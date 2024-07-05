@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.beicroon</groupId>
+        <artifactId>beicroon-construct</artifactId>
+        <version>1.0.0</version>
+        <relativePath/>
+    </parent>
+
+    <artifactId>beicroon-starter</artifactId>
+    <version>1.0.0</version>
+    <packaging>pom</packaging>
+
+    <!--  请勿随意调整顺序  -->
+    <modules>
+        <module>beicroon-starter-async</module>
+        <module>beicroon-starter-cache</module>
+        <module>beicroon-starter-cloud</module>
+        <module>beicroon-starter-gateway</module>
+        <module>beicroon-starter-json</module>
+        <module>beicroon-starter-logging</module>
+        <module>beicroon-starter-mq</module>
+        <module>beicroon-starter-service</module>
+        <module>beicroon-starter-task</module>
+        <module>beicroon-starter-web</module>
+    </modules>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.beicroon</groupId>
+                <artifactId>beicroon-starter-async</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.beicroon</groupId>
+                <artifactId>beicroon-starter-cache</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.beicroon</groupId>
+                <artifactId>beicroon-starter-cloud</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.beicroon</groupId>
+                <artifactId>beicroon-starter-gateway</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.beicroon</groupId>
+                <artifactId>beicroon-starter-json</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.beicroon</groupId>
+                <artifactId>beicroon-starter-logging</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.beicroon</groupId>
+                <artifactId>beicroon-starter-mq</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.beicroon</groupId>
+                <artifactId>beicroon-starter-service</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.beicroon</groupId>
+                <artifactId>beicroon-starter-task</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.beicroon</groupId>
+                <artifactId>beicroon-starter-web</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+</project>

@@ -1,0 +1,31 @@
+server:
+  port: 8000
+  shutdown: GRACEFUL
+
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  application:
+    name: @project.artifactId@
+  profiles:
+    active: @pom.profile.name@
+  cache:
+    type: REDIS
+  cloud:
+    nacos:
+      config:
+        server-addr: @pom.nacos.addresses@
+        namespace: @pom.nacos.namespace@
+        enabled: true
+        file-extension: yml
+        refresh-enabled: true
+      discovery:
+        server-addr: @pom.nacos.addresses@
+        namespace: @pom.nacos.namespace@
+        enabled: true
+    gateway:
+      routes:
+        - id: beicroon-service-admin
+          uri: lb://beicroon-service-admin
+          predicates:
+            - Path=/api/admin/**
