@@ -6,19 +6,16 @@
 
     <parent>
         <groupId>com.beicroon</groupId>
-        <artifactId>beicroon-starter</artifactId>
+        <artifactId>beicroon-common</artifactId>
         <version>1.0.0</version>
-        <relativePath/>
     </parent>
 
-    <artifactId>beicroon-service-admin</artifactId>
+    <artifactId>beicroon-common-admin</artifactId>
     <version>1.0.0</version>
     <packaging>pom</packaging>
 
     <!--  请勿随意调整顺序  -->
     <modules>
-        <module>beicroon-admin-entity</module>
-        <module>beicroon-admin-service</module>
-        <module>beicroon-admin-web</module>
+        <module>beicroon-admin-rpc</module>
     </modules>
 </project>

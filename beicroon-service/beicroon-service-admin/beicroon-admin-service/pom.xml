@@ -6,23 +6,19 @@
 
     <parent>
         <groupId>com.beicroon</groupId>
-        <artifactId>beicroon-starter</artifactId>
+        <artifactId>beicroon-service-admin</artifactId>
         <version>1.0.0</version>
+        <relativePath/>
     </parent>
 
-    <artifactId>beicroon-starter-service</artifactId>
+    <artifactId>beicroon-admin-service</artifactId>
     <version>1.0.0</version>
     <packaging>jar</packaging>
 
     <dependencies>
         <dependency>
             <groupId>com.beicroon</groupId>
-            <artifactId>beicroon-starter-json</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.beicroon</groupId>
-            <artifactId>beicroon-starter-mysql</artifactId>
+            <artifactId>beicroon-starter-service</artifactId>
         </dependency>
     </dependencies>
 </project>

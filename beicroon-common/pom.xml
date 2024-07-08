@@ -11,5 +11,6 @@
 
     <!--  请勿随意调整顺序  -->
     <modules>
+        <module>beicroon-common-admin</module>
     </modules>
 </project>

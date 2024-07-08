@@ -17,6 +17,7 @@
         <module>beicroon-construct-databind</module>
         <module>beicroon-construct-enums</module>
         <module>beicroon-construct-jackson</module>
+        <module>beicroon-construct-mybatis</module>
         <module>beicroon-construct-utils</module>
         <module>beicroon-construct-xxljob</module>
     </modules>
@@ -39,6 +40,7 @@
         <xxljob.version>2.4.1</xxljob.version>
         <jackson.version>2.17.1</jackson.version>
         <jakarta.version>3.0.0</jakarta.version>
+        <mybatis.version>3.5.7</mybatis.version>
         <spring.version>6.1.8</spring.version>
         <spring.boot.version>3.3.0</spring.boot.version>
         <spring.cloud.version>4.1.3</spring.cloud.version>
@@ -135,6 +137,24 @@
             </dependency>
 
             <dependency>
+                <groupId>com.mysql</groupId>
+                <artifactId>mysql-connector-j</artifactId>
+                <version>9.0.0</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-spring-boot3-starter</artifactId>
+                <version>3.5.7</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid-spring-boot-starter</artifactId>
+                <version>1.2.23</version>
+            </dependency>
+
+            <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-aop</artifactId>
                 <version>${spring.version}</version>
@@ -191,6 +211,12 @@
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-web</artifactId>
+                <version>${spring.boot.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-jdbc</artifactId>
                 <version>${spring.boot.version}</version>
             </dependency>
 
@@ -310,6 +336,12 @@
 
             <dependency>
                 <groupId>com.beicroon</groupId>
+                <artifactId>beicroon-construct-mybatis</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.beicroon</groupId>
                 <artifactId>beicroon-construct-utils</artifactId>
                 <version>${project.version}</version>
             </dependency>
@@ -353,7 +385,7 @@
                 <pom.redis.password/>
                 <pom.mq.address>127.0.0.1:9876</pom.mq.address>
                 <pom.mq.consumer.enable>false</pom.mq.consumer.enable>
-                <pom.job.addresses>127.0.0.1:8080</pom.job.addresses>
+                <pom.job.addresses/>
             </properties>
         </profile>
     </profiles>

@@ -10,19 +10,14 @@
         <version>1.0.0</version>
     </parent>
 
-    <artifactId>beicroon-starter-service</artifactId>
+    <artifactId>beicroon-starter-mysql</artifactId>
     <version>1.0.0</version>
     <packaging>jar</packaging>
 
     <dependencies>
         <dependency>
             <groupId>com.beicroon</groupId>
-            <artifactId>beicroon-starter-json</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.beicroon</groupId>
-            <artifactId>beicroon-starter-mysql</artifactId>
+            <artifactId>beicroon-construct-mybatis</artifactId>
         </dependency>
     </dependencies>
 </project>

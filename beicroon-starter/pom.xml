@@ -24,6 +24,7 @@
         <module>beicroon-starter-json</module>
         <module>beicroon-starter-logging</module>
         <module>beicroon-starter-mq</module>
+        <module>beicroon-starter-mysql</module>
         <module>beicroon-starter-service</module>
         <module>beicroon-starter-task</module>
         <module>beicroon-starter-web</module>
@@ -70,6 +71,12 @@
             <dependency>
                 <groupId>com.beicroon</groupId>
                 <artifactId>beicroon-starter-mq</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.beicroon</groupId>
+                <artifactId>beicroon-starter-mysql</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
