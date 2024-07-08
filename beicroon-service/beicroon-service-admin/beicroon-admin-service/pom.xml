@@ -18,6 +18,12 @@
     <dependencies>
         <dependency>
             <groupId>com.beicroon</groupId>
+            <artifactId>beicroon-admin-entity</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.beicroon</groupId>
             <artifactId>beicroon-starter-service</artifactId>
         </dependency>
     </dependencies>

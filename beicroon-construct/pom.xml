@@ -11,11 +11,15 @@
 
     <!--  请勿随意调整顺序  -->
     <modules>
+        <module>beicroon-construct-annotation</module>
         <module>beicroon-construct-auth</module>
         <module>beicroon-construct-common</module>
         <module>beicroon-construct-constant</module>
         <module>beicroon-construct-databind</module>
+        <module>beicroon-construct-entity</module>
         <module>beicroon-construct-enums</module>
+        <module>beicroon-construct-exception</module>
+        <module>beicroon-construct-interfaces</module>
         <module>beicroon-construct-jackson</module>
         <module>beicroon-construct-mybatis</module>
         <module>beicroon-construct-utils</module>
@@ -74,6 +78,12 @@
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>
                 <version>${lombok.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.mapstruct</groupId>
+                <artifactId>mapstruct</artifactId>
+                <version>${mapstruct.version}</version>
             </dependency>
 
             <dependency>
@@ -300,6 +310,12 @@
 
             <dependency>
                 <groupId>com.beicroon</groupId>
+                <artifactId>beicroon-construct-annotation</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.beicroon</groupId>
                 <artifactId>beicroon-construct-auth</artifactId>
                 <version>${project.version}</version>
             </dependency>
@@ -324,7 +340,25 @@
 
             <dependency>
                 <groupId>com.beicroon</groupId>
+                <artifactId>beicroon-construct-entity</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.beicroon</groupId>
                 <artifactId>beicroon-construct-enums</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.beicroon</groupId>
+                <artifactId>beicroon-construct-exception</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.beicroon</groupId>
+                <artifactId>beicroon-construct-interfaces</artifactId>
                 <version>${project.version}</version>
             </dependency>
 

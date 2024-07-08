@@ -37,7 +37,7 @@ this.userRepository.updateById(user);
 public class UserModel extends GenericModel {
     
     @TableField(value = "`name`")
-    @ApiModelProperty(value = "名称")
+    @ApiModelProperty(name = "名称")
     private String name;
     
     public boolean hasName() {
@@ -58,10 +58,10 @@ public class UserModel extends GenericModel {
 @EqualsAndHashCode(callSuper = true)
 public class UserVO extends GenericVO {
     
-    @ApiModelProperty(value = "名字")
+    @ApiModelProperty(name = "名字")
     private String firstName; 
     
-    @ApiModelProperty(value = "姓氏")
+    @ApiModelProperty(name = "姓氏")
     private String lastName;
     
     public String getFullName() {

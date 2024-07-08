@@ -16,5 +16,9 @@
     <packaging>jar</packaging>
 
     <dependencies>
+        <dependency>
+            <groupId>com.beicroon</groupId>
+            <artifactId>beicroon-construct-entity</artifactId>
+        </dependency>
     </dependencies>
 </project>

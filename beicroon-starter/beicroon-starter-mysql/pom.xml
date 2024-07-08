@@ -17,7 +17,27 @@
     <dependencies>
         <dependency>
             <groupId>com.beicroon</groupId>
+            <artifactId>beicroon-construct-annotation</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.beicroon</groupId>
+            <artifactId>beicroon-construct-entity</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.beicroon</groupId>
+            <artifactId>beicroon-construct-exception</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.beicroon</groupId>
             <artifactId>beicroon-construct-mybatis</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.beicroon</groupId>
+            <artifactId>beicroon-construct-utils</artifactId>
         </dependency>
     </dependencies>
 </project>

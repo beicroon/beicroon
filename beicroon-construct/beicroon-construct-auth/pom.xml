@@ -13,4 +13,16 @@
     <artifactId>beicroon-construct-auth</artifactId>
     <version>1.0.0</version>
     <packaging>jar</packaging>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.beicroon</groupId>
+            <artifactId>beicroon-construct-entity</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.beicroon</groupId>
+            <artifactId>beicroon-construct-utils</artifactId>
+        </dependency>
+    </dependencies>
 </project>
