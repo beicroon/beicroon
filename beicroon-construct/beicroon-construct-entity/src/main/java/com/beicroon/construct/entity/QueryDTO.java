@@ -39,8 +39,8 @@ public class QueryDTO implements Serializable {
     private List<Long> ids;
 
     @FieldSearch(value = "`created_at`", between = true)
-    @ApiModelProperty(name = "创建时间开始")
-    private String createTime;
+    @ApiModelProperty(name = "创建时间")
+    private String createdAt;
 
     @FieldSearch(value = "`creator_id`")
     @ApiModelProperty(name = "创建人主键")

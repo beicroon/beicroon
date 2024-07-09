@@ -91,7 +91,7 @@ public final class QueryUtils {
 
         // 禁用查询
         if (dto instanceof QueryDTOWithDisable) {
-            String disableFlag = ((QueryDTOWithDisable) dto).getDisableFlag();
+            String disableFlag = ((QueryDTOWithDisable) dto).getDisabledFlag();
 
             if (BooleanEnums.isTrue(disableFlag)) {
                 wrapper.isNotNull(SystemConstant.DISABLE_KEY_NAME);

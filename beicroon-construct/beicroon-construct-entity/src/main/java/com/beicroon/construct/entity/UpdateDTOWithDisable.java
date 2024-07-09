@@ -9,6 +9,6 @@ import lombok.EqualsAndHashCode;
 public class UpdateDTOWithDisable extends UpdateDTO {
 
     @ApiModelProperty(name = "是否禁用")
-    private Integer disableFlag;
+    private String disabledFlag;
 
 }

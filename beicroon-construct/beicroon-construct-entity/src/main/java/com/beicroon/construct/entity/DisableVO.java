@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 public class DisableVO extends GenericVO {
 
     @ApiModelProperty(name = "禁用标识")
-    private String disableFlag;
+    private String disabledFlag;
 
     @ApiModelProperty(name = "禁用标识")
     private String disableDesc;
