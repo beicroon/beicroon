@@ -8,8 +8,4 @@
     <artifactId>beicroon-app</artifactId>
     <version>1.0.0</version>
     <packaging>pom</packaging>
-
-    <!--  请勿随意调整顺序  -->
-    <modules>
-    </modules>
 </project>

@@ -7,6 +7,7 @@ import com.beicroon.construct.utils.ListUtils;
 import com.beicroon.starter.mysql.model.GenericModel;
 import com.beicroon.starter.service.helper.ConvertorHelper;
 import org.mapstruct.AfterMapping;
+import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 
 import java.util.List;
@@ -19,6 +20,15 @@ public interface BaseConvertor<M extends GenericModel, C extends CreateDTO, B ex
         return ListUtils.toList(ms, this::toBaseVO);
     }
 
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "createdAt", ignore = true)
+    @Mapping(target = "creatorId", ignore = true)
+    @Mapping(target = "creatorCode", ignore = true)
+    @Mapping(target = "creatorName", ignore = true)
+    @Mapping(target = "modifiedAt", ignore = true)
+    @Mapping(target = "modifierId", ignore = true)
+    @Mapping(target = "modifierCode", ignore = true)
+    @Mapping(target = "modifierName", ignore = true)
     M toEntity(C c);
 
     default void afterToBaseVO(B b, M m) {

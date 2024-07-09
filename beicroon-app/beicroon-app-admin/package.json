@@ -1,0 +1,22 @@
+{
+  "name": "beicroon-app-admin",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "vite-plugin-aliases": "^0.0.1",
+    "vue": "^3.4.29",
+    "vue-router": "^4.4.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^5.0.5",
+    "less": "^4.2.0",
+    "less-loader": "^12.2.0",
+    "vite": "^5.3.1"
+  }
+}
