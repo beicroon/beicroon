@@ -1,11 +1,13 @@
-<script setup>
-
+<script setup lang="ts">
+import TableList from '@/components/TableList.vue';
 </script>
 
 <template>
-<div>AccountAdmin</div>
+<div>
+  <table-list></table-list>
+</div>
 </template>
 
-<style scoped>
+<style scoped lang="less">
 
 </style>

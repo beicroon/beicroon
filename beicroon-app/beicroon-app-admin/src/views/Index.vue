@@ -1,12 +1,9 @@
-<script setup>
-import router from '@/router/index.js';
-import {defineComponent, ref, watch} from 'vue';
+<script setup lang="ts">
+import router from '@/router';
+import {Ref, ref, watch} from 'vue';
+import type MenuBaseVO from '@/http/vo/menu/MenuBaseVO.d.ts';
 
-defineComponent({
-  name: 'Index',
-});
-
-function handleNavigatorClick(navigator) {
+function handleNavigatorClick(navigator: MenuBaseVO) {
   for (let i = 0; i < navigators.length; i++) {
     const item = navigators[i];
 
@@ -22,7 +19,7 @@ function handleNavigatorClick(navigator) {
   menus.value = navigator.children;
 }
 
-function handleLinkerClick(parent, linker) {
+function handleLinkerClick(parent: MenuBaseVO, linker: MenuBaseVO) {
   for (let i = 0; i < menus.value.length; i++) {
     const menu = menus.value[i];
 
@@ -50,44 +47,59 @@ function handleLinkerClick(parent, linker) {
   router.push({path: linker.path});
 }
 
-const navigators = [
+const navigators: Array<MenuBaseVO> = [
   {
     name: '账号中心',
     path: '',
+    active: false,
     children: [
       {
         name: '账号管理',
         path: '',
+        active: false,
         children: [
           {
             name: '后台账号',
             path: '/account/admin',
+            active: false,
+            children: [],
           },
           {
             name: '用户账号',
             path: '/account/user',
+            active: false,
+            children: [],
           },
           {
             name: '司机账号',
             path: '/account/driver',
+            active: false,
+            children: [],
           },
           {
             name: '商户账号',
             path: '/account/business',
+            active: false,
+            children: [],
           },
         ],
       },
       {
         name: '系统设置',
         path: '',
+        active: false,
         children: [
           {
             name: '系统设置',
             path: '/setting/system',
+            active: false,
+            children: [],
           },
           {
             name: '角色管理',
             path: '/setting/role',
+            active: false,
+            children: [],
           },
         ],
       },
@@ -96,18 +108,24 @@ const navigators = [
   {
     name: '设置中心',
     path: '',
+    active: false,
     children: [
       {
         name: '系统设置',
         path: '',
+        active: false,
         children: [
           {
             name: '系统设置',
             path: '/setting/system',
+            active: false,
+            children: [],
           },
           {
             name: '角色管理',
             path: '/setting/role',
+            active: false,
+            children: [],
           },
         ],
       },
@@ -115,7 +133,7 @@ const navigators = [
   },
 ];
 
-const menus = ref([]);
+const menus: Ref<Array<MenuBaseVO>> = ref([]);
 
 watch(menus, () => {
   for (let i = 0; i < menus.value.length; i++) {
@@ -258,7 +276,7 @@ watch(menus, () => {
   right: 0;
   top: 60rem;
   padding: 8rem;
-  overflow-y: auto;
+  overflow: auto;
   position: absolute;
   width: calc(100% - 180rem);
   height: calc(100% - 60rem);
