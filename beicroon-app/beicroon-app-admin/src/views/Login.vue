@@ -1,15 +1,10 @@
-<script setup>
-import {defineComponent} from 'vue';
-
-defineComponent({
-  name: 'Login',
-});
+<script setup lang="ts">
 </script>
 
 <template>
   <div class="login">Login</div>
 </template>
 
-<style scoped>
+<style scoped lang="less">
 
 </style>

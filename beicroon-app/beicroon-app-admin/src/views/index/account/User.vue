@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 
 </script>
 
@@ -6,6 +6,6 @@
 <div>AccountUser</div>
 </template>
 
-<style scoped>
+<style scoped lang="less">
 
 </style>

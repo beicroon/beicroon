@@ -4,12 +4,12 @@ const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
     routes: [
         {
-            name: 'Login',
+            name: '登录',
             path: '/login',
             component: () => import('@/views/Login.vue')
         },
         {
-            name: 'Index',
+            name: '首页',
             path: '/',
             component: () => import('@/views/Index.vue'),
             children: [
