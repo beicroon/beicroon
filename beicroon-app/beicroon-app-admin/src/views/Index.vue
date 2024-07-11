@@ -233,7 +233,7 @@ onMounted(() => {
       cursor: pointer;
       padding: 8rem 12rem;
       border-radius: 8rem;
-      border: solid 1rem #65a5ff;
+      border: 1rem solid #65a5ff;
 
       &:hover {
         border-color: #65a5ff;
