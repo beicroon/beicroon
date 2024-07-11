@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import router from '@/router';
-import {Ref, ref, watch} from 'vue';
+import {onMounted, Ref, ref, watch} from 'vue';
 import type MenuBaseVO from '@/http/vo/menu/MenuBaseVO.d.ts';
 
 function handleNavigatorClick(navigator: MenuBaseVO) {
-  for (let i = 0; i < navigators.length; i++) {
-    const item = navigators[i];
+  for (let i = 0; i < navigators.value.length; i++) {
+    const item = navigators.value[i];
 
     if (item.active) {
       item.active = false;
@@ -47,91 +47,7 @@ function handleLinkerClick(parent: MenuBaseVO, linker: MenuBaseVO) {
   router.push({path: linker.path});
 }
 
-const navigators: Array<MenuBaseVO> = [
-  {
-    name: '账号中心',
-    path: '',
-    active: false,
-    children: [
-      {
-        name: '账号管理',
-        path: '',
-        active: false,
-        children: [
-          {
-            name: '后台账号',
-            path: '/account/admin',
-            active: false,
-            children: [],
-          },
-          {
-            name: '用户账号',
-            path: '/account/user',
-            active: false,
-            children: [],
-          },
-          {
-            name: '司机账号',
-            path: '/account/driver',
-            active: false,
-            children: [],
-          },
-          {
-            name: '商户账号',
-            path: '/account/business',
-            active: false,
-            children: [],
-          },
-        ],
-      },
-      {
-        name: '系统设置',
-        path: '',
-        active: false,
-        children: [
-          {
-            name: '系统设置',
-            path: '/setting/system',
-            active: false,
-            children: [],
-          },
-          {
-            name: '角色管理',
-            path: '/setting/role',
-            active: false,
-            children: [],
-          },
-        ],
-      },
-    ],
-  },
-  {
-    name: '设置中心',
-    path: '',
-    active: false,
-    children: [
-      {
-        name: '系统设置',
-        path: '',
-        active: false,
-        children: [
-          {
-            name: '系统设置',
-            path: '/setting/system',
-            active: false,
-            children: [],
-          },
-          {
-            name: '角色管理',
-            path: '/setting/role',
-            active: false,
-            children: [],
-          },
-        ],
-      },
-    ],
-  },
-];
+const navigators: Ref<Array<MenuBaseVO>> = ref([]);
 
 const menus: Ref<Array<MenuBaseVO>> = ref([]);
 
@@ -149,6 +65,120 @@ watch(menus, () => {
       }
     }
   }
+});
+
+watch(navigators, () => {
+  const path = router.currentRoute.value.path;
+
+  NAV: for (let i = 0; i < navigators.value.length; i++) {
+    const nav = navigators.value[i];
+
+    for (let j = 0; j < nav.children.length; j++) {
+      const menu = nav.children[j];
+
+      for (let k = 0; k < menu.children.length; k++) {
+        const linker = menu.children[k];
+
+        if (linker.path == path) {
+          nav.active = true;
+          menu.active = true;
+          linker.active = true;
+
+          menus.value = nav.children;
+
+          break NAV;
+        }
+      }
+    }
+  }
+});
+
+onMounted(() => {
+  navigators.value = [
+    {
+      name: '账号中心',
+      path: '',
+      active: false,
+      children: [
+        {
+          name: '账号管理',
+          path: '',
+          active: false,
+          children: [
+            {
+              name: '后台账号',
+              path: '/account/admin',
+              active: false,
+              children: [],
+            },
+            {
+              name: '用户账号',
+              path: '/account/user',
+              active: false,
+              children: [],
+            },
+            {
+              name: '司机账号',
+              path: '/account/driver',
+              active: false,
+              children: [],
+            },
+            {
+              name: '商户账号',
+              path: '/account/business',
+              active: false,
+              children: [],
+            },
+          ],
+        },
+        {
+          name: '系统设置',
+          path: '',
+          active: false,
+          children: [
+            {
+              name: '系统设置',
+              path: '/setting/system',
+              active: false,
+              children: [],
+            },
+            {
+              name: '角色管理',
+              path: '/setting/role',
+              active: false,
+              children: [],
+            },
+          ],
+        },
+      ],
+    },
+    {
+      name: '设置中心',
+      path: '',
+      active: false,
+      children: [
+        {
+          name: '系统设置',
+          path: '',
+          active: false,
+          children: [
+            {
+              name: '系统设置',
+              path: '/setting/system',
+              active: false,
+              children: [],
+            },
+            {
+              name: '角色管理',
+              path: '/setting/role',
+              active: false,
+              children: [],
+            },
+          ],
+        },
+      ],
+    },
+  ];
 });
 </script>
 
