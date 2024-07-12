@@ -42,6 +42,7 @@ input, textarea, button, select {
   color: inherit;
   background: none;
   appearance: none;
+  user-select: none;
   font-size: inherit;
 }
 
