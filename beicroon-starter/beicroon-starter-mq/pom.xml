@@ -27,6 +27,11 @@
 
         <dependency>
             <groupId>com.beicroon</groupId>
+            <artifactId>beicroon-construct-rocketmq</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.beicroon</groupId>
             <artifactId>beicroon-construct-utils</artifactId>
         </dependency>
     </dependencies>
