@@ -48,4 +48,67 @@ input, textarea, button, select {
 button {
   cursor: pointer;
 }
+
+.list {
+  padding: 8rem;
+  width: max-content;
+  border-radius: 8rem;
+  border: 1rem solid #e0e4ed;
+
+  .list-table {
+    min-width: 100%;
+    min-height: 100%;
+    empty-cells: show;
+    border-spacing: 0;
+    border-collapse: collapse;
+  }
+
+  .list-head {
+    z-index: 3;
+    top: -9rem;
+    position: sticky;
+    background: #ecedef;
+    border-top: 1rem solid #e0e4ed;
+
+    .list-action {
+      top: -9rem;
+      background: #ecedef;
+    }
+  }
+
+  .list-body {
+    .list-row:nth-child(even) .list-cell {
+      background: #ecedef;
+    }
+  }
+
+  .list-cell {
+    display: flex;
+    min-width: 130rem;
+    min-height: 60rem;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    border-left: 1rem solid #e0e4ed;
+    border-bottom: 1rem solid #e0e4ed;
+  }
+
+  .list-action {
+    z-index: 2;
+    right: -9rem;
+    position: sticky;
+    background: #ffffff;
+  }
+
+  .list-button {
+    padding: 0 18rem;
+    flex-direction: row !important;
+    border-right: 1rem solid #e0e4ed;
+    justify-content: space-around !important;
+
+    button {
+      margin: 0 6rem;
+    }
+  }
+}
 </style>

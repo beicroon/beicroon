@@ -312,7 +312,7 @@ onMounted(() => {
   height: calc(100% - 60rem);
 
   .view {
-    width: 100%;
+    min-width: 100%;
     min-height: 100%;
   }
 }
