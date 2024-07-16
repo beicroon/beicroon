@@ -91,11 +91,11 @@ public final class QueryUtils {
 
         // 禁用查询
         if (dto instanceof QueryDTOWithDisable) {
-            String disableFlag = ((QueryDTOWithDisable) dto).getDisabledFlag();
+            String disabledFlag = ((QueryDTOWithDisable) dto).getDisabledFlag();
 
-            if (BooleanEnums.isTrue(disableFlag)) {
+            if (BooleanEnums.isTrue(disabledFlag)) {
                 wrapper.isNotNull(SystemConstant.DISABLE_KEY_NAME);
-            } else if (BooleanEnums.isFalse(disableFlag)) {
+            } else if (BooleanEnums.isFalse(disabledFlag)) {
                 wrapper.isNull(SystemConstant.DISABLE_KEY_NAME);
             }
         }

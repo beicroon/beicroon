@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import router from '@/router';
+import router from '@/routers';
 import {onMounted, Ref, ref, watch} from 'vue';
-import type MenuBaseVO from '@/http/vo/menu/MenuBaseVO.d.ts';
+import type {MenuBaseVO} from '@/https/setting/menu.http.ts';
 
 function handleNavigatorClick(navigator: MenuBaseVO) {
   for (let i = 0; i < navigators.value.length; i++) {

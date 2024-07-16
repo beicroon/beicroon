@@ -28,7 +28,8 @@
     </modules>
 
     <properties>
-        <java.version>17</java.version>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <snakeyaml.version>2.2</snakeyaml.version>
@@ -51,6 +52,7 @@
         <spring.cloud.version>4.1.3</spring.cloud.version>
         <alibaba.cloud.version>2023.0.1.0</alibaba.cloud.version>
         <maven.compiler.version>3.13.0</maven.compiler.version>
+        <maven.resources.version>3.3.1</maven.resources.version>
         <lombok.version>1.18.32</lombok.version>
         <mapstruct.version>1.5.5.Final</mapstruct.version>
     </properties>
@@ -451,6 +453,11 @@
                     <artifactId>maven-compiler-plugin</artifactId>
                     <version>${maven.compiler.version}</version>
                 </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <version>${maven.resources.version}</version>
+                </plugin>
             </plugins>
         </pluginManagement>
         <resources>
@@ -459,8 +466,8 @@
                 <filtering>true</filtering>
                 <includes>
                     <include>**/*.xml</include>
-                    <include>**/*.sql</include>
                     <include>**/*.yml</include>
+                    <include>**/*.sql</include>
                     <include>**/*.json</include>
                 </includes>
             </resource>
@@ -474,8 +481,9 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-                    <source>${java.version}</source>
-                    <target>${java.version}</target>
+                    <source>${maven.compiler.source}</source>
+                    <target>${maven.compiler.target}</target>
+                    <encoding>${project.build.sourceEncoding}</encoding>
                     <annotationProcessorPaths>
                         <path>
                             <groupId>org.projectlombok</groupId>
@@ -488,6 +496,13 @@
                             <version>${mapstruct.version}</version>
                         </path>
                     </annotationProcessorPaths>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <configuration>
+                    <encoding>${project.build.sourceEncoding}</encoding>
                 </configuration>
             </plugin>
         </plugins>

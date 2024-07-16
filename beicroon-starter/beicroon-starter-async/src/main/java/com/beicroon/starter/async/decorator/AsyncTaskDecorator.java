@@ -1,6 +1,6 @@
 package com.beicroon.starter.async.decorator;
 
-import lombok.NonNull;
+import jakarta.annotation.Nonnull;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.task.TaskDecorator;
 
@@ -8,7 +8,7 @@ import org.springframework.core.task.TaskDecorator;
 public class AsyncTaskDecorator implements TaskDecorator {
 
     @Override
-    public @NonNull Runnable decorate(@NonNull Runnable runnable) {
+    public @Nonnull Runnable decorate(@Nonnull Runnable runnable) {
         return () -> {
             try {
                 runnable.run();

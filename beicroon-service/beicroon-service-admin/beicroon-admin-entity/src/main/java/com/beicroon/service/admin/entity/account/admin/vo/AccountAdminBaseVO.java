@@ -1,13 +1,19 @@
-package com.beicroon.service.admin.entity.account.dto;
+package com.beicroon.service.admin.entity.account.admin.vo;
 
 import com.beicroon.construct.annotation.ApiModelProperty;
-import com.beicroon.construct.entity.UpdateDTOWithDisable;
+import com.beicroon.construct.entity.DisableVO;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class AccountUpdateDTO extends UpdateDTOWithDisable {
+public class AccountAdminBaseVO extends DisableVO {
+
+    @ApiModelProperty(name = "编码")
+    private String code;
+
+    @ApiModelProperty(name = "账号")
+    private String account;
 
     @ApiModelProperty(name = "姓名")
     private String nickname;

@@ -3,14 +3,14 @@ package com.beicroon.service.admin.model;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.beicroon.construct.annotation.ApiModelProperty;
-import com.beicroon.starter.mysql.model.GenericModel;
+import com.beicroon.starter.mysql.model.DisableModel;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @Data
 @TableName("`admin_account`")
 @EqualsAndHashCode(callSuper = true)
-public class AccountModel extends GenericModel {
+public class AccountModel extends DisableModel {
 
     @TableField(value = "`code`")
     @ApiModelProperty(name = "编码")

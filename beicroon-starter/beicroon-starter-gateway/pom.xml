@@ -47,6 +47,26 @@
 
         <dependency>
             <groupId>com.beicroon</groupId>
+            <artifactId>beicroon-construct-exception</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.beicroon</groupId>
+            <artifactId>beicroon-construct-constant</artifactId>
+        </dependency>
+        
+        <dependency>
+            <groupId>com.beicroon</groupId>
+            <artifactId>beicroon-construct-entity</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.beicroon</groupId>
+            <artifactId>beicroon-construct-utils</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.beicroon</groupId>
             <artifactId>beicroon-starter-cache</artifactId>
         </dependency>
 

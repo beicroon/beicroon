@@ -2,11 +2,11 @@ package com.beicroon.construct.constant;
 
 public interface HeaderConstant {
 
-    String TOKEN = "Authorization";
+    String AUTHORIZATION = "Authorization";
+
+    String AUTHORIZATION_USER = "S-Auth-User";
 
     String TRACE_ID = "S-Trace-ID";
-
-    String AUTH_USER = "S-Auth-User";
 
     String SOURCE = "X-Source";
 

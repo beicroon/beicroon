@@ -1,13 +1,13 @@
-package com.beicroon.service.admin.entity.account.dto;
+package com.beicroon.service.admin.entity.account.admin.dto;
 
 import com.beicroon.construct.annotation.ApiModelProperty;
-import com.beicroon.construct.entity.CreateDTO;
+import com.beicroon.construct.entity.CreateDTOWithDisable;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class AccountCreateDTO extends CreateDTO {
+public class AccountAdminCreateDTO extends CreateDTOWithDisable {
 
     @ApiModelProperty(name = "账号")
     private String account;

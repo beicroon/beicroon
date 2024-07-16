@@ -6,8 +6,9 @@
 
     <parent>
         <groupId>com.beicroon</groupId>
-        <artifactId>beicroon-common</artifactId>
+        <artifactId>beicroon-construct</artifactId>
         <version>1.0.0</version>
+        <relativePath/>
     </parent>
 
     <artifactId>beicroon-common-admin</artifactId>

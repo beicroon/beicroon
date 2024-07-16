@@ -9,19 +9,17 @@ import java.util.Set;
 
 public interface SystemConstant {
 
-    String NAME = "yunbao";
+    String NAME = "beicroon";
 
     String SUFFIX = "com";
 
     String BASE_PACKAGE = SUFFIX + "." + NAME;
 
-    String MAPPER_PACKAGE = BASE_PACKAGE + ".**.mapper";
-
     Charset CHARSET = StandardCharsets.UTF_8;
 
     ZoneOffset TIMEZONE = ZoneOffset.of("+8");
 
-    String LOG_TRACE_ID_NAME = "traceId";
+    String TRACE_ID = "traceId";
 
     String PRIMARY_KEY_NAME = "`id`";
 
