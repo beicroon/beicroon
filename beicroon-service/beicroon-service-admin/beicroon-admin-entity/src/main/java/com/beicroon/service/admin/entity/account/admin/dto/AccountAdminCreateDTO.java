@@ -15,7 +15,7 @@ public class AccountAdminCreateDTO extends CreateDTOWithDisable {
     @ApiModelProperty(name = "姓名")
     private String nickname;
 
-    @ApiModelProperty(name = "手机")
+    @ApiModelProperty(name = "电话")
     private String phone;
 
     @ApiModelProperty(name = "邮箱")

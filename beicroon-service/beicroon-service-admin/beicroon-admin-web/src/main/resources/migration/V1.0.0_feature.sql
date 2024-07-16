@@ -7,7 +7,7 @@ create table `admin_account`
     `account`       varchar(255)        not null default '' comment '账号',
     `password`      varchar(255)        not null default '' comment '密码',
     `nickname`      varchar(255)        not null default '' comment '姓名',
-    `phone`         varchar(32)         not null default '' comment '手机',
+    `phone`         varchar(32)         not null default '' comment '电话',
     `email`         varchar(255)        not null default '' comment '邮箱',
     `disabled_at`   timestamp           null     default null comment '禁用时间',
     `disabled_id`   bigint(20) unsigned not null default 0 comment '禁用人主键',

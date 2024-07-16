@@ -1,81 +1,105 @@
 <script setup lang="ts">
-import {onMounted, ref} from 'vue';
 import {PageInfo} from '@/https';
+import {onMounted, ref} from 'vue';
 import {AdminPageVO, AdminQueryDTO, page} from '@/https/account/admin.http.ts';
+
+const query = ref<AdminQueryDTO>({} as AdminQueryDTO);
 
 const pageInfo = ref<PageInfo>();
 const data = ref<Array<AdminPageVO>>();
 
-onMounted(async () => {
-  const res = await page({} as AdminQueryDTO);
+onMounted(load)
+
+async function reset() {
+  query.value = {} as AdminQueryDTO;
+}
+
+async function load() {
+  const res = await page(query.value);
 
   data.value = res.data;
 
   pageInfo.value = res.page;
-})
+}
 </script>
 
 <template>
   <div class="list">
-    <div class="list-function">
-      <button>新增</button>
-      <button>刷新</button>
-      <button>重置</button>
+    <div class="list-head flex-row">
+      <div class="head-search">
+        <label class="head-input">
+          <span><i>昵</i><i>称</i></span>
+          <input type="text" placeholder="昵称筛选" v-model="query.nickname"/>
+        </label>
+        <label class="head-input">
+          <span><i>电</i><i>话</i></span>
+          <input type="text" placeholder="电话筛选" v-model="query.phone"/>
+        </label>
+        <label class="head-input">
+          <span><i>邮</i><i>箱</i></span>
+          <input type="text" placeholder="邮箱筛选" v-model="query.email"/>
+        </label>
+      </div>
+      <div class="head-action">
+        <button class="head-button" @click="reset">重置</button>
+        <button class="head-button" @click="load">查询</button>
+        <button class="head-button">新增</button>
+      </div>
     </div>
     <table class="list-table">
-      <thead class="list-head">
-      <tr class="list-row">
+      <thead class="table-head">
+      <tr class="table-row">
         <th>
-          <div class="list-cell">ID</div>
+          <div class="table-cell">ID</div>
         </th>
         <th>
-          <div class="list-cell">编号</div>
+          <div class="table-cell">编号</div>
         </th>
         <th>
-          <div class="list-cell">昵称</div>
+          <div class="table-cell">昵称</div>
         </th>
         <th>
-          <div class="list-cell">账号</div>
+          <div class="table-cell">账号</div>
         </th>
         <th>
-          <div class="list-cell">电话</div>
+          <div class="table-cell">电话</div>
         </th>
         <th>
-          <div class="list-cell">邮箱</div>
+          <div class="table-cell">邮箱</div>
         </th>
         <th>
-          <div class="list-cell">创建时间</div>
+          <div class="table-cell">创建时间</div>
         </th>
-        <th class="list-action">
-          <div class="list-cell list-button">操作</div>
+        <th class="table-action">
+          <div class="table-cell table-button">操作</div>
         </th>
       </tr>
       </thead>
-      <tbody class="list-body">
-      <tr class="list-row" v-for="item in data">
+      <tbody class="table-body">
+      <tr class="table-row" v-for="item in data">
         <td>
-          <div class="list-cell">{{ item.id }}</div>
+          <div class="table-cell">{{ item.id }}</div>
         </td>
         <td>
-          <div class="list-cell">{{ item.code }}</div>
+          <div class="table-cell">{{ item.code }}</div>
         </td>
         <td>
-          <div class="list-cell">{{ item.nickname }}</div>
+          <div class="table-cell">{{ item.nickname }}</div>
         </td>
         <td>
-          <div class="list-cell">{{ item.account }}</div>
+          <div class="table-cell">{{ item.account }}</div>
         </td>
         <td>
-          <div class="list-cell">{{ item.phone }}</div>
+          <div class="table-cell">{{ item.phone }}</div>
         </td>
         <td>
-          <div class="list-cell">{{ item.email }}</div>
+          <div class="table-cell">{{ item.email }}</div>
         </td>
         <td>
-          <div class="list-cell">{{ item.createdAt }}</div>
+          <div class="table-cell">{{ item.createdAt }}</div>
         </td>
-        <td class="list-action">
-          <div class="list-cell list-button">
+        <td class="table-action">
+          <div class="table-cell table-button">
             <button>查看</button>
             <button>编辑</button>
             <button>删除</button>

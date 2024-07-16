@@ -65,3 +65,43 @@ export async function page(data: AdminQueryDTO): Promise<Response<Array<AdminPag
     })
 }
 
+export async function create(data: AdminCreateDTO): Promise<Response<boolean>> {
+    return http.request({
+        url: 'api/admin/admin/account-admin-create',
+        method: 'POST',
+        data: data
+    })
+}
+
+export async function update(data: AdminUpdateDTO): Promise<Response<boolean>> {
+    return http.request({
+        url: 'api/admin/admin/account-admin-update',
+        method: 'PUT',
+        data: data
+    })
+}
+
+export async function enable(ids: Array<string>): Promise<Response<boolean>> {
+    return http.request({
+        url: 'api/admin/admin/account-admin-enable',
+        method: 'PUT',
+        data: {ids}
+    })
+}
+
+export async function disable(ids: Array<string>): Promise<Response<boolean>> {
+    return http.request({
+        url: 'api/admin/admin/account-admin-disable',
+        method: 'PUT',
+        data: {ids}
+    })
+}
+
+export async function remove(ids: Array<string>): Promise<Response<boolean>> {
+    return http.request({
+        url: 'api/admin/admin/account-admin-remove',
+        method: 'DELETE',
+        data: {ids}
+    })
+}
+

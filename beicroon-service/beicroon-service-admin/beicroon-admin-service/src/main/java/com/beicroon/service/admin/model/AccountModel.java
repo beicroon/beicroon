@@ -29,7 +29,7 @@ public class AccountModel extends DisableModel {
     private String nickname;
 
     @TableField(value = "`phone`")
-    @ApiModelProperty(name = "手机")
+    @ApiModelProperty(name = "电话")
     private String phone;
 
     @TableField(value = "`email`")

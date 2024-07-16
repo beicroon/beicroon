@@ -23,7 +23,7 @@ public class AccountAdminQueryDTO extends QueryDTOWithDisable {
     private String nickname;
 
     @FieldSearch(value = "`phone`")
-    @ApiModelProperty(name = "手机")
+    @ApiModelProperty(name = "电话")
     private String phone;
 
     @FieldSearch(value = "`email`")

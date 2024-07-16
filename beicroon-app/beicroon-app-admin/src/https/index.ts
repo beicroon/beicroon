@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {BooleanEnums} from '@/enums/SystemEnums.ts';
+import {BooleanEnums} from '@/enums/system.enums.ts';
 
 const http = axios.create({
     baseURL: import.meta.env.VITE_REQUEST_URL,
