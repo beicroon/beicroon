@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import {PageInfo} from '@/https';
 import {onMounted, ref} from 'vue';
+import ElButton from '@/components/elements/ElButton.vue';
 import {AdminPageVO, AdminQueryDTO, page} from '@/https/account/admin.http.ts';
 
 const query = ref<AdminQueryDTO>({} as AdminQueryDTO);
@@ -8,18 +9,29 @@ const query = ref<AdminQueryDTO>({} as AdminQueryDTO);
 const pageInfo = ref<PageInfo>();
 const data = ref<Array<AdminPageVO>>();
 
-onMounted(load)
+onMounted(load);
 
-async function reset() {
-  query.value = {} as AdminQueryDTO;
-}
+const loading = ref(false);
 
 async function load() {
+  loading.value = true;
+
+  data.value = [];
+
   const res = await page(query.value);
 
   data.value = res.data;
 
   pageInfo.value = res.page;
+
+  loading.value = false;
+}
+
+async function reset() {
+  query.value = {} as AdminQueryDTO;
+}
+
+async function create() {
 }
 </script>
 
@@ -41,9 +53,9 @@ async function load() {
         </label>
       </div>
       <div class="head-action">
-        <button class="head-button" @click="reset">重置</button>
-        <button class="head-button" @click="load">查询</button>
-        <button class="head-button">新增</button>
+        <el-button class="head-button" @click="load" :loading="loading">查询</el-button>
+        <el-button class="head-button" @click="reset">重置</el-button>
+        <el-button class="head-button" @click="create">新增</el-button>
       </div>
     </div>
     <table class="list-table">

@@ -32,7 +32,7 @@ body, body a, input, textarea, button, select, option {
 }
 
 ul, ol, li {
-  table-style: none;
+  list-style: none;
 }
 
 input, textarea, button, select {
