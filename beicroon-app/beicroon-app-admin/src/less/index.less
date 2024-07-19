@@ -1,11 +1,5 @@
-<script setup lang="ts">
-</script>
+@import "colors";
 
-<template>
-  <router-view></router-view>
-</template>
-
-<style lang="less">
 * {
   margin: 0;
   padding: 0;
@@ -27,8 +21,8 @@ body {
 }
 
 body, body a, input, textarea, button, select, option {
-  color: #333333;
-  font: 14rem/1.4 "PingFang SC", "Microsoft YaHei", Arial;
+  color: @black;
+  font: 14rem/1.4 "JetBrains Mono", "Fira Code", "Source Code Pro", Consolas, "Courier New", monospace;
 }
 
 ul, ol, li {
@@ -54,7 +48,7 @@ button {
   padding: 8rem;
   width: max-content;
   border-radius: 8rem;
-  border: 1rem solid #e0e4ed;
+  border: 1rem solid @light-grey;
 
   .list-head {
     gap: 18rem;
@@ -65,7 +59,7 @@ button {
     justify-content: space-between;
 
     &.flex-row {
-      .head-action{
+      .head-action {
         width: 252rem;
         flex-direction: row;
       }
@@ -103,14 +97,14 @@ button {
       display: block;
       padding: 4rem 8rem;
       border-radius: 8rem;
-      border: 1rem solid #a4a3a3;
+      border: 1rem solid @grey;
 
       &:focus {
-        border-color: #287bf1;
+        border-color: @blue;
       }
 
       &::placeholder {
-        color: #a4a3a3;
+        color: @grey;
       }
     }
   }
@@ -127,10 +121,10 @@ button {
 
   .head-button {
     width: 80rem;
-    color: #ffffff;
+    color: @white;
     padding: 6rem 0;
-    background: #287bf1;
     border-radius: 8rem;
+    background-color: @blue;
   }
 
   .list-table {
@@ -145,19 +139,17 @@ button {
     z-index: 3;
     top: -9rem;
     position: sticky;
-    background: #ecedef;
-    border-top: 1rem solid #e0e4ed;
+    background-color: @light-grey;
+    border-top: 1rem solid @light-grey;
 
     .table-action {
       top: -9rem;
-      background: #ecedef;
+      background-color: @light-grey;
     }
   }
 
-  .table-body {
-    .table-row:nth-child(even) .table-cell {
-      background: #ecedef;
-    }
+  .table-body .table-row:nth-child(even) .table-cell {
+    background-color: @light-grey;
   }
 
   .table-cell {
@@ -167,21 +159,21 @@ button {
     align-items: center;
     flex-direction: column;
     justify-content: center;
-    border-left: 1rem solid #e0e4ed;
-    border-bottom: 1rem solid #e0e4ed;
+    border-left: 1rem solid @light-grey;
+    border-bottom: 1rem solid @light-grey;
   }
 
   .table-action {
     z-index: 2;
     right: -9rem;
     position: sticky;
-    background: #ffffff;
+    background-color: @white;
   }
 
   .table-button {
     padding: 0 18rem;
     flex-direction: row !important;
-    border-right: 1rem solid #e0e4ed;
+    border-right: 1rem solid @light-grey;
     justify-content: space-around !important;
 
     button {
@@ -189,4 +181,14 @@ button {
     }
   }
 }
-</style>
+
+.list-fixed {
+  z-index: 6;
+  height: 100%;
+  position: fixed;
+}
+
+.right-bottom {
+  right: 0;
+  bottom: 0;
+}

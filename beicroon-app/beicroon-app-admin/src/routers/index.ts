@@ -16,7 +16,7 @@ const router = createRouter({
                 {
                     name: '后台账号',
                     path: '/account/admin',
-                    component: () => import('@/views/index/account/Admin.vue'),
+                    component: () => import('@/views/index/account/admin/AccountAdminApp.vue'),
                 },
                 {
                     name: '用户账号',

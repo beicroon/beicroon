@@ -26,5 +26,19 @@ function handleClick() {
 </template>
 
 <style lang="less">
+@import "@/less/colors";
 
+.button {
+  &.warning {
+    color: @warning;
+  }
+
+  &.primary {
+    color: @primary;
+  }
+
+  &.dangerous {
+    color: @dangerous;
+  }
+}
 </style>

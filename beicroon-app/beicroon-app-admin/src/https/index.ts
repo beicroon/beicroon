@@ -7,7 +7,7 @@ const http = axios.create({
     headers: {'Content-Type': 'application/json'},
 });
 
-const minResponseTime = 3000;
+const minResponseTime = 300;
 
 // 添加请求拦截器
 http.interceptors.request.use(

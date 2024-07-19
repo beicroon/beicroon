@@ -3,10 +3,14 @@ import {PageInfo} from '@/https';
 import {onMounted, ref} from 'vue';
 import ElButton from '@/components/elements/ElButton.vue';
 import {AdminPageVO, AdminQueryDTO, page} from '@/https/account/admin.http.ts';
+import ElCreate from '@/views/index/account/admin/AccountAdminCreate.vue';
+import ElUpdate from '@/views/index/account/admin/AccountAdminUpdate.vue';
+import ElDetail from '@/views/index/account/admin/AccountAdminDetail.vue';
 
 const query = ref<AdminQueryDTO>({} as AdminQueryDTO);
 
-const pageInfo = ref<PageInfo>();
+const paginator = ref<PageInfo>();
+
 const data = ref<Array<AdminPageVO>>();
 
 onMounted(load);
@@ -22,7 +26,7 @@ async function load() {
 
   data.value = res.data;
 
-  pageInfo.value = res.page;
+  paginator.value = res.page;
 
   loading.value = false;
 }
@@ -37,6 +41,9 @@ async function create() {
 
 <template>
   <div class="list">
+    <el-create class="list-fixed right-bottom"></el-create>
+    <el-update class="list-fixed right-bottom"></el-update>
+    <el-detail class="list-fixed right-bottom"></el-detail>
     <div class="list-head flex-row">
       <div class="head-search">
         <label class="head-input">
@@ -112,9 +119,9 @@ async function create() {
         </td>
         <td class="table-action">
           <div class="table-cell table-button">
-            <button>查看</button>
-            <button>编辑</button>
-            <button>删除</button>
+            <el-button class="primary">查看</el-button>
+            <el-button class="warning">编辑</el-button>
+            <el-button class="dangerous">删除</el-button>
           </div>
         </td>
       </tr>
