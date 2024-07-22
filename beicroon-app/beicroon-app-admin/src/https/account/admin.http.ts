@@ -35,17 +35,15 @@ export type AdminQueryDTO = QueryDTO & DisableDTO & {
 
 export async function show(id: String): Promise<Response<AdminBaseVO>> {
     return http.request({
-        url: 'api/admin/admin/account-admin-show',
+        url: 'api/admin/admin/account-admin-show?id=' + id,
         method: 'GET',
-        params: {id: id}
     })
 }
 
 export async function detail(id: String): Promise<Response<AdminDetailVO>> {
     return http.request({
-        url: 'api/admin/admin/account-admin-detail',
+        url: 'api/admin/admin/account-admin-detail?id=' + id,
         method: 'GET',
-        params: {id: id}
     })
 }
 

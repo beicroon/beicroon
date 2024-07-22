@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import {PageInfo} from '@/https';
-import {onMounted, ref} from 'vue';
+import {onMounted, reactive, ref} from 'vue';
 import ElButton from '@/components/elements/ElButton.vue';
-import {AdminPageVO, AdminQueryDTO, page} from '@/https/account/admin.http.ts';
 import ElCreate from '@/views/index/account/admin/AccountAdminCreate.vue';
 import ElUpdate from '@/views/index/account/admin/AccountAdminUpdate.vue';
 import ElDetail from '@/views/index/account/admin/AccountAdminDetail.vue';
+import {AdminPageVO, AdminQueryDTO, page} from '@/https/account/admin.http.ts';
 
 const query = ref<AdminQueryDTO>({} as AdminQueryDTO);
 
@@ -35,15 +35,42 @@ async function reset() {
   query.value = {} as AdminQueryDTO;
 }
 
+const show = reactive({
+  create: null as AdminPageVO | null,
+  update: null as AdminPageVO | null,
+  detail: null as AdminPageVO | null,
+  remove: null as AdminPageVO | null,
+});
+
+const hide = ref({
+  create: () => show.create = null,
+  update: () => show.update = null,
+  detail: () => show.detail = null,
+  remove: () => show.remove = null,
+});
+
 async function create() {
+  show.create = {} as AdminPageVO;
+}
+
+async function update(item: AdminPageVO) {
+  show.update = item;
+}
+
+async function detail(item: AdminPageVO) {
+  show.detail = item;
+}
+
+async function remove(item: AdminPageVO) {
+  show.remove = item;
 }
 </script>
 
 <template>
   <div class="list">
-    <el-create class="list-fixed right-bottom"></el-create>
-    <el-update class="list-fixed right-bottom"></el-update>
-    <el-detail class="list-fixed right-bottom"></el-detail>
+    <el-create class="list-fixed right-bottom" v-if="show.create" @close="hide.create"></el-create>
+    <el-update class="list-fixed right-bottom" v-if="show.update" :id="show.update.id" @close="hide.update"></el-update>
+    <el-detail class="list-fixed right-bottom" v-if="show.detail" :id="show.detail.id" @close="hide.detail"></el-detail>
     <div class="list-head flex-row">
       <div class="head-search">
         <label class="head-input">
@@ -119,9 +146,9 @@ async function create() {
         </td>
         <td class="table-action">
           <div class="table-cell table-button">
-            <el-button class="primary">查看</el-button>
-            <el-button class="warning">编辑</el-button>
-            <el-button class="dangerous">删除</el-button>
+            <el-button class="primary" @click="detail(item)">查看</el-button>
+            <el-button class="warning" @click="update(item)">编辑</el-button>
+            <el-button class="dangerous" @click="remove(item)">删除</el-button>
           </div>
         </td>
       </tr>
