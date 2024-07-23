@@ -1,11 +1,9 @@
 <script setup lang="ts">
 import {PageInfo} from '@/https';
-import {onMounted, reactive, ref} from 'vue';
+import {onMounted, ref} from 'vue';
 import ElButton from '@/components/elements/ElButton.vue';
-import ElCreate from '@/views/index/account/admin/AccountAdminCreate.vue';
-import ElUpdate from '@/views/index/account/admin/AccountAdminUpdate.vue';
-import ElDetail from '@/views/index/account/admin/AccountAdminDetail.vue';
 import {AdminPageVO, AdminQueryDTO, page} from '@/https/account/admin.http.ts';
+import toast from "@/utils/toast";
 
 const query = ref<AdminQueryDTO>({} as AdminQueryDTO);
 
@@ -35,42 +33,25 @@ async function reset() {
   query.value = {} as AdminQueryDTO;
 }
 
-const show = reactive({
-  create: null as AdminPageVO | null,
-  update: null as AdminPageVO | null,
-  detail: null as AdminPageVO | null,
-  remove: null as AdminPageVO | null,
-});
-
-const hide = ref({
-  create: () => show.create = null,
-  update: () => show.update = null,
-  detail: () => show.detail = null,
-  remove: () => show.remove = null,
-});
-
 async function create() {
-  show.create = {} as AdminPageVO;
+  toast("试一试");
 }
 
 async function update(item: AdminPageVO) {
-  show.update = item;
+  console.info(item);
 }
 
 async function detail(item: AdminPageVO) {
-  show.detail = item;
+  console.info(item);
 }
 
 async function remove(item: AdminPageVO) {
-  show.remove = item;
+  console.info(item);
 }
 </script>
 
 <template>
   <div class="list">
-    <el-create class="list-fixed right-bottom" v-if="show.create" @close="hide.create"></el-create>
-    <el-update class="list-fixed right-bottom" v-if="show.update" :id="show.update.id" @close="hide.update"></el-update>
-    <el-detail class="list-fixed right-bottom" v-if="show.detail" :id="show.detail.id" @close="hide.detail"></el-detail>
     <div class="list-head flex-row">
       <div class="head-search">
         <label class="head-input">

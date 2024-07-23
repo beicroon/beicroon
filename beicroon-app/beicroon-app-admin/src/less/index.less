@@ -182,17 +182,36 @@ button {
   }
 }
 
-.list-fixed {
-  z-index: 6;
-  height: 100%;
+.toast {
+  top: 18%;
+  left: 50%;
+  z-index: 9;
   position: fixed;
+  transform: translateX(-50%);
 }
 
-.right-bottom {
-  right: 0;
-  bottom: 0;
+.dialog {
+  top: 50%;
+  left: 50%;
+  z-index: 8;
+  position: fixed;
+  background-color: @white;
+  transform: translate(-50%, -50%);
 }
 
 .window {
+  top: 100%;
+  left: 100%;
+  z-index: 6;
+  opacity: 0;
+  height: 100%;
+  position: fixed;
+  min-width: 800rem;
   background-color: @white;
+
+  &.show {
+    opacity: 1;
+    transition: all 300ms linear;
+    transform: translate(-100%, -100%);
+  }
 }
