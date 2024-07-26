@@ -10,7 +10,6 @@ import org.apache.rocketmq.client.exception.MQClientException;
 import org.apache.rocketmq.client.producer.DefaultMQProducer;
 import org.apache.rocketmq.common.message.Message;
 import org.apache.rocketmq.remoting.exception.RemotingException;
-import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Import;
 
@@ -41,8 +40,6 @@ public class RocketMqProducer implements IMqProducer {
             this.producer.send(message, this.sendCallback, this.timeout);
         } catch (RemotingException | InterruptedException | MQClientException ex) {
             throw new RuntimeException(ex);
-        } catch (NoSuchBeanDefinitionException ex) {
-            throw new RuntimeException("MQ配置错误:请确认MQ服务端地址是否正确配置", ex);
         }
     }
 

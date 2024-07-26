@@ -81,6 +81,54 @@ public class RocketMqRegister implements SmartInitializingSingleton, DisposableB
                 return;
             }
 
+//            Map<String, List<Object>> listenerGroup = ListUtils.toMapList(listenerMap.values(), listener -> {
+//                if (!(listener instanceof MqConsumer)) {
+//                    return null;
+//                }
+//
+//                MqListener annotation = listener.getClass().getAnnotation(MqListener.class);
+//
+//                if (annotation == null) {
+//                    return null;
+//                }
+//
+//                return annotation.topic();
+//            });
+//
+//            for (Map.Entry<String, List<Object>> consumerEntry : listenerGroup.entrySet()) {
+//                String topic = consumerEntry.getKey();
+//
+//                Set<String[]> tags = ListUtils.toSet(consumerEntry.getValue(), consumer -> {
+//                    MqListener annotation = consumer.getClass().getAnnotation(MqListener.class);
+//
+//                    if (annotation == null) {
+//                        return null;
+//                    }
+//
+//                    return annotation.tags();
+//                });
+//
+//                String tag = tags.stream()
+//                        .flatMap(Arrays::stream)
+//                        .collect(Collectors.joining("||"));
+//
+//                DefaultMQPushConsumer consumer = new DefaultMQPushConsumer(this.appName);
+//
+//                consumer.setNamesrvAddr(this.serverAddr);
+//                consumer.registerMessageListener(new RocketMqListener((MqConsumer<?>) new MqConsumer<>() {
+//
+//                }));
+//
+//                try {
+//                    consumer.subscribe(topic, tag);
+//                    consumer.start();
+//                } catch (MQClientException ex) {
+//                    throw new RuntimeException(ex);
+//                }
+//
+//                this.consumers.add(consumer);
+//            }
+
             for (Map.Entry<String, Object> listenerEntry : listenerMap.entrySet()) {
                 Object listener = listenerEntry.getValue();
 
