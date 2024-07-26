@@ -1,4 +1,4 @@
-package com.beicroon.starter.mq.annotation;
+package com.beicroon.construct.mq.annotation;
 
 import org.springframework.stereotype.Component;
 

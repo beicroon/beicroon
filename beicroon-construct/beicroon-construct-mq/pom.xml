@@ -10,29 +10,19 @@
         <version>1.0.0</version>
     </parent>
 
-    <artifactId>beicroon-construct-rocketmq</artifactId>
+    <artifactId>beicroon-construct-mq</artifactId>
     <version>1.0.0</version>
     <packaging>jar</packaging>
 
     <dependencies>
         <dependency>
-            <groupId>org.apache.rocketmq</groupId>
-            <artifactId>rocketmq-client</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>jakarta.annotation</groupId>
-            <artifactId>jakarta.annotation-api</artifactId>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
         </dependency>
 
         <dependency>
             <groupId>com.beicroon</groupId>
-            <artifactId>beicroon-construct-mq</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.beicroon</groupId>
-            <artifactId>beicroon-construct-utils</artifactId>
+            <artifactId>beicroon-construct-jackson</artifactId>
         </dependency>
     </dependencies>
 </project>

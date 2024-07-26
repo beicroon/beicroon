@@ -1,4 +1,4 @@
-package com.beicroon.starter.mq.enums;
+package com.beicroon.construct.mq.enums;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

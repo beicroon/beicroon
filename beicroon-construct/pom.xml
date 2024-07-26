@@ -21,6 +21,7 @@
         <module>beicroon-construct-exception</module>
         <module>beicroon-construct-interfaces</module>
         <module>beicroon-construct-jackson</module>
+        <module>beicroon-construct-mq</module>
         <module>beicroon-construct-mybatis</module>
         <module>beicroon-construct-rocketmq</module>
         <module>beicroon-construct-utils</module>
@@ -169,8 +170,8 @@
 
             <dependency>
                 <groupId>org.apache.rocketmq</groupId>
-                <artifactId>rocketmq-client-java</artifactId>
-                <version>5.0.7</version>
+                <artifactId>rocketmq-client</artifactId>
+                <version>5.3.0</version>
             </dependency>
 
             <dependency>
@@ -374,6 +375,12 @@
             <dependency>
                 <groupId>com.beicroon</groupId>
                 <artifactId>beicroon-construct-jackson</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.beicroon</groupId>
+                <artifactId>beicroon-construct-mq</artifactId>
                 <version>${project.version}</version>
             </dependency>
 

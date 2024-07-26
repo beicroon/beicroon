@@ -16,23 +16,13 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
-        </dependency>
-
-        <dependency>
             <groupId>com.beicroon</groupId>
-            <artifactId>beicroon-construct-jackson</artifactId>
+            <artifactId>beicroon-construct-mq</artifactId>
         </dependency>
 
         <dependency>
             <groupId>com.beicroon</groupId>
             <artifactId>beicroon-construct-rocketmq</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.beicroon</groupId>
-            <artifactId>beicroon-construct-utils</artifactId>
         </dependency>
     </dependencies>
 </project>

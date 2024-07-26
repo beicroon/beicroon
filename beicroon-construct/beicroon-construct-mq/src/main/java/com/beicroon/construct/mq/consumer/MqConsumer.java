@@ -1,4 +1,4 @@
-package com.beicroon.starter.mq.consumer;
+package com.beicroon.construct.mq.consumer;
 
 import com.beicroon.construct.jackson.utils.JsonUtils;
 
@@ -7,6 +7,7 @@ import java.lang.reflect.Type;
 
 public abstract class MqConsumer<T> {
 
+    @SuppressWarnings("unchecked")
     public Class<T> getClazz() {
         Type type = ((ParameterizedType) this.getClass().getGenericSuperclass()).getActualTypeArguments()[0];
 
