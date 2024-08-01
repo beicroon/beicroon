@@ -5,6 +5,7 @@ import com.beicroon.construct.jackson.utils.JsonUtils;
 import com.beicroon.construct.mq.enums.MqDelayEnums;
 import com.beicroon.construct.mq.producer.IMqProducer;
 import com.beicroon.construct.rocketmq.callback.RocketMqSendCallback;
+import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.rocketmq.client.exception.MQClientException;
 import org.apache.rocketmq.client.producer.DefaultMQProducer;
@@ -12,14 +13,14 @@ import org.apache.rocketmq.common.message.Message;
 import org.apache.rocketmq.remoting.exception.RemotingException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Import;
-
-import javax.annotation.Resource;
+import org.springframework.stereotype.Component;
 
 @Slf4j
+@Component
 @Import({RocketMqSendCallback.class, DefaultMQProducer.class})
 public class RocketMqProducer implements IMqProducer {
 
-    @Value("${mq.producer.timeout:3000}")
+    @Value("${mq.timeout:3000}")
     private Long timeout;
 
     @Resource

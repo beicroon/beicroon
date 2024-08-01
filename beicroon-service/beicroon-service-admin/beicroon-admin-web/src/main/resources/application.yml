@@ -48,10 +48,12 @@ mybatis-plus:
   mapper-locations: classpath*:/mapper/*.xml
   type-aliases-package: com.beicroon.service.*.model
 
-#rocketmq:
-#  nameServer: @pom.mq.address@
-#  namespace: @pom.profile.name@
-#  groupId: @project.parent.artifactId@
+mq:
+#  server-address: @pom.mq.address@
+  server-address: 172.16.110.23:9876
+  namespace: @pom.profile.name@
+  group-id: @project.parent.artifactId@
+  timeout: 3000
 
 xxl:
   job:

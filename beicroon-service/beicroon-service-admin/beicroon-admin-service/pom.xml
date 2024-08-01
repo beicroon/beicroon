@@ -24,6 +24,11 @@
 
         <dependency>
             <groupId>com.beicroon</groupId>
+            <artifactId>beicroon-starter-mq</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.beicroon</groupId>
             <artifactId>beicroon-starter-service</artifactId>
         </dependency>
     </dependencies>

@@ -1,15 +1,18 @@
 package com.beicroon.construct.rocketmq.register;
 
+import com.beicroon.construct.constant.SystemConstant;
 import com.beicroon.construct.mq.annotation.MqListener;
 import com.beicroon.construct.mq.consumer.MqConsumer;
-import com.beicroon.construct.rocketmq.listener.RocketMqListener;
 import com.beicroon.construct.utils.EmptyUtils;
 import com.beicroon.construct.utils.ListUtils;
 import jakarta.annotation.Nonnull;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.rocketmq.client.consumer.DefaultMQPushConsumer;
+import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyStatus;
+import org.apache.rocketmq.client.consumer.listener.MessageListenerConcurrently;
 import org.apache.rocketmq.client.exception.MQClientException;
 import org.apache.rocketmq.client.producer.DefaultMQProducer;
+import org.apache.rocketmq.common.message.MessageExt;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.SmartInitializingSingleton;
 import org.springframework.beans.factory.annotation.Value;
@@ -19,7 +22,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.GenericApplicationContext;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -36,8 +39,14 @@ public class RocketMqRegister implements SmartInitializingSingleton, DisposableB
     @Value("${spring.application.name}")
     private String appName;
 
-    @Value("${mq.server-addr:}")
-    private String serverAddr;
+    @Value("${mq.server-address:}")
+    private String serverAddress;
+
+    @Value("${mq.namespace:}")
+    private String namespace;
+
+    @Value("${mq.group-id:}")
+    private String groupId;
 
     @Value("${mq.consumer.enable:true}")
     private boolean consumerEnable;
@@ -49,12 +58,13 @@ public class RocketMqRegister implements SmartInitializingSingleton, DisposableB
 
     @Override
     public void afterSingletonsInstantiated() {
-        if (EmptyUtils.isNotEmpty(this.serverAddr)) {
+        if (EmptyUtils.isNotEmpty(this.serverAddress)) {
             // 注册生产者
             ((GenericApplicationContext) this.applicationContext).registerBean(DefaultMQProducer.class, () -> {
                 DefaultMQProducer producer = new DefaultMQProducer(this.appName);
 
-                producer.setNamesrvAddr(this.serverAddr);
+                producer.setNamesrvAddr(this.serverAddress);
+                producer.setNamespaceV2(this.namespace);
 
                 try {
                     producer.start();
@@ -81,74 +91,79 @@ public class RocketMqRegister implements SmartInitializingSingleton, DisposableB
                 return;
             }
 
-//            Map<String, List<Object>> listenerGroup = ListUtils.toMapList(listenerMap.values(), listener -> {
-//                if (!(listener instanceof MqConsumer)) {
-//                    return null;
-//                }
-//
-//                MqListener annotation = listener.getClass().getAnnotation(MqListener.class);
-//
-//                if (annotation == null) {
-//                    return null;
-//                }
-//
-//                return annotation.topic();
-//            });
-//
-//            for (Map.Entry<String, List<Object>> consumerEntry : listenerGroup.entrySet()) {
-//                String topic = consumerEntry.getKey();
-//
-//                Set<String[]> tags = ListUtils.toSet(consumerEntry.getValue(), consumer -> {
-//                    MqListener annotation = consumer.getClass().getAnnotation(MqListener.class);
-//
-//                    if (annotation == null) {
-//                        return null;
-//                    }
-//
-//                    return annotation.tags();
-//                });
-//
-//                String tag = tags.stream()
-//                        .flatMap(Arrays::stream)
-//                        .collect(Collectors.joining("||"));
-//
-//                DefaultMQPushConsumer consumer = new DefaultMQPushConsumer(this.appName);
-//
-//                consumer.setNamesrvAddr(this.serverAddr);
-//                consumer.registerMessageListener(new RocketMqListener((MqConsumer<?>) new MqConsumer<>() {
-//
-//                }));
-//
-//                try {
-//                    consumer.subscribe(topic, tag);
-//                    consumer.start();
-//                } catch (MQClientException ex) {
-//                    throw new RuntimeException(ex);
-//                }
-//
-//                this.consumers.add(consumer);
-//            }
-
-            for (Map.Entry<String, Object> listenerEntry : listenerMap.entrySet()) {
-                Object listener = listenerEntry.getValue();
-
+            Map<String, List<Object>> listenerGroup = ListUtils.toMapList(listenerMap.values(), listener -> {
                 if (!(listener instanceof MqConsumer)) {
-                    continue;
+                    return null;
                 }
 
                 MqListener annotation = listener.getClass().getAnnotation(MqListener.class);
 
                 if (annotation == null) {
-                    continue;
+                    return null;
                 }
+
+                return annotation.topic();
+            });
+
+            for (Map.Entry<String, List<Object>> consumerEntry : listenerGroup.entrySet()) {
+                String topic = consumerEntry.getKey();
+
+                Map<String, List<MqConsumer<?>>> listenerTagMap = new HashMap<>();
+
+                for (Object listener : consumerEntry.getValue()) {
+                    if (!(listener instanceof MqConsumer<?> consumer)) {
+                        continue;
+                    }
+
+                    MqListener annotation = consumer.getClass().getAnnotation(MqListener.class);
+
+                    for (String tag : annotation.tags()) {
+                        if (!listenerTagMap.containsKey(tag)) {
+                            listenerTagMap.put(tag, new ArrayList<>());
+                        }
+
+                        listenerTagMap.get(tag).add(consumer);
+                    }
+                }
+
+                String tag = ListUtils.join(listenerTagMap.keySet(), "||");
 
                 DefaultMQPushConsumer consumer = new DefaultMQPushConsumer(this.appName);
 
-                consumer.setNamesrvAddr(this.serverAddr);
-                consumer.registerMessageListener(new RocketMqListener((MqConsumer<?>) listener));
+                consumer.setNamesrvAddr(this.serverAddress);
+                consumer.setNamespaceV2(this.namespace);
+                consumer.setConsumerGroup(this.groupId);
+                consumer.registerMessageListener((MessageListenerConcurrently) (messages, consumeConcurrentlyContext) -> {
+                    for (MessageExt message : messages) {
+                        try {
+                            List<MqConsumer<?>> tagConsumers = listenerTagMap.get(message.getTags());
+
+                            for (MqConsumer<?> tagConsumer : tagConsumers) {
+                                try {
+                                    tagConsumer.consume(message.getBody());
+                                } catch (Exception ex) {
+                                    log.error(
+                                            "MQ消息消费失败:topic={}, msgId={}, content={}, message={}",
+                                            message.getTopic(),
+                                            message.getMsgId(),
+                                            new String(message.getBody(), SystemConstant.CHARSET),
+                                            ex.getMessage(),
+                                            ex
+                                    );
+
+                                    throw ex;
+                                }
+                            }
+                        } catch (Exception ex) {
+                            return ConsumeConcurrentlyStatus.RECONSUME_LATER;
+                        }
+                    }
+
+                    return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
+                });
 
                 try {
-                    consumer.subscribe(annotation.topic(), ListUtils.join(Arrays.asList(annotation.tags()), "||"));
+                    consumer.subscribe(topic, tag);
                     consumer.start();
                 } catch (MQClientException ex) {
                     throw new RuntimeException(ex);

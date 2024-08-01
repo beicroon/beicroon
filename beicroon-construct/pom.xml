@@ -440,7 +440,7 @@
                 <pom.redis.port>6379</pom.redis.port>
                 <pom.redis.password/>
                 <pom.mq.address>127.0.0.1:9876</pom.mq.address>
-                <pom.mq.consumer.enable>false</pom.mq.consumer.enable>
+                <pom.mq.consumer.enable>true</pom.mq.consumer.enable>
                 <pom.job.addresses/>
             </properties>
         </profile>
