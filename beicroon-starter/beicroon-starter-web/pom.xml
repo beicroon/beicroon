@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>com.beicroon</groupId>
+        <groupId>com.beicroon.starter</groupId>
         <artifactId>beicroon-starter</artifactId>
         <version>1.0.0</version>
     </parent>
@@ -41,46 +41,46 @@
         </dependency>
 
         <dependency>
-            <groupId>com.beicroon</groupId>
+            <groupId>com.beicroon.construct</groupId>
             <artifactId>beicroon-construct-exception</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>com.beicroon</groupId>
+            <groupId>com.beicroon.starter</groupId>
             <artifactId>beicroon-starter-async</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>com.beicroon</groupId>
+            <groupId>com.beicroon.starter</groupId>
             <artifactId>beicroon-starter-cache</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>com.beicroon</groupId>
+            <groupId>com.beicroon.starter</groupId>
             <artifactId>beicroon-starter-cloud</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>com.beicroon</groupId>
+            <groupId>com.beicroon.starter</groupId>
             <artifactId>beicroon-starter-json</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>com.beicroon</groupId>
+            <groupId>com.beicroon.starter</groupId>
             <artifactId>beicroon-starter-logging</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>com.beicroon</groupId>
+            <groupId>com.beicroon.starter</groupId>
             <artifactId>beicroon-starter-mq</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>com.beicroon</groupId>
+            <groupId>com.beicroon.starter</groupId>
             <artifactId>beicroon-starter-task</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.beicroon</groupId>
+            <groupId>com.beicroon.construct</groupId>
             <artifactId>beicroon-construct-entity</artifactId>
         </dependency>
     </dependencies>

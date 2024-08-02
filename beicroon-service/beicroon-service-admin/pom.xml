@@ -5,20 +5,21 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>com.beicroon</groupId>
+        <groupId>com.beicroon.starter</groupId>
         <artifactId>beicroon-starter</artifactId>
         <version>1.0.0</version>
         <relativePath/>
     </parent>
 
+    <groupId>com.beicroon.service</groupId>
     <artifactId>beicroon-service-admin</artifactId>
     <version>1.0.0</version>
     <packaging>pom</packaging>
 
     <!--  请勿随意调整顺序  -->
     <modules>
-        <module>beicroon-admin-entity</module>
-        <module>beicroon-admin-service</module>
-        <module>beicroon-admin-web</module>
+        <module>beicroon-service-admin-entity</module>
+        <module>beicroon-service-admin-service</module>
+        <module>beicroon-service-admin-web</module>
     </modules>
 </project>

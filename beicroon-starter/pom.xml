@@ -5,12 +5,13 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>com.beicroon</groupId>
+        <groupId>com.beicroon.construct</groupId>
         <artifactId>beicroon-construct</artifactId>
         <version>1.0.0</version>
         <relativePath/>
     </parent>
 
+    <groupId>com.beicroon.starter</groupId>
     <artifactId>beicroon-starter</artifactId>
     <version>1.0.0</version>
     <packaging>pom</packaging>
@@ -20,7 +21,6 @@
         <module>beicroon-starter-async</module>
         <module>beicroon-starter-cache</module>
         <module>beicroon-starter-cloud</module>
-        <module>beicroon-starter-feign</module>
         <module>beicroon-starter-gateway</module>
         <module>beicroon-starter-json</module>
         <module>beicroon-starter-logging</module>
@@ -34,73 +34,67 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>com.beicroon</groupId>
+                <groupId>com.beicroon.starter</groupId>
                 <artifactId>beicroon-starter-async</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>com.beicroon</groupId>
+                <groupId>com.beicroon.starter</groupId>
                 <artifactId>beicroon-starter-cache</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>com.beicroon</groupId>
+                <groupId>com.beicroon.starter</groupId>
                 <artifactId>beicroon-starter-cloud</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>com.beicroon</groupId>
-                <artifactId>beicroon-starter-feign</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.beicroon</groupId>
+                <groupId>com.beicroon.starter</groupId>
                 <artifactId>beicroon-starter-gateway</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>com.beicroon</groupId>
+                <groupId>com.beicroon.starter</groupId>
                 <artifactId>beicroon-starter-json</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>com.beicroon</groupId>
+                <groupId>com.beicroon.starter</groupId>
                 <artifactId>beicroon-starter-logging</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>com.beicroon</groupId>
+                <groupId>com.beicroon.starter</groupId>
                 <artifactId>beicroon-starter-mq</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>com.beicroon</groupId>
+                <groupId>com.beicroon.starter</groupId>
                 <artifactId>beicroon-starter-mysql</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>com.beicroon</groupId>
+                <groupId>com.beicroon.starter</groupId>
                 <artifactId>beicroon-starter-service</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>com.beicroon</groupId>
+                <groupId>com.beicroon.starter</groupId>
                 <artifactId>beicroon-starter-task</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>com.beicroon</groupId>
+                <groupId>com.beicroon.starter</groupId>
                 <artifactId>beicroon-starter-web</artifactId>
                 <version>${project.version}</version>
             </dependency>

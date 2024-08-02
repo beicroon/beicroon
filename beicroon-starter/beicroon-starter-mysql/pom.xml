@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>com.beicroon</groupId>
+        <groupId>com.beicroon.starter</groupId>
         <artifactId>beicroon-starter</artifactId>
         <version>1.0.0</version>
     </parent>
@@ -16,27 +16,27 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.beicroon</groupId>
+            <groupId>com.beicroon.construct</groupId>
             <artifactId>beicroon-construct-annotation</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>com.beicroon</groupId>
+            <groupId>com.beicroon.construct</groupId>
             <artifactId>beicroon-construct-entity</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>com.beicroon</groupId>
+            <groupId>com.beicroon.construct</groupId>
             <artifactId>beicroon-construct-exception</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>com.beicroon</groupId>
+            <groupId>com.beicroon.construct</groupId>
             <artifactId>beicroon-construct-mybatis</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>com.beicroon</groupId>
+            <groupId>com.beicroon.construct</groupId>
             <artifactId>beicroon-construct-utils</artifactId>
         </dependency>
     </dependencies>

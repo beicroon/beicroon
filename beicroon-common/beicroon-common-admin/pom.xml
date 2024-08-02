@@ -5,18 +5,23 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>com.beicroon</groupId>
+        <groupId>com.beicroon.construct</groupId>
         <artifactId>beicroon-construct</artifactId>
         <version>1.0.0</version>
         <relativePath/>
     </parent>
 
+    <groupId>com.beicroon.common</groupId>
     <artifactId>beicroon-common-admin</artifactId>
     <version>1.0.0</version>
     <packaging>pom</packaging>
 
     <!--  请勿随意调整顺序  -->
     <modules>
-        <module>beicroon-admin-rpc</module>
+        <module>beicroon-common-admin-entity</module>
+        <module>beicroon-common-admin-rpc</module>
     </modules>
+
+    <dependencies>
+    </dependencies>
 </project>
