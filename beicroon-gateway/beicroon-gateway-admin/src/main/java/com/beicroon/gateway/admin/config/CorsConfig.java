@@ -20,7 +20,7 @@ public class CorsConfig {
         config.addAllowedHeader("Referer");
         config.addAllowedHeader("User-Agent");
         config.addAllowedHeader("Content-Type");
-        config.addAllowedHeader(HeaderConstant.AUTHORIZATION);
+        config.addAllowedHeader(HeaderConstant.AUTHORIZATION_TOKEN);
         config.addAllowedHeader(HeaderConstant.SOURCE);
         config.addAllowedHeader(HeaderConstant.VERSION);
         config.addAllowedHeader(HeaderConstant.TENANT_ID);
