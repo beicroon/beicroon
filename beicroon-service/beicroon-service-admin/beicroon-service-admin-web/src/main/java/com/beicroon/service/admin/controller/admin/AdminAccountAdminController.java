@@ -1,6 +1,6 @@
 package com.beicroon.service.admin.controller.admin;
 
-import com.beicroon.common.admin.entity.admin.vo.AccountAdminBaseVO;
+import com.beicroon.common.admin.entity.account.admin.vo.AccountAdminBaseVO;
 import com.beicroon.construct.annotation.ApiOperation;
 import com.beicroon.construct.annotation.ApiTag;
 import com.beicroon.construct.entity.Result;

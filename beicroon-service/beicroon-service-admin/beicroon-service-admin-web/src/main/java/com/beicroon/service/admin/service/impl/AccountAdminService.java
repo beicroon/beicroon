@@ -1,6 +1,6 @@
 package com.beicroon.service.admin.service.impl;
 
-import com.beicroon.common.admin.entity.admin.vo.AccountAdminBaseVO;
+import com.beicroon.common.admin.entity.account.admin.vo.AccountAdminBaseVO;
 import com.beicroon.construct.entity.PageInfo;
 import com.beicroon.construct.utils.ListUtils;
 import com.beicroon.service.admin.convertor.AccountAdminConvertor;

@@ -1,7 +1,7 @@
 package com.beicroon.service.admin.rpc.impl;
 
-import com.beicroon.common.admin.entity.admin.vo.AccountAdminBaseVO;
-import com.beicroon.common.admin.feign.IAccountAdminFeignApi;
+import com.beicroon.common.admin.entity.account.admin.vo.AccountAdminBaseVO;
+import com.beicroon.common.admin.rpc.feign.IAccountAdminFeignApi;
 import com.beicroon.construct.entity.Result;
 import com.beicroon.construct.entity.WebResult;
 import com.beicroon.service.admin.service.IAccountAdminService;

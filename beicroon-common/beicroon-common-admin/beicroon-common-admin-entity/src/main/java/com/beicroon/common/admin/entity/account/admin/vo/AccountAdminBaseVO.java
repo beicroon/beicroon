@@ -1,4 +1,4 @@
-package com.beicroon.common.admin.entity.admin.vo;
+package com.beicroon.common.admin.entity.account.admin.vo;
 
 import com.beicroon.construct.annotation.ApiModelProperty;
 import com.beicroon.construct.entity.DisableVO;

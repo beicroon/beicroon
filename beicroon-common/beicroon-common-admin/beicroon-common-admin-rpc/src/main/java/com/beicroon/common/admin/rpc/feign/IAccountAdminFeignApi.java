@@ -1,6 +1,6 @@
-package com.beicroon.common.admin.feign;
+package com.beicroon.common.admin.rpc.feign;
 
-import com.beicroon.common.admin.entity.admin.vo.AccountAdminBaseVO;
+import com.beicroon.common.admin.entity.account.admin.vo.AccountAdminBaseVO;
 import com.beicroon.construct.annotation.ApiOperation;
 import com.beicroon.construct.entity.Result;
 import org.springframework.cloud.openfeign.FeignClient;

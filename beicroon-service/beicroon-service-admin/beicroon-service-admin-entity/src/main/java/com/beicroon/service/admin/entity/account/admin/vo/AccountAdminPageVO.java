@@ -1,6 +1,6 @@
 package com.beicroon.service.admin.entity.account.admin.vo;
 
-import com.beicroon.common.admin.entity.admin.vo.AccountAdminBaseVO;
+import com.beicroon.common.admin.entity.account.admin.vo.AccountAdminBaseVO;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 

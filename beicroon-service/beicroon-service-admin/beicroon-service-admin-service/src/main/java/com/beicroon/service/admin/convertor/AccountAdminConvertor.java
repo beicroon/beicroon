@@ -1,6 +1,6 @@
 package com.beicroon.service.admin.convertor;
 
-import com.beicroon.common.admin.entity.admin.vo.AccountAdminBaseVO;
+import com.beicroon.common.admin.entity.account.admin.vo.AccountAdminBaseVO;
 import com.beicroon.service.admin.entity.account.admin.dto.AccountAdminCreateDTO;
 import com.beicroon.service.admin.entity.account.admin.dto.AccountAdminUpdateDTO;
 import com.beicroon.service.admin.entity.account.admin.vo.AccountAdminDetailVO;
