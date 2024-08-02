@@ -1,11 +1,9 @@
-package com.beicroon.construct.feign.config;
+package com.beicroon.starter.feign.config;
 
 import com.beicroon.construct.auth.utils.AuthUtils;
 import com.beicroon.construct.constant.HeaderConstant;
 import com.beicroon.construct.constant.SystemConstant;
 import com.beicroon.construct.jackson.utils.JsonUtils;
-import com.beicroon.construct.utils.EmptyUtils;
-import com.beicroon.construct.utils.RandomUtils;
 import com.beicroon.construct.utils.UrlUtils;
 import feign.RequestInterceptor;
 import jakarta.servlet.http.HttpServletRequest;
@@ -37,8 +35,6 @@ public class FeignClientConfig {
 
     @Bean
     public RequestInterceptor requestInterceptor() {
-        MDC.put(SystemConstant.TRACE_ID, RandomUtils.uuid());
-
         return template -> {
             ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
 
@@ -49,19 +45,12 @@ public class FeignClientConfig {
                     template.header(header, request.getHeader(header));
                 }
             } else {
-                String traceId = MDC.get(SystemConstant.TRACE_ID);
-
-                if (EmptyUtils.isEmpty(traceId)) {
-                    MDC.put(SystemConstant.TRACE_ID, RandomUtils.uuid());
-                }
-
-                template.header(HeaderConstant.TRACE_ID, UrlUtils.encode(MDC.get(SystemConstant.TRACE_ID)));
-                template.header(HeaderConstant.AUTHORIZATION_USER, UrlUtils.encode(JsonUtils.toJson(AuthUtils.getUser())));
-
                 template.header(HeaderConstant.SOURCE, UrlUtils.encode(AuthUtils.getSource()));
                 template.header(HeaderConstant.VERSION, UrlUtils.encode(AuthUtils.getVersion()));
+                template.header(HeaderConstant.TRACE_ID, UrlUtils.encode(MDC.get(SystemConstant.TRACE_ID)));
                 template.header(HeaderConstant.TENANT_ID, UrlUtils.encode(String.valueOf(AuthUtils.getTenantId())));
                 template.header(HeaderConstant.STATION_ID, UrlUtils.encode(String.valueOf(AuthUtils.getStationId())));
+                template.header(HeaderConstant.AUTHORIZATION_USER, UrlUtils.encode(JsonUtils.toJson(AuthUtils.getUser())));
             }
         };
     }

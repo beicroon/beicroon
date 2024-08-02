@@ -19,7 +19,7 @@
         <module>beicroon-construct-entity</module>
         <module>beicroon-construct-enums</module>
         <module>beicroon-construct-exception</module>
-        <module>beicroon-construct-feign</module>
+        <module>beicroon-construct-http</module>
         <module>beicroon-construct-interfaces</module>
         <module>beicroon-construct-jackson</module>
         <module>beicroon-construct-mq</module>
@@ -387,7 +387,7 @@
 
             <dependency>
                 <groupId>com.beicroon</groupId>
-                <artifactId>beicroon-construct-feign</artifactId>
+                <artifactId>beicroon-construct-http</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
