@@ -4,14 +4,24 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
+    <parent>
+        <groupId>com.beicroon.construct</groupId>
+        <artifactId>beicroon-construct</artifactId>
+        <version>1.0.0</version>
+        <relativePath/>
+    </parent>
+
     <groupId>com.beicroon.common</groupId>
-    <artifactId>beicroon-common</artifactId>
+    <artifactId>beicroon-common-tenant</artifactId>
     <version>1.0.0</version>
     <packaging>pom</packaging>
 
     <!--  请勿随意调整顺序  -->
     <modules>
-        <module>beicroon-common-admin</module>
-        <module>beicroon-common-tenant</module>
+        <module>beicroon-common-tenant-entity</module>
+        <module>beicroon-common-tenant-rpc</module>
     </modules>
+
+    <dependencies>
+    </dependencies>
 </project>
