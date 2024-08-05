@@ -5,12 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.beicroon.middle</groupId>
-    <artifactId>beicroon-middle</artifactId>
+    <artifactId>beicroon-middle-tenant</artifactId>
     <version>1.0.0</version>
-    <packaging>pom</packaging>
-
-    <!--  请勿随意调整顺序  -->
-    <modules>
-        <module>beicroon-middle-tenant</module>
-    </modules>
+    <packaging>jar</packaging>
 </project>
