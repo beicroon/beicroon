@@ -10,8 +10,8 @@ public interface IAuthUser {
 
     String getCode();
 
-    void setName(String value);
+    void setNickname(String value);
 
-    String getName();
+    String getNickname();
 
 }

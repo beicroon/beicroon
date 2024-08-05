@@ -5,12 +5,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>com.beicroon.construct</groupId>
-        <artifactId>beicroon-construct</artifactId>
+        <groupId>com.beicroon.starter</groupId>
+        <artifactId>beicroon-starter</artifactId>
         <version>1.0.0</version>
     </parent>
 
-    <artifactId>beicroon-construct-jwt</artifactId>
+    <artifactId>beicroon-starter-jwt</artifactId>
     <version>1.0.0</version>
     <packaging>jar</packaging>
 

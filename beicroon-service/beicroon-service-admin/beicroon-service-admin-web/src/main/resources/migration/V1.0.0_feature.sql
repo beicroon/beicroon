@@ -4,7 +4,7 @@ create table `admin_account`
     `id`            bigint(20) unsigned not null auto_increment comment '主键',
     `tenant_id`     bigint(20) unsigned not null default 0 comment '租户主键',
     `code`          varchar(64)         not null default '' comment '编码',
-    `account`       varchar(255)        not null default '' comment '账号',
+    `username`      varchar(255)        not null default '' comment '账号',
     `password`      varchar(255)        not null default '' comment '密码',
     `nickname`      varchar(255)        not null default '' comment '姓名',
     `phone`         varchar(32)         not null default '' comment '电话',
@@ -22,7 +22,7 @@ create table `admin_account`
     `modifier_code` varchar(64)         not null default '' comment '更新人编码',
     `modifier_name` varchar(255)        not null default '' comment '更新人姓名',
     primary key (`id`),
-    index `idx_account` (`account`),
+    index `idx_username` (`username`),
     index `idx_phone` (`phone`),
     index `idx_email` (`email`)
 ) engine = innodb comment '账号表';

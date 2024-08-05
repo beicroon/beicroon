@@ -18,18 +18,13 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.beicroon.construct</groupId>
-            <artifactId>beicroon-construct-constant</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.beicroon.construct</groupId>
-            <artifactId>beicroon-construct-jwt</artifactId>
+            <groupId>com.beicroon.starter</groupId>
+            <artifactId>beicroon-starter-gateway</artifactId>
         </dependency>
 
         <dependency>
             <groupId>com.beicroon.starter</groupId>
-            <artifactId>beicroon-starter-gateway</artifactId>
+            <artifactId>beicroon-starter-jwt</artifactId>
         </dependency>
     </dependencies>
 </project>

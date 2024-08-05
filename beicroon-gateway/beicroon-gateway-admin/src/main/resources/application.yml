@@ -29,3 +29,6 @@ spring:
           uri: lb://beicroon-service-admin
           predicates:
             - Path=/api/admin/**
+auth:
+  ignores:
+    - /api/admin/admin/auth-admin-login

@@ -23,6 +23,7 @@
         <module>beicroon-starter-cloud</module>
         <module>beicroon-starter-gateway</module>
         <module>beicroon-starter-json</module>
+        <module>beicroon-starter-jwt</module>
         <module>beicroon-starter-logging</module>
         <module>beicroon-starter-mq</module>
         <module>beicroon-starter-mysql</module>
@@ -60,6 +61,12 @@
             <dependency>
                 <groupId>com.beicroon.starter</groupId>
                 <artifactId>beicroon-starter-json</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.beicroon.starter</groupId>
+                <artifactId>beicroon-starter-jwt</artifactId>
                 <version>${project.version}</version>
             </dependency>
 

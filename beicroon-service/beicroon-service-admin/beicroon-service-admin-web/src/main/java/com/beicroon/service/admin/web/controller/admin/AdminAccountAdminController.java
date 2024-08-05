@@ -8,7 +8,7 @@ import com.beicroon.construct.entity.WebResult;
 import com.beicroon.service.admin.entity.account.admin.dto.AccountAdminQueryDTO;
 import com.beicroon.service.admin.entity.account.admin.vo.AccountAdminDetailVO;
 import com.beicroon.service.admin.entity.account.admin.vo.AccountAdminPageVO;
-import com.beicroon.service.admin.web.service.impl.AccountAdminService;
+import com.beicroon.service.admin.web.service.IAccountAdminService;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,7 +20,7 @@ import java.util.List;
 public class AdminAccountAdminController {
 
     @Resource
-    private AccountAdminService accountAdminService;
+    private IAccountAdminService accountAdminService;
 
     @ApiOperation("基础信息")
     @GetMapping("/account-admin-show")

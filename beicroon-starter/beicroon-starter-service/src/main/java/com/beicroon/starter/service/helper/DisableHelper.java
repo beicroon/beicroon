@@ -26,7 +26,7 @@ public final class DisableHelper {
         t.setDisabledAt(LocalDateTime.now());
         t.setDisabledId(authUser.getId());
         t.setDisabledCode(authUser.getCode());
-        t.setDisabledName(authUser.getName());
+        t.setDisabledName(authUser.getNickname());
     }
 
     public static <T extends DisableModel> UpdateWrapper<T> disable(Long id) {
@@ -51,7 +51,7 @@ public final class DisableHelper {
         wrapper.set(SystemConstant.DISABLE_KEY_NAME, LocalDateTime.now());
         wrapper.set("`disabled_id`", authUser.getId());
         wrapper.set("`disabled_code`", authUser.getCode());
-        wrapper.set("`disabled_name`", authUser.getName());
+        wrapper.set("`disabled_name`", authUser.getNickname());
 
         return wrapper;
     }

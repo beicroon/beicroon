@@ -13,7 +13,7 @@ public class AccountAdminBaseVO extends DisableVO {
     private String code;
 
     @ApiModelProperty(name = "账号")
-    private String account;
+    private String username;
 
     @ApiModelProperty(name = "姓名")
     private String nickname;

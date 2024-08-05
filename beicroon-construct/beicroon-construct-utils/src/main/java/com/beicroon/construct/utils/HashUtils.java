@@ -114,4 +114,8 @@ public final class HashUtils {
         return Base64.getDecoder().decode(value);
     }
 
+    public static boolean checkPassword(String password, String hash) {
+        return HashUtils.sha256(password).equals(HashUtils.sha256(hash));
+    }
+
 }

@@ -1,4 +1,4 @@
-package com.beicroon.construct.jwt.utils;
+package com.beicroon.starter.jwt.utils;
 
 import com.beicroon.construct.constant.JwtConstant;
 import com.beicroon.construct.entity.AuthUser;
@@ -81,7 +81,7 @@ public final class JwtUtils {
                 .expirationTime(new Date(System.currentTimeMillis() + JwtConstant.DURATION))
                 .claim("role", role.getCode())
                 .claim("code", user.getCode())
-                .claim("name", user.getName())
+                .claim("nickname", user.getNickname())
                 .build();
 
         JWSHeader jwsHeader = new JWSHeader.Builder(JWSAlgorithm.HS256)
@@ -131,7 +131,7 @@ public final class JwtUtils {
         authUser.setId(NumberUtils.longOf(claimsSet.getSubject()));
         authUser.setRole((String) claimsSet.getClaim("role"));
         authUser.setCode((String) claimsSet.getClaim("code"));
-        authUser.setName((String) claimsSet.getClaim("name"));
+        authUser.setNickname((String) claimsSet.getClaim("nickname"));
 
         return authUser;
     }

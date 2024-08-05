@@ -15,6 +15,8 @@ public interface SystemConstant {
 
     String BASE_PACKAGE = SUFFIX + "." + NAME;
 
+    String MAPPER_PACKAGE = BASE_PACKAGE + ".service.**.dao.mapper";
+
     Charset CHARSET = StandardCharsets.UTF_8;
 
     ZoneOffset TIMEZONE = ZoneOffset.of("+8");

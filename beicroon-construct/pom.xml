@@ -28,7 +28,6 @@
         <module>beicroon-construct-rocketmq</module>
         <module>beicroon-construct-utils</module>
         <module>beicroon-construct-xxljob</module>
-        <module>beicroon-construct-jwt</module>
     </modules>
 
     <properties>
@@ -444,12 +443,6 @@
             <dependency>
                 <groupId>com.beicroon.construct</groupId>
                 <artifactId>beicroon-construct-xxljob</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.beicroon.construct</groupId>
-                <artifactId>beicroon-construct-jwt</artifactId>
                 <version>${project.version}</version>
             </dependency>
         </dependencies>

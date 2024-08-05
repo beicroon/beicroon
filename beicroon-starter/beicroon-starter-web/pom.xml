@@ -67,12 +67,22 @@
 
         <dependency>
             <groupId>com.beicroon.starter</groupId>
+            <artifactId>beicroon-starter-jwt</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.beicroon.starter</groupId>
             <artifactId>beicroon-starter-logging</artifactId>
         </dependency>
 
         <dependency>
             <groupId>com.beicroon.starter</groupId>
             <artifactId>beicroon-starter-mq</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.beicroon.starter</groupId>
+            <artifactId>beicroon-starter-mysql</artifactId>
         </dependency>
 
         <dependency>
