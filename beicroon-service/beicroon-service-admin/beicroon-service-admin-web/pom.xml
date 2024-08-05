@@ -28,7 +28,7 @@
 
         <dependency>
             <groupId>com.beicroon.service</groupId>
-            <artifactId>beicroon-service-admin-service</artifactId>
+            <artifactId>beicroon-service-admin-dao</artifactId>
             <version>${project.version}</version>
         </dependency>
     </dependencies>

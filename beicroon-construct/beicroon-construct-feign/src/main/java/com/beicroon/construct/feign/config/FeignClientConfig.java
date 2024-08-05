@@ -28,7 +28,6 @@ public class FeignClientConfig {
             HeaderConstant.VERSION,
             HeaderConstant.TRACE_ID,
             HeaderConstant.TENANT_ID,
-            HeaderConstant.STATION_ID,
             HeaderConstant.AUTHORIZATION_USER,
             HeaderConstant.AUTHORIZATION_TOKEN
     );
@@ -49,7 +48,6 @@ public class FeignClientConfig {
                 template.header(HeaderConstant.VERSION, UrlUtils.encode(AuthUtils.getVersion()));
                 template.header(HeaderConstant.TRACE_ID, UrlUtils.encode(MDC.get(SystemConstant.TRACE_ID)));
                 template.header(HeaderConstant.TENANT_ID, UrlUtils.encode(String.valueOf(AuthUtils.getTenantId())));
-                template.header(HeaderConstant.STATION_ID, UrlUtils.encode(String.valueOf(AuthUtils.getStationId())));
                 template.header(HeaderConstant.AUTHORIZATION_USER, UrlUtils.encode(JsonUtils.toJson(AuthUtils.getUser())));
             }
         };

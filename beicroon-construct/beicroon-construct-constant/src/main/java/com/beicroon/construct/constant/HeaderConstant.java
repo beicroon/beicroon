@@ -14,6 +14,4 @@ public interface HeaderConstant {
 
     String TENANT_ID = "X-Tenant-Id";
 
-    String STATION_ID = "X-Station-Id";
-
 }

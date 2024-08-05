@@ -24,7 +24,6 @@ public class CorsConfig {
         config.addAllowedHeader(HeaderConstant.SOURCE);
         config.addAllowedHeader(HeaderConstant.VERSION);
         config.addAllowedHeader(HeaderConstant.TENANT_ID);
-        config.addAllowedHeader(HeaderConstant.STATION_ID);
         config.addAllowedMethod("GET");
         config.addAllowedMethod("POST");
         config.addAllowedMethod("PUT");

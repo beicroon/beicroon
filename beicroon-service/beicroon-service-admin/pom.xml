@@ -18,8 +18,8 @@
 
     <!--  请勿随意调整顺序  -->
     <modules>
+        <module>beicroon-service-admin-dao</module>
         <module>beicroon-service-admin-entity</module>
-        <module>beicroon-service-admin-service</module>
         <module>beicroon-service-admin-web</module>
     </modules>
 </project>

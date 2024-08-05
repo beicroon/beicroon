@@ -35,7 +35,6 @@ public final class AuthUtils {
         newInfo.setSource(EmptyUtils.emptyString());
         newInfo.setVersion(EmptyUtils.emptyString());
         newInfo.setTenantId(EmptyUtils.emptyLong());
-        newInfo.setStationId(EmptyUtils.emptyLong());
 
         AuthUtils.AUTH_THREAD_LOCAL.set(newInfo);
 
@@ -56,10 +55,6 @@ public final class AuthUtils {
 
     public static Long getUserId() {
         return AuthUtils.getUser().getId();
-    }
-
-    public static void setUserId(Long userId) {
-        AuthUtils.getUser().setId(userId);
     }
 
     public static void setSource(String source) {
@@ -84,14 +79,6 @@ public final class AuthUtils {
 
     public static Long getTenantId() {
         return AuthUtils.getAuthThreadInfo().getTenantId();
-    }
-
-    public static void setStationId(Long stationId) {
-        AuthUtils.getAuthThreadInfo().setStationId(stationId);
-    }
-
-    public static Long getStationId() {
-        return AuthUtils.getAuthThreadInfo().getStationId();
     }
 
     public static void clear() {

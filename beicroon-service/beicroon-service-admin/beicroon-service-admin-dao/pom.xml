@@ -5,31 +5,25 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>com.beicroon.starter</groupId>
-        <artifactId>beicroon-starter</artifactId>
+        <groupId>com.beicroon.service</groupId>
+        <artifactId>beicroon-service-admin</artifactId>
         <version>1.0.0</version>
-        <relativePath/>
     </parent>
 
-    <groupId>com.beicroon.gateway</groupId>
-    <artifactId>beicroon-gateway-admin</artifactId>
+    <artifactId>beicroon-service-admin-dao</artifactId>
     <version>1.0.0</version>
     <packaging>jar</packaging>
 
     <dependencies>
         <dependency>
-            <groupId>com.beicroon.construct</groupId>
-            <artifactId>beicroon-construct-constant</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.beicroon.construct</groupId>
-            <artifactId>beicroon-construct-jwt</artifactId>
+            <groupId>com.beicroon.service</groupId>
+            <artifactId>beicroon-service-admin-entity</artifactId>
+            <version>${project.version}</version>
         </dependency>
 
         <dependency>
             <groupId>com.beicroon.starter</groupId>
-            <artifactId>beicroon-starter-gateway</artifactId>
+            <artifactId>beicroon-starter-service</artifactId>
         </dependency>
     </dependencies>
 </project>
