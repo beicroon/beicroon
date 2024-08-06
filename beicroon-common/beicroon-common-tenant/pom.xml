@@ -21,7 +21,4 @@
         <module>beicroon-common-tenant-entity</module>
         <module>beicroon-common-tenant-rpc</module>
     </modules>
-
-    <dependencies>
-    </dependencies>
 </project>

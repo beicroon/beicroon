@@ -1,7 +1,7 @@
 package com.beicroon.construct.http.entity;
 
 import com.beicroon.construct.constant.SystemConstant;
-import com.beicroon.construct.jackson.utils.JsonUtils;
+import com.beicroon.construct.json.utils.JsonUtils;
 import com.beicroon.construct.utils.EmptyUtils;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;

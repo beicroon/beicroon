@@ -43,11 +43,6 @@
 
         <dependency>
             <groupId>com.beicroon.construct</groupId>
-            <artifactId>beicroon-construct-jackson</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.beicroon.construct</groupId>
             <artifactId>beicroon-construct-utils</artifactId>
         </dependency>
     </dependencies>

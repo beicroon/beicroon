@@ -1,7 +1,7 @@
 package com.beicroon.middle.tenant.manager;
 
 import com.beicroon.common.tenant.rpc.feign.ITenantTenantFeignApi;
-import com.beicroon.construct.jackson.utils.JsonUtils;
+import com.beicroon.construct.json.utils.JsonUtils;
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;

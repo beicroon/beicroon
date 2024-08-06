@@ -3,7 +3,7 @@ package com.beicroon.construct.feign.config;
 import com.beicroon.construct.auth.utils.AuthUtils;
 import com.beicroon.construct.constant.HeaderConstant;
 import com.beicroon.construct.constant.SystemConstant;
-import com.beicroon.construct.jackson.utils.JsonUtils;
+import com.beicroon.construct.json.utils.JsonUtils;
 import com.beicroon.construct.utils.UrlUtils;
 import feign.RequestInterceptor;
 import jakarta.servlet.http.HttpServletRequest;

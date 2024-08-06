@@ -4,7 +4,7 @@ import com.beicroon.construct.constant.HeaderConstant;
 import com.beicroon.construct.constant.JwtConstant;
 import com.beicroon.construct.entity.AuthUser;
 import com.beicroon.construct.exception.utils.ExceptionUtils;
-import com.beicroon.construct.jackson.utils.JsonUtils;
+import com.beicroon.construct.json.utils.JsonUtils;
 import com.beicroon.construct.utils.EmptyUtils;
 import com.beicroon.construct.utils.UrlUtils;
 import com.beicroon.gateway.admin.property.AuthProperty;

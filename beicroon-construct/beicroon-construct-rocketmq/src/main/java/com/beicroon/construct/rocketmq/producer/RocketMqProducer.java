@@ -1,7 +1,7 @@
 package com.beicroon.construct.rocketmq.producer;
 
 import com.beicroon.construct.constant.SystemConstant;
-import com.beicroon.construct.jackson.utils.JsonUtils;
+import com.beicroon.construct.json.utils.JsonUtils;
 import com.beicroon.construct.mq.enums.MqDelayEnums;
 import com.beicroon.construct.mq.producer.IMqProducer;
 import com.beicroon.construct.rocketmq.callback.RocketMqSendCallback;

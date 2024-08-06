@@ -3,7 +3,7 @@ package com.beicroon.construct.auth.interceptor;
 import com.beicroon.construct.auth.utils.AuthUtils;
 import com.beicroon.construct.constant.HeaderConstant;
 import com.beicroon.construct.entity.AuthUser;
-import com.beicroon.construct.jackson.utils.JsonUtils;
+import com.beicroon.construct.json.utils.JsonUtils;
 import com.beicroon.construct.utils.EmptyUtils;
 import com.beicroon.construct.utils.NumberUtils;
 import com.beicroon.construct.utils.UrlUtils;

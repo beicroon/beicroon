@@ -4,7 +4,7 @@ import com.beicroon.construct.constant.SystemConstant;
 import com.beicroon.construct.entity.Result;
 import com.beicroon.construct.entity.WebResult;
 import com.beicroon.construct.exception.BusinessException;
-import com.beicroon.construct.jackson.utils.JsonUtils;
+import com.beicroon.construct.json.utils.JsonUtils;
 import jakarta.annotation.Nonnull;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.web.reactive.error.ErrorWebExceptionHandler;

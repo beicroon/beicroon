@@ -62,6 +62,11 @@
 
         <dependency>
             <groupId>com.beicroon.construct</groupId>
+            <artifactId>beicroon-construct-json</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.beicroon.construct</groupId>
             <artifactId>beicroon-construct-utils</artifactId>
         </dependency>
 

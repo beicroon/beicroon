@@ -1,6 +1,6 @@
 package com.beicroon.construct.mq.consumer;
 
-import com.beicroon.construct.jackson.utils.JsonUtils;
+import com.beicroon.construct.json.utils.JsonUtils;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
