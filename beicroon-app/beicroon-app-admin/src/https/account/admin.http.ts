@@ -2,8 +2,8 @@ import http, {BaseVO, DisableDTO, DisableVO, QueryDTO, Response} from '@/https';
 
 export type AdminBaseVO = BaseVO & DisableVO & {
     code: string,
+    username: string,
     nickname: string,
-    account: string,
     phone: string,
     email: string,
 }
@@ -13,7 +13,7 @@ export type AdminDetailVO = AdminBaseVO & {}
 export type AdminPageVO = AdminBaseVO & {}
 
 export type AdminCreateDTO = QueryDTO & DisableDTO & {
-    account?: string,
+    username?: string,
     nickname?: string,
     phone: string,
     email: string,
@@ -27,7 +27,7 @@ export type AdminUpdateDTO = QueryDTO & {
 
 export type AdminQueryDTO = QueryDTO & DisableDTO & {
     code?: string,
-    account?: string,
+    username?: string,
     nickname?: string,
     phone: string,
     email: string,
