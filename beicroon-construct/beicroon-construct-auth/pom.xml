@@ -16,8 +16,28 @@
 
     <dependencies>
         <dependency>
+            <groupId>jakarta.servlet</groupId>
+            <artifactId>jakarta.servlet-api</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>jakarta.annotation</groupId>
+            <artifactId>jakarta.annotation-api</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+        </dependency>
+
+        <dependency>
             <groupId>com.beicroon.construct</groupId>
             <artifactId>beicroon-construct-entity</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.beicroon.construct</groupId>
+            <artifactId>beicroon-construct-jackson</artifactId>
         </dependency>
 
         <dependency>

@@ -24,6 +24,7 @@
         <module>beicroon-construct-http</module>
         <module>beicroon-construct-interfaces</module>
         <module>beicroon-construct-jackson</module>
+        <module>beicroon-construct-json</module>
         <module>beicroon-construct-mq</module>
         <module>beicroon-construct-mybatis</module>
         <module>beicroon-construct-rocketmq</module>
@@ -49,7 +50,8 @@
         <caffeine.version>3.1.8</caffeine.version>
         <xxljob.version>2.4.1</xxljob.version>
         <jackson.version>2.17.1</jackson.version>
-        <jakarta.version>3.0.0</jakarta.version>
+        <jakarta.servlet.version>6.1.0</jakarta.servlet.version>
+        <jakarta.annotation.version>3.0.0</jakarta.annotation.version>
         <mybatis.version>3.5.7</mybatis.version>
         <spring.version>6.1.8</spring.version>
         <spring.boot.version>3.3.0</spring.boot.version>
@@ -148,9 +150,15 @@
             </dependency>
 
             <dependency>
+                <groupId>jakarta.servlet</groupId>
+                <artifactId>jakarta.servlet-api</artifactId>
+                <version>${jakarta.servlet.version}</version>
+            </dependency>
+
+            <dependency>
                 <groupId>jakarta.annotation</groupId>
                 <artifactId>jakarta.annotation-api</artifactId>
-                <version>${jakarta.version}</version>
+                <version>${jakarta.annotation.version}</version>
             </dependency>
 
             <dependency>
@@ -426,6 +434,12 @@
             <dependency>
                 <groupId>com.beicroon.construct</groupId>
                 <artifactId>beicroon-construct-jackson</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.beicroon.construct</groupId>
+                <artifactId>beicroon-construct-json</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
