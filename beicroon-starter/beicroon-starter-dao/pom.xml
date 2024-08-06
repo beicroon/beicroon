@@ -31,8 +31,8 @@
         </dependency>
 
         <dependency>
-            <groupId>com.beicroon.starter</groupId>
-            <artifactId>beicroon-starter-json</artifactId>
+            <groupId>com.beicroon.construct</groupId>
+            <artifactId>beicroon-construct-json</artifactId>
         </dependency>
 
         <dependency>

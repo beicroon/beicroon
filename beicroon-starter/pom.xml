@@ -22,6 +22,7 @@
         <module>beicroon-starter-cache</module>
         <module>beicroon-starter-cloud</module>
         <module>beicroon-starter-dao</module>
+        <module>beicroon-starter-feign</module>
         <module>beicroon-starter-gateway</module>
         <module>beicroon-starter-json</module>
         <module>beicroon-starter-jwt</module>
@@ -49,6 +50,18 @@
             <dependency>
                 <groupId>com.beicroon.starter</groupId>
                 <artifactId>beicroon-starter-cloud</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.beicroon.starter</groupId>
+                <artifactId>beicroon-starter-dao</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.beicroon.starter</groupId>
+                <artifactId>beicroon-starter-feign</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
@@ -85,12 +98,6 @@
             <dependency>
                 <groupId>com.beicroon.starter</groupId>
                 <artifactId>beicroon-starter-mysql</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.beicroon.starter</groupId>
-                <artifactId>beicroon-starter-dao</artifactId>
                 <version>${project.version}</version>
             </dependency>
 

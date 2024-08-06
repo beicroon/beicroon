@@ -5,25 +5,24 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>com.beicroon.common</groupId>
-        <artifactId>beicroon-common-tenant</artifactId>
+        <groupId>com.beicroon.starter</groupId>
+        <artifactId>beicroon-starter</artifactId>
         <version>1.0.0</version>
     </parent>
 
-    <artifactId>beicroon-common-tenant-rpc</artifactId>
+    <artifactId>beicroon-starter-feign</artifactId>
     <version>1.0.0</version>
     <packaging>jar</packaging>
 
     <dependencies>
         <dependency>
-            <groupId>com.beicroon.starter</groupId>
-            <artifactId>beicroon-starter-feign</artifactId>
+            <groupId>com.beicroon.construct</groupId>
+            <artifactId>beicroon-construct-feign</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>com.beicroon.common</groupId>
-            <artifactId>beicroon-common-tenant-entity</artifactId>
-            <version>${project.version}</version>
+            <groupId>com.beicroon.starter</groupId>
+            <artifactId>beicroon-starter-json</artifactId>
         </dependency>
     </dependencies>
 </project>

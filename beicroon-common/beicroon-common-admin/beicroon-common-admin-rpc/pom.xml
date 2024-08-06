@@ -16,8 +16,8 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.beicroon.construct</groupId>
-            <artifactId>beicroon-construct-feign</artifactId>
+            <groupId>com.beicroon.starter</groupId>
+            <artifactId>beicroon-starter-feign</artifactId>
         </dependency>
 
         <dependency>

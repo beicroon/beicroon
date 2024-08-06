@@ -46,11 +46,10 @@ spring:
 
 mybatis-plus:
   mapper-locations: classpath*:/mapper/*.xml
-  type-aliases-package: com.beicroon.service.*.model
+  type-aliases-package: com.beicroon.service.*.dao.model
 
 mq:
-#  server-address: @pom.mq.address@
-  server-address: 172.16.110.23:9876
+  server-address: @pom.mq.address@
   namespace: @pom.profile.name@
   group-id: @project.parent.artifactId@
   timeout: 3000
