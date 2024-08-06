@@ -35,6 +35,9 @@ public class AuthUser implements IAuthUser, Serializable {
         @Serial
         private static final long serialVersionUID = 1L;
 
+        @ApiModelProperty(name = "所有组织")
+        private String allOrg;
+
         @ApiModelProperty(name = "组织主键")
         private List<Long> orgIds;
 

@@ -34,5 +34,20 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-jdbc</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>com.beicroon.construct</groupId>
+            <artifactId>beicroon-construct-auth</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.beicroon.construct</groupId>
+            <artifactId>beicroon-construct-database</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.beicroon.construct</groupId>
+            <artifactId>beicroon-construct-utils</artifactId>
+        </dependency>
     </dependencies>
 </project>

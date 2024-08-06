@@ -15,6 +15,7 @@
         <module>beicroon-construct-auth</module>
         <module>beicroon-construct-common</module>
         <module>beicroon-construct-constant</module>
+        <module>beicroon-construct-database</module>
         <module>beicroon-construct-databind</module>
         <module>beicroon-construct-entity</module>
         <module>beicroon-construct-enums</module>
@@ -371,6 +372,12 @@
             <dependency>
                 <groupId>com.beicroon.construct</groupId>
                 <artifactId>beicroon-construct-constant</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.beicroon.construct</groupId>
+                <artifactId>beicroon-construct-database</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
