@@ -1,4 +1,4 @@
-package com.beicroon.starter.service.convertor;
+package com.beicroon.starter.dao.convertor;
 
 import com.beicroon.construct.entity.CreateDTO;
 import com.beicroon.construct.entity.GenericVO;

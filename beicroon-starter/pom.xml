@@ -21,13 +21,13 @@
         <module>beicroon-starter-async</module>
         <module>beicroon-starter-cache</module>
         <module>beicroon-starter-cloud</module>
+        <module>beicroon-starter-dao</module>
         <module>beicroon-starter-gateway</module>
         <module>beicroon-starter-json</module>
         <module>beicroon-starter-jwt</module>
         <module>beicroon-starter-logging</module>
         <module>beicroon-starter-mq</module>
         <module>beicroon-starter-mysql</module>
-        <module>beicroon-starter-service</module>
         <module>beicroon-starter-task</module>
         <module>beicroon-starter-web</module>
     </modules>
@@ -90,7 +90,7 @@
 
             <dependency>
                 <groupId>com.beicroon.starter</groupId>
-                <artifactId>beicroon-starter-service</artifactId>
+                <artifactId>beicroon-starter-dao</artifactId>
                 <version>${project.version}</version>
             </dependency>
 

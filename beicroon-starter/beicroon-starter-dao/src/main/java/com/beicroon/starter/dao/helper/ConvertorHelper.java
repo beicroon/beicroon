@@ -1,4 +1,4 @@
-package com.beicroon.starter.service.helper;
+package com.beicroon.starter.dao.helper;
 
 import com.baomidou.mybatisplus.core.toolkit.IdWorker;
 import com.beicroon.construct.auth.utils.AuthUtils;

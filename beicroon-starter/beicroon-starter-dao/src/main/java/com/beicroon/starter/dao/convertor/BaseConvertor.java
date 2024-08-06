@@ -1,11 +1,11 @@
-package com.beicroon.starter.service.convertor;
+package com.beicroon.starter.dao.convertor;
 
 
 import com.beicroon.construct.entity.CreateDTO;
 import com.beicroon.construct.entity.GenericVO;
 import com.beicroon.construct.utils.ListUtils;
+import com.beicroon.starter.dao.helper.ConvertorHelper;
 import com.beicroon.starter.mysql.model.GenericModel;
-import com.beicroon.starter.service.helper.ConvertorHelper;
 import org.mapstruct.AfterMapping;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;

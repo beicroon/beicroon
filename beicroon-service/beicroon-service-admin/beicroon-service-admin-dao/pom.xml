@@ -16,14 +16,14 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.beicroon.service</groupId>
-            <artifactId>beicroon-service-admin-entity</artifactId>
-            <version>${project.version}</version>
+            <groupId>com.beicroon.starter</groupId>
+            <artifactId>beicroon-starter-dao</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>com.beicroon.starter</groupId>
-            <artifactId>beicroon-starter-service</artifactId>
+            <groupId>com.beicroon.service</groupId>
+            <artifactId>beicroon-service-admin-entity</artifactId>
+            <version>${project.version}</version>
         </dependency>
     </dependencies>
 </project>

@@ -1,4 +1,4 @@
-package com.beicroon.starter.service.helper;
+package com.beicroon.starter.dao.helper;
 
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
