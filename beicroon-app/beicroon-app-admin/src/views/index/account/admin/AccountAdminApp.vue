@@ -3,7 +3,6 @@ import {PageInfo} from '@/https';
 import {onMounted, ref} from 'vue';
 import ElButton from '@/components/elements/ElButton.vue';
 import {AdminPageVO, AdminQueryDTO, page} from '@/https/account/admin.http.ts';
-import toast from "@/utils/toast";
 
 const query = ref<AdminQueryDTO>({} as AdminQueryDTO);
 
@@ -34,7 +33,7 @@ async function reset() {
 }
 
 async function create() {
-  toast("试一试");
+
 }
 
 async function update(item: AdminPageVO) {
@@ -83,10 +82,10 @@ async function remove(item: AdminPageVO) {
           <div class="table-cell">编号</div>
         </th>
         <th>
-          <div class="table-cell">昵称</div>
+          <div class="table-cell">账号</div>
         </th>
         <th>
-          <div class="table-cell">账号</div>
+          <div class="table-cell">昵称</div>
         </th>
         <th>
           <div class="table-cell">电话</div>
@@ -111,10 +110,10 @@ async function remove(item: AdminPageVO) {
           <div class="table-cell">{{ item.code }}</div>
         </td>
         <td>
-          <div class="table-cell">{{ item.nickname }}</div>
+          <div class="table-cell">{{ item.username }}</div>
         </td>
         <td>
-          <div class="table-cell">{{ item.account }}</div>
+          <div class="table-cell">{{ item.nickname }}</div>
         </td>
         <td>
           <div class="table-cell">{{ item.phone }}</div>
