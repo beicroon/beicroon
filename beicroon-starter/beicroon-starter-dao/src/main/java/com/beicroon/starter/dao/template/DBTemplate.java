@@ -12,10 +12,10 @@ public class DBTemplate {
     @Resource
     private TransactionTemplate transactionTemplate;
 
-    public void execute(Runnable action) {
+    public void execute(Runnable runner) {
         this.transactionTemplate.executeWithoutResult(status -> {
             try {
-                action.run();
+                runner.run();
             } catch (Exception ex) {
                 status.setRollbackOnly();
 
@@ -24,10 +24,10 @@ public class DBTemplate {
         });
     }
 
-    public void execute(Runnable action, Runnable then) {
+    public void execute(Runnable runner, Runnable then) {
         this.transactionTemplate.executeWithoutResult(status -> {
             try {
-                action.run();
+                runner.run();
             } catch (Exception ex) {
                 status.setRollbackOnly();
 
