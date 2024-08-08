@@ -21,6 +21,13 @@ function getEl() {
     return el;
 }
 
+function complete(toast: Node) {
+    getEl().removeChild(toast);
+
+    if (getEl().childNodes.length <= 0) {
+        getEl().style.display = "none";
+    }
+}
 
 export default (message: string, error: boolean = false, duration: number = 3000) => {
     const app = createApp(App, {
@@ -28,9 +35,11 @@ export default (message: string, error: boolean = false, duration: number = 3000
         error: error,
     });
 
-    const messageEl = app.mount(document.createElement("div")).$el;
+    const toast = app.mount(document.createElement("div")).$el;
 
-    getEl().prepend(messageEl);
+    getEl().prepend(toast);
 
-    setTimeout(() => getEl().removeChild(messageEl), duration);
+    getEl().style.display = "block";
+
+    setTimeout(() => complete(toast), duration);
 }

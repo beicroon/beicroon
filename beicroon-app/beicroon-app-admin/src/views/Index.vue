@@ -212,6 +212,13 @@ onMounted(() => {
 </template>
 
 <style scoped lang="less">
+.index {
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
 .head {
   top: 0;
   left: 0;
