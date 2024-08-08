@@ -19,16 +19,16 @@ function handleClick() {
 </script>
 
 <template>
-  <button class="button" @click="handleClick">
+  <button class="el-button" @click="handleClick">
     <template v-if="props.loading">加载中</template>
     <template v-else><slot></slot></template>
   </button>
 </template>
 
-<style lang="less">
+<style scoped lang="less">
 @import "@/less/colors";
 
-.button {
+.el-button {
   &.warning {
     color: @warning;
   }

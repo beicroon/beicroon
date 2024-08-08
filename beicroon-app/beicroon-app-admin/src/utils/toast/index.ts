@@ -1,20 +1,29 @@
 import {createApp} from "vue";
 
-import Toast from "@/utils/toast/components/Toast.vue";
-import Message from "@/utils/toast/components/Message.vue";
+import App from "@/utils/toast/components/Toast.vue";
+import {AppSelectorEnums} from "@/enums/system.enums.ts";
 
-let el: any = null;
+let el: HTMLElement | null = null;
 
 function getEl() {
     if (el == null) {
-        el = createApp(Toast).mount("#toast").$el;
+        el = document.querySelector(AppSelectorEnums.TOAST);
+    }
+
+    if (el == null) {
+        el = document.createElement("div");
+
+        el.id = AppSelectorEnums.TOAST;
+
+        document.body.appendChild(el);
     }
 
     return el;
 }
 
+
 export default (message: string, error: boolean = false, duration: number = 3000) => {
-    const app = createApp(Message, {
+    const app = createApp(App, {
         message: message,
         error: error,
     });

@@ -40,7 +40,7 @@ async function create() {
 async function detail(item: AdminPageVO) {
   toast("测试");
   dialog("请确认", async () => {
-    console.info(item);
+    dialog("再次确认", async () =>  console.info(item));
   });
 }
 
