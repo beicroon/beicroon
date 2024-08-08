@@ -14,7 +14,7 @@ function addMessage(content: string, error = false) {
   setTimeout(() => messages.value.shift(), 3000);
 }
 
-provide('toastMessage', addMessage);
+provide('toast', addMessage);
 </script>
 
 <template>
