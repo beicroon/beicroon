@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import router from '@/routers';
-import {onMounted, Ref, ref, watch} from 'vue';
-import type {MenuBaseVO} from '@/https/setting/menu.http.ts';
+import router from "@/routers";
+import {onMounted, Ref, ref, watch} from "vue";
+import type {MenuBaseVO} from "@/https/setting/menu.http.ts";
 
 function handleNavigatorClick(navigator: MenuBaseVO) {
   for (let i = 0; i < navigators.value.length; i++) {
@@ -96,55 +96,55 @@ watch(navigators, () => {
 onMounted(() => {
   navigators.value = [
     {
-      name: '账号中心',
-      path: '',
+      name: "账号中心",
+      path: "",
       active: false,
       children: [
         {
-          name: '账号管理',
-          path: '',
+          name: "账号管理",
+          path: "",
           active: false,
           children: [
             {
-              name: '后台账号',
-              path: '/account/admin',
+              name: "后台账号",
+              path: "/account/admin",
               active: false,
               children: [],
             },
             {
-              name: '用户账号',
-              path: '/account/user',
+              name: "用户账号",
+              path: "/account/user",
               active: false,
               children: [],
             },
             {
-              name: '司机账号',
-              path: '/account/driver',
+              name: "司机账号",
+              path: "/account/driver",
               active: false,
               children: [],
             },
             {
-              name: '商户账号',
-              path: '/account/business',
+              name: "商户账号",
+              path: "/account/business",
               active: false,
               children: [],
             },
           ],
         },
         {
-          name: '系统设置',
-          path: '',
+          name: "系统设置",
+          path: "",
           active: false,
           children: [
             {
-              name: '系统设置',
-              path: '/setting/system',
+              name: "系统设置",
+              path: "/setting/system",
               active: false,
               children: [],
             },
             {
-              name: '角色管理',
-              path: '/setting/role',
+              name: "角色管理",
+              path: "/setting/role",
               active: false,
               children: [],
             },
@@ -153,24 +153,24 @@ onMounted(() => {
       ],
     },
     {
-      name: '设置中心',
-      path: '',
+      name: "设置中心",
+      path: "",
       active: false,
       children: [
         {
-          name: '系统设置',
-          path: '',
+          name: "系统设置",
+          path: "",
           active: false,
           children: [
             {
-              name: '系统设置',
-              path: '/setting/system',
+              name: "系统设置",
+              path: "/setting/system",
               active: false,
               children: [],
             },
             {
-              name: '角色管理',
-              path: '/setting/role',
+              name: "角色管理",
+              path: "/setting/role",
               active: false,
               children: [],
             },

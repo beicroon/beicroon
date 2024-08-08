@@ -1,10 +1,10 @@
-import axios from 'axios';
-import {BooleanEnums, CacheKeyEnums} from '@/enums/system.enums.ts';
+import axios from "axios";
+import {BooleanEnums, CacheKeyEnums} from "@/enums/system.enums.ts";
 
 const http = axios.create({
     baseURL: import.meta.env.VITE_REQUEST_URL,
     timeout: 6000,
-    headers: {'Content-Type': 'application/json'},
+    headers: {"Content-Type": "application/json"},
 });
 
 const minResponseTime = 300;
@@ -12,11 +12,11 @@ const minResponseTime = 300;
 // 添加请求拦截器
 http.interceptors.request.use(
     (config: any) => {
-        config.headers['Authorization'] = localStorage.getItem(CacheKeyEnums.AUTHORIZATION_TOKEN);
+        config.headers["Authorization"] = localStorage.getItem(CacheKeyEnums.AUTHORIZATION_TOKEN);
 
         config.metadata = {startTime: Date.now()};
 
-        if (config.method !== 'GET') {
+        if (config.method !== "GET") {
             config.data = config.data || {};
         }
 

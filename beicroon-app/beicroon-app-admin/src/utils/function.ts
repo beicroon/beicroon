@@ -3,7 +3,7 @@ const stacks: Record<string, (() => Promise<void>)[]> = {
     Escape: [],
 };
 
-document.addEventListener('keyup', async (e: KeyboardEvent) => {
+document.addEventListener("keyup", async (e: KeyboardEvent) => {
     const callbacks = stacks[e.code];
 
     if (!Array.isArray(callbacks) || callbacks.length === 0) return;

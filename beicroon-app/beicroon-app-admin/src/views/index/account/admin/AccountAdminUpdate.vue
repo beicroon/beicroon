@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import {escUp} from '@/utils/function.ts';
+import {escUp} from "@/utils/function.ts";
 
-const emits = defineEmits(['close']);
+const emits = defineEmits(["close"]);
 
 async function close() {
-  emits('close');
+  emits("close");
 }
 
 escUp(close);

@@ -1,16 +1,16 @@
-import {createApp} from 'vue';
+import {createApp} from "vue";
 
-import Toast from '@/utils/toast/components/Toast.vue';
-import Message from '@/utils/toast/components/Message.vue';
+import Toast from "@/utils/toast/components/Toast.vue";
+import Message from "@/utils/toast/components/Message.vue";
 
-let toastEl: any = null;
+let el: any = null;
 
-function getToast() {
-    if (toastEl == null) {
-        toastEl = createApp(Toast).mount('#toast').$el;
+function getEl() {
+    if (el == null) {
+        el = createApp(Toast).mount("#toast").$el;
     }
 
-    return toastEl;
+    return el;
 }
 
 export default (message: string, error: boolean = false, duration: number = 3000) => {
@@ -19,9 +19,9 @@ export default (message: string, error: boolean = false, duration: number = 3000
         error: error,
     });
 
-    const messageEl = app.mount(document.createElement('div')).$el;
+    const messageEl = app.mount(document.createElement("div")).$el;
 
-    getToast().prepend(messageEl);
+    getEl().prepend(messageEl);
 
-    setTimeout(() => getToast().removeChild(messageEl), duration);
+    setTimeout(() => getEl().removeChild(messageEl), duration);
 }

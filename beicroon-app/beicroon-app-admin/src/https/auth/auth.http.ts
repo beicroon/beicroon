@@ -1,4 +1,4 @@
-import http, {Response} from '@/https';
+import http, {Response} from "@/https";
 
 
 export type AuthAdminLoginDTO = {
@@ -18,8 +18,8 @@ export type AuthAdminLoginVO = AuthAdminBaseVO & {
 
 export async function login(data: AuthAdminLoginDTO): Promise<Response<AuthAdminLoginVO>> {
     return http.request({
-        url: 'api/admin/admin/auth-admin-login',
-        method: 'POST',
+        url: "api/admin/admin/auth-admin-login",
+        method: "POST",
         data: data
     })
 }

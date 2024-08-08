@@ -7,14 +7,14 @@ const props = defineProps({
   }
 });
 
-const emits = defineEmits(['click']);
+const emits = defineEmits(["click"]);
 
 function handleClick() {
   if (props.loading) {
     return;
   }
 
-  emits('click');
+  emits("click");
 }
 </script>
 

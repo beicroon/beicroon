@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import {onBeforeMount, ref} from 'vue';
-import {escUp} from '@/utils/function.ts';
-import {AdminDetailVO, detail} from '@/https/account/admin.http.ts';
+import {onBeforeMount, ref} from "vue";
+import {escUp} from "@/utils/function.ts";
+import {AdminDetailVO, detail} from "@/https/account/admin.http.ts";
 
 const props = defineProps({
   id: {
@@ -18,10 +18,10 @@ onBeforeMount(async () => {
   data.value = res.data;
 });
 
-const emits = defineEmits(['close']);
+const emits = defineEmits(["close"]);
 
 async function close() {
-  emits('close');
+  emits("close");
 }
 
 escUp(close);

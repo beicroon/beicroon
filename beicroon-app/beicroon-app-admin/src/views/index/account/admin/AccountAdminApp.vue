@@ -1,8 +1,10 @@
 <script setup lang="ts">
-import {PageInfo} from '@/https';
-import {onMounted, ref} from 'vue';
-import ElButton from '@/components/elements/ElButton.vue';
-import {AdminPageVO, AdminQueryDTO, page} from '@/https/account/admin.http.ts';
+import {PageInfo} from "@/https";
+import {onMounted, ref} from "vue";
+import ElButton from "@/components/elements/ElButton.vue";
+import {AdminPageVO, AdminQueryDTO, page} from "@/https/account/admin.http.ts";
+import toast from "@/utils/toast";
+import dialog from "@/utils/dialog";
 
 const query = ref<AdminQueryDTO>({} as AdminQueryDTO);
 
@@ -35,11 +37,14 @@ async function reset() {
 async function create() {
 }
 
-async function update(item: AdminPageVO) {
-  console.info(item);
+async function detail(item: AdminPageVO) {
+  toast("测试");
+  dialog("请确认", async () => {
+    console.info(item);
+  });
 }
 
-async function detail(item: AdminPageVO) {
+async function update(item: AdminPageVO) {
   console.info(item);
 }
 

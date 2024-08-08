@@ -1,13 +1,13 @@
-import {createApp} from 'vue';
+import {createApp} from "vue";
 
-import router from '@/routers';
+import router from "@/routers";
+import component from "@/utils/component";
 
-import App from '@/apps/App.vue';
+import App from "@/apps/App.vue";
 
 const app = createApp(App)
 
 app.use(router);
+app.use(component);
 
-app.component('el-button', import('@/components/elements/ElButton.vue'));
-
-app.mount('#app');
+app.mount("#app");
