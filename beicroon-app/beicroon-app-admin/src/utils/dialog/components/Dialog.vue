@@ -61,17 +61,22 @@ async function doConfirm() {
 
   .title {
     height: 60rem;
+    font-size: 16rem;
+    font-weight: bold;
     line-height: 60rem;
     text-align: center;
+    letter-spacing: 8rem;
     border-bottom: 1rem solid #e0e4ed;
   }
 
   .message {
     flex: 1;
     display: flex;
-    padding: 8rem;
+    text-align: center;
     line-height: 24rem;
     align-items: center;
+    padding: 8rem 18rem;
+    letter-spacing: 2rem;
     justify-content: center;
   }
 

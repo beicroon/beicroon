@@ -3,8 +3,6 @@ import {PageInfo} from "@/https";
 import {onMounted, ref} from "vue";
 import ElButton from "@/components/elements/ElButton.vue";
 import {AdminPageVO, AdminQueryDTO, page} from "@/https/account/admin.http.ts";
-import toast from "@/utils/toast";
-import dialog from "@/utils/dialog";
 
 const query = ref<AdminQueryDTO>({} as AdminQueryDTO);
 
@@ -38,10 +36,7 @@ async function create() {
 }
 
 async function detail(item: AdminPageVO) {
-  toast("测试");
-  dialog("请确认", async () => {
-    dialog("再次确认", async () =>  console.info(item));
-  });
+
 }
 
 async function update(item: AdminPageVO) {
