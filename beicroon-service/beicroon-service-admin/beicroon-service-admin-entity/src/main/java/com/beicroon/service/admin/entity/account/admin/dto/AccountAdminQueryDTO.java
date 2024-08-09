@@ -14,12 +14,12 @@ public class AccountAdminQueryDTO extends QueryDTOWithDisable {
     @ApiModelProperty(name = "编码")
     private String code;
 
-    @FieldSearch(value = "`account`")
+    @FieldSearch(value = "`username`")
     @ApiModelProperty(name = "账号")
-    private String account;
+    private String username;
 
     @FieldSearch(value = "`nickname`")
-    @ApiModelProperty(name = "姓名")
+    @ApiModelProperty(name = "昵称")
     private String nickname;
 
     @FieldSearch(value = "`phone`")

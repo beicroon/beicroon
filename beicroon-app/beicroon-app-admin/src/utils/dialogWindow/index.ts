@@ -46,11 +46,12 @@ function complete(node: Element) {
     }, 300)
 }
 
-export default (title: string, is: any, binds: Record<string, any> = {}) => {
+export default async (title: string, is: any, binds: Record<string, any> = {}, events: Record<string, () => Promise<void>> = {}) => {
     const app = createApp(App, {
         is: is,
         title: title,
         binds: binds,
+        events: events,
         complete: () => complete(node),
     });
 

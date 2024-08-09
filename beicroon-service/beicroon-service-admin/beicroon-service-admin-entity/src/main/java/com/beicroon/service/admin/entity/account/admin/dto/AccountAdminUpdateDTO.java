@@ -9,7 +9,7 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 public class AccountAdminUpdateDTO extends UpdateDTOWithDisable {
 
-    @ApiModelProperty(name = "姓名")
+    @ApiModelProperty(name = "昵称")
     private String nickname;
 
     @ApiModelProperty(name = "电话")

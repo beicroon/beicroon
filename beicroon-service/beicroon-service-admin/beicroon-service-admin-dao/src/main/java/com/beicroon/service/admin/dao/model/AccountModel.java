@@ -22,11 +22,11 @@ public class AccountModel extends DisableModel implements IAuthUser {
     private String username;
 
     @TableField(value = "`password`")
-    @ApiModelProperty(name = "账号")
+    @ApiModelProperty(name = "密码")
     private String password;
 
     @TableField(value = "`nickname`")
-    @ApiModelProperty(name = "姓名")
+    @ApiModelProperty(name = "昵称")
     private String nickname;
 
     @TableField(value = "`phone`")

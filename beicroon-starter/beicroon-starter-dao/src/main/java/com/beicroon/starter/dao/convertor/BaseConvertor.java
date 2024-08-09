@@ -2,9 +2,13 @@ package com.beicroon.starter.dao.convertor;
 
 
 import com.beicroon.construct.entity.CreateDTO;
+import com.beicroon.construct.entity.CreateDTOWithDisable;
 import com.beicroon.construct.entity.GenericVO;
+import com.beicroon.construct.enums.BooleanEnums;
 import com.beicroon.construct.utils.ListUtils;
 import com.beicroon.starter.dao.helper.ConvertorHelper;
+import com.beicroon.starter.dao.helper.DisableHelper;
+import com.beicroon.starter.mysql.model.DisableModel;
 import com.beicroon.starter.mysql.model.GenericModel;
 import org.mapstruct.AfterMapping;
 import org.mapstruct.Mapping;
@@ -49,6 +53,13 @@ public interface BaseConvertor<M extends GenericModel, C extends CreateDTO, B ex
         this.beforeFillCreator(m);
 
         ConvertorHelper.fillCreator(m);
+    }
+
+    @AfterMapping
+    default void fillDisable(@MappingTarget DisableModel m, CreateDTOWithDisable c) {
+        if (BooleanEnums.isTrue(c.getDisabledFlag())) {
+            DisableHelper.disable(m);
+        }
     }
 
 }

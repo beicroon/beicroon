@@ -22,7 +22,7 @@ public class GenericVO extends BaseVO {
     @ApiModelProperty(name = "创建者编码")
     private String creatorCode;
 
-    @ApiModelProperty(name = "创建者姓名")
+    @ApiModelProperty(name = "创建者昵称")
     private String creatorName;
 
     @ApiModelProperty(name = "更新时间")
@@ -34,7 +34,7 @@ public class GenericVO extends BaseVO {
     @ApiModelProperty(name = "更新人编码")
     private String modifierCode;
 
-    @ApiModelProperty(name = "更新人姓名")
+    @ApiModelProperty(name = "更新人昵称")
     private String modifierName;
 
 }

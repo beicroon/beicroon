@@ -313,7 +313,6 @@ onMounted(() => {
   right: 0;
   top: 60rem;
   padding: 8rem;
-  overflow: auto;
   position: absolute;
   width: calc(100% - 180rem);
   height: calc(100% - 60rem);

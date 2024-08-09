@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import {onBeforeMount, ref} from "vue";
-import {escUp} from "@/utils/function.ts";
+import ElButton from "@/components/elements/ElButton.vue";
 import {AdminDetailVO, detail} from "@/https/account/admin.http.ts";
 
 const props = defineProps({
@@ -18,17 +18,21 @@ onBeforeMount(async () => {
   data.value = res.data;
 });
 
-const emits = defineEmits(["close"]);
+const emits = defineEmits(["hide"]);
 
-async function close() {
-  emits("close");
+async function cancel() {
+  emits("hide");
 }
-
-escUp(close);
 </script>
 
 <template>
-  <div class="window">DETAIL</div>
+  <form class="detail">
+    <div class="view"></div>
+    <div class="button">
+      <el-button class="cancel" @click="cancel">取消</el-button>
+      <el-button class="confirm">保存</el-button>
+    </div>
+  </form>
 </template>
 
 <style scoped lang="less">

@@ -12,6 +12,10 @@ const props = defineProps({
     type: Object,
     required: true,
   },
+  events: {
+    type: Object,
+    required: true,
+  },
   complete: {
     type: Function,
     required: true,
@@ -27,7 +31,7 @@ async function doHide() {
   <div class="dialog-window" @click.stop>
     <div class="title">{{ title }}</div>
     <div class="content">
-      <component :is="is" @hide="doHide" v-bind="binds"></component>
+      <component :is="is" @hide="doHide" v-bind="binds" v-on="events"></component>
     </div>
   </div>
 </template>

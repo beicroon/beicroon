@@ -29,7 +29,7 @@ function complete(node: Node) {
     }
 }
 
-export default (message: string, error: boolean = false, duration: number = 3000) => {
+export default async (message: string, error: boolean = false, duration: number = 3000) => {
     const app = createApp(App, {
         message: message,
         error: error,

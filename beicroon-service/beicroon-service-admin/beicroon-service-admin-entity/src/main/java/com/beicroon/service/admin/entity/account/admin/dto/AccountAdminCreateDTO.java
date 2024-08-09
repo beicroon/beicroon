@@ -1,6 +1,7 @@
 package com.beicroon.service.admin.entity.account.admin.dto;
 
 import com.beicroon.construct.annotation.ApiModelProperty;
+import com.beicroon.construct.annotation.NeedValue;
 import com.beicroon.construct.entity.CreateDTOWithDisable;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -9,10 +10,12 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 public class AccountAdminCreateDTO extends CreateDTOWithDisable {
 
+    @NeedValue(message = "账号不能为空")
     @ApiModelProperty(name = "账号")
-    private String account;
+    private String username;
 
-    @ApiModelProperty(name = "姓名")
+    @NeedValue(message = "昵称不能为空")
+    @ApiModelProperty(name = "昵称")
     private String nickname;
 
     @ApiModelProperty(name = "电话")

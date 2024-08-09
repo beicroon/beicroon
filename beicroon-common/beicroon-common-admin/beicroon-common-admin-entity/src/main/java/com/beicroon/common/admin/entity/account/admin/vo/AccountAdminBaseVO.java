@@ -15,7 +15,7 @@ public class AccountAdminBaseVO extends DisableVO {
     @ApiModelProperty(name = "账号")
     private String username;
 
-    @ApiModelProperty(name = "姓名")
+    @ApiModelProperty(name = "昵称")
     private String nickname;
 
     @ApiModelProperty(name = "电话")
