@@ -1,6 +1,5 @@
 import http, {Response} from "@/https";
 
-
 export type AuthAdminLoginDTO = {
     username: string,
     password: string,

@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import {ref} from "vue";
 import ElButton from "@/components/elements/ElButton.vue";
 
 const props = defineProps({
@@ -26,6 +27,8 @@ const props = defineProps({
   },
 });
 
+const loading = ref(false);
+
 async function doCancel() {
   props.cancel && await props.cancel();
 
@@ -33,7 +36,11 @@ async function doCancel() {
 }
 
 async function doConfirm() {
+  loading.value = true;
+
   await props.confirm();
+
+  loading.value = false;
 
   await props.complete();
 }
@@ -44,8 +51,8 @@ async function doConfirm() {
     <div class="title">{{ title }}</div>
     <div class="message">{{ message }}</div>
     <div class="button">
-      <el-button class="cancel" @click="doCancel">取消</el-button>
-      <el-button class="confirm" @click="doConfirm">确认</el-button>
+      <el-button class="cancel" @click="doCancel" :loading="loading">取消</el-button>
+      <el-button class="confirm" @click="doConfirm" :loading="loading">确认</el-button>
     </div>
   </div>
 </template>

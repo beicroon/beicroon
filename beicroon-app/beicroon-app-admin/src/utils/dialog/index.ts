@@ -1,5 +1,4 @@
 import {createApp} from "vue";
-
 import App from "@/utils/dialog/App.vue";
 import {AppSelectorEnums} from "@/enums/system.enums.ts";
 
@@ -21,7 +20,7 @@ function getEl() {
     return el;
 }
 
-function complete(node: Node) {
+async function doComplete(node: Node) {
     getEl().removeChild(node);
 
     if (getEl().childNodes.length <= 0) {
@@ -29,12 +28,12 @@ function complete(node: Node) {
     }
 }
 
-export default async (message: string, confirm: () => Promise<any>) => {
+export default async (message: string, confirm: () => Promise<any>, complete?: () => Promise<any>) => {
     const app = createApp(App, {
         title: "操作确认",
         message: message,
         confirm: confirm,
-        complete: () => complete(node),
+        complete: async () => await doComplete(node).then(complete),
     });
 
     const node = app.mount(document.createElement("div")).$el;

@@ -1,5 +1,4 @@
 import {createApp} from "vue";
-
 import App from "@/utils/toast/App.vue";
 import {AppSelectorEnums} from "@/enums/system.enums.ts";
 

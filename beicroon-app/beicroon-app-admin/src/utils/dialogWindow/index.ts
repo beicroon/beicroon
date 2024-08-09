@@ -1,5 +1,4 @@
 import {createApp} from "vue";
-
 import {escUp} from "@/utils/function.ts";
 import App from "@/utils/dialogWindow/App.vue";
 import {AppSelectorEnums} from "@/enums/system.enums.ts";

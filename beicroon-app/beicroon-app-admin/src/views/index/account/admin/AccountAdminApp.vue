@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import {PageInfo} from "@/https";
+import toast from "@/utils/toast";
 import {onMounted, ref} from "vue";
 import dialog from "@/utils/dialog";
 import dialogWindow from "@/utils/dialogWindow";
@@ -50,11 +51,11 @@ async function showUpdate(item: AdminPageVO) {
 }
 
 async function showRemove(item: AdminPageVO) {
-  await dialog("是否删除该账号数据？删除后数据不可恢复，请谨慎操作！", async () => {
-    await remove(item.id);
-
-    await doLoad();
-  });
+  await dialog(
+      "是否删除该账号数据？删除后数据不可恢复，请谨慎操作！",
+      async () => await remove(item.id),
+      async () => await toast("删除成功").then(doLoad)
+  );
 }
 
 onMounted(doLoad);
