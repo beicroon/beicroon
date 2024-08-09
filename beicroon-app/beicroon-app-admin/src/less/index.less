@@ -135,6 +135,7 @@ button {
     flex: 1;
     overflow: auto;
     border-top: 1rem solid @light-grey;
+    border-left: 1rem solid @light-grey;
     border-bottom: 1rem solid @light-grey;
 
     /* 滚动条样式 */
@@ -187,6 +188,14 @@ button {
 
   .table-body .table-row:nth-child(even) .table-cell {
     background-color: @lighter-grey;
+  }
+
+  .table-row th:first-child .table-cell {
+    border-left: none;
+  }
+
+  .table-row td:first-child .table-cell {
+    border-left: none;
   }
 
   .table-cell {
