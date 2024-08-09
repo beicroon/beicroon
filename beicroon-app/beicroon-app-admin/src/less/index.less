@@ -134,6 +134,8 @@ button {
   .list-view {
     flex: 1;
     overflow: auto;
+    border-top: 1rem solid @light-grey;
+    border-bottom: 1rem solid @light-grey;
 
     /* 滚动条样式 */
     &::-webkit-scrollbar {
@@ -172,8 +174,8 @@ button {
   }
 
   .table-head {
-    z-index: 3;
     top: -9rem;
+    z-index: 3;
     position: sticky;
     background-color: @lighter-grey;
 
@@ -196,8 +198,8 @@ button {
     padding: 8rem 18rem;
     flex-direction: column;
     justify-content: center;
-    //border-right: 1rem solid @light-grey;
-    //border-bottom: 1rem solid @light-grey;
+    border-left: 1rem solid @light-grey;
+    border-bottom: 1rem solid @light-grey;
   }
 
   .table-action {
@@ -210,6 +212,7 @@ button {
   .table-button {
     padding: 0 18rem;
     flex-direction: row !important;
+    border-right: 1rem solid @light-grey;
     justify-content: space-around !important;
 
     button {
