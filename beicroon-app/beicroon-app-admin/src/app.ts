@@ -1,15 +1,14 @@
 import {createApp} from "vue";
 
 import router from "@/routers";
-import component from "@/utils/component";
-
+// import component from "@/utils/component";
 import App from "@/apps/App.vue";
 import {AppSelectorEnums} from "@/enums/system.enums.ts";
 
 const app = createApp(App)
 
 app.use(router);
-app.use(component);
+// app.use(component);
 
 let el: HTMLElement | null = null;
 

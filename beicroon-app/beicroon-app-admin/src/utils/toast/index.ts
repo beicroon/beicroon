@@ -1,6 +1,6 @@
 import {createApp} from "vue";
 
-import App from "@/utils/toast/components/Toast.vue";
+import App from "@/utils/toast/App.vue";
 import {AppSelectorEnums} from "@/enums/system.enums.ts";
 
 let el: HTMLElement | null = null;
@@ -21,8 +21,8 @@ function getEl() {
     return el;
 }
 
-function complete(toast: Node) {
-    getEl().removeChild(toast);
+function complete(node: Node) {
+    getEl().removeChild(node);
 
     if (getEl().childNodes.length <= 0) {
         getEl().style.display = "none";
@@ -35,11 +35,11 @@ export default (message: string, error: boolean = false, duration: number = 3000
         error: error,
     });
 
-    const toast = app.mount(document.createElement("div")).$el;
+    const node = app.mount(document.createElement("div")).$el;
 
-    getEl().prepend(toast);
+    getEl().prepend(node);
 
     getEl().style.display = "block";
 
-    setTimeout(() => complete(toast), duration);
+    setTimeout(() => complete(node), duration);
 }

@@ -12,5 +12,5 @@ export enum AppSelectorEnums {
     APP = "#app",
     TOAST = "#toast",
     DIALOG = "#dialog",
-    WINDOW = "#window",
+    WINDOW = "#dialog-window",
 }

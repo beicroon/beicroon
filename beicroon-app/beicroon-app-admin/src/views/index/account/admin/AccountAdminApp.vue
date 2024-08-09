@@ -1,8 +1,13 @@
 <script setup lang="ts">
 import {PageInfo} from "@/https";
 import {onMounted, ref} from "vue";
+import dialog from "@/utils/dialog";
+import dialogWindow from "@/utils/dialogWindow";
 import ElButton from "@/components/elements/ElButton.vue";
-import {AdminPageVO, AdminQueryDTO, page} from "@/https/account/admin.http.ts";
+import Create from "@/views/index/account/admin/AccountAdminCreate.vue";
+import Detail from "@/views/index/account/admin/AccountAdminDetail.vue";
+import Update from "@/views/index/account/admin/AccountAdminUpdate.vue";
+import {AdminPageVO, AdminQueryDTO, page, remove} from "@/https/account/admin.http.ts";
 
 const query = ref<AdminQueryDTO>({} as AdminQueryDTO);
 
@@ -10,11 +15,9 @@ const paginator = ref<PageInfo>();
 
 const data = ref<Array<AdminPageVO>>();
 
-onMounted(load);
-
 const loading = ref(false);
 
-async function load() {
+async function doLoad() {
   loading.value = true;
 
   data.value = [];
@@ -28,24 +31,27 @@ async function load() {
   loading.value = false;
 }
 
-async function reset() {
+async function doReset() {
   query.value = {} as AdminQueryDTO;
 }
 
-async function create() {
+async function showCreate() {
+  dialogWindow("新增账号", Create);
 }
 
-async function detail(item: AdminPageVO) {
-
+async function showDetail(item: AdminPageVO) {
+  dialogWindow("账号详情", Detail, {id: item.id});
 }
 
-async function update(item: AdminPageVO) {
-  console.info(item);
+async function showUpdate(item: AdminPageVO) {
+  dialogWindow("编辑账号", Update, {id: item.id});
 }
 
-async function remove(item: AdminPageVO) {
-  console.info(item);
+async function showRemove(item: AdminPageVO) {
+  dialog("是否删除该账号数据？删除后数据不可恢复，请谨慎操作！", async () => await remove(item.id));
 }
+
+onMounted(doLoad);
 </script>
 
 <template>
@@ -66,9 +72,9 @@ async function remove(item: AdminPageVO) {
         </label>
       </div>
       <div class="head-action">
-        <el-button class="head-button" @click="load" :loading="loading">查询</el-button>
-        <el-button class="head-button" @click="reset">重置</el-button>
-        <el-button class="head-button" @click="create">新增</el-button>
+        <el-button class="head-button" @click="doLoad" :loading="loading">查询</el-button>
+        <el-button class="head-button" @click="doReset">重置</el-button>
+        <el-button class="head-button" @click="showCreate">新增</el-button>
       </div>
     </div>
     <table class="list-table">
@@ -125,9 +131,9 @@ async function remove(item: AdminPageVO) {
         </td>
         <td class="table-action">
           <div class="table-cell table-button">
-            <el-button class="primary" @click="detail(item)">查看</el-button>
-            <el-button class="warning" @click="update(item)">编辑</el-button>
-            <el-button class="dangerous" @click="remove(item)">删除</el-button>
+            <el-button class="primary" @click="showDetail(item)">查看</el-button>
+            <el-button class="warning" @click="showUpdate(item)">编辑</el-button>
+            <el-button class="dangerous" @click="showRemove(item)">删除</el-button>
           </div>
         </td>
       </tr>

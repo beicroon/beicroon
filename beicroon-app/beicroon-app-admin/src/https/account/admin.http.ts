@@ -95,11 +95,11 @@ export async function disable(ids: Array<string>): Promise<Response<boolean>> {
     })
 }
 
-export async function remove(ids: Array<string>): Promise<Response<boolean>> {
+export async function remove(ids: string | Array<string>): Promise<Response<boolean>> {
     return http.request({
         url: "api/admin/admin/account-admin-remove",
         method: "DELETE",
-        data: {ids}
+        data: {ids: typeof ids === 'string' ? [ids] : ids}
     })
 }
 

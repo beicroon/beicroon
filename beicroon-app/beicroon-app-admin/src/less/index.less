@@ -220,11 +220,18 @@ button {
   transform: translate(-50%, -30%);
 }
 
-#window {
+#dialog-window {
+  top: 0;
+  left: 0;
+  z-index: 6;
+  width: 100%;
+  height: 100%;
   display: none;
+  position: fixed;
+  background-color: rgba(30, 30, 30, 0.5);
 }
 
-.window {
+.dialog-window {
   top: 100%;
   left: 100%;
   z-index: 6;
@@ -233,10 +240,10 @@ button {
   position: fixed;
   min-width: 800rem;
   background-color: @white;
+  transition: all 300ms linear;
 
   &.show {
     opacity: 1;
-    transition: all 300ms linear;
     transform: translate(-100%, -100%);
   }
 }
