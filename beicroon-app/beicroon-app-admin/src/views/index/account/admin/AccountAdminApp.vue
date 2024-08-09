@@ -48,7 +48,7 @@ async function showUpdate(item: AdminPageVO) {
 }
 
 async function showRemove(item: AdminPageVO) {
-  dialog("是否删除该账号数据？删除后数据不可恢复，请谨慎操作！", async () => await remove(item.id));
+  dialog("是否删除该账号数据？删除后数据不可恢复，请谨慎操作！", () => remove(item.id));
 }
 
 onMounted(doLoad);

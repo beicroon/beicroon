@@ -29,7 +29,7 @@ function complete(node: Node) {
     }
 }
 
-export default (message: string, confirm: () => Promise<Response<boolean>>) => {
+export default (message: string, confirm: () => Promise<any>) => {
     const app = createApp(App, {
         title: "操作确认",
         message: message,
