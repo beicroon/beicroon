@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import {ref} from "vue";
 import toast from "@/utils/toast";
+import {validateForm} from "@/utils/function.ts";
 import ElInput from "@/components/elements/ElInput.vue";
 import ElButton from "@/components/elements/ElButton.vue";
-import {AdminCreateDTO as DTO, create} from "@/https/account/admin.http.ts";
+import {AdminCreateDTO as DTO, create as submit} from "@/https/account/admin.http.ts";
 
 const form = ref();
 
@@ -11,7 +12,7 @@ const params = ref<DTO>({});
 
 const loading = ref(false);
 
-const emits = defineEmits(["hide", 'reload']);
+const emits = defineEmits(["hide", "reload"]);
 
 function cancel() {
   emits("hide");
@@ -20,27 +21,7 @@ function cancel() {
 async function confirm() {
   loading.value = true;
 
-  const inputs: Element[] = form.value.querySelectorAll(".form-input.required");
-
-  let valid = true;
-
-  for (let i = 0; i < inputs.length; i++) {
-    const elInput = inputs[i];
-
-    const input: HTMLInputElement | null = elInput.querySelector(".input-value");
-
-    if (input == null) {
-      continue;
-    }
-
-    if (!input.value) {
-      valid = false;
-
-      elInput.classList.add("invalid");
-    }
-  }
-
-  if (!valid) {
+  if (!validateForm(form)) {
     await toast("请填写或选择必填项！", true);
 
     loading.value = false;
@@ -48,7 +29,7 @@ async function confirm() {
     return;
   }
 
-  await create(params.value);
+  await submit(params.value);
 
   await toast("添加成功");
 

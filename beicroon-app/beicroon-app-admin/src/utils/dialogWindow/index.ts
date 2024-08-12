@@ -5,6 +5,8 @@ import {AppSelectorEnums} from "@/enums/system.enums.ts";
 
 let el: HTMLElement | null = null;
 
+let clickEl: HTMLElement | null = null;
+
 function getEl() {
     if (el == null) {
         el = document.querySelector(AppSelectorEnums.WINDOW);
@@ -17,7 +19,23 @@ function getEl() {
             document.body.appendChild(el);
         }
 
-        el.addEventListener('click', autoComplete)
+        el.addEventListener("mousedown", (e: MouseEvent): void => {
+            clickEl = e.target;
+        });
+
+        el.addEventListener("mouseup", (e: MouseEvent): void => {
+            if (e.target != clickEl) {
+                clickEl = null;
+            }
+        });
+
+        el.addEventListener("click", (e: MouseEvent): void => {
+            if (e.target != e.currentTarget || e.target != clickEl) {
+                return;
+            }
+
+            autoComplete();
+        })
     }
 
     return el;

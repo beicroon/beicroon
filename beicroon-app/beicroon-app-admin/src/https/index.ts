@@ -77,6 +77,10 @@ export type DisableVO = {
     disabledFlag?: BooleanEnums,
 }
 
+export type UpdateDTO = {
+    id: string,
+}
+
 export type QueryDTO = {
     pageNum?: number,
     pageSize?: number,

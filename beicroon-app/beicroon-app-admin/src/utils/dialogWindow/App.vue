@@ -28,7 +28,7 @@ async function doHide() {
 </script>
 
 <template>
-  <div class="dialog-window" @click.stop>
+  <div class="dialog-window">
     <div class="title">{{ title }}</div>
     <div class="content">
       <component :is="is" @hide="doHide" v-bind="binds" v-on="events"></component>

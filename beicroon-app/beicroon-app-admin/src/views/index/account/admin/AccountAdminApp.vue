@@ -43,11 +43,15 @@ async function showCreate() {
 }
 
 async function showDetail(item: AdminPageVO) {
-  await dialogWindow("账号详情", Detail, {id: item.id});
+  await dialogWindow("账号详情", Detail, {id: item.id}, {
+    reload: doLoad,
+  });
 }
 
 async function showUpdate(item: AdminPageVO) {
-  await dialogWindow("编辑账号", Update, {id: item.id});
+  await dialogWindow("编辑账号", Update, {id: item.id}, {
+    reload: doLoad,
+  });
 }
 
 async function showRemove(item: AdminPageVO) {

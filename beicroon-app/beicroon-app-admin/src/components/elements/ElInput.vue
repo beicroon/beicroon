@@ -160,7 +160,11 @@ const value = computed({
     display: block;
     padding: 0 18rem;
     border-radius: 6rem;
-    border: 1rem solid @primary;
+    border: 1rem solid @light-grey;
+
+    &:focus {
+      border-color: @light-blue;
+    }
   }
 }
 </style>

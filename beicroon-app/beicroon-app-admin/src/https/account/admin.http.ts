@@ -1,4 +1,4 @@
-import http, {BaseVO, DisableDTO, DisableVO, QueryDTO, Response} from "@/https";
+import http, {BaseVO, DisableDTO, DisableVO, QueryDTO, Response, UpdateDTO} from "@/https";
 
 export type AdminBaseVO = BaseVO & DisableVO & {
     code?: string,
@@ -19,7 +19,7 @@ export type AdminCreateDTO = DisableDTO & {
     email?: string,
 }
 
-export type AdminUpdateDTO = {
+export type AdminUpdateDTO = UpdateDTO & {
     nickname?: string,
     phone?: string,
     email?: string,
@@ -99,7 +99,7 @@ export async function remove(ids: string | Array<string>): Promise<Response<bool
     return http.request({
         url: "/api/admin/admin/account-admin-remove",
         method: "DELETE",
-        data: {ids: typeof ids === 'string' ? [ids] : ids}
+        data: {ids: typeof ids === "string" ? [ids] : ids}
     })
 }
 

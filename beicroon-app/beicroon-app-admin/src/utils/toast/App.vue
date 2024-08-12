@@ -29,8 +29,7 @@ defineProps({
     margin: 4rem;
     padding: 8rem;
     color: #28ab80;
-    font-size: 16rem;
-    font-weight: bold;
+    font-size: 14rem;
     text-align: center;
     background: #dbf6ed;
     border-radius: 8rem;

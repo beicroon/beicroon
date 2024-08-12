@@ -58,7 +58,7 @@ public class AdminAccountAdminController {
     }
 
     @ApiOperation("单个修改")
-    @PostMapping("/account-admin-update")
+    @PutMapping("/account-admin-update")
     public Result<Boolean> update(@RequestBody AccountAdminUpdateDTO dto) {
         return WebResult.success(this.accountAdminService.update(dto));
     }
