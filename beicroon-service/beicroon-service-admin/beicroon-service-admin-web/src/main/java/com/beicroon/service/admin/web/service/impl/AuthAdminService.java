@@ -3,7 +3,7 @@ package com.beicroon.service.admin.web.service.impl;
 import com.beicroon.construct.constant.JwtConstant;
 import com.beicroon.construct.exception.utils.ExceptionUtils;
 import com.beicroon.construct.utils.HashUtils;
-import com.beicroon.service.admin.dao.model.AccountModel;
+import com.beicroon.service.admin.dao.model.AccountAdminModel;
 import com.beicroon.service.admin.dao.repository.AccountAdminRepository;
 import com.beicroon.service.admin.entity.auth.admin.dto.AuthAdminLoginDTO;
 import com.beicroon.service.admin.entity.auth.admin.vo.AuthAdminLoginVO;
@@ -24,8 +24,8 @@ public class AuthAdminService implements IAuthAdminService {
 
     @Override
     public AuthAdminLoginVO login(AuthAdminLoginDTO dto) {
-        AccountModel admin = this.accountAdminRepository.firstOrError(
-                AccountModel::getUsername, dto.getUsername(), "账号或密码错误"
+        AccountAdminModel admin = this.accountAdminRepository.firstOrError(
+                AccountAdminModel::getUsername, dto.getUsername(), "账号或密码错误"
         );
 
         if (!HashUtils.checkPassword(admin.getPassword(), dto.getPassword())) {

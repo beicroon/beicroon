@@ -111,43 +111,6 @@ onMounted(() => {
               active: false,
               children: [],
             },
-            {
-              name: "用户账号",
-              path: "/account/user",
-              active: false,
-              children: [],
-            },
-            {
-              name: "司机账号",
-              path: "/account/driver",
-              active: false,
-              children: [],
-            },
-            {
-              name: "商户账号",
-              path: "/account/business",
-              active: false,
-              children: [],
-            },
-          ],
-        },
-        {
-          name: "系统设置",
-          path: "",
-          active: false,
-          children: [
-            {
-              name: "系统设置",
-              path: "/setting/system",
-              active: false,
-              children: [],
-            },
-            {
-              name: "角色管理",
-              path: "/setting/role",
-              active: false,
-              children: [],
-            },
           ],
         },
       ],
@@ -163,14 +126,8 @@ onMounted(() => {
           active: false,
           children: [
             {
-              name: "系统设置",
-              path: "/setting/system",
-              active: false,
-              children: [],
-            },
-            {
-              name: "角色管理",
-              path: "/setting/role",
+              name: "菜单管理",
+              path: "/setting/resource",
               active: false,
               children: [],
             },

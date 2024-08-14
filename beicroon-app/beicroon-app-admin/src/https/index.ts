@@ -47,7 +47,9 @@ http.interceptors.response.use(
             }
         })
     },
-    error => {
+    async error => {
+        await toast("系统错误!请联系技术员~", true);
+
         return Promise.reject(error);
     }
 );

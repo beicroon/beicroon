@@ -25,29 +25,9 @@ const router = createRouter({
                     component: () => import("@/views/index/account/admin/AccountAdminApp.vue"),
                 },
                 {
-                    name: "用户账号",
-                    path: "/account/user",
-                    component: () => import("@/views/index/account/User.vue"),
-                },
-                {
-                    name: "司机账号",
-                    path: "/account/driver",
-                    component: () => import("@/views/index/account/Driver.vue"),
-                },
-                {
-                    name: "商户账号",
-                    path: "/account/business",
-                    component: () => import("@/views/index/account/Business.vue"),
-                },
-                {
-                    name: "系统设置",
-                    path: "/setting/system",
-                    component: () => import("@/views/index/setting/System.vue"),
-                },
-                {
-                    name: "角色管理",
-                    path: "/setting/role",
-                    component: () => import("@/views/index/setting/Role.vue"),
+                    name: "资源管理",
+                    path: "/setting/resource",
+                    component: () => import("@/views/index/resource/menu/ResourceMenuApp.vue"),
                 },
             ],
         },

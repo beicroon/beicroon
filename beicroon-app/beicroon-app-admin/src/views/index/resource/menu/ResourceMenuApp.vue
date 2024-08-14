@@ -5,10 +5,10 @@ import {onMounted, ref} from "vue";
 import dialog from "@/utils/dialog";
 import dialogWindow from "@/utils/dialogWindow";
 import ElButton from "@/components/elements/ElButton.vue";
-import Create from "@/views/index/account/admin/AccountAdminCreate.vue";
-import Detail from "@/views/index/account/admin/AccountAdminDetail.vue";
-import Update from "@/views/index/account/admin/AccountAdminUpdate.vue";
-import {AdminPageVO as VO, AdminQueryDTO as DTO, page, remove} from "@/https/account/admin.http.ts";
+import Create from "@/views/index/resource/menu/ResourceMenuCreate.vue";
+import Detail from "@/views/index/resource/menu/ResourceMenuDetail.vue";
+import Update from "@/views/index/resource/menu/ResourceMenuUpdate.vue";
+import {MenuPageVO as VO, MenuQueryDTO as DTO, page, remove} from "@/https/resource/menu.http.ts";
 
 const query = ref<DTO>({} as DTO);
 
@@ -37,26 +37,26 @@ async function doReset() {
 }
 
 async function showCreate() {
-  await dialogWindow("新增账号", Create, {}, {
+  await dialogWindow("新增菜单", Create, {}, {
     reload: doLoad,
   });
 }
 
 async function showDetail(item: VO) {
-  await dialogWindow("账号详情", Detail, {id: item.id}, {
+  await dialogWindow("菜单详情", Detail, {id: item.id}, {
     reload: doLoad,
   });
 }
 
 async function showUpdate(item: VO) {
-  await dialogWindow("编辑账号", Update, {id: item.id}, {
+  await dialogWindow("编辑菜单", Update, {id: item.id}, {
     reload: doLoad,
   });
 }
 
 async function showRemove(item: VO) {
   await dialog(
-      "是否删除该账号数据？删除后数据不可恢复，请谨慎操作！",
+      "是否删除该菜单数据？删除后数据不可恢复，请谨慎操作！",
       async () => await remove(item.id),
       async () => await toast("删除成功").then(doLoad)
   );
@@ -99,7 +99,7 @@ onMounted(doLoad);
             <div class="table-cell">编号</div>
           </th>
           <th>
-            <div class="table-cell">账号</div>
+            <div class="table-cell">菜单</div>
           </th>
           <th>
             <div class="table-cell">昵称</div>

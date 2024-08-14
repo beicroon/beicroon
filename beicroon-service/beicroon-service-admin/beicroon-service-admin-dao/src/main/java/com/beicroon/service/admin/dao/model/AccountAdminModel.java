@@ -9,9 +9,9 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @Data
-@TableName("`admin_account`")
+@TableName("`admin_account_admin`")
 @EqualsAndHashCode(callSuper = true)
-public class AccountModel extends DisableModel implements IAuthUser {
+public class AccountAdminModel extends DisableModel implements IAuthUser {
 
     @TableField(value = "`code`")
     @ApiModelProperty(name = "编码")
