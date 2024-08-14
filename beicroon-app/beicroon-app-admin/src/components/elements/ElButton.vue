@@ -19,17 +19,21 @@ function handleClick() {
 </script>
 
 <template>
-  <button type="button" class="el-button" @click="handleClick">
-    <template v-if="props.loading">加载中</template>
-    <template v-else><slot></slot></template>
-  </button>
+  <div class="el-button" @click="handleClick">
+    <span v-show="props.loading">加载中</span>
+    <button type="button" v-show="!props.loading"><slot></slot></button>
+  </div>
 </template>
 
 <style scoped lang="less">
 @import "@/less/colors";
 
 .el-button {
+  display: flex;
   cursor: pointer;
+  align-items: center;
+  border-radius: 8rem;
+  justify-content: center;
 
   &.warning {
     color: @warning;
