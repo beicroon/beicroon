@@ -28,7 +28,7 @@ async function submit() {
   if (!validateForm(form)) {
     loading.value = false;
 
-    return await toast("请重新填写标红的输入框", true)
+    return await toast("请填写必填项", true)
   }
 
   const res = await login(dto.value).finally(() => loading.value = false);

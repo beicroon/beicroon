@@ -22,7 +22,7 @@ async function confirm() {
   loading.value = true;
 
   if (!validateForm(form)) {
-    await toast("请填写或选择必填项！", true);
+    await toast("请填写必填项！", true);
 
     loading.value = false;
 
