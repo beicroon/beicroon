@@ -22,7 +22,9 @@ export function escUp(callback: () => Promise<void>) {
 export function validateForm(form: Ref<HTMLInputElement>) {
     let valid = true;
 
-    const inputs: Element[] = form.value.querySelectorAll(".form-input.required");
+    const inputs: NodeListOf<Element> = form.value.querySelectorAll(".form-input.required");
+
+    console.info(inputs);
 
     for (let i = 0; i < inputs.length; i++) {
         const elInput = inputs[i];

@@ -1,5 +1,6 @@
 import axios from "axios";
 import {BooleanEnums, CacheKeyEnums} from "@/enums/system.enums.ts";
+import toast from "@/utils/toast";
 
 const http = axios.create({
     baseURL: import.meta.env.VITE_REQUEST_URL,
@@ -29,16 +30,22 @@ http.interceptors.request.use(
 
 // 添加响应拦截器
 http.interceptors.response.use(
-    (response: any) => {
-        const elapsedTime = Date.now() - response.config.metadata.startTime;
+    async (response: any) => {
+        return new Promise((resolve, reject) => {
+            if (response.data.code > 0) {
+                toast(response.data.message, true);
 
-        if (elapsedTime < minResponseTime) {
-            return new Promise((resolve) => {
+                return reject(response.data);
+            }
+
+            const elapsedTime = Date.now() - response.config.metadata.startTime;
+
+            if (elapsedTime < minResponseTime) {
                 setTimeout(() => resolve(response.data), minResponseTime - elapsedTime);
-            });
-        } else {
-            return response.data;
-        }
+            } else {
+                return resolve(response.data);
+            }
+        })
     },
     error => {
         return Promise.reject(error);

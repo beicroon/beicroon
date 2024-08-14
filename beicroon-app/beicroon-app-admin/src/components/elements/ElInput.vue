@@ -7,6 +7,11 @@ const props = defineProps({
     default: null,
     required: false,
   },
+  type: {
+    type: String,
+    default: "text",
+    required: false,
+  },
   label: {
     type: String,
     required: true,
@@ -44,7 +49,7 @@ const value = computed({
 <template>
   <div class="el-input" :class="{required: required}" ref="elInput">
     <label>{{ label }}</label>
-    <input class="input-value" type="text" :placeholder="placeholder" v-model="value"/>
+    <input class="input-value" :type="type" :placeholder="placeholder" v-model="value"/>
   </div>
 </template>
 

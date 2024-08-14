@@ -29,7 +29,7 @@ async function confirm() {
     return;
   }
 
-  await submit(params.value);
+  await submit(params.value).finally(() => loading.value = false);;
 
   await toast("添加成功");
 

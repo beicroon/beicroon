@@ -4,7 +4,7 @@ import {onBeforeMount, ref} from "vue";
 import {validateForm} from "@/utils/function.ts";
 import ElInput from "@/components/elements/ElInput.vue";
 import ElButton from "@/components/elements/ElButton.vue";
-import {AdminCreateDTO as DTO, detail as show, update as submit} from "@/https/account/admin.http.ts";
+import {AdminUpdateDTO as DTO, detail as show, update as submit} from "@/https/account/admin.http.ts";
 
 const props = defineProps({
   id: {
@@ -46,7 +46,7 @@ async function confirm() {
     return;
   }
 
-  await submit(params.value);
+  await submit(params.value).finally(() => loading.value = false);;
 
   await toast("添加成功");
 
