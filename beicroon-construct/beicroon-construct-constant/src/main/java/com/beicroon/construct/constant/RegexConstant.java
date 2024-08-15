@@ -2,6 +2,10 @@ package com.beicroon.construct.constant;
 
 public interface RegexConstant {
 
+    String SPLIT_UPPER = "(?=[A-Z])";
+
+    String CASE_SNAKE = "_(\\w)";
+
     String PHONE = "^(+?86)?(-\\s)?1[3-9](-\\s)?[0-9]{4}(-\\s)?[0-9]{4}$";
 
     String ID_CARD = "^[0-9]{17}([0-9]|X)$";

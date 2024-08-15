@@ -1,8 +1,13 @@
 package com.beicroon.starter.generic.maker;
 
+import com.beicroon.construct.constant.RegexConstant;
 import com.beicroon.construct.constant.SystemConstant;
+import com.beicroon.starter.generic.content.ModelContent;
+import com.beicroon.starter.generic.manager.FileManager;
+import com.beicroon.starter.generic.manager.PackageManager;
 import com.beicroon.starter.generic.utils.FileUtils;
 import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 
 import java.io.File;
@@ -11,6 +16,9 @@ import java.io.Serializable;
 import java.lang.reflect.Array;
 import java.sql.*;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class ApiMysqlMaker {
 
@@ -72,21 +80,113 @@ public class ApiMysqlMaker {
         this.password = password;
     }
 
-    public void generic(Class<?> clazz, String... names) {
+    public void generic(File rootPath, String serviceName, String basePackage, String... tableNames) {
+        this.run(rootPath, serviceName, basePackage, tableNames);
+    }
+
+    private void run(File rootPath, String serviceName, String basePackage, String... tableNames) {
         System.out.println("接口初始化开始");
 
-        File rootFile = new File(clazz.getProtectionDomain().getCodeSource().getLocation().getPath());
+        if (!rootPath.exists()) {
+            throw new RuntimeException(String.format("项目根目录不存在[%s]", rootPath.getAbsolutePath()));
+        }
 
-        File moduleFile = new File(rootFile, FileUtils.joinPaths("..", "..", ".."));
+        PackageManager packageManager = new PackageManager(basePackage);
 
-        for (Table table : this.getTables(names)) {
+        FileManager fileManager = new FileManager(rootPath, serviceName, packageManager);
 
+        for (Table table : this.getTables(tableNames)) {
+            Set<String> imports = new HashSet<>();
+
+            StringBuilder content = new StringBuilder();
+
+            for (Field field : table.getColumns()) {
+                content.append(this.getModelFieldString(field, imports));
+            }
+
+            table.setImports(imports);
+            table.setContent(content.toString());
+
+            File modelFile = FileUtils.getJavaFile(fileManager.getModelPath(), table.getFileName() + "Model");
+
+            FileUtils.writeFileIfNotExists(modelFile, ModelContent.getContent(packageManager, table));
         }
 
         System.out.println("接口初始化结束");
     }
 
-    private List<Table> getTables(String... names) {
+    private String getPropertyFieldString(Field field, Set<String> imports) {
+        String type = this.getJavaType(field.getType());
+
+        if (TYPE_IMPORTS.containsKey(type)) {
+            imports.add(TYPE_IMPORTS.get(type));
+        }
+
+        return String.format(
+                "\n    @ApiModelProperty(name = \"%s\")\n    private %s %s;\n",
+                field.getComment(),
+                type,
+                this.snakeToCamel(field.getName())
+        );
+    }
+
+    private String getSearchFieldString(Field field, Set<String> imports) {
+        String type = this.getJavaType(field.getType());
+
+        if (TYPE_IMPORTS.containsKey(type)) {
+            imports.add(TYPE_IMPORTS.get(type));
+        }
+
+        return String.format(
+                "\n    @FieldSearch(value = \"`%s`\")\n    @ApiModelProperty(name = \"%s\")\n    private %s %s;\n",
+                field.getName(),
+                field.getComment(),
+                type,
+                this.snakeToCamel(field.getName())
+        );
+    }
+
+    private String getModelFieldString(Field field, Set<String> imports) {
+        String type = this.getJavaType(field.getType());
+
+        if (TYPE_IMPORTS.containsKey(type)) {
+            imports.add(TYPE_IMPORTS.get(type));
+        }
+
+        return String.format(
+                "\n    @TableField(value = \"`%s`\")\n    @ApiModelProperty(name = \"%s\")\n    private %s %s;\n",
+                field.getName(),
+                field.getComment(),
+                type,
+                this.snakeToCamel(field.getName())
+        );
+    }
+
+    private String snakeToCamel(String snakeCase) {
+        Pattern pattern = Pattern.compile(RegexConstant.CASE_SNAKE);
+
+        Matcher matcher = pattern.matcher(snakeCase);
+
+        StringBuilder camelCase = new StringBuilder();
+
+        while (matcher.find()) {
+            matcher.appendReplacement(camelCase, matcher.group(1).toUpperCase());
+        }
+
+        matcher.appendTail(camelCase);
+
+        return camelCase.toString();
+    }
+
+    private String getJavaType(String type) {
+        if (!JAVA_TYPES.containsKey(type)) {
+            return "String";
+        }
+
+        return JAVA_TYPES.get(type);
+    }
+
+    private List<Table> getTables(String... tableNames) {
         List<Table> tables = new ArrayList<>();
 
         Connection connection = this.getConnection();
@@ -94,9 +194,9 @@ public class ApiMysqlMaker {
         Statement statement = this.getStatement(connection);
 
         try {
-            Map<String, String> tableNames = this.queryTables(statement, names);
+            Map<String, String> tableNameMap = this.queryTables(statement, tableNames);
 
-            for (Map.Entry<String, String> tableEntry : tableNames.entrySet()) {
+            for (Map.Entry<String, String> tableEntry : tableNameMap.entrySet()) {
                 String tableName = tableEntry.getKey();
 
                 String tableComment = tableEntry.getValue();
@@ -146,13 +246,13 @@ public class ApiMysqlMaker {
         return columns;
     }
 
-    private Map<String, String> queryTables(Statement statement, String... names) {
+    private Map<String, String> queryTables(Statement statement, String... tableNames) {
         Map<String, String> tables = new HashMap<>();
 
         ResultSet resultSet = null;
 
         try {
-            String sql = this.getTableSql(names);
+            String sql = this.getTableSql(tableNames);
 
             resultSet = statement.executeQuery(sql);
 
@@ -174,7 +274,7 @@ public class ApiMysqlMaker {
         return tables;
     }
 
-    private String getTableSql(String... names) {
+    private String getTableSql(String... tableNames) {
         StringBuilder sb = new StringBuilder(String.format(
                 "SELECT `TABLE_NAME`, `TABLE_COMMENT` " +
                         "FROM `INFORMATION_SCHEMA`.`TABLES` " +
@@ -182,8 +282,8 @@ public class ApiMysqlMaker {
                 this.database
         ));
 
-        if (Array.getLength(names) > 0) {
-            sb.append(" AND `TABLE_NAME` IN ('").append(String.join("', '", names)).append("')");
+        if (Array.getLength(tableNames) > 0) {
+            sb.append(" AND `TABLE_NAME` IN ('").append(String.join("', '", tableNames)).append("')");
         }
 
         return sb.toString();
@@ -272,12 +372,36 @@ public class ApiMysqlMaker {
 
         private final List<Field> columns;
 
+        private final String fileName;
+
+        @Setter
+        private Set<String> imports;
+
+        @Setter
+        private String content;
+
         public Table(String name, String comment, List<Field> columns) {
             this.name = name;
 
             this.comment = comment;
 
             this.columns = columns;
+
+            this.fileName = Arrays.stream(name.split("_"))
+                    .map(s -> s.substring(0, 1).toUpperCase() + s.substring(1))
+                    .collect(Collectors.joining());
+        }
+
+        public String getImportString() {
+            if (this.imports == null || this.imports.isEmpty()) {
+                return "";
+            }
+
+            List<String> importList = new ArrayList<>(this.imports);
+
+            Collections.sort(importList);
+
+            return "\n" + String.join("\n", importList) + "\n";
         }
 
     }
