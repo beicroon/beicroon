@@ -1,5 +1,7 @@
 package com.beicroon.starter.generic.utils;
 
+import com.beicroon.starter.generic.entity.Table;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -26,6 +28,10 @@ public class FileUtils {
     public static final String PACKAGE_DAO_REPOSITORY = "repository";
 
     public static final String PACKAGE_ENTITY = "entity";
+
+    public static final String PACKAGE_ENTITY_DTO = "dto";
+
+    public static final String PACKAGE_ENTITY_VO = "vo";
 
     public static final String PACKAGE_GENERIC = "generic";
 
@@ -83,6 +89,26 @@ public class FileUtils {
         File path = new File(rootPath, String.format("%s-%s", serviceName, PACKAGE_WEB));
 
         return FileUtils.mkdir(path);
+    }
+
+    public static File getDTOPath(File daoPath, Table table, List<String> basePackages) {
+        String src = DIR_JAVA + FileUtils.getSeparator()
+                + FileUtils.joinPaths(basePackages) + FileUtils.getSeparator()
+                + PACKAGE_ENTITY + FileUtils.getSeparator()
+                + table.getPath() + FileUtils.getSeparator()
+                + PACKAGE_ENTITY_DTO;
+
+        return FileUtils.mkdir(new File(daoPath, src));
+    }
+
+    public static File getVOPath(File daoPath, Table table, List<String> basePackages) {
+        String src = DIR_JAVA + FileUtils.getSeparator()
+                + FileUtils.joinPaths(basePackages) + FileUtils.getSeparator()
+                + PACKAGE_ENTITY + FileUtils.getSeparator()
+                + table.getPath() + FileUtils.getSeparator()
+                + PACKAGE_ENTITY_VO;
+
+        return FileUtils.mkdir(new File(daoPath, src));
     }
 
     public static File getConvertorPath(File daoPath, List<String> basePackages) {
@@ -227,10 +253,6 @@ public class FileUtils {
                 + PACKAGE_WEB_TASK;
 
         return FileUtils.mkdir(new File(webPath, src));
-    }
-
-    public static File getJavaFile(File rootPath, String className) {
-        return new File(rootPath, className + ".java");
     }
 
     public static void writeFileIfNotExists(File target, String content) {

@@ -2,23 +2,33 @@ package com.beicroon.starter.generic.maker;
 
 import com.beicroon.construct.constant.RegexConstant;
 import com.beicroon.construct.constant.SystemConstant;
-import com.beicroon.starter.generic.content.ModelContent;
+import com.beicroon.starter.generic.content.controller.AdminControllerContent;
+import com.beicroon.starter.generic.content.convertor.ConvertorContent;
+import com.beicroon.starter.generic.content.dto.CreateDTOContent;
+import com.beicroon.starter.generic.content.dto.QueryDTOContent;
+import com.beicroon.starter.generic.content.dto.UpdateDTOContent;
+import com.beicroon.starter.generic.content.helper.HelperContent;
+import com.beicroon.starter.generic.content.manager.ManagerContent;
+import com.beicroon.starter.generic.content.mapper.MapperContent;
+import com.beicroon.starter.generic.content.model.ModelContent;
+import com.beicroon.starter.generic.content.repository.RepositoryContent;
+import com.beicroon.starter.generic.content.service.ServiceContent;
+import com.beicroon.starter.generic.content.service.ServiceImplContent;
+import com.beicroon.starter.generic.content.vo.BaseVOContent;
+import com.beicroon.starter.generic.content.vo.DetailVOContent;
+import com.beicroon.starter.generic.content.vo.PageVOContent;
+import com.beicroon.starter.generic.entity.Field;
+import com.beicroon.starter.generic.entity.Table;
 import com.beicroon.starter.generic.manager.FileManager;
 import com.beicroon.starter.generic.manager.PackageManager;
 import com.beicroon.starter.generic.utils.FileUtils;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
 
 import java.io.File;
-import java.io.Serial;
-import java.io.Serializable;
 import java.lang.reflect.Array;
 import java.sql.*;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
 public class ApiMysqlMaker {
 
@@ -80,11 +90,11 @@ public class ApiMysqlMaker {
         this.password = password;
     }
 
-    public void generic(File rootPath, String serviceName, String basePackage, String... tableNames) {
-        this.run(rootPath, serviceName, basePackage, tableNames);
+    public void generic(File rootPath, String serviceName, String basePackage, String modulePrefix, String... tableNames) {
+        this.run(rootPath, serviceName, basePackage, modulePrefix, tableNames);
     }
 
-    private void run(File rootPath, String serviceName, String basePackage, String... tableNames) {
+    private void run(File rootPath, String serviceName, String basePackage, String modulePrefix, String... tableNames) {
         System.out.println("接口初始化开始");
 
         if (!rootPath.exists()) {
@@ -95,28 +105,46 @@ public class ApiMysqlMaker {
 
         FileManager fileManager = new FileManager(rootPath, serviceName, packageManager);
 
-        for (Table table : this.getTables(tableNames)) {
+        for (Table table : this.getTables(modulePrefix, tableNames)) {
             Set<String> imports = new HashSet<>();
 
-            StringBuilder content = new StringBuilder();
+            StringBuilder modelContent = new StringBuilder();
+            StringBuilder dtoContent = new StringBuilder();
+            StringBuilder queryContent = new StringBuilder();
 
             for (Field field : table.getColumns()) {
-                content.append(this.getModelFieldString(field, imports));
+                modelContent.append(this.getModelFieldString(field, imports));
+                dtoContent.append(this.getDTOFieldString(field, imports));
+                queryContent.append(this.getQueryFieldString(field, imports));
             }
 
             table.setImports(imports);
-            table.setContent(content.toString());
+            table.setModelContent(modelContent.toString());
+            table.setDtoContent(dtoContent.toString());
+            table.setQueryContent(queryContent.toString());
 
-            File modelFile = FileUtils.getJavaFile(fileManager.getModelPath(), table.getFileName() + "Model");
-
-            FileUtils.writeFileIfNotExists(modelFile, ModelContent.getContent(packageManager, table));
+            FileUtils.writeFileIfNotExists(fileManager.getConverTorFile(table), ConvertorContent.getContent(packageManager, table));
+            FileUtils.writeFileIfNotExists(fileManager.getHelperFile(table), HelperContent.getContent(packageManager, table));
+            FileUtils.writeFileIfNotExists(fileManager.getManagerFile(table), ManagerContent.getContent(packageManager, table));
+            FileUtils.writeFileIfNotExists(fileManager.getMapperFile(table), MapperContent.getContent(packageManager, table));
+            FileUtils.writeFileIfNotExists(fileManager.getModelFile(table), ModelContent.getContent(packageManager, table));
+            FileUtils.writeFileIfNotExists(fileManager.getRepositoryFile(table), RepositoryContent.getContent(packageManager, table));
+            FileUtils.writeFileIfNotExists(fileManager.getCreateDTOFile(table), CreateDTOContent.getContent(packageManager, table));
+            FileUtils.writeFileIfNotExists(fileManager.getUpdateDTOFile(table), UpdateDTOContent.getContent(packageManager, table));
+            FileUtils.writeFileIfNotExists(fileManager.getQueryDTOFile(table), QueryDTOContent.getContent(packageManager, table));
+            FileUtils.writeFileIfNotExists(fileManager.getBaseVOFile(table), BaseVOContent.getContent(packageManager, table));
+            FileUtils.writeFileIfNotExists(fileManager.getDetailVOFile(table), DetailVOContent.getContent(packageManager, table));
+            FileUtils.writeFileIfNotExists(fileManager.getPageVOFile(table), PageVOContent.getContent(packageManager, table));
+            FileUtils.writeFileIfNotExists(fileManager.getControllerAdminFile(table), AdminControllerContent.getContent(packageManager, table));
+            FileUtils.writeFileIfNotExists(fileManager.getServiceFile(table), ServiceContent.getContent(packageManager, table));
+            FileUtils.writeFileIfNotExists(fileManager.getServiceImplFile(table), ServiceImplContent.getContent(packageManager, table));
         }
 
         System.out.println("接口初始化结束");
     }
 
-    private String getPropertyFieldString(Field field, Set<String> imports) {
-        String type = this.getJavaType(field.getType());
+    private String getDTOFieldString(Field field, Set<String> imports) {
+        String type = this.getJavaType(field.type());
 
         if (TYPE_IMPORTS.containsKey(type)) {
             imports.add(TYPE_IMPORTS.get(type));
@@ -124,14 +152,14 @@ public class ApiMysqlMaker {
 
         return String.format(
                 "\n    @ApiModelProperty(name = \"%s\")\n    private %s %s;\n",
-                field.getComment(),
+                field.comment(),
                 type,
-                this.snakeToCamel(field.getName())
+                this.snakeToCamel(field.name())
         );
     }
 
-    private String getSearchFieldString(Field field, Set<String> imports) {
-        String type = this.getJavaType(field.getType());
+    private String getQueryFieldString(Field field, Set<String> imports) {
+        String type = this.getJavaType(field.type());
 
         if (TYPE_IMPORTS.containsKey(type)) {
             imports.add(TYPE_IMPORTS.get(type));
@@ -139,15 +167,15 @@ public class ApiMysqlMaker {
 
         return String.format(
                 "\n    @FieldSearch(value = \"`%s`\")\n    @ApiModelProperty(name = \"%s\")\n    private %s %s;\n",
-                field.getName(),
-                field.getComment(),
+                field.name(),
+                field.comment(),
                 type,
-                this.snakeToCamel(field.getName())
+                this.snakeToCamel(field.name())
         );
     }
 
     private String getModelFieldString(Field field, Set<String> imports) {
-        String type = this.getJavaType(field.getType());
+        String type = this.getJavaType(field.type());
 
         if (TYPE_IMPORTS.containsKey(type)) {
             imports.add(TYPE_IMPORTS.get(type));
@@ -155,10 +183,10 @@ public class ApiMysqlMaker {
 
         return String.format(
                 "\n    @TableField(value = \"`%s`\")\n    @ApiModelProperty(name = \"%s\")\n    private %s %s;\n",
-                field.getName(),
-                field.getComment(),
+                field.name(),
+                field.comment(),
                 type,
-                this.snakeToCamel(field.getName())
+                this.snakeToCamel(field.name())
         );
     }
 
@@ -186,7 +214,7 @@ public class ApiMysqlMaker {
         return JAVA_TYPES.get(type);
     }
 
-    private List<Table> getTables(String... tableNames) {
+    private List<Table> getTables(String modulePrefix, String... tableNames) {
         List<Table> tables = new ArrayList<>();
 
         Connection connection = this.getConnection();
@@ -203,7 +231,7 @@ public class ApiMysqlMaker {
 
                 List<Field> fields = this.queryColumns(statement, tableName);
 
-                tables.add(new Table(tableName, tableComment, fields));
+                tables.add(new Table(modulePrefix, tableName, tableComment, fields));
             }
         } finally {
             this.closeStatement(statement);
@@ -357,76 +385,6 @@ public class ApiMysqlMaker {
 
             throw new RuntimeException(ex);
         }
-    }
-
-    @Getter
-    @ToString
-    public static class Table implements Serializable {
-
-        @Serial
-        private static final long serialVersionUID = 1L;
-
-        private final String name;
-
-        private final String comment;
-
-        private final List<Field> columns;
-
-        private final String fileName;
-
-        @Setter
-        private Set<String> imports;
-
-        @Setter
-        private String content;
-
-        public Table(String name, String comment, List<Field> columns) {
-            this.name = name;
-
-            this.comment = comment;
-
-            this.columns = columns;
-
-            this.fileName = Arrays.stream(name.split("_"))
-                    .map(s -> s.substring(0, 1).toUpperCase() + s.substring(1))
-                    .collect(Collectors.joining());
-        }
-
-        public String getImportString() {
-            if (this.imports == null || this.imports.isEmpty()) {
-                return "";
-            }
-
-            List<String> importList = new ArrayList<>(this.imports);
-
-            Collections.sort(importList);
-
-            return "\n" + String.join("\n", importList) + "\n";
-        }
-
-    }
-
-    @Getter
-    @ToString
-    public static class Field implements Serializable {
-
-        @Serial
-        private static final long serialVersionUID = 1L;
-
-        private final String name;
-
-        private final String type;
-
-        private final String comment;
-
-        public Field(String name, String type, String comment) {
-            this.name = name;
-
-            this.type = type;
-
-            this.comment = comment;
-        }
-
     }
 
 }

@@ -1,20 +1,25 @@
 package com.beicroon.service.admin.entity.account.admin.dto;
 
+import com.beicroon.construct.annotation.ApiModel;
 import com.beicroon.construct.annotation.ApiModelProperty;
-import com.beicroon.construct.annotation.NeedValue;
-import com.beicroon.construct.entity.CreateDTOWithDisable;
+import com.beicroon.construct.entity.CreateDTO;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @Data
+@ApiModel(name = "新增后台账号入参")
 @EqualsAndHashCode(callSuper = true)
-public class AccountAdminCreateDTO extends CreateDTOWithDisable {
+public class AccountAdminCreateDTO extends CreateDTO {
+    
+    @ApiModelProperty(name = "编码")
+    private String code;
 
-    @NeedValue(message = "账号不能为空")
     @ApiModelProperty(name = "账号")
     private String username;
 
-    @NeedValue(message = "昵称不能为空")
+    @ApiModelProperty(name = "密码")
+    private String password;
+
     @ApiModelProperty(name = "昵称")
     private String nickname;
 

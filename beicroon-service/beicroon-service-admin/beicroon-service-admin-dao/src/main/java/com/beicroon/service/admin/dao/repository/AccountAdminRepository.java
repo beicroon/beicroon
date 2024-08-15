@@ -1,5 +1,6 @@
 package com.beicroon.service.admin.dao.repository;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.beicroon.service.admin.dao.mapper.AccountAdminMapper;
 import com.beicroon.service.admin.dao.model.AccountAdminModel;
@@ -13,7 +14,7 @@ public class AccountAdminRepository extends GenericRepository<AccountAdminQueryD
 
     @Override
     public void fillQueryWrapper(AccountAdminQueryDTO dto, QueryWrapper<AccountAdminModel> wrapper) {
-
+        LambdaQueryWrapper<AccountAdminModel> query = wrapper.lambda();
     }
 
 }

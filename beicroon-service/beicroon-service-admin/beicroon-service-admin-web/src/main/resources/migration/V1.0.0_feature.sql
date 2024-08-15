@@ -25,7 +25,7 @@ create table `admin_account_admin`
     index `idx_username` (`username`),
     index `idx_phone` (`phone`),
     index `idx_email` (`email`)
-) engine = innodb comment '后台账号表';
+) engine = innodb comment '后台账号';
 
 drop table if exists `admin_resource_menu`;
 create table `admin_resource_menu`

@@ -23,4 +23,12 @@ public class PackageManager {
         return String.format("%s.%s", this.basePackage, FileUtils.PACKAGE_DAO);
     }
 
+    public String getEntityPackage() {
+        return String.format("%s.%s", this.basePackage, FileUtils.PACKAGE_ENTITY);
+    }
+
+    public String getWebPackage() {
+        return String.format("%s.%s", this.basePackage, FileUtils.PACKAGE_WEB);
+    }
+
 }

@@ -1,15 +1,15 @@
-package com.beicroon.service.admin.entity.account.admin.dto;
+package com.beicroon.service.admin.entity.account.admin.vo;
 
 import com.beicroon.construct.annotation.ApiModel;
 import com.beicroon.construct.annotation.ApiModelProperty;
-import com.beicroon.construct.entity.UpdateDTO;
+import com.beicroon.construct.entity.GenericVO;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @Data
-@ApiModel(name = "修改后台账号入参")
+@ApiModel(name = "查询后台账号基础出参")
 @EqualsAndHashCode(callSuper = true)
-public class AccountAdminUpdateDTO extends UpdateDTO {
+public class AccountAdminBaseVO extends GenericVO {
     
     @ApiModelProperty(name = "编码")
     private String code;
