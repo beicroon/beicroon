@@ -21,18 +21,6 @@
         </dependency>
 
         <dependency>
-            <groupId>com.beicroon.common</groupId>
-            <artifactId>beicroon-common-admin-rpc</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.beicroon.middle</groupId>
-            <artifactId>beicroon-middle-tenant</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-
-        <dependency>
             <groupId>com.beicroon.service</groupId>
             <artifactId>beicroon-service-admin-dao</artifactId>
             <version>${project.version}</version>

@@ -94,7 +94,7 @@ async function doConfirm() {
     justify-content: space-around;
     border-top: 1rem solid #e0e4ed;
 
-    button {
+    .el-button {
       color: #ffffff;
       border-radius: 6rem;
       padding: 8rem 24rem;

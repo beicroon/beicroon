@@ -12,5 +12,6 @@
     <!--  请勿随意调整顺序  -->
     <modules>
         <module>beicroon-service-admin</module>
+<!--        <module>beicroon-service-home</module>-->
     </modules>
 </project>

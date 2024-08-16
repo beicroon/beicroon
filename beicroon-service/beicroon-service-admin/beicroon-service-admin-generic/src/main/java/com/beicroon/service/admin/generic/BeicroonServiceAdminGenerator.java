@@ -8,7 +8,7 @@ public class BeicroonServiceAdminGenerator {
 
     private static final String ROOT_PATH = "beicroon-service";
 
-    private static final String MODULE_NAME = "beicroon-service-admin";
+    private static final String SERVICE_NAME = "beicroon-service-admin";
 
     private static final String BASE_PACKAGE = "com.beicroon.service.admin";
 
@@ -17,12 +17,12 @@ public class BeicroonServiceAdminGenerator {
     public static void main(String[] args) {
         ApiMysqlMaker maker = new ApiMysqlMaker(
                 "127.0.0.1:3306",
-                "beicroon-service-admin-dev",
+                "dev-beicroon-service-admin",
                 "root",
                 ""
         );
 
-        maker.generic(new File(ROOT_PATH, MODULE_NAME), MODULE_NAME, BASE_PACKAGE, MODULE_PREFIX);
+        maker.generic(new File(ROOT_PATH, SERVICE_NAME), SERVICE_NAME, BASE_PACKAGE, MODULE_PREFIX);
     }
 
 }

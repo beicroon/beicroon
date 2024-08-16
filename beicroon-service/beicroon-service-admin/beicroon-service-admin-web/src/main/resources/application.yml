@@ -13,13 +13,13 @@ spring:
     type: REDIS
   data:
     redis:
-      database: 1
+      database: 0
       host: @pom.redis.ip@
       port: @pom.redis.port@
       password: @pom.redis.password@
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://@pom.mysql.ip@:@pom.mysql.port@/@project.parent.artifactId@-@pom.profile.name@
+    url: jdbc:mysql://@pom.mysql.ip@:@pom.mysql.port@/@pom.profile.name@-@project.parent.artifactId@
     username: @pom.mysql.username@
     password: @pom.mysql.password@
   flyway:
@@ -58,7 +58,3 @@ xxl:
   job:
     admin:
       addresses: @pom.job.addresses@
-
-beicroon:
-  tenant:
-    enable: false

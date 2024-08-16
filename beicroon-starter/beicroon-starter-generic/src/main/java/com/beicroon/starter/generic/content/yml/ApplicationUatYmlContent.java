@@ -5,11 +5,12 @@ public class ApplicationUatYmlContent {
     private static final String CONTENT = """
             logging:
               level:
-                root: DEBUG
+                {{basePackage}}: DEBUG
             """;
 
-    public static String getContent() {
-        return CONTENT;
+    public static String getContent(String basePackage) {
+        return CONTENT
+                .replace("{{basePackage}}", basePackage);
     }
 
 }

@@ -13,4 +13,11 @@
     <artifactId>beicroon-construct-database</artifactId>
     <version>1.0.0</version>
     <packaging>jar</packaging>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-core</artifactId>
+        </dependency>
+    </dependencies>
 </project>

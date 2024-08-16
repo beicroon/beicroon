@@ -7,6 +7,8 @@ import com.beicroon.construct.entity.QueryDTO;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import java.time.LocalDateTime;
+
 @Data
 @ApiModel(name = "查询后台账号入参")
 @EqualsAndHashCode(callSuper = true)
@@ -35,5 +37,21 @@ public class AccountAdminQueryDTO extends QueryDTO {
     @FieldSearch(name = "`email`")
     @ApiModelProperty(name = "邮箱")
     private String email;
+
+    @FieldSearch(name = "`deleted_at`")
+    @ApiModelProperty(name = "删除时间")
+    private LocalDateTime deletedAt;
+
+    @FieldSearch(name = "`deleter_id`")
+    @ApiModelProperty(name = "删除人主键")
+    private Long deleterId;
+
+    @FieldSearch(name = "`deleter_code`")
+    @ApiModelProperty(name = "删除人编码")
+    private String deleterCode;
+
+    @FieldSearch(name = "`deleter_name`")
+    @ApiModelProperty(name = "删除人昵称")
+    private String deleterName;
 
 }

@@ -19,15 +19,16 @@ public class ApplicationLocalYmlContent {
 
             logging:
               level:
-                root: DEBUG
+                {{basePackage}}: DEBUG
 
             mybatis-plus:
               configuration:
                 log-impl: org.apache.ibatis.logging.slf4j.Slf4jImpl
             """;
 
-    public static String getContent() {
-        return CONTENT;
+    public static String getContent(String basePackage) {
+        return CONTENT
+                .replace("{{basePackage}}", basePackage);
     }
 
 }

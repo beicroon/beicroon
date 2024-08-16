@@ -19,11 +19,5 @@
             <groupId>com.beicroon.construct</groupId>
             <artifactId>beicroon-construct-entity</artifactId>
         </dependency>
-
-        <dependency>
-            <groupId>com.beicroon.common</groupId>
-            <artifactId>beicroon-common-admin-entity</artifactId>
-            <version>${project.version}</version>
-        </dependency>
     </dependencies>
 </project>

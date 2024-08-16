@@ -6,6 +6,8 @@ import com.beicroon.construct.entity.CreateDTO;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import java.time.LocalDateTime;
+
 @Data
 @ApiModel(name = "新增后台账号入参")
 @EqualsAndHashCode(callSuper = true)
@@ -28,5 +30,17 @@ public class AccountAdminCreateDTO extends CreateDTO {
 
     @ApiModelProperty(name = "邮箱")
     private String email;
+
+    @ApiModelProperty(name = "删除时间")
+    private LocalDateTime deletedAt;
+
+    @ApiModelProperty(name = "删除人主键")
+    private Long deleterId;
+
+    @ApiModelProperty(name = "删除人编码")
+    private String deleterCode;
+
+    @ApiModelProperty(name = "删除人昵称")
+    private String deleterName;
 
 }

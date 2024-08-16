@@ -5,11 +5,12 @@ public class ApplicationProYmlContent {
     private static final String CONTENT = """
             logging:
               level:
-                root: INFO
+                {{basePackage}}: INFO
             """;
 
-    public static String getContent() {
-        return CONTENT;
+    public static String getContent(String basePackage) {
+        return CONTENT
+                .replace("{{basePackage}}", basePackage);
     }
 
 }

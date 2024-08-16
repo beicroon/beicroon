@@ -40,12 +40,12 @@ public class ServiceStructureMaker {
         FileUtils.writeFileIfNotExists(fileManager.getWebPomFile(), WebPomContent.getContent(moduleName, moduleVersion));
         FileUtils.writeFileIfNotExists(fileManager.getWebApplicationFile(filename), WebApplicationContent.getContent(filename, basePackage));
         FileUtils.writeFileIfNotExists(fileManager.getWebApplicationYmlFile(), ApplicationYmlContent.getContent(serverPort, redisDB));
-        FileUtils.writeFileIfNotExists(fileManager.getWebApplicationDevYmlFile(), ApplicationDevYmlContent.getContent());
-        FileUtils.writeFileIfNotExists(fileManager.getWebApplicationFatYmlFile(), ApplicationFatYmlContent.getContent());
-        FileUtils.writeFileIfNotExists(fileManager.getWebApplicationUatYmlFile(), ApplicationUatYmlContent.getContent());
-        FileUtils.writeFileIfNotExists(fileManager.getWebApplicationProYmlFile(), ApplicationProYmlContent.getContent());
-        FileUtils.writeFileIfNotExists(fileManager.getWebApplicationLocalYmlFile(), ApplicationLocalYmlContent.getContent());
-        FileUtils.writeFileIfNotExists(fileManager.getWebApplicationLocalYmlFile(), ApplicationLocalYmlContent.getContent());
+        FileUtils.writeFileIfNotExists(fileManager.getWebApplicationDevYmlFile(), ApplicationDevYmlContent.getContent(basePackage));
+        FileUtils.writeFileIfNotExists(fileManager.getWebApplicationFatYmlFile(), ApplicationFatYmlContent.getContent(basePackage));
+        FileUtils.writeFileIfNotExists(fileManager.getWebApplicationUatYmlFile(), ApplicationUatYmlContent.getContent(basePackage));
+        FileUtils.writeFileIfNotExists(fileManager.getWebApplicationProYmlFile(), ApplicationProYmlContent.getContent(basePackage));
+        FileUtils.writeFileIfNotExists(fileManager.getWebApplicationLocalYmlFile(), ApplicationLocalYmlContent.getContent(basePackage));
+        FileUtils.writeFileIfNotExists(fileManager.getWebApplicationLocalYmlFile(), ApplicationLocalYmlContent.getContent(basePackage));
         FileUtils.writeFileIfNotExists(fileManager.getMigrationFile(moduleVersion), MigrationContent.getContent(moduleName));
 
         System.out.println("模块初始结束");
