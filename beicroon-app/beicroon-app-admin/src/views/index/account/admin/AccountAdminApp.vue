@@ -57,8 +57,7 @@ async function showUpdate(item: VO) {
 async function showRemove(item: VO) {
   await dialog(
       "是否删除该账号数据？删除后数据不可恢复，请谨慎操作！",
-      async () => await remove(item.id),
-      async () => await toast("删除成功").then(doLoad)
+      async () => await remove(item.id).then(async () => await toast("删除成功").then(doLoad))
   );
 }
 
