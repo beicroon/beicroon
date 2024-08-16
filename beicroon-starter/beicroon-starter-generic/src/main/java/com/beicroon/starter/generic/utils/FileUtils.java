@@ -27,6 +27,8 @@ public class FileUtils {
 
     public static final String PACKAGE_DAO_REPOSITORY = "repository";
 
+    public static final String PACKAGE_RESOURCES_MAPPER = "mapper";
+
     public static final String PACKAGE_ENTITY = "entity";
 
     public static final String PACKAGE_ENTITY_DTO = "dto";
@@ -163,6 +165,13 @@ public class FileUtils {
                 + PACKAGE_DAO_REPOSITORY;
 
         return FileUtils.mkdir(new File(daoPath, src));
+    }
+
+    public static File getMapperXmlPath(File rootPath) {
+        String src = DIR_RESOURCES + FileUtils.getSeparator()
+                     + PACKAGE_RESOURCES_MAPPER;
+
+        return FileUtils.mkdir(new File(rootPath, src));
     }
 
     public static File getConsumerPath(File webPath, List<String> basePackages) {

@@ -72,15 +72,15 @@ public class Table implements Serializable {
     }
 
     public String getPath() {
-        return this.name.replaceAll("_", FileUtils.getSeparator());
+        return this.name.replace("_", FileUtils.getSeparator());
     }
 
     public String getPackage() {
-        return this.name.replaceAll("_", ".");
+        return this.name.replace("_", ".");
     }
 
     public String getUrlName() {
-        return this.name.replaceAll("_", "-");
+        return this.name.replace("_", "-");
     }
 
 }

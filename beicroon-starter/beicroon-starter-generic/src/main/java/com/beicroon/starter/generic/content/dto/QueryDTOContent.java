@@ -25,11 +25,11 @@ public class QueryDTOContent {
 
     public static String getContent(PackageManager packageManager, Table table) {
         return CONTENT
-                .replaceAll("\\{\\{package}}", packageManager.getEntityPackage() + "." + table.getPackage())
-                .replaceAll("\\{\\{filename}}", table.getFilename())
-                .replaceAll("\\{\\{import}}", table.getImportString())
-                .replaceAll("\\{\\{comment}}", table.getComment())
-                .replaceAll("\\{\\{content}}", table.getQueryContent());
+                .replace("{{package}}", packageManager.getEntityPackage() + "." + table.getPackage())
+                .replace("{{filename}}", table.getFilename())
+                .replace("{{import}}", table.getImportString())
+                .replace("{{comment}}", table.getComment())
+                .replace("{{content}}", table.getQueryContent());
     }
 
 }

@@ -6,14 +6,14 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public final class RandomUtils {
 
-    private static final String UUID_REGEX = "-";
+    private static final String UUID_REPLACE = "-";
 
     private RandomUtils() {
 
     }
 
     public static String uuid() {
-        return UUID.randomUUID().toString().replaceAll(UUID_REGEX, EmptyUtils.emptyString());
+        return UUID.randomUUID().toString().replace(UUID_REPLACE, EmptyUtils.emptyString());
     }
 
     public static int nextInt() {

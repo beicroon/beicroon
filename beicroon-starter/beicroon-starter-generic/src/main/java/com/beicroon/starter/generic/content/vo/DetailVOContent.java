@@ -22,9 +22,9 @@ public class DetailVOContent {
 
     public static String getContent(PackageManager packageManager, Table table) {
         return CONTENT
-                .replaceAll("\\{\\{package}}", packageManager.getEntityPackage() + "." + table.getPackage())
-                .replaceAll("\\{\\{filename}}", table.getFilename())
-                .replaceAll("\\{\\{comment}}", table.getComment());
+                .replace("{{package}}", packageManager.getEntityPackage() + "." + table.getPackage())
+                .replace("{{filename}}", table.getFilename())
+                .replace("{{comment}}", table.getComment());
     }
 
 }

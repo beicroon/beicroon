@@ -10,6 +10,7 @@ import com.beicroon.starter.generic.content.dto.UpdateDTOContent;
 import com.beicroon.starter.generic.content.helper.HelperContent;
 import com.beicroon.starter.generic.content.manager.ManagerContent;
 import com.beicroon.starter.generic.content.mapper.MapperContent;
+import com.beicroon.starter.generic.content.mapper.MapperXmlContent;
 import com.beicroon.starter.generic.content.model.ModelContent;
 import com.beicroon.starter.generic.content.repository.RepositoryContent;
 import com.beicroon.starter.generic.content.service.ServiceContent;
@@ -90,11 +91,11 @@ public class ApiMysqlMaker {
         this.password = password;
     }
 
-    public void generic(File rootPath, String serviceName, String basePackage, String modulePrefix, String... tableNames) {
-        this.run(rootPath, serviceName, basePackage, modulePrefix, tableNames);
+    public void generic(File rootPath, String moduleName, String basePackage, String modulePrefix, String... tableNames) {
+        this.run(rootPath, moduleName, basePackage, modulePrefix, tableNames);
     }
 
-    private void run(File rootPath, String serviceName, String basePackage, String modulePrefix, String... tableNames) {
+    private void run(File rootPath, String moduleName, String basePackage, String modulePrefix, String... tableNames) {
         System.out.println("接口初始化开始");
 
         if (!rootPath.exists()) {
@@ -103,7 +104,7 @@ public class ApiMysqlMaker {
 
         PackageManager packageManager = new PackageManager(basePackage);
 
-        FileManager fileManager = new FileManager(rootPath, serviceName, packageManager);
+        FileManager fileManager = new FileManager(rootPath, moduleName, packageManager);
 
         for (Table table : this.getTables(modulePrefix, tableNames)) {
             Set<String> imports = new HashSet<>();
@@ -129,6 +130,7 @@ public class ApiMysqlMaker {
             FileUtils.writeFileIfNotExists(fileManager.getMapperFile(table), MapperContent.getContent(packageManager, table));
             FileUtils.writeFileIfNotExists(fileManager.getModelFile(table), ModelContent.getContent(packageManager, table));
             FileUtils.writeFileIfNotExists(fileManager.getRepositoryFile(table), RepositoryContent.getContent(packageManager, table));
+            FileUtils.writeFileIfNotExists(fileManager.getMapperXmlFile(table), MapperXmlContent.getContent(packageManager, table));
             FileUtils.writeFileIfNotExists(fileManager.getCreateDTOFile(table), CreateDTOContent.getContent(packageManager, table));
             FileUtils.writeFileIfNotExists(fileManager.getUpdateDTOFile(table), UpdateDTOContent.getContent(packageManager, table));
             FileUtils.writeFileIfNotExists(fileManager.getQueryDTOFile(table), QueryDTOContent.getContent(packageManager, table));

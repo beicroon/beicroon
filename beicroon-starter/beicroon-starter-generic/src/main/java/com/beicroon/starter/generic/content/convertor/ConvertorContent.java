@@ -26,9 +26,9 @@ public class ConvertorContent {
 
     public static String getContent(PackageManager packageManager, Table table) {
         return CONTENT
-                .replaceAll("\\{\\{package}}", packageManager.getDaoPackage())
-                .replaceAll("\\{\\{modulePackage}}", packageManager.getEntityPackage() + "." + table.getPackage())
-                .replaceAll("\\{\\{filename}}", table.getFilename());
+                .replace("{{package}}", packageManager.getDaoPackage())
+                .replace("{{modulePackage}}", packageManager.getEntityPackage() + "." + table.getPackage())
+                .replace("{{filename}}", table.getFilename());
     }
 
 }

@@ -2,35 +2,40 @@ package com.beicroon.starter.generic.manager;
 
 import com.beicroon.starter.generic.entity.Table;
 import com.beicroon.starter.generic.utils.FileUtils;
-import lombok.Getter;
 
 import java.io.File;
 
 public class FileManager {
 
-    public static final String SUFFIX_CONVERTOR = "Convertor.java";
+    public static final String SUFFIX_GIT_IGNORE = ".gitignore";
 
-    public static final String SUFFIX_HELPER = "Helper.java";
+    public static final String SUFFIX_POM = "pom.xml";
 
-    public static final String SUFFIX_MANAGER = "Manager.java";
+    public static final String SUFFIX_CONVERTOR = "%sConvertor.java";
 
-    public static final String SUFFIX_MAPPER = "Mapper.java";
+    public static final String SUFFIX_HELPER = "%sHelper.java";
 
-    public static final String SUFFIX_MODEL = "Model.java";
+    public static final String SUFFIX_MANAGER = "%sManager.java";
 
-    public static final String SUFFIX_REPOSITORY = "Repository.java";
+    public static final String SUFFIX_MAPPER = "%sMapper.java";
 
-    public static final String SUFFIX_CREATE_DTO = "CreateDTO.java";
+    public static final String SUFFIX_MODEL = "%sModel.java";
 
-    public static final String SUFFIX_UPDATE_DTO = "UpdateDTO.java";
+    public static final String SUFFIX_REPOSITORY = "%sRepository.java";
 
-    public static final String SUFFIX_QUERY_DTO = "QueryDTO.java";
+    public static final String SUFFIX_MAPPER_XML = "%sMapper.xml";
 
-    public static final String SUFFIX_BASE_VO = "BaseVO.java";
+    public static final String SUFFIX_CREATE_DTO = "%sCreateDTO.java";
 
-    public static final String SUFFIX_DETAIL_VO = "DetailVO.java";
+    public static final String SUFFIX_UPDATE_DTO = "%sUpdateDTO.java";
 
-    public static final String SUFFIX_PAGE_VO = "PageVO.java";
+    public static final String SUFFIX_QUERY_DTO = "%sQueryDTO.java";
+
+    public static final String SUFFIX_BASE_VO = "%sBaseVO.java";
+
+    public static final String SUFFIX_DETAIL_VO = "%sDetailVO.java";
+
+    public static final String SUFFIX_PAGE_VO = "%sPageVO.java";
 
     public static final String SUFFIX_CONTROLLER_ADMIN = "Admin%sController.java";
 
@@ -38,10 +43,9 @@ public class FileManager {
 
     public static final String FILENAME_SERVICE_IMPL = "%sService.java";
 
-    @Getter
     private final File rootPath;
 
-    private final String serviceName;
+    private final String moduleName;
 
     private final PackageManager packageManager;
 
@@ -65,6 +69,8 @@ public class FileManager {
 
     private File repositoryPath;
 
+    private File mapperXmlPath;
+
     private File controllerAdminPath;
 
     private File controllerHomePath;
@@ -73,17 +79,21 @@ public class FileManager {
 
     private File serviceImplPath;
 
-    public FileManager(File rootPath, String serviceName, PackageManager packageManager) {
+    public FileManager(File rootPath, String moduleName, PackageManager packageManager) {
         this.rootPath = rootPath;
 
-        this.serviceName = serviceName;
+        this.moduleName = moduleName;
 
         this.packageManager = packageManager;
     }
 
+    public File getRootPath() {
+        return FileUtils.mkdir(this.rootPath);
+    }
+
     public File getDaoPath() {
         if (this.daoPath == null) {
-            this.daoPath = FileUtils.getDaoPath(this.getRootPath(), this.serviceName);
+            this.daoPath = FileUtils.getDaoPath(this.getRootPath(), this.moduleName);
         }
 
         return this.daoPath;
@@ -91,7 +101,7 @@ public class FileManager {
 
     public File getEntityPath() {
         if (this.entityPath == null) {
-            this.entityPath = FileUtils.getEntityPath(this.getRootPath(), this.serviceName);
+            this.entityPath = FileUtils.getEntityPath(this.getRootPath(), this.moduleName);
         }
 
         return this.entityPath;
@@ -99,7 +109,7 @@ public class FileManager {
 
     public File getGenericPath() {
         if (this.genericPath == null) {
-            this.genericPath = FileUtils.getGenericPath(this.getRootPath(), this.serviceName);
+            this.genericPath = FileUtils.getGenericPath(this.getRootPath(), this.moduleName);
         }
 
         return this.genericPath;
@@ -107,7 +117,7 @@ public class FileManager {
 
     public File getWebPath() {
         if (this.webPath == null) {
-            this.webPath = FileUtils.getWebPath(this.getRootPath(), this.serviceName);
+            this.webPath = FileUtils.getWebPath(this.getRootPath(), this.moduleName);
         }
 
         return this.webPath;
@@ -169,6 +179,14 @@ public class FileManager {
         return this.repositoryPath;
     }
 
+    public File getMapperXmlPath() {
+        if (this.mapperXmlPath == null) {
+            this.mapperXmlPath = FileUtils.getMapperXmlPath(this.getDaoPath());
+        }
+
+        return this.mapperXmlPath;
+    }
+
     public File getControllerAdminPath() {
         if (this.controllerAdminPath == null) {
             this.controllerAdminPath = FileUtils.getControllerAdminPath(this.getWebPath(), this.packageManager.getBasePackages());
@@ -201,64 +219,76 @@ public class FileManager {
         return this.serviceImplPath;
     }
 
+    public File getModuleGitIgnoreFile() {
+        return new File(this.getRootPath(), SUFFIX_GIT_IGNORE);
+    }
+
+    public File getModulePomFile() {
+        return new File(this.getRootPath(), SUFFIX_POM);
+    }
+
     public File getConverTorFile(Table table) {
-        return new File(this.getConvertorPath(), table.getFilename() + SUFFIX_CONVERTOR);
+        return new File(this.getConvertorPath(), String.format(SUFFIX_CONVERTOR, table.getFilename()));
     }
 
     public File getHelperFile(Table table) {
-        return new File(this.getHelperPath(), table.getFilename() + SUFFIX_HELPER);
+        return new File(this.getHelperPath(), String.format(SUFFIX_HELPER, table.getFilename()));
     }
 
     public File getManagerFile(Table table) {
-        return new File(this.getManagerPath(), table.getFilename() + SUFFIX_MANAGER);
+        return new File(this.getManagerPath(), String.format(SUFFIX_MANAGER, table.getFilename()));
     }
 
     public File getMapperFile(Table table) {
-        return new File(this.getMapperPath(), table.getFilename() + SUFFIX_MAPPER);
+        return new File(this.getMapperPath(), String.format(SUFFIX_MAPPER, table.getFilename()));
     }
 
     public File getModelFile(Table table) {
-        return new File(this.getModelPath(), table.getFilename() + SUFFIX_MODEL);
+        return new File(this.getModelPath(), String.format(SUFFIX_MODEL, table.getFilename()));
     }
 
     public File getRepositoryFile(Table table) {
-        return new File(this.getRepositoryPath(), table.getFilename() + SUFFIX_REPOSITORY);
+        return new File(this.getRepositoryPath(), String.format(SUFFIX_REPOSITORY, table.getFilename()));
+    }
+
+    public File getMapperXmlFile(Table table) {
+        return new File(this.getMapperXmlPath(), String.format(SUFFIX_MAPPER_XML, table.getFilename()));
     }
 
     public File getCreateDTOFile(Table table) {
-        return new File(this.getDTOPath(table),  table.getFilename() + SUFFIX_CREATE_DTO);
+        return new File(this.getDTOPath(table), String.format(SUFFIX_CREATE_DTO, table.getFilename()));
     }
 
     public File getUpdateDTOFile(Table table) {
-        return new File(this.getDTOPath(table),  table.getFilename() + SUFFIX_UPDATE_DTO);
+        return new File(this.getDTOPath(table), String.format(SUFFIX_UPDATE_DTO, table.getFilename()));
     }
 
     public File getQueryDTOFile(Table table) {
-        return new File(this.getDTOPath(table),  table.getFilename() + SUFFIX_QUERY_DTO);
+        return new File(this.getDTOPath(table), String.format(SUFFIX_QUERY_DTO, table.getFilename()));
     }
 
     public File getBaseVOFile(Table table) {
-        return new File(this.getVOPath(table),  table.getFilename() + SUFFIX_BASE_VO);
+        return new File(this.getVOPath(table), String.format(SUFFIX_BASE_VO, table.getFilename()));
     }
 
     public File getDetailVOFile(Table table) {
-        return new File(this.getVOPath(table),  table.getFilename() + SUFFIX_DETAIL_VO);
+        return new File(this.getVOPath(table), String.format(SUFFIX_DETAIL_VO, table.getFilename()));
     }
 
     public File getPageVOFile(Table table) {
-        return new File(this.getVOPath(table),  table.getFilename() + SUFFIX_PAGE_VO);
+        return new File(this.getVOPath(table), String.format(SUFFIX_PAGE_VO, table.getFilename()));
     }
 
     public File getControllerAdminFile(Table table) {
-        return new File(this.getControllerAdminPath(),  String.format(SUFFIX_CONTROLLER_ADMIN, table.getFilename()));
+        return new File(this.getControllerAdminPath(), String.format(SUFFIX_CONTROLLER_ADMIN, table.getFilename()));
     }
 
     public File getServiceFile(Table table) {
-        return new File(this.getServicePath(),  String.format(FILENAME_SERVICE, table.getFilename()));
+        return new File(this.getServicePath(), String.format(FILENAME_SERVICE, table.getFilename()));
     }
 
     public File getServiceImplFile(Table table) {
-        return new File(this.getServiceImplPath(),  String.format(FILENAME_SERVICE_IMPL, table.getFilename()));
+        return new File(this.getServiceImplPath(), String.format(FILENAME_SERVICE_IMPL, table.getFilename()));
     }
 
 }

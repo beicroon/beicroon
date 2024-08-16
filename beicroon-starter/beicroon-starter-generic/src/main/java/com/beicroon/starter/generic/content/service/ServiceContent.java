@@ -40,9 +40,9 @@ public class ServiceContent {
 
     public static String getContent(PackageManager packageManager, Table table) {
         return CONTENT
-                .replaceAll("\\{\\{package}}", packageManager.getWebPackage())
-                .replaceAll("\\{\\{modulePackage}}", packageManager.getEntityPackage() + "." + table.getPackage())
-                .replaceAll("\\{\\{filename}}", table.getFilename());
+                .replace("{{package}}", packageManager.getWebPackage())
+                .replace("{{modulePackage}}", packageManager.getEntityPackage() + "." + table.getPackage())
+                .replace("{{filename}}", table.getFilename());
     }
 
 }

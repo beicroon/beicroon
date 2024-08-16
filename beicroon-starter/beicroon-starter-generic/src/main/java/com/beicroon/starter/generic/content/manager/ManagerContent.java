@@ -29,9 +29,9 @@ public class ManagerContent {
 
     public static String getContent(PackageManager packageManager, Table table) {
         return CONTENT
-                .replaceAll("\\{\\{package}}", packageManager.getDaoPackage())
-                .replaceAll("\\{\\{filename}}", table.getFilename())
-                .replaceAll("\\{\\{variableName}}", table.getVariableName());
+                .replace("{{package}}", packageManager.getDaoPackage())
+                .replace("{{filename}}", table.getFilename())
+                .replace("{{variableName}}", table.getVariableName());
     }
 
 }

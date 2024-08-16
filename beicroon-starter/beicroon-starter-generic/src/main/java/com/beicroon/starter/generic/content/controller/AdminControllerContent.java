@@ -82,12 +82,12 @@ public class AdminControllerContent {
 
     public static String getContent(PackageManager packageManager, Table table) {
         return CONTENT
-                .replaceAll("\\{\\{package}}", packageManager.getWebPackage())
-                .replaceAll("\\{\\{modulePackage}}", packageManager.getEntityPackage() + "." + table.getPackage())
-                .replaceAll("\\{\\{comment}}", table.getComment())
-                .replaceAll("\\{\\{variableName}}", table.getVariableName())
-                .replaceAll("\\{\\{filename}}", table.getFilename())
-                .replaceAll("\\{\\{urlName}}", table.getUrlName());
+                .replace("{{package}}", packageManager.getWebPackage())
+                .replace("{{modulePackage}}", packageManager.getEntityPackage() + "." + table.getPackage())
+                .replace("{{comment}}", table.getComment())
+                .replace("{{variableName}}", table.getVariableName())
+                .replace("{{filename}}", table.getFilename())
+                .replace("{{urlName}}", table.getUrlName());
     }
 
 }
