@@ -10,7 +10,7 @@ import lombok.EqualsAndHashCode;
 
 @Data
 @ApiModel(name = "资源菜单")
-@TableName("`resource_menu`")
+@TableName("`admin_resource_menu`")
 @EqualsAndHashCode(callSuper = true)
 public class ResourceMenuModel extends GenericModel {
     

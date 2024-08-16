@@ -10,7 +10,7 @@ import lombok.EqualsAndHashCode;
 
 @Data
 @ApiModel(name = "后台账号")
-@TableName("`account_admin`")
+@TableName("`admin_account_admin`")
 @EqualsAndHashCode(callSuper = true)
 public class AccountAdminModel extends GenericModel {
     

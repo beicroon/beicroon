@@ -9,7 +9,7 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface ApiOperation {
 
-    String value() default "";
+    String name() default "";
 
     String description() default "";
 

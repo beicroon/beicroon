@@ -12,11 +12,11 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 public class ResourceMenuQueryDTO extends QueryDTO {
     
-    @FieldSearch(value = "`code`")
+    @FieldSearch(name = "`code`")
     @ApiModelProperty(name = "编码")
     private String code;
 
-    @FieldSearch(value = "`name`")
+    @FieldSearch(name = "`name`")
     @ApiModelProperty(name = "名称")
     private String name;
 

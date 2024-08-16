@@ -28,63 +28,51 @@ public class AdminControllerContent {
 
             @Validated
             @RestController
-            @ApiTag("{{comment}}相关")
-            @RequestMapping("/api/admin/admin")
+            @ApiTag(name = "{{comment}}相关")
+            @RequestMapping(path = "/api/admin/admin")
             public class Admin{{filename}}Controller {
 
                 @Resource
                 private I{{filename}}Service {{variableName}}Service;
 
-                @ApiOperation("基础信息")
-                @GetMapping("/{{urlName}}-show")
+                @ApiOperation(name = "基础信息")
+                @GetMapping(path = "/{{urlName}}-show")
                 public Result<{{filename}}BaseVO> show(@RequestParam("id") Long id) {
                     return WebResult.success(this.{{variableName}}Service.show(id));
                 }
 
-                @ApiOperation("详细信息")
-                @GetMapping("/{{urlName}}-detail")
+                @ApiOperation(name = "详细信息")
+                @GetMapping(path = "/{{urlName}}-detail")
                 public Result<{{filename}}DetailVO> detail(@RequestParam("id") Long id) {
                     return WebResult.success(this.{{variableName}}Service.detail(id));
                 }
 
-                @ApiOperation("全量列表")
-                @PostMapping("/{{urlName}}-list")
-                public Result<List<{{filename}}BaseVO>> list(@RequestBody {{filename}}QueryDTO dto) {
-                    return WebResult.success(this.{{variableName}}Service.list(dto));
-                }
-
-                @ApiOperation("分页列表")
-                @PostMapping("/{{urlName}}-page")
+                @ApiOperation(name = "分页列表")
+                @PostMapping(path = "/{{urlName}}-page")
                 public Result<List<{{filename}}PageVO>> page(@RequestBody {{filename}}QueryDTO dto) {
                     return WebResult.success(this.{{variableName}}Service.page(dto));
                 }
 
-                @ApiOperation("单个新增")
-                @PostMapping("/{{urlName}}-create")
+                @ApiOperation(name = "全量列表")
+                @PostMapping(path = "/{{urlName}}-list")
+                public Result<List<{{filename}}BaseVO>> list(@RequestBody {{filename}}QueryDTO dto) {
+                    return WebResult.success(this.{{variableName}}Service.list(dto));
+                }
+
+                @ApiOperation(name = "单个新增")
+                @PostMapping(path = "/{{urlName}}-create")
                 public Result<Boolean> create(@RequestBody {{filename}}CreateDTO dto) {
                     return WebResult.success(this.{{variableName}}Service.create(dto));
                 }
 
-                @ApiOperation("单个修改")
-                @PutMapping("/{{urlName}}-update")
+                @ApiOperation(name = "单个修改")
+                @PutMapping(path = "/{{urlName}}-update")
                 public Result<Boolean> update(@RequestBody {{filename}}UpdateDTO dto) {
                     return WebResult.success(this.{{variableName}}Service.update(dto));
                 }
 
-//                @ApiOperation("批量启用")
-//                @PutMapping("/{{urlName}}-enable")
-//                public Result<Boolean> enable(@RequestBody IdsDTO dto) {
-//                    return WebResult.success(this.{{variableName}}Service.enable(dto));
-//                }
-
-//                @ApiOperation("批量禁用")
-//                @PutMapping("/{{urlName}}-disable")
-//                public Result<Boolean> disable(@RequestBody IdsDTO dto) {
-//                    return WebResult.success(this.{{variableName}}Service.disable(dto));
-//                }
-
-                @ApiOperation("批量删除")
-                @DeleteMapping("/{{urlName}}-remove")
+                @ApiOperation(name = "批量删除")
+                @DeleteMapping(path = "/{{urlName}}-remove")
                 public Result<Boolean> remove(@RequestBody IdsDTO dto) {
                     return WebResult.success(this.{{variableName}}Service.remove(dto));
                 }

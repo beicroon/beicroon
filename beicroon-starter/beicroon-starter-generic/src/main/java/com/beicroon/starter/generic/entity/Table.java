@@ -10,7 +10,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 @Getter
-public class Table  implements Serializable {
+public class Table implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 1L;
@@ -65,6 +65,10 @@ public class Table  implements Serializable {
         Collections.sort(importList);
 
         return "\n" + String.join("\n", importList) + "\n";
+    }
+
+    public String getTableName() {
+        return this.prefix + this.name;
     }
 
     public String getPath() {

@@ -166,7 +166,7 @@ public class ApiMysqlMaker {
         }
 
         return String.format(
-                "\n    @FieldSearch(value = \"`%s`\")\n    @ApiModelProperty(name = \"%s\")\n    private %s %s;\n",
+                "\n    @FieldSearch(name = \"`%s`\")\n    @ApiModelProperty(name = \"%s\")\n    private %s %s;\n",
                 field.name(),
                 field.comment(),
                 type,

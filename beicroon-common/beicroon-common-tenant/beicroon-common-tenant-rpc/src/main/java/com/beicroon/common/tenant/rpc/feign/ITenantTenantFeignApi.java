@@ -10,8 +10,8 @@ import java.util.Set;
 @FeignClient(name = "beicroon-service-tenant", path = "/api/feign/tenant")
 public interface ITenantTenantFeignApi {
 
-    @ApiOperation("获取所有租户主键")
+    @ApiOperation(name = "获取所有租户主键")
     @GetMapping("/tenant-id-list")
-    Result<Set<Long>> listId();
+    Result<Set<Long>> idList();
 
 }

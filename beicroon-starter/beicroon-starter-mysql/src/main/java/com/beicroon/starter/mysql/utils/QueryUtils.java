@@ -57,7 +57,7 @@ public final class QueryUtils {
             KeywordsSearch keywordsSearch = dto.getClass().getAnnotation(KeywordsSearch.class);
 
             if (keywordsSearch != null) {
-                List<String> values = Arrays.asList(keywordsSearch.value());
+                List<String> values = Arrays.asList(keywordsSearch.name());
 
                 wrapper.and(sw -> ListUtils.foreach(values, s -> sw.or().like(s, dto.getKeywords())));
             }
@@ -110,35 +110,35 @@ public final class QueryUtils {
                 throw new RuntimeException("in查询值必须是一个集合");
             }
 
-            wrapper.in(fieldSearch.value(), (Collection<?>) value);
+            wrapper.in(fieldSearch.name(), (Collection<?>) value);
         }
         // like 查询
         else if (fieldSearch.like()) {
-            wrapper.like(fieldSearch.value(), value);
+            wrapper.like(fieldSearch.name(), value);
         }
         // likeLeft 查询
         else if (fieldSearch.likeLeft()) {
-            wrapper.likeLeft(fieldSearch.value(), value);
+            wrapper.likeLeft(fieldSearch.name(), value);
         }
         // likeRight 查询
         else if (fieldSearch.likeRight()) {
-            wrapper.likeRight(fieldSearch.value(), value);
+            wrapper.likeRight(fieldSearch.name(), value);
         }
         // gt 查询
         else if (fieldSearch.gt()) {
-            wrapper.gt(fieldSearch.value(), value);
+            wrapper.gt(fieldSearch.name(), value);
         }
         // ge 查询
         else if (fieldSearch.ge()) {
-            wrapper.ge(fieldSearch.value(), value);
+            wrapper.ge(fieldSearch.name(), value);
         }
         // lt 查询
         else if (fieldSearch.lt()) {
-            wrapper.lt(fieldSearch.value(), value);
+            wrapper.lt(fieldSearch.name(), value);
         }
         // le 查询
         else if (fieldSearch.le()) {
-            wrapper.le(fieldSearch.value(), value);
+            wrapper.le(fieldSearch.name(), value);
         }
         // between 查询
         else if (fieldSearch.between()) {
@@ -148,11 +148,11 @@ public final class QueryUtils {
                 throw new RuntimeException("between查询值使用'~'分隔开");
             }
 
-            wrapper.between(fieldSearch.value(), values.get(0), values.get(1));
+            wrapper.between(fieldSearch.name(), values.get(0), values.get(1));
         }
         // = 查询
         else {
-            wrapper.eq(fieldSearch.value(), value);
+            wrapper.eq(fieldSearch.name(), value);
         }
     }
 

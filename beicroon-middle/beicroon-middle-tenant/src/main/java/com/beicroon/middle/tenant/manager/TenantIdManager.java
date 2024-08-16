@@ -47,7 +47,7 @@ public class TenantIdManager {
             this.writeLock.lock();
 
             try {
-                Set<Long> ids = this.tenantApi.listId().getData();
+                Set<Long> ids = this.tenantApi.idList().getData();
 
                 log.info("租户主键更新:ids={}", JsonUtils.toJson(ids));
 

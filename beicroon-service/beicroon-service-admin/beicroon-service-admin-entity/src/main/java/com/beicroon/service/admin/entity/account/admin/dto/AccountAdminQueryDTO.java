@@ -12,27 +12,27 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 public class AccountAdminQueryDTO extends QueryDTO {
     
-    @FieldSearch(value = "`code`")
+    @FieldSearch(name = "`code`")
     @ApiModelProperty(name = "编码")
     private String code;
 
-    @FieldSearch(value = "`username`")
+    @FieldSearch(name = "`username`")
     @ApiModelProperty(name = "账号")
     private String username;
 
-    @FieldSearch(value = "`password`")
+    @FieldSearch(name = "`password`")
     @ApiModelProperty(name = "密码")
     private String password;
 
-    @FieldSearch(value = "`nickname`")
+    @FieldSearch(name = "`nickname`")
     @ApiModelProperty(name = "昵称")
     private String nickname;
 
-    @FieldSearch(value = "`phone`")
+    @FieldSearch(name = "`phone`")
     @ApiModelProperty(name = "电话")
     private String phone;
 
-    @FieldSearch(value = "`email`")
+    @FieldSearch(name = "`email`")
     @ApiModelProperty(name = "邮箱")
     private String email;
 

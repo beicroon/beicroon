@@ -30,27 +30,27 @@ public class QueryDTO implements Serializable {
     @ApiModelProperty(name = "子选项卡编码")
     private String subTabCode;
 
-    @FieldSearch(value = "`id`")
+    @FieldSearch(name = "`id`")
     @ApiModelProperty(name = "主键")
     private Long id;
 
-    @FieldSearch(value = "`id`", in = true)
+    @FieldSearch(name = "`id`", in = true)
     @ApiModelProperty(name = "主键列表")
     private List<Long> ids;
 
-    @FieldSearch(value = "`created_at`", between = true)
+    @FieldSearch(name = "`created_at`", between = true)
     @ApiModelProperty(name = "创建时间")
     private String createdAt;
 
-    @FieldSearch(value = "`creator_id`")
+    @FieldSearch(name = "`creator_id`")
     @ApiModelProperty(name = "创建人主键")
     private Long creatorId;
 
-    @FieldSearch(value = "`creator_code`")
+    @FieldSearch(name = "`creator_code`")
     @ApiModelProperty(name = "创建人编码")
     private String creatorCode;
 
-    @FieldSearch(value = "`creator_name`", like = true)
+    @FieldSearch(name = "`creator_name`", like = true)
     @ApiModelProperty(name = "创建人名称")
     private String creatorName;
 

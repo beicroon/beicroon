@@ -9,7 +9,7 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface FieldSearch {
 
-    String value();
+    String name();
 
     boolean in() default false;
 

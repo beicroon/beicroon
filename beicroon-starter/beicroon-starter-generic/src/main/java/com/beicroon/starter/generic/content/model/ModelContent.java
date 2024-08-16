@@ -28,7 +28,7 @@ public class ModelContent {
     public static String getContent(PackageManager packageManager, Table table) {
         return CONTENT
                 .replaceAll("\\{\\{package}}", packageManager.getDaoPackage())
-                .replaceAll("\\{\\{tableName}}", table.getName())
+                .replaceAll("\\{\\{tableName}}", table.getTableName())
                 .replaceAll("\\{\\{filename}}", table.getFilename())
                 .replaceAll("\\{\\{import}}", table.getImportString())
                 .replaceAll("\\{\\{comment}}", table.getComment())
