@@ -3,12 +3,12 @@ import {PageInfo} from "@/https";
 import toast from "@/utils/toast";
 import {onMounted, ref} from "vue";
 import dialog from "@/utils/dialog";
+import Create from "./AccountAdminCreate.vue";
+import Detail from "./AccountAdminDetail.vue";
+import Update from "./AccountAdminUpdate.vue";
 import dialogWindow from "@/utils/dialogWindow";
 import ElButton from "@/components/elements/ElButton.vue";
-import Create from "@/views/index/account/admin/AccountAdminCreate.vue";
-import Detail from "@/views/index/account/admin/AccountAdminDetail.vue";
-import Update from "@/views/index/account/admin/AccountAdminUpdate.vue";
-import {AdminPageVO as VO, AdminQueryDTO as DTO, page, remove} from "@/https/account/admin.http.ts";
+import {AdminPageVO as VO, AdminQueryDTO as DTO, page, remove} from "./account.admin.http.ts";
 
 const query = ref<DTO>({} as DTO);
 

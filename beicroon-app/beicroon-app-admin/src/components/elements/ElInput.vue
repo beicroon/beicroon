@@ -26,6 +26,11 @@ const props = defineProps({
     default: false,
     required: false,
   },
+  disabled: {
+    type: Boolean,
+    default: false,
+    required: false,
+  },
 });
 
 const elInput = ref();
@@ -49,7 +54,7 @@ const value = computed({
 <template>
   <div class="el-input" :class="{required: required}" ref="elInput">
     <label>{{ label }}</label>
-    <input class="input-value" :type="type" :placeholder="placeholder" v-model="value"/>
+    <input :disabled="disabled" class="input-value" :type="type" :placeholder="placeholder" v-model="value"/>
   </div>
 </template>
 
@@ -169,6 +174,10 @@ const value = computed({
 
     &:focus {
       border-color: @light-blue;
+    }
+
+    &[disabled] {
+      cursor: text;
     }
   }
 }

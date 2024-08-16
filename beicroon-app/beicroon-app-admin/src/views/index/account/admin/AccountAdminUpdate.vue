@@ -4,7 +4,7 @@ import {onBeforeMount, ref} from "vue";
 import {validateForm} from "@/utils/function.ts";
 import ElInput from "@/components/elements/ElInput.vue";
 import ElButton from "@/components/elements/ElButton.vue";
-import {AdminUpdateDTO as DTO, detail as show, update as submit} from "@/https/account/admin.http.ts";
+import {AdminUpdateDTO as DTO, detail as show, update as submit} from "./account.admin.http.ts";
 
 const props = defineProps({
   id: {
@@ -15,16 +15,16 @@ const props = defineProps({
 
 const form = ref();
 
-const params = ref<DTO>({
+const data = ref<DTO>({
   id: props.id,
 });
 
 onBeforeMount(async () => {
   const res = await show(props.id);
 
-  params.value.nickname = res.data.nickname;
-  params.value.phone = res.data.phone;
-  params.value.email = res.data.email;
+  data.value.nickname = res.data.nickname;
+  data.value.phone = res.data.phone;
+  data.value.email = res.data.email;
 });
 
 const loading = ref(false);
@@ -46,7 +46,7 @@ async function confirm() {
     return;
   }
 
-  await submit(params.value).finally(() => loading.value = false);;
+  await submit(data.value).finally(() => loading.value = false);;
 
   await toast("修改成功");
 
@@ -59,9 +59,9 @@ async function confirm() {
 <template>
   <form class="create" ref="form">
     <div class="view">
-      <el-input required class="form-input" label="昵称" placeholder="请输入昵称" v-model="params.nickname"></el-input>
-      <el-input class="form-input" label="电话" placeholder="请输入电话" v-model="params.phone"></el-input>
-      <el-input class="form-input" label="邮箱" placeholder="请输入邮箱" v-model="params.email"></el-input>
+      <el-input required class="form-input" label="昵称" placeholder="请输入昵称" v-model="data.nickname"></el-input>
+      <el-input class="form-input" label="电话" placeholder="请输入电话" v-model="data.phone"></el-input>
+      <el-input class="form-input" label="邮箱" placeholder="请输入邮箱" v-model="data.email"></el-input>
     </div>
     <div class="button">
       <el-button class="cancel" @click="cancel" :loading="loading">取消</el-button>

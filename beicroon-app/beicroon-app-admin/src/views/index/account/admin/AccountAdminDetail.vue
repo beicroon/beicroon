@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import {onBeforeMount, ref} from "vue";
+import ElInput from "@/components/elements/ElInput.vue";
 import ElButton from "@/components/elements/ElButton.vue";
-import {AdminDetailVO, detail} from "@/https/account/admin.http.ts";
+import {AdminDetailVO, detail} from "./account.admin.http.ts";
 
 const props = defineProps({
   id: {
@@ -10,12 +11,16 @@ const props = defineProps({
   },
 });
 
-const data = ref<AdminDetailVO | null>(null);
+const data = ref<AdminDetailVO>({
+  id: props.id,
+});
 
 onBeforeMount(async () => {
   const res = await detail(props.id);
 
-  data.value = res.data;
+  if (res.data) {
+    data.value = res.data;
+  }
 });
 
 const emits = defineEmits(["hide"]);
@@ -26,11 +31,15 @@ async function cancel() {
 </script>
 
 <template>
-  <form class="detail">
-    <div class="view"></div>
+  <form class="detail disabled">
+    <div class="view">
+      <el-input disabled class="form-input" label="账号" v-model="data.username"></el-input>
+      <el-input disabled class="form-input" label="昵称" v-model="data.nickname"></el-input>
+      <el-input disabled class="form-input" label="电话" v-model="data.phone"></el-input>
+      <el-input disabled class="form-input" label="邮箱" v-model="data.email"></el-input>
+    </div>
     <div class="button">
-      <el-button class="cancel" @click="cancel">取消</el-button>
-      <el-button class="confirm">保存</el-button>
+      <el-button class="cancel" @click="cancel">关闭</el-button>
     </div>
   </form>
 </template>

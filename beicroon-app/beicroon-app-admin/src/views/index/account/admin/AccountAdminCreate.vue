@@ -4,11 +4,11 @@ import toast from "@/utils/toast";
 import {validateForm} from "@/utils/function.ts";
 import ElInput from "@/components/elements/ElInput.vue";
 import ElButton from "@/components/elements/ElButton.vue";
-import {AdminCreateDTO as DTO, create as submit} from "@/https/account/admin.http.ts";
+import {AdminCreateDTO as DTO, create as submit} from "./account.admin.http.ts";
 
 const form = ref();
 
-const params = ref<DTO>({});
+const data = ref<DTO>({});
 
 const loading = ref(false);
 
@@ -29,7 +29,7 @@ async function confirm() {
     return;
   }
 
-  await submit(params.value).finally(() => loading.value = false);;
+  await submit(data.value).finally(() => loading.value = false);;
 
   await toast("添加成功");
 
@@ -42,10 +42,10 @@ async function confirm() {
 <template>
   <form class="create" ref="form">
     <div class="view">
-      <el-input required class="form-input" label="账号" placeholder="请输入账号" v-model="params.username"></el-input>
-      <el-input required class="form-input" label="昵称" placeholder="请输入昵称" v-model="params.nickname"></el-input>
-      <el-input class="form-input" label="电话" placeholder="请输入电话" v-model="params.phone"></el-input>
-      <el-input class="form-input" label="邮箱" placeholder="请输入邮箱" v-model="params.email"></el-input>
+      <el-input required class="form-input" label="账号" placeholder="请输入账号" v-model="data.username"></el-input>
+      <el-input required class="form-input" label="昵称" placeholder="请输入昵称" v-model="data.nickname"></el-input>
+      <el-input class="form-input" label="电话" placeholder="请输入电话" v-model="data.phone"></el-input>
+      <el-input class="form-input" label="邮箱" placeholder="请输入邮箱" v-model="data.email"></el-input>
     </div>
     <div class="button">
       <el-button class="cancel" @click="cancel" :loading="loading">取消</el-button>
