@@ -11,8 +11,6 @@ import java.util.regex.Matcher;
 
 public class FileUtils {
 
-    public static final String PACKAGE_SERVICE = "service";
-
     public static final String PACKAGE_DAO = "dao";
 
     public static final String PACKAGE_DAO_CONVERTOR = "convertor";
@@ -27,7 +25,7 @@ public class FileUtils {
 
     public static final String PACKAGE_DAO_REPOSITORY = "repository";
 
-    public static final String PACKAGE_RESOURCES_MAPPER = "mapper";
+    public static final String PACKAGE_DAO_RESOURCES_MAPPER = "mapper";
 
     public static final String PACKAGE_ENTITY = "entity";
 
@@ -59,7 +57,7 @@ public class FileUtils {
 
     public static final String PACKAGE_WEB_TASK = "task";
 
-    public static final String CLASS_GENERATOR = "Generator";
+    public static final String PACKAGE_WEB_RESOURCES_MIGRATION = "migration";
 
     public static final String DIR_JAVA = FileUtils.joinPaths("src", "main", "java");
 
@@ -169,9 +167,33 @@ public class FileUtils {
 
     public static File getMapperXmlPath(File rootPath) {
         String src = DIR_RESOURCES + FileUtils.getSeparator()
-                     + PACKAGE_RESOURCES_MAPPER;
+                     + PACKAGE_DAO_RESOURCES_MAPPER;
 
         return FileUtils.mkdir(new File(rootPath, src));
+    }
+
+    public static File getGenericApplicationPath(File genericPath, List<String> basePackages) {
+        String src = DIR_JAVA + FileUtils.getSeparator()
+                     + FileUtils.joinPaths(basePackages) + FileUtils.getSeparator()
+                     + PACKAGE_GENERIC;
+
+        return FileUtils.mkdir(new File(genericPath, src));
+    }
+
+    public static File getWebApplicationPath(File webPath, List<String> basePackages) {
+        String src = DIR_JAVA + FileUtils.getSeparator()
+                     + FileUtils.joinPaths(basePackages) + FileUtils.getSeparator()
+                     + PACKAGE_WEB;
+
+        return FileUtils.mkdir(new File(webPath, src));
+    }
+
+    public static File getWebResourcesPath(File rootPath) {
+        return FileUtils.mkdir(new File(rootPath, DIR_RESOURCES));
+    }
+
+    public static File getWebMigrationPath(File resourcesPath) {
+        return FileUtils.mkdir(new File(resourcesPath, PACKAGE_WEB_RESOURCES_MIGRATION));
     }
 
     public static File getConsumerPath(File webPath, List<String> basePackages) {

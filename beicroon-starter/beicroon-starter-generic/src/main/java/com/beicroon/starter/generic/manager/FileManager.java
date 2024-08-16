@@ -37,6 +37,24 @@ public class FileManager {
 
     public static final String SUFFIX_PAGE_VO = "%sPageVO.java";
 
+    public static final String SUFFIX_GENERIC_APPLICATION = "%sGenerator.java";
+
+    public static final String SUFFIX_WEB_APPLICATION = "%sApplication.java";
+
+    public static final String SUFFIX_YML_APPLICATION = "application.yml";
+
+    public static final String SUFFIX_YML_APPLICATION_DEV = "application-dev.yml";
+
+    public static final String SUFFIX_YML_APPLICATION_FAT = "application-fat.yml";
+
+    public static final String SUFFIX_YML_APPLICATION_UAT = "application-uat.yml";
+
+    public static final String SUFFIX_YML_APPLICATION_PRO = "application-pro.yml";
+
+    public static final String SUFFIX_YML_APPLICATION_LOCAL = "application-local.yml";
+
+    public static final String SUFFIX_MIGRATION = "V%s_feature.sql";
+
     public static final String SUFFIX_CONTROLLER_ADMIN = "Admin%sController.java";
 
     public static final String FILENAME_SERVICE = "I%sService.java";
@@ -55,7 +73,15 @@ public class FileManager {
 
     private File genericPath;
 
+    private File genericApplicationPath;
+
     private File webPath;
+
+    private File webApplicationPath;
+
+    private File webResourcesPath;
+
+    private File webMigrationPath;
 
     private File convertorPath;
 
@@ -72,8 +98,6 @@ public class FileManager {
     private File mapperXmlPath;
 
     private File controllerAdminPath;
-
-    private File controllerHomePath;
 
     private File servicePath;
 
@@ -115,12 +139,44 @@ public class FileManager {
         return this.genericPath;
     }
 
+    public File getGenericApplicationPath() {
+        if (this.genericApplicationPath == null) {
+            this.genericApplicationPath = FileUtils.getGenericApplicationPath(this.getGenericPath(), this.packageManager.getBasePackages());
+        }
+
+        return this.genericApplicationPath;
+    }
+
     public File getWebPath() {
         if (this.webPath == null) {
             this.webPath = FileUtils.getWebPath(this.getRootPath(), this.moduleName);
         }
 
         return this.webPath;
+    }
+
+    public File getWebApplicationPath() {
+        if (this.webApplicationPath == null) {
+            this.webApplicationPath = FileUtils.getWebApplicationPath(this.getWebPath(), this.packageManager.getBasePackages());
+        }
+
+        return this.webApplicationPath;
+    }
+
+    public File getWebResourcesPath() {
+        if (this.webResourcesPath == null) {
+            this.webResourcesPath = FileUtils.getWebResourcesPath(this.getWebPath());
+        }
+
+        return this.webResourcesPath;
+    }
+
+    public File getWebMigrationPath() {
+        if (this.webMigrationPath == null) {
+            this.webMigrationPath = FileUtils.getWebMigrationPath(this.getWebResourcesPath());
+        }
+
+        return this.webMigrationPath;
     }
 
     public File getDTOPath(Table table) {
@@ -225,6 +281,74 @@ public class FileManager {
 
     public File getModulePomFile() {
         return new File(this.getRootPath(), SUFFIX_POM);
+    }
+
+    public File getDaoGitIgnoreFile() {
+        return new File(this.getDaoPath(), SUFFIX_GIT_IGNORE);
+    }
+
+    public File getDaoPomFile() {
+        return new File(this.getDaoPath(), SUFFIX_POM);
+    }
+
+    public File getEntityGitIgnoreFile() {
+        return new File(this.getEntityPath(), SUFFIX_GIT_IGNORE);
+    }
+
+    public File getEntityPomFile() {
+        return new File(this.getEntityPath(), SUFFIX_POM);
+    }
+
+    public File getGenericGitIgnoreFile() {
+        return new File(this.getGenericPath(), SUFFIX_GIT_IGNORE);
+    }
+
+    public File getGenericPomFile() {
+        return new File(this.getGenericPath(), SUFFIX_POM);
+    }
+
+    public File getGenericApplicationFile(String filename) {
+        return new File(this.getGenericApplicationPath(), String.format(SUFFIX_GENERIC_APPLICATION, filename));
+    }
+
+    public File getWebGitIgnoreFile() {
+        return new File(this.getWebPath(), SUFFIX_GIT_IGNORE);
+    }
+
+    public File getWebPomFile() {
+        return new File(this.getWebPath(), SUFFIX_POM);
+    }
+
+    public File getWebApplicationFile(String filename) {
+        return new File(this.getWebApplicationPath(), String.format(SUFFIX_WEB_APPLICATION, filename));
+    }
+
+    public File getWebApplicationYmlFile() {
+        return new File(this.getWebResourcesPath(), SUFFIX_YML_APPLICATION);
+    }
+
+    public File getWebApplicationDevYmlFile() {
+        return new File(this.getWebResourcesPath(), SUFFIX_YML_APPLICATION_DEV);
+    }
+
+    public File getWebApplicationFatYmlFile() {
+        return new File(this.getWebResourcesPath(), SUFFIX_YML_APPLICATION_FAT);
+    }
+
+    public File getWebApplicationUatYmlFile() {
+        return new File(this.getWebResourcesPath(), SUFFIX_YML_APPLICATION_UAT);
+    }
+
+    public File getWebApplicationProYmlFile() {
+        return new File(this.getWebResourcesPath(), SUFFIX_YML_APPLICATION_PRO);
+    }
+
+    public File getWebApplicationLocalYmlFile() {
+        return new File(this.getWebResourcesPath(), SUFFIX_YML_APPLICATION_LOCAL);
+    }
+
+    public File getMigrationFile(String moduleVersion) {
+        return new File(this.getWebMigrationPath(), String.format(SUFFIX_MIGRATION, moduleVersion));
     }
 
     public File getConverTorFile(Table table) {

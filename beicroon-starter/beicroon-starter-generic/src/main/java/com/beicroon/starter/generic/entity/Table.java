@@ -42,7 +42,11 @@ public class Table implements Serializable {
     public Table(String prefix, String name, String comment, List<Field> columns) {
         this.prefix = prefix;
 
-        this.name = name.replaceFirst(prefix, "");
+        if (prefix != null && !prefix.isEmpty() && name.startsWith(prefix)) {
+            this.name = name.replaceFirst(prefix, "");
+        } else {
+            this.name = name;
+        }
 
         this.comment = comment;
 
