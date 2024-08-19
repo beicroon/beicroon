@@ -22,12 +22,12 @@ const router = createRouter({
                 {
                     name: "后台账号",
                     path: "/account/admin",
-                    component: () => import("@/views/index/account/admin/AccountAdminApp.vue"),
+                    component: () => import("@/modules/account/admin/AccountAdminApp.vue"),
                 },
                 {
                     name: "资源管理",
                     path: "/setting/resource",
-                    component: () => import("@/views/index/resource/menu/ResourceMenuApp.vue"),
+                    component: () => import("@/modules/resource/menu/ResourceMenuApp.vue"),
                 },
             ],
         },

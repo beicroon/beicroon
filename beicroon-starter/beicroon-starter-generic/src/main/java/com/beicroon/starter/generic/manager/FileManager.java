@@ -7,59 +7,69 @@ import java.io.File;
 
 public class FileManager {
 
-    public static final String SUFFIX_GIT_IGNORE = ".gitignore";
+    public static final String FILENAME_GIT_IGNORE = ".gitignore";
 
-    public static final String SUFFIX_POM = "pom.xml";
+    public static final String FILENAME_POM = "pom.xml";
 
-    public static final String SUFFIX_CONVERTOR = "%sConvertor.java";
+    public static final String FILENAME_CONVERTOR = "%sConvertor.java";
 
-    public static final String SUFFIX_HELPER = "%sHelper.java";
+    public static final String FILENAME_HELPER = "%sHelper.java";
 
-    public static final String SUFFIX_MANAGER = "%sManager.java";
+    public static final String FILENAME_MANAGER = "%sManager.java";
 
-    public static final String SUFFIX_MAPPER = "%sMapper.java";
+    public static final String FILENAME_MAPPER = "%sMapper.java";
 
-    public static final String SUFFIX_MODEL = "%sModel.java";
+    public static final String FILENAME_MODEL = "%sModel.java";
 
-    public static final String SUFFIX_REPOSITORY = "%sRepository.java";
+    public static final String FILENAME_REPOSITORY = "%sRepository.java";
 
-    public static final String SUFFIX_MAPPER_XML = "%sMapper.xml";
+    public static final String FILENAME_MAPPER_XML = "%sMapper.xml";
 
-    public static final String SUFFIX_CREATE_DTO = "%sCreateDTO.java";
+    public static final String FILENAME_CREATE_DTO = "%sCreateDTO.java";
 
-    public static final String SUFFIX_UPDATE_DTO = "%sUpdateDTO.java";
+    public static final String FILENAME_UPDATE_DTO = "%sUpdateDTO.java";
 
-    public static final String SUFFIX_QUERY_DTO = "%sQueryDTO.java";
+    public static final String FILENAME_QUERY_DTO = "%sQueryDTO.java";
 
-    public static final String SUFFIX_BASE_VO = "%sBaseVO.java";
+    public static final String FILENAME_BASE_VO = "%sBaseVO.java";
 
-    public static final String SUFFIX_DETAIL_VO = "%sDetailVO.java";
+    public static final String FILENAME_DETAIL_VO = "%sDetailVO.java";
 
-    public static final String SUFFIX_PAGE_VO = "%sPageVO.java";
+    public static final String FILENAME_PAGE_VO = "%sPageVO.java";
 
-    public static final String SUFFIX_GENERIC_APPLICATION = "%sGenerator.java";
+    public static final String FILENAME_GENERIC_APPLICATION = "%sGenerator.java";
 
-    public static final String SUFFIX_WEB_APPLICATION = "%sApplication.java";
+    public static final String FILENAME_WEB_APPLICATION = "%sApplication.java";
 
-    public static final String SUFFIX_YML_APPLICATION = "application.yml";
+    public static final String FILENAME_YML_APPLICATION = "application.yml";
 
-    public static final String SUFFIX_YML_APPLICATION_DEV = "application-dev.yml";
+    public static final String FILENAME_YML_APPLICATION_DEV = "application-dev.yml";
 
-    public static final String SUFFIX_YML_APPLICATION_FAT = "application-fat.yml";
+    public static final String FILENAME_YML_APPLICATION_FAT = "application-fat.yml";
 
-    public static final String SUFFIX_YML_APPLICATION_UAT = "application-uat.yml";
+    public static final String FILENAME_YML_APPLICATION_UAT = "application-uat.yml";
 
-    public static final String SUFFIX_YML_APPLICATION_PRO = "application-pro.yml";
+    public static final String FILENAME_YML_APPLICATION_PRO = "application-pro.yml";
 
-    public static final String SUFFIX_YML_APPLICATION_LOCAL = "application-local.yml";
+    public static final String FILENAME_YML_APPLICATION_LOCAL = "application-local.yml";
 
-    public static final String SUFFIX_MIGRATION = "V%s_feature.sql";
+    public static final String FILENAME_MIGRATION = "V%s_feature.sql";
 
-    public static final String SUFFIX_CONTROLLER_ADMIN = "Admin%sController.java";
+    public static final String FILENAME_CONTROLLER_ADMIN = "Admin%sController.java";
 
     public static final String FILENAME_SERVICE = "I%sService.java";
 
     public static final String FILENAME_SERVICE_IMPL = "%sService.java";
+
+    public static final String FILENAME_VUE_HTTP = "%s.http.ts";
+
+    public static final String FILENAME_VUE_APP = "%sApp.vue";
+
+    public static final String FILENAME_VUE_CREATE = "%sCreate.vue";
+
+    public static final String FILENAME_VUE_DETAIL = "%sDetail.vue";
+
+    public static final String FILENAME_VUE_UPDATE = "%sUpdate.vue";
 
     private final File rootPath;
 
@@ -251,14 +261,6 @@ public class FileManager {
         return this.controllerAdminPath;
     }
 
-    public File getControllerHomePath() {
-        if (this.controllerAdminPath == null) {
-            this.controllerAdminPath = FileUtils.getControllerAdminPath(this.getWebPath(), this.packageManager.getBasePackages());
-        }
-
-        return this.controllerAdminPath;
-    }
-
     public File getServicePath() {
         if (this.servicePath == null) {
             this.servicePath = FileUtils.getServicePath(this.getWebPath(), this.packageManager.getBasePackages());
@@ -276,135 +278,135 @@ public class FileManager {
     }
 
     public File getModuleGitIgnoreFile() {
-        return new File(this.getRootPath(), SUFFIX_GIT_IGNORE);
+        return new File(this.getRootPath(), FILENAME_GIT_IGNORE);
     }
 
     public File getModulePomFile() {
-        return new File(this.getRootPath(), SUFFIX_POM);
+        return new File(this.getRootPath(), FILENAME_POM);
     }
 
     public File getDaoGitIgnoreFile() {
-        return new File(this.getDaoPath(), SUFFIX_GIT_IGNORE);
+        return new File(this.getDaoPath(), FILENAME_GIT_IGNORE);
     }
 
     public File getDaoPomFile() {
-        return new File(this.getDaoPath(), SUFFIX_POM);
+        return new File(this.getDaoPath(), FILENAME_POM);
     }
 
     public File getEntityGitIgnoreFile() {
-        return new File(this.getEntityPath(), SUFFIX_GIT_IGNORE);
+        return new File(this.getEntityPath(), FILENAME_GIT_IGNORE);
     }
 
     public File getEntityPomFile() {
-        return new File(this.getEntityPath(), SUFFIX_POM);
+        return new File(this.getEntityPath(), FILENAME_POM);
     }
 
     public File getGenericGitIgnoreFile() {
-        return new File(this.getGenericPath(), SUFFIX_GIT_IGNORE);
+        return new File(this.getGenericPath(), FILENAME_GIT_IGNORE);
     }
 
     public File getGenericPomFile() {
-        return new File(this.getGenericPath(), SUFFIX_POM);
+        return new File(this.getGenericPath(), FILENAME_POM);
     }
 
     public File getGenericApplicationFile(String filename) {
-        return new File(this.getGenericApplicationPath(), String.format(SUFFIX_GENERIC_APPLICATION, filename));
+        return new File(this.getGenericApplicationPath(), String.format(FILENAME_GENERIC_APPLICATION, filename));
     }
 
     public File getWebGitIgnoreFile() {
-        return new File(this.getWebPath(), SUFFIX_GIT_IGNORE);
+        return new File(this.getWebPath(), FILENAME_GIT_IGNORE);
     }
 
     public File getWebPomFile() {
-        return new File(this.getWebPath(), SUFFIX_POM);
+        return new File(this.getWebPath(), FILENAME_POM);
     }
 
     public File getWebApplicationFile(String filename) {
-        return new File(this.getWebApplicationPath(), String.format(SUFFIX_WEB_APPLICATION, filename));
+        return new File(this.getWebApplicationPath(), String.format(FILENAME_WEB_APPLICATION, filename));
     }
 
     public File getWebApplicationYmlFile() {
-        return new File(this.getWebResourcesPath(), SUFFIX_YML_APPLICATION);
+        return new File(this.getWebResourcesPath(), FILENAME_YML_APPLICATION);
     }
 
     public File getWebApplicationDevYmlFile() {
-        return new File(this.getWebResourcesPath(), SUFFIX_YML_APPLICATION_DEV);
+        return new File(this.getWebResourcesPath(), FILENAME_YML_APPLICATION_DEV);
     }
 
     public File getWebApplicationFatYmlFile() {
-        return new File(this.getWebResourcesPath(), SUFFIX_YML_APPLICATION_FAT);
+        return new File(this.getWebResourcesPath(), FILENAME_YML_APPLICATION_FAT);
     }
 
     public File getWebApplicationUatYmlFile() {
-        return new File(this.getWebResourcesPath(), SUFFIX_YML_APPLICATION_UAT);
+        return new File(this.getWebResourcesPath(), FILENAME_YML_APPLICATION_UAT);
     }
 
     public File getWebApplicationProYmlFile() {
-        return new File(this.getWebResourcesPath(), SUFFIX_YML_APPLICATION_PRO);
+        return new File(this.getWebResourcesPath(), FILENAME_YML_APPLICATION_PRO);
     }
 
     public File getWebApplicationLocalYmlFile() {
-        return new File(this.getWebResourcesPath(), SUFFIX_YML_APPLICATION_LOCAL);
+        return new File(this.getWebResourcesPath(), FILENAME_YML_APPLICATION_LOCAL);
     }
 
     public File getMigrationFile(String moduleVersion) {
-        return new File(this.getWebMigrationPath(), String.format(SUFFIX_MIGRATION, moduleVersion));
+        return new File(this.getWebMigrationPath(), String.format(FILENAME_MIGRATION, moduleVersion));
     }
 
     public File getConverTorFile(Table table) {
-        return new File(this.getConvertorPath(), String.format(SUFFIX_CONVERTOR, table.getFilename()));
+        return new File(this.getConvertorPath(), String.format(FILENAME_CONVERTOR, table.getFilename()));
     }
 
     public File getHelperFile(Table table) {
-        return new File(this.getHelperPath(), String.format(SUFFIX_HELPER, table.getFilename()));
+        return new File(this.getHelperPath(), String.format(FILENAME_HELPER, table.getFilename()));
     }
 
     public File getManagerFile(Table table) {
-        return new File(this.getManagerPath(), String.format(SUFFIX_MANAGER, table.getFilename()));
+        return new File(this.getManagerPath(), String.format(FILENAME_MANAGER, table.getFilename()));
     }
 
     public File getMapperFile(Table table) {
-        return new File(this.getMapperPath(), String.format(SUFFIX_MAPPER, table.getFilename()));
+        return new File(this.getMapperPath(), String.format(FILENAME_MAPPER, table.getFilename()));
     }
 
     public File getModelFile(Table table) {
-        return new File(this.getModelPath(), String.format(SUFFIX_MODEL, table.getFilename()));
+        return new File(this.getModelPath(), String.format(FILENAME_MODEL, table.getFilename()));
     }
 
     public File getRepositoryFile(Table table) {
-        return new File(this.getRepositoryPath(), String.format(SUFFIX_REPOSITORY, table.getFilename()));
+        return new File(this.getRepositoryPath(), String.format(FILENAME_REPOSITORY, table.getFilename()));
     }
 
     public File getMapperXmlFile(Table table) {
-        return new File(this.getMapperXmlPath(), String.format(SUFFIX_MAPPER_XML, table.getFilename()));
+        return new File(this.getMapperXmlPath(), String.format(FILENAME_MAPPER_XML, table.getFilename()));
     }
 
     public File getCreateDTOFile(Table table) {
-        return new File(this.getDTOPath(table), String.format(SUFFIX_CREATE_DTO, table.getFilename()));
+        return new File(this.getDTOPath(table), String.format(FILENAME_CREATE_DTO, table.getFilename()));
     }
 
     public File getUpdateDTOFile(Table table) {
-        return new File(this.getDTOPath(table), String.format(SUFFIX_UPDATE_DTO, table.getFilename()));
+        return new File(this.getDTOPath(table), String.format(FILENAME_UPDATE_DTO, table.getFilename()));
     }
 
     public File getQueryDTOFile(Table table) {
-        return new File(this.getDTOPath(table), String.format(SUFFIX_QUERY_DTO, table.getFilename()));
+        return new File(this.getDTOPath(table), String.format(FILENAME_QUERY_DTO, table.getFilename()));
     }
 
     public File getBaseVOFile(Table table) {
-        return new File(this.getVOPath(table), String.format(SUFFIX_BASE_VO, table.getFilename()));
+        return new File(this.getVOPath(table), String.format(FILENAME_BASE_VO, table.getFilename()));
     }
 
     public File getDetailVOFile(Table table) {
-        return new File(this.getVOPath(table), String.format(SUFFIX_DETAIL_VO, table.getFilename()));
+        return new File(this.getVOPath(table), String.format(FILENAME_DETAIL_VO, table.getFilename()));
     }
 
     public File getPageVOFile(Table table) {
-        return new File(this.getVOPath(table), String.format(SUFFIX_PAGE_VO, table.getFilename()));
+        return new File(this.getVOPath(table), String.format(FILENAME_PAGE_VO, table.getFilename()));
     }
 
     public File getControllerAdminFile(Table table) {
-        return new File(this.getControllerAdminPath(), String.format(SUFFIX_CONTROLLER_ADMIN, table.getFilename()));
+        return new File(this.getControllerAdminPath(), String.format(FILENAME_CONTROLLER_ADMIN, table.getFilename()));
     }
 
     public File getServiceFile(Table table) {
@@ -413,6 +415,26 @@ public class FileManager {
 
     public File getServiceImplFile(Table table) {
         return new File(this.getServiceImplPath(), String.format(FILENAME_SERVICE_IMPL, table.getFilename()));
+    }
+    
+    public static File getVueHttpFile(File modulePath, Table table) {
+        return new File(modulePath, String.format(FILENAME_VUE_HTTP, table.getFilename()));
+    }
+
+    public static File getVueAppFile(File modulePath, Table table) {
+        return new File(modulePath, String.format(FILENAME_VUE_APP, table.getFilename()));
+    }
+
+    public static File getVueCreateFile(File modulePath, Table table) {
+        return new File(modulePath, String.format(FILENAME_VUE_CREATE, table.getFilename()));
+    }
+
+    public static File getVueDetailFile(File modulePath, Table table) {
+        return new File(modulePath, String.format(FILENAME_VUE_DETAIL, table.getFilename()));
+    }
+
+    public static File getVueUpdateFile(File modulePath, Table table) {
+        return new File(modulePath, String.format(FILENAME_VUE_UPDATE, table.getFilename()));
     }
 
 }

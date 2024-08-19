@@ -1,31 +1,14 @@
 <script setup lang="ts">
+import {ref} from "vue";
 import toast from "@/utils/toast";
-import {onBeforeMount, ref} from "vue";
 import {validateForm} from "@/utils/function.ts";
 import ElInput from "@/components/elements/ElInput.vue";
 import ElButton from "@/components/elements/ElButton.vue";
-import {AdminUpdateDTO as DTO, detail as show, update as submit} from "./account.admin.http.ts";
-
-const props = defineProps({
-  id: {
-    type: String,
-    required: true,
-  }
-});
+import {create as submit, ResourceMenuCreateDTO as DTO} from "./ResourceMenu.http.ts";
 
 const form = ref();
 
-const data = ref<DTO>({
-  id: props.id,
-});
-
-onBeforeMount(async () => {
-  const res = await show(props.id);
-
-  data.value.nickname = res.data.nickname;
-  data.value.phone = res.data.phone;
-  data.value.email = res.data.email;
-});
+const data = ref<DTO>({});
 
 const loading = ref(false);
 
@@ -48,7 +31,7 @@ async function confirm() {
 
   await submit(data.value).finally(() => loading.value = false);;
 
-  await toast("修改成功");
+  await toast("添加成功");
 
   emits("hide");
 
@@ -59,9 +42,12 @@ async function confirm() {
 <template>
   <form class="create" ref="form">
     <div class="view">
-      <el-input required class="form-input" label="昵称" placeholder="请输入昵称" v-model="data.nickname"></el-input>
-      <el-input class="form-input" label="电话" placeholder="请输入电话" v-model="data.phone"></el-input>
-      <el-input class="form-input" label="邮箱" placeholder="请输入邮箱" v-model="data.email"></el-input>
+      <el-input class="form-input" label="父级主键" placeholder="请输入父级主键" v-model="data.parentId"></el-input>
+      <el-input class="form-input" label="父级编码" placeholder="请输入父级编码" v-model="data.parentCode"></el-input>
+      <el-input class="form-input" label="父级名称" placeholder="请输入父级名称" v-model="data.parentName"></el-input>
+      <el-input class="form-input" label="编码" placeholder="请输入编码" v-model="data.code"></el-input>
+      <el-input class="form-input" label="名称" placeholder="请输入名称" v-model="data.name"></el-input>
+      <el-input class="form-input" label="路径" placeholder="请输入路径" v-model="data.path"></el-input>
     </div>
     <div class="button">
       <el-button class="cancel" @click="cancel" :loading="loading">取消</el-button>

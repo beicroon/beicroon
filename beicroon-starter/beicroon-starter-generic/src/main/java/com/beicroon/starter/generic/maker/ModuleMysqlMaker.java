@@ -1,6 +1,5 @@
 package com.beicroon.starter.generic.maker;
 
-import com.beicroon.construct.constant.RegexConstant;
 import com.beicroon.construct.constant.SystemConstant;
 import com.beicroon.starter.generic.content.controller.AdminControllerContent;
 import com.beicroon.starter.generic.content.convertor.ConvertorContent;
@@ -18,6 +17,7 @@ import com.beicroon.starter.generic.content.service.ServiceImplContent;
 import com.beicroon.starter.generic.content.vo.BaseVOContent;
 import com.beicroon.starter.generic.content.vo.DetailVOContent;
 import com.beicroon.starter.generic.content.vo.PageVOContent;
+import com.beicroon.starter.generic.content.vue.*;
 import com.beicroon.starter.generic.entity.Field;
 import com.beicroon.starter.generic.entity.Table;
 import com.beicroon.starter.generic.manager.FileManager;
@@ -28,12 +28,13 @@ import java.io.File;
 import java.lang.reflect.Array;
 import java.sql.*;
 import java.util.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
-public class ApiMysqlMaker {
+public class ModuleMysqlMaker {
 
     private static final Set<String> IGNORES_TABLES = new HashSet<>();
+
+    private static final Map<String, String> NUMBER_TYPES = new HashMap<>();
 
     private static final Map<String, String> JAVA_TYPES = new HashMap<>();
 
@@ -43,6 +44,8 @@ public class ApiMysqlMaker {
         // 忽略的表
         IGNORES_TABLES.add("flyway_schema");
         IGNORES_TABLES.add("flyway_schema_history");
+
+        NUMBER_TYPES.put("Integer", "number");
 
         // 数值类型
         JAVA_TYPES.put("tinyint", "Integer");
@@ -81,7 +84,9 @@ public class ApiMysqlMaker {
 
     private final String password;
 
-    public ApiMysqlMaker(String host, String database, String username, String password) {
+    private List<Table> tables;
+
+    public ModuleMysqlMaker(String host, String database, String username, String password) {
         this.host = host;
 
         this.database = database;
@@ -95,6 +100,44 @@ public class ApiMysqlMaker {
         this.run(rootPath, moduleName, basePackage, modulePrefix, tableNames);
     }
 
+    public void genericVueModule(File rootPath, String modulePrefix, String... tableNames) {
+        if (this.tables == null) {
+            this.initTables(modulePrefix, tableNames);
+        }
+
+        for (Table table : this.tables) {
+            File modulePath = new File(rootPath, table.getPath());
+
+            FileUtils.mkdir(modulePath);
+
+            StringBuilder vueHttpContent = new StringBuilder();
+            StringBuilder vueAppSearchContent = new StringBuilder();
+            StringBuilder vueAppTableHeadContent = new StringBuilder();
+            StringBuilder vueAppTableBodyContent = new StringBuilder();
+            StringBuilder vueAppFormInputContent = new StringBuilder();
+
+            for (Field field : table.getColumns()) {
+                vueHttpContent.append(this.getVueHttpFieldString(field));
+                vueAppSearchContent.append(this.getVueAppSearchFieldString(field));
+                vueAppTableHeadContent.append(this.getVueAppTableHeadFieldString(field));
+                vueAppTableBodyContent.append(this.getVueAppTableBodyFieldString(field));
+                vueAppFormInputContent.append(this.getVueFormInputFieldString(field));
+            }
+
+            table.setVueHttpContent(vueHttpContent.toString());
+            table.setVueAppSearchContent(vueAppSearchContent.toString());
+            table.setVueAppTableHeadContent(vueAppTableHeadContent.toString());
+            table.setVueAppTableBodyContent(vueAppTableBodyContent.toString());
+            table.setVueAppFormInputContent(vueAppFormInputContent.toString());
+
+            FileUtils.writeFileIfNotExists(FileManager.getVueHttpFile(modulePath, table), VueHttpContent.getContent(table));
+            FileUtils.writeFileIfNotExists(FileManager.getVueAppFile(modulePath, table), VueAppContent.getContent(table));
+            FileUtils.writeFileIfNotExists(FileManager.getVueCreateFile(modulePath, table), VueCreateContent.getContent(table));
+            FileUtils.writeFileIfNotExists(FileManager.getVueDetailFile(modulePath, table), VueDetailContent.getContent(table));
+            FileUtils.writeFileIfNotExists(FileManager.getVueUpdateFile(modulePath, table), VueUpdateContent.getContent(table));
+        }
+    }
+
     private void run(File rootPath, String moduleName, String basePackage, String modulePrefix, String... tableNames) {
         System.out.println("接口初始化开始");
 
@@ -106,7 +149,9 @@ public class ApiMysqlMaker {
 
         FileManager fileManager = new FileManager(rootPath, moduleName, packageManager);
 
-        for (Table table : this.getTables(modulePrefix, tableNames)) {
+        this.initTables(modulePrefix, tableNames);
+
+        for (Table table : this.tables) {
             Set<String> imports = new HashSet<>();
 
             StringBuilder modelContent = new StringBuilder();
@@ -156,7 +201,7 @@ public class ApiMysqlMaker {
                 "\n    @ApiModelProperty(name = \"%s\")\n    private %s %s;\n",
                 field.comment(),
                 type,
-                this.snakeToCamel(field.name())
+                field.getSnakeCaseName()
         );
     }
 
@@ -172,8 +217,61 @@ public class ApiMysqlMaker {
                 field.name(),
                 field.comment(),
                 type,
-                this.snakeToCamel(field.name())
+                field.getSnakeCaseName()
         );
+    }
+
+    private String getVueFormInputFieldString(Field field) {
+        String template = """
+                      <el-input class="form-input" label="%s" placeholder="请输入%s" v-model="data.%s"></el-input>
+                """;
+
+        return String.format(template, field.comment(), field.comment(), field.getSnakeCaseName());
+    }
+
+    private String getVueAppTableBodyFieldString(Field field) {
+        String template = """
+                          <td>
+                            <div class="table-cell">{{ item.%s }}</div>
+                          </td>
+                """;
+
+        return String.format(template, field.getSnakeCaseName());
+    }
+
+    private String getVueAppTableHeadFieldString(Field field) {
+        String template = """
+                          <th>
+                            <div class="table-cell">%s</div>
+                          </th>
+                """;
+
+        return String.format(template, field.comment());
+    }
+
+    private String getVueAppSearchFieldString(Field field) {
+        String template = """
+                        <label class="head-input">
+                          <span>%s</span>
+                          <input type="text" placeholder="%s筛选" v-model="query.%s"/>
+                        </label>
+                """;
+
+        String title = Arrays.stream(field.comment().split(""))
+                .map(it -> String.format("<i>%s</i>", it))
+                .collect(Collectors.joining());
+
+        return String.format(template, title, field.comment(), field.getSnakeCaseName());
+    }
+
+    private String getVueHttpFieldString(Field field) {
+        String type = this.getJavaType(field.type());
+
+        if (NUMBER_TYPES.containsKey(type)) {
+            return String.format("    %s?: number\n", field.getSnakeCaseName());
+        }
+
+        return String.format("    %s?: string\n", field.getSnakeCaseName());
     }
 
     private String getModelFieldString(Field field, Set<String> imports) {
@@ -188,24 +286,8 @@ public class ApiMysqlMaker {
                 field.name(),
                 field.comment(),
                 type,
-                this.snakeToCamel(field.name())
+                field.getSnakeCaseName()
         );
-    }
-
-    private String snakeToCamel(String snakeCase) {
-        Pattern pattern = Pattern.compile(RegexConstant.CASE_SNAKE);
-
-        Matcher matcher = pattern.matcher(snakeCase);
-
-        StringBuilder camelCase = new StringBuilder();
-
-        while (matcher.find()) {
-            matcher.appendReplacement(camelCase, matcher.group(1).toUpperCase());
-        }
-
-        matcher.appendTail(camelCase);
-
-        return camelCase.toString();
     }
 
     private String getJavaType(String type) {
@@ -216,8 +298,8 @@ public class ApiMysqlMaker {
         return JAVA_TYPES.get(type);
     }
 
-    private List<Table> getTables(String modulePrefix, String... tableNames) {
-        List<Table> tables = new ArrayList<>();
+    private void initTables(String modulePrefix, String... tableNames) {
+        this.tables = new ArrayList<>();
 
         Connection connection = this.getConnection();
 
@@ -233,15 +315,13 @@ public class ApiMysqlMaker {
 
                 List<Field> fields = this.queryColumns(statement, tableName);
 
-                tables.add(new Table(modulePrefix, tableName, tableComment, fields));
+                this.tables.add(new Table(modulePrefix, tableName, tableComment, fields));
             }
         } finally {
             this.closeStatement(statement);
 
             this.closeConnection(connection);
         }
-
-        return tables;
     }
 
     private List<Field> queryColumns(Statement statement, String tableName) {
@@ -307,8 +387,8 @@ public class ApiMysqlMaker {
     private String getTableSql(String... tableNames) {
         StringBuilder sb = new StringBuilder(String.format(
                 "SELECT `TABLE_NAME`, `TABLE_COMMENT` " +
-                        "FROM `INFORMATION_SCHEMA`.`TABLES` " +
-                        "WHERE `TABLE_SCHEMA` = '%s'",
+                "FROM `INFORMATION_SCHEMA`.`TABLES` " +
+                "WHERE `TABLE_SCHEMA` = '%s'",
                 this.database
         ));
 
@@ -322,10 +402,10 @@ public class ApiMysqlMaker {
     private String getColumnsSql(String tableName) {
         return String.format(
                 "SELECT `COLUMN_NAME`, `DATA_TYPE`, `COLUMN_COMMENT` " +
-                        "FROM `INFORMATION_SCHEMA`.`COLUMNS` " +
-                        "WHERE `TABLE_NAME` = '%s' " +
-                        "AND `TABLE_SCHEMA` = '%s' " +
-                        "ORDER BY `ORDINAL_POSITION`",
+                "FROM `INFORMATION_SCHEMA`.`COLUMNS` " +
+                "WHERE `TABLE_NAME` = '%s' " +
+                "AND `TABLE_SCHEMA` = '%s' " +
+                "ORDER BY `ORDINAL_POSITION`",
                 tableName,
                 this.database
         );

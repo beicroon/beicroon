@@ -39,13 +39,30 @@ public class Table implements Serializable {
     @Setter
     private String queryContent;
 
-    public Table(String prefix, String name, String comment, List<Field> columns) {
-        this.prefix = prefix;
+    @Setter
+    private String vueHttpContent;
 
-        if (prefix != null && !prefix.isEmpty() && name.startsWith(prefix)) {
-            this.name = name.replaceFirst(prefix, "");
+    @Setter
+    private String vueAppSearchContent;
+
+    @Setter
+    private String vueAppTableHeadContent;
+
+    @Setter
+    private String vueAppTableBodyContent;
+
+    @Setter
+    private String vueAppFormInputContent;
+
+    public Table(String prefix, String name, String comment, List<Field> columns) {
+        this.prefix = prefix.replace("_", "-");
+
+        String tempName = name.replaceFirst(prefix, "");
+
+        if (tempName.startsWith("_")) {
+            this.name = tempName.substring(1);
         } else {
-            this.name = name;
+            this.name = tempName;
         }
 
         this.comment = comment;
@@ -72,7 +89,7 @@ public class Table implements Serializable {
     }
 
     public String getTableName() {
-        return this.prefix + this.name;
+        return this.prefix + "_" + this.name;
     }
 
     public String getPath() {

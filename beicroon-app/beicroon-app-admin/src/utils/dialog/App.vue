@@ -32,7 +32,7 @@ const loading = ref(false);
 async function doCancel() {
   props.cancel && await props.cancel();
 
-  await props.complete();
+  await props.complete(false);
 }
 
 async function doConfirm() {
@@ -42,7 +42,7 @@ async function doConfirm() {
 
   loading.value = false;
 
-  await props.complete();
+  await props.complete(true);
 }
 </script>
 

@@ -3,12 +3,12 @@ import {PageInfo} from "@/https";
 import toast from "@/utils/toast";
 import {onMounted, ref} from "vue";
 import dialog from "@/utils/dialog";
-import Create from "./AccountAdminCreate.vue";
-import Detail from "./AccountAdminDetail.vue";
-import Update from "./AccountAdminUpdate.vue";
+import Create from "./ResourceMenuCreate.vue";
+import Detail from "./ResourceMenuDetail.vue";
+import Update from "./ResourceMenuUpdate.vue";
 import dialogWindow from "@/utils/dialogWindow";
 import ElButton from "@/components/elements/ElButton.vue";
-import {AdminPageVO as VO, AdminQueryDTO as DTO, page, remove} from "./account.admin.http.ts";
+import {page, remove, ResourceMenuPageVO as VO, ResourceMenuQueryDTO as DTO} from "./ResourceMenu.http.ts";
 
 const query = ref<DTO>({} as DTO);
 
@@ -37,27 +37,28 @@ async function doReset() {
 }
 
 async function showCreate() {
-  await dialogWindow("新增账号", Create, {}, {
+  await dialogWindow("新增资源菜单", Create, {}, {
     reload: doLoad,
   });
 }
 
 async function showDetail(item: VO) {
-  await dialogWindow("账号详情", Detail, {id: item.id}, {
+  await dialogWindow("资源菜单详情", Detail, {id: item.id}, {
     reload: doLoad,
   });
 }
 
 async function showUpdate(item: VO) {
-  await dialogWindow("编辑账号", Update, {id: item.id}, {
+  await dialogWindow("编辑资源菜单", Update, {id: item.id}, {
     reload: doLoad,
   });
 }
 
 async function showRemove(item: VO) {
   await dialog(
-      "是否删除该账号数据？删除后数据不可恢复，请谨慎操作！",
-      async () => await remove(item.id).then(async () => await toast("删除成功").then(doLoad))
+      "是否删除该资源菜单数据？删除后数据不可恢复，请谨慎操作！",
+      () => remove(item.id),
+      async () => toast("删除成功").then(doLoad)
   );
 }
 
@@ -69,16 +70,28 @@ onMounted(doLoad);
     <div class="list-head flex-row">
       <div class="head-search">
         <label class="head-input">
-          <span><i>昵</i><i>称</i></span>
-          <input type="text" placeholder="昵称筛选" v-model="query.nickname"/>
+          <span><i>父</i><i>级</i><i>主</i><i>键</i></span>
+          <input type="text" placeholder="父级主键筛选" v-model="query.parentId"/>
         </label>
         <label class="head-input">
-          <span><i>电</i><i>话</i></span>
-          <input type="text" placeholder="电话筛选" v-model="query.phone"/>
+          <span><i>父</i><i>级</i><i>编</i><i>码</i></span>
+          <input type="text" placeholder="父级编码筛选" v-model="query.parentCode"/>
         </label>
         <label class="head-input">
-          <span><i>邮</i><i>箱</i></span>
-          <input type="text" placeholder="邮箱筛选" v-model="query.email"/>
+          <span><i>父</i><i>级</i><i>名</i><i>称</i></span>
+          <input type="text" placeholder="父级名称筛选" v-model="query.parentName"/>
+        </label>
+        <label class="head-input">
+          <span><i>编</i><i>码</i></span>
+          <input type="text" placeholder="编码筛选" v-model="query.code"/>
+        </label>
+        <label class="head-input">
+          <span><i>名</i><i>称</i></span>
+          <input type="text" placeholder="名称筛选" v-model="query.name"/>
+        </label>
+        <label class="head-input">
+          <span><i>路</i><i>径</i></span>
+          <input type="text" placeholder="路径筛选" v-model="query.path"/>
         </label>
       </div>
       <div class="head-action">
@@ -92,22 +105,22 @@ onMounted(doLoad);
         <thead class="table-head">
         <tr class="table-row">
           <th>
-            <div class="table-cell">ID</div>
+            <div class="table-cell">父级主键</div>
           </th>
           <th>
-            <div class="table-cell">编号</div>
+            <div class="table-cell">父级编码</div>
           </th>
           <th>
-            <div class="table-cell">账号</div>
+            <div class="table-cell">父级名称</div>
           </th>
           <th>
-            <div class="table-cell">昵称</div>
+            <div class="table-cell">编码</div>
           </th>
           <th>
-            <div class="table-cell">电话</div>
+            <div class="table-cell">名称</div>
           </th>
           <th>
-            <div class="table-cell">邮箱</div>
+            <div class="table-cell">路径</div>
           </th>
           <th>
             <div class="table-cell">创建时间</div>
@@ -129,22 +142,22 @@ onMounted(doLoad);
         <tbody class="table-body">
         <tr class="table-row" v-for="item in data">
           <td>
-            <div class="table-cell">{{ item.id }}</div>
+            <div class="table-cell">{{ item.parentId }}</div>
+          </td>
+          <td>
+            <div class="table-cell">{{ item.parentCode }}</div>
+          </td>
+          <td>
+            <div class="table-cell">{{ item.parentName }}</div>
           </td>
           <td>
             <div class="table-cell">{{ item.code }}</div>
           </td>
           <td>
-            <div class="table-cell">{{ item.username }}</div>
+            <div class="table-cell">{{ item.name }}</div>
           </td>
           <td>
-            <div class="table-cell">{{ item.nickname }}</div>
-          </td>
-          <td>
-            <div class="table-cell">{{ item.phone }}</div>
-          </td>
-          <td>
-            <div class="table-cell">{{ item.email }}</div>
+            <div class="table-cell">{{ item.path }}</div>
           </td>
           <td>
             <div class="table-cell">{{ item.createdAt }}</div>

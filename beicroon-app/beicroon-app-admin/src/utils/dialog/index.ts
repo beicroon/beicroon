@@ -33,7 +33,13 @@ export default async (message: string, confirm: () => Promise<any>, complete?: (
         title: "操作确认",
         message: message,
         confirm: confirm,
-        complete: async () => await doComplete(node).then(complete),
+        complete: async (flag: boolean) => {
+            await doComplete(node);
+
+            if (flag && complete) {
+                await complete();
+            }
+        },
     });
 
     const node = app.mount(document.createElement("div")).$el;

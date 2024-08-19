@@ -29,7 +29,7 @@ public class AdminControllerContent {
             @Validated
             @RestController
             @ApiTag(name = "{{comment}}相关")
-            @RequestMapping(path = "/api/admin/admin")
+            @RequestMapping(path = "/api/{{modulePrefix}}/admin")
             public class Admin{{filename}}Controller {
 
                 @Resource
@@ -85,6 +85,7 @@ public class AdminControllerContent {
                 .replace("{{package}}", packageManager.getWebPackage())
                 .replace("{{modulePackage}}", packageManager.getEntityPackage() + "." + table.getPackage())
                 .replace("{{comment}}", table.getComment())
+                .replace("{{modulePrefix}}", table.getPrefix())
                 .replace("{{variableName}}", table.getVariableName())
                 .replace("{{filename}}", table.getFilename())
                 .replace("{{urlName}}", table.getUrlName());

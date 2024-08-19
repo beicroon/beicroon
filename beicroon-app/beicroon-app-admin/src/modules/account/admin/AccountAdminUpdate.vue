@@ -1,14 +1,29 @@
 <script setup lang="ts">
-import {ref} from "vue";
 import toast from "@/utils/toast";
+import {onBeforeMount, ref} from "vue";
 import {validateForm} from "@/utils/function.ts";
 import ElInput from "@/components/elements/ElInput.vue";
 import ElButton from "@/components/elements/ElButton.vue";
-import {AdminCreateDTO as DTO, create as submit} from "./account.admin.http.ts";
+import {AccountAdminUpdateDTO as DTO, detail as show, update as submit} from "./AccountAdmin.http.ts";
+
+const props = defineProps({
+  id: {
+    type: String,
+    required: true,
+  }
+});
 
 const form = ref();
 
-const data = ref<DTO>({});
+const data = ref<DTO>({
+  id: props.id,
+});
+
+onBeforeMount(async () => {
+  const res = await show(props.id);
+
+  data.value = res.data;
+});
 
 const loading = ref(false);
 
@@ -31,7 +46,7 @@ async function confirm() {
 
   await submit(data.value).finally(() => loading.value = false);;
 
-  await toast("添加成功");
+  await toast("修改成功");
 
   emits("hide");
 
@@ -42,8 +57,10 @@ async function confirm() {
 <template>
   <form class="create" ref="form">
     <div class="view">
-      <el-input required class="form-input" label="账号" placeholder="请输入账号" v-model="data.username"></el-input>
-      <el-input required class="form-input" label="昵称" placeholder="请输入昵称" v-model="data.nickname"></el-input>
+      <el-input class="form-input" label="编码" placeholder="请输入编码" v-model="data.code"></el-input>
+      <el-input class="form-input" label="账号" placeholder="请输入账号" v-model="data.username"></el-input>
+      <el-input class="form-input" label="密码" placeholder="请输入密码" v-model="data.password"></el-input>
+      <el-input class="form-input" label="昵称" placeholder="请输入昵称" v-model="data.nickname"></el-input>
       <el-input class="form-input" label="电话" placeholder="请输入电话" v-model="data.phone"></el-input>
       <el-input class="form-input" label="邮箱" placeholder="请输入邮箱" v-model="data.email"></el-input>
     </div>

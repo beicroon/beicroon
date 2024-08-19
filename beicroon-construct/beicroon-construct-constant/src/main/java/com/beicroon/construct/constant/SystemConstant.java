@@ -41,7 +41,10 @@ public interface SystemConstant {
             "disabled_id",
             "disabled_name",
             "disabled_code",
-            "deleted",
+            "deleted_at",
+            "deleter_id",
+            "deleter_name",
+            "deleter_code",
             "version",
             "tenant_id"
     ));
