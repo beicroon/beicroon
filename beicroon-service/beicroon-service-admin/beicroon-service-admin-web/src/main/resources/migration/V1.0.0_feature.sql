@@ -21,5 +21,3 @@
 #    `deleter_name`  varchar(255)        not null default '' comment '删除人昵称',
 #    primary key (`id`)
 #) engine = innodb comment '建表示例';
-
-CREATE DATABASE `dev-beicroon-service-admin` CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;

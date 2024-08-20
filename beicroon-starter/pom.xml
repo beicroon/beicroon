@@ -32,6 +32,7 @@
         <module>beicroon-starter-mysql</module>
         <module>beicroon-starter-task</module>
         <module>beicroon-starter-web</module>
+        <module>beicroon-starter-web-admin</module>
     </modules>
 
     <dependencyManagement>
@@ -117,6 +118,12 @@
             <dependency>
                 <groupId>com.beicroon.starter</groupId>
                 <artifactId>beicroon-starter-web</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.beicroon.starter</groupId>
+                <artifactId>beicroon-starter-web-admin</artifactId>
                 <version>${project.version}</version>
             </dependency>
         </dependencies>

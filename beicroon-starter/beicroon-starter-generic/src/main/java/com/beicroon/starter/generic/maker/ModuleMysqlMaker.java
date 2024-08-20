@@ -44,6 +44,8 @@ public class ModuleMysqlMaker {
         // 忽略的表
         IGNORES_TABLES.add("flyway_schema");
         IGNORES_TABLES.add("flyway_schema_history");
+        IGNORES_TABLES.add("admin_account_admin");
+        IGNORES_TABLES.add("admin_resource_menu");
 
         NUMBER_TYPES.put("Integer", "number");
 

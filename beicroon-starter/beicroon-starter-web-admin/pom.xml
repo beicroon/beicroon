@@ -5,30 +5,24 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>com.beicroon.service</groupId>
-        <artifactId>beicroon-service-admin</artifactId>
+        <groupId>com.beicroon.starter</groupId>
+        <artifactId>beicroon-starter</artifactId>
         <version>1.0.0</version>
     </parent>
 
-    <artifactId>beicroon-service-admin-web</artifactId>
+    <artifactId>beicroon-starter-web-admin</artifactId>
     <version>1.0.0</version>
     <packaging>jar</packaging>
 
     <dependencies>
         <dependency>
             <groupId>com.beicroon.starter</groupId>
-            <artifactId>beicroon-starter-web</artifactId>
+            <artifactId>beicroon-starter-dao</artifactId>
         </dependency>
 
         <dependency>
             <groupId>com.beicroon.starter</groupId>
-            <artifactId>beicroon-starter-web-admin</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.beicroon.service</groupId>
-            <artifactId>beicroon-service-admin-dao</artifactId>
-            <version>${project.version}</version>
+            <artifactId>beicroon-starter-web</artifactId>
         </dependency>
     </dependencies>
 </project>

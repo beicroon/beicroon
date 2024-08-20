@@ -42,6 +42,11 @@
 
         <dependency>
             <groupId>com.beicroon.construct</groupId>
+            <artifactId>beicroon-construct-entity</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.beicroon.construct</groupId>
             <artifactId>beicroon-construct-exception</artifactId>
         </dependency>
 
@@ -88,10 +93,6 @@
         <dependency>
             <groupId>com.beicroon.starter</groupId>
             <artifactId>beicroon-starter-task</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.beicroon.construct</groupId>
-            <artifactId>beicroon-construct-entity</artifactId>
         </dependency>
     </dependencies>
 </project>
