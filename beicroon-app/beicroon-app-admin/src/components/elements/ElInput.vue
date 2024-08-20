@@ -127,12 +127,15 @@ const value = computed({
 
   label {
     z-index: 1;
-    display: block;
+    width: 50%;
+    height: 36rem;
+    display: flex;
     position: relative;
-    width: fit-content;
+    align-items: center;
     padding: 8rem 32rem;
     border-radius: 6rem;
     letter-spacing: 4rem;
+    justify-content: center;
     background-color: @light-grey;
 
     &.required:before {

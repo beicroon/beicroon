@@ -4,18 +4,16 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.beicroon.construct.annotation.ApiModel;
 import com.beicroon.construct.annotation.ApiModelProperty;
-import com.beicroon.starter.mysql.model.GenericModel;
+import com.beicroon.starter.mysql.model.DisableModel;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-
-import java.time.LocalDateTime;
 
 @Data
 @ApiModel(name = "资源菜单")
 @TableName("`admin_resource_menu`")
 @EqualsAndHashCode(callSuper = true)
-public class ResourceMenuModel extends GenericModel {
-    
+public class ResourceMenuModel extends DisableModel {
+
     @TableField(value = "`parent_id`")
     @ApiModelProperty(name = "父级主键")
     private Long parentId;
@@ -40,20 +38,8 @@ public class ResourceMenuModel extends GenericModel {
     @ApiModelProperty(name = "路径")
     private String path;
 
-    @TableField(value = "`deleted_at`")
-    @ApiModelProperty(name = "删除时间")
-    private LocalDateTime deletedAt;
-
-    @TableField(value = "`deleter_id`")
-    @ApiModelProperty(name = "删除人主键")
-    private Long deleterId;
-
-    @TableField(value = "`deleter_code`")
-    @ApiModelProperty(name = "删除人编码")
-    private String deleterCode;
-
-    @TableField(value = "`deleter_name`")
-    @ApiModelProperty(name = "删除人昵称")
-    private String deleterName;
+    @TableField(value = "`sorting`")
+    @ApiModelProperty(name = "排序")
+    private Integer sorting;
 
 }

@@ -54,17 +54,17 @@ export async function detail(id: String): Promise<Response<AccountAdminDetailVO>
     })
 }
 
-export async function list(data: AccountAdminQueryDTO): Promise<Response<Array<AccountAdminBaseVO>>> {
+export async function page(data: AccountAdminQueryDTO): Promise<Response<Array<AccountAdminPageVO>>> {
     return http.request({
-        url: "/api/admin/admin/account-admin-list",
+        url: "/api/admin/admin/account-admin-page",
         method: "POST",
         data: data
     })
 }
 
-export async function page(data: AccountAdminQueryDTO): Promise<Response<Array<AccountAdminPageVO>>> {
+export async function list(data: AccountAdminQueryDTO): Promise<Response<Array<AccountAdminBaseVO>>> {
     return http.request({
-        url: "/api/admin/admin/account-admin-page",
+        url: "/api/admin/admin/account-admin-list",
         method: "POST",
         data: data
     })

@@ -6,8 +6,6 @@ import com.beicroon.construct.entity.GenericVO;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import java.time.LocalDateTime;
-
 @Data
 @ApiModel(name = "查询后台账号基础出参")
 @EqualsAndHashCode(callSuper = true)
@@ -30,17 +28,5 @@ public class AccountAdminBaseVO extends GenericVO {
 
     @ApiModelProperty(name = "邮箱")
     private String email;
-
-    @ApiModelProperty(name = "删除时间")
-    private LocalDateTime deletedAt;
-
-    @ApiModelProperty(name = "删除人主键")
-    private Long deleterId;
-
-    @ApiModelProperty(name = "删除人编码")
-    private String deleterCode;
-
-    @ApiModelProperty(name = "删除人昵称")
-    private String deleterName;
 
 }

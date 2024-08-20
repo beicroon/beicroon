@@ -1,6 +1,7 @@
 package com.beicroon.service.admin.dao.convertor;
 
 import com.beicroon.service.admin.dao.model.ResourceMenuModel;
+import com.beicroon.service.admin.entity.auth.admin.vo.AuthAdminMenuVO;
 import com.beicroon.service.admin.entity.resource.menu.dto.ResourceMenuCreateDTO;
 import com.beicroon.service.admin.entity.resource.menu.dto.ResourceMenuUpdateDTO;
 import com.beicroon.service.admin.entity.resource.menu.vo.ResourceMenuBaseVO;
@@ -12,5 +13,7 @@ import org.mapstruct.ReportingPolicy;
 
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface ResourceMenuConvertor extends GenericConvertor<ResourceMenuModel, ResourceMenuCreateDTO, ResourceMenuUpdateDTO, ResourceMenuBaseVO, ResourceMenuDetailVO, ResourceMenuPageVO> {
+
+    AuthAdminMenuVO toTreeVO(ResourceMenuModel model);
 
 }

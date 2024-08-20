@@ -70,6 +70,18 @@ onMounted(doLoad);
     <div class="list-head flex-row">
       <div class="head-search">
         <label class="head-input">
+          <span><i>编</i><i>码</i></span>
+          <input type="text" placeholder="编码筛选" v-model="query.code"/>
+        </label>
+        <label class="head-input">
+          <span><i>账</i><i>号</i></span>
+          <input type="text" placeholder="账号筛选" v-model="query.username"/>
+        </label>
+        <label class="head-input">
+          <span><i>密</i><i>码</i></span>
+          <input type="text" placeholder="密码筛选" v-model="query.password"/>
+        </label>
+        <label class="head-input">
           <span><i>昵</i><i>称</i></span>
           <input type="text" placeholder="昵称筛选" v-model="query.nickname"/>
         </label>

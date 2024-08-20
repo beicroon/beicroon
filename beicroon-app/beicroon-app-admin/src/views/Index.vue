@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import router from "@/routers";
 import {onMounted, Ref, ref, watch} from "vue";
-import type {MenuBaseVO} from "@/https/setting/menu.http.ts";
+import {MenuTreeVO as VO, tree} from "@/https/auth/auth.http.ts";
 
-function handleNavigatorClick(navigator: MenuBaseVO) {
+function handleNavigatorClick(navigator: VO) {
   for (let i = 0; i < navigators.value.length; i++) {
     const item = navigators.value[i];
 
@@ -19,7 +19,7 @@ function handleNavigatorClick(navigator: MenuBaseVO) {
   menus.value = navigator.children;
 }
 
-function handleLinkerClick(parent: MenuBaseVO, linker: MenuBaseVO) {
+function handleLinkerClick(parent: VO, linker: VO) {
   for (let i = 0; i < menus.value.length; i++) {
     const menu = menus.value[i];
 
@@ -47,9 +47,9 @@ function handleLinkerClick(parent: MenuBaseVO, linker: MenuBaseVO) {
   router.push({path: linker.path});
 }
 
-const navigators: Ref<Array<MenuBaseVO>> = ref([]);
+const navigators: Ref<Array<VO>> = ref([]);
 
-const menus: Ref<Array<MenuBaseVO>> = ref([]);
+const menus: Ref<Array<VO>> = ref([]);
 
 watch(menus, () => {
   for (let i = 0; i < menus.value.length; i++) {
@@ -93,49 +93,10 @@ watch(navigators, () => {
   }
 });
 
-onMounted(() => {
-  navigators.value = [
-    {
-      name: "账号中心",
-      path: "",
-      active: false,
-      children: [
-        {
-          name: "账号管理",
-          path: "",
-          active: false,
-          children: [
-            {
-              name: "后台账号",
-              path: "/account/admin",
-              active: false,
-              children: [],
-            },
-          ],
-        },
-      ],
-    },
-    {
-      name: "设置中心",
-      path: "",
-      active: false,
-      children: [
-        {
-          name: "系统设置",
-          path: "",
-          active: false,
-          children: [
-            {
-              name: "菜单管理",
-              path: "/setting/resource",
-              active: false,
-              children: [],
-            },
-          ],
-        },
-      ],
-    },
-  ];
+onMounted(async () => {
+  const res = await tree();
+
+  navigators.value = res.data;
 });
 </script>
 

@@ -7,6 +7,7 @@ export type ResourceMenuBaseVO = BaseVO & DisableVO & {
     code?: string
     name?: string
     path?: string
+    sorting?: number
 }
 
 export type ResourceMenuDetailVO = ResourceMenuBaseVO & {}
@@ -20,6 +21,7 @@ export type ResourceMenuCreateDTO = DisableDTO & {
     code?: string
     name?: string
     path?: string
+    sorting?: number
 }
 
 export type ResourceMenuUpdateDTO = UpdateDTO & {
@@ -29,6 +31,7 @@ export type ResourceMenuUpdateDTO = UpdateDTO & {
     code?: string
     name?: string
     path?: string
+    sorting?: number
 }
 
 export type ResourceMenuQueryDTO = QueryDTO & DisableDTO & {
@@ -38,6 +41,7 @@ export type ResourceMenuQueryDTO = QueryDTO & DisableDTO & {
     code?: string
     name?: string
     path?: string
+    sorting?: number
 }
 
 export async function show(id: String): Promise<Response<ResourceMenuBaseVO>> {
@@ -54,17 +58,17 @@ export async function detail(id: String): Promise<Response<ResourceMenuDetailVO>
     })
 }
 
-export async function list(data: ResourceMenuQueryDTO): Promise<Response<Array<ResourceMenuBaseVO>>> {
+export async function page(data: ResourceMenuQueryDTO): Promise<Response<Array<ResourceMenuPageVO>>> {
     return http.request({
-        url: "/api/admin/admin/resource-menu-list",
+        url: "/api/admin/admin/resource-menu-page",
         method: "POST",
         data: data
     })
 }
 
-export async function page(data: ResourceMenuQueryDTO): Promise<Response<Array<ResourceMenuPageVO>>> {
+export async function list(data: ResourceMenuQueryDTO): Promise<Response<Array<ResourceMenuBaseVO>>> {
     return http.request({
-        url: "/api/admin/admin/resource-menu-page",
+        url: "/api/admin/admin/resource-menu-list",
         method: "POST",
         data: data
     })

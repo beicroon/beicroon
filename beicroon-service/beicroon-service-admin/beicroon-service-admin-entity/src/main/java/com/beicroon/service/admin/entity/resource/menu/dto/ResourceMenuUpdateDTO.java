@@ -6,8 +6,6 @@ import com.beicroon.construct.entity.UpdateDTO;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import java.time.LocalDateTime;
-
 @Data
 @ApiModel(name = "修改资源菜单入参")
 @EqualsAndHashCode(callSuper = true)
@@ -31,16 +29,7 @@ public class ResourceMenuUpdateDTO extends UpdateDTO {
     @ApiModelProperty(name = "路径")
     private String path;
 
-    @ApiModelProperty(name = "删除时间")
-    private LocalDateTime deletedAt;
-
-    @ApiModelProperty(name = "删除人主键")
-    private Long deleterId;
-
-    @ApiModelProperty(name = "删除人编码")
-    private String deleterCode;
-
-    @ApiModelProperty(name = "删除人昵称")
-    private String deleterName;
+    @ApiModelProperty(name = "排序")
+    private Integer sorting;
 
 }

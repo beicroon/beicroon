@@ -41,17 +41,17 @@ public class VueHttpContent {
                 })
             }
 
-            export async function list(data: {{filename}}QueryDTO): Promise<Response<Array<{{filename}}BaseVO>>> {
+            export async function page(data: {{filename}}QueryDTO): Promise<Response<Array<{{filename}}PageVO>>> {
                 return http.request({
-                    url: "/api/{{modulePrefix}}/admin/{{urlName}}-list",
+                    url: "/api/{{modulePrefix}}/admin/{{urlName}}-page",
                     method: "POST",
                     data: data
                 })
             }
 
-            export async function page(data: {{filename}}QueryDTO): Promise<Response<Array<{{filename}}PageVO>>> {
+            export async function list(data: {{filename}}QueryDTO): Promise<Response<Array<{{filename}}BaseVO>>> {
                 return http.request({
-                    url: "/api/{{modulePrefix}}/admin/{{urlName}}-page",
+                    url: "/api/{{modulePrefix}}/admin/{{urlName}}-list",
                     method: "POST",
                     data: data
                 })

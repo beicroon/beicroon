@@ -26,7 +26,7 @@ const router = createRouter({
                 },
                 {
                     name: "资源管理",
-                    path: "/setting/resource",
+                    path: "/resource/menu",
                     component: () => import("@/modules/resource/menu/ResourceMenuApp.vue"),
                 },
             ],

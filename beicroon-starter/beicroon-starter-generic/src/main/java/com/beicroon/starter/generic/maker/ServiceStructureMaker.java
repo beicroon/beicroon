@@ -45,7 +45,6 @@ public class ServiceStructureMaker {
         FileUtils.writeFileIfNotExists(fileManager.getWebApplicationUatYmlFile(), ApplicationUatYmlContent.getContent(basePackage));
         FileUtils.writeFileIfNotExists(fileManager.getWebApplicationProYmlFile(), ApplicationProYmlContent.getContent(basePackage));
         FileUtils.writeFileIfNotExists(fileManager.getWebApplicationLocalYmlFile(), ApplicationLocalYmlContent.getContent(basePackage));
-        FileUtils.writeFileIfNotExists(fileManager.getWebApplicationLocalYmlFile(), ApplicationLocalYmlContent.getContent(basePackage));
         FileUtils.writeFileIfNotExists(fileManager.getMigrationFile(moduleVersion), MigrationContent.getContent(moduleName));
 
         System.out.println("模块初始结束");

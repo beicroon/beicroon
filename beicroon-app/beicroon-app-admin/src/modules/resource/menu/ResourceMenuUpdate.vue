@@ -63,6 +63,7 @@ async function confirm() {
       <el-input class="form-input" label="编码" placeholder="请输入编码" v-model="data.code"></el-input>
       <el-input class="form-input" label="名称" placeholder="请输入名称" v-model="data.name"></el-input>
       <el-input class="form-input" label="路径" placeholder="请输入路径" v-model="data.path"></el-input>
+      <el-input class="form-input" label="排序" placeholder="请输入排序" v-model="data.sorting"></el-input>
     </div>
     <div class="button">
       <el-button class="cancel" @click="cancel" :loading="loading">取消</el-button>

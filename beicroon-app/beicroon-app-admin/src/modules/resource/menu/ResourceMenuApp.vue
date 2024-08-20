@@ -93,6 +93,10 @@ onMounted(doLoad);
           <span><i>路</i><i>径</i></span>
           <input type="text" placeholder="路径筛选" v-model="query.path"/>
         </label>
+        <label class="head-input">
+          <span><i>排</i><i>序</i></span>
+          <input type="text" placeholder="排序筛选" v-model="query.sorting"/>
+        </label>
       </div>
       <div class="head-action">
         <el-button class="head-button" @click="doLoad" :loading="loading">查询</el-button>
@@ -121,6 +125,9 @@ onMounted(doLoad);
           </th>
           <th>
             <div class="table-cell">路径</div>
+          </th>
+          <th>
+            <div class="table-cell">排序</div>
           </th>
           <th>
             <div class="table-cell">创建时间</div>
@@ -158,6 +165,9 @@ onMounted(doLoad);
           </td>
           <td>
             <div class="table-cell">{{ item.path }}</div>
+          </td>
+          <td>
+            <div class="table-cell">{{ item.sorting }}</div>
           </td>
           <td>
             <div class="table-cell">{{ item.createdAt }}</div>
