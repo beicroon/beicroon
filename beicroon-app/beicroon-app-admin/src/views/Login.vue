@@ -83,11 +83,13 @@ async function submit() {
   }
 
   .login-button {
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
 
-    button {
+    .el-button {
+      width: 100%;
       color: @white;
       padding: 8rem 32rem;
       border-radius: 8rem;

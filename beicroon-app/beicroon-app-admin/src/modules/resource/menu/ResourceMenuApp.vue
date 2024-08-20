@@ -67,7 +67,7 @@ onMounted(doLoad);
 
 <template>
   <div class="list">
-    <div class="list-head flex-row">
+    <div class="list-head">
       <div class="head-search">
         <label class="head-input">
           <span><i>父</i><i>级</i><i>主</i><i>键</i></span>
