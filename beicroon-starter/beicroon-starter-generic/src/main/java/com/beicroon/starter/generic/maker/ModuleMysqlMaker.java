@@ -154,6 +154,10 @@ public class ModuleMysqlMaker {
         this.initTables(modulePrefix, tableNames);
 
         for (Table table : this.tables) {
+            if (IGNORES_TABLES.contains(table.getTableName())) {
+                continue;
+            }
+
             Set<String> imports = new HashSet<>();
 
             StringBuilder modelContent = new StringBuilder();
@@ -369,13 +373,7 @@ public class ModuleMysqlMaker {
             resultSet = statement.executeQuery(sql);
 
             while (resultSet.next()) {
-                String tableName = resultSet.getString(1);
-
-                if (IGNORES_TABLES.contains(tableName)) {
-                    continue;
-                }
-
-                tables.put(tableName, resultSet.getString(2));
+                tables.put(resultSet.getString(1), resultSet.getString(2));
             }
         } catch (SQLException ex) {
             throw new RuntimeException(ex);
