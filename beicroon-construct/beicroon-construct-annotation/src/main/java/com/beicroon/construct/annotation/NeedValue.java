@@ -3,6 +3,7 @@ package com.beicroon.construct.annotation;
 
 import java.lang.annotation.*;
 
+@Inherited
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.FIELD, ElementType.METHOD})

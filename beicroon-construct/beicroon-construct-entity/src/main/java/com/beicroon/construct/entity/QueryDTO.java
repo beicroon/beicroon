@@ -55,7 +55,6 @@ public class QueryDTO implements Serializable {
     private String creatorName;
 
     @JsonIgnore
-    @ApiModelProperty(hidden = true)
     public Long getPageNumOrDefault() {
         if (this.pageNum == null) {
             return 1L;
@@ -65,7 +64,6 @@ public class QueryDTO implements Serializable {
     }
 
     @JsonIgnore
-    @ApiModelProperty(hidden = true)
     public Long getPageSizeOrDefault() {
         if (this.pageSize == null) {
             return 30L;
