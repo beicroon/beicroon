@@ -7,26 +7,37 @@ public class VueHttpContent {
     private static final String CONTENT = """
             import http, {BaseVO, DisableDTO, DisableVO, QueryDTO, Response, UpdateDTO} from "@/https";
 
+            // 基础返回字段
             export type {{filename}}BaseVO = BaseVO & DisableVO & {
                 {{content}}
             }
 
-            export type {{filename}}DetailVO = {{filename}}BaseVO & {}
+            // 详情返回字段
+            export type {{filename}}DetailVO = {{filename}}BaseVO & {
+            
+            }
 
-            export type {{filename}}PageVO = {{filename}}BaseVO & {}
+            // 分页返回字段
+            export type {{filename}}PageVO = {{filename}}BaseVO & {
+            
+            }
 
+            // 新增参数字段
             export type {{filename}}CreateDTO = DisableDTO & {
                 {{content}}
             }
 
+            // 修改参数字段
             export type {{filename}}UpdateDTO = UpdateDTO & {
                 {{content}}
             }
 
+            // 查询参数字段
             export type {{filename}}QueryDTO = QueryDTO & DisableDTO & {
                 {{content}}
             }
 
+            // 基础信息接口
             export async function show(id: String): Promise<Response<{{filename}}BaseVO>> {
                 return http.request({
                     url: "/api/{{modulePrefix}}/admin/{{urlName}}-show?id=" + id,
@@ -34,6 +45,7 @@ public class VueHttpContent {
                 })
             }
 
+            // 详细信息接口
             export async function detail(id: String): Promise<Response<{{filename}}DetailVO>> {
                 return http.request({
                     url: "/api/{{modulePrefix}}/admin/{{urlName}}-detail?id=" + id,
@@ -41,6 +53,7 @@ public class VueHttpContent {
                 })
             }
 
+            // 分页列表接口
             export async function page(data: {{filename}}QueryDTO): Promise<Response<Array<{{filename}}PageVO>>> {
                 return http.request({
                     url: "/api/{{modulePrefix}}/admin/{{urlName}}-page",
@@ -49,6 +62,7 @@ public class VueHttpContent {
                 })
             }
 
+            // 全量列表接口
             export async function list(data: {{filename}}QueryDTO): Promise<Response<Array<{{filename}}BaseVO>>> {
                 return http.request({
                     url: "/api/{{modulePrefix}}/admin/{{urlName}}-list",
@@ -57,6 +71,7 @@ public class VueHttpContent {
                 })
             }
 
+            // 单个新增接口
             export async function create(data: {{filename}}CreateDTO): Promise<Response<boolean>> {
                 return http.request({
                     url: "/api/{{modulePrefix}}/admin/{{urlName}}-create",
@@ -65,6 +80,7 @@ public class VueHttpContent {
                 })
             }
 
+            // 单个修改接口
             export async function update(data: {{filename}}UpdateDTO): Promise<Response<boolean>> {
                 return http.request({
                     url: "/api/{{modulePrefix}}/admin/{{urlName}}-update",
@@ -73,6 +89,7 @@ public class VueHttpContent {
                 })
             }
 
+            // 删除接口
             export async function remove(ids: string | Array<string>): Promise<Response<boolean>> {
                 return http.request({
                     url: "/api/{{modulePrefix}}/admin/{{urlName}}-remove",

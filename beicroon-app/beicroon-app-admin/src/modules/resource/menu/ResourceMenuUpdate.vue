@@ -44,7 +44,7 @@ async function confirm() {
     return;
   }
 
-  await submit(data.value).finally(() => loading.value = false);;
+  await submit(data.value).finally(() => loading.value = false);
 
   await toast("修改成功");
 
@@ -57,13 +57,13 @@ async function confirm() {
 <template>
   <form class="create" ref="form">
     <div class="view">
-      <el-input class="form-input" label="父级主键" placeholder="请输入父级主键" v-model="data.parentId"></el-input>
-      <el-input class="form-input" label="父级编码" placeholder="请输入父级编码" v-model="data.parentCode"></el-input>
-      <el-input class="form-input" label="父级名称" placeholder="请输入父级名称" v-model="data.parentName"></el-input>
-      <el-input class="form-input" label="编码" placeholder="请输入编码" v-model="data.code"></el-input>
-      <el-input class="form-input" label="名称" placeholder="请输入名称" v-model="data.name"></el-input>
-      <el-input class="form-input" label="路径" placeholder="请输入路径" v-model="data.path"></el-input>
-      <el-input class="form-input" label="排序" placeholder="请输入排序" v-model="data.sorting"></el-input>
+      <el-input class="form-input" placeholder="请输入父级主键" v-model="data.parentId">父级主键</el-input>
+      <el-input class="form-input" placeholder="请输入父级编码" v-model="data.parentCode">父级编码</el-input>
+      <el-input class="form-input" placeholder="请输入父级名称" v-model="data.parentName">父级名称</el-input>
+      <el-input class="form-input" placeholder="请输入编码" v-model="data.code">编码</el-input>
+      <el-input class="form-input" placeholder="请输入名称" v-model="data.name">名称</el-input>
+      <el-input class="form-input" placeholder="请输入路径" v-model="data.path">路径</el-input>
+      <el-input class="form-input" placeholder="请输入排序" v-model="data.sorting">排序</el-input>
     </div>
     <div class="button">
       <el-button class="cancel" @click="cancel" :loading="loading">取消</el-button>

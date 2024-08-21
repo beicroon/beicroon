@@ -36,7 +36,7 @@ public class VueCreateContent {
                 return;
               }
 
-              await submit(data.value).finally(() => loading.value = false);;
+              await submit(data.value).finally(() => loading.value = false);
 
               await toast("添加成功");
 

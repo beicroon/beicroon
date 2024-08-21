@@ -229,17 +229,15 @@ public class ModuleMysqlMaker {
 
     private String getVueFormInputFieldString(Field field) {
         String template = """
-                      <el-input class="form-input" label="%s" placeholder="请输入%s" v-model="data.%s"></el-input>
+                      <el-input class="form-input" placeholder="请输入%s" v-model="data.%s">%s</el-input>
                 """;
 
-        return String.format(template, field.comment(), field.comment(), field.getSnakeCaseName());
+        return String.format(template, field.comment(), field.getSnakeCaseName(), field.comment());
     }
 
     private String getVueAppTableBodyFieldString(Field field) {
         String template = """
-                          <td>
-                            <div class="table-cell">{{ item.%s }}</div>
-                          </td>
+                          <td><div class="table-cell">{{ item.%s }}</div></td>
                 """;
 
         return String.format(template, field.getSnakeCaseName());
@@ -247,9 +245,7 @@ public class ModuleMysqlMaker {
 
     private String getVueAppTableHeadFieldString(Field field) {
         String template = """
-                          <th>
-                            <div class="table-cell">%s</div>
-                          </th>
+                          <th><div class="table-cell">%s</div></th>
                 """;
 
         return String.format(template, field.comment());
@@ -257,9 +253,7 @@ public class ModuleMysqlMaker {
 
     private String getVueAppSearchFieldString(Field field) {
         String template = """
-                        <el-search placeholder="%s筛选"  v-model="query.%s">
-                          %s
-                        </el-search>
+                        <el-search placeholder="%s筛选"  v-model="query.%s">%s</el-search>
                 """;
 
         String title = Arrays.stream(field.comment().split(""))

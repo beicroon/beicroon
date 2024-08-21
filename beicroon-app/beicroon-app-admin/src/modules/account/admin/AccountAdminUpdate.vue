@@ -44,7 +44,7 @@ async function confirm() {
     return;
   }
 
-  await submit(data.value).finally(() => loading.value = false);;
+  await submit(data.value).finally(() => loading.value = false);
 
   await toast("修改成功");
 
@@ -57,12 +57,11 @@ async function confirm() {
 <template>
   <form class="create" ref="form">
     <div class="view">
-      <el-input class="form-input" label="编码" placeholder="请输入编码" v-model="data.code"></el-input>
-      <el-input class="form-input" label="账号" placeholder="请输入账号" v-model="data.username"></el-input>
-      <el-input class="form-input" label="密码" placeholder="请输入密码" v-model="data.password"></el-input>
-      <el-input class="form-input" label="昵称" placeholder="请输入昵称" v-model="data.nickname"></el-input>
-      <el-input class="form-input" label="电话" placeholder="请输入电话" v-model="data.phone"></el-input>
-      <el-input class="form-input" label="邮箱" placeholder="请输入邮箱" v-model="data.email"></el-input>
+      <el-input class="form-input" placeholder="请输入编码" v-model="data.code">编码</el-input>
+      <el-input class="form-input" placeholder="请输入账号" v-model="data.username">账号</el-input>
+      <el-input class="form-input" placeholder="请输入昵称" v-model="data.nickname">昵称</el-input>
+      <el-input class="form-input" placeholder="请输入电话" v-model="data.phone">电话</el-input>
+      <el-input class="form-input" placeholder="请输入邮箱" v-model="data.email">邮箱</el-input>
     </div>
     <div class="button">
       <el-button class="cancel" @click="cancel" :loading="loading">取消</el-button>

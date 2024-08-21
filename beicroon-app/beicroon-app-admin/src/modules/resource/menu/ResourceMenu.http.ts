@@ -1,5 +1,6 @@
 import http, {BaseVO, DisableDTO, DisableVO, QueryDTO, Response, UpdateDTO} from "@/https";
 
+// 基础返回字段
 export type ResourceMenuBaseVO = BaseVO & DisableVO & {
     parentId?: string
     parentCode?: string
@@ -10,10 +11,17 @@ export type ResourceMenuBaseVO = BaseVO & DisableVO & {
     sorting?: number
 }
 
-export type ResourceMenuDetailVO = ResourceMenuBaseVO & {}
+// 详情返回字段
+export type ResourceMenuDetailVO = ResourceMenuBaseVO & {
 
-export type ResourceMenuPageVO = ResourceMenuBaseVO & {}
+}
 
+// 分页返回字段
+export type ResourceMenuPageVO = ResourceMenuBaseVO & {
+
+}
+
+// 新增参数字段
 export type ResourceMenuCreateDTO = DisableDTO & {
     parentId?: string
     parentCode?: string
@@ -24,6 +32,7 @@ export type ResourceMenuCreateDTO = DisableDTO & {
     sorting?: number
 }
 
+// 修改参数字段
 export type ResourceMenuUpdateDTO = UpdateDTO & {
     parentId?: string
     parentCode?: string
@@ -34,6 +43,7 @@ export type ResourceMenuUpdateDTO = UpdateDTO & {
     sorting?: number
 }
 
+// 查询参数字段
 export type ResourceMenuQueryDTO = QueryDTO & DisableDTO & {
     parentId?: string
     parentCode?: string
@@ -44,6 +54,7 @@ export type ResourceMenuQueryDTO = QueryDTO & DisableDTO & {
     sorting?: number
 }
 
+// 基础信息接口
 export async function show(id: String): Promise<Response<ResourceMenuBaseVO>> {
     return http.request({
         url: "/api/admin/admin/resource-menu-show?id=" + id,
@@ -51,6 +62,7 @@ export async function show(id: String): Promise<Response<ResourceMenuBaseVO>> {
     })
 }
 
+// 详细信息接口
 export async function detail(id: String): Promise<Response<ResourceMenuDetailVO>> {
     return http.request({
         url: "/api/admin/admin/resource-menu-detail?id=" + id,
@@ -58,6 +70,7 @@ export async function detail(id: String): Promise<Response<ResourceMenuDetailVO>
     })
 }
 
+// 分页列表接口
 export async function page(data: ResourceMenuQueryDTO): Promise<Response<Array<ResourceMenuPageVO>>> {
     return http.request({
         url: "/api/admin/admin/resource-menu-page",
@@ -66,6 +79,7 @@ export async function page(data: ResourceMenuQueryDTO): Promise<Response<Array<R
     })
 }
 
+// 全量列表接口
 export async function list(data: ResourceMenuQueryDTO): Promise<Response<Array<ResourceMenuBaseVO>>> {
     return http.request({
         url: "/api/admin/admin/resource-menu-list",
@@ -74,6 +88,7 @@ export async function list(data: ResourceMenuQueryDTO): Promise<Response<Array<R
     })
 }
 
+// 单个新增接口
 export async function create(data: ResourceMenuCreateDTO): Promise<Response<boolean>> {
     return http.request({
         url: "/api/admin/admin/resource-menu-create",
@@ -82,6 +97,7 @@ export async function create(data: ResourceMenuCreateDTO): Promise<Response<bool
     })
 }
 
+// 单个修改接口
 export async function update(data: ResourceMenuUpdateDTO): Promise<Response<boolean>> {
     return http.request({
         url: "/api/admin/admin/resource-menu-update",
@@ -90,6 +106,7 @@ export async function update(data: ResourceMenuUpdateDTO): Promise<Response<bool
     })
 }
 
+// 删除接口
 export async function remove(ids: string | Array<string>): Promise<Response<boolean>> {
     return http.request({
         url: "/api/admin/admin/resource-menu-remove",

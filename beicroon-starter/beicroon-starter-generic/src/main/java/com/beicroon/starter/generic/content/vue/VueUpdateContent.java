@@ -51,7 +51,7 @@ public class VueUpdateContent {
                 return;
               }
 
-              await submit(data.value).finally(() => loading.value = false);;
+              await submit(data.value).finally(() => loading.value = false);
 
               await toast("修改成功");
 
