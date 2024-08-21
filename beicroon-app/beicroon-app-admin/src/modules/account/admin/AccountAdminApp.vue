@@ -8,6 +8,7 @@ import Detail from "./AccountAdminDetail.vue";
 import Update from "./AccountAdminUpdate.vue";
 import dialogWindow from "@/utils/dialogWindow";
 import ElButton from "@/components/elements/ElButton.vue";
+import ElSearch from "@/components/elements/ElSearch.vue";
 import {AccountAdminPageVO as VO, AccountAdminQueryDTO as DTO, page, remove} from "./AccountAdmin.http.ts";
 
 const query = ref<DTO>({} as DTO);
@@ -69,30 +70,21 @@ onMounted(doLoad);
   <div class="list">
     <div class="list-head">
       <div class="head-search">
-        <label class="head-input">
-          <span><i>编</i><i>码</i></span>
-          <input type="text" placeholder="编码筛选" v-model="query.code"/>
-        </label>
-        <label class="head-input">
-          <span><i>账</i><i>号</i></span>
-          <input type="text" placeholder="账号筛选" v-model="query.username"/>
-        </label>
-        <label class="head-input">
-          <span><i>密</i><i>码</i></span>
-          <input type="text" placeholder="密码筛选" v-model="query.password"/>
-        </label>
-        <label class="head-input">
-          <span><i>昵</i><i>称</i></span>
-          <input type="text" placeholder="昵称筛选" v-model="query.nickname"/>
-        </label>
-        <label class="head-input">
-          <span><i>电</i><i>话</i></span>
-          <input type="text" placeholder="电话筛选" v-model="query.phone"/>
-        </label>
-        <label class="head-input">
-          <span><i>邮</i><i>箱</i></span>
-          <input type="text" placeholder="邮箱筛选" v-model="query.email"/>
-        </label>
+        <el-search placeholder="编码筛选"  v-model="query.code">
+          <i>编</i><i>码</i>
+        </el-search>
+        <el-search placeholder="账号筛选"  v-model="query.username">
+          <i>账</i><i>号</i>
+        </el-search>
+        <el-search placeholder="昵称筛选"  v-model="query.nickname">
+          <i>昵</i><i>称</i>
+        </el-search>
+        <el-search placeholder="电话筛选"  v-model="query.phone">
+          <i>电</i><i>话</i>
+        </el-search>
+        <el-search placeholder="邮箱筛选"  v-model="query.email">
+          <i>邮</i><i>箱</i>
+        </el-search>
       </div>
       <div class="head-action">
         <el-button class="head-button" @click="doLoad" :loading="loading">查询</el-button>

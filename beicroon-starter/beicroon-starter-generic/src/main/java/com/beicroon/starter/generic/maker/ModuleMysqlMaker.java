@@ -257,17 +257,16 @@ public class ModuleMysqlMaker {
 
     private String getVueAppSearchFieldString(Field field) {
         String template = """
-                        <label class="head-input">
-                          <span>%s</span>
-                          <input type="text" placeholder="%s筛选" v-model="query.%s"/>
-                        </label>
+                        <el-search placeholder="%s筛选"  v-model="query.%s">
+                          %s
+                        </el-search>
                 """;
 
         String title = Arrays.stream(field.comment().split(""))
                 .map(it -> String.format("<i>%s</i>", it))
                 .collect(Collectors.joining());
 
-        return String.format(template, title, field.comment(), field.getSnakeCaseName());
+        return String.format(template, field.comment(), field.getSnakeCaseName(), title);
     }
 
     private String getVueHttpFieldString(Field field) {

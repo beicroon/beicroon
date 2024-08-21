@@ -53,7 +53,7 @@ const value = computed({
 
 <template>
   <div class="el-input" :class="{required: required}" ref="elInput">
-    <label>{{ label }}</label>
+    <label><slot></slot></label>
     <input :disabled="disabled" class="input-value" :type="type" :placeholder="placeholder" v-model="value"/>
   </div>
 </template>

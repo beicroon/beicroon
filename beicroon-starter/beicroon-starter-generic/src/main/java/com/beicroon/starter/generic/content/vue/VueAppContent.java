@@ -15,6 +15,7 @@ public class VueAppContent {
             import Update from "./{{filename}}Update.vue";
             import dialogWindow from "@/utils/dialogWindow";
             import ElButton from "@/components/elements/ElButton.vue";
+            import ElSearch from "@/components/elements/ElSearch.vue";
             import {{{filename}}PageVO as VO, {{filename}}QueryDTO as DTO, page, remove} from "./{{filename}}.http.ts";
             
             const query = ref<DTO>({} as DTO);

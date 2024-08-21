@@ -8,6 +8,7 @@ import Detail from "./ResourceMenuDetail.vue";
 import Update from "./ResourceMenuUpdate.vue";
 import dialogWindow from "@/utils/dialogWindow";
 import ElButton from "@/components/elements/ElButton.vue";
+import ElSearch from "@/components/elements/ElSearch.vue";
 import {page, remove, ResourceMenuPageVO as VO, ResourceMenuQueryDTO as DTO} from "./ResourceMenu.http.ts";
 
 const query = ref<DTO>({} as DTO);
@@ -69,34 +70,18 @@ onMounted(doLoad);
   <div class="list">
     <div class="list-head">
       <div class="head-search">
-        <label class="head-input">
-          <span><i>父</i><i>级</i><i>主</i><i>键</i></span>
-          <input type="text" placeholder="父级主键筛选" v-model="query.parentId"/>
-        </label>
-        <label class="head-input">
-          <span><i>父</i><i>级</i><i>编</i><i>码</i></span>
-          <input type="text" placeholder="父级编码筛选" v-model="query.parentCode"/>
-        </label>
-        <label class="head-input">
-          <span><i>父</i><i>级</i><i>名</i><i>称</i></span>
-          <input type="text" placeholder="父级名称筛选" v-model="query.parentName"/>
-        </label>
-        <label class="head-input">
-          <span><i>编</i><i>码</i></span>
-          <input type="text" placeholder="编码筛选" v-model="query.code"/>
-        </label>
-        <label class="head-input">
-          <span><i>名</i><i>称</i></span>
-          <input type="text" placeholder="名称筛选" v-model="query.name"/>
-        </label>
-        <label class="head-input">
-          <span><i>路</i><i>径</i></span>
-          <input type="text" placeholder="路径筛选" v-model="query.path"/>
-        </label>
-        <label class="head-input">
-          <span><i>排</i><i>序</i></span>
-          <input type="text" placeholder="排序筛选" v-model="query.sorting"/>
-        </label>
+        <el-search placeholder="父级编码筛选"  v-model="query.parentCode">
+          <i>父</i><i>级</i><i>编</i><i>码</i>
+        </el-search>
+        <el-search placeholder="父级名称筛选"  v-model="query.parentName">
+          <i>父</i><i>级</i><i>名</i><i>称</i>
+        </el-search>
+        <el-search placeholder="编码筛选"  v-model="query.code">
+          <i>编</i><i>码</i>
+        </el-search>
+        <el-search placeholder="名称筛选"  v-model="query.name">
+          <i>名</i><i>称</i>
+        </el-search>
       </div>
       <div class="head-action">
         <el-button class="head-button" @click="doLoad" :loading="loading">查询</el-button>
