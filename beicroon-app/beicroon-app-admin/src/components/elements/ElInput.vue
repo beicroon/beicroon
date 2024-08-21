@@ -124,6 +124,7 @@ const value = computed({
   label {
     z-index: 1;
     width: 50%;
+    cursor: text;
     height: 36rem;
     display: flex;
     position: relative;
@@ -165,6 +166,7 @@ const value = computed({
 
   input {
     width: 100%;
+    cursor: text;
     height: 38rem;
     display: block;
     padding: 0 18rem;

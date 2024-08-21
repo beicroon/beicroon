@@ -40,7 +40,7 @@ public class VueDetailContent {
             <template>
               <form class="detail disabled">
                 <div class="view">
-                  {{vueAppFormInputContent}}
+                  {{vueAppDetailContent}}
                 </div>
                 <div class="button">
                   <el-button class="cancel" @click="cancel">关闭</el-button>
@@ -56,7 +56,7 @@ public class VueDetailContent {
     public static String getContent(Table table) {
         return CONTENT
                 .replace("{{filename}}", table.getFilename())
-                .replace("{{vueAppFormInputContent}}", table.getVueAppFormInputContent().trim());
+                .replace("{{vueAppDetailContent}}", table.getVueAppDetailContent().trim());
     }
 
 }

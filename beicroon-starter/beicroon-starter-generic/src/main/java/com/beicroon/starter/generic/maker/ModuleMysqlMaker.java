@@ -117,6 +117,7 @@ public class ModuleMysqlMaker {
             StringBuilder vueAppTableHeadContent = new StringBuilder();
             StringBuilder vueAppTableBodyContent = new StringBuilder();
             StringBuilder vueAppFormInputContent = new StringBuilder();
+            StringBuilder vueAppDetailContent = new StringBuilder();
 
             for (Field field : table.getColumns()) {
                 vueHttpContent.append(this.getVueHttpFieldString(field));
@@ -124,6 +125,7 @@ public class ModuleMysqlMaker {
                 vueAppTableHeadContent.append(this.getVueAppTableHeadFieldString(field));
                 vueAppTableBodyContent.append(this.getVueAppTableBodyFieldString(field));
                 vueAppFormInputContent.append(this.getVueFormInputFieldString(field));
+                vueAppDetailContent.append(this.getVueDetailFieldString(field));
             }
 
             table.setVueHttpContent(vueHttpContent.toString());
@@ -131,6 +133,7 @@ public class ModuleMysqlMaker {
             table.setVueAppTableHeadContent(vueAppTableHeadContent.toString());
             table.setVueAppTableBodyContent(vueAppTableBodyContent.toString());
             table.setVueAppFormInputContent(vueAppFormInputContent.toString());
+            table.setVueAppDetailContent(vueAppDetailContent.toString());
 
             FileUtils.writeFileIfNotExists(FileManager.getVueHttpFile(modulePath, table), VueHttpContent.getContent(table));
             FileUtils.writeFileIfNotExists(FileManager.getVueAppFile(modulePath, table), VueAppContent.getContent(table));
@@ -225,6 +228,14 @@ public class ModuleMysqlMaker {
                 type,
                 field.getSnakeCaseName()
         );
+    }
+
+    private String getVueDetailFieldString(Field field) {
+        String template = """
+                      <el-input disabled class="form-input" v-model="data.%s">%s</el-input>
+                """;
+
+        return String.format(template, field.getSnakeCaseName(), field.comment());
     }
 
     private String getVueFormInputFieldString(Field field) {

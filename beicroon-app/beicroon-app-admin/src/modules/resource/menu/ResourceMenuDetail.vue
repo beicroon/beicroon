@@ -33,13 +33,13 @@ async function cancel() {
 <template>
   <form class="detail disabled">
     <div class="view">
-      <el-input class="form-input" placeholder="请输入父级主键" v-model="data.parentId">父级主键</el-input>
-      <el-input class="form-input" placeholder="请输入父级编码" v-model="data.parentCode">父级编码</el-input>
-      <el-input class="form-input" placeholder="请输入父级名称" v-model="data.parentName">父级名称</el-input>
-      <el-input class="form-input" placeholder="请输入编码" v-model="data.code">编码</el-input>
-      <el-input class="form-input" placeholder="请输入名称" v-model="data.name">名称</el-input>
-      <el-input class="form-input" placeholder="请输入路径" v-model="data.path">路径</el-input>
-      <el-input class="form-input" placeholder="请输入排序" v-model="data.sorting">排序</el-input>
+      <el-input disabled class="form-input" v-model="data.parentId">父级主键</el-input>
+      <el-input disabled class="form-input" v-model="data.parentCode">父级编码</el-input>
+      <el-input disabled class="form-input" v-model="data.parentName">父级名称</el-input>
+      <el-input disabled class="form-input" v-model="data.code">编码</el-input>
+      <el-input disabled class="form-input" v-model="data.name">名称</el-input>
+      <el-input disabled class="form-input" v-model="data.path">路径</el-input>
+      <el-input disabled class="form-input" v-model="data.sorting">排序</el-input>
     </div>
     <div class="button">
       <el-button class="cancel" @click="cancel">关闭</el-button>
