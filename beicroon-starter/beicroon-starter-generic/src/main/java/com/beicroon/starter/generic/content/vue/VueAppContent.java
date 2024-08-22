@@ -90,10 +90,8 @@ public class VueAppContent {
                     <thead class="table-head">
                     <tr class="table-row">
                       {{vueAppTableHeadContent}}
-                      <th><div class="table-cell">创建时间</div></th>
-                      <th><div class="table-cell">创建人昵称</div></th>
-                      <th><div class="table-cell">更新时间</div></th>
-                      <th><div class="table-cell">更新人昵称</div></th>
+                      <th><div class="table-cell">创建信息</div></th>
+                      <th><div class="table-cell">更新信息</div></th>
                       <th class="table-action">
                         <div class="table-cell table-button">操作</div>
                       </th>
@@ -102,10 +100,30 @@ public class VueAppContent {
                     <tbody class="table-body">
                     <tr class="table-row" v-for="item in data">
                       {{vueAppTableBodyContent}}
-                      <td><div class="table-cell">{{ item.createdAt }}</div></td>
-                      <td><div class="table-cell">{{ item.creatorName }}</div></td>
-                      <td><div class="table-cell">{{ item.modifiedAt }}</div></td>
-                      <td><div class="table-cell">{{ item.modifierName }}</div></td>
+                      <td>
+                        <div class="table-cell table-datetime">
+                          <div class="line">
+                            <span class="label">昵称</span>
+                            <span class="value">{{ item.creatorName }}</span>
+                          </div>
+                          <div class="line">
+                            <span class="label">时间</span>
+                            <span class="value">{{ item.createdAt }}</span>
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                        <div class="table-cell table-datetime">
+                          <div class="line">
+                            <span class="label">昵称</span>
+                            <span class="value">{{ item.modifierName }}</span>
+                          </div>
+                          <div class="line">
+                            <span class="label">时间</span>
+                            <span class="value">{{ item.modifiedAt }}</span>
+                          </div>
+                        </div>
+                      </td>
                       <td class="table-action">
                         <div class="table-cell table-button">
                           <el-button class="primary" @click="showDetail(item)">查看</el-button>

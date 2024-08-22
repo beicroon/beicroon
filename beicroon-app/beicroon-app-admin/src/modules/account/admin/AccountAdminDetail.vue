@@ -35,6 +35,7 @@ async function cancel() {
     <div class="view">
       <el-input disabled class="form-input" v-model="data.code">编码</el-input>
       <el-input disabled class="form-input" v-model="data.username">账号</el-input>
+      <el-input disabled class="form-input" v-model="data.password">密码</el-input>
       <el-input disabled class="form-input" v-model="data.nickname">昵称</el-input>
       <el-input disabled class="form-input" v-model="data.phone">电话</el-input>
       <el-input disabled class="form-input" v-model="data.email">邮箱</el-input>

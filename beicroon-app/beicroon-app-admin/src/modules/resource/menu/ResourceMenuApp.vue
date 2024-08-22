@@ -70,10 +70,13 @@ onMounted(doLoad);
   <div class="list">
     <div class="list-head">
       <div class="head-search">
+        <el-search placeholder="父级主键筛选"  v-model="query.parentId"><i>父</i><i>级</i><i>主</i><i>键</i></el-search>
         <el-search placeholder="父级编码筛选"  v-model="query.parentCode"><i>父</i><i>级</i><i>编</i><i>码</i></el-search>
         <el-search placeholder="父级名称筛选"  v-model="query.parentName"><i>父</i><i>级</i><i>名</i><i>称</i></el-search>
         <el-search placeholder="编码筛选"  v-model="query.code"><i>编</i><i>码</i></el-search>
         <el-search placeholder="名称筛选"  v-model="query.name"><i>名</i><i>称</i></el-search>
+        <el-search placeholder="路径筛选"  v-model="query.path"><i>路</i><i>径</i></el-search>
+        <el-search placeholder="排序筛选"  v-model="query.sorting"><i>排</i><i>序</i></el-search>
       </div>
       <div class="head-action">
         <el-button class="head-button" @click="doLoad" :loading="loading">查询</el-button>
@@ -85,16 +88,15 @@ onMounted(doLoad);
       <table class="list-table">
         <thead class="table-head">
         <tr class="table-row">
+          <th><div class="table-cell">父级主键</div></th>
           <th><div class="table-cell">父级编码</div></th>
           <th><div class="table-cell">父级名称</div></th>
           <th><div class="table-cell">编码</div></th>
           <th><div class="table-cell">名称</div></th>
           <th><div class="table-cell">路径</div></th>
           <th><div class="table-cell">排序</div></th>
-          <th><div class="table-cell">创建时间</div></th>
-          <th><div class="table-cell">创建人昵称</div></th>
-          <th><div class="table-cell">更新时间</div></th>
-          <th><div class="table-cell">更新人昵称</div></th>
+          <th><div class="table-cell">创建信息</div></th>
+          <th><div class="table-cell">更新信息</div></th>
           <th class="table-action">
             <div class="table-cell table-button">操作</div>
           </th>
@@ -102,16 +104,37 @@ onMounted(doLoad);
         </thead>
         <tbody class="table-body">
         <tr class="table-row" v-for="item in data">
+          <td><div class="table-cell">{{ item.parentId }}</div></td>
           <td><div class="table-cell">{{ item.parentCode }}</div></td>
           <td><div class="table-cell">{{ item.parentName }}</div></td>
           <td><div class="table-cell">{{ item.code }}</div></td>
           <td><div class="table-cell">{{ item.name }}</div></td>
           <td><div class="table-cell">{{ item.path }}</div></td>
           <td><div class="table-cell">{{ item.sorting }}</div></td>
-          <td><div class="table-cell">{{ item.createdAt }}</div></td>
-          <td><div class="table-cell">{{ item.creatorName }}</div></td>
-          <td><div class="table-cell">{{ item.modifiedAt }}</div></td>
-          <td><div class="table-cell">{{ item.modifierName }}</div></td>
+          <td>
+            <div class="table-cell table-datetime">
+              <div class="line">
+                <span class="label">昵称</span>
+                <span class="value">{{ item.creatorName }}</span>
+              </div>
+              <div class="line">
+                <span class="label">时间</span>
+                <span class="value">{{ item.createdAt }}</span>
+              </div>
+            </div>
+          </td>
+          <td>
+            <div class="table-cell table-datetime">
+              <div class="line">
+                <span class="label">昵称</span>
+                <span class="value">{{ item.modifierName }}</span>
+              </div>
+              <div class="line">
+                <span class="label">时间</span>
+                <span class="value">{{ item.modifiedAt }}</span>
+              </div>
+            </div>
+          </td>
           <td class="table-action">
             <div class="table-cell table-button">
               <el-button class="primary" @click="showDetail(item)">查看</el-button>

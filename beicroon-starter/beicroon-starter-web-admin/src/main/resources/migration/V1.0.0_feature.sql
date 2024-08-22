@@ -32,9 +32,9 @@ create table `admin_account_admin`
 ) engine = innodb comment '后台账号';
 
 INSERT INTO `admin_account_admin`
-    (`code`, `nickname`, `username`, `password`)
+    (`code`, `nickname`, `username`, `password`, `creator_name`, `modifier_name`)
 VALUES
-    ('BeiCroon', 'BeiCroon', 'BeiCroon', 'BeiCroon');
+    ('BeiCroon', 'BeiCroon', 'BeiCroon', 'BeiCroon', 'BeiCroon', 'BeiCroon');
 
 drop table if exists `admin_resource_menu`;
 create table `admin_resource_menu`
@@ -68,13 +68,13 @@ create table `admin_resource_menu`
 ) engine = innodb comment '资源菜单';
 
 INSERT INTO `admin_resource_menu`
-    (`id`, `tenant_id`, `parent_id`, `parent_code`, `parent_name`, `code`, `name`, `path`)
+    (`id`, `tenant_id`, `parent_id`, `parent_code`, `parent_name`, `code`, `name`, `path`, `creator_name`, `modifier_name`)
 VALUES
-    (1825706731063808002, 0, 0, '', '', 'ACCOUNT_CENTER', '账号中心', '/account/center'),
-    (1825707094248591361, 0, 1825706731063808002, 'ACCOUNT_CENTER', '账号中心', 'ACCOUNT_MANAGER', '账号管理', '/account/manager'),
-    (1825707293197012994, 0, 1825707094248591361, 'ACCOUNT_MANAGER', '账号管理', 'ACCOUNT_ADMIN', '后台账号', '/account/admin'),
-    (1825707485132558337, 0, 0, '', '', 'SETTING_CENTER', '设置中心', '/setting/center'),
-    (1825707757028315138, 0, 1825707485132558337, 'SETTING_CENTER', '设置中心', 'SETTING_SYSTEM', '系统设置','/setting/system'),
-    (1825707969033605121, 0, 1825707757028315138, 'SETTING_SYSTEM', '系统设置', 'RESOURCE_MENU', '菜单管理', '/resource/menu');
+    (1825706731063808002, 0, 0, '', '', 'ACCOUNT_CENTER', '账号中心', '/account/center', 'BeiCroon', 'BeiCroon'),
+    (1825707094248591361, 0, 1825706731063808002, 'ACCOUNT_CENTER', '账号中心', 'ACCOUNT_MANAGER', '账号管理', '/account/manager', 'BeiCroon', 'BeiCroon'),
+    (1825707293197012994, 0, 1825707094248591361, 'ACCOUNT_MANAGER', '账号管理', 'ACCOUNT_ADMIN', '后台账号', '/account/admin', 'BeiCroon', 'BeiCroon'),
+    (1825707485132558337, 0, 0, '', '', 'SETTING_CENTER', '设置中心', '/setting/center', 'BeiCroon', 'BeiCroon'),
+    (1825707757028315138, 0, 1825707485132558337, 'SETTING_CENTER', '设置中心', 'SETTING_SYSTEM', '系统设置','/setting/system', 'BeiCroon', 'BeiCroon'),
+    (1825707969033605121, 0, 1825707757028315138, 'SETTING_SYSTEM', '系统设置', 'RESOURCE_MENU', '菜单管理', '/resource/menu', 'BeiCroon', 'BeiCroon');
 
 

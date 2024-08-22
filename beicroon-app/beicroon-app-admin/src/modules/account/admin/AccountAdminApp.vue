@@ -72,6 +72,7 @@ onMounted(doLoad);
       <div class="head-search">
         <el-search placeholder="编码筛选"  v-model="query.code"><i>编</i><i>码</i></el-search>
         <el-search placeholder="账号筛选"  v-model="query.username"><i>账</i><i>号</i></el-search>
+        <el-search placeholder="密码筛选"  v-model="query.password"><i>密</i><i>码</i></el-search>
         <el-search placeholder="昵称筛选"  v-model="query.nickname"><i>昵</i><i>称</i></el-search>
         <el-search placeholder="电话筛选"  v-model="query.phone"><i>电</i><i>话</i></el-search>
         <el-search placeholder="邮箱筛选"  v-model="query.email"><i>邮</i><i>箱</i></el-search>
@@ -88,13 +89,12 @@ onMounted(doLoad);
         <tr class="table-row">
           <th><div class="table-cell">编码</div></th>
           <th><div class="table-cell">账号</div></th>
+          <th><div class="table-cell">密码</div></th>
           <th><div class="table-cell">昵称</div></th>
           <th><div class="table-cell">电话</div></th>
           <th><div class="table-cell">邮箱</div></th>
-          <th><div class="table-cell">创建时间</div></th>
-          <th><div class="table-cell">创建人昵称</div></th>
-          <th><div class="table-cell">更新时间</div></th>
-          <th><div class="table-cell">更新人昵称</div></th>
+          <th><div class="table-cell">创建信息</div></th>
+          <th><div class="table-cell">更新信息</div></th>
           <th class="table-action">
             <div class="table-cell table-button">操作</div>
           </th>
@@ -104,13 +104,34 @@ onMounted(doLoad);
         <tr class="table-row" v-for="item in data">
           <td><div class="table-cell">{{ item.code }}</div></td>
           <td><div class="table-cell">{{ item.username }}</div></td>
+          <td><div class="table-cell">{{ item.password }}</div></td>
           <td><div class="table-cell">{{ item.nickname }}</div></td>
           <td><div class="table-cell">{{ item.phone }}</div></td>
           <td><div class="table-cell">{{ item.email }}</div></td>
-          <td><div class="table-cell">{{ item.createdAt }}</div></td>
-          <td><div class="table-cell">{{ item.creatorName }}</div></td>
-          <td><div class="table-cell">{{ item.modifiedAt }}</div></td>
-          <td><div class="table-cell">{{ item.modifierName }}</div></td>
+          <td>
+            <div class="table-cell table-datetime">
+              <div class="line">
+                <span class="label">昵称</span>
+                <span class="value">{{ item.creatorName }}</span>
+              </div>
+              <div class="line">
+                <span class="label">时间</span>
+                <span class="value">{{ item.createdAt }}</span>
+              </div>
+            </div>
+          </td>
+          <td>
+            <div class="table-cell table-datetime">
+              <div class="line">
+                <span class="label">昵称</span>
+                <span class="value">{{ item.modifierName }}</span>
+              </div>
+              <div class="line">
+                <span class="label">时间</span>
+                <span class="value">{{ item.modifiedAt }}</span>
+              </div>
+            </div>
+          </td>
           <td class="table-action">
             <div class="table-cell table-button">
               <el-button class="primary" @click="showDetail(item)">查看</el-button>

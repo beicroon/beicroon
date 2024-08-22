@@ -58,13 +58,15 @@ async function doConfirm() {
 </template>
 
 <style scoped lang="less">
+@import "@/less/colors";
+
 .dialog {
   display: flex;
   width: 520rem;
   height: 240rem;
   border-radius: 8rem;
   flex-direction: column;
-  border: 1rem solid #e0e4ed;
+  border: 1rem solid @grey;
 
   .title {
     height: 60rem;
@@ -73,7 +75,7 @@ async function doConfirm() {
     line-height: 60rem;
     text-align: center;
     letter-spacing: 8rem;
-    border-bottom: 1rem solid #e0e4ed;
+    border-bottom: 1rem solid @grey;
   }
 
   .message {
@@ -91,21 +93,21 @@ async function doConfirm() {
     height: 60rem;
     display: flex;
     align-items: center;
+    border-top: 1rem solid @grey;
     justify-content: space-around;
-    border-top: 1rem solid #e0e4ed;
 
     .el-button {
-      color: #ffffff;
+      color: @white;
       border-radius: 6rem;
       padding: 8rem 24rem;
     }
 
     .cancel {
-      background-color: #f85e5e;
+      background-color: @dangerous;
     }
 
     .confirm {
-      background-color: #287bf1;
+      background-color: @primary;
     }
   }
 }

@@ -19,6 +19,8 @@ defineProps({
 </template>
 
 <style scoped lang="less">
+@import "@/less/colors";
+
 .toast {
   overflow: hidden;
   min-width: 320rem;
