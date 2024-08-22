@@ -70,7 +70,6 @@ onMounted(doLoad);
   <div class="list">
     <div class="list-head">
       <div class="head-search">
-        <form-input class="row" v-model="query.parentId"><i>父</i><i>级</i><i>主</i><i>键</i></form-input>
         <form-input class="row" v-model="query.parentCode"><i>父</i><i>级</i><i>编</i><i>码</i></form-input>
         <form-input class="row" v-model="query.parentName"><i>父</i><i>级</i><i>名</i><i>称</i></form-input>
         <form-input class="row" v-model="query.code"><i>编</i><i>码</i></form-input>
@@ -86,7 +85,6 @@ onMounted(doLoad);
       <table class="list-table">
         <thead class="table-head">
         <tr class="table-row">
-          <th><div class="table-cell">父级主键</div></th>
           <th><div class="table-cell">父级编码</div></th>
           <th><div class="table-cell">父级名称</div></th>
           <th><div class="table-cell">编码</div></th>
@@ -102,7 +100,6 @@ onMounted(doLoad);
         </thead>
         <tbody class="table-body">
         <tr class="table-row" v-for="item in data">
-          <td><div class="table-cell">{{ item.parentId }}</div></td>
           <td><div class="table-cell">{{ item.parentCode }}</div></td>
           <td><div class="table-cell">{{ item.parentName }}</div></td>
           <td><div class="table-cell">{{ item.code }}</div></td>
