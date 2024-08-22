@@ -7,8 +7,8 @@ import Create from "./ResourceMenuCreate.vue";
 import Detail from "./ResourceMenuDetail.vue";
 import Update from "./ResourceMenuUpdate.vue";
 import dialogWindow from "@/utils/dialogWindow";
-import ElButton from "@/components/elements/ElButton.vue";
-import ElSearch from "@/components/elements/ElSearch.vue";
+import FormInput from "@/components/form/FormInput.vue";
+import FormButton from "@/components/form/FormButton.vue";
 import {page, remove, ResourceMenuPageVO as VO, ResourceMenuQueryDTO as DTO} from "./ResourceMenu.http.ts";
 
 const query = ref<DTO>({} as DTO);
@@ -70,18 +70,16 @@ onMounted(doLoad);
   <div class="list">
     <div class="list-head">
       <div class="head-search">
-        <el-search placeholder="父级主键筛选"  v-model="query.parentId"><i>父</i><i>级</i><i>主</i><i>键</i></el-search>
-        <el-search placeholder="父级编码筛选"  v-model="query.parentCode"><i>父</i><i>级</i><i>编</i><i>码</i></el-search>
-        <el-search placeholder="父级名称筛选"  v-model="query.parentName"><i>父</i><i>级</i><i>名</i><i>称</i></el-search>
-        <el-search placeholder="编码筛选"  v-model="query.code"><i>编</i><i>码</i></el-search>
-        <el-search placeholder="名称筛选"  v-model="query.name"><i>名</i><i>称</i></el-search>
-        <el-search placeholder="路径筛选"  v-model="query.path"><i>路</i><i>径</i></el-search>
-        <el-search placeholder="排序筛选"  v-model="query.sorting"><i>排</i><i>序</i></el-search>
+        <form-input class="row" v-model="query.parentId"><i>父</i><i>级</i><i>主</i><i>键</i></form-input>
+        <form-input class="row" v-model="query.parentCode"><i>父</i><i>级</i><i>编</i><i>码</i></form-input>
+        <form-input class="row" v-model="query.parentName"><i>父</i><i>级</i><i>名</i><i>称</i></form-input>
+        <form-input class="row" v-model="query.code"><i>编</i><i>码</i></form-input>
+        <form-input class="row" v-model="query.name"><i>名</i><i>称</i></form-input>
       </div>
       <div class="head-action">
-        <el-button class="head-button" @click="doLoad" :loading="loading">查询</el-button>
-        <el-button class="head-button" @click="doReset">重置</el-button>
-        <el-button class="head-button" @click="showCreate">新增</el-button>
+        <form-button class="head-button" @click="doLoad" :loading="loading">查询</form-button>
+        <form-button class="head-button" @click="doReset">重置</form-button>
+        <form-button class="head-button" @click="showCreate">新增</form-button>
       </div>
     </div>
     <div class="list-view">
@@ -137,9 +135,9 @@ onMounted(doLoad);
           </td>
           <td class="table-action">
             <div class="table-cell table-button">
-              <el-button class="primary" @click="showDetail(item)">查看</el-button>
-              <el-button class="warning" @click="showUpdate(item)">编辑</el-button>
-              <el-button class="dangerous" @click="showRemove(item)">删除</el-button>
+              <form-button class="primary" @click="showDetail(item)">查看</form-button>
+              <form-button class="warning" @click="showUpdate(item)">编辑</form-button>
+              <form-button class="dangerous" @click="showRemove(item)">删除</form-button>
             </div>
           </td>
         </tr>

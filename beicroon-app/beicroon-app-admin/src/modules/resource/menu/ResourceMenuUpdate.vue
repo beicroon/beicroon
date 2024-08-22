@@ -2,8 +2,8 @@
 import toast from "@/utils/toast";
 import {onBeforeMount, ref} from "vue";
 import {validateForm} from "@/utils/function.ts";
-import ElInput from "@/components/elements/ElInput.vue";
-import ElButton from "@/components/elements/ElButton.vue";
+import FormInput from "@/components/form/FormInput.vue";
+import FormButton from "@/components/form/FormButton.vue";
 import {detail as show, ResourceMenuUpdateDTO as DTO, update as submit} from "./ResourceMenu.http.ts";
 
 const props = defineProps({
@@ -57,17 +57,17 @@ async function confirm() {
 <template>
   <form class="create" ref="form">
     <div class="view">
-      <el-input class="form-input" placeholder="请输入父级主键" v-model="data.parentId">父级主键</el-input>
-      <el-input class="form-input" placeholder="请输入父级编码" v-model="data.parentCode">父级编码</el-input>
-      <el-input class="form-input" placeholder="请输入父级名称" v-model="data.parentName">父级名称</el-input>
-      <el-input class="form-input" placeholder="请输入编码" v-model="data.code">编码</el-input>
-      <el-input class="form-input" placeholder="请输入名称" v-model="data.name">名称</el-input>
-      <el-input class="form-input" placeholder="请输入路径" v-model="data.path">路径</el-input>
-      <el-input class="form-input" placeholder="请输入排序" v-model="data.sorting">排序</el-input>
+      <form-input class="form-input" placeholder="请输入父级主键" v-model="data.parentId">父级主键</form-input>
+      <form-input class="form-input" placeholder="请输入父级编码" v-model="data.parentCode">父级编码</form-input>
+      <form-input class="form-input" placeholder="请输入父级名称" v-model="data.parentName">父级名称</form-input>
+      <form-input class="form-input" placeholder="请输入编码" v-model="data.code">编码</form-input>
+      <form-input class="form-input" placeholder="请输入名称" v-model="data.name">名称</form-input>
+      <form-input class="form-input" placeholder="请输入路径" v-model="data.path">路径</form-input>
+      <form-input class="form-input" placeholder="请输入排序" v-model="data.sorting">排序</form-input>
     </div>
     <div class="button">
-      <el-button class="cancel" @click="cancel" :loading="loading">取消</el-button>
-      <el-button class="confirm" @click="confirm" :loading="loading">保存</el-button>
+      <form-button class="cancel" @click="cancel" :loading="loading">取消</form-button>
+      <form-button class="confirm" @click="confirm" :loading="loading">保存</form-button>
     </div>
   </form>
 </template>

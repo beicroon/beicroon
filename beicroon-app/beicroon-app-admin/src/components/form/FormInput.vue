@@ -48,7 +48,7 @@ const value = computed({
 </script>
 
 <template>
-  <div class="el-input" :class="{required: required}" ref="elInput">
+  <div class="form-input" :class="{required: required}" ref="elInput">
     <label><slot></slot></label>
     <input :disabled="disabled" class="input-value" :type="type" :placeholder="placeholder" v-model="value"/>
   </div>
@@ -57,7 +57,7 @@ const value = computed({
 <style lang="less">
 @import "@/less/colors";
 
-.el-input {
+.form-input {
   gap: 8rem;
   z-index: 1;
   width: 360rem;
@@ -129,7 +129,6 @@ const value = computed({
     display: flex;
     position: relative;
     align-items: center;
-    padding: 8rem 32rem;
     border-radius: 6rem;
     letter-spacing: 4rem;
     justify-content: center;
@@ -162,6 +161,10 @@ const value = computed({
       font-weight: bold;
       position: absolute;
     }
+
+    i {
+      font-style: normal;
+    }
   }
 
   input {
@@ -179,6 +182,20 @@ const value = computed({
 
     &[disabled] {
       cursor: text;
+    }
+  }
+
+  &.row {
+    padding: 0;
+    height: auto;
+    flex-direction: row;
+
+    label {
+      flex: 1;
+    }
+
+    input {
+      width: 260rem;
     }
   }
 }

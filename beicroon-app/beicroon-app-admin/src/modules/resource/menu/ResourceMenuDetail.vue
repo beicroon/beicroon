@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import {onBeforeMount, ref} from "vue";
-import ElInput from "@/components/elements/ElInput.vue";
-import ElButton from "@/components/elements/ElButton.vue";
+import FormInput from "@/components/form/FormInput.vue";
+import FormButton from "@/components/form/FormButton.vue";
 import {detail, ResourceMenuDetailVO as VO} from "./ResourceMenu.http.ts";
 
 const props = defineProps({
@@ -33,16 +33,16 @@ async function cancel() {
 <template>
   <form class="detail disabled">
     <div class="view">
-      <el-input disabled class="form-input" v-model="data.parentId">父级主键</el-input>
-      <el-input disabled class="form-input" v-model="data.parentCode">父级编码</el-input>
-      <el-input disabled class="form-input" v-model="data.parentName">父级名称</el-input>
-      <el-input disabled class="form-input" v-model="data.code">编码</el-input>
-      <el-input disabled class="form-input" v-model="data.name">名称</el-input>
-      <el-input disabled class="form-input" v-model="data.path">路径</el-input>
-      <el-input disabled class="form-input" v-model="data.sorting">排序</el-input>
+      <form-input disabled class="form-input" v-model="data.parentId">父级主键</form-input>
+      <form-input disabled class="form-input" v-model="data.parentCode">父级编码</form-input>
+      <form-input disabled class="form-input" v-model="data.parentName">父级名称</form-input>
+      <form-input disabled class="form-input" v-model="data.code">编码</form-input>
+      <form-input disabled class="form-input" v-model="data.name">名称</form-input>
+      <form-input disabled class="form-input" v-model="data.path">路径</form-input>
+      <form-input disabled class="form-input" v-model="data.sorting">排序</form-input>
     </div>
     <div class="button">
-      <el-button class="cancel" @click="cancel">关闭</el-button>
+      <form-button class="cancel" @click="cancel">关闭</form-button>
     </div>
   </form>
 </template>

@@ -232,7 +232,7 @@ public class ModuleMysqlMaker {
 
     private String getVueDetailFieldString(Field field) {
         String template = """
-                      <el-input disabled class="form-input" v-model="data.%s">%s</el-input>
+                      <form-input disabled class="form-input" v-model="data.%s">%s</form-input>
                 """;
 
         return String.format(template, field.getSnakeCaseName(), field.comment());
@@ -240,7 +240,7 @@ public class ModuleMysqlMaker {
 
     private String getVueFormInputFieldString(Field field) {
         String template = """
-                      <el-input class="form-input" placeholder="请输入%s" v-model="data.%s">%s</el-input>
+                      <form-input class="form-input" placeholder="请输入%s" v-model="data.%s">%s</form-input>
                 """;
 
         return String.format(template, field.comment(), field.getSnakeCaseName(), field.comment());
@@ -264,14 +264,14 @@ public class ModuleMysqlMaker {
 
     private String getVueAppSearchFieldString(Field field) {
         String template = """
-                        <el-search placeholder="%s筛选"  v-model="query.%s">%s</el-search>
+                        <form-input class="row" v-model="query.%s">%s</form-input>
                 """;
 
         String title = Arrays.stream(field.comment().split(""))
                 .map(it -> String.format("<i>%s</i>", it))
                 .collect(Collectors.joining());
 
-        return String.format(template, field.comment(), field.getSnakeCaseName(), title);
+        return String.format(template, field.getSnakeCaseName(), title);
     }
 
     private String getVueHttpFieldString(Field field) {

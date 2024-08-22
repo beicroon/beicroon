@@ -51,7 +51,7 @@ const d = "M510.44352 122.88a71.68 71.68 0 0 1 20.48 140.3904v66.16064l59.67872-
 </script>
 
 <template>
-  <div class="el-button" @click="handleClick">
+  <div class="form-button" @click="handleClick">
     <svg v-show="loading" class="button-loading" viewBox="0 0 1024 1024" width="20" height="20">
       <path :d="d" fill="#ffffff"></path>
     </svg>
@@ -71,7 +71,7 @@ const d = "M510.44352 122.88a71.68 71.68 0 0 1 20.48 140.3904v66.16064l59.67872-
   }
 }
 
-.el-button {
+.form-button {
   display: flex;
   cursor: pointer;
   overflow: hidden;

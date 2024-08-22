@@ -143,7 +143,6 @@ onMounted(async () => {
   width: 100%;
   height: 60rem;
   color: #ffffff;
-  font-size: 16rem;
   padding: 0 38rem;
   position: absolute;
   background: linear-gradient(83deg, #0f71e2 0%, #0f71e2 100%);
@@ -194,7 +193,6 @@ onMounted(async () => {
   .parent {
     cursor: pointer;
     padding: 8rem 0;
-    font-size: 16rem;
     font-weight: bold;
     text-align: center;
 

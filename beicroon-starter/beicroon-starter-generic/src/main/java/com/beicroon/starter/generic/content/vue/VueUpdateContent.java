@@ -9,8 +9,8 @@ public class VueUpdateContent {
             import toast from "@/utils/toast";
             import {onBeforeMount, ref} from "vue";
             import {validateForm} from "@/utils/function.ts";
-            import ElInput from "@/components/elements/ElInput.vue";
-            import ElButton from "@/components/elements/ElButton.vue";
+            import FormInput from "@/components/form/FormInput.vue";
+            import FormButton from "@/components/form/FormButton.vue";
             import {{{filename}}UpdateDTO as DTO, detail as show, update as submit} from "./{{filename}}.http.ts";
 
             const props = defineProps({
@@ -67,8 +67,8 @@ public class VueUpdateContent {
                   {{vueAppFormInputContent}}
                 </div>
                 <div class="button">
-                  <el-button class="cancel" @click="cancel" :loading="loading">取消</el-button>
-                  <el-button class="confirm" @click="confirm" :loading="loading">保存</el-button>
+                  <form-button class="cancel" @click="cancel" :loading="loading">取消</form-button>
+                  <form-button class="confirm" @click="confirm" :loading="loading">保存</form-button>
                 </div>
               </form>
             </template>

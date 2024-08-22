@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import {ref} from "vue";
-import ElButton from "@/components/elements/ElButton.vue";
+import FormButton from "@/components/form/FormButton.vue";
 
 const props = defineProps({
   title: {
@@ -51,8 +51,8 @@ async function doConfirm() {
     <div class="title">{{ title }}</div>
     <div class="message">{{ message }}</div>
     <div class="button">
-      <el-button class="cancel" @click="doCancel" :loading="loading">取消</el-button>
-      <el-button class="confirm" @click="doConfirm" :loading="loading">确认</el-button>
+      <form-button class="cancel" @click="doCancel" :loading="loading">取消</form-button>
+      <form-button class="confirm" @click="doConfirm" :loading="loading">确认</form-button>
     </div>
   </div>
 </template>
@@ -70,7 +70,6 @@ async function doConfirm() {
 
   .title {
     height: 60rem;
-    font-size: 16rem;
     font-weight: bold;
     line-height: 60rem;
     text-align: center;
@@ -97,7 +96,7 @@ async function doConfirm() {
     border-top: 1rem solid @grey;
     justify-content: space-around;
 
-    .el-button {
+    .form-button {
       color: @white;
       padding: 8rem 0;
       min-width: 80rem;

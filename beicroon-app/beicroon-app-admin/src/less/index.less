@@ -5,6 +5,34 @@
   padding: 0;
   box-shadow: none;
   box-sizing: border-box;
+
+  /* 滚动条样式 */
+  &::-webkit-scrollbar {
+    width: 8rem; /* 滚动条的宽度 */
+    height: 8rem; /* 滚动条的宽度 */
+  }
+
+  /* 滚动条滑道样式 */
+  &::-webkit-scrollbar-track {
+    background-color: transparent; /* 滑道背景 */
+  }
+
+  /* 滚动条滑块样式 */
+  &::-webkit-scrollbar-thumb {
+    border: none; /* 滑块边框 */
+    border-radius: 8rem; /* 滑块圆角 */
+    background-color: @light-grey; /* 滑块颜色 */
+  }
+
+  /* 滑块悬停样式 */
+  &::-webkit-scrollbar-thumb:hover {
+    background-color: @grey; /* 悬停时滑块颜色 */
+  }
+
+  /* 滚动条交界处样式 */
+  &::-webkit-scrollbar-corner {
+    background-color: transparent; /* 方块颜色 */
+  }
 }
 
 html {
@@ -98,41 +126,6 @@ button {
     flex: 1;
     overflow: auto;
     border: 1rem solid @light-grey;
-
-    /* 滚动条样式 */
-
-    &::-webkit-scrollbar {
-      width: 8rem; /* 滚动条的宽度 */
-      height: 8rem; /* 滚动条的宽度 */
-    }
-
-    /* 滚动条滑道样式 */
-
-    &::-webkit-scrollbar-track {
-      background-color: transparent; /* 滑道背景 */
-      border-top: 1rem solid @light-grey; /* 左边框 */
-      border-left: 1rem solid @light-grey; /* 左边框 */
-    }
-
-    /* 滚动条滑块样式 */
-
-    &::-webkit-scrollbar-thumb {
-      border: none; /* 滑块边框 */
-      border-radius: 6rem; /* 滑块圆角 */
-      background-color: @light-grey; /* 滑块颜色 */
-    }
-
-    /* 滑块悬停样式 */
-
-    &::-webkit-scrollbar-thumb:hover {
-      background-color: @grey; /* 悬停时滑块颜色 */
-    }
-
-    /* 滚动条交界处样式 */
-
-    &::-webkit-scrollbar-corner {
-      background-color: transparent; /* 方块颜色 */
-    }
   }
 
   .list-table {
@@ -169,6 +162,7 @@ button {
   }
 
   .table-cell {
+    gap: 8rem;
     display: flex;
     min-width: 130rem;
     min-height: 60rem;
@@ -178,34 +172,27 @@ button {
     flex-direction: column;
     justify-content: center;
 
-    &.table-datetime {
-      gap: 18rem;
-      width: 240rem;
+    .line {
+      gap: 8rem;
       display: flex;
-      flex-direction: column;
+    }
 
-      .line {
-        gap: 8rem;
-        display: flex;
+    .label {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: right;
+
+      &:after {
+        content: "：";
       }
+    }
 
-      .label {
-        flex: 1;
-        display: flex;
-        align-items: center;
-        justify-content: right;
-
-        &:after {
-          content: "：";
-        }
-      }
-
-      .value {
-        width: 160rem;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
+    .value {
+      width: 160rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
   }
 
@@ -316,6 +303,7 @@ button {
       flex: 1;
       gap: 8rem;
       display: flex;
+      overflow: auto;
       flex-wrap: wrap;
       padding: 12rem 24rem;
       align-content: flex-start;
@@ -338,7 +326,7 @@ button {
       justify-content: space-around;
       border-top: 1rem solid @light-grey;
 
-      .el-button {
+      .form-button {
         color: @white;
         padding: 8rem 0;
         min-width: 80rem;

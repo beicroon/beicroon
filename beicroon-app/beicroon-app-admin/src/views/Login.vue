@@ -5,8 +5,8 @@ import toast from "@/utils/toast";
 import {useRoute} from "vue-router";
 import {validateForm} from "@/utils/function.ts";
 import {CacheKeyEnums} from "@/enums/system.enums.ts";
-import ElInput from "@/components/elements/ElInput.vue";
-import ElButton from "@/components/elements/ElButton.vue";
+import FormInput from "@/components/form/FormInput.vue";
+import FormButton from "@/components/form/FormButton.vue";
 import {AuthAdminBaseVO, AuthAdminLoginDTO, login} from "@/https/auth/auth.http.ts";
 
 const form = ref();
@@ -49,10 +49,10 @@ async function submit() {
 <template>
   <div class="login">
     <form class="login-form" ref="form" @submit="submit">
-      <el-input required class="form-input" placeholder="请输入账号" v-model="dto.username">账号</el-input>
-      <el-input required class="form-input" type="password" placeholder="请输入密码" v-model="dto.password">密码</el-input>
+      <form-input required class="form-input" placeholder="请输入账号" v-model="dto.username">账号</form-input>
+      <form-input required class="form-input" type="password" placeholder="请输入密码" v-model="dto.password">密码</form-input>
       <div class="login-button">
-        <el-button @click="submit" :loading="loading">登录</el-button>
+        <form-button @click="submit" :loading="loading">登录</form-button>
       </div>
     </form>
   </div>
@@ -88,7 +88,7 @@ async function submit() {
     align-items: center;
     justify-content: center;
 
-    .el-button {
+    .form-button {
       width: 100%;
       color: @white;
       padding: 8rem 0;

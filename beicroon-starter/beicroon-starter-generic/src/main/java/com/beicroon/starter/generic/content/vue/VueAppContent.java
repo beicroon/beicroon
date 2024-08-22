@@ -14,8 +14,8 @@ public class VueAppContent {
             import Detail from "./{{filename}}Detail.vue";
             import Update from "./{{filename}}Update.vue";
             import dialogWindow from "@/utils/dialogWindow";
-            import ElButton from "@/components/elements/ElButton.vue";
-            import ElSearch from "@/components/elements/ElSearch.vue";
+            import FormInput from "@/components/form/FormInput.vue";
+            import FormButton from "@/components/form/FormButton.vue";
             import {{{filename}}PageVO as VO, {{filename}}QueryDTO as DTO, page, remove} from "./{{filename}}.http.ts";
             
             const query = ref<DTO>({} as DTO);
@@ -80,9 +80,9 @@ public class VueAppContent {
                     {{vueAppSearchContent}}
                   </div>
                   <div class="head-action">
-                    <el-button class="head-button" @click="doLoad" :loading="loading">查询</el-button>
-                    <el-button class="head-button" @click="doReset">重置</el-button>
-                    <el-button class="head-button" @click="showCreate">新增</el-button>
+                    <form-button class="head-button" @click="doLoad" :loading="loading">查询</form-button>
+                    <form-button class="head-button" @click="doReset">重置</form-button>
+                    <form-button class="head-button" @click="showCreate">新增</form-button>
                   </div>
                 </div>
                 <div class="list-view">
@@ -126,9 +126,9 @@ public class VueAppContent {
                       </td>
                       <td class="table-action">
                         <div class="table-cell table-button">
-                          <el-button class="primary" @click="showDetail(item)">查看</el-button>
-                          <el-button class="warning" @click="showUpdate(item)">编辑</el-button>
-                          <el-button class="dangerous" @click="showRemove(item)">删除</el-button>
+                          <form-button class="primary" @click="showDetail(item)">查看</form-button>
+                          <form-button class="warning" @click="showUpdate(item)">编辑</form-button>
+                          <form-button class="dangerous" @click="showRemove(item)">删除</form-button>
                         </div>
                       </td>
                     </tr>

@@ -4,7 +4,6 @@ import http, {BaseVO, DisableDTO, DisableVO, QueryDTO, Response, UpdateDTO} from
 export type AccountAdminBaseVO = BaseVO & DisableVO & {
     code?: string
     username?: string
-    password?: string
     nickname?: string
     phone?: string
     email?: string
@@ -34,7 +33,6 @@ export type AccountAdminCreateDTO = DisableDTO & {
 export type AccountAdminUpdateDTO = UpdateDTO & {
     code?: string
     username?: string
-    password?: string
     nickname?: string
     phone?: string
     email?: string
@@ -44,7 +42,6 @@ export type AccountAdminUpdateDTO = UpdateDTO & {
 export type AccountAdminQueryDTO = QueryDTO & DisableDTO & {
     code?: string
     username?: string
-    password?: string
     nickname?: string
     phone?: string
     email?: string

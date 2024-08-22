@@ -7,8 +7,8 @@ public class VueDetailContent {
     private static final String CONTENT = """
             <script setup lang="ts">
             import {onBeforeMount, ref} from "vue";
-            import ElInput from "@/components/elements/ElInput.vue";
-            import ElButton from "@/components/elements/ElButton.vue";
+            import FormInput from "@/components/form/FormInput.vue";
+            import FormButton from "@/components/form/FormButton.vue";
             import {{{filename}}DetailVO as VO, detail} from "./{{filename}}.http.ts";
 
             const props = defineProps({
@@ -43,7 +43,7 @@ public class VueDetailContent {
                   {{vueAppDetailContent}}
                 </div>
                 <div class="button">
-                  <el-button class="cancel" @click="cancel">关闭</el-button>
+                  <form-button class="cancel" @click="cancel">关闭</form-button>
                 </div>
               </form>
             </template>
