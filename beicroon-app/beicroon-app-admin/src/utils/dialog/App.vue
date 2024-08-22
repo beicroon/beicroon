@@ -92,14 +92,15 @@ async function doConfirm() {
   .button {
     height: 60rem;
     display: flex;
+    min-width: 80rem;
     align-items: center;
     border-top: 1rem solid @grey;
     justify-content: space-around;
 
     .el-button {
       color: @white;
-      border-radius: 6rem;
-      padding: 8rem 24rem;
+      padding: 8rem 0;
+      min-width: 80rem;
     }
 
     .cancel {

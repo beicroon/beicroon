@@ -91,8 +91,8 @@ async function submit() {
     .el-button {
       width: 100%;
       color: @white;
-      padding: 8rem 32rem;
-      border-radius: 8rem;
+      padding: 8rem 0;
+      min-width: 80rem;
       background-color: @primary;
     }
   }
