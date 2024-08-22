@@ -70,10 +70,13 @@ onMounted(doLoad);
   <div class="list">
     <div class="list-head">
       <div class="head-search">
+        <form-input class="row" v-model="query.parentId"><i>父</i><i>级</i><i>主</i><i>键</i></form-input>
         <form-input class="row" v-model="query.parentCode"><i>父</i><i>级</i><i>编</i><i>码</i></form-input>
         <form-input class="row" v-model="query.parentName"><i>父</i><i>级</i><i>名</i><i>称</i></form-input>
         <form-input class="row" v-model="query.code"><i>编</i><i>码</i></form-input>
         <form-input class="row" v-model="query.name"><i>名</i><i>称</i></form-input>
+        <form-input class="row" v-model="query.path"><i>路</i><i>径</i></form-input>
+        <form-input class="row" v-model="query.sorting"><i>排</i><i>序</i></form-input>
       </div>
       <div class="head-action">
         <form-button class="head-button" @click="doLoad" :loading="loading">查询</form-button>
@@ -85,27 +88,29 @@ onMounted(doLoad);
       <table class="list-table">
         <thead class="table-head">
         <tr class="table-row">
-          <th><div class="table-cell">父级编码</div></th>
-          <th><div class="table-cell">父级名称</div></th>
-          <th><div class="table-cell">编码</div></th>
-          <th><div class="table-cell">名称</div></th>
-          <th><div class="table-cell">路径</div></th>
-          <th><div class="table-cell">排序</div></th>
-          <th><div class="table-cell">创建信息</div></th>
-          <th><div class="table-cell">更新信息</div></th>
-          <th class="table-action">
+          <th style="width: 130rem;"><div class="table-cell">父级主键</div></th>
+          <th style="width: 130rem;"><div class="table-cell">父级编码</div></th>
+          <th style="width: 130rem;"><div class="table-cell">父级名称</div></th>
+          <th style="width: 130rem;"><div class="table-cell">编码</div></th>
+          <th style="width: 130rem;"><div class="table-cell">名称</div></th>
+          <th style="width: 130rem;"><div class="table-cell">路径</div></th>
+          <th style="width: 130rem;"><div class="table-cell">排序</div></th>
+          <th style="width: 280rem;"><div class="table-cell">创建信息</div></th>
+          <th style="width: 280rem;"><div class="table-cell">更新信息</div></th>
+          <th class="table-action" style="width: 180rem;">
             <div class="table-cell table-button">操作</div>
           </th>
         </tr>
         </thead>
         <tbody class="table-body">
         <tr class="table-row" v-for="item in data">
-          <td><div class="table-cell">{{ item.parentCode }}</div></td>
-          <td><div class="table-cell">{{ item.parentName }}</div></td>
-          <td><div class="table-cell">{{ item.code }}</div></td>
-          <td><div class="table-cell">{{ item.name }}</div></td>
-          <td><div class="table-cell">{{ item.path }}</div></td>
-          <td><div class="table-cell">{{ item.sorting }}</div></td>
+          <td><div class="table-cell"><span class="table-text">{{ item.parentId }}</span></div></td>
+          <td><div class="table-cell"><span class="table-text">{{ item.parentCode }}</span></div></td>
+          <td><div class="table-cell"><span class="table-text">{{ item.parentName }}</span></div></td>
+          <td><div class="table-cell"><span class="table-text">{{ item.code }}</span></div></td>
+          <td><div class="table-cell"><span class="table-text">{{ item.name }}</span></div></td>
+          <td><div class="table-cell"><span class="table-text">{{ item.path }}</span></div></td>
+          <td><div class="table-cell"><span class="table-text">{{ item.sorting }}</span></div></td>
           <td>
             <div class="table-cell table-datetime">
               <div class="line">
