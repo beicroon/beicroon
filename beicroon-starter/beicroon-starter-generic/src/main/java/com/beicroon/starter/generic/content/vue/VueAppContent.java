@@ -90,9 +90,9 @@ public class VueAppContent {
                     <thead class="table-head">
                     <tr class="table-row">
                       {{vueAppTableHeadContent}}
-                      <th><div class="table-cell">创建信息</div></th>
-                      <th><div class="table-cell">更新信息</div></th>
-                      <th class="table-action">
+                      <th style="width: 280rem;"><div class="table-cell">创建信息</div></th>
+                      <th style="width: 280rem;"><div class="table-cell">更新信息</div></th>
+                      <th class="table-action" style="width: 180rem;">
                         <div class="table-cell table-button">操作</div>
                       </th>
                     </tr>

@@ -176,6 +176,10 @@ const value = computed({
     border-radius: 6rem;
     border: 1rem solid @light-grey;
 
+    &::placeholder {
+      color: @deep-grey;
+    }
+
     &:focus {
       border-color: @light-blue;
     }

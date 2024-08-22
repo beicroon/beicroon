@@ -248,7 +248,7 @@ public class ModuleMysqlMaker {
 
     private String getVueAppTableBodyFieldString(Field field) {
         String template = """
-                          <td><div class="table-cell">{{ item.%s }}</div></td>
+                          <td><div class="table-cell"><span class="table-text">{{ item.%s }}</span></div></td>
                 """;
 
         return String.format(template, field.getSnakeCaseName());
@@ -256,7 +256,7 @@ public class ModuleMysqlMaker {
 
     private String getVueAppTableHeadFieldString(Field field) {
         String template = """
-                          <th><div class="table-cell">%s</div></th>
+                          <th style="width: 130rem;"><div class="table-cell">%s</div></th>
                 """;
 
         return String.format(template, field.comment());

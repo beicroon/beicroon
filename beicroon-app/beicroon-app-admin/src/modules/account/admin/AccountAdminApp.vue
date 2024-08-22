@@ -72,6 +72,7 @@ onMounted(doLoad);
       <div class="head-search">
         <form-input class="row" v-model="query.code"><i>编</i><i>码</i></form-input>
         <form-input class="row" v-model="query.username"><i>账</i><i>号</i></form-input>
+        <form-input class="row" v-model="query.password"><i>密</i><i>码</i></form-input>
         <form-input class="row" v-model="query.nickname"><i>昵</i><i>称</i></form-input>
         <form-input class="row" v-model="query.phone"><i>电</i><i>话</i></form-input>
         <form-input class="row" v-model="query.email"><i>邮</i><i>箱</i></form-input>
@@ -86,25 +87,27 @@ onMounted(doLoad);
       <table class="list-table">
         <thead class="table-head">
         <tr class="table-row">
-          <th><div class="table-cell">编码</div></th>
-          <th><div class="table-cell">账号</div></th>
-          <th><div class="table-cell">昵称</div></th>
-          <th><div class="table-cell">电话</div></th>
-          <th><div class="table-cell">邮箱</div></th>
-          <th><div class="table-cell">创建信息</div></th>
-          <th><div class="table-cell">更新信息</div></th>
-          <th class="table-action">
+          <th style="width: 130rem;"><div class="table-cell">编码</div></th>
+          <th style="width: 130rem;"><div class="table-cell">账号</div></th>
+          <th style="width: 130rem;"><div class="table-cell">密码</div></th>
+          <th style="width: 130rem;"><div class="table-cell">昵称</div></th>
+          <th style="width: 130rem;"><div class="table-cell">电话</div></th>
+          <th style="width: 130rem;"><div class="table-cell">邮箱</div></th>
+          <th style="width: 280rem;"><div class="table-cell">创建信息</div></th>
+          <th style="width: 280rem;"><div class="table-cell">更新信息</div></th>
+          <th class="table-action" style="width: 180rem;">
             <div class="table-cell table-button">操作</div>
           </th>
         </tr>
         </thead>
         <tbody class="table-body">
         <tr class="table-row" v-for="item in data">
-          <td><div class="table-cell">{{ item.code }}</div></td>
-          <td><div class="table-cell">{{ item.username }}</div></td>
-          <td><div class="table-cell">{{ item.nickname }}</div></td>
-          <td><div class="table-cell">{{ item.phone }}</div></td>
-          <td><div class="table-cell">{{ item.email }}</div></td>
+          <td><div class="table-cell"><span class="table-text">{{ item.code }}</span></div></td>
+          <td><div class="table-cell"><span class="table-text">{{ item.username }}</span></div></td>
+          <td><div class="table-cell"><span class="table-text">{{ item.password }}</span></div></td>
+          <td><div class="table-cell"><span class="table-text">{{ item.nickname }}</span></div></td>
+          <td><div class="table-cell"><span class="table-text">{{ item.phone }}</span></div></td>
+          <td><div class="table-cell"><span class="table-text">{{ item.email }}</span></div></td>
           <td>
             <div class="table-cell table-datetime">
               <div class="line">

@@ -116,8 +116,10 @@ button {
 
   .head-button {
     width: 80rem;
+    height: 32rem;
     color: @white;
-    padding: 6rem 0;
+    overflow: hidden;
+    line-height: 32rem;
     border-radius: 8rem;
     background-color: @blue;
   }
@@ -132,23 +134,30 @@ button {
     min-width: 100%;
     empty-cells: show;
     border-spacing: 0;
+    width: fit-content;
+    table-layout: fixed;
     border-collapse: collapse;
   }
 
   .table-head {
-    top: -9rem;
+    top: 0;
     z-index: 3;
     position: sticky;
     background-color: @lighter-grey;
 
     .table-action {
-      top: -9rem;
+      top: 0;
       background-color: @lighter-grey;
     }
   }
 
+  .table-row {
+    height: 60rem;
+  }
+
   .table-row th, .table-row td {
     z-index: 1;
+    min-width: 130rem;
     position: relative;
     box-shadow: 0 0 1rem @grey inset;
   }
@@ -164,13 +173,19 @@ button {
   .table-cell {
     gap: 8rem;
     display: flex;
-    min-width: 130rem;
-    min-height: 60rem;
+    padding: 8rem 18rem;
     align-items: center;
     white-space: nowrap;
-    padding: 8rem 18rem;
     flex-direction: column;
     justify-content: center;
+
+    .table-text {
+      width: 100%;
+      display: block;
+      overflow: hidden;
+      text-align: center;
+      text-overflow: ellipsis;
+    }
 
     .line {
       gap: 8rem;
@@ -180,6 +195,7 @@ button {
     .label {
       flex: 1;
       display: flex;
+      color: @deep-grey;
       align-items: center;
       justify-content: right;
 
@@ -198,14 +214,14 @@ button {
 
   .table-action {
     right: 0;
-    z-index: 3;
+    z-index: 3 !important;
     background-color: @white;
     position: sticky !important;
 
     &:before {
       top: 0;
       bottom: 0;
-      width: 1rem;
+      left: -1rem;
       z-index: -1;
       content: "";
       display: block;
