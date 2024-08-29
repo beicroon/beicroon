@@ -10,7 +10,4 @@ export enum CacheKeyEnums {
 
 export enum AppSelectorEnums {
     APP = "#app",
-    TOAST = "#toast",
-    DIALOG = "#dialog",
-    WINDOW = "#dialog-window",
 }

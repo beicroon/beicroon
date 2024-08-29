@@ -25,9 +25,9 @@ const router = createRouter({
                     component: () => import("@/modules/account/admin/AccountAdminApp.vue"),
                 },
                 {
-                    name: "资源管理",
-                    path: "/resource/menu",
-                    component: () => import("@/modules/resource/menu/ResourceMenuApp.vue"),
+                    name: "菜单管理",
+                    path: "/system/menu",
+                    component: () => import("@/modules/system/menu/SystemMenuApp.vue"),
                 },
             ],
         },
@@ -35,19 +35,13 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-    const token = localStorage.getItem(CacheKeyEnums.AUTHORIZATION_TOKEN);
-
-    if (token) {
-        return next();
-    }
-
     const meta: Meta = to.meta as Meta;
 
-    if (meta.auth && !meta.auth) {
-        return next();
-    }
+    if (localStorage.getItem(CacheKeyEnums.AUTHORIZATION_USER) || (meta.auth && !meta.auth) || to.path === "/login") {
+        if (typeof to.name === "string") {
+            document.title = to.name;
+        }
 
-    if (to.path === "/login") {
         return next();
     }
 

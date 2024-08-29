@@ -22,12 +22,14 @@ public final class JwtUtils {
     private static final Map<Integer, String> SALT = new LinkedHashMap<>();
 
     static {
-        JwtUtils.SALT.put(10, "Y");
-        JwtUtils.SALT.put(40, "U");
-        JwtUtils.SALT.put(70, "N");
-        JwtUtils.SALT.put(100, "B");
-        JwtUtils.SALT.put(130, "A");
-        JwtUtils.SALT.put(160, "O");
+        JwtUtils.SALT.put(10, "B");
+        JwtUtils.SALT.put(30, "E");
+        JwtUtils.SALT.put(50, "I");
+        JwtUtils.SALT.put(70, "C");
+        JwtUtils.SALT.put(90, "R");
+        JwtUtils.SALT.put(110, "O");
+        JwtUtils.SALT.put(130, "O");
+        JwtUtils.SALT.put(150, "N");
     }
 
     private JwtUtils() {

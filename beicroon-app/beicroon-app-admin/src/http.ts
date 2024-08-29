@@ -1,6 +1,5 @@
 import axios from "axios";
 import {BooleanEnums, CacheKeyEnums} from "@/enums/system.enums.ts";
-import toast from "@/utils/toast";
 
 const http = axios.create({
     baseURL: import.meta.env.VITE_REQUEST_URL,
@@ -33,8 +32,6 @@ http.interceptors.response.use(
     async (response: any) => {
         return new Promise((resolve, reject) => {
             if (response.data.code > 0) {
-                toast(response.data.message, true);
-
                 return reject(response.data);
             }
 
@@ -48,8 +45,6 @@ http.interceptors.response.use(
         })
     },
     async error => {
-        await toast("系统错误!请联系技术员~", true);
-
         return Promise.reject(error);
     }
 );
@@ -57,7 +52,7 @@ http.interceptors.response.use(
 export default http;
 
 export type PageInfo = {
-    num: number,
+    page: number,
     size: number,
     total: number,
 }

@@ -1,241 +1,134 @@
 <script setup lang="ts">
-import router from "@/routers";
-import {onMounted, Ref, ref, watch} from "vue";
-import {MenuTreeVO as VO, tree} from "@/https/auth/auth.http.ts";
+import router from "@/router.ts";
+import BeicroonLineCross from "@/components/BeicroonLineCross.vue";
+import BeicroonLineVertical from "@/components/BeicroonLineVertical.vue";
 
-function handleNavigatorClick(navigator: VO) {
-  for (let i = 0; i < navigators.value.length; i++) {
-    const item = navigators.value[i];
-
-    if (item.active) {
-      item.active = false;
-
-      break;
-    }
-  }
-
-  navigator.active = true;
-
-  menus.value = navigator.children;
+function toAccountAdmin() {
+  router.push("/account/admin");
 }
 
-function handleLinkerClick(parent: VO, linker: VO) {
-  for (let i = 0; i < menus.value.length; i++) {
-    const menu = menus.value[i];
-
-    if (menu.active) {
-      menu.active = false;
-
-      for (let j = 0; j < menu.children.length; j++) {
-        const child = menu.children[j];
-
-        if (child.active) {
-          child.active = false;
-
-          break;
-        }
-      }
-
-      break;
-    }
-  }
-
-  parent.active = true;
-
-  linker.active = true;
-
-  router.push({path: linker.path});
+function toSystemMenu() {
+  router.push("/system/menu");
 }
-
-const navigators: Ref<Array<VO>> = ref([]);
-
-const menus: Ref<Array<VO>> = ref([]);
-
-watch(menus, () => {
-  for (let i = 0; i < menus.value.length; i++) {
-    const children = menus.value[i].children;
-
-    for (let j = 0; j < children.length; j++) {
-      const linker = children[j];
-
-      if (linker.active) {
-        router.push({path: linker.path});
-
-        break;
-      }
-    }
-  }
-});
-
-watch(navigators, () => {
-  const path = router.currentRoute.value.path;
-
-  NAV: for (let i = 0; i < navigators.value.length; i++) {
-    const nav = navigators.value[i];
-
-    for (let j = 0; j < nav.children.length; j++) {
-      const menu = nav.children[j];
-
-      for (let k = 0; k < menu.children.length; k++) {
-        const linker = menu.children[k];
-
-        if (linker.path == path) {
-          nav.active = true;
-          menu.active = true;
-          linker.active = true;
-
-          menus.value = nav.children;
-
-          break NAV;
-        }
-      }
-    }
-  }
-});
-
-onMounted(async () => {
-  const res = await tree();
-
-  navigators.value = res.data;
-});
 </script>
 
 <template>
-  <div class="index">
-    <div class="head">
-      <ul class="navigator">
-        <template v-for="navigator in navigators">
-          <li class="navigator-item" :class="{active: navigator.active}" @click="handleNavigatorClick(navigator)">
-            {{ navigator.name }}
-          </li>
-        </template>
+  <section class="beicroon">
+    <section class="beicroon-head">
+      <div class="logo"></div>
+      <ul class="menu">
+        <li>首页</li>
+        <li>设置中心</li>
+        <li>账号中心</li>
       </ul>
-    </div>
-    <div class="menu">
-      <div class="menu-item" v-for="menu in menus">
-        <div class="parent" :class="{active: menu.active}">{{ menu.name }}</div>
-        <ul class="linker">
-          <template v-for="linker in menu.children">
-            <li class="linker-item" :class="{active: linker.active}" @click="handleLinkerClick(menu, linker)">
-              {{ linker.name }}
-            </li>
-          </template>
+    </section>
+    <beicroon-line-vertical></beicroon-line-vertical>
+    <section class="beicroon-body">
+      <section class="beicroon-menu">
+        <ul class="menu">
+          <li @click="toAccountAdmin">账号管理</li>
+          <li @click="toSystemMenu">菜单管理</li>
         </ul>
-      </div>
-    </div>
-    <div class="main">
-      <router-view class="view"></router-view>
-    </div>
-  </div>
+      </section>
+      <beicroon-line-cross></beicroon-line-cross>
+      <section class="beicroon-main">
+        <router-view class="beicroon-view"></router-view>
+      </section>
+    </section>
+  </section>
 </template>
 
-<style scoped lang="less">
-.index {
+<style lang="less">
+:root {
+  --beicroon-height-head: 60rem;
+  --beicroon-height-line: 1rem;
+  --beicroon-width-menu: 180rem;
+  --beicroon-width-line: 1rem;
+}
+
+.beicroon {
   z-index: 1;
   width: 100%;
   height: 100%;
   position: relative;
 }
 
-.head {
-  top: 0;
-  left: 0;
+.beicroon-head {
+  gap: 30rem;
   width: 100%;
-  height: 60rem;
-  color: #ffffff;
-  padding: 0 38rem;
-  position: absolute;
-  background: linear-gradient(83deg, #0f71e2 0%, #0f71e2 100%);
+  display: flex;
+  height: var(--beicroon-height-head);
 
-  .navigator {
-    height: 100%;
+  .logo {
+    width: 300rem;
+  }
+
+  .menu {
+    flex: 1;
+    gap: 30rem;
     display: flex;
+    flex-direction: row;
     align-items: center;
 
-    .navigator-item {
-      margin: 0 8rem;
+    li {
+      display: flex;
+      height: 34rem;
       cursor: pointer;
-      padding: 8rem 12rem;
+      min-width: 88rem;
       border-radius: 8rem;
-      border: 1rem solid #65a5ff;
+      align-items: center;
+      justify-content: center;
+      border: 1rem solid var(--color-primary);
 
       &:hover {
-        border-color: #65a5ff;
-        background-color: #65a5ff;
-      }
-
-      &.active {
-        color: #65a5ff;
-        font-weight: bold;
-        border-color: #ffffff;
-        background-color: #ffffff;
+        color: var(--color-white);
+        background-color: var(--color-primary);
       }
     }
   }
 }
 
-.menu {
-  left: 0;
-  top: 60rem;
-  width: 180rem;
+.beicroon-body {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  height: calc(100% - var(--beicroon-height-head) - var(--beicroon-height-line));
+}
+
+.beicroon-menu {
+  height: 100%;
+  padding: 30rem 0;
   overflow-y: auto;
-  padding: 38rem 0;
-  overflow-x: hidden;
-  position: absolute;
-  height: calc(100% - 60rem);
-  border-right: 1px solid #e0e4ed;
+  width: var(--beicroon-width-menu);
 
-  .menu-item {
-    width: 100%;
-    height: auto;
-  }
+  .menu {
+    gap: 8rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 
-  .parent {
-    cursor: pointer;
-    padding: 8rem 0;
-    font-weight: bold;
-    text-align: center;
+    li {
+      width: 100%;
+      display: flex;
+      height: 38rem;
+      cursor: pointer;
+      align-items: center;
+      justify-content: center;
 
-    &:hover {
-      color: #ffffff;
-      background: linear-gradient(90deg, #287bf1 0%, #65a5ff 100%);
-    }
-
-    &.active {
-      color: #287bf1;
-    }
-  }
-
-  .linker-item {
-    margin: 2rem 0;
-    padding: 8rem 0;
-    cursor: pointer;
-    text-indent: 10rem;
-    text-align: center;
-
-    &:hover {
-      color: #ffffff;
-      background: linear-gradient(90deg, #65a5ff 0%, #8eb6ff 100%);
-    }
-
-    &.active {
-      color: #ffffff;
-      background: linear-gradient(90deg, #287bf1 0%, #65a5ff 100%);
+      &:hover {
+        color: var(--color-white);
+        background-color: var(--color-primary);
+      }
     }
   }
 }
 
-.main {
-  right: 0;
-  top: 60rem;
-  padding: 8rem;
-  position: absolute;
-  width: calc(100% - 180rem);
-  height: calc(100% - 60rem);
+.beicroon-main {
+  height: 100%;
+  width: calc(100% - var(--beicroon-width-menu) - var(--beicroon-width-line));
+}
 
-  .view {
-    min-width: 100%;
-    min-height: 100%;
-  }
+.beicroon-view {
+  min-height: 100%;
 }
 </style>
