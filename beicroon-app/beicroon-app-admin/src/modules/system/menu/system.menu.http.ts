@@ -1,4 +1,4 @@
-import http, {BaseVO, DisableDTO, DisableVO, QueryDTO, Response, UpdateDTO} from "@/http.ts";
+import http, {BaseVO, DisableDTO, DisableVO, PageInfo, QueryDTO, Response, UpdateDTO} from "@/http.ts";
 
 // 基础返回字段
 export type SystemMenuBaseVO = BaseVO & DisableVO & {
@@ -71,11 +71,15 @@ export async function detail(id: String): Promise<Response<SystemMenuDetailVO>> 
 }
 
 // 分页列表接口
-export async function page(data: SystemMenuQueryDTO): Promise<Response<Array<SystemMenuPageVO>>> {
+export async function page(data: SystemMenuQueryDTO, pageInfo: PageInfo): Promise<Response<Array<SystemMenuPageVO>>> {
     return http.request({
         url: "/api/admin/admin/resource-menu-page",
         method: "POST",
-        data: data
+        data: {
+            ...data,
+            pageNum: pageInfo.page,
+            pageSize: pageInfo.size,
+        }
     })
 }
 

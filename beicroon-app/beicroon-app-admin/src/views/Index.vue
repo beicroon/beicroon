@@ -106,7 +106,7 @@ function toSystemMenu() {
   width: var(--beicroon-width-menu);
 
   .menu {
-    gap: 8rem;
+    gap: 2rem;
     display: flex;
     flex-direction: column;
     justify-content: center;

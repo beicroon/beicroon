@@ -66,7 +66,7 @@ public class QueryDTO implements Serializable {
     @JsonIgnore
     public Long getPageSizeOrDefault() {
         if (this.pageSize == null) {
-            return 30L;
+            return 15L;
         }
 
         if (this.pageSize > 300) {

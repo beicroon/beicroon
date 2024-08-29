@@ -18,6 +18,7 @@ html {
 
 body, body a {
   font-size: 14rem;
+  line-height: 24rem;
   color: var(--color-black-light);
   font-family: "JetBrains Mono", "Fira Code", "Source Code Pro", Consolas, "Courier New", monospace;
 }

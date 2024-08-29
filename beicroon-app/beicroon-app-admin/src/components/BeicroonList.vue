@@ -1,124 +1,40 @@
 <script setup lang="ts">
-import {ref, watch} from "vue";
 import {PageInfo} from "@/http.ts";
+import {computed, defineProps} from "vue";
 import BeicroonButton from "@/components/BeicroonButton.vue";
 import BeicroonListTable from "@/components/BeicroonListTable.vue";
-import BeicroonListColumn from "@/components/BeicroonListColumn.vue";
 import BeicroonLineVertical from "@/components/BeicroonLineVertical.vue";
 import BeicroonListPaginator from "@/components/BeicroonListPaginator.vue";
 
-const data = ref<Array<any>>([
-  {
-    name: "名称",
-    path: "路径",
-    sorting: "排序",
-  },
-  {
-    name: "名称1",
-    path: "路径1",
-    sorting: "排序1",
-  },
-  {
-    name: "名称1",
-    path: "路径1",
-    sorting: "排序1",
-  },
-  {
-    name: "名称1",
-    path: "路径1",
-    sorting: "排序1",
-  },
-  {
-    name: "名称1",
-    path: "路径1",
-    sorting: "排序1",
-  },
-  {
-    name: "名称1",
-    path: "路径1",
-    sorting: "排序1",
-  },
-  {
-    name: "名称1",
-    path: "路径1",
-    sorting: "排序1",
-  },
-  {
-    name: "名称1",
-    path: "路径1",
-    sorting: "排序1",
-  },
-  {
-    name: "名称1",
-    path: "路径1",
-    sorting: "排序1",
-  },
-  {
-    name: "名称1",
-    path: "路径1",
-    sorting: "排序1",
-  },
-  {
-    name: "名称1",
-    path: "路径1",
-    sorting: "排序1",
-  },
-  {
-    name: "名称1",
-    path: "路径1",
-    sorting: "排序1",
-  },
-  {
-    name: "名称1",
-    path: "路径1",
-    sorting: "排序1",
-  },
-  {
-    name: "名称1",
-    path: "路径1",
-    sorting: "排序1",
-  },
-  {
-    name: "名称1",
-    path: "路径1",
-    sorting: "排序1",
-  },
-  {
-    name: "名称1",
-    path: "路径1",
-    sorting: "排序1",
-  },
-]);
+type Props = {
+  pageInfo: PageInfo,
+};
 
-const pageInfo = ref<PageInfo>({
-  page: 1,
-  size: 15,
-  total: 0,
-});
+const props = defineProps<Props>();
 
-watch(pageInfo, () => {
+const emits = defineEmits(["update:pageInfo"]);
 
+const paginator = computed({
+  get: () => props.pageInfo,
+  set: (val) => emits("update:pageInfo", val),
 });
 </script>
 
 <template>
   <div class="beicroon-list">
     <div class="list-head">
-      <div class="head-search">
-        <slot name="search"></slot>
-      </div>
-      <div class="head-button">
-        <beicroon-button class="block primary" label="重置"></beicroon-button>
-        <beicroon-button class="block primary" label="查询"></beicroon-button>
-        <beicroon-button class="block warning" label="新增"></beicroon-button>
-      </div>
+      <div class="head-search"><slot name="head-search"></slot></div>
+      <div class="head-button"><slot name="head-button"></slot></div>
     </div>
     <beicroon-line-vertical></beicroon-line-vertical>
     <div class="list-body">
-      <beicroon-list-table :data="data">
-        <beicroon-list-column label="名称" field="name" width="500"></beicroon-list-column>
-        <beicroon-list-column label="路径" field="path" width="500"></beicroon-list-column>
-        <beicroon-list-column label="排序" field="sorting" width="500"></beicroon-list-column>
+      <beicroon-list-table>
+        <template #title>
+          <slot name="table-title"></slot>
+        </template>
+        <template #body>
+          <slot name="table-body"></slot>
+        </template>
       </beicroon-list-table>
     </div>
     <beicroon-line-vertical></beicroon-line-vertical>
@@ -127,7 +43,11 @@ watch(pageInfo, () => {
         <beicroon-button class="block normal" label="字段设置"></beicroon-button>
         <beicroon-button class="block normal" label="查询设置"></beicroon-button>
       </div>
-      <beicroon-list-paginator v-model="pageInfo"></beicroon-list-paginator>
+      <div class="search">
+        <beicroon-button class="primary" label="更多查询"></beicroon-button>
+        <div class="search-input"><slot name="more-search"></slot></div>
+      </div>
+      <beicroon-list-paginator class="paginator" v-model="paginator"></beicroon-list-paginator>
     </div>
   </div>
 </template>
@@ -186,10 +106,27 @@ watch(pageInfo, () => {
   .setting {
     gap: 18rem;
     display: flex;
+    width: 300rem;
     padding: 0 52rem;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+  }
+
+  .search {
+    width: 120rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    .search-input {
+      display: none;
+    }
+  }
+
+  .paginator {
+    flex: 1;
   }
 }
 </style>

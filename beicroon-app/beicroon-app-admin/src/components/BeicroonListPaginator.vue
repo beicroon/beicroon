@@ -83,7 +83,7 @@ function setPages() {
 </script>
 
 <template>
-  <div class="beicroon-list-paginator">
+  <div class="beicroon-paginator">
     <div class="size" @click="toggleChoosers">
       <h6 class="current">
         <span>{{ size }}</span>
@@ -107,7 +107,7 @@ function setPages() {
 </template>
 
 <style lang="less">
-.beicroon-list-paginator {
+.beicroon-paginator {
   gap: 52rem;
   display: flex;
   padding: 0 52rem;
