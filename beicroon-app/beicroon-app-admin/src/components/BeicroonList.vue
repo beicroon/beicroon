@@ -18,6 +18,76 @@ const data = ref<Array<any>>([
     path: "路径1",
     sorting: "排序1",
   },
+  {
+    name: "名称1",
+    path: "路径1",
+    sorting: "排序1",
+  },
+  {
+    name: "名称1",
+    path: "路径1",
+    sorting: "排序1",
+  },
+  {
+    name: "名称1",
+    path: "路径1",
+    sorting: "排序1",
+  },
+  {
+    name: "名称1",
+    path: "路径1",
+    sorting: "排序1",
+  },
+  {
+    name: "名称1",
+    path: "路径1",
+    sorting: "排序1",
+  },
+  {
+    name: "名称1",
+    path: "路径1",
+    sorting: "排序1",
+  },
+  {
+    name: "名称1",
+    path: "路径1",
+    sorting: "排序1",
+  },
+  {
+    name: "名称1",
+    path: "路径1",
+    sorting: "排序1",
+  },
+  {
+    name: "名称1",
+    path: "路径1",
+    sorting: "排序1",
+  },
+  {
+    name: "名称1",
+    path: "路径1",
+    sorting: "排序1",
+  },
+  {
+    name: "名称1",
+    path: "路径1",
+    sorting: "排序1",
+  },
+  {
+    name: "名称1",
+    path: "路径1",
+    sorting: "排序1",
+  },
+  {
+    name: "名称1",
+    path: "路径1",
+    sorting: "排序1",
+  },
+  {
+    name: "名称1",
+    path: "路径1",
+    sorting: "排序1",
+  },
 ]);
 
 const pageInfo = ref<PageInfo>({
@@ -46,9 +116,9 @@ watch(pageInfo, () => {
     <beicroon-line-vertical></beicroon-line-vertical>
     <div class="list-body">
       <beicroon-list-table :data="data">
-        <beicroon-list-column label="名称" field="name"></beicroon-list-column>
-        <beicroon-list-column label="路径" field="path"></beicroon-list-column>
-        <beicroon-list-column label="排序" field="sorting"></beicroon-list-column>
+        <beicroon-list-column label="名称" field="name" width="500"></beicroon-list-column>
+        <beicroon-list-column label="路径" field="path" width="500"></beicroon-list-column>
+        <beicroon-list-column label="排序" field="sorting" width="500"></beicroon-list-column>
       </beicroon-list-table>
     </div>
     <beicroon-line-vertical></beicroon-line-vertical>
@@ -102,6 +172,8 @@ watch(pageInfo, () => {
 .list-body {
   flex: 1;
   width: 100%;
+  padding: 8rem;
+  overflow-y: auto;
 }
 
 .list-foot {

@@ -32,7 +32,7 @@ function handleClick(e: MouseEvent) {
   cursor: pointer;
   display: inline-flex;
 
-  &.error {
+  &.danger {
     color: var(--color-error);
   }
 

@@ -4,11 +4,20 @@ import {defineProps, inject, onMounted, Ref} from "vue";
 type Props = {
   label: string,
   field: string,
+  width?: string,
 };
 
-const props = defineProps<Props>();
+const props = withDefaults(defineProps<Props>(), {
+  width: "auto",
+});
 
 const columns: Ref<Array<Props>> | undefined = inject("registerListTableColumn");
+
+function getStyle() {
+  return {
+    width: props.width == "auto" ? "auto" : props.width + "rem",
+  };
+}
 
 onMounted(() => {
   if (!columns) {
@@ -20,8 +29,8 @@ onMounted(() => {
 </script>
 
 <template>
-  <th>
-    <div class="beicroon-list-title">{{ label }}</div>
+  <th :style="getStyle()">
+    <div class="beicroon-list-field">{{ label }}</div>
   </th>
 </template>
 

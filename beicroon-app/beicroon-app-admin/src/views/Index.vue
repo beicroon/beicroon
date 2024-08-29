@@ -54,9 +54,11 @@ function toSystemMenu() {
 }
 
 .beicroon-head {
+  z-index: 2;
   gap: 30rem;
   width: 100%;
   display: flex;
+  position: relative;
   height: var(--beicroon-height-head);
 
   .logo {
@@ -89,8 +91,10 @@ function toSystemMenu() {
 }
 
 .beicroon-body {
+  z-index: 1;
   width: 100%;
   display: flex;
+  position: relative;
   flex-direction: row;
   height: calc(100% - var(--beicroon-height-head) - var(--beicroon-height-line));
 }
@@ -124,7 +128,10 @@ function toSystemMenu() {
 }
 
 .beicroon-main {
+  z-index: 1;
   height: 100%;
+  overflow-y: auto;
+  position: relative;
   width: calc(100% - var(--beicroon-width-menu) - var(--beicroon-width-line));
 }
 
