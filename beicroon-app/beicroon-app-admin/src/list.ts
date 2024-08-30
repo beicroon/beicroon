@@ -23,11 +23,11 @@ export type List<DTO, VO> = {
     handleRemove: (item: VO, component: Component) => Promise<void>,
 };
 
-export default function createBeicroonList<DTO, VO>(page: (params: DTO, pageInfo: PageInfo) => Promise<Response<Array[VO]>>): Reactive<List<DTO, VO>> {
+export default function createBeicroonList<DTO, VO>(page: (params: DTO, pageInfo: PageInfo) => Promise<Response<Array<VO>>>): Reactive<List<DTO, VO>> {
     const list: Reactive<List> = reactive({
         loading: false,
         params: {} as DTO,
-        data: {} as VO[],
+        data: [] as Array<VO>,
         pageInfo: {page: 1, size: 15, total: 0} as PageInfo,
         pages: [1],
         choosers: [2, 15, 30, 50, 100],
