@@ -44,7 +44,7 @@ onMounted(resetSearch);
       <beicroon-list-cell class="beicroon-list-button">操作</beicroon-list-cell>
     </template>
     <template #table-body>
-      <beicroon-list-row label="名称" field="name" width="500" v-for="item in list.data">
+      <beicroon-list-row width="500" v-for="item in list.data">
         <beicroon-list-cell>{{ item.name }}</beicroon-list-cell>
         <beicroon-list-cell>{{ item.path }}</beicroon-list-cell>
         <beicroon-list-cell>{{ item.sorting }}</beicroon-list-cell>
