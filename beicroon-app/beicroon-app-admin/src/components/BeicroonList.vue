@@ -1,34 +1,27 @@
 <script setup lang="ts">
+import {List} from "@/list.ts";
+import {inject, ref} from "vue";
 import escToggle from "@/util.ts";
-import {PageInfo} from "@/http.ts";
-import {computed, defineProps, ref, unref} from "vue";
 import BeicroonButton from "@/components/BeicroonButton.vue";
 import BeicroonListTable from "@/components/BeicroonListTable.vue";
 import BeicroonLineVertical from "@/components/BeicroonLineVertical.vue";
 import BeicroonListPaginator from "@/components/BeicroonListPaginator.vue";
 
-type Props = {
-  pageInfo: PageInfo,
-};
-
-const props = defineProps<Props>();
-
-const emits = defineEmits(["update:pageInfo"]);
-
-const paginator = computed({
-  get: () => props.pageInfo,
-  set: (val) => emits("update:pageInfo", val),
-});
-
 const moreSearch = ref(false);
+
+const list: List<any, any> | undefined = inject("BeicroonListTable");
 
 async function toggleMoreSearch() {
   moreSearch.value = !moreSearch.value;
 
-  if (unref(moreSearch)) {
+  if (moreSearch.value) {
     await escToggle(async () => {
       moreSearch.value = false;
+
+      list?.resetSearch();
     });
+  } else {
+    await escToggle();
   }
 }
 </script>
@@ -61,12 +54,13 @@ async function toggleMoreSearch() {
         <beicroon-button class="block normal" label="查询设置"></beicroon-button>
       </div>
       <div class="search" @click.stop>
-        <beicroon-button class="primary" label="更多查询" @click="toggleMoreSearch"></beicroon-button>
-        <form class="search-input" v-show="moreSearch">
+        <beicroon-button class="search-button primary" label="更多筛选" @click="toggleMoreSearch"></beicroon-button>
+        <h6 class="search-size">+3</h6>
+        <form class="search-input" :class="{show: moreSearch}">
           <slot name="more-search"></slot>
         </form>
       </div>
-      <beicroon-list-paginator class="paginator" v-model="paginator"></beicroon-list-paginator>
+      <beicroon-list-paginator class="paginator"></beicroon-list-paginator>
     </div>
   </div>
 </template>
@@ -81,8 +75,10 @@ async function toggleMoreSearch() {
   justify-content: center;
 
   .list-head {
+    z-index: 1;
     width: 100%;
     display: flex;
+    position: relative;
     flex-direction: row;
 
     .head-search {
@@ -111,15 +107,19 @@ async function toggleMoreSearch() {
 
   .list-body {
     flex: 1;
+    z-index: 1;
     width: 100%;
     padding: 8rem;
     overflow-y: auto;
+    position: relative;
   }
 
   .list-foot {
+    z-index: 2;
     width: 100%;
     height: 60rem;
     display: flex;
+    position: relative;
     align-items: center;
     justify-content: space-between;
 
@@ -134,31 +134,59 @@ async function toggleMoreSearch() {
     }
 
     .search {
+      gap: 8rem;
       z-index: 3;
       width: 120rem;
       display: flex;
       position: relative;
       flex-direction: row;
       align-items: center;
-      justify-content: space-between;
+      justify-content: center;
+
+      .search-button {
+        z-index: 1;
+        position: relative;
+      }
+
+      .search-size {
+        z-index: 1;
+        top: -12rem;
+        right: 10rem;
+        height: 34rem;
+        font-size: 18rem;
+        position: absolute;
+        line-height: 36rem;
+        font-style: normal;
+        font-weight: normal;
+        color: var(--color-warning-deep);
+      }
 
       .search-input {
+        width: 0;
+        height: 0;
+        opacity: 0;
         gap: 18rem;
         z-index: 1;
-        bottom: 36rem;
-        left: -240rem;
-        width: 880rem;
+        left: 8rem;
         display: grid;
+        bottom: 36rem;
         padding: 18rem;
-        height: 580rem;
         flex-wrap: wrap;
         overflow-y: auto;
         position: absolute;
         border-radius: 6rem;
         justify-items: center;
+        transition: all 180ms linear;
         background-color: var(--color-white);
         grid-template-columns: repeat(3, 1fr);
         border: 1rem solid var(--color-grey-light);
+
+        &.show {
+          opacity: 1;
+          left: -240rem;
+          width: 880rem;
+          height: 580rem;
+        }
       }
 
       .beicroon-input {

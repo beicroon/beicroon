@@ -1,6 +1,6 @@
 const escStacks: (() => Promise<void>)[] = [];
 
-async function escToggle(callback: () => Promise<void>) {
+async function escToggle(callback?: () => Promise<void>) {
     if (callback) {
         await escToggle.put(callback);
     } else {

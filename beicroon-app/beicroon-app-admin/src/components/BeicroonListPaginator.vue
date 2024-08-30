@@ -1,84 +1,13 @@
 <script setup lang="ts">
-import {PageInfo} from "@/http.ts";
-import {computed, ref, watch} from "vue";
+import {List} from "@/list.ts";
+import {inject, ref} from "vue";
 
-type Props = {
-  modelValue: PageInfo,
-};
-
-const props = defineProps<Props>();
-
-const emits = defineEmits(["update:modelValue"]);
-
-const page = computed({
-  get: () => props.modelValue.page || 1,
-  set: (val: number) => emits("update:modelValue", {...props.modelValue, page: val}),
-});
-
-const size = computed({
-  get: () => props.modelValue.size || 15,
-  set: (val: number) => emits("update:modelValue", {...props.modelValue, size: val}),
-});
-
-const total = computed({
-  get: () => props.modelValue.total || 0,
-  set: (val: number) => emits("update:modelValue", {...props.modelValue, total: val}),
-});
-
-watch(
-  () => {
-    return {page: page.value, size: size.value, total: total.value};
-  },
-  () => {
-    setPages();
-  },
-);
-
-const pages = ref([1]);
+const list: List<any, any> | undefined = inject("BeicroonListTable");
 
 const chooserShow = ref(false);
 
-const choosers = ref([15, 30, 50, 100]);
-
-function setPage(num: number) {
-  page.value = num;
-}
-
-function choose(num: number) {
-  if (size.value == num) {
-    return;
-  }
-
-  page.value = 1;
-  size.value = num;
-}
-
 function toggleChoosers() {
   chooserShow.value = !chooserShow.value;
-}
-
-function getPages(s: number, e: number) {
-  const ps = [];
-
-  for (let i = s; i <= e; i++) {
-    ps.push(i);
-  }
-
-  return ps;
-}
-
-function setPages() {
-  const t = total.value > 0 ? Math.ceil(total.value / size.value) : 1;
-
-  if (t <= 11) {
-    pages.value = getPages(1, t);
-  } else if (page.value <= 6) {
-    pages.value = getPages(1, 11);
-  } else if (page.value + 5 >= t) {
-    pages.value = getPages(t - 10, 11);
-  } else {
-    pages.value = getPages(page.value - 5, page.value + 5);
-  }
 }
 </script>
 
@@ -86,21 +15,21 @@ function setPages() {
   <div class="beicroon-paginator">
     <div class="size" @click="toggleChoosers">
       <h6 class="current">
-        <span>{{ size }}</span>
+        <span>{{ list?.pageInfo.size }}</span>
         <span>条/页</span>
       </h6>
       <ul class="chooser" :class="{show: chooserShow}">
-        <template v-for="num in choosers">
-          <li @click="choose(num)">
-            <span>{{ num }}</span>
+        <template v-for="size in list?.choosers">
+          <li @click="list?.choose(size)">
+            <span>{{ size }}</span>
             <span>条/页</span>
           </li>
         </template>
       </ul>
     </div>
     <ul class="page">
-      <template v-for="p in pages">
-        <li @click="setPage(p)" :class="{active: p == page}">{{ p }}</li>
+      <template v-for="page in list?.pages">
+        <li @click="list?.setPage(page)" :class="{active: page == list?.pageInfo.page}">{{ page }}</li>
       </template>
     </ul>
   </div>

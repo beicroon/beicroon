@@ -66,6 +66,7 @@ html, body, #app {
   --color-black-light: #333333;
   --color-error: #f56c6c;
   --color-warning: #e6a23c;
+  --color-warning-deep: #ffb200;
   --color-success: #67c23a;
   --color-primary: #409eff;
 }
