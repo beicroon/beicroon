@@ -67,8 +67,8 @@ public class GlobalExceptionHandler {
     @ResponseBody
     @ResponseStatus(HttpStatus.OK)
     @ExceptionHandler(HttpMessageNotReadableException.class)
-    public Result<String> handleException(HttpMessageNotReadableException ignore) {
-        return WebResult.error(412, "Required request body is missing!");
+    public Result<String> handleException(HttpMessageNotReadableException ex) {
+        return WebResult.error(412, ex.getMessage());
     }
 
     @ResponseBody

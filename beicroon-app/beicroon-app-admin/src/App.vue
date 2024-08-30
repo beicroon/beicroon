@@ -36,12 +36,31 @@ html, body, #app {
   position: relative;
 }
 
+::-webkit-scrollbar {
+  width: 8rem;
+  height: 8rem;
+}
+
+::-webkit-scrollbar-track {
+  border-radius: 6rem;
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 6rem;
+  background: var(--color-grey-lighter);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-grey-light);
+}
+
 :root {
   color-scheme: light;
   --color-grey: #545c64;
   --color-grey-light: #babdc4;
   --color-grey-lighter: #e4e7ed;
-  --color-grey-lightest: #ebeef5;
+  --color-grey-lightest: #f7f7f7;
   --color-white: #ffffff;
   --color-black: #000000;
   --color-black-light: #333333;

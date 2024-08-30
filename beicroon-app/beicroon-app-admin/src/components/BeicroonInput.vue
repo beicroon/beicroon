@@ -24,8 +24,8 @@ const value = computed({
 
 <template>
 <div class="beicroon-input" :class="{required: required}">
-  <span>{{label}}</span>
-  <input :disabled="disabled" :type="type" :placeholder="placeholder" v-model="value" />
+  <span class="input-label">{{label}}</span>
+  <input class="input-area" :disabled="disabled" :type="type" :placeholder="placeholder" v-model="value" />
 </div>
 </template>
 
@@ -43,16 +43,16 @@ const value = computed({
     align-items: flex-start;
   }
 
-  span {
+  .input-label {
     height: 32rem;
-    min-width: 80rem;
+    min-width: 100rem;
     line-height: 32rem;
     text-align: center;
     border-radius: 6rem;
     background-color: var(--color-grey-lighter);
   }
 
-  input {
+  .input-area {
     width: 240rem;
     outline: none;
     height: 32rem;

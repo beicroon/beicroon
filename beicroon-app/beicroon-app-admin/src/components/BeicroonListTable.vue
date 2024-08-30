@@ -22,6 +22,7 @@ import BeicroonListRow from "@/components/BeicroonListRow.vue";
   width: fit-content;
   text-align: center;
   table-layout: fixed;
+  box-shadow: 0 0 1rem var(--color-grey-light) inset;
 
   .beicroon-list-head {
     z-index: 2;
@@ -29,7 +30,7 @@ import BeicroonListRow from "@/components/BeicroonListRow.vue";
     position: sticky;
 
     .beicroon-list-row {
-      background-color: var(--color-grey-lightest);
+      background-color: var(--color-grey-lighter);
 
       .beicroon-list-button {
         background-color: inherit;
@@ -57,7 +58,7 @@ import BeicroonListRow from "@/components/BeicroonListRow.vue";
 
   .beicroon-list-cell {
     padding: 18rem;
-    box-shadow: 0 0 1rem var(--color-grey-light);
+    box-shadow: 0 0 1rem var(--color-grey-light) inset;
   }
 
   .beicroon-list-button {
