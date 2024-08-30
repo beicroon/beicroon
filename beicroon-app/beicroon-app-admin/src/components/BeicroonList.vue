@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import {ref} from "vue";
 import {List} from "@/list.ts";
 import escToggle from "@/util.ts";
+import {computed, ref} from "vue";
 import BeicroonButton from "@/components/BeicroonButton.vue";
 import BeicroonListTable from "@/components/BeicroonListTable.vue";
 import BeicroonLineVertical from "@/components/BeicroonLineVertical.vue";
@@ -28,6 +28,10 @@ async function toggleMoreSearch() {
     await escToggle();
   }
 }
+
+const moreSearchSize = computed(() => {
+  return Object.values(props.list.params).filter((item) => item).length;
+});
 </script>
 
 <template>
@@ -59,7 +63,7 @@ async function toggleMoreSearch() {
       </div>
       <div class="search" @click.stop>
         <beicroon-button class="search-button primary" label="更多筛选" @click="toggleMoreSearch"></beicroon-button>
-        <h6 class="search-size">+3</h6>
+        <h6 class="search-size">+{{ moreSearchSize }}</h6>
         <form class="search-input" :class="{show: moreSearch}">
           <slot name="more-search"></slot>
         </form>
@@ -180,6 +184,7 @@ async function toggleMoreSearch() {
         position: absolute;
         border-radius: 6rem;
         justify-items: center;
+        align-content: flex-start;
         transition: all 180ms linear;
         background-color: var(--color-white);
         grid-template-columns: repeat(3, 1fr);

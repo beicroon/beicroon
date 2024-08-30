@@ -56,32 +56,8 @@ onMounted(resetSearch);
       </beicroon-list-row>
     </template>
     <template #more-search>
-      <beicroon-input label="名称" v-model="list.params.name"></beicroon-input>
-      <beicroon-input label="路径" v-model="list.params.path"></beicroon-input>
-      <beicroon-input label="排序" v-model="list.params.sorting"></beicroon-input>
-      <beicroon-input label="名称" v-model="list.params.name"></beicroon-input>
-      <beicroon-input label="路径" v-model="list.params.path"></beicroon-input>
-      <beicroon-input label="排序" v-model="list.params.sorting"></beicroon-input>
       <beicroon-input class="column-three" label="名称" v-model="list.params.name"></beicroon-input>
-      <beicroon-input class="column-two" label="路径1" v-model="list.params.path"></beicroon-input>
-      <beicroon-input label="排序" v-model="list.params.sorting"></beicroon-input>
-      <beicroon-input label="名称" v-model="list.params.name"></beicroon-input>
-      <beicroon-input label="路径" v-model="list.params.path"></beicroon-input>
-      <beicroon-input label="排序" v-model="list.params.sorting"></beicroon-input>
-      <beicroon-input label="名称" v-model="list.params.name"></beicroon-input>
-      <beicroon-input label="路径" v-model="list.params.path"></beicroon-input>
-      <beicroon-input label="排序" v-model="list.params.sorting"></beicroon-input>
-      <beicroon-input label="名称" v-model="list.params.name"></beicroon-input>
-      <beicroon-input label="路径" v-model="list.params.path"></beicroon-input>
-      <beicroon-input label="排序" v-model="list.params.sorting"></beicroon-input>
-      <beicroon-input label="名称" v-model="list.params.name"></beicroon-input>
-      <beicroon-input label="路径" v-model="list.params.path"></beicroon-input>
-      <beicroon-input label="排序" v-model="list.params.sorting"></beicroon-input>
-      <beicroon-input label="名称" v-model="list.params.name"></beicroon-input>
-      <beicroon-input label="路径" v-model="list.params.path"></beicroon-input>
-      <beicroon-input label="排序" v-model="list.params.sorting"></beicroon-input>
-      <beicroon-input label="名称" v-model="list.params.name"></beicroon-input>
-      <beicroon-input label="路径" v-model="list.params.path"></beicroon-input>
+      <beicroon-input class="column-two" label="路径" v-model="list.params.path"></beicroon-input>
       <beicroon-input label="排序" v-model="list.params.sorting"></beicroon-input>
     </template>
   </beicroon-list>
