@@ -1,8 +1,12 @@
 <script setup lang="ts">
+import {ref} from "vue";
 import {List} from "@/list.ts";
-import {inject, ref} from "vue";
 
-const list: List<any, any> | undefined = inject("BeicroonListTable");
+type Props = {
+  list: List<any, any>,
+};
+
+defineProps<Props>();
 
 const chooserShow = ref(false);
 
@@ -15,12 +19,12 @@ function toggleChoosers() {
   <div class="beicroon-paginator">
     <div class="size" @click="toggleChoosers">
       <h6 class="current">
-        <span>{{ list?.pageInfo.size }}</span>
+        <span>{{ list.pageInfo.size }}</span>
         <span>条/页</span>
       </h6>
       <ul class="chooser" :class="{show: chooserShow}">
-        <template v-for="size in list?.choosers">
-          <li @click="list?.choose(size)">
+        <template v-for="size in list.choosers">
+          <li @click="list.choose(size)">
             <span>{{ size }}</span>
             <span>条/页</span>
           </li>
@@ -28,8 +32,8 @@ function toggleChoosers() {
       </ul>
     </div>
     <ul class="page">
-      <template v-for="page in list?.pages">
-        <li @click="list?.setPage(page)" :class="{active: page == list?.pageInfo.page}">{{ page }}</li>
+      <template v-for="page in list.pages">
+        <li @click="list.setPage(page)" :class="{active: page == list.pageInfo.page}">{{ page }}</li>
       </template>
     </ul>
   </div>

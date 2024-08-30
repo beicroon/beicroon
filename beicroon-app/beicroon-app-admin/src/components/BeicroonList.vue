@@ -1,15 +1,19 @@
 <script setup lang="ts">
+import {ref} from "vue";
 import {List} from "@/list.ts";
-import {inject, ref} from "vue";
 import escToggle from "@/util.ts";
 import BeicroonButton from "@/components/BeicroonButton.vue";
 import BeicroonListTable from "@/components/BeicroonListTable.vue";
 import BeicroonLineVertical from "@/components/BeicroonLineVertical.vue";
 import BeicroonListPaginator from "@/components/BeicroonListPaginator.vue";
 
-const moreSearch = ref(false);
+type Props = {
+  list: List<any, any>,
+};
 
-const list: List<any, any> | undefined = inject("BeicroonListTable");
+const props = defineProps<Props>();
+
+const moreSearch = ref(false);
 
 async function toggleMoreSearch() {
   moreSearch.value = !moreSearch.value;
@@ -18,7 +22,7 @@ async function toggleMoreSearch() {
     await escToggle(async () => {
       moreSearch.value = false;
 
-      list?.resetSearch();
+      await props.list.resetSearch();
     });
   } else {
     await escToggle();
@@ -60,7 +64,7 @@ async function toggleMoreSearch() {
           <slot name="more-search"></slot>
         </form>
       </div>
-      <beicroon-list-paginator class="paginator"></beicroon-list-paginator>
+      <beicroon-list-paginator class="paginator" :list="list"></beicroon-list-paginator>
     </div>
   </div>
 </template>

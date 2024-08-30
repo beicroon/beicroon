@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import {onMounted, provide} from "vue";
-import createBeicroonList, {List} from "@/list.ts";
+import createBeicroonList from "@/list.ts";
 import BeicroonList from "@/components/BeicroonList.vue";
 import BeicroonInput from "@/components/BeicroonInput.vue";
 import BeicroonButton from "@/components/BeicroonButton.vue";
@@ -11,7 +11,7 @@ import SystemMenuDetail from "@/modules/system/menu/SystemMenuDetail.vue";
 import SystemMenuUpdate from "@/modules/system/menu/SystemMenuUpdate.vue";
 import {page, SystemMenuPageVO as VO, SystemMenuQueryDTO as DTO} from "@/modules/system/menu/system.menu.http.ts";
 
-const list: List<DTO, VO> = createBeicroonList<DTO, VO>(page);
+const list = createBeicroonList<DTO, VO>(page);
 
 provide("BeicroonListTable", list);
 
@@ -26,7 +26,7 @@ onMounted(resetSearch);
 </script>
 
 <template>
-  <beicroon-list class="system-menu-app">
+  <beicroon-list class="system-menu-app" :list="list">
     <template #head-search>
       <beicroon-input label="名称" v-model="list.params.name"></beicroon-input>
       <beicroon-input label="路径" v-model="list.params.path"></beicroon-input>

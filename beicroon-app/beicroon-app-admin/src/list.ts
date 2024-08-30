@@ -1,12 +1,12 @@
-import {defineComponent, Reactive, reactive} from "vue";
 import {PageInfo, Response} from "@/http.ts";
+import {ComponentOptionsMixin, DefineComponent, ExtractPropTypes, PublicProps, Reactive, reactive} from "vue";
 
-defineComponent()
+type Component = DefineComponent<{}, {}, {}, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, {}, string, PublicProps, Readonly<ExtractPropTypes<{}>>, {}>;
 
 export type List<DTO, VO> = {
     loading: boolean,
     params: DTO,
-    data: Array[VO],
+    data: Array<VO>,
     pageInfo: PageInfo,
     pages: Array<number>,
     choosers: Array<number>,
@@ -18,12 +18,12 @@ export type List<DTO, VO> = {
     handleReset: () => Promise<void>,
     handleSearch: () => Promise<void>,
     handleCreate: () => Promise<void>,
-    handleDetail: (item: VO, component: { render: () => void }) => Promise<void>,
-    handleUpdate: (item: VO, component: { render: () => void }) => Promise<void>,
-    handleRemove: (item: VO, component: { render: () => void }) => Promise<void>,
+    handleDetail: (item: VO, component: Component) => Promise<void>,
+    handleUpdate: (item: VO, component: Component) => Promise<void>,
+    handleRemove: (item: VO, component: Component) => Promise<void>,
 };
 
-export default function createBeicroonList<DTO, VO>(page: (params: DTO, pageInfo: PageInfo) => Promise<Response<Array[VO]>>): List<DTO, VO> {
+export default function createBeicroonList<DTO, VO>(page: (params: DTO, pageInfo: PageInfo) => Promise<Response<Array[VO]>>): Reactive<List<DTO, VO>> {
     const list: Reactive<List> = reactive({
         loading: false,
         params: {} as DTO,
@@ -98,13 +98,13 @@ export default function createBeicroonList<DTO, VO>(page: (params: DTO, pageInfo
         handleCreate: async () => {
 
         },
-        handleDetail: async (ignore: VO, component: { render: () => void }) => {
+        handleDetail: async (ignore: VO, component: Component) => {
 
         },
-        handleUpdate: async (ignore: VO, component: { render: () => void }) => {
+        handleUpdate: async (ignore: VO, component: Component) => {
 
         },
-        handleRemove: async (ignore: VO, component: { render: () => void }) => {
+        handleRemove: async (ignore: VO, component: Component) => {
 
         },
     });
