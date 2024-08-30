@@ -71,11 +71,11 @@ function handleRemove(item: VO) {
 </script>
 
 <template>
-  <beicroon-list v-model:page-info="pageInfo">
+  <beicroon-list v-model:page-info="pageInfo" class="system-menu-app">
     <template #head-search>
       <beicroon-input label="名称" v-model="params.name"></beicroon-input>
       <beicroon-input label="路径" v-model="params.path"></beicroon-input>
-      <beicroon-input label="排序" v-model="params.sorting"></beicroon-input>
+      <beicroon-input type="number" label="排序" v-model="params.sorting"></beicroon-input>
     </template>
     <template #head-button>
       <beicroon-button class="block primary" label="重置" @click="handleReset"></beicroon-button>
@@ -133,4 +133,7 @@ function handleRemove(item: VO) {
 </template>
 
 <style scoped lang="less">
+.system-menu-app {
+
+}
 </style>

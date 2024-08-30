@@ -2,7 +2,7 @@
 import {computed} from "vue";
 
 type Props = {
-  type?: "text" | "password",
+  type?: "text" | "number" | "password",
   label: string,
   placeholder?: string,
   required?: boolean,
@@ -67,6 +67,15 @@ const value = computed({
 
     &:focus {
       border-color: var(--color-primary);
+    }
+
+    &[type="number"] {
+      appearance: textfield;
+    }
+
+    &[type="number"]::-webkit-outer-spin-button,
+    &[type="number"]::-webkit-inner-spin-button {
+      appearance: none;
     }
   }
 }
