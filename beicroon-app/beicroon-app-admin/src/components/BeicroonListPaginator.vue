@@ -120,6 +120,7 @@ function toggleChoosers() {
       background-color: var(--color-grey-lighter);
 
       &.active {
+        cursor: text;
         color: var(--color-white);
         background-color: var(--color-primary);
       }

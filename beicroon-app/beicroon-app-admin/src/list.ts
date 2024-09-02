@@ -1,9 +1,13 @@
-import {PageInfo, Response} from "@/http.ts";
+import {BaseVO, PageInfo, QueryDTO, Response} from "@/http.ts";
 import {ComponentOptionsMixin, DefineComponent, ExtractPropTypes, PublicProps, Reactive, reactive} from "vue";
+
+type Page<DTO extends QueryDTO, VO extends BaseVO> = (params: DTO, pageInfo: PageInfo) => Promise<Response<Array<VO>>>;
+
+type Remove = (ids: string | Array<string>) => Promise<Response<boolean>>;
 
 type Component = DefineComponent<{}, {}, {}, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, {}, string, PublicProps, Readonly<ExtractPropTypes<{}>>, {}>;
 
-export type List<DTO, VO> = {
+export type List<DTO extends QueryDTO, VO extends BaseVO> = {
     loading: boolean,
     params: DTO,
     data: Array<VO>,
@@ -17,14 +21,14 @@ export type List<DTO, VO> = {
     resetSearch: () => Promise<void>,
     handleReset: () => Promise<void>,
     handleSearch: () => Promise<void>,
-    handleCreate: () => Promise<void>,
+    handleCreate: (component: Component) => Promise<void>,
     handleDetail: (item: VO, component: Component) => Promise<void>,
     handleUpdate: (item: VO, component: Component) => Promise<void>,
-    handleRemove: (item: VO, component: Component) => Promise<void>,
+    handleRemove: (item: VO, remove: Remove) => Promise<void>,
 };
 
-export default function createBeicroonList<DTO, VO>(page: (params: DTO, pageInfo: PageInfo) => Promise<Response<Array<VO>>>): Reactive<List<DTO, VO>> {
-    const list: Reactive<List> = reactive({
+export default function createBeicroonList<DTO extends QueryDTO, VO extends BaseVO>(page: Page<DTO, VO>): Reactive<List<DTO, VO>> {
+    const list: Reactive<List<DTO, VO>> = reactive<List<DTO, VO>>({
         loading: false,
         params: {} as DTO,
         data: [] as Array<VO>,
@@ -42,6 +46,10 @@ export default function createBeicroonList<DTO, VO>(page: (params: DTO, pageInfo
             await list.handleSearch();
         },
         setPage: async (page: number) => {
+            if (list.pageInfo.page == page) {
+                return;
+            }
+
             list.pageInfo.page = page;
 
             await list.handleSearch();
@@ -74,7 +82,7 @@ export default function createBeicroonList<DTO, VO>(page: (params: DTO, pageInfo
             await list.handleSearch();
         },
         handleReset: async () => {
-            list.params = {};
+            list.params = {} as DTO;
         },
         handleSearch: async () => {
             if (list.loading) {
@@ -95,17 +103,20 @@ export default function createBeicroonList<DTO, VO>(page: (params: DTO, pageInfo
 
             await list.setPages();
         },
-        handleCreate: async () => {
-
+        handleCreate: async (component: Component) => {
+            console.info(component);
         },
-        handleDetail: async (ignore: VO, component: Component) => {
-
+        handleDetail: async (item: VO, component: Component) => {
+            console.info(item);
+            console.info(component);
         },
-        handleUpdate: async (ignore: VO, component: Component) => {
-
+        handleUpdate: async (item: VO, component: Component) => {
+            console.info(item);
+            console.info(component);
         },
-        handleRemove: async (ignore: VO, component: Component) => {
-
+        handleRemove: async (item: VO, remove: Remove) => {
+            console.info(item);
+            console.info(remove);
         },
     });
 
