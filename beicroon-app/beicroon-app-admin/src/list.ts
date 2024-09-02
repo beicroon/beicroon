@@ -21,13 +21,15 @@ export type List<DTO extends QueryDTO, VO extends BaseVO> = {
     resetSearch: () => Promise<void>,
     handleReset: () => Promise<void>,
     handleSearch: () => Promise<void>,
-    handleCreate: (component: Component) => Promise<void>,
-    handleDetail: (item: VO, component: Component) => Promise<void>,
-    handleUpdate: (item: VO, component: Component) => Promise<void>,
-    handleRemove: (item: VO, remove: Remove) => Promise<void>,
+    handleCreate: () => Promise<void>,
+    handleDetail: (item: VO) => Promise<void>,
+    handleUpdate: (item: VO) => Promise<void>,
+    handleRemove: (item: VO) => Promise<void>,
 };
 
-export default function createBeicroonList<DTO extends QueryDTO, VO extends BaseVO>(page: Page<DTO, VO>): Reactive<List<DTO, VO>> {
+export default function createBeicroonList<DTO extends QueryDTO, VO extends BaseVO>(
+    page: Page<DTO, VO>, remove: Remove, create?: Component, detail?: Component, update?: Component
+): Reactive<List<DTO, VO>> {
     const list: Reactive<List<DTO, VO>> = reactive<List<DTO, VO>>({
         loading: false,
         params: {} as DTO,
@@ -107,18 +109,18 @@ export default function createBeicroonList<DTO extends QueryDTO, VO extends Base
 
             await list.setPages();
         },
-        handleCreate: async (component: Component) => {
-            console.info(component);
+        handleCreate: async () => {
+            console.info(create);
         },
-        handleDetail: async (item: VO, component: Component) => {
+        handleDetail: async (item: VO) => {
             console.info(item);
-            console.info(component);
+            console.info(detail);
         },
-        handleUpdate: async (item: VO, component: Component) => {
+        handleUpdate: async (item: VO) => {
             console.info(item);
-            console.info(component);
+            console.info(update);
         },
-        handleRemove: async (item: VO, remove: Remove) => {
+        handleRemove: async (item: VO) => {
             console.info(item);
             console.info(remove);
         },
