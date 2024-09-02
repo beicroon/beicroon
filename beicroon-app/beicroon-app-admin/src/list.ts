@@ -1,5 +1,5 @@
 import {BaseVO, PageInfo, QueryDTO, Response} from "@/http.ts";
-import {ComponentOptionsMixin, DefineComponent, ExtractPropTypes, PublicProps, Reactive, reactive} from "vue";
+import {ComponentOptionsMixin, DefineComponent, ExtractPropTypes, PublicProps, Reactive, reactive, toRaw} from "vue";
 
 type Page<DTO extends QueryDTO, VO extends BaseVO> = (params: DTO, pageInfo: PageInfo) => Promise<Response<Array<VO>>>;
 
@@ -82,7 +82,11 @@ export default function createBeicroonList<DTO extends QueryDTO, VO extends Base
             await list.handleSearch();
         },
         handleReset: async () => {
-            list.params = {} as DTO;
+            for (const key in list.params) {
+                if (Object.prototype.hasOwnProperty.call(list.params, key)) {
+                    (list.params as any)[key] = null;
+                }
+            }
         },
         handleSearch: async () => {
             if (list.loading) {
@@ -93,11 +97,11 @@ export default function createBeicroonList<DTO extends QueryDTO, VO extends Base
 
             list.data = [];
 
-            const res = await page(list.params, list.pageInfo).finally(() => {
+            const res = await page(toRaw(list.params) as DTO, list.pageInfo).finally(() => {
                 list.loading = false;
             });
 
-            list.data = res.data;
+            Object.assign(list.data, res.data);
 
             list.pageInfo.total = res.page.total;
 
