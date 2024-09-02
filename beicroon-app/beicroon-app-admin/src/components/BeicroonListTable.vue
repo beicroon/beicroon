@@ -64,17 +64,29 @@ import BeicroonListRow from "@/components/BeicroonListRow.vue";
   .beicroon-list-button {
     z-index: 1;
     top: -8rem;
-    right: -8rem;
+    right: 2rem;
     width: 180rem;
     position: sticky;
 
     &:before {
       top: 0;
       z-index: 2;
-      left: -2rem;
+      left: -3rem;
       content: "";
-      width: 2rem;
+      width: 3rem;
       height: 100%;
+      display: block;
+      position: absolute;
+      background-color: var(--color-white);
+    }
+
+    &:after {
+      top: 0;
+      z-index: 2;
+      content: "";
+      width: 10rem;
+      height: 100%;
+      right: -10rem;
       display: block;
       position: absolute;
       background-color: var(--color-white);
