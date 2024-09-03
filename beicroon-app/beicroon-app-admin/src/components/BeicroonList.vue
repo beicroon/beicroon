@@ -74,13 +74,14 @@ const moreSearchSize = computed(() => {
 </template>
 
 <style lang="less">
+:root {
+  --beicroon-height-list-head: 160rem;
+  --beicroon-height-list-foot: 60rem;
+}
+
 .beicroon-list {
   width: 100%;
   height: 100%;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  justify-content: center;
 
   .list-head {
     z-index: 1;
@@ -88,6 +89,7 @@ const moreSearchSize = computed(() => {
     display: flex;
     position: relative;
     flex-direction: row;
+    height: var(--beicroon-height-list-head);
 
     .head-search {
       flex: 1;
@@ -114,22 +116,21 @@ const moreSearchSize = computed(() => {
   }
 
   .list-body {
-    flex: 1;
     z-index: 1;
     width: 100%;
     padding: 8rem;
-    overflow-y: auto;
     position: relative;
+    height: calc(100% - var(--beicroon-height-list-head) - var(--beicroon-height-line) - var(--beicroon-height-list-foot) - var(--beicroon-height-line));
   }
 
   .list-foot {
     z-index: 2;
     width: 100%;
-    height: 60rem;
     display: flex;
     position: relative;
     align-items: center;
     justify-content: space-between;
+    height: var(--beicroon-height-list-foot);
 
     .setting {
       gap: 18rem;

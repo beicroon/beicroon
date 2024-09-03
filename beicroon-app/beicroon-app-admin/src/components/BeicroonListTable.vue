@@ -18,23 +18,25 @@ const colspan = computed(() => {
 </script>
 
 <template>
-  <table class="beicroon-list-table" :class="{loading: list.loading}" ref="listTable">
-    <thead class="beicroon-list-head">
-    <beicroon-list-row>
-      <slot name="title"></slot>
-    </beicroon-list-row>
-    </thead>
-    <tbody class="beicroon-list-body" v-if="list.loading">
-    <beicroon-list-row>
-      <td :colspan="colspan">
-        <beicroon-loading fill="#e6e6e6" width="100" height="100"></beicroon-loading>
-      </td>
-    </beicroon-list-row>
-    </tbody>
-    <tbody class="beicroon-list-body" v-else>
-    <slot name="body"></slot>
-    </tbody>
-  </table>
+  <div class="beicroon-list-table">
+    <table class="beicroon-list-table" :class="{loading: list.loading}" ref="listTable">
+      <thead class="beicroon-list-head">
+      <beicroon-list-row>
+        <slot name="title"></slot>
+      </beicroon-list-row>
+      </thead>
+      <tbody class="beicroon-list-body" v-if="list.loading">
+      <beicroon-list-row>
+        <td :colspan="colspan">
+          <beicroon-loading fill="#e6e6e6" width="100" height="100"></beicroon-loading>
+        </td>
+      </beicroon-list-row>
+      </tbody>
+      <tbody class="beicroon-list-body" v-else>
+      <slot name="body"></slot>
+      </tbody>
+    </table>
+  </div>
 </template>
 
 <style lang="less">
@@ -43,23 +45,38 @@ const colspan = computed(() => {
 }
 
 .beicroon-list-table {
-  min-width: 100%;
-  empty-cells: show;
-  width: fit-content;
-  text-align: center;
-  table-layout: fixed;
-  box-shadow: 0 0 1rem var(--color-grey-light) inset;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  position: relative;
+  scrollbar-width: none;
 
-  &.loading {
-    height: 100%;
+  &::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+  }
 
-    .beicroon-list-body {
-      height: calc(100% - var(--beicroon-height-list-row));
+  table {
+    min-width: 100%;
+    empty-cells: show;
+    width: fit-content;
+    text-align: center;
+    table-layout: fixed;
+    border-spacing: 2rem;
+    border-collapse: separate;
+
+    &.loading {
+      height: 100%;
+
+      .beicroon-list-body {
+        height: calc(100% - var(--beicroon-height-list-row));
+      }
     }
   }
 
   .beicroon-list-head {
-    top: -8rem;
+    top: 2rem;
     z-index: 2;
     position: sticky;
     height: var(--beicroon-height-list-row);
@@ -70,6 +87,20 @@ const colspan = computed(() => {
 
       td {
         height: inherit;
+      }
+
+      .beicroon-list-cell {
+        &:after {
+          left: 0;
+          top: -2rem;
+          z-index: 2;
+          content: "";
+          width: 100%;
+          height: 2rem;
+          display: block;
+          position: absolute;
+          background-color: var(--color-white);
+        }
       }
 
       .beicroon-list-button {
@@ -107,12 +138,10 @@ const colspan = computed(() => {
     align-items: center;
     flex-direction: column;
     justify-content: center;
-    box-shadow: 0 0 1rem var(--color-grey-light) inset;
   }
 
   .beicroon-list-button {
     z-index: 1;
-    top: -8rem;
     right: 2rem;
     width: 180rem;
     position: sticky;
@@ -120,9 +149,9 @@ const colspan = computed(() => {
     &:before {
       top: 0;
       z-index: 2;
-      left: -3rem;
+      left: -2rem;
       content: "";
-      width: 3rem;
+      width: 2rem;
       height: 100%;
       display: block;
       position: absolute;
@@ -133,9 +162,9 @@ const colspan = computed(() => {
       top: 0;
       z-index: 2;
       content: "";
-      width: 10rem;
+      width: 2rem;
       height: 100%;
-      right: -10rem;
+      right: -2rem;
       display: block;
       position: absolute;
       background-color: var(--color-white);
