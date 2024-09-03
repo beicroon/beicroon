@@ -14,6 +14,7 @@ export type List<DTO extends QueryDTO, VO extends BaseVO> = {
     pageInfo: PageInfo,
     pages: Array<number>,
     choosers: Array<number>,
+    afterSearchCallbacks: Array<() => Promise<void>>,
     choose: (page: number) => Promise<void>,
     setPage: (page: number) => Promise<void>,
     getPages: (start: number, end: number) => Promise<Array<number>>,
@@ -25,6 +26,8 @@ export type List<DTO extends QueryDTO, VO extends BaseVO> = {
     handleDetail: (item: VO) => Promise<void>,
     handleUpdate: (item: VO) => Promise<void>,
     handleRemove: (item: VO) => Promise<void>,
+    afterSearch: (callback: () => Promise<void>) => Promise<void>,
+    handleSearchCallbacks: () => Promise<void>,
 };
 
 export default function createBeicroonList<DTO extends QueryDTO, VO extends BaseVO>(
@@ -37,6 +40,7 @@ export default function createBeicroonList<DTO extends QueryDTO, VO extends Base
         pageInfo: {page: 1, size: 15, total: 0} as PageInfo,
         pages: [1],
         choosers: [2, 15, 30, 50, 100],
+        afterSearchCallbacks: [] as Array<() => Promise<void>>,
         choose: async (size: number) => {
             if (list.pageInfo.size == size) {
                 return;
@@ -108,6 +112,8 @@ export default function createBeicroonList<DTO extends QueryDTO, VO extends Base
             list.pageInfo.total = res.page.total;
 
             await list.setPages();
+
+            await list.handleSearchCallbacks();
         },
         handleCreate: async () => {
             console.info(create);
@@ -123,6 +129,12 @@ export default function createBeicroonList<DTO extends QueryDTO, VO extends Base
         handleRemove: async (item: VO) => {
             console.info(item);
             console.info(remove);
+        },
+        afterSearch: async (callback: () => Promise<void>) => {
+            list.afterSearchCallbacks.push(callback);
+        },
+        handleSearchCallbacks: async () => {
+            list.afterSearchCallbacks.forEach(callback => callback());
         },
     });
 

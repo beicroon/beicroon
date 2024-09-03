@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import {List} from "@/list.ts";
 import {computed, ref} from "vue";
+import {windowResize} from "@/util.ts";
 import BeicroonListRow from "@/components/BeicroonListRow.vue";
 import BeicroonLoading from "@/components/BeicroonLoading.vue";
 
@@ -8,34 +9,86 @@ type Props = {
   list: List<any, any>,
 };
 
-defineProps<Props>();
+const props = defineProps<Props>();
 
-const listTable = ref();
+const beicroonList = ref();
+
+const beicroonTable = ref();
 
 const colspan = computed(() => {
-  return listTable.value ? listTable.value.querySelectorAll("thead td").length : 0;
+  return beicroonTable.value ? beicroonTable.value.querySelectorAll("thead td").length : 0;
 });
+
+const scrollWidth = ref(0);
+const scrollHeight = ref(0);
+
+const scrollTop = ref(0);
+const scrollLeft = ref(0);
+
+async function setScroll() {
+  if (!beicroonList.value || !beicroonTable.value) {
+    return;
+  }
+
+  scrollWidth.value = (beicroonList.value.clientWidth / beicroonTable.value.clientWidth) * beicroonList.value.clientWidth;
+
+  scrollHeight.value = (beicroonList.value.clientHeight / beicroonTable.value.clientHeight) * beicroonList.value.clientHeight;
+}
+
+function handleScroll() {
+  scrollTop.value = beicroonList.value.scrollTop * (beicroonList.value.clientHeight / beicroonTable.value.clientHeight);
+
+  scrollLeft.value = beicroonList.value.scrollLeft * (beicroonList.value.clientWidth / beicroonTable.value.clientWidth);
+}
+
+const scrollWidthStyle = computed(() => {
+  if (scrollWidth.value < 0 || scrollWidth.value > beicroonTable.value?.clientWidth) {
+    return {};
+  }
+
+  return {
+    left: `${scrollLeft.value}rem`,
+    width: `${scrollWidth.value}rem`,
+  };
+});
+
+const scrollHeightStyle = computed(() => {
+  if (scrollHeight.value < 0 || scrollHeight.value > beicroonTable.value?.clientHeight) {
+    return {};
+  }
+
+  return {
+    top: `${scrollTop.value}rem`,
+    height: `${scrollHeight.value}rem`,
+  };
+});
+
+props.list.afterSearch(setScroll)
+
+windowResize(setScroll);
 </script>
 
 <template>
-  <div class="beicroon-list-table">
-    <table class="beicroon-list-table" :class="{loading: list.loading}" ref="listTable">
+  <div class="beicroon-list-table" :class="{loading: list.loading}" ref="beicroonList" @scroll="handleScroll">
+    <table ref="beicroonTable">
       <thead class="beicroon-list-head">
       <beicroon-list-row>
         <slot name="title"></slot>
       </beicroon-list-row>
       </thead>
-      <tbody class="beicroon-list-body" v-if="list.loading">
-      <beicroon-list-row>
-        <td :colspan="colspan">
-          <beicroon-loading fill="#e6e6e6" width="100" height="100"></beicroon-loading>
-        </td>
-      </beicroon-list-row>
-      </tbody>
-      <tbody class="beicroon-list-body" v-else>
+      <tbody class="beicroon-list-body">
       <slot name="body"></slot>
       </tbody>
     </table>
+    <div class="beicroon-list-loading">
+      <beicroon-loading fill="#e6e6e6" width="100" height="100"></beicroon-loading>
+    </div>
+    <div class="beicroon-list-table-scroll x">
+      <div class="scroll" :style="scrollWidthStyle"></div>
+    </div>
+    <div class="beicroon-list-table-scroll y">
+      <div class="scroll" :style="scrollHeightStyle"></div>
+    </div>
   </div>
 </template>
 
@@ -45,11 +98,9 @@ const colspan = computed(() => {
 }
 
 .beicroon-list-table {
-  z-index: 1;
   width: 100%;
   height: 100%;
   overflow: auto;
-  position: relative;
   scrollbar-width: none;
 
   &::-webkit-scrollbar {
@@ -65,13 +116,14 @@ const colspan = computed(() => {
     table-layout: fixed;
     border-spacing: 2rem;
     border-collapse: separate;
+  }
 
-    &.loading {
-      height: 100%;
-
-      .beicroon-list-body {
-        height: calc(100% - var(--beicroon-height-list-row));
-      }
+  &.loading {
+    .beicroon-list-loading {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: calc(100% - var(--beicroon-height-list-row));
     }
   }
 
@@ -132,6 +184,16 @@ const colspan = computed(() => {
     }
   }
 
+  .beicroon-list-loading {
+    top: 50%;
+    left: 50%;
+    z-index: 3;
+    width: 100%;
+    display: none;
+    position: absolute;
+    transform: translate(-50%, calc(-50% + (var(--beicroon-height-list-row) / 2)));
+  }
+
   .beicroon-list-cell {
     height: 100%;
     display: flex;
@@ -172,6 +234,43 @@ const colspan = computed(() => {
 
     .beicroon-list-cell {
       flex-direction: row;
+    }
+  }
+}
+
+.beicroon-list-table-scroll {
+  z-index: 3;
+  position: absolute;
+  background-color: var(--color-primary);
+
+  .scroll {
+    top: 0;
+    left: 0;
+    z-index: 1;
+    position: absolute;
+  }
+
+  &.x {
+    bottom: 0;
+    left: 10rem;
+    height: 8rem;
+    width: calc(100% - 18rem);
+
+    .scroll {
+      height: 100%;
+      background-color: var(--color-warning);
+    }
+  }
+
+  &.y {
+    right: 0;
+    top: 10rem;
+    width: 8rem;
+    height: calc(100% - 18rem);
+
+    .scroll {
+      width: 100%;
+      background-color: var(--color-warning);
     }
   }
 }
