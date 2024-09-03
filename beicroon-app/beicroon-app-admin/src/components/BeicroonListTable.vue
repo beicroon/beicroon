@@ -1,21 +1,47 @@
 <script setup lang="ts">
+import {List} from "@/list.ts";
+import {computed, ref} from "vue";
 import BeicroonListRow from "@/components/BeicroonListRow.vue";
+import BeicroonLoading from "@/components/BeicroonLoading.vue";
+
+type Props = {
+  list: List<any, any>,
+};
+
+defineProps<Props>();
+
+const listTable = ref();
+
+const colspan = computed(() => {
+  return listTable.value ? listTable.value.querySelectorAll("thead td").length : 0;
+});
 </script>
 
 <template>
-  <table class="beicroon-list-table">
+  <table class="beicroon-list-table" :class="{loading: list.loading}" ref="listTable">
     <thead class="beicroon-list-head">
     <beicroon-list-row>
       <slot name="title"></slot>
     </beicroon-list-row>
     </thead>
-    <tbody class="beicroon-list-body">
+    <tbody class="beicroon-list-body" v-if="list.loading">
+    <beicroon-list-row>
+      <td :colspan="colspan">
+        <beicroon-loading fill="#e6e6e6" width="100" height="100"></beicroon-loading>
+      </td>
+    </beicroon-list-row>
+    </tbody>
+    <tbody class="beicroon-list-body" v-else>
     <slot name="body"></slot>
     </tbody>
   </table>
 </template>
 
 <style lang="less">
+:root {
+  --beicroon-height-list-row: 72rem;
+}
+
 .beicroon-list-table {
   min-width: 100%;
   empty-cells: show;
@@ -24,13 +50,27 @@ import BeicroonListRow from "@/components/BeicroonListRow.vue";
   table-layout: fixed;
   box-shadow: 0 0 1rem var(--color-grey-light) inset;
 
+  &.loading {
+    height: 100%;
+
+    .beicroon-list-body {
+      height: calc(100% - var(--beicroon-height-list-row));
+    }
+  }
+
   .beicroon-list-head {
-    z-index: 2;
     top: -8rem;
+    z-index: 2;
     position: sticky;
+    height: var(--beicroon-height-list-row);
 
     .beicroon-list-row {
+      height: inherit;
       background-color: var(--color-grey-lighter);
+
+      td {
+        height: inherit;
+      }
 
       .beicroon-list-button {
         background-color: inherit;
@@ -41,6 +81,11 @@ import BeicroonListRow from "@/components/BeicroonListRow.vue";
   .beicroon-list-body {
     .beicroon-list-row {
       background-color: var(--color-white);
+      height: var(--beicroon-height-list-row);
+
+      td {
+        height: inherit;
+      }
 
       .beicroon-list-button {
         background-color: inherit;
@@ -57,7 +102,11 @@ import BeicroonListRow from "@/components/BeicroonListRow.vue";
   }
 
   .beicroon-list-cell {
-    padding: 18rem;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
     box-shadow: 0 0 1rem var(--color-grey-light) inset;
   }
 
@@ -90,6 +139,10 @@ import BeicroonListRow from "@/components/BeicroonListRow.vue";
       display: block;
       position: absolute;
       background-color: var(--color-white);
+    }
+
+    .beicroon-list-cell {
+      flex-direction: row;
     }
   }
 }

@@ -46,7 +46,7 @@ const moreSearchSize = computed(() => {
     </div>
     <beicroon-line-vertical></beicroon-line-vertical>
     <div class="list-body">
-      <beicroon-list-table>
+      <beicroon-list-table :list="list">
         <template #title>
           <slot name="table-title"></slot>
         </template>
