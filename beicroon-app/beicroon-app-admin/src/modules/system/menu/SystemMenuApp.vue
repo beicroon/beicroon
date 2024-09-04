@@ -11,7 +11,7 @@ import BeicroonListRow from "@/components/BeicroonListRow.vue";
 import BeicroonListCell from "@/components/BeicroonListCell.vue";
 import {page, remove, SystemMenuPageVO as VO, SystemMenuQueryDTO as DTO} from "./system.menu.http.ts";
 
-const list = createBeicroonList<DTO, VO>(page, remove, Create, Detail, Update);
+const list = createBeicroonList<DTO, VO>(page);
 
 onMounted(list.resetSearch);
 </script>
@@ -26,7 +26,7 @@ onMounted(list.resetSearch);
     <template #head-button>
       <beicroon-button class="block primary" label="重置" @click="list.handleReset"></beicroon-button>
       <beicroon-button class="block primary" label="查询" :loading="list.loading" @click="list.resetSearch"></beicroon-button>
-      <beicroon-button class="block warning" label="新增" @click="list.handleCreate"></beicroon-button>
+      <beicroon-button class="block warning" label="新增" @click="list.handleCreate(Create)"></beicroon-button>
     </template>
     <template #table-title>
       <beicroon-list-cell width="500">名称</beicroon-list-cell>
@@ -40,9 +40,9 @@ onMounted(list.resetSearch);
         <beicroon-list-cell>{{ item.path }}</beicroon-list-cell>
         <beicroon-list-cell>{{ item.sorting }}</beicroon-list-cell>
         <beicroon-list-cell class="beicroon-list-button">
-          <beicroon-button class="primary" label="查看" @click="list.handleDetail(item)"></beicroon-button>
-          <beicroon-button class="warning" label="编辑" @click="list.handleUpdate(item)"></beicroon-button>
-          <beicroon-button class="danger" label="删除" @click="list.handleRemove(item)"></beicroon-button>
+          <beicroon-button class="primary" label="查看" @click="list.handleDetail(item, Detail)"></beicroon-button>
+          <beicroon-button class="warning" label="编辑" @click="list.handleUpdate(item, Update)"></beicroon-button>
+          <beicroon-button class="danger" label="删除" @click="list.handleRemove(item, remove)"></beicroon-button>
         </beicroon-list-cell>
       </beicroon-list-row>
     </template>

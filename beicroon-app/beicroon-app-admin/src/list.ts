@@ -1,20 +1,9 @@
-import {
-    ComponentOptionsMixin,
-    DefineComponent,
-    ExtractPropTypes,
-    nextTick,
-    PublicProps,
-    Reactive,
-    reactive,
-    toRaw
-} from "vue";
+import {nextTick, Reactive, reactive, toRaw} from "vue";
 import {BaseVO, PageInfo, QueryDTO, Response} from "@/http.ts";
 
 type Page<DTO extends QueryDTO, VO extends BaseVO> = (params: DTO, pageInfo: PageInfo) => Promise<Response<Array<VO>>>;
 
 type Remove = (ids: string | Array<string>) => Promise<Response<boolean>>;
-
-type Component = DefineComponent<{}, {}, {}, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, {}, string, PublicProps, Readonly<ExtractPropTypes<{}>>, {}>;
 
 export type List<DTO extends QueryDTO, VO extends BaseVO> = {
     loading: boolean,
@@ -31,17 +20,15 @@ export type List<DTO extends QueryDTO, VO extends BaseVO> = {
     resetSearch: () => Promise<void>,
     handleReset: () => Promise<void>,
     handleSearch: () => Promise<void>,
-    handleCreate: () => Promise<void>,
-    handleDetail: (item: VO) => Promise<void>,
-    handleUpdate: (item: VO) => Promise<void>,
-    handleRemove: (item: VO) => Promise<void>,
+    handleCreate: (component: any) => Promise<void>,
+    handleDetail: (item: VO, component: any) => Promise<void>,
+    handleUpdate: (item: VO, component: any) => Promise<void>,
+    handleRemove: (item: VO, remove: Remove) => Promise<void>,
     afterSearch: (callback: () => Promise<void>) => Promise<void>,
     handleSearchCallbacks: () => Promise<void>,
 };
 
-export default function createBeicroonList<DTO extends QueryDTO, VO extends BaseVO>(
-    page: Page<DTO, VO>, remove: Remove, create?: Component, detail?: Component, update?: Component
-): Reactive<List<DTO, VO>> {
+export default function createBeicroonList<DTO extends QueryDTO, VO extends BaseVO>(page: Page<DTO, VO>): Reactive<List<DTO, VO>> {
     const list: Reactive<List<DTO, VO>> = reactive<List<DTO, VO>>({
         loading: false,
         params: {} as DTO,
@@ -126,18 +113,18 @@ export default function createBeicroonList<DTO extends QueryDTO, VO extends Base
 
             await list.handleSearchCallbacks();
         },
-        handleCreate: async () => {
-            console.info(create);
+        handleCreate: async (component: any) => {
+            console.info(component);
         },
-        handleDetail: async (item: VO) => {
+        handleDetail: async (item: VO, component: any) => {
             console.info(item);
-            console.info(detail);
+            console.info(component);
         },
-        handleUpdate: async (item: VO) => {
+        handleUpdate: async (item: VO, component: any) => {
             console.info(item);
-            console.info(update);
+            console.info(component);
         },
-        handleRemove: async (item: VO) => {
+        handleRemove: async (item: VO, remove: Remove) => {
             console.info(item);
             console.info(remove);
         },
