@@ -61,6 +61,7 @@ html, body, #app {
   --color-grey-light: #babdc4;
   --color-grey-lighter: #e4e7ed;
   --color-grey-lightest: #f7f7f7;
+  --color-grey-deep: #9b9d9e;
   --color-white: #ffffff;
   --color-black: #000000;
   --color-black-light: #333333;

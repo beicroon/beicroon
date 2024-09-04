@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import {List} from "@/list.ts";
 import {computed, ref} from "vue";
-import {windowResize} from "@/util.ts";
+import {afterSearch, List} from "@/list.ts";
+import {mouseUp, windowResize} from "@/util.ts";
 import BeicroonListRow from "@/components/BeicroonListRow.vue";
 import BeicroonLoading from "@/components/BeicroonLoading.vue";
 
@@ -59,9 +59,29 @@ const scrollHeightStyle = computed(() => {
   };
 });
 
-props.list.afterSearch(setScroll)
+afterSearch(props.list, setScroll);
 
 windowResize(setScroll);
+
+const scrollXActive = ref(false);
+const scrollYActive = ref(false);
+
+async function activeX() {
+  scrollXActive.value = true;
+
+  await mouseUp(endScroll);
+}
+
+async function activeY() {
+  scrollYActive.value = true;
+
+  await mouseUp(endScroll);
+}
+
+async function endScroll() {
+  scrollXActive.value = false;
+  scrollYActive.value = false;
+}
 </script>
 
 <template>
@@ -80,10 +100,10 @@ windowResize(setScroll);
       <beicroon-loading fill="#b3e5fc" width="100" height="100"></beicroon-loading>
     </div>
     <div class="beicroon-list-table-scroll x">
-      <div class="scroll" :style="scrollWidthStyle"></div>
+      <div class="scroll" :class="{active: scrollXActive}" :style="scrollWidthStyle" @mousedown.self="activeX"></div>
     </div>
     <div class="beicroon-list-table-scroll y">
-      <div class="scroll" :style="scrollHeightStyle"></div>
+      <div class="scroll" :class="{active: scrollYActive}" :style="scrollHeightStyle" @mousedown.self="activeY"></div>
     </div>
   </div>
 </template>
@@ -238,7 +258,7 @@ windowResize(setScroll);
   z-index: 3;
   overflow: hidden;
   position: absolute;
-  background-color: var(--color-primary);
+  border-radius: 6rem;
 
   .scroll {
     top: 0;
@@ -247,6 +267,12 @@ windowResize(setScroll);
     max-width: 100%;
     max-height: 100%;
     position: absolute;
+    border-radius: 6rem;
+    background-color: var(--color-grey-light);
+
+    &.active {
+      background-color: var(--color-grey-deep);
+    }
   }
 
   &.x {
@@ -257,7 +283,6 @@ windowResize(setScroll);
 
     .scroll {
       height: 100%;
-      background-color: var(--color-warning);
     }
   }
 
@@ -269,7 +294,6 @@ windowResize(setScroll);
 
     .scroll {
       width: 100%;
-      background-color: var(--color-warning);
     }
   }
 }

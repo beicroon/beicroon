@@ -151,3 +151,7 @@ export default function createBeicroonList<DTO extends QueryDTO, VO extends Base
 
     return list;
 };
+
+export async function afterSearch<DTO extends QueryDTO, VO extends BaseVO>(list: List<DTO, VO>, callback: () => Promise<void>) {
+    await list.afterSearch(callback);
+}
