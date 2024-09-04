@@ -1,5 +1,14 @@
+import {
+    ComponentOptionsMixin,
+    DefineComponent,
+    ExtractPropTypes,
+    nextTick,
+    PublicProps,
+    Reactive,
+    reactive,
+    toRaw
+} from "vue";
 import {BaseVO, PageInfo, QueryDTO, Response} from "@/http.ts";
-import {ComponentOptionsMixin, DefineComponent, ExtractPropTypes, PublicProps, Reactive, reactive, toRaw} from "vue";
 
 type Page<DTO extends QueryDTO, VO extends BaseVO> = (params: DTO, pageInfo: PageInfo) => Promise<Response<Array<VO>>>;
 
@@ -112,6 +121,8 @@ export default function createBeicroonList<DTO extends QueryDTO, VO extends Base
             list.pageInfo.total = res.page.total;
 
             await list.setPages();
+
+            await nextTick();
 
             await list.handleSearchCallbacks();
         },

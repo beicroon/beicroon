@@ -15,10 +15,6 @@ const beicroonList = ref();
 
 const beicroonTable = ref();
 
-const colspan = computed(() => {
-  return beicroonTable.value ? beicroonTable.value.querySelectorAll("thead td").length : 0;
-});
-
 const scrollWidth = ref(0);
 const scrollHeight = ref(0);
 
@@ -81,7 +77,7 @@ windowResize(setScroll);
       </tbody>
     </table>
     <div class="beicroon-list-loading">
-      <beicroon-loading fill="#e6e6e6" width="100" height="100"></beicroon-loading>
+      <beicroon-loading fill="#b3e5fc" width="100" height="100"></beicroon-loading>
     </div>
     <div class="beicroon-list-table-scroll x">
       <div class="scroll" :style="scrollWidthStyle"></div>
