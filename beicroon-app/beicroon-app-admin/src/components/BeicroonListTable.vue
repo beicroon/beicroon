@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import {computed, ref} from "vue";
+import {computed, onMounted, onUnmounted, ref} from "vue";
 import {afterSearch, List} from "@/list.ts";
-import {mouseUp, windowResize} from "@/util.ts";
+import {mouseMove, mouseUp, windowResize} from "@/util.ts";
 import BeicroonListRow from "@/components/BeicroonListRow.vue";
 import BeicroonLoading from "@/components/BeicroonLoading.vue";
 
@@ -30,6 +30,8 @@ async function setScroll() {
 
   scrollHeight.value = (beicroonList.value.clientHeight / beicroonTable.value.clientHeight) * beicroonList.value.clientHeight;
 }
+
+const step = ref(0);
 
 function handleScroll() {
   scrollTop.value = beicroonList.value.scrollTop * (beicroonList.value.clientHeight / beicroonTable.value.clientHeight);
@@ -61,7 +63,8 @@ const scrollHeightStyle = computed(() => {
 
 afterSearch(props.list, setScroll);
 
-windowResize(setScroll);
+onMounted(() => windowResize(setScroll));
+onUnmounted(() => windowResize());
 
 const scrollXActive = ref(false);
 const scrollYActive = ref(false);
@@ -69,11 +72,23 @@ const scrollYActive = ref(false);
 async function activeX() {
   scrollXActive.value = true;
 
+  document.body.style.userSelect = "none";
+
+  await mouseMove(async (e: MouseEvent) => {
+    beicroonList.value.scrollLeft += e.movementX;
+  });
+
   await mouseUp(endScroll);
 }
 
 async function activeY() {
   scrollYActive.value = true;
+
+  document.body.style.userSelect = "none";
+
+  await mouseMove(async (e: MouseEvent) => {
+    beicroonList.value.scrollTop += e.movementY;
+  });
 
   await mouseUp(endScroll);
 }
@@ -81,6 +96,10 @@ async function activeY() {
 async function endScroll() {
   scrollXActive.value = false;
   scrollYActive.value = false;
+
+  document.body.style.userSelect = "";
+
+  await mouseMove();
 }
 </script>
 

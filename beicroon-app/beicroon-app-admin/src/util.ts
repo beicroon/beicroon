@@ -23,7 +23,7 @@ escToggle.pop = async () => {
     }
 }
 
-document.addEventListener("keyup", async (e) => {
+document.addEventListener("keyup", async (e: KeyboardEvent) => {
     if (e.key === "Escape") {
         await escToggle.pop();
     }
@@ -34,9 +34,9 @@ document.addEventListener("click", async () => {
 });
 
 // 可视区域大小变化事件管理
-const windowResizeStacks: Array<(() => Promise<void>)> = [];
+const windowResizeStacks: Array<((e: Event) => Promise<void>)> = [];
 
-export async function windowResize(callback?: () => Promise<void>) {
+export async function windowResize(callback?: (e: Event) => Promise<void>) {
     if (callback) {
         await windowResize.put(callback);
     } else {
@@ -44,49 +44,68 @@ export async function windowResize(callback?: () => Promise<void>) {
     }
 }
 
-windowResize.put = async (callback: () => Promise<void>) => {
+windowResize.put = async (callback: (e: Event) => Promise<void>) => {
     windowResizeStacks.push(callback);
 }
 
 windowResize.pop = async () => {
     if (windowResizeStacks.length > 0) {
-        const callback = windowResizeStacks.pop();
-
-        if (callback) {
-            await callback();
-        }
+        windowResizeStacks.pop();
     }
 }
 
-window.addEventListener("resize", () => windowResizeStacks.forEach(callback => callback()));
+window.addEventListener("resize", (e: Event) => {
+    windowResizeStacks.forEach(callback => callback(e));
+});
 
 // 鼠标抬起事件管理
-const mouseUpStacks: Array<(() => Promise<void>)> = [];
+const mouseUpStacks: Array<((e: MouseEvent) => Promise<void>)> = [];
 
-export async function mouseUp(callback?: () => Promise<void>) {
-    if (callback) {
-        await mouseUp.put(callback);
-    } else {
-        await mouseUp.pop();
-    }
+export async function mouseUp(callback: (e: MouseEvent) => Promise<void>) {
+    await mouseUp.put(callback);
 }
 
-mouseUp.put = async (callback: () => Promise<void>) => {
+mouseUp.put = async (callback: (e: MouseEvent) => Promise<void>) => {
     mouseUpStacks.push(callback);
 }
 
-mouseUp.pop = async () => {
+mouseUp.pop = async (e: MouseEvent) => {
     if (mouseUpStacks.length > 0) {
         const callback = mouseUpStacks.pop();
 
         if (callback) {
-            await callback();
+            await callback(e);
         }
     }
 }
 
-document.addEventListener("mouseup", async () => {
-    await mouseUp.pop();
+document.addEventListener("mouseup", async (e: MouseEvent) => {
+    await mouseUp.pop(e);
 });
 
-export default {escToggle, windowResize, mouseUp};
+// 鼠标移动事件管理
+const mouseMoveStacks: Array<((e: MouseEvent) => Promise<void>)> = [];
+
+export async function mouseMove(callback?: (e: MouseEvent) => Promise<void>) {
+    if (callback) {
+        await mouseMove.put(callback);
+    } else {
+        await mouseMove.pop();
+    }
+}
+
+mouseMove.put = async (callback: (e: MouseEvent) => Promise<void>) => {
+    mouseMoveStacks.push(callback);
+}
+
+mouseMove.pop = async () => {
+    if (mouseMoveStacks.length > 0) {
+        mouseMoveStacks.pop();
+    }
+}
+
+document.addEventListener("mousemove", async (e: MouseEvent) => {
+    mouseMoveStacks.forEach(callback => callback(e));
+});
+
+export default {escToggle, windowResize, mouseUp, mouseMove};
