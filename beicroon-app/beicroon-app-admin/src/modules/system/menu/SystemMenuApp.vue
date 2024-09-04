@@ -30,9 +30,9 @@ onMounted(list.resetSearch);
       <beicroon-button class="block warning" label="新增" @click="list.handleCreate(Create)"></beicroon-button>
     </template>
     <template #table-title>
-      <beicroon-list-cell width="500">名称</beicroon-list-cell>
-      <beicroon-list-cell width="500">路径</beicroon-list-cell>
-      <beicroon-list-cell width="500">排序</beicroon-list-cell>
+      <beicroon-list-cell>名称</beicroon-list-cell>
+      <beicroon-list-cell>路径</beicroon-list-cell>
+      <beicroon-list-cell>排序</beicroon-list-cell>
       <beicroon-list-cell-button>操作</beicroon-list-cell-button>
     </template>
     <template #table-body>
