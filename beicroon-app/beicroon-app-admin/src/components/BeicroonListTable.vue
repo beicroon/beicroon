@@ -68,9 +68,9 @@ const scrollXActive = ref(false);
 const scrollYActive = ref(false);
 
 async function activeX() {
-  scrollXActive.value = true;
-
   document.body.style.userSelect = "none";
+
+  scrollXActive.value = true;
 
   await mouseMove(async (e: MouseEvent) => {
     beicroonList.value.scrollLeft += e.movementX;
@@ -80,9 +80,9 @@ async function activeX() {
 }
 
 async function activeY() {
-  scrollYActive.value = true;
-
   document.body.style.userSelect = "none";
+
+  scrollYActive.value = true;
 
   await mouseMove(async (e: MouseEvent) => {
     beicroonList.value.scrollTop += e.movementY;
@@ -92,10 +92,10 @@ async function activeY() {
 }
 
 async function endScroll() {
+  document.body.style.userSelect = "";
+
   scrollXActive.value = false;
   scrollYActive.value = false;
-
-  document.body.style.userSelect = "";
 
   await mouseMove();
 }
@@ -175,13 +175,25 @@ async function endScroll() {
       }
 
       .beicroon-list-cell {
-        &:after {
+        &:before {
           left: 0;
           top: -2rem;
           z-index: 2;
           content: "";
           width: 100%;
           height: 2rem;
+          display: block;
+          position: absolute;
+          background-color: var(--color-white);
+        }
+
+        &:after {
+          left: 0;
+          z-index: 2;
+          content: "";
+          width: 100%;
+          height: 2rem;
+          bottom: -2rem;
           display: block;
           position: absolute;
           background-color: var(--color-white);
