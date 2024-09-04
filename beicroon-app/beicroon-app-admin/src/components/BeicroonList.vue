@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import {List} from "@/list.ts";
-import escToggle from "@/util.ts";
 import {computed, ref} from "vue";
+import escToggle from "@/event.ts";
 import BeicroonButton from "@/components/BeicroonButton.vue";
 import BeicroonListTable from "@/components/BeicroonListTable.vue";
 import BeicroonLineVertical from "@/components/BeicroonLineVertical.vue";

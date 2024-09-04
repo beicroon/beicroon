@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import {afterSearch, List} from "@/list.ts";
 import {computed, onMounted, onUnmounted, ref} from "vue";
-import {mouseMove, mouseUp, windowResize} from "@/util.ts";
+import {mouseMove, mouseUp, windowResize} from "@/event.ts";
 import BeicroonListRow from "@/components/BeicroonListRow.vue";
 import BeicroonLoading from "@/components/BeicroonLoading.vue";
 
