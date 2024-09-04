@@ -31,8 +31,6 @@ async function setScroll() {
   scrollHeight.value = (beicroonList.value.clientHeight / beicroonTable.value.clientHeight) * beicroonList.value.clientHeight;
 }
 
-const step = ref(0);
-
 function handleScroll() {
   scrollTop.value = beicroonList.value.scrollTop * (beicroonList.value.clientHeight / beicroonTable.value.clientHeight);
 
