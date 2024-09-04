@@ -1,11 +1,11 @@
-import {CacheKeyEnums} from "@/enums/system.enums.ts";
-import {createRouter, createWebHistory} from "vue-router";
+import {CacheKeyEnums} from "@/enums/default-enums.ts";
+import {createRouter, createWebHistory, Router} from "vue-router";
 
 type Meta = {
     auth: boolean,
 }
 
-const router = createRouter({
+const router: Router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
     routes: [
         {
@@ -19,11 +19,11 @@ const router = createRouter({
             path: "/",
             component: () => import("@/views/Index.vue"),
             children: [
-                {
-                    name: "后台账号",
-                    path: "/account/admin",
-                    component: () => import("@/modules/account/admin/AccountAdminApp.vue"),
-                },
+                // {
+                //     name: "后台账号",
+                //     path: "/account/admin",
+                //     component: () => import("@/modules/account/admin/AccountAdminApp.vue"),
+                // },
                 {
                     name: "菜单管理",
                     path: "/system/menu",

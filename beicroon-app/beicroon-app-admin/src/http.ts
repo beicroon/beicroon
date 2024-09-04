@@ -1,9 +1,9 @@
 import axios from "axios";
-import {BooleanEnums, CacheKeyEnums} from "@/enums/system.enums.ts";
+import {BooleanEnums, CacheKeyEnums} from "@/enums/default-enums.ts";
 
 const http = axios.create({
-    baseURL: import.meta.env.VITE_REQUEST_URL,
     timeout: 6000,
+    baseURL: import.meta.env.VITE_REQUEST_URL,
     headers: {"Content-Type": "application/json"},
 });
 

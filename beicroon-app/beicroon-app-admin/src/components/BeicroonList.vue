@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import {List} from "@/list.ts";
 import {computed, ref} from "vue";
-import escToggle from "@/event.ts";
+import {escToggle} from "@/event.ts";
 import BeicroonButton from "@/components/BeicroonButton.vue";
 import BeicroonListTable from "@/components/BeicroonListTable.vue";
 import BeicroonLineVertical from "@/components/BeicroonLineVertical.vue";
@@ -120,6 +120,7 @@ const moreSearchSize = computed(() => {
     width: 100%;
     padding: 8rem;
     position: relative;
+    min-height: 300rem;
     height: calc(100% - var(--beicroon-height-list-head) - var(--beicroon-height-line) - var(--beicroon-height-list-foot) - var(--beicroon-height-line));
   }
 
@@ -130,6 +131,7 @@ const moreSearchSize = computed(() => {
     position: relative;
     align-items: center;
     justify-content: space-between;
+    background-color: var(--color-white);
     height: var(--beicroon-height-list-foot);
 
     .setting {

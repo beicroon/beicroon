@@ -153,10 +153,8 @@ async function endScroll() {
 
   &.loading {
     .beicroon-list-loading {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: calc(100% - var(--beicroon-height-list-row));
+      opacity: 1;
+      visibility: visible;
     }
   }
 
@@ -233,9 +231,16 @@ async function endScroll() {
     top: 50%;
     left: 50%;
     z-index: 3;
+    opacity: 0;
     width: 100%;
-    display: none;
+    display: flex;
+    visibility: hidden;
     position: absolute;
+    align-items: center;
+    justify-content: center;
+    transition: all 80ms linear;
+    background-color: var(--color-white);
+    height: calc(100% - var(--beicroon-height-list-row) - 20rem);
     transform: translate(-50%, calc(-50% + (var(--beicroon-height-list-row) / 2)));
   }
 

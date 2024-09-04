@@ -2,7 +2,7 @@ import {createApp} from "vue";
 
 import App from "@/Main.vue";
 import router from "@/router.ts";
-import {AppSelectorEnums} from "@/enums/system.enums.ts";
+import {AppSelectorEnums} from "@/enums/default-enums.ts";
 
 const app = createApp(App)
 
