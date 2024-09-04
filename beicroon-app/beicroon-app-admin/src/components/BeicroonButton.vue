@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import BeicroonLoading from "@/components/BeicroonLoading.vue";
 import {ref} from "vue";
+import BeicroonLoading from "@/components/BeicroonLoading.vue";
 
 type Props = {
   type?: "button" | "submit" | "reset",
