@@ -168,7 +168,7 @@ async function endScroll() {
 
     .beicroon-list-row {
       height: inherit;
-      background-color: var(--color-grey-lighter);
+      background-color: var(--color-grey-light);
 
       td {
         height: inherit;
@@ -209,7 +209,7 @@ async function endScroll() {
     }
 
     .beicroon-list-row:nth-child(even) {
-      background-color: var(--color-grey-lightest);
+      background-color: var(--color-grey-lighter);
 
       .beicroon-list-button {
         background-color: inherit;
@@ -285,7 +285,7 @@ async function endScroll() {
     max-height: 100%;
     position: absolute;
     border-radius: 6rem;
-    background-color: var(--color-grey-light);
+    background-color: var(--color-grey-deeper);
 
     &.active {
       background-color: var(--color-grey-deep);

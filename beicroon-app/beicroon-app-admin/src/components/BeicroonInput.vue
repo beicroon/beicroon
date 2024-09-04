@@ -49,7 +49,7 @@ const value = computed({
     line-height: 32rem;
     text-align: center;
     border-radius: 6rem;
-    background-color: var(--color-grey-lighter);
+    background-color: var(--color-grey-light);
   }
 
   .input-area {
@@ -59,7 +59,7 @@ const value = computed({
     padding: 0 8rem;
     line-height: 32rem;
     border-radius: 6rem;
-    border: 1rem solid var(--color-grey-light);
+    border: 1rem solid var(--color-grey-deeper);
 
     &::placeholder {
       color: var(--color-grey-light);

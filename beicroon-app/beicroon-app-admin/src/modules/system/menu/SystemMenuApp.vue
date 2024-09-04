@@ -25,7 +25,7 @@ onMounted(list.resetSearch);
       <beicroon-input type="number" label="排序" v-model="list.params.sorting"></beicroon-input>
     </template>
     <template #head-button>
-      <beicroon-button class="block primary" label="重置" @click="list.handleReset"></beicroon-button>
+      <beicroon-button disabled class="block primary" label="重置" @click="list.handleReset"></beicroon-button>
       <beicroon-button class="block primary" label="查询" :loading="list.loading" @click="list.resetSearch"></beicroon-button>
       <beicroon-button class="block warning" label="新增" @click="list.handleCreate(Create)"></beicroon-button>
     </template>

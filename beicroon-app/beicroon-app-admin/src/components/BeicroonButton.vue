@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import BeicroonLoading from "@/components/BeicroonLoading.vue";
+import {ref} from "vue";
 
 type Props = {
   type?: "button" | "submit" | "reset",
@@ -21,10 +22,20 @@ function handleClick(e: MouseEvent) {
 
   emits("click", e);
 }
+
+const clicking = ref(false);
+
+function handleMouseDown() {
+  clicking.value = true;
+}
+
+function handleMouseUp() {
+  clicking.value = false;
+}
 </script>
 
 <template>
-<div class="beicroon-button" @click.stop.prevent="handleClick">
+<div class="beicroon-button" :class="{disabled: disabled, clicking: clicking}" @click.stop.prevent="handleClick" @mousedown="handleMouseDown" @mouseup="handleMouseUp">
   <beicroon-loading v-show="loading" fill="#ffffff" width="20" height="20"></beicroon-loading>
   <button v-show="!loading" :disabled="disabled" :type="type">{{label}}</button>
 </div>
@@ -34,6 +45,10 @@ function handleClick(e: MouseEvent) {
 .beicroon-button {
   cursor: pointer;
   display: inline-flex;
+
+  &.disabled {
+    cursor: not-allowed;
+  }
 
   &.danger {
     color: var(--color-error);
@@ -59,28 +74,45 @@ function handleClick(e: MouseEvent) {
     align-items: center;
     justify-content: center;
 
+    &.disabled {
+      color: var(--color-white);
+      background-color: var(--color-grey-light) !important;
+    }
+
     &.error {
       color: var(--color-white);
       background-color: var(--color-error);
+
+      &.clicking {
+        background-color: var(--color-error-deeper);
+      }
     }
 
     &.warning {
       color: var(--color-white);
       background-color: var(--color-warning);
+
+      &.clicking {
+        background-color: var(--color-warning-deeper);
+      }
     }
 
     &.success {
       color: var(--color-white);
       background-color: var(--color-success);
+
+      &.clicking {
+        background-color: var(--color-success-deeper);
+      }
     }
 
     &.primary {
       color: var(--color-white);
       background-color: var(--color-primary);
-    }
 
-    &.normal {
-      background-color: var(--color-grey-lighter);
+      &.clicking {
+        background-color: var(--color-primary-deeper);
+      }
     }
   }
 
