@@ -38,8 +38,8 @@ function handleScroll() {
 }
 
 const scrollWidthStyle = computed(() => {
-  if (scrollWidth.value < 0 || scrollWidth.value > beicroonTable.value?.clientWidth) {
-    return {};
+  if (scrollWidth.value >= beicroonList.value?.clientWidth) {
+    return null;
   }
 
   return {
@@ -49,8 +49,8 @@ const scrollWidthStyle = computed(() => {
 });
 
 const scrollHeightStyle = computed(() => {
-  if (scrollHeight.value < 0 || scrollHeight.value > beicroonTable.value?.clientHeight) {
-    return {};
+  if (scrollHeight.value >= beicroonList.value?.clientHeight) {
+    return null;
   }
 
   return {
@@ -236,6 +236,7 @@ windowResize(setScroll);
 
 .beicroon-list-table-scroll {
   z-index: 3;
+  overflow: hidden;
   position: absolute;
   background-color: var(--color-primary);
 
@@ -243,6 +244,8 @@ windowResize(setScroll);
     top: 0;
     left: 0;
     z-index: 1;
+    max-width: 100%;
+    max-height: 100%;
     position: absolute;
   }
 
