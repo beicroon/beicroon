@@ -32,5 +32,7 @@ export default async function (message: string, type: Types = "success", duratio
 
     container.appendChild(node);
 
-    console.info("duration", duration);
+    const remove = () => container.removeChild(node);
+
+    setTimeout(remove, duration);
 }
