@@ -130,12 +130,24 @@ export default function createBeicroonList<DTO extends QueryDTO, VO extends Base
             });
         },
         handleDetail: async (item: VO, component: any) => {
-            console.info(item);
-            console.info(component);
+            await dialog({
+                title: `查看[${name}]`,
+                message: component,
+                props: {id: item.id},
+            });
         },
         handleUpdate: async (item: VO, component: any) => {
-            console.info(item);
-            console.info(component);
+            await dialog({
+                title: `编辑[${name}]`,
+                message: component,
+                props: {id: item.id},
+                confirm: async () => {
+                    await toast("保存成功");
+                },
+                finally: async (flag: boolean) => {
+                    flag && await list.resetSearch();
+                },
+            });
         },
         handleRemove: async (item: VO, remove: Remove) => {
             await dialog({

@@ -23,6 +23,10 @@ const types: Array<string> = ["success", "warning", "error"] as const;
 type Types = typeof types[number];
 
 async function handleRemove(node: HTMLElement) {
+    if (!node) {
+        return;
+    }
+
     container.removeChild(node);
 
     if (container.childNodes.length <= 0) {

@@ -71,6 +71,10 @@ const value = computed({
       border-color: var(--color-primary);
     }
 
+    &[disabled] {
+      cursor: text;
+    }
+
     &[type="number"] {
       appearance: textfield;
     }

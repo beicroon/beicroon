@@ -29,6 +29,7 @@ function getNode() {
 type DialogConfig = {
     title?: string,
     message: string | VNode,
+    props?: Record<string, any>,
     cancel?: () => Promise<void>,
     confirm?: () => Promise<void>,
     finally?: (flag: boolean) => Promise<void>,
@@ -37,6 +38,7 @@ type DialogConfig = {
 type Dialog = {
     title: string,
     message: string | VNode,
+    props?: Record<string, any>,
     handleCancel: () => Promise<void>,
     handleConfirm: () => Promise<void>,
 };
@@ -54,6 +56,7 @@ function createWindowNode(config: Dialog) {
     return h(DialogOverlay, {title: config.title}, {
         default: () => [
             h(config.message, {
+                ...config.props,
                 onCancel: config.handleCancel,
                 onConfirm: config.handleConfirm,
             }),
@@ -62,6 +65,10 @@ function createWindowNode(config: Dialog) {
 }
 
 async function removeNode(node: HTMLElement) {
+    if (!node) {
+        return;
+    }
+
     container.removeChild(node);
 
     if (container.childNodes.length <= 0) {
@@ -77,6 +84,7 @@ export default async function dialog(config: DialogConfig) {
     const dialog: Dialog = {
         title: config.title || "操作确认",
         message: config.message,
+        props: config.props,
         handleCancel: async () => {
             await config.cancel?.();
 

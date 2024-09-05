@@ -66,6 +66,13 @@ defineProps<Props>();
     }
   }
 
+  .beicroon-dialog-loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: calc(100% - 73rem);
+  }
+
   .beicroon-dialog-button {
     width: 100%;
     height: 72rem;
