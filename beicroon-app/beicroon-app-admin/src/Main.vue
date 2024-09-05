@@ -6,55 +6,6 @@
 </template>
 
 <style lang="less">
-* {
-  margin: 0;
-  box-shadow: none;
-  box-sizing: border-box;
-}
-
-html {
-  font-size: 1px;
-}
-
-body, body a {
-  font-size: 14rem;
-  line-height: 24rem;
-  color: var(--color-black-light);
-  font-family: "JetBrains Mono", "Fira Code", "Source Code Pro", Consolas, "Courier New", monospace;
-}
-
-ul, ol, li {
-  padding: 0;
-  list-style: none;
-}
-
-html, body, #app {
-  z-index: 1;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  position: relative;
-}
-
-::-webkit-scrollbar {
-  width: 8rem;
-  height: 8rem;
-}
-
-::-webkit-scrollbar-track {
-  border-radius: 6rem;
-  background: transparent;
-}
-
-::-webkit-scrollbar-thumb {
-  border-radius: 6rem;
-  background: var(--color-grey-lighter);
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: var(--color-grey-light);
-}
-
 :root {
   color-scheme: light;
   --color-grey: #909399;
@@ -85,5 +36,82 @@ html, body, #app {
   --color-primary-lighter: #d9ecff;
   --color-primary-deep: #a0cfff;
   --color-primary-deeper: #79bbff;
+}
+
+* {
+  margin: 0;
+  box-shadow: none;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 1px;
+}
+
+body, body a {
+  font-size: 14rem;
+  line-height: 1.4;
+  color: var(--color-black-light);
+  font-family: "JetBrains Mono", "Fira Code", "Source Code Pro", Consolas, "Courier New", monospace;
+}
+
+ul, ol, li {
+  padding: 0;
+  list-style: none;
+}
+
+html, body, #beicroon-app {
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+#beicroon-toast {
+  top: 18%;
+  gap: 8rem;
+  left: 50%;
+  z-index: 999;
+  padding: 8rem;
+  display: flex;
+  position: fixed;
+  min-width: 300rem;
+  max-width: 500rem;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  transform: translateX(-50%);
+}
+
+.beicroon-toast {
+  width: 100%;
+
+  .beicroon-toast-message {
+    width: 100%;
+    display: flex;
+    padding: 8rem;
+    border-radius: 6rem;
+    align-items: center;
+    justify-content: center;
+
+    &.success {
+      color: var(--color-success);
+      background-color: var(--color-success-lighter);
+      border: 1rem solid var(--color-success-deeper);
+    }
+
+    &.warning {
+      color: var(--color-warning);
+      background-color: var(--color-warning-lighter);
+      border: 1rem solid var(--color-warning-deeper);
+    }
+
+    &.error {
+      color: var(--color-error);
+      background-color: var(--color-error-lighter);
+      border: 1rem solid var(--color-error-deeper);
+    }
+  }
 }
 </style>

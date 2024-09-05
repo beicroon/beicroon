@@ -8,6 +8,12 @@ export enum CacheKeyEnums {
     AUTHORIZATION_TOKEN = "Auth-Token",
 }
 
+export enum AppEnums {
+    APP = "beicroon-app",
+    TOAST = "beicroon-toast",
+}
+
 export enum AppSelectorEnums {
-    APP = "#app",
+    APP = "#" + AppEnums.APP,
+    TOAST = "#" + AppEnums.TOAST,
 }

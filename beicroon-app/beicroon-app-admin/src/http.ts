@@ -1,4 +1,5 @@
 import axios from "axios";
+import toast from "@/toast.ts";
 import {BooleanEnums, CacheKeyEnums} from "@/enums/default-enums.ts";
 
 const http = axios.create({
@@ -30,8 +31,10 @@ http.interceptors.request.use(
 // 添加响应拦截器
 http.interceptors.response.use(
     async (response: any) => {
-        return new Promise((resolve, reject) => {
+        return new Promise(async (resolve, reject) => {
             if (response.data.code > 0) {
+                await toast(response.message);
+
                 return reject(response.data);
             }
 
