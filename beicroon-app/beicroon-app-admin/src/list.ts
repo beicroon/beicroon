@@ -1,3 +1,4 @@
+import toast from "@/toast.ts";
 import dialog from "@/dialog.ts";
 import {nextTick, Reactive, reactive, toRaw} from "vue";
 import {BaseVO, PageInfo, QueryDTO, Response} from "@/http.ts";
@@ -120,6 +121,9 @@ export default function createBeicroonList<DTO extends QueryDTO, VO extends Base
             await dialog({
                 title: `新增[${name}]`,
                 message: component,
+                confirm: async () => {
+                    await toast("保存成功");
+                },
                 finally: async (flag: boolean) => {
                     flag && await list.resetSearch();
                 },
@@ -139,6 +143,8 @@ export default function createBeicroonList<DTO extends QueryDTO, VO extends Base
                 message: "是否删除该数据？删除后数据将无法恢复！",
                 confirm: async () => {
                     await remove(item.id);
+
+                    await toast("删除成功");
                 },
                 finally: async (flag: boolean) => {
                     flag && await list.resetSearch();

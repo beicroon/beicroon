@@ -86,36 +86,10 @@ html, body, #beicroon-app {
   justify-content: center;
   transform: translateX(-50%);
   flex-direction: column-reverse;
-}
 
-.beicroon-toast {
-  width: 100%;
-
-  .beicroon-toast-message {
+  .beicroon-toast {
     width: 100%;
-    display: flex;
-    padding: 8rem;
-    border-radius: 6rem;
-    align-items: center;
-    justify-content: center;
-
-    &.success {
-      color: var(--color-success);
-      background-color: var(--color-success-lighter);
-      border: 1rem solid var(--color-success-deeper);
-    }
-
-    &.warning {
-      color: var(--color-warning);
-      background-color: var(--color-warning-lighter);
-      border: 1rem solid var(--color-warning-deeper);
-    }
-
-    &.error {
-      color: var(--color-error);
-      background-color: var(--color-error-lighter);
-      border: 1rem solid var(--color-error-deeper);
-    }
+    height: fit-content;
   }
 }
 
@@ -127,16 +101,16 @@ html, body, #beicroon-app {
   z-index: 888;
   position: fixed;
   background-color: rgba(30, 30, 30, 0.3);
-}
 
-.beicroon-dialog {
-  width: 100%;
-  height: 100%;
+  .beicroon-dialog {
+    width: 100%;
+    height: 100%;
 
-  .beicroon-dialog-button {
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
+    .beicroon-dialog-button {
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+    }
   }
 }
 </style>

@@ -13,7 +13,7 @@ container.classList.add("hidden");
 document.body.appendChild(container);
 
 function getNode() {
-    const node = document.createElement("div")
+    const node = document.createElement("div");
 
     node.classList.add(AppNameEnums.DIALOG);
 
@@ -51,19 +51,11 @@ function createMessageNode(config: Dialog) {
 }
 
 function createWindowNode(config: Dialog) {
-    const props = {
-        title: config.title,
-    };
-
-    return h(DialogOverlay, props, {
+    return h(DialogOverlay, {title: config.title}, {
         default: () => [
             h(config.message, {
-                onCancel: async () => {
-                    await config.handleCancel();
-                },
-                onConfirm: async () => {
-                    await config.handleConfirm();
-                },
+                onCancel: config.handleCancel,
+                onConfirm: config.handleConfirm,
             }),
         ],
     });
