@@ -1,5 +1,6 @@
 import axios from "axios";
 import toast from "@/toast.ts";
+import router from "@/router.ts";
 import {BooleanEnums, CacheKeyEnums} from "@/enums/default-enums.ts";
 
 const http = axios.create({
@@ -33,7 +34,14 @@ http.interceptors.response.use(
     async (response: any) => {
         return new Promise(async (resolve, reject) => {
             if (response.data.code > 0) {
-                await toast(response.message);
+                await toast(response.message, "error");
+
+                if (response.data.code === 401) {
+                    localStorage.removeItem(CacheKeyEnums.AUTHORIZATION_USER);
+                    localStorage.removeItem(CacheKeyEnums.AUTHORIZATION_TOKEN);
+
+                    await router.push("/login");
+                }
 
                 return reject(response.data);
             }
@@ -48,6 +56,8 @@ http.interceptors.response.use(
         })
     },
     async error => {
+        await toast(error.response.message, "error");
+
         return Promise.reject(error);
     }
 );

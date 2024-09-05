@@ -1,3 +1,4 @@
+import dialog from "@/dialog.ts";
 import {nextTick, Reactive, reactive, toRaw} from "vue";
 import {BaseVO, PageInfo, QueryDTO, Response} from "@/http.ts";
 
@@ -125,8 +126,15 @@ export default function createBeicroonList<DTO extends QueryDTO, VO extends Base
             console.info(component);
         },
         handleRemove: async (item: VO, remove: Remove) => {
-            console.info(item);
-            console.info(remove);
+            await dialog({
+                title: "删除确认",
+                message: "是否删除该数据？删除后数据将无法恢复！",
+                confirm: async () => {
+                    await remove(item.id);
+
+                    await list.resetSearch();
+                },
+            });
         },
         afterSearch: async (callback: () => Promise<void>) => {
             list.afterSearchCallbacks.push(callback);

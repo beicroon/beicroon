@@ -114,4 +114,57 @@ html, body, #beicroon-app {
     }
   }
 }
+
+#beicroon-dialog {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 888;
+  display: flex;
+  position: fixed;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(30, 30, 30, 0.3);
+
+  &.hidden {
+    display: none;
+  }
+}
+
+.beicroon-dialog {
+  padding: 18rem 0;
+  border-radius: 6rem;
+  transform: translateY(-18%);
+  background-color: var(--color-white);
+
+  .beicroon-dialog-message {
+    gap: 18rem;
+    width: 520rem;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .beicroon-dialog-title {
+    display: flex;
+    font-weight: bold;
+    align-items: center;
+    letter-spacing: 4rem;
+    justify-content: center;
+  }
+
+  .beicroon-dialog-content {
+    display: flex;
+    padding: 18rem 0;
+    align-items: center;
+    letter-spacing: 2rem;
+    justify-content: center;
+  }
+
+  .beicroon-dialog-button {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+  }
+}
 </style>
