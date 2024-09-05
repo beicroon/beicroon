@@ -64,7 +64,7 @@ const value = computed({
     border: 1rem solid var(--color-grey-deeper);
 
     &::placeholder {
-      color: var(--color-grey-light);
+      color: var(--color-grey);
     }
 
     &:focus {

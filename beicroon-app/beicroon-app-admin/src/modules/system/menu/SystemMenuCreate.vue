@@ -27,9 +27,9 @@ async function handleConfirm() {
 <template>
 <form class="beicroon-dialog-view system-menu-create">
   <div class="beicroon-dialog-input">
-    <beicroon-input class="column" label="名称" v-model="form.name"></beicroon-input>
-    <beicroon-input class="column" label="路径" v-model="form.path"></beicroon-input>
-    <beicroon-input class="column" type="number" label="排序" v-model="form.sorting"></beicroon-input>
+    <beicroon-input class="column" label="名称" placeholder="菜单名称" v-model="form.name"></beicroon-input>
+    <beicroon-input class="column" label="路径" placeholder="菜单路径" v-model="form.path"></beicroon-input>
+    <beicroon-input class="column" type="number" label="排序" placeholder="菜单排序" v-model="form.sorting"></beicroon-input>
   </div>
   <beicroon-line-vertical></beicroon-line-vertical>
   <div class="beicroon-dialog-button">
