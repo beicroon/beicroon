@@ -79,9 +79,9 @@ html, body, #beicroon-app {
   min-width: 300rem;
   max-width: 500rem;
   align-items: center;
-  flex-direction: column;
   justify-content: center;
   transform: translateX(-50%);
+  flex-direction: column-reverse;
 }
 
 .beicroon-toast {
