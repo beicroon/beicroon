@@ -7,6 +7,7 @@ type Page<DTO extends QueryDTO, VO extends BaseVO> = (params: DTO, pageInfo: Pag
 type Remove = (ids: string | Array<string>) => Promise<Response<boolean>>;
 
 export type List<DTO extends QueryDTO, VO extends BaseVO> = {
+    name: string,
     loading: boolean,
     params: DTO,
     data: Array<VO>,
@@ -29,8 +30,9 @@ export type List<DTO extends QueryDTO, VO extends BaseVO> = {
     handleSearchCallbacks: () => Promise<void>,
 };
 
-export default function createBeicroonList<DTO extends QueryDTO, VO extends BaseVO>(page: Page<DTO, VO>): Reactive<List<DTO, VO>> {
+export default function createBeicroonList<DTO extends QueryDTO, VO extends BaseVO>(name: string, page: Page<DTO, VO>): Reactive<List<DTO, VO>> {
     const list: Reactive<List<DTO, VO>> = reactive<List<DTO, VO>>({
+        name: name,
         loading: false,
         params: {} as DTO,
         data: [] as Array<VO>,
@@ -115,7 +117,13 @@ export default function createBeicroonList<DTO extends QueryDTO, VO extends Base
             await list.handleSearchCallbacks();
         },
         handleCreate: async (component: any) => {
-            console.info(component);
+            await dialog({
+                title: `新增[${name}]`,
+                message: component,
+                finally: async () => {
+                    await list.resetSearch();
+                },
+            });
         },
         handleDetail: async (item: VO, component: any) => {
             console.info(item);
@@ -127,11 +135,12 @@ export default function createBeicroonList<DTO extends QueryDTO, VO extends Base
         },
         handleRemove: async (item: VO, remove: Remove) => {
             await dialog({
-                title: "删除确认",
+                title:  `[${name}]删除确认`,
                 message: "是否删除该数据？删除后数据将无法恢复！",
                 confirm: async () => {
                     await remove(item.id);
-
+                },
+                finally: async () => {
                     await list.resetSearch();
                 },
             });

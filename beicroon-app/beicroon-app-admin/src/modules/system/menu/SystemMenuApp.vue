@@ -12,7 +12,7 @@ import BeicroonListCell from "@/components/BeicroonListCell.vue";
 import BeicroonListCellButton from "@/components/BeicroonListCellButton.vue";
 import {page, remove, SystemMenuPageVO as VO, SystemMenuQueryDTO as DTO} from "./system-menu.http.ts";
 
-const list = createBeicroonList<DTO, VO>(page);
+const list = createBeicroonList<DTO, VO>("菜单", page);
 
 onMounted(list.resetSearch);
 </script>

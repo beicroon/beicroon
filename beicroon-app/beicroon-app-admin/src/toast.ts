@@ -5,6 +5,8 @@ const container: HTMLElement = document.createElement("div");
 
 container.id = AppNameEnums.TOAST;
 
+container.classList.add("hidden");
+
 document.body.appendChild(container);
 
 function getNode() {
@@ -19,6 +21,14 @@ const types: Array<string> = ["success", "warning", "error"] as const;
 
 type Types = typeof types[number];
 
+async function handleRemove(node: HTMLElement) {
+    container.removeChild(node);
+
+    if (container.childNodes.length <= 0) {
+        container.classList.remove("hidden");
+    }
+}
+
 export default async function toast(message: string, type: Types = "success", duration: number = 3000) {
     const node = getNode();
 
@@ -32,7 +42,5 @@ export default async function toast(message: string, type: Types = "success", du
 
     container.appendChild(node);
 
-    const remove = () => container.removeChild(node);
-
-    setTimeout(remove, duration);
+    setTimeout(() => handleRemove(node), duration);
 }

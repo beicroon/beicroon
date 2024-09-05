@@ -35,10 +35,12 @@ const value = computed({
   align-items: center;
   flex-direction: row;
   display: inline-flex;
+  transition: all 300ms linear;
   justify-content: space-between;
 
   &.column {
     padding: 8rem;
+    border-radius: 6rem;
     flex-direction: column;
     align-items: flex-start;
   }

@@ -21,8 +21,6 @@ async function toggleMoreSearch() {
   if (moreSearch.value) {
     await escToggle(async () => {
       moreSearch.value = false;
-
-      await props.list.resetSearch();
     });
   } else {
     await escToggle();
@@ -182,7 +180,6 @@ const moreSearchSize = computed(() => {
         display: grid;
         bottom: 36rem;
         padding: 18rem;
-        flex-wrap: wrap;
         overflow-y: auto;
         position: absolute;
         border-radius: 6rem;

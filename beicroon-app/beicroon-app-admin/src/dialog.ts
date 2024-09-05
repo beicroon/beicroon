@@ -1,8 +1,8 @@
 import {h, render, VNode} from "vue";
+import {escToggle} from "@/event.ts";
 import {AppNameEnums} from "@/enums/default-enums.ts";
 import BeicroonButton from "@/components/BeicroonButton.vue";
 import BeicroonLineVertical from "@/components/BeicroonLineVertical.vue";
-import {escToggle} from "@/event.ts";
 
 const container: HTMLElement = document.createElement("div");
 
@@ -17,6 +17,12 @@ function getNode() {
 
     node.classList.add(AppNameEnums.DIALOG);
 
+    node.addEventListener("click", (e: MouseEvent) => {
+        e.preventDefault();
+        e.stopPropagation();
+        e.stopImmediatePropagation();
+    });
+
     return node;
 }
 
@@ -25,7 +31,7 @@ type DialogConfig = {
     message: string | VNode,
     cancel?: () => Promise<void>,
     confirm?: () => Promise<void>,
-    finally?: () => Promise<void>,
+    finally?: (flag: boolean) => Promise<void>,
 };
 
 type Dialog = {
@@ -33,7 +39,6 @@ type Dialog = {
     message: string | VNode,
     handleCancel: () => Promise<void>,
     handleConfirm: () => Promise<void>,
-    handleFinally: () => Promise<void>,
 };
 
 function createMessageNode(config: Dialog) {
@@ -52,7 +57,6 @@ function createMessageNode(config: Dialog) {
                 label: "取消",
                 onClick: async () => {
                     await config.handleCancel();
-                    await config.handleFinally();
                 },
             }),
             h(BeicroonButton, {
@@ -60,7 +64,6 @@ function createMessageNode(config: Dialog) {
                 label: "确认",
                 onClick: async () => {
                     await config.handleConfirm();
-                    await config.handleFinally();
                 },
             }),
         ]),
@@ -72,7 +75,19 @@ function createWindowNode(config: Dialog) {
         class: "beicroon-dialog-overlay",
     };
 
-    return h("div", props, config.message);
+    return h("div", props, [
+        h("div", {class: "beicroon-dialog-head"}, config.title),
+        h(BeicroonLineVertical),
+        h(config.message, {
+            class: "beicroon-dialog-body",
+            onCancel: async () => {
+                await config.handleCancel();
+            },
+            onConfirm: async () => {
+                await config.handleConfirm();
+            },
+        }),
+    ]);
 }
 
 async function removeNode(node: HTMLElement) {
@@ -93,14 +108,17 @@ export default async function dialog(config: DialogConfig) {
         message: config.message,
         handleCancel: async () => {
             await config.cancel?.();
+
+            await removeNode(node);
+
+            await config.finally?.(false);
         },
         handleConfirm: async () => {
             await config.confirm?.();
-        },
-        handleFinally: async () => {
-            await config.finally?.();
 
             await removeNode(node);
+
+            await config.finally?.(true);
         },
     };
 
@@ -116,11 +134,7 @@ export default async function dialog(config: DialogConfig) {
 
     container.appendChild(node);
 
-    await escToggle(async () => {
-        await dialog.handleCancel();
-
-        await dialog.handleFinally();
-    });
+    await escToggle(dialog.handleCancel);
 
     container.classList.remove("hidden");
 }
