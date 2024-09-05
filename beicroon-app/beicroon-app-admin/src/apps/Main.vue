@@ -133,93 +133,10 @@ html, body, #beicroon-app {
   width: 100%;
   height: 100%;
 
-  .beicroon-dialog-message {
-    top: 24%;
-    left: 50%;
-    gap: 18rem;
-    display: flex;
-    width: 520rem;
-    padding: 18rem 0;
-    position: absolute;
-    border-radius: 6rem;
-    flex-direction: column;
-    transform: translateX(-50%);
-    background-color: var(--color-white);
-  }
-
-  .beicroon-dialog-overlay {
-    top: 0;
-    right: 0;
-    height: 100%;
-    width: 800rem;
-    position: absolute;
-    background-color: var(--color-white);
-  }
-
-  .beicroon-dialog-title {
-    display: flex;
-    font-weight: bold;
-    align-items: center;
-    letter-spacing: 4rem;
-    justify-content: center;
-  }
-
-  .beicroon-dialog-content {
-    display: flex;
-    padding: 18rem 0;
-    align-items: center;
-    letter-spacing: 2rem;
-    justify-content: center;
-  }
-
   .beicroon-dialog-button {
     display: flex;
     align-items: center;
     justify-content: space-around;
-  }
-
-  .beicroon-dialog-head {
-    width: 50%;
-    height: 52rem;
-    display: flex;
-    font-weight: bold;
-    align-items: center;
-    letter-spacing: 4rem;
-    justify-content: center;
-    background-color: var(--color-grey-light);
-  }
-
-  .beicroon-dialog-body {
-    width: 100%;
-    height: calc(100% - 53rem);
-
-    .beicroon-dialog-button {
-      width: 100%;
-      height: 72rem;
-    }
-  }
-
-  .beicroon-dialog-input {
-    gap: 8rem;
-    display: grid;
-    padding: 24rem 0;
-    justify-items: center;
-    align-content: flex-start;
-    height: calc(100% - 73rem);
-    grid-template-columns: repeat(2, 1fr);
-
-    .beicroon-input:focus-within {
-      background-color: var(--color-primary-lighter);
-
-      .input-label {
-        color: var(--color-white);
-        background-color: var(--color-primary-deeper);
-      }
-    }
-
-    .input-area {
-      width: 300rem;
-    }
   }
 }
 </style>

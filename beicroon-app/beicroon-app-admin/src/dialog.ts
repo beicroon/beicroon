@@ -1,8 +1,8 @@
 import {h, render, VNode} from "vue";
 import {escToggle} from "@/event.ts";
+import DialogMessage from "@/apps/DialogMessage.vue";
+import DialogOverlay from "@/apps/DialogOverlay.vue";
 import {AppNameEnums} from "@/enums/default-enums.ts";
-import BeicroonButton from "@/components/BeicroonButton.vue";
-import BeicroonLineVertical from "@/components/BeicroonLineVertical.vue";
 
 const container: HTMLElement = document.createElement("div");
 
@@ -42,52 +42,31 @@ type Dialog = {
 };
 
 function createMessageNode(config: Dialog) {
-    const props: Record<string, any> = {
-        class: "beicroon-dialog-message",
-    };
-
-    return h("div", props, [
-        h("div", {class: "beicroon-dialog-title"}, config.title),
-        h(BeicroonLineVertical),
-        h("div", {class: "beicroon-dialog-content"}, config.message),
-        h(BeicroonLineVertical),
-        h("div", {class: "beicroon-dialog-button"}, [
-            h(BeicroonButton, {
-                class: ["block", "primary"],
-                label: "取消",
-                onClick: async () => {
-                    await config.handleCancel();
-                },
-            }),
-            h(BeicroonButton, {
-                class: ["block", "warning"],
-                label: "确认",
-                onClick: async () => {
-                    await config.handleConfirm();
-                },
-            }),
-        ]),
-    ]);
+    return h(DialogMessage, {
+        title: config.title,
+        message: config.message as string,
+        cancel: config.handleCancel,
+        confirm: config.handleConfirm,
+    });
 }
 
 function createWindowNode(config: Dialog) {
-    const props: Record<string, any> = {
-        class: "beicroon-dialog-overlay",
+    const props = {
+        title: config.title,
     };
 
-    return h("div", props, [
-        h("div", {class: "beicroon-dialog-head"}, config.title),
-        h(BeicroonLineVertical),
-        h(config.message, {
-            class: "beicroon-dialog-body",
-            onCancel: async () => {
-                await config.handleCancel();
-            },
-            onConfirm: async () => {
-                await config.handleConfirm();
-            },
-        }),
-    ]);
+    return h(DialogOverlay, props, {
+        default: () => [
+            h(config.message, {
+                onCancel: async () => {
+                    await config.handleCancel();
+                },
+                onConfirm: async () => {
+                    await config.handleConfirm();
+                },
+            }),
+        ],
+    });
 }
 
 async function removeNode(node: HTMLElement) {

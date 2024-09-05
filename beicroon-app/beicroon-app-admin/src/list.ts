@@ -120,8 +120,8 @@ export default function createBeicroonList<DTO extends QueryDTO, VO extends Base
             await dialog({
                 title: `新增[${name}]`,
                 message: component,
-                finally: async () => {
-                    await list.resetSearch();
+                finally: async (flag: boolean) => {
+                    flag && await list.resetSearch();
                 },
             });
         },
@@ -140,8 +140,8 @@ export default function createBeicroonList<DTO extends QueryDTO, VO extends Base
                 confirm: async () => {
                     await remove(item.id);
                 },
-                finally: async () => {
-                    await list.resetSearch();
+                finally: async (flag: boolean) => {
+                    flag && await list.resetSearch();
                 },
             });
         },
