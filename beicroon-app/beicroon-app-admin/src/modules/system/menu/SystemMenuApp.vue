@@ -11,7 +11,6 @@ import BeicroonListRow from "@/components/BeicroonListRow.vue";
 import BeicroonListCell from "@/components/BeicroonListCell.vue";
 import BeicroonListCellButton from "@/components/BeicroonListCellButton.vue";
 import {page, remove, SystemMenuPageVO as VO, SystemMenuQueryDTO as DTO} from "./system-menu.http.ts";
-import toast from "@/toast.ts";
 
 const list = createBeicroonList<DTO, VO>(page);
 
@@ -26,8 +25,7 @@ onMounted(list.resetSearch);
       <beicroon-input type="number" label="排序" v-model="list.params.sorting"></beicroon-input>
     </template>
     <template #head-button>
-<!--      <beicroon-button class="block primary" label="重置" @click="list.handleReset"></beicroon-button>-->
-      <beicroon-button class="block primary" label="重置" @click="toast('测试')"></beicroon-button>
+      <beicroon-button class="block primary" label="重置" @click="list.handleReset"></beicroon-button>
       <beicroon-button class="block primary" label="查询" :loading="list.loading" @click="list.resetSearch"></beicroon-button>
       <beicroon-button class="block warning" label="新增" @click="list.handleCreate(Create)"></beicroon-button>
     </template>
