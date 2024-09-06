@@ -52,15 +52,6 @@ defineProps<Props>();
     height: calc(100% - 73rem);
     grid-template-columns: repeat(2, 1fr);
 
-    .beicroon-input:focus-within {
-      background-color: var(--color-primary-lighter);
-
-      .input-label {
-        color: var(--color-white);
-        background-color: var(--color-primary-deeper);
-      }
-    }
-
     .input-area {
       width: 300rem;
     }

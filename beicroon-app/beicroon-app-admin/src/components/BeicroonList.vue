@@ -105,7 +105,7 @@ const moreSearchSize = computed(() => {
       padding: 18rem;
       flex-wrap: wrap;
       flex-direction: row;
-      align-items: flex-start;
+      align-items: center;
       justify-content: flex-start;
     }
 
@@ -204,7 +204,7 @@ const moreSearchSize = computed(() => {
         display: grid;
         bottom: 36rem;
         padding: 18rem;
-        overflow-y: auto;
+        overflow: hidden;
         position: absolute;
         border-radius: 6rem;
         justify-items: center;
@@ -216,18 +216,14 @@ const moreSearchSize = computed(() => {
 
         &.show {
           opacity: 1;
-          width: 880rem;
+          width: 920rem;
           height: 530rem;
+          overflow-y: auto;
         }
       }
 
       .beicroon-input {
-        gap: 8rem;
-        padding: 8rem;
-        flex-direction: column;
-        align-items: flex-start;
-
-        &.column-three {
+        &.column-3 {
           width: 100%;
           grid-column: span 3;
 
@@ -236,7 +232,7 @@ const moreSearchSize = computed(() => {
           }
         }
 
-        &.column-two {
+        &.column-2 {
           width: 100%;
           grid-column: span 2;
 

@@ -39,10 +39,20 @@ const value = computed({
   justify-content: space-between;
 
   &.column {
-    padding: 8rem;
+    gap: 12rem;
+    padding: 14rem 18rem;
     border-radius: 6rem;
     flex-direction: column;
     align-items: flex-start;
+
+    &:focus-within {
+      background-color: var(--color-primary-lighter);
+
+      .input-label {
+        color: var(--color-white);
+        background-color: var(--color-primary-deeper);
+      }
+    }
   }
 
   .input-label {

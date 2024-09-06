@@ -107,8 +107,6 @@ public class ModuleMysqlMaker {
         }
 
         for (Table table : this.tables) {
-            int searchCount = 1;
-
             File modulePath = new File(rootPath, table.getPath());
 
             FileUtils.mkdir(modulePath);
@@ -120,19 +118,18 @@ public class ModuleMysqlMaker {
             StringBuilder vueTableBodyContent = new StringBuilder();
             StringBuilder vueFormInputString = new StringBuilder();
 
+            int searchCount = 1;
+
             for (Field field : table.getColumns()) {
                 vueHttpContent.append(this.getVueHttpFieldString(field));
 
-                String searchString = this.getVueSearchFieldString(field);
+                if (searchCount <= 6) {
+                    vueSearchContent.append(this.getVueSearchFieldString(field));
 
-                if (searchCount <= 9) {
-                    vueSearchContent.append(searchString);
-                } else {
-                    vueMoreSearchContent.append(searchString);
+                    searchCount++;
                 }
 
-                searchCount++;
-
+                vueMoreSearchContent.append(this.getVueMoreSearchFieldString(field));
                 vueTableHeadContent.append(this.getVueTableHeadFieldString(field));
                 vueTableBodyContent.append(this.getVueTableBodyFieldString(field));
                 vueFormInputString.append(this.getVueFormInputFieldString(field));
@@ -262,6 +259,14 @@ public class ModuleMysqlMaker {
                 """;
 
         return String.format(template, field.comment());
+    }
+
+    private String getVueMoreSearchFieldString(Field field) {
+        String template = """
+                      <beicroon-input class="column" label="%s" v-model="list.params.%s"></beicroon-input>
+                """;
+
+        return String.format(template, field.comment(), field.getSnakeCaseName());
     }
 
     private String getVueSearchFieldString(Field field) {

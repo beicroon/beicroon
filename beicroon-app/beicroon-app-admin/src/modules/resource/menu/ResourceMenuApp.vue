@@ -20,10 +20,12 @@ onMounted(list.resetSearch);
 <template>
   <beicroon-list :list="list">
     <template #head-search>
+      <beicroon-input label="父级主键" v-model="list.params.parentId"></beicroon-input>
+      <beicroon-input label="父级编码" v-model="list.params.parentCode"></beicroon-input>
+      <beicroon-input label="父级名称" v-model="list.params.parentName"></beicroon-input>
       <beicroon-input label="编码" v-model="list.params.code"></beicroon-input>
       <beicroon-input label="名称" v-model="list.params.name"></beicroon-input>
       <beicroon-input label="路径" v-model="list.params.path"></beicroon-input>
-      <beicroon-input label="排序" v-model="list.params.sorting"></beicroon-input>
     </template>
     <template #head-button>
       <beicroon-button class="block primary" label="重置" @click="list.handleReset"></beicroon-button>
@@ -57,9 +59,13 @@ onMounted(list.resetSearch);
       </beicroon-list-row>
     </template>
     <template #more-search>
-      <beicroon-input label="父级主键" v-model="list.params.parentId"></beicroon-input>
-      <beicroon-input label="父级编码" v-model="list.params.parentCode"></beicroon-input>
-      <beicroon-input label="父级名称" v-model="list.params.parentName"></beicroon-input>
+      <beicroon-input class="column" label="父级主键" v-model="list.params.parentId"></beicroon-input>
+      <beicroon-input class="column" label="父级编码" v-model="list.params.parentCode"></beicroon-input>
+      <beicroon-input class="column" label="父级名称" v-model="list.params.parentName"></beicroon-input>
+      <beicroon-input class="column" label="编码" v-model="list.params.code"></beicroon-input>
+      <beicroon-input class="column" label="名称" v-model="list.params.name"></beicroon-input>
+      <beicroon-input class="column" label="路径" v-model="list.params.path"></beicroon-input>
+      <beicroon-input class="column" label="排序" v-model="list.params.sorting"></beicroon-input>
     </template>
   </beicroon-list>
 </template>
