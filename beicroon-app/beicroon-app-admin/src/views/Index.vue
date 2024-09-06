@@ -1,15 +1,85 @@
 <script setup lang="ts">
 import router from "@/router.ts";
+import {onBeforeMount, ref} from "vue";
+import http, {Response} from "@/http.ts";
 import BeicroonLineCross from "@/components/BeicroonLineCross.vue";
 import BeicroonLineVertical from "@/components/BeicroonLineVertical.vue";
 
-function toAccountAdmin() {
-  router.push("/account/admin");
+type Menu = {
+  code: string;
+  name: string;
+  path: string;
+  active: boolean;
+  children: Array<Menu>;
+};
+
+// 全量列表接口
+async function getMenuTree(): Promise<Response<Array<Menu>>> {
+  return http.request({
+    url: "/api/admin/admin/auth-menu-tree",
+    method: "GET",
+  })
 }
 
-function toSystemMenu() {
-  router.push("/resource/menu");
+const menus = ref<Array<Menu>>([]);
+
+const prevMenu = ref<Menu | null>(null);
+
+const currentMenu = ref<Menu | null>(null);
+
+const links = ref<Array<Menu>>([]);
+
+function toLinkPath(link: Menu) {
+  if (prevMenu.value !== null) {
+    prevMenu.value.children.forEach((child) => {
+      child.children.forEach((item) => {
+        item.active = false;
+      });
+    });
+  }
+
+  link.active = true;
+
+  router.push(link.path);
 }
+
+function setLinks(menu: Menu) {
+  menus.value.forEach((item) => item.active = false);
+
+  prevMenu.value = currentMenu.value;
+
+  currentMenu.value = menu;
+
+  menu.active = true;
+
+  links.value = menu.children;
+}
+
+onBeforeMount(async () => {
+  const res = await getMenuTree();
+
+  menus.value = res.data;
+
+  MENU_FOREACH: for (let i = 0; i < menus.value.length; i++) {
+    const menu = menus.value[i];
+
+    for (let j = 0; j < menu.children.length; j++) {
+      const child = menu.children[j];
+
+      for (let k = 0; k < child.children.length; k++) {
+        const link = child.children[k];
+
+        if (link.path === router.currentRoute.value.path) {
+          setLinks(menu);
+
+          link.active = true;
+
+          break MENU_FOREACH;
+        }
+      }
+    }
+  }
+});
 </script>
 
 <template>
@@ -18,16 +88,19 @@ function toSystemMenu() {
       <div class="logo"></div>
       <ul class="menu">
         <li>首页</li>
-        <li>设置中心</li>
-        <li>账号中心</li>
+        <li v-for="menu in menus" :class="{active: menu.active}" @click="setLinks(menu)">{{ menu.name }}</li>
       </ul>
     </section>
     <beicroon-line-vertical></beicroon-line-vertical>
     <section class="beicroon-body">
       <section class="beicroon-menu">
         <ul class="menu">
-          <li @click="toAccountAdmin">账号管理</li>
-          <li @click="toSystemMenu">菜单管理</li>
+          <li v-for="menu in links">
+            <h3>{{ menu.name }}</h3>
+            <ul class="menu">
+              <li v-for="link in menu.children" :class="{active: link.active}" @click="toLinkPath(link)">{{ link.name }}</li>
+            </ul>
+          </li>
         </ul>
       </section>
       <beicroon-line-cross></beicroon-line-cross>
@@ -82,7 +155,7 @@ function toSystemMenu() {
       justify-content: center;
       border: 1rem solid var(--color-primary);
 
-      &:hover {
+      &:hover, &.active {
         color: var(--color-white);
         background-color: var(--color-primary);
       }
@@ -109,21 +182,38 @@ function toSystemMenu() {
 
   .menu {
     gap: 2rem;
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
 
-    li {
+    h3 {
       width: 100%;
-      display: flex;
       height: 38rem;
-      cursor: pointer;
+      display: flex;
+      font-size: 14rem;
+      line-height: 38rem;
+      font-weight: normal;
       align-items: center;
       justify-content: center;
+      transform: translateX(-14rem);
+    }
 
-      &:hover {
-        color: var(--color-white);
-        background-color: var(--color-primary);
+    li {
+      gap: 6rem;
+      width: 100%;
+      display: flex;
+      cursor: pointer;
+      line-height: 38rem;
+      align-items: center;
+      flex-direction: column;
+      justify-content: center;
+
+      .menu li {
+        &:hover, &.active {
+          color: var(--color-white);
+          background-color: var(--color-primary);
+        }
       }
     }
   }
