@@ -34,7 +34,7 @@ http.interceptors.response.use(
     async (response: any) => {
         return new Promise(async (resolve, reject) => {
             if (response.data.code > 0) {
-                await toast(response.message, "error");
+                await toast(response.data.message, "error");
 
                 if (response.data.code === 401) {
                     localStorage.removeItem(CacheKeyEnums.AUTHORIZATION_USER);

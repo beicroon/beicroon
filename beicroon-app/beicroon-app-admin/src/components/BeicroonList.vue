@@ -97,7 +97,7 @@ const moreSearchSize = computed(() => {
       flex-wrap: wrap;
       flex-direction: row;
       align-items: flex-start;
-      justify-content: space-between;
+      justify-content: flex-start;
     }
 
     .head-button {
