@@ -51,7 +51,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <form class="beicroon-dialog-view system-menu-update">
+  <form class="beicroon-dialog-view">
     <div class="beicroon-dialog-input" v-if="!loading.get">
       <beicroon-input class="column" label="名称" placeholder="菜单名称" v-model="form.name"></beicroon-input>
       <beicroon-input class="column" label="路径" placeholder="菜单路径" v-model="form.path"></beicroon-input>
@@ -68,8 +68,5 @@ onMounted(async () => {
   </form>
 </template>
 
-<style scoped lang="less">
-.system-menu-update {
-
-}
+<style lang="less">
 </style>

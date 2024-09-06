@@ -2,8 +2,8 @@
 import {reactive, ref} from "vue";
 import BeicroonInput from "@/components/BeicroonInput.vue";
 import BeicroonButton from "@/components/BeicroonButton.vue";
-import {create, SystemMenuCreateDTO as DTO} from "./system-menu.http.ts";
 import BeicroonLineVertical from "@/components/BeicroonLineVertical.vue";
+import {create, SystemMenuCreateDTO as DTO} from "./system-menu.http.ts";
 
 const loading = ref(false);
 
@@ -25,7 +25,7 @@ async function handleConfirm() {
 </script>
 
 <template>
-<form class="beicroon-dialog-view system-menu-create">
+<form class="beicroon-dialog-view">
   <div class="beicroon-dialog-input">
     <beicroon-input class="column" label="名称" placeholder="菜单名称" v-model="form.name"></beicroon-input>
     <beicroon-input class="column" label="路径" placeholder="菜单路径" v-model="form.path"></beicroon-input>
@@ -39,8 +39,5 @@ async function handleConfirm() {
 </form>
 </template>
 
-<style scoped lang="less">
-.system-menu-create {
-
-}
+<style lang="less">
 </style>

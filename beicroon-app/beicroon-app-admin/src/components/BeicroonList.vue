@@ -81,6 +81,12 @@ const moreSearchSize = computed(() => {
   width: 100%;
   height: 100%;
 
+  &.head-search-no-wrap {
+    .head-search {
+      flex-wrap: nowrap !important;
+    }
+  }
+
   .list-head {
     z-index: 1;
     width: 100%;
@@ -98,6 +104,21 @@ const moreSearchSize = computed(() => {
       flex-direction: row;
       align-items: flex-start;
       justify-content: flex-start;
+    }
+
+    .head-search-full {
+      height: 100%;
+      width: 350rem;
+    }
+
+    .head-search-sub {
+      flex: 1;
+      gap: 16rem;
+      display: flex;
+      flex-wrap: wrap;
+      flex-direction: row;
+      align-items: flex-start;
+      justify-content: space-between;
     }
 
     .head-button {

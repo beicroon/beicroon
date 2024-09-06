@@ -3,8 +3,8 @@ import {onMounted, ref} from "vue";
 import BeicroonInput from "@/components/BeicroonInput.vue";
 import BeicroonButton from "@/components/BeicroonButton.vue";
 import BeicroonLoading from "@/components/BeicroonLoading.vue";
-import {detail, SystemMenuDetailVO as VO} from "./system-menu.http.ts";
 import BeicroonLineVertical from "@/components/BeicroonLineVertical.vue";
+import {detail, SystemMenuDetailVO as VO} from "./system-menu.http.ts";
 
 type Props = {
   id: string,
@@ -28,7 +28,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <form class="beicroon-dialog-view system-menu-detail">
+  <form class="beicroon-dialog-view">
     <div class="beicroon-dialog-input" v-if="vo">
       <beicroon-input disabled class="column" label="名称" v-model="vo.name"></beicroon-input>
       <beicroon-input disabled class="column" label="路径" v-model="vo.path"></beicroon-input>
@@ -44,8 +44,5 @@ onMounted(async () => {
   </form>
 </template>
 
-<style scoped lang="less">
-.system-menu-detail {
-
-}
+<style lang="less">
 </style>

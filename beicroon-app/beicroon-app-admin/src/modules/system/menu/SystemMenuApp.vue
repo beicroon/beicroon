@@ -18,11 +18,14 @@ onMounted(list.resetSearch);
 </script>
 
 <template>
-  <beicroon-list class="system-menu-app" :list="list">
+  <beicroon-list class="head-search-no-wrap" :list="list">
     <template #head-search>
-      <beicroon-input label="名称" v-model="list.params.name"></beicroon-input>
-      <beicroon-input label="路径" v-model="list.params.path"></beicroon-input>
-      <beicroon-input type="number" label="排序" v-model="list.params.sorting"></beicroon-input>
+      <div class="head-search-full"></div>
+      <div class="head-search-sub">
+        <beicroon-input label="名称" v-model="list.params.name"></beicroon-input>
+        <beicroon-input label="路径" v-model="list.params.path"></beicroon-input>
+        <beicroon-input type="number" label="排序" v-model="list.params.sorting"></beicroon-input>
+      </div>
     </template>
     <template #head-button>
       <beicroon-button class="block primary" label="重置" @click="list.handleReset"></beicroon-button>
@@ -55,8 +58,5 @@ onMounted(list.resetSearch);
   </beicroon-list>
 </template>
 
-<style scoped lang="less">
-.system-menu-app {
-
-}
+<style lang="less">
 </style>
