@@ -117,6 +117,7 @@ public class ModuleMysqlMaker {
             StringBuilder vueTableHeadContent = new StringBuilder();
             StringBuilder vueTableBodyContent = new StringBuilder();
             StringBuilder vueFormInputString = new StringBuilder();
+            StringBuilder vueFormDisabledInputString = new StringBuilder();
 
             int searchCount = 1;
 
@@ -133,6 +134,7 @@ public class ModuleMysqlMaker {
                 vueTableHeadContent.append(this.getVueTableHeadFieldString(field));
                 vueTableBodyContent.append(this.getVueTableBodyFieldString(field));
                 vueFormInputString.append(this.getVueFormInputFieldString(field));
+                vueFormDisabledInputString.append(this.getVueFormDisabledInputFieldString(field));
             }
 
             table.setVueHttpContent(vueHttpContent.toString());
@@ -141,6 +143,7 @@ public class ModuleMysqlMaker {
             table.setVueTableHeadContent(vueTableHeadContent.toString().trim());
             table.setVueTableBodyContent(vueTableBodyContent.toString().trim());
             table.setVueFormInputString(vueFormInputString.toString().trim());
+            table.setVueFormDisabledInputString(vueFormDisabledInputString.toString().trim());
 
             FileUtils.writeFileIfNotExists(FileManager.getVueHttpFile(modulePath, table), VueHttpContent.getContent(table));
             FileUtils.writeFileIfNotExists(FileManager.getVueAppFile(modulePath, table), VueAppContent.getContent(table));
@@ -235,6 +238,14 @@ public class ModuleMysqlMaker {
                 type,
                 field.getSnakeCaseName()
         );
+    }
+
+    private String getVueFormDisabledInputFieldString(Field field) {
+        String template = """
+                      <beicroon-input disabled class="column" label="%s" placeholder="%s" v-model="form.%s"></beicroon-input>
+                """;
+
+        return String.format(template, field.getComment(), field.getComment(), field.getSnakeCaseName());
     }
 
     private String getVueFormInputFieldString(Field field) {

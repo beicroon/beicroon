@@ -59,6 +59,9 @@ public class Table implements Serializable {
     @Setter
     private String vueFormInputString;
 
+    @Setter
+    private String vueFormDisabledInputString;
+
     public Table(String prefix, String name, String comment, List<Field> columns) {
         this.prefix = prefix.replace("_", "-");
 

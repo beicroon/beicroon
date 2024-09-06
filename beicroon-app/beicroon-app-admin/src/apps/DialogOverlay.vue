@@ -19,16 +19,20 @@ defineProps<Props>();
 </template>
 
 <style lang="less">
+:root {
+  --beicroon-height-dialog-button: 72rem;
+}
+
 .beicroon-dialog-overlay {
   top: 0;
   right: 0;
   height: 100%;
-  width: 800rem;
+  width: 1080rem;
   position: absolute;
   background-color: var(--color-white);
 
   .beicroon-dialog-head {
-    width: 50%;
+    width: 30%;
     height: 52rem;
     display: flex;
     font-weight: bold;
@@ -47,10 +51,11 @@ defineProps<Props>();
     gap: 8rem;
     display: grid;
     padding: 24rem 0;
+    overflow-y: auto;
     justify-items: center;
     align-content: flex-start;
     height: calc(100% - 73rem);
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
 
     .input-area {
       width: 300rem;
@@ -61,12 +66,12 @@ defineProps<Props>();
     display: flex;
     align-items: center;
     justify-content: center;
-    height: calc(100% - 73rem);
+    height: calc(100% - var(--beicroon-height-dialog-button) - var(--beicroon-height-line));
   }
 
   .beicroon-dialog-button {
     width: 100%;
-    height: 72rem;
+    height: var(--beicroon-height-dialog-button);
   }
 
   .beicroon-dialog-view {

@@ -57,7 +57,7 @@ public class VueDetailContent {
         return CONTENT
                 .replace("{{filename}}", table.getFilename())
                 .replace("{{vueFilename}}", table.getVueFilename())
-                .replace("{{formInput}}", table.getVueFormInputString());
+                .replace("{{formInput}}", table.getVueFormDisabledInputString());
     }
 
 }
