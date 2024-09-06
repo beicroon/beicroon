@@ -247,15 +247,15 @@ async function endScroll() {
     left: 50%;
     z-index: 3;
     opacity: 0;
-    width: 100%;
     display: flex;
     visibility: hidden;
     position: absolute;
     align-items: center;
     justify-content: center;
+    width: calc(100% - 18rem);
     transition: all 80ms linear;
     background-color: var(--color-white);
-    height: calc(100% - var(--beicroon-height-list-row) - 20rem);
+    height: calc(100% - var(--beicroon-height-list-row) - 18rem);
     transform: translate(-50%, calc(-50% + (var(--beicroon-height-list-row) / 2)));
   }
 }
