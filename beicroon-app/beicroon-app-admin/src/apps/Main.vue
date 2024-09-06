@@ -40,7 +40,6 @@
 
 * {
   margin: 0;
-  box-shadow: none;
   box-sizing: border-box;
 }
 

@@ -35,7 +35,11 @@ function handleScroll() {
   scrollTop.value = beicroonList.value.scrollTop * (beicroonList.value.clientHeight / beicroonTable.value.clientHeight);
 
   scrollLeft.value = beicroonList.value.scrollLeft * (beicroonList.value.clientWidth / beicroonTable.value.clientWidth);
+
+  scrollLeftEnd.value = beicroonList.value?.scrollLeft + beicroonList.value?.clientWidth >= beicroonTable.value?.clientWidth;
 }
+
+const scrollLeftEnd = ref(false);
 
 const scrollWidthStyle = computed(() => {
   if (scrollWidth.value >= beicroonList.value?.clientWidth) {
@@ -103,7 +107,7 @@ async function endScroll() {
 
 <template>
   <div class="beicroon-list-table" :class="{loading: list.loading}" ref="beicroonList" @scroll="handleScroll">
-    <table ref="beicroonTable">
+    <table :class="{scrolling: !scrollLeftEnd}" ref="beicroonTable">
       <thead class="beicroon-list-head">
       <beicroon-list-row>
         <slot name="title"></slot>
@@ -135,6 +139,7 @@ async function endScroll() {
   height: 100%;
   overflow: auto;
   scrollbar-width: none;
+  border: 1rem solid var(--color-grey-light);
 
   &::-webkit-scrollbar {
     width: 0;
@@ -142,13 +147,36 @@ async function endScroll() {
   }
 
   table {
+    padding: 0;
+    border: none;
     min-width: 100%;
+    border-spacing: 0;
     empty-cells: show;
     width: fit-content;
     text-align: center;
     table-layout: fixed;
-    border-spacing: 2rem;
-    border-collapse: separate;
+    border-collapse: collapse;
+
+    thead, tbody, tr, td {
+      padding: 0;
+      border: none;
+    }
+
+    &.scrolling {
+      .beicroon-list-button {
+        &:before {
+          top: 0;
+          left: 0;
+          z-index: 2;
+          content: "";
+          width: 10rem;
+          height: 100%;
+          display: block;
+          position: absolute;
+          box-shadow: -6rem 0 8rem -3rem #00000026 inset;
+        }
+      }
+    }
   }
 
   &.loading {
@@ -159,47 +187,21 @@ async function endScroll() {
   }
 
   .beicroon-list-head {
-    top: 2rem;
+    top: 0;
     z-index: 2;
     position: sticky;
     height: var(--beicroon-height-list-row);
 
     .beicroon-list-row {
       height: inherit;
-      background-color: var(--color-grey-light);
 
       td {
         height: inherit;
-      }
-
-      .beicroon-list-cell {
-        &:before {
-          left: 0;
-          top: -2rem;
-          z-index: 2;
-          content: "";
-          width: 100%;
-          height: 2rem;
-          display: block;
-          position: absolute;
-          background-color: var(--color-white);
-        }
-
-        &:after {
-          left: 0;
-          z-index: 2;
-          content: "";
-          width: 100%;
-          height: 2rem;
-          bottom: -2rem;
-          display: block;
-          position: absolute;
-          background-color: var(--color-white);
-        }
+        background-color: var(--color-grey-lighter);
       }
 
       .beicroon-list-button {
-        background-color: inherit;
+        background-color: var(--color-grey-lighter);
       }
     }
   }
@@ -208,37 +210,35 @@ async function endScroll() {
     z-index: 1;
     position: relative;
 
-    &:after {
-      left: 0;
-      z-index: 2;
-      content: "";
-      width: 100%;
-      height: 2rem;
-      bottom: -2rem;
-      display: block;
-      position: absolute;
-      background-color: var(--color-grey-lighter);
-    }
-
     .beicroon-list-row {
-      background-color: var(--color-white);
       height: var(--beicroon-height-list-row);
 
       td {
         height: inherit;
       }
-
-      .beicroon-list-button {
-        background-color: inherit;
-      }
     }
+  }
 
-    .beicroon-list-row:nth-child(even) {
-      background-color: var(--color-grey-lighter);
+  .beicroon-list-cell {
+    display: flex;
+    height: inherit;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    border-right: 1rem solid var(--color-grey-light);
+    border-bottom: 1rem solid var(--color-grey-light);
+  }
 
-      .beicroon-list-button {
-        background-color: inherit;
-      }
+  .beicroon-list-button {
+    right: 0;
+    z-index: 1;
+    width: 180rem;
+    position: sticky;
+    background-color: var(--color-white);
+
+    .beicroon-list-cell {
+      border-right: none;
+      flex-direction: row;
     }
   }
 
@@ -257,49 +257,6 @@ async function endScroll() {
     background-color: var(--color-white);
     height: calc(100% - var(--beicroon-height-list-row) - 20rem);
     transform: translate(-50%, calc(-50% + (var(--beicroon-height-list-row) / 2)));
-  }
-
-  .beicroon-list-cell {
-    height: 100%;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    justify-content: center;
-  }
-
-  .beicroon-list-button {
-    z-index: 1;
-    right: 2rem;
-    width: 180rem;
-    position: sticky;
-
-    &:before {
-      top: 0;
-      z-index: 2;
-      left: -2rem;
-      content: "";
-      width: 2rem;
-      height: 100%;
-      display: block;
-      position: absolute;
-      background-color: var(--color-white);
-    }
-
-    &:after {
-      top: 0;
-      z-index: 2;
-      content: "";
-      width: 2rem;
-      height: 100%;
-      right: -2rem;
-      display: block;
-      position: absolute;
-      background-color: var(--color-white);
-    }
-
-    .beicroon-list-cell {
-      flex-direction: row;
-    }
   }
 }
 
