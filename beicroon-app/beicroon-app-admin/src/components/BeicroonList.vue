@@ -55,10 +55,6 @@ const moreSearchSize = computed(() => {
     </div>
     <beicroon-line-vertical></beicroon-line-vertical>
     <div class="list-foot">
-      <div class="setting">
-        <beicroon-button class="block normal" label="字段设置"></beicroon-button>
-        <beicroon-button class="block normal" label="查询设置"></beicroon-button>
-      </div>
       <div class="search" @click.stop>
         <beicroon-button class="search-button primary" label="更多筛选" @click="toggleMoreSearch"></beicroon-button>
         <h6 class="search-size">+{{ moreSearchSize }}</h6>
@@ -213,9 +209,8 @@ const moreSearchSize = computed(() => {
 
         &.show {
           opacity: 1;
-          left: -240rem;
           width: 880rem;
-          height: 580rem;
+          height: 530rem;
         }
       }
 

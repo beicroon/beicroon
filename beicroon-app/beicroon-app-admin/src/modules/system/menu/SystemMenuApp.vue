@@ -20,12 +20,9 @@ onMounted(list.resetSearch);
 <template>
   <beicroon-list class="head-search-no-wrap" :list="list">
     <template #head-search>
-      <div class="head-search-full"></div>
-      <div class="head-search-sub">
-        <beicroon-input label="名称" v-model="list.params.name"></beicroon-input>
-        <beicroon-input label="路径" v-model="list.params.path"></beicroon-input>
-        <beicroon-input type="number" label="排序" v-model="list.params.sorting"></beicroon-input>
-      </div>
+      <beicroon-input label="名称" v-model="list.params.name"></beicroon-input>
+      <beicroon-input label="路径" v-model="list.params.path"></beicroon-input>
+      <beicroon-input type="number" label="排序" v-model="list.params.sorting"></beicroon-input>
     </template>
     <template #head-button>
       <beicroon-button class="block primary" label="重置" @click="list.handleReset"></beicroon-button>
