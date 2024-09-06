@@ -9,7 +9,7 @@ defineProps<Props>();
 </script>
 
 <template>
-  <div class="beicroon-dialog-overlay">
+  <div class="beicroon-dialog-overlay" @click.stop>
     <div class="beicroon-dialog-head">{{ title }}</div>
     <beicroon-line-vertical></beicroon-line-vertical>
     <div class="beicroon-dialog-body">
@@ -56,10 +56,6 @@ defineProps<Props>();
     align-content: flex-start;
     height: calc(100% - 73rem);
     grid-template-columns: repeat(3, 1fr);
-
-    .input-area {
-      width: 300rem;
-    }
   }
 
   .beicroon-dialog-loading {

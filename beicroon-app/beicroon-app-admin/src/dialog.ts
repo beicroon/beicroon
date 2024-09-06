@@ -17,12 +17,6 @@ function getNode() {
 
     node.classList.add(AppNameEnums.DIALOG);
 
-    node.addEventListener("click", (e: MouseEvent) => {
-        e.preventDefault();
-        e.stopPropagation();
-        e.stopImmediatePropagation();
-    });
-
     return node;
 }
 

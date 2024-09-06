@@ -203,10 +203,10 @@ const moreSearchSize = computed(() => {
         left: 8rem;
         display: grid;
         bottom: 36rem;
-        padding: 18rem;
         overflow: hidden;
         position: absolute;
         border-radius: 6rem;
+        padding: 24rem 8rem;
         justify-items: center;
         align-content: flex-start;
         transition: all 180ms linear;
@@ -216,7 +216,7 @@ const moreSearchSize = computed(() => {
 
         &.show {
           opacity: 1;
-          width: 920rem;
+          width: 1080rem;
           height: 530rem;
           overflow-y: auto;
         }

@@ -53,6 +53,10 @@ const value = computed({
         background-color: var(--color-primary-deeper);
       }
     }
+
+    .input-area {
+      width: 300rem;
+    }
   }
 
   .input-label {
