@@ -8,7 +8,7 @@ function toAccountAdmin() {
 }
 
 function toSystemMenu() {
-  router.push("/system/menu");
+  router.push("/resource/menu");
 }
 </script>
 

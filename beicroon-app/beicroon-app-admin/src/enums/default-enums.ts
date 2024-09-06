@@ -19,3 +19,7 @@ export enum AppSelectorEnums {
     TOAST = "#" + AppNameEnums.TOAST,
     DIALOG = "#" + AppNameEnums.DIALOG,
 }
+
+export enum SelectorEnums {
+    INPUT = ".beicroon-input",
+}

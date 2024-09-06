@@ -205,6 +205,21 @@ async function endScroll() {
   }
 
   .beicroon-list-body {
+    z-index: 1;
+    position: relative;
+
+    &:after {
+      left: 0;
+      z-index: 2;
+      content: "";
+      width: 100%;
+      height: 2rem;
+      bottom: -2rem;
+      display: block;
+      position: absolute;
+      background-color: var(--color-grey-lighter);
+    }
+
     .beicroon-list-row {
       background-color: var(--color-white);
       height: var(--beicroon-height-list-row);

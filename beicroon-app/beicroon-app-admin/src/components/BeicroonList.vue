@@ -2,6 +2,7 @@
 import {List} from "@/list.ts";
 import {computed, ref} from "vue";
 import {escToggle} from "@/event.ts";
+import {SelectorEnums} from "@/enums/default-enums.ts";
 import BeicroonButton from "@/components/BeicroonButton.vue";
 import BeicroonListTable from "@/components/BeicroonListTable.vue";
 import BeicroonLineVertical from "@/components/BeicroonLineVertical.vue";
@@ -26,6 +27,12 @@ async function toggleMoreSearch() {
     await escToggle();
   }
 }
+
+const moreSearchForm = ref();
+
+const hasMoreSearch = computed(() => {
+  return moreSearchForm.value?.querySelectorAll(SelectorEnums.INPUT).length > 0;
+});
 
 const moreSearchSize = computed(() => {
   return Object.values(props.list.params).filter((item) => item).length;
@@ -55,10 +62,10 @@ const moreSearchSize = computed(() => {
     </div>
     <beicroon-line-vertical></beicroon-line-vertical>
     <div class="list-foot">
-      <div class="search" @click.stop>
+      <div class="search" @click.stop v-show="hasMoreSearch">
         <beicroon-button class="search-button primary" label="更多筛选" @click="toggleMoreSearch"></beicroon-button>
         <h6 class="search-size">+{{ moreSearchSize }}</h6>
-        <form class="search-input" :class="{show: moreSearch}">
+        <form class="search-input" :class="{show: moreSearch}" ref="moreSearchForm">
           <slot name="more-search"></slot>
         </form>
       </div>

@@ -1,28 +1,29 @@
 <script setup lang="ts">
 import {onMounted} from "vue";
 import createBeicroonList from "@/list.ts";
-import Create from "./SystemMenuCreate.vue";
-import Detail from "./SystemMenuDetail.vue";
-import Update from "./SystemMenuUpdate.vue";
+import Create from "./ResourceMenuCreate.vue";
+import Detail from "./ResourceMenuDetail.vue";
+import Update from "./ResourceMenuUpdate.vue";
 import BeicroonList from "@/components/BeicroonList.vue";
 import BeicroonInput from "@/components/BeicroonInput.vue";
 import BeicroonButton from "@/components/BeicroonButton.vue";
 import BeicroonListRow from "@/components/BeicroonListRow.vue";
 import BeicroonListCell from "@/components/BeicroonListCell.vue";
 import BeicroonListCellButton from "@/components/BeicroonListCellButton.vue";
-import {page, remove, SystemMenuPageVO as VO, SystemMenuQueryDTO as DTO} from "./system-menu.http.ts";
+import {page, remove, ResourceMenuPageVO as VO, ResourceMenuQueryDTO as DTO} from "./resource-menu.http.ts";
 
-const list = createBeicroonList<DTO, VO>("菜单", page);
+const list = createBeicroonList<DTO, VO>("资源菜单", page);
 
 onMounted(list.resetSearch);
 </script>
 
 <template>
-  <beicroon-list class="head-search-no-wrap" :list="list">
+  <beicroon-list :list="list">
     <template #head-search>
+      <beicroon-input label="编码" v-model="list.params.code"></beicroon-input>
       <beicroon-input label="名称" v-model="list.params.name"></beicroon-input>
       <beicroon-input label="路径" v-model="list.params.path"></beicroon-input>
-      <beicroon-input type="number" label="排序" v-model="list.params.sorting"></beicroon-input>
+      <beicroon-input label="排序" v-model="list.params.sorting"></beicroon-input>
     </template>
     <template #head-button>
       <beicroon-button class="block primary" label="重置" @click="list.handleReset"></beicroon-button>
@@ -30,13 +31,21 @@ onMounted(list.resetSearch);
       <beicroon-button class="block warning" label="新增" @click="list.handleCreate(Create)"></beicroon-button>
     </template>
     <template #table-title>
-      <beicroon-list-cell>名称</beicroon-list-cell>
-      <beicroon-list-cell>路径</beicroon-list-cell>
-      <beicroon-list-cell>排序</beicroon-list-cell>
+      <beicroon-list-cell width="180">父级主键</beicroon-list-cell>
+      <beicroon-list-cell width="180">父级编码</beicroon-list-cell>
+      <beicroon-list-cell width="180">父级名称</beicroon-list-cell>
+      <beicroon-list-cell width="180">编码</beicroon-list-cell>
+      <beicroon-list-cell width="180">名称</beicroon-list-cell>
+      <beicroon-list-cell width="180">路径</beicroon-list-cell>
+      <beicroon-list-cell width="180">排序</beicroon-list-cell>
       <beicroon-list-cell-button>操作</beicroon-list-cell-button>
     </template>
     <template #table-body>
       <beicroon-list-row v-for="item in list.data">
+        <beicroon-list-cell>{{ item.parentId }}</beicroon-list-cell>
+        <beicroon-list-cell>{{ item.parentCode }}</beicroon-list-cell>
+        <beicroon-list-cell>{{ item.parentName }}</beicroon-list-cell>
+        <beicroon-list-cell>{{ item.code }}</beicroon-list-cell>
         <beicroon-list-cell>{{ item.name }}</beicroon-list-cell>
         <beicroon-list-cell>{{ item.path }}</beicroon-list-cell>
         <beicroon-list-cell>{{ item.sorting }}</beicroon-list-cell>
@@ -48,9 +57,9 @@ onMounted(list.resetSearch);
       </beicroon-list-row>
     </template>
     <template #more-search>
-      <beicroon-input class="column-three" label="名称" v-model="list.params.name"></beicroon-input>
-      <beicroon-input class="column-two" label="路径" v-model="list.params.path"></beicroon-input>
-      <beicroon-input label="排序" v-model="list.params.sorting"></beicroon-input>
+      <beicroon-input label="父级主键" v-model="list.params.parentId"></beicroon-input>
+      <beicroon-input label="父级编码" v-model="list.params.parentCode"></beicroon-input>
+      <beicroon-input label="父级名称" v-model="list.params.parentName"></beicroon-input>
     </template>
   </beicroon-list>
 </template>

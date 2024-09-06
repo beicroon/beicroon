@@ -19,15 +19,15 @@ const router: Router = createRouter({
             path: "/",
             component: () => import("@/views/Index.vue"),
             children: [
-                // {
-                //     name: "后台账号",
-                //     path: "/account/admin",
-                //     component: () => import("@/modules/account/admin/AccountAdminApp.vue"),
-                // },
+                {
+                    name: "后台账号",
+                    path: "/account/admin",
+                    component: () => import("@/modules/account/admin/AccountAdminApp.vue"),
+                },
                 {
                     name: "菜单管理",
-                    path: "/system/menu",
-                    component: () => import("@/modules/system/menu/SystemMenuApp.vue"),
+                    path: "/resource/menu",
+                    component: () => import("@/modules/resource/menu/ResourceMenuApp.vue"),
                 },
             ],
         },

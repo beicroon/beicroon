@@ -6,57 +6,58 @@ public class VueDetailContent {
 
     private static final String CONTENT = """
             <script setup lang="ts">
-            import {onBeforeMount, ref} from "vue";
-            import FormInput from "@/components/form/FormInput.vue";
-            import FormButton from "@/components/form/FormButton.vue";
-            import {{{filename}}DetailVO as VO, detail} from "./{{filename}}.http.ts";
+            import {onMounted, ref} from "vue";
+            import BeicroonInput from "@/components/BeicroonInput.vue";
+            import BeicroonButton from "@/components/BeicroonButton.vue";
+            import BeicroonLoading from "@/components/BeicroonLoading.vue";
+            import BeicroonLineVertical from "@/components/BeicroonLineVertical.vue";
+            import {detail, {{filename}}DetailVO as VO} from "./{{vueFilename}}.http.ts";
 
-            const props = defineProps({
-              id: {
-                type: String,
-                required: true,
-              },
-            });
+            type Props = {
+              id: string,
+            };
 
-            const data = ref<VO>({
-              id: props.id,
-            });
+            const props = defineProps<Props>();
 
-            onBeforeMount(async () => {
-              const res = await detail(props.id);
+            const form = ref<VO | null>(null);
 
-              if (res.data) {
-                data.value = res.data;
-              }
-            });
+            const emits = defineEmits(["cancel"]);
 
-            const emits = defineEmits(["hide"]);
-
-            async function cancel() {
-              emits("hide");
+            async function handleCancel() {
+              emits("cancel");
             }
+
+            onMounted(async () => {
+              const {data} = await detail(props.id);
+            
+              form.value = data;
+            });
             </script>
 
             <template>
-              <form class="detail disabled">
-                <div class="view">
-                  {{vueAppDetailContent}}
+              <form class="beicroon-dialog-view">
+                <div class="beicroon-dialog-input" v-if="form">
+                  {{formInput}}
                 </div>
-                <div class="button">
-                  <form-button class="cancel" @click="cancel">关闭</form-button>
+                <div class="beicroon-dialog-loading" v-else>
+                  <beicroon-loading fill="#b3e5fc" width="100" height="100"></beicroon-loading>
+                </div>
+                <beicroon-line-vertical></beicroon-line-vertical>
+                <div class="beicroon-dialog-button">
+                  <beicroon-button class="block primary" label="关闭" @click="handleCancel"></beicroon-button>
                 </div>
               </form>
             </template>
 
-            <style scoped lang="less">
-
+            <style lang="less">
             </style>
             """;
 
     public static String getContent(Table table) {
         return CONTENT
                 .replace("{{filename}}", table.getFilename())
-                .replace("{{vueAppDetailContent}}", table.getVueAppDetailContent().trim());
+                .replace("{{vueFilename}}", table.getVueFilename())
+                .replace("{{formInput}}", table.getVueFormInputString());
     }
 
 }

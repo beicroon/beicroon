@@ -4,7 +4,7 @@ import BeicroonInput from "@/components/BeicroonInput.vue";
 import BeicroonButton from "@/components/BeicroonButton.vue";
 import BeicroonLoading from "@/components/BeicroonLoading.vue";
 import BeicroonLineVertical from "@/components/BeicroonLineVertical.vue";
-import {detail, SystemMenuDetailVO as VO} from "./system-menu.http.ts";
+import {AccountAdminDetailVO as VO, detail} from "./account-admin.http.ts";
 
 type Props = {
   id: string,
@@ -12,7 +12,7 @@ type Props = {
 
 const props = defineProps<Props>();
 
-const vo = ref<VO | null>(null);
+const form = ref<VO | null>(null);
 
 const emits = defineEmits(["cancel"]);
 
@@ -23,16 +23,19 @@ async function handleCancel() {
 onMounted(async () => {
   const {data} = await detail(props.id);
 
-  vo.value = data;
+  form.value = data;
 });
 </script>
 
 <template>
   <form class="beicroon-dialog-view">
-    <div class="beicroon-dialog-input" v-if="vo">
-      <beicroon-input disabled class="column" label="名称" v-model="vo.name"></beicroon-input>
-      <beicroon-input disabled class="column" label="路径" v-model="vo.path"></beicroon-input>
-      <beicroon-input disabled class="column" type="number" label="排序" v-model="vo.sorting"></beicroon-input>
+    <div class="beicroon-dialog-input" v-if="form">
+      <beicroon-input class="column" label="编码" placeholder="编码" v-model="form.code"></beicroon-input>
+      <beicroon-input class="column" label="账号" placeholder="账号" v-model="form.username"></beicroon-input>
+      <beicroon-input class="column" label="密码" placeholder="密码" v-model="form.password"></beicroon-input>
+      <beicroon-input class="column" label="昵称" placeholder="昵称" v-model="form.nickname"></beicroon-input>
+      <beicroon-input class="column" label="电话" placeholder="电话" v-model="form.phone"></beicroon-input>
+      <beicroon-input class="column" label="邮箱" placeholder="邮箱" v-model="form.email"></beicroon-input>
     </div>
     <div class="beicroon-dialog-loading" v-else>
       <beicroon-loading fill="#b3e5fc" width="100" height="100"></beicroon-loading>

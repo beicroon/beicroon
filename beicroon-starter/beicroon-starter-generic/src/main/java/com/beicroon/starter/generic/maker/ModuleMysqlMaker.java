@@ -28,7 +28,6 @@ import java.io.File;
 import java.lang.reflect.Array;
 import java.sql.*;
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class ModuleMysqlMaker {
 
@@ -108,32 +107,43 @@ public class ModuleMysqlMaker {
         }
 
         for (Table table : this.tables) {
+            int searchCount = 1;
+
             File modulePath = new File(rootPath, table.getPath());
 
             FileUtils.mkdir(modulePath);
 
             StringBuilder vueHttpContent = new StringBuilder();
-            StringBuilder vueAppSearchContent = new StringBuilder();
-            StringBuilder vueAppTableHeadContent = new StringBuilder();
-            StringBuilder vueAppTableBodyContent = new StringBuilder();
-            StringBuilder vueAppFormInputContent = new StringBuilder();
-            StringBuilder vueAppDetailContent = new StringBuilder();
+            StringBuilder vueSearchContent = new StringBuilder();
+            StringBuilder vueMoreSearchContent = new StringBuilder();
+            StringBuilder vueTableHeadContent = new StringBuilder();
+            StringBuilder vueTableBodyContent = new StringBuilder();
+            StringBuilder vueFormInputString = new StringBuilder();
 
             for (Field field : table.getColumns()) {
                 vueHttpContent.append(this.getVueHttpFieldString(field));
-                vueAppSearchContent.append(this.getVueAppSearchFieldString(field));
-                vueAppTableHeadContent.append(this.getVueAppTableHeadFieldString(field));
-                vueAppTableBodyContent.append(this.getVueAppTableBodyFieldString(field));
-                vueAppFormInputContent.append(this.getVueFormInputFieldString(field));
-                vueAppDetailContent.append(this.getVueDetailFieldString(field));
+
+                String searchString = this.getVueSearchFieldString(field);
+
+                if (searchCount <= 9) {
+                    vueSearchContent.append(searchString);
+                } else {
+                    vueMoreSearchContent.append(searchString);
+                }
+
+                searchCount++;
+
+                vueTableHeadContent.append(this.getVueTableHeadFieldString(field));
+                vueTableBodyContent.append(this.getVueTableBodyFieldString(field));
+                vueFormInputString.append(this.getVueFormInputFieldString(field));
             }
 
             table.setVueHttpContent(vueHttpContent.toString());
-            table.setVueAppSearchContent(vueAppSearchContent.toString());
-            table.setVueAppTableHeadContent(vueAppTableHeadContent.toString());
-            table.setVueAppTableBodyContent(vueAppTableBodyContent.toString());
-            table.setVueAppFormInputContent(vueAppFormInputContent.toString());
-            table.setVueAppDetailContent(vueAppDetailContent.toString());
+            table.setVueSearchContent(vueSearchContent.toString().trim());
+            table.setVueMoreSearchContent(vueMoreSearchContent.toString().trim());
+            table.setVueTableHeadContent(vueTableHeadContent.toString().trim());
+            table.setVueTableBodyContent(vueTableBodyContent.toString().trim());
+            table.setVueFormInputString(vueFormInputString.toString().trim());
 
             FileUtils.writeFileIfNotExists(FileManager.getVueHttpFile(modulePath, table), VueHttpContent.getContent(table));
             FileUtils.writeFileIfNotExists(FileManager.getVueAppFile(modulePath, table), VueAppContent.getContent(table));
@@ -230,48 +240,36 @@ public class ModuleMysqlMaker {
         );
     }
 
-    private String getVueDetailFieldString(Field field) {
-        String template = """
-                      <form-input disabled class="form-input" v-model="data.%s">%s</form-input>
-                """;
-
-        return String.format(template, field.getSnakeCaseName(), field.comment());
-    }
-
     private String getVueFormInputFieldString(Field field) {
         String template = """
-                      <form-input class="form-input" placeholder="请输入%s" v-model="data.%s">%s</form-input>
+                      <beicroon-input class="column" label="%s" placeholder="%s" v-model="form.%s"></beicroon-input>
                 """;
 
-        return String.format(template, field.comment(), field.getSnakeCaseName(), field.comment());
+        return String.format(template, field.getComment(), field.getComment(), field.getSnakeCaseName());
     }
 
-    private String getVueAppTableBodyFieldString(Field field) {
+    private String getVueTableBodyFieldString(Field field) {
         String template = """
-                          <td><div class="table-cell"><span class="table-text">{{ item.%s }}</span></div></td>
+                        <beicroon-list-cell>{{ item.%s }}</beicroon-list-cell>
                 """;
 
         return String.format(template, field.getSnakeCaseName());
     }
 
-    private String getVueAppTableHeadFieldString(Field field) {
+    private String getVueTableHeadFieldString(Field field) {
         String template = """
-                          <th style="width: 130rem;"><div class="table-cell">%s</div></th>
+                      <beicroon-list-cell width="180">%s</beicroon-list-cell>
                 """;
 
         return String.format(template, field.comment());
     }
 
-    private String getVueAppSearchFieldString(Field field) {
+    private String getVueSearchFieldString(Field field) {
         String template = """
-                        <form-input class="row" v-model="query.%s">%s</form-input>
+                      <beicroon-input label="%s" v-model="list.params.%s"></beicroon-input>
                 """;
 
-        String title = Arrays.stream(field.comment().split(""))
-                .map(it -> String.format("<i>%s</i>", it))
-                .collect(Collectors.joining());
-
-        return String.format(template, field.getSnakeCaseName(), title);
+        return String.format(template, field.comment(), field.getSnakeCaseName());
     }
 
     private String getVueHttpFieldString(Field field) {

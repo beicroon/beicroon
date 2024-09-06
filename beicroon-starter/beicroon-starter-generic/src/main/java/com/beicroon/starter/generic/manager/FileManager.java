@@ -418,7 +418,7 @@ public class FileManager {
     }
     
     public static File getVueHttpFile(File modulePath, Table table) {
-        return new File(modulePath, String.format(FILENAME_VUE_HTTP, table.getFilename()));
+        return new File(modulePath, String.format(FILENAME_VUE_HTTP, table.getVueFilename()));
     }
 
     public static File getVueAppFile(File modulePath, Table table) {

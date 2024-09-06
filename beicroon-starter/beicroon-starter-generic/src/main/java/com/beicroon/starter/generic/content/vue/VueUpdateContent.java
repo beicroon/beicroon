@@ -6,82 +6,82 @@ public class VueUpdateContent {
 
     private static final String CONTENT = """
             <script setup lang="ts">
-            import toast from "@/utils/toast";
-            import {onBeforeMount, ref} from "vue";
-            import {validateForm} from "@/utils/function.ts";
-            import FormInput from "@/components/form/FormInput.vue";
-            import FormButton from "@/components/form/FormButton.vue";
-            import {{{filename}}UpdateDTO as DTO, detail as show, update as submit} from "./{{filename}}.http.ts";
+            import {onMounted, reactive} from "vue";
+            import BeicroonInput from "@/components/BeicroonInput.vue";
+            import BeicroonButton from "@/components/BeicroonButton.vue";
+            import BeicroonLoading from "@/components/BeicroonLoading.vue";
+            import BeicroonLineVertical from "@/components/BeicroonLineVertical.vue";
+            import {detail, {{filename}}UpdateDTO as DTO, update} from "./{{vueFilename}}.http.ts";
 
-            const props = defineProps({
-              id: {
-                type: String,
-                required: true,
-              }
+            type Props = {
+              id: string,
+            };
+
+            const props = defineProps<Props>();
+
+            const loading = reactive({
+              set: false,
+              get: false,
             });
 
-            const form = ref();
-
-            const data = ref<DTO>({
+            const form = reactive<DTO>({
               id: props.id,
             });
 
-            onBeforeMount(async () => {
-              const res = await show(props.id);
+            const emits = defineEmits(["cancel", "confirm"]);
 
-              data.value = res.data;
+            async function handleCancel() {
+              emits("cancel");
+            }
+
+            async function handleConfirm() {
+              loading.set = true;
+            
+              await update(form).finally(() => loading.set = false);
+            
+              emits("confirm");
+            }
+
+            onMounted(async () => {
+              loading.get = true;
+
+              const {data} = await detail(props.id).finally(() => loading.get = false);
+
+              form.code = data.code;
+              form.name = data.name;
+              form.path = data.path;
+              form.sorting = data.sorting;
+              form.parentId = data.parentId;
+              form.parentCode = data.parentCode;
+              form.parentName = data.parentName;
             });
-
-            const loading = ref(false);
-
-            const emits = defineEmits(["hide", "reload"]);
-
-            function cancel() {
-              emits("hide");
-            }
-
-            async function confirm() {
-              loading.value = true;
-
-              if (!validateForm(form)) {
-                await toast("请填写必填项！", true);
-
-                loading.value = false;
-
-                return;
-              }
-
-              await submit(data.value).finally(() => loading.value = false);
-
-              await toast("修改成功");
-
-              emits("hide");
-
-              emits("reload");
-            }
             </script>
 
             <template>
-              <form class="create" ref="form">
-                <div class="view">
-                  {{vueAppFormInputContent}}
+              <form class="beicroon-dialog-view">
+                <div class="beicroon-dialog-input" v-if="!loading.get">
+                  {{formInput}}
                 </div>
-                <div class="button">
-                  <form-button class="cancel" @click="cancel" :loading="loading">取消</form-button>
-                  <form-button class="confirm" @click="confirm" :loading="loading">保存</form-button>
+                <div class="beicroon-dialog-loading" v-else>
+                  <beicroon-loading fill="#b3e5fc" width="100" height="100"></beicroon-loading>
+                </div>
+                <beicroon-line-vertical></beicroon-line-vertical>
+                <div class="beicroon-dialog-button">
+                  <beicroon-button class="block primary" label="关闭" @click="handleCancel"></beicroon-button>
+                  <beicroon-button class="block warning" label="保存" @click="handleConfirm" :loading="loading.set"></beicroon-button>
                 </div>
               </form>
             </template>
 
-            <style scoped lang="less">
-
+            <style lang="less">
             </style>
             """;
 
     public static String getContent(Table table) {
         return CONTENT
                 .replace("{{filename}}", table.getFilename())
-                .replace("{{vueAppFormInputContent}}", table.getVueAppFormInputContent().trim());
+                .replace("{{vueFilename}}", table.getVueFilename())
+                .replace("{{formInput}}", table.getVueFormInputString());
     }
 
 }

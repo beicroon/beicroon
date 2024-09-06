@@ -25,6 +25,8 @@ public class Table implements Serializable {
 
     private final String filename;
 
+    private final String vueFilename;
+
     private final String variableName;
 
     @Setter
@@ -43,19 +45,19 @@ public class Table implements Serializable {
     private String vueHttpContent;
 
     @Setter
-    private String vueAppSearchContent;
+    private String vueSearchContent;
 
     @Setter
-    private String vueAppTableHeadContent;
+    private String vueMoreSearchContent;
 
     @Setter
-    private String vueAppTableBodyContent;
+    private String vueTableHeadContent;
 
     @Setter
-    private String vueAppFormInputContent;
+    private String vueTableBodyContent;
 
     @Setter
-    private String vueAppDetailContent;
+    private String vueFormInputString;
 
     public Table(String prefix, String name, String comment, List<Field> columns) {
         this.prefix = prefix.replace("_", "-");
@@ -72,9 +74,13 @@ public class Table implements Serializable {
 
         this.columns = columns;
 
-        this.filename = Arrays.stream(this.name.split("_"))
+        String[] names = this.name.split("_");
+
+        this.filename = Arrays.stream(names)
                 .map(s -> s.substring(0, 1).toUpperCase() + s.substring(1))
                 .collect(Collectors.joining());
+
+        this.vueFilename = String.join("-", names);
 
         this.variableName = this.filename.substring(0, 1).toLowerCase() + this.filename.substring(1);
     }

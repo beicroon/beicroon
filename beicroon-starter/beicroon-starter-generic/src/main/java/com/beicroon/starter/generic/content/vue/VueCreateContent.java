@@ -6,67 +6,53 @@ public class VueCreateContent {
 
     private static final String CONTENT = """
             <script setup lang="ts">
-            import {ref} from "vue";
-            import toast from "@/utils/toast";
-            import {validateForm} from "@/utils/function.ts";
-            import FormInput from "@/components/form/FormInput.vue";
-            import FormButton from "@/components/form/FormButton.vue";
-            import {{{filename}}CreateDTO as DTO, create as submit} from "./{{filename}}.http.ts";
-
-            const form = ref();
-
-            const data = ref<DTO>({});
+            import {reactive, ref} from "vue";
+            import BeicroonInput from "@/components/BeicroonInput.vue";
+            import BeicroonButton from "@/components/BeicroonButton.vue";
+            import BeicroonLineVertical from "@/components/BeicroonLineVertical.vue";
+            import {create, {{filename}}CreateDTO as DTO} from "./{{vueFilename}}.http.ts";
 
             const loading = ref(false);
 
-            const emits = defineEmits(["hide", "reload"]);
+            const form = reactive<DTO>({});
 
-            function cancel() {
-              emits("hide");
+            const emits = defineEmits(["cancel", "confirm"]);
+
+            async function handleCancel() {
+              emits("cancel");
             }
 
-            async function confirm() {
+            async function handleConfirm() {
               loading.value = true;
 
-              if (!validateForm(form)) {
-                await toast("请填写必填项！", true);
+              await create(form).finally(() => loading.value = false);
 
-                loading.value = false;
-
-                return;
-              }
-
-              await submit(data.value).finally(() => loading.value = false);
-
-              await toast("添加成功");
-
-              emits("hide");
-
-              emits("reload");
+              emits("confirm");
             }
             </script>
 
             <template>
-              <form class="create" ref="form">
-                <div class="view">
-                  {{vueAppFormInputContent}}
+              <form class="beicroon-dialog-view">
+                <div class="beicroon-dialog-input">
+                  {{formInput}}
                 </div>
-                <div class="button">
-                  <form-button class="cancel" @click="cancel" :loading="loading">取消</form-button>
-                  <form-button class="confirm" @click="confirm" :loading="loading">保存</form-button>
+                <beicroon-line-vertical></beicroon-line-vertical>
+                <div class="beicroon-dialog-button">
+                  <beicroon-button class="block warning" label="取消" @click="handleCancel"></beicroon-button>
+                  <beicroon-button class="block primary" label="保存" @click="handleConfirm" :loading="loading"></beicroon-button>
                 </div>
               </form>
             </template>
 
-            <style scoped lang="less">
-
+            <style lang="less">
             </style>
             """;
 
     public static String getContent(Table table) {
         return CONTENT
                 .replace("{{filename}}", table.getFilename())
-                .replace("{{vueAppFormInputContent}}", table.getVueAppFormInputContent().trim());
+                .replace("{{vueFilename}}", table.getVueFilename())
+                .replace("{{formInput}}", table.getVueFormInputString());
     }
 
 }

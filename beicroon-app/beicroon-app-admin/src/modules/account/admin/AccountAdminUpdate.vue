@@ -4,7 +4,7 @@ import BeicroonInput from "@/components/BeicroonInput.vue";
 import BeicroonButton from "@/components/BeicroonButton.vue";
 import BeicroonLoading from "@/components/BeicroonLoading.vue";
 import BeicroonLineVertical from "@/components/BeicroonLineVertical.vue";
-import {detail, SystemMenuUpdateDTO as DTO, update} from "./system-menu.http.ts";
+import {AccountAdminUpdateDTO as DTO, detail, update} from "./account-admin.http.ts";
 
 type Props = {
   id: string,
@@ -53,9 +53,12 @@ onMounted(async () => {
 <template>
   <form class="beicroon-dialog-view">
     <div class="beicroon-dialog-input" v-if="!loading.get">
-      <beicroon-input class="column" label="名称" placeholder="菜单名称" v-model="form.name"></beicroon-input>
-      <beicroon-input class="column" label="路径" placeholder="菜单路径" v-model="form.path"></beicroon-input>
-      <beicroon-input class="column" type="number" label="排序" placeholder="菜单排序" v-model="form.sorting"></beicroon-input>
+      <beicroon-input class="column" label="编码" placeholder="编码" v-model="form.code"></beicroon-input>
+      <beicroon-input class="column" label="账号" placeholder="账号" v-model="form.username"></beicroon-input>
+      <beicroon-input class="column" label="密码" placeholder="密码" v-model="form.password"></beicroon-input>
+      <beicroon-input class="column" label="昵称" placeholder="昵称" v-model="form.nickname"></beicroon-input>
+      <beicroon-input class="column" label="电话" placeholder="电话" v-model="form.phone"></beicroon-input>
+      <beicroon-input class="column" label="邮箱" placeholder="邮箱" v-model="form.email"></beicroon-input>
     </div>
     <div class="beicroon-dialog-loading" v-else>
       <beicroon-loading fill="#b3e5fc" width="100" height="100"></beicroon-loading>

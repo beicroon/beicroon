@@ -6,150 +6,67 @@ public class VueAppContent {
 
     private static final String CONTENT = """
             <script setup lang="ts">
-            import {PageInfo} from "@/https";
-            import toast from "@/utils/toast";
-            import {onMounted, ref} from "vue";
-            import dialog from "@/utils/dialog";
+            import {onMounted} from "vue";
+            import createBeicroonList from "@/list.ts";
             import Create from "./{{filename}}Create.vue";
             import Detail from "./{{filename}}Detail.vue";
             import Update from "./{{filename}}Update.vue";
-            import dialogWindow from "@/utils/dialogWindow";
-            import FormInput from "@/components/form/FormInput.vue";
-            import FormButton from "@/components/form/FormButton.vue";
-            import {{{filename}}PageVO as VO, {{filename}}QueryDTO as DTO, page, remove} from "./{{filename}}.http.ts";
-            
-            const query = ref<DTO>({} as DTO);
-            
-            const paginator = ref<PageInfo>();
-            
-            const data = ref<Array<VO>>();
-            
-            const loading = ref(false);
-            
-            async function doLoad() {
-              loading.value = true;
-            
-              data.value = [];
-            
-              const res = await page(query.value);
-            
-              data.value = res.data;
-            
-              paginator.value = res.page;
-            
-              loading.value = false;
-            }
-            
-            async function doReset() {
-              query.value = {} as DTO;
-            }
-            
-            async function showCreate() {
-              await dialogWindow("新增{{comment}}", Create, {}, {
-                reload: doLoad,
-              });
-            }
-            
-            async function showDetail(item: VO) {
-              await dialogWindow("{{comment}}详情", Detail, {id: item.id}, {
-                reload: doLoad,
-              });
-            }
-            
-            async function showUpdate(item: VO) {
-              await dialogWindow("编辑{{comment}}", Update, {id: item.id}, {
-                reload: doLoad,
-              });
-            }
-            
-            async function showRemove(item: VO) {
-              await dialog(
-                  "是否删除该{{comment}}数据？删除后数据不可恢复，请谨慎操作！",
-                  () => remove(item.id),
-                  async () => toast("删除成功").then(doLoad)
-              );
-            }
-            
-            onMounted(doLoad);
+            import BeicroonList from "@/components/BeicroonList.vue";
+            import BeicroonInput from "@/components/BeicroonInput.vue";
+            import BeicroonButton from "@/components/BeicroonButton.vue";
+            import BeicroonListRow from "@/components/BeicroonListRow.vue";
+            import BeicroonListCell from "@/components/BeicroonListCell.vue";
+            import BeicroonListCellButton from "@/components/BeicroonListCellButton.vue";
+            import {page, remove, {{filename}}PageVO as VO, {{filename}}QueryDTO as DTO} from "./{{vueFilename}}.http.ts";
+
+            const list = createBeicroonList<DTO, VO>("{{comment}}", page);
+
+            onMounted(list.resetSearch);
             </script>
-            
+
             <template>
-              <div class="list">
-                <div class="list-head">
-                  <div class="head-search">
-                    {{vueAppSearchContent}}
-                  </div>
-                  <div class="head-action">
-                    <form-button class="head-button" @click="doLoad" :loading="loading">查询</form-button>
-                    <form-button class="head-button" @click="doReset">重置</form-button>
-                    <form-button class="head-button" @click="showCreate">新增</form-button>
-                  </div>
-                </div>
-                <div class="list-view">
-                  <table class="list-table">
-                    <thead class="table-head">
-                    <tr class="table-row">
-                      {{vueAppTableHeadContent}}
-                      <th style="width: 280rem;"><div class="table-cell">创建信息</div></th>
-                      <th style="width: 280rem;"><div class="table-cell">更新信息</div></th>
-                      <th class="table-action" style="width: 180rem;">
-                        <div class="table-cell table-button">操作</div>
-                      </th>
-                    </tr>
-                    </thead>
-                    <tbody class="table-body">
-                    <tr class="table-row" v-for="item in data">
-                      {{vueAppTableBodyContent}}
-                      <td>
-                        <div class="table-cell table-datetime">
-                          <div class="line">
-                            <span class="label">昵称</span>
-                            <span class="value">{{ item.creatorName }}</span>
-                          </div>
-                          <div class="line">
-                            <span class="label">时间</span>
-                            <span class="value">{{ item.createdAt }}</span>
-                          </div>
-                        </div>
-                      </td>
-                      <td>
-                        <div class="table-cell table-datetime">
-                          <div class="line">
-                            <span class="label">昵称</span>
-                            <span class="value">{{ item.modifierName }}</span>
-                          </div>
-                          <div class="line">
-                            <span class="label">时间</span>
-                            <span class="value">{{ item.modifiedAt }}</span>
-                          </div>
-                        </div>
-                      </td>
-                      <td class="table-action">
-                        <div class="table-cell table-button">
-                          <form-button class="primary" @click="showDetail(item)">查看</form-button>
-                          <form-button class="warning" @click="showUpdate(item)">编辑</form-button>
-                          <form-button class="dangerous" @click="showRemove(item)">删除</form-button>
-                        </div>
-                      </td>
-                    </tr>
-                    </tbody>
-                  </table>
-                </div>
-                <div class="list-foot"></div>
-              </div>
+              <beicroon-list :list="list">
+                <template #head-search>
+                  {{search}}
+                </template>
+                <template #head-button>
+                  <beicroon-button class="block primary" label="重置" @click="list.handleReset"></beicroon-button>
+                  <beicroon-button class="block primary" label="查询" :loading="list.loading" @click="list.resetSearch"></beicroon-button>
+                  <beicroon-button class="block warning" label="新增" @click="list.handleCreate(Create)"></beicroon-button>
+                </template>
+                <template #table-title>
+                  {{tableHead}}
+                  <beicroon-list-cell-button>操作</beicroon-list-cell-button>
+                </template>
+                <template #table-body>
+                  <beicroon-list-row v-for="item in list.data">
+                    {{tableBody}}
+                    <beicroon-list-cell-button>
+                      <beicroon-button class="primary" label="查看" @click="list.handleDetail(item, Detail)"></beicroon-button>
+                      <beicroon-button class="warning" label="编辑" @click="list.handleUpdate(item, Update)"></beicroon-button>
+                      <beicroon-button class="danger" label="删除" @click="list.handleRemove(item, remove)"></beicroon-button>
+                    </beicroon-list-cell-button>
+                  </beicroon-list-row>
+                </template>
+                <template #more-search>
+                  {{moreSearch}}
+                </template>
+              </beicroon-list>
             </template>
-            
-            <style scoped lang="less">
+
+            <style lang="less">
             </style>
             """;
 
     public static String getContent(Table table) {
         return CONTENT
                 .replace("{{filename}}", table.getFilename())
+                .replace("{{vueFilename}}", table.getVueFilename())
                 .replace("{{comment}}", table.getComment())
-                .replace("{{vueAppSearchContent}}", table.getVueAppSearchContent().trim())
-                .replace("{{vueAppTableHeadContent}}", table.getVueAppTableHeadContent().trim())
-                .replace("{{vueAppTableBodyContent}}", table.getVueAppTableBodyContent().trim());
+                .replace("{{search}}", table.getVueSearchContent())
+                .replace("{{moreSearch}}", table.getVueMoreSearchContent())
+                .replace("{{tableHead}}", table.getVueTableHeadContent())
+                .replace("{{tableBody}}", table.getVueTableBodyContent());
     }
 
 }
