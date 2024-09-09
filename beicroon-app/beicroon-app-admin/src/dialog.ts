@@ -149,13 +149,13 @@ export default async function dialog(config: DialogConfig) {
         const vNode = createWindowNode(dialog);
 
         render(vNode, node);
+
+        await escToggle(dialog.handleCancel);
     }
 
     container.appendChild(node);
 
     show(node);
-
-    await escToggle(dialog.handleCancel);
 
     container.classList.remove("hidden");
 }
