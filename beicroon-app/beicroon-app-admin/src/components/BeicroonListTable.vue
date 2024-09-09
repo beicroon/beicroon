@@ -65,7 +65,12 @@ const scrollHeightStyle = computed(() => {
 
 afterSearch(props.list, setScroll);
 
-onMounted(() => windowResize(setScroll));
+onMounted(() => {
+  windowResize(setScroll);
+
+  handleScroll();
+});
+
 onUnmounted(() => windowResize());
 
 const scrollXActive = ref(false);

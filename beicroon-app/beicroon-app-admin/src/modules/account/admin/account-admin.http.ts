@@ -2,12 +2,11 @@ import http, {BaseVO, DisableDTO, DisableVO, QueryDTO, Response, UpdateDTO} from
 
 // 基础返回字段
 export type AccountAdminBaseVO = BaseVO & DisableVO & {
-    code?: string,
-    username?: string,
-    password?: string,
-    nickname?: string,
-    phone?: string,
-    email?: string,
+    code?: string,  // 编码
+    username?: string,  // 账号
+    nickname?: string,  // 昵称
+    phone?: string,  // 电话
+    email?: string,  // 邮箱
 }
 
 // 详情返回字段
@@ -22,32 +21,30 @@ export type AccountAdminPageVO = AccountAdminBaseVO & {
 
 // 新增参数字段
 export type AccountAdminCreateDTO = DisableDTO & {
-    code?: string,
-    username?: string,
-    password?: string,
-    nickname?: string,
-    phone?: string,
-    email?: string,
+    code?: string,  // 编码
+    username?: string,  // 账号
+    password?: string,  // 密码
+    nickname?: string,  // 昵称
+    phone?: string,  // 电话
+    email?: string,  // 邮箱
 }
 
 // 修改参数字段
 export type AccountAdminUpdateDTO = UpdateDTO & {
-    code?: string,
-    username?: string,
-    password?: string,
-    nickname?: string,
-    phone?: string,
-    email?: string,
+    code?: string,  // 编码
+    username?: string,  // 账号
+    nickname?: string,  // 昵称
+    phone?: string,  // 电话
+    email?: string,  // 邮箱
 }
 
 // 查询参数字段
 export type AccountAdminQueryDTO = QueryDTO & DisableDTO & {
-    code?: string,
-    username?: string,
-    password?: string,
-    nickname?: string,
-    phone?: string,
-    email?: string,
+    code?: string,  // 编码
+    username?: string,  // 账号
+    nickname?: string,  // 昵称
+    phone?: string,  // 电话
+    email?: string,  // 邮箱
 }
 
 // 基础信息接口
