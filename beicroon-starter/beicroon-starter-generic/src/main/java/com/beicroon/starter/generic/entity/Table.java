@@ -60,6 +60,9 @@ public class Table implements Serializable {
     private String vueFormInputString;
 
     @Setter
+    private String vueFormFieldString;
+
+    @Setter
     private String vueFormDisabledInputString;
 
     public Table(String prefix, String name, String comment, List<Field> columns) {

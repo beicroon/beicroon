@@ -2,12 +2,12 @@ import http, {BaseVO, DisableDTO, DisableVO, QueryDTO, Response, UpdateDTO} from
 
 // 基础返回字段
 export type AccountAdminBaseVO = BaseVO & DisableVO & {
-    code?: string
-    username?: string
-    password?: string
-    nickname?: string
-    phone?: string
-    email?: string
+    code?: string,
+    username?: string,
+    password?: string,
+    nickname?: string,
+    phone?: string,
+    email?: string,
 }
 
 // 详情返回字段
@@ -22,32 +22,32 @@ export type AccountAdminPageVO = AccountAdminBaseVO & {
 
 // 新增参数字段
 export type AccountAdminCreateDTO = DisableDTO & {
-    code?: string
-    username?: string
-    password?: string
-    nickname?: string
-    phone?: string
-    email?: string
+    code?: string,
+    username?: string,
+    password?: string,
+    nickname?: string,
+    phone?: string,
+    email?: string,
 }
 
 // 修改参数字段
 export type AccountAdminUpdateDTO = UpdateDTO & {
-    code?: string
-    username?: string
-    password?: string
-    nickname?: string
-    phone?: string
-    email?: string
+    code?: string,
+    username?: string,
+    password?: string,
+    nickname?: string,
+    phone?: string,
+    email?: string,
 }
 
 // 查询参数字段
 export type AccountAdminQueryDTO = QueryDTO & DisableDTO & {
-    code?: string
-    username?: string
-    password?: string
-    nickname?: string
-    phone?: string
-    email?: string
+    code?: string,
+    username?: string,
+    password?: string,
+    nickname?: string,
+    phone?: string,
+    email?: string,
 }
 
 // 基础信息接口
@@ -71,7 +71,7 @@ export async function page(data: AccountAdminQueryDTO): Promise<Response<Array<A
     return http.request({
         url: "/api/admin/admin/account-admin-page",
         method: "POST",
-        data: data
+        data: data,
     })
 }
 
@@ -80,7 +80,7 @@ export async function list(data: AccountAdminQueryDTO): Promise<Response<Array<A
     return http.request({
         url: "/api/admin/admin/account-admin-list",
         method: "POST",
-        data: data
+        data: data,
     })
 }
 
@@ -89,7 +89,7 @@ export async function create(data: AccountAdminCreateDTO): Promise<Response<bool
     return http.request({
         url: "/api/admin/admin/account-admin-create",
         method: "POST",
-        data: data
+        data: data,
     })
 }
 
@@ -98,7 +98,7 @@ export async function update(data: AccountAdminUpdateDTO): Promise<Response<bool
     return http.request({
         url: "/api/admin/admin/account-admin-update",
         method: "PUT",
-        data: data
+        data: data,
     })
 }
 
@@ -107,6 +107,6 @@ export async function remove(ids: string | Array<string>): Promise<Response<bool
     return http.request({
         url: "/api/admin/admin/account-admin-remove",
         method: "DELETE",
-        data: {ids: typeof ids === "string" ? [ids] : ids}
+        data: {ids: typeof ids === "string" ? [ids] : ids},
     })
 }

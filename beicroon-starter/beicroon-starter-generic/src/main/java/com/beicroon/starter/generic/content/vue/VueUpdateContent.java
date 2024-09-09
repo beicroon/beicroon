@@ -47,13 +47,7 @@ public class VueUpdateContent {
 
               const {data} = await detail(props.id).finally(() => loading.get = false);
 
-              form.code = data.code;
-              form.name = data.name;
-              form.path = data.path;
-              form.sorting = data.sorting;
-              form.parentId = data.parentId;
-              form.parentCode = data.parentCode;
-              form.parentName = data.parentName;
+              {{formField}}
             });
             </script>
 
@@ -81,7 +75,8 @@ public class VueUpdateContent {
         return CONTENT
                 .replace("{{filename}}", table.getFilename())
                 .replace("{{vueFilename}}", table.getVueFilename())
-                .replace("{{formInput}}", table.getVueFormInputString());
+                .replace("{{formInput}}", table.getVueFormInputString())
+                .replace("{{formField}}", table.getVueFormFieldString());
     }
 
 }

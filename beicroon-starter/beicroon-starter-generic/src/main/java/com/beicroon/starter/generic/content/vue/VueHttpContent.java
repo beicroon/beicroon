@@ -58,7 +58,7 @@ public class VueHttpContent {
                 return http.request({
                     url: "/api/{{modulePrefix}}/admin/{{urlName}}-page",
                     method: "POST",
-                    data: data
+                    data: data,
                 })
             }
 
@@ -67,7 +67,7 @@ public class VueHttpContent {
                 return http.request({
                     url: "/api/{{modulePrefix}}/admin/{{urlName}}-list",
                     method: "POST",
-                    data: data
+                    data: data,
                 })
             }
 
@@ -76,7 +76,7 @@ public class VueHttpContent {
                 return http.request({
                     url: "/api/{{modulePrefix}}/admin/{{urlName}}-create",
                     method: "POST",
-                    data: data
+                    data: data,
                 })
             }
 
@@ -85,7 +85,7 @@ public class VueHttpContent {
                 return http.request({
                     url: "/api/{{modulePrefix}}/admin/{{urlName}}-update",
                     method: "PUT",
-                    data: data
+                    data: data,
                 })
             }
 
@@ -94,7 +94,7 @@ public class VueHttpContent {
                 return http.request({
                     url: "/api/{{modulePrefix}}/admin/{{urlName}}-remove",
                     method: "DELETE",
-                    data: {ids: typeof ids === "string" ? [ids] : ids}
+                    data: {ids: typeof ids === "string" ? [ids] : ids},
                 })
             }
             """;

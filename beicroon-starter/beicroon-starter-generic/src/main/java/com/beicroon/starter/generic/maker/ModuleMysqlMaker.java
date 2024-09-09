@@ -117,6 +117,7 @@ public class ModuleMysqlMaker {
             StringBuilder vueTableHeadContent = new StringBuilder();
             StringBuilder vueTableBodyContent = new StringBuilder();
             StringBuilder vueFormInputString = new StringBuilder();
+            StringBuilder vueFormFieldString = new StringBuilder();
             StringBuilder vueFormDisabledInputString = new StringBuilder();
 
             int searchCount = 1;
@@ -124,7 +125,7 @@ public class ModuleMysqlMaker {
             for (Field field : table.getColumns()) {
                 vueHttpContent.append(this.getVueHttpFieldString(field));
 
-                if (searchCount <= 6) {
+                if (searchCount <= 9) {
                     vueSearchContent.append(this.getVueSearchFieldString(field));
 
                     searchCount++;
@@ -134,6 +135,7 @@ public class ModuleMysqlMaker {
                 vueTableHeadContent.append(this.getVueTableHeadFieldString(field));
                 vueTableBodyContent.append(this.getVueTableBodyFieldString(field));
                 vueFormInputString.append(this.getVueFormInputFieldString(field));
+                vueFormFieldString.append(this.getVueFormFieldFieldString(field));
                 vueFormDisabledInputString.append(this.getVueFormDisabledInputFieldString(field));
             }
 
@@ -143,6 +145,7 @@ public class ModuleMysqlMaker {
             table.setVueTableHeadContent(vueTableHeadContent.toString().trim());
             table.setVueTableBodyContent(vueTableBodyContent.toString().trim());
             table.setVueFormInputString(vueFormInputString.toString().trim());
+            table.setVueFormFieldString(vueFormFieldString.toString().trim());
             table.setVueFormDisabledInputString(vueFormDisabledInputString.toString().trim());
 
             FileUtils.writeFileIfNotExists(FileManager.getVueHttpFile(modulePath, table), VueHttpContent.getContent(table));
@@ -248,6 +251,14 @@ public class ModuleMysqlMaker {
         return String.format(template, field.getComment(), field.getComment(), field.getSnakeCaseName());
     }
 
+    private String getVueFormFieldFieldString(Field field) {
+        String template = """
+                  form.%s = data.%s;
+                """;
+
+        return String.format(template, field.getSnakeCaseName(), field.getSnakeCaseName());
+    }
+
     private String getVueFormInputFieldString(Field field) {
         String template = """
                       <beicroon-input class="column" label="%s" placeholder="%s" v-model="form.%s"></beicroon-input>
@@ -292,10 +303,10 @@ public class ModuleMysqlMaker {
         String type = this.getJavaType(field.type());
 
         if (NUMBER_TYPES.containsKey(type)) {
-            return String.format("    %s?: number\n", field.getSnakeCaseName());
+            return String.format("    %s?: number,\n", field.getSnakeCaseName());
         }
 
-        return String.format("    %s?: string\n", field.getSnakeCaseName());
+        return String.format("    %s?: string,\n", field.getSnakeCaseName());
     }
 
     private String getModelFieldString(Field field, Set<String> imports) {

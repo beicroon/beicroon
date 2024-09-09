@@ -2,13 +2,13 @@ import http, {BaseVO, DisableDTO, DisableVO, QueryDTO, Response, UpdateDTO} from
 
 // 基础返回字段
 export type ResourceMenuBaseVO = BaseVO & DisableVO & {
-    parentId?: string
-    parentCode?: string
-    parentName?: string
-    code?: string
-    name?: string
-    path?: string
-    sorting?: number
+    parentId?: string,
+    parentCode?: string,
+    parentName?: string,
+    code?: string,
+    name?: string,
+    path?: string,
+    sorting?: number,
 }
 
 // 详情返回字段
@@ -23,35 +23,35 @@ export type ResourceMenuPageVO = ResourceMenuBaseVO & {
 
 // 新增参数字段
 export type ResourceMenuCreateDTO = DisableDTO & {
-    parentId?: string
-    parentCode?: string
-    parentName?: string
-    code?: string
-    name?: string
-    path?: string
-    sorting?: number
+    parentId?: string,
+    parentCode?: string,
+    parentName?: string,
+    code?: string,
+    name?: string,
+    path?: string,
+    sorting?: number,
 }
 
 // 修改参数字段
 export type ResourceMenuUpdateDTO = UpdateDTO & {
-    parentId?: string
-    parentCode?: string
-    parentName?: string
-    code?: string
-    name?: string
-    path?: string
-    sorting?: number
+    parentId?: string,
+    parentCode?: string,
+    parentName?: string,
+    code?: string,
+    name?: string,
+    path?: string,
+    sorting?: number,
 }
 
 // 查询参数字段
 export type ResourceMenuQueryDTO = QueryDTO & DisableDTO & {
-    parentId?: string
-    parentCode?: string
-    parentName?: string
-    code?: string
-    name?: string
-    path?: string
-    sorting?: number
+    parentId?: string,
+    parentCode?: string,
+    parentName?: string,
+    code?: string,
+    name?: string,
+    path?: string,
+    sorting?: number,
 }
 
 // 基础信息接口
@@ -75,7 +75,7 @@ export async function page(data: ResourceMenuQueryDTO): Promise<Response<Array<R
     return http.request({
         url: "/api/admin/admin/resource-menu-page",
         method: "POST",
-        data: data
+        data: data,
     })
 }
 
@@ -84,7 +84,7 @@ export async function list(data: ResourceMenuQueryDTO): Promise<Response<Array<R
     return http.request({
         url: "/api/admin/admin/resource-menu-list",
         method: "POST",
-        data: data
+        data: data,
     })
 }
 
@@ -93,7 +93,7 @@ export async function create(data: ResourceMenuCreateDTO): Promise<Response<bool
     return http.request({
         url: "/api/admin/admin/resource-menu-create",
         method: "POST",
-        data: data
+        data: data,
     })
 }
 
@@ -102,7 +102,7 @@ export async function update(data: ResourceMenuUpdateDTO): Promise<Response<bool
     return http.request({
         url: "/api/admin/admin/resource-menu-update",
         method: "PUT",
-        data: data
+        data: data,
     })
 }
 
@@ -111,6 +111,6 @@ export async function remove(ids: string | Array<string>): Promise<Response<bool
     return http.request({
         url: "/api/admin/admin/resource-menu-remove",
         method: "DELETE",
-        data: {ids: typeof ids === "string" ? [ids] : ids}
+        data: {ids: typeof ids === "string" ? [ids] : ids},
     })
 }

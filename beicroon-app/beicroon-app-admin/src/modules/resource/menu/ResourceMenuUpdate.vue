@@ -40,13 +40,13 @@ onMounted(async () => {
 
   const {data} = await detail(props.id).finally(() => loading.get = false);
 
+  form.parentId = data.parentId;
+  form.parentCode = data.parentCode;
+  form.parentName = data.parentName;
   form.code = data.code;
   form.name = data.name;
   form.path = data.path;
   form.sorting = data.sorting;
-  form.parentId = data.parentId;
-  form.parentCode = data.parentCode;
-  form.parentName = data.parentName;
 });
 </script>
 

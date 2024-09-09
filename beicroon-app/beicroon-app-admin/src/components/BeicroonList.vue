@@ -106,7 +106,7 @@ const moreSearchSize = computed(() => {
       flex-wrap: wrap;
       flex-direction: row;
       align-items: center;
-      justify-content: flex-start;
+      justify-content: space-between;
     }
 
     .head-search-full {

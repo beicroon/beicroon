@@ -41,12 +41,11 @@ onMounted(async () => {
   const {data} = await detail(props.id).finally(() => loading.get = false);
 
   form.code = data.code;
-  form.name = data.name;
-  form.path = data.path;
-  form.sorting = data.sorting;
-  form.parentId = data.parentId;
-  form.parentCode = data.parentCode;
-  form.parentName = data.parentName;
+  form.username = data.username;
+  form.password = data.password;
+  form.nickname = data.nickname;
+  form.phone = data.phone;
+  form.email = data.email;
 });
 </script>
 
