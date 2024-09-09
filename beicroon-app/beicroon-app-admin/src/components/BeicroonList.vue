@@ -62,7 +62,7 @@ const moreSearchSize = computed(() => {
     </div>
     <beicroon-line-vertical></beicroon-line-vertical>
     <div class="list-foot">
-      <div class="search" @click.stop v-show="hasMoreSearch">
+      <div class="more-search" @click.stop v-show="hasMoreSearch">
         <beicroon-button class="search-button primary" label="更多筛选" @click="toggleMoreSearch"></beicroon-button>
         <h6 class="search-size">+{{ moreSearchSize }}</h6>
         <form class="search-input" :class="{show: moreSearch}" ref="moreSearchForm">
@@ -166,7 +166,7 @@ const moreSearchSize = computed(() => {
       justify-content: space-between;
     }
 
-    .search {
+    .more-search {
       gap: 8rem;
       z-index: 3;
       width: 120rem;
@@ -217,7 +217,7 @@ const moreSearchSize = computed(() => {
         &.show {
           opacity: 1;
           width: 1080rem;
-          height: 530rem;
+          height: 550rem;
           overflow-y: auto;
         }
       }
