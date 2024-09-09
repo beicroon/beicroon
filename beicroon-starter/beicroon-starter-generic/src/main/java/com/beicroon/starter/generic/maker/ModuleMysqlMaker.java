@@ -303,10 +303,10 @@ public class ModuleMysqlMaker {
         String type = this.getJavaType(field.type());
 
         if (NUMBER_TYPES.containsKey(type)) {
-            return String.format("    %s?: number,\n", field.getSnakeCaseName());
+            return String.format("    %s?: number,  // %s\n", field.getSnakeCaseName(), field.getComment());
         }
 
-        return String.format("    %s?: string,\n", field.getSnakeCaseName());
+        return String.format("    %s?: string,  // %s\n", field.getSnakeCaseName(), field.getComment());
     }
 
     private String getModelFieldString(Field field, Set<String> imports) {

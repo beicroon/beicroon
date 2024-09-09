@@ -22,7 +22,6 @@ onMounted(list.resetSearch);
     <template #head-search>
       <beicroon-input label="编码" v-model="list.params.code"></beicroon-input>
       <beicroon-input label="账号" v-model="list.params.username"></beicroon-input>
-      <beicroon-input label="密码" v-model="list.params.password"></beicroon-input>
       <beicroon-input label="昵称" v-model="list.params.nickname"></beicroon-input>
       <beicroon-input label="电话" v-model="list.params.phone"></beicroon-input>
       <beicroon-input label="邮箱" v-model="list.params.email"></beicroon-input>
@@ -35,7 +34,6 @@ onMounted(list.resetSearch);
     <template #table-title>
       <beicroon-list-cell width="180">编码</beicroon-list-cell>
       <beicroon-list-cell width="180">账号</beicroon-list-cell>
-      <beicroon-list-cell width="180">密码</beicroon-list-cell>
       <beicroon-list-cell width="180">昵称</beicroon-list-cell>
       <beicroon-list-cell width="180">电话</beicroon-list-cell>
       <beicroon-list-cell width="180">邮箱</beicroon-list-cell>
@@ -45,7 +43,6 @@ onMounted(list.resetSearch);
       <beicroon-list-row v-for="item in list.data">
         <beicroon-list-cell>{{ item.code }}</beicroon-list-cell>
         <beicroon-list-cell>{{ item.username }}</beicroon-list-cell>
-        <beicroon-list-cell>{{ item.password }}</beicroon-list-cell>
         <beicroon-list-cell>{{ item.nickname }}</beicroon-list-cell>
         <beicroon-list-cell>{{ item.phone }}</beicroon-list-cell>
         <beicroon-list-cell>{{ item.email }}</beicroon-list-cell>
@@ -59,7 +56,6 @@ onMounted(list.resetSearch);
     <template #more-search>
       <beicroon-input class="column" label="编码" v-model="list.params.code"></beicroon-input>
       <beicroon-input class="column" label="账号" v-model="list.params.username"></beicroon-input>
-      <beicroon-input class="column" label="密码" v-model="list.params.password"></beicroon-input>
       <beicroon-input class="column" label="昵称" v-model="list.params.nickname"></beicroon-input>
       <beicroon-input class="column" label="电话" v-model="list.params.phone"></beicroon-input>
       <beicroon-input class="column" label="邮箱" v-model="list.params.email"></beicroon-input>
