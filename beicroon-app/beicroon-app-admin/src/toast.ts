@@ -27,11 +27,49 @@ async function handleRemove(node: HTMLElement) {
         return;
     }
 
+    await hide(node);
+
     container.removeChild(node);
 
     if (container.childNodes.length <= 0) {
         container.classList.add("hidden");
     }
+}
+
+function show(node: HTMLElement) {
+    node.animate([
+        {
+            opacity: 0,
+            transform: "scale(0)",
+        },
+        {
+            opacity: 1,
+            transform: "scale(1)",
+        },
+    ], {
+        duration: 130,
+        easing: "linear",
+    });
+}
+
+function hide(node: HTMLElement) {
+    return new Promise((resolve) => {
+        node.animate([
+            {
+                opacity: 1,
+                transform: "scale(1)",
+            },
+            {
+                opacity: 0,
+                transform: "scale(0)",
+            },
+        ], {
+            duration: 130,
+            easing: "linear",
+        });
+
+        setTimeout(resolve, 130);
+    });
 }
 
 export default async function toast(message: string, type: Types = "success", duration: number = 3000) {
@@ -45,6 +83,8 @@ export default async function toast(message: string, type: Types = "success", du
     render(vNode, node);
 
     container.appendChild(node);
+
+    show(node);
 
     container.classList.remove("hidden");
 
