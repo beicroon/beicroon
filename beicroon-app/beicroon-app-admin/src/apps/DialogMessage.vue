@@ -22,7 +22,7 @@ async function handleConfirm() {
 </script>
 
 <template>
-<div class="beicroon-dialog-message">
+<div class="beicroon-dialog-message" @click.stop>
   <div class="beicroon-dialog-head">{{title}}</div>
   <beicroon-line-vertical></beicroon-line-vertical>
   <div class="beicroon-dialog-body">{{message}}</div>

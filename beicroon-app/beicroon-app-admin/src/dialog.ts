@@ -63,11 +63,55 @@ async function removeNode(node: HTMLElement) {
         return;
     }
 
+    await hide(node);
+
     container.removeChild(node);
 
     if (container.childNodes.length <= 0) {
         container.classList.add("hidden");
     }
+}
+
+function show(node: HTMLElement) {
+    node.animate([
+        {
+            opacity: 0,
+            transform: "translateX(100%)"
+        },
+        {
+            opacity: 1,
+            transform: "translateX(0)"
+        },
+    ], {
+        duration: 130,
+        easing: "linear",
+    });
+}
+
+function hide(node: HTMLElement) {
+    return new Promise<void>((resolve) => {
+        node.animate([
+            {
+                opacity: 1,
+                transform: "translateX(0)"
+            },
+            {
+                opacity: 0,
+                transform: "translateX(100%)"
+            },
+        ], {
+            duration: 130,
+            easing: "linear",
+        });
+
+        setTimeout(resolve, 130);
+    });
+}
+
+function stopClick(node: HTMLElement) {
+    node.addEventListener("click", (e: MouseEvent) => {
+        e.stopPropagation();
+    });
 }
 
 export default async function dialog(config: DialogConfig) {
@@ -99,6 +143,8 @@ export default async function dialog(config: DialogConfig) {
         const vNode = createMessageNode(dialog);
 
         render(vNode, node);
+
+        stopClick(node);
     } else {
         const vNode = createWindowNode(dialog);
 
@@ -106,6 +152,8 @@ export default async function dialog(config: DialogConfig) {
     }
 
     container.appendChild(node);
+
+    show(node);
 
     await escToggle(dialog.handleCancel);
 
