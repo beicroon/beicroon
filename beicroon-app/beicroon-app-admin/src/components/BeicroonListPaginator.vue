@@ -8,10 +8,10 @@ type Props = {
 
 defineProps<Props>();
 
-const chooserShow = ref(false);
+const hidden = ref(true);
 
 function toggleChoosers() {
-  chooserShow.value = !chooserShow.value;
+  hidden.value = !hidden.value;
 }
 </script>
 
@@ -22,7 +22,7 @@ function toggleChoosers() {
         <span>{{ list.pageInfo.size }}</span>
         <span>条/页</span>
       </h6>
-      <ul class="chooser" :class="{show: chooserShow}">
+      <ul class="chooser" :class="{hidden: hidden}">
         <template v-for="size in list.choosers">
           <li @click="list.choose(size)">
             <span>{{ size }}</span>
@@ -73,22 +73,18 @@ function toggleChoosers() {
   }
 
   .chooser {
+    gap: 4rem;
     z-index: 1;
     left: -2rem;
-    display: none;
+    display: flex;
     padding: 4rem 0;
     position: absolute;
     border-radius: 6rem;
+    flex-direction: column;
     width: calc(100% + 4rem);
     bottom: calc(100% + 4rem);
     background-color: var(--color-white);
     border: 1rem solid var(--color-grey-light);
-
-    &.show {
-      gap: 4rem;
-      display: flex;
-      flex-direction: column;
-    }
 
     li {
       gap: 6rem;

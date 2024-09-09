@@ -68,7 +68,9 @@ html, body, #beicroon-app {
 }
 
 &.hidden {
+  opacity: 0 !important;
   display: none !important;
+  visibility: hidden !important;
 }
 
 #beicroon-toast {
