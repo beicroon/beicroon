@@ -1,11 +1,11 @@
 // esc按键事件管理
 const escStacks: Array<(() => Promise<void>)> = [];
 
-export async function escToggle(callback?: () => Promise<void>) {
-    if (callback) {
+export async function escToggle(callback?: (() => Promise<void>) | boolean) {
+    if (callback && typeof callback === "function") {
         await escToggle.put(callback);
     } else {
-        await escToggle.pop();
+        await escToggle.pop(callback);
     }
 }
 
@@ -13,11 +13,11 @@ escToggle.put = async (callback: () => Promise<void>) => {
     escStacks.push(callback);
 }
 
-escToggle.pop = async () => {
+escToggle.pop = async (flag: boolean = true) => {
     if (escStacks.length > 0) {
         const callback = escStacks.pop();
 
-        if (callback) {
+        if (flag && callback) {
             await callback();
         }
     }

@@ -3,6 +3,7 @@ package com.beicroon.starter.web.admin.entity.resource.menu.dto;
 import com.beicroon.construct.annotation.ApiModel;
 import com.beicroon.construct.annotation.ApiModelProperty;
 import com.beicroon.construct.annotation.FieldSearch;
+import com.beicroon.construct.annotation.KeywordsSearch;
 import com.beicroon.construct.entity.QueryDTO;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -10,6 +11,7 @@ import lombok.EqualsAndHashCode;
 @Data
 @ApiModel(name = "查询资源菜单入参")
 @EqualsAndHashCode(callSuper = true)
+@KeywordsSearch(name = {"`code`", "`name`"})
 public class ResourceMenuQueryDTO extends QueryDTO {
     
     @FieldSearch(name = "`parent_id`")

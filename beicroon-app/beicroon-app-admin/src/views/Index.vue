@@ -1,35 +1,19 @@
 <script setup lang="ts">
 import router from "@/router.ts";
 import {onBeforeMount, ref} from "vue";
-import http, {Response} from "@/http.ts";
+import {AuthMenu, listAuthMenu} from "@/auth.http.ts";
 import BeicroonLineCross from "@/components/BeicroonLineCross.vue";
 import BeicroonLineVertical from "@/components/BeicroonLineVertical.vue";
 
-type Menu = {
-  code: string;
-  name: string;
-  path: string;
-  active: boolean;
-  children: Array<Menu>;
-};
+const menus = ref<Array<AuthMenu>>([]);
 
-// 全量列表接口
-async function getMenuTree(): Promise<Response<Array<Menu>>> {
-  return http.request({
-    url: "/api/admin/admin/auth-menu-tree",
-    method: "GET",
-  })
-}
+const prevMenu = ref<AuthMenu | null>(null);
 
-const menus = ref<Array<Menu>>([]);
+const currentMenu = ref<AuthMenu | null>(null);
 
-const prevMenu = ref<Menu | null>(null);
+const links = ref<Array<AuthMenu>>([]);
 
-const currentMenu = ref<Menu | null>(null);
-
-const links = ref<Array<Menu>>([]);
-
-function toLinkPath(link: Menu) {
+function toLinkPath(link: AuthMenu) {
   if (prevMenu.value !== null) {
     prevMenu.value.children.forEach((child) => {
       child.children.forEach((item) => {
@@ -43,7 +27,7 @@ function toLinkPath(link: Menu) {
   router.push(link.path);
 }
 
-function setLinks(menu: Menu) {
+function setLinks(menu: AuthMenu) {
   menus.value.forEach((item) => item.active = false);
 
   prevMenu.value = currentMenu.value;
@@ -56,7 +40,7 @@ function setLinks(menu: Menu) {
 }
 
 onBeforeMount(async () => {
-  const res = await getMenuTree();
+  const res = await listAuthMenu();
 
   menus.value = res.data;
 
