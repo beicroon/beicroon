@@ -38,6 +38,29 @@
   --color-primary-deeper: #79bbff;
 }
 
+::-webkit-scrollbar {
+  width: 8rem;
+  height: 8rem;
+}
+
+::-webkit-scrollbar-track {
+  border-radius: 6rem;
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 6rem;
+  background-color: var(--color-grey-deeper);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--color-grey-deep);
+}
+
+::-webkit-scrollbar-thumb:active {
+  background-color: var(--color-grey);
+}
+
 * {
   margin: 0;
   box-sizing: border-box;

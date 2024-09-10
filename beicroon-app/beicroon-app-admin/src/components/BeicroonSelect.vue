@@ -137,6 +137,10 @@ async function handleScrollEnd() {
 }
 
 function isLoading() {
+  if (!props.request) {
+    return true;
+  }
+
   if (hidden.value) {
     return true;
   }
@@ -153,12 +157,12 @@ function isLoading() {
     <div class="loading" :class="{hidden: isLoading()}">
       <beicroon-loading fill="#b3e5fc" width="60" height="60"></beicroon-loading>
     </div>
-    <ul class="select" :class="{hidden: hidden}" @scrollend="handleScrollEnd" ref="select">
-      <li class="option" v-for="option in options" @mousedown="handleMousedown" @click="handleClick(option)">
+    <ul class="select" :class="{hidden: hidden}" @mousedown="handleMousedown" @scrollend="handleScrollEnd" ref="select">
+      <li class="option" v-for="option in options" @click="handleClick(option)">
         {{ option[fieldLabel] }}
       </li>
       <template v-for="options in items">
-        <li class="option" v-for="option in options" @mousedown="handleMousedown" @click="handleClick(option)">
+        <li class="option" v-for="option in options" @click="handleClick(option)">
           {{ option[fieldLabel] }}
         </li>
       </template>
@@ -179,8 +183,8 @@ function isLoading() {
     }
   }
 
-  .loading {
-    right: 0;
+  .loading, .select {
+    right: 6rem;
     z-index: 777;
     display: flex;
     width: 240rem;
@@ -188,27 +192,18 @@ function isLoading() {
     position: absolute;
     border-radius: 6rem;
     align-items: center;
-    top: calc(100% + 2rem);
+    top: calc(100% - 4rem);
     justify-content: center;
     background-color: var(--color-white);
     border: 1rem solid var(--color-grey-light);
   }
 
   .select {
-    right: 0;
     gap: 2rem;
     z-index: 666;
-    width: 240rem;
-    display: flex;
-    height: 160rem;
     padding: 8rem 0;
     overflow-y: auto;
-    position: absolute;
-    border-radius: 6rem;
-    top: calc(100% + 2rem);
     flex-direction: column;
-    background-color: var(--color-white);
-    border: 1rem solid var(--color-grey-light);
 
     .option {
       width: 100%;
