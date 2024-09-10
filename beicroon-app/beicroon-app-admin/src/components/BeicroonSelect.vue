@@ -16,7 +16,7 @@ type Props = {
   showValue?: string
   modelValue?: string
   request?: (data: T) => Promise<Response<Array<R>>>,
-  options?: Array<Record<string, any>>,
+  options?: Array<R>,
   fieldKey?: keyof R,
   fieldLabel?: keyof R,
   pageSize?: number,
@@ -33,6 +33,8 @@ const emits = defineEmits(["update:modelValue"]);
 const pageNum = ref(1);
 
 const items = ref<Array<Array<R>>>([]);
+
+const noMore = ref(true);
 
 const params = reactive<T>({
   pageSize: props.pageSize,
@@ -71,7 +73,7 @@ async function handleRequest() {
 
   const res = await props.request(params).finally(() => loading.value = false);
 
-  items.value[pageNum.value] = res.data;
+  items.value[pageNum.value - 1] = res.data;
 
   noMore.value = res.data.length < res.page.size;
 }
@@ -120,8 +122,6 @@ async function handleClick(item: R) {
 
 const select = ref();
 
-const noMore = ref(true);
-
 async function handleScrollEnd() {
   if (loading.value) {
     return;
@@ -154,6 +154,9 @@ function isLoading() {
       <beicroon-loading fill="#b3e5fc" width="60" height="60"></beicroon-loading>
     </div>
     <ul class="select" :class="{hidden: hidden}" @scrollend="handleScrollEnd" ref="select">
+      <li class="option" v-for="option in options" @mousedown="handleMousedown" @click="handleClick(option)">
+        {{ option[fieldLabel] }}
+      </li>
       <template v-for="options in items">
         <li class="option" v-for="option in options" @mousedown="handleMousedown" @click="handleClick(option)">
           {{ option[fieldLabel] }}
