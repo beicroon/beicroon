@@ -32,11 +32,22 @@ const value = computed({
 <style lang="less">
 .beicroon-input {
   gap: 6rem;
+  padding: 6rem;
+  border-radius: 6rem;
   align-items: center;
   flex-direction: row;
   display: inline-flex;
   transition: all 300ms linear;
   justify-content: space-between;
+
+  &:focus-within {
+    background-color: var(--color-primary-lighter);
+
+    .input-label {
+      color: var(--color-white);
+      background-color: var(--color-primary-deeper);
+    }
+  }
 
   &.column {
     gap: 12rem;
@@ -44,15 +55,6 @@ const value = computed({
     border-radius: 6rem;
     flex-direction: column;
     align-items: flex-start;
-
-    &:focus-within {
-      background-color: var(--color-primary-lighter);
-
-      .input-label {
-        color: var(--color-white);
-        background-color: var(--color-primary-deeper);
-      }
-    }
 
     .input-area {
       width: 300rem;

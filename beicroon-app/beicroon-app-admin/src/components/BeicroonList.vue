@@ -78,6 +78,7 @@ const moreSearchSize = computed(() => {
 :root {
   --beicroon-height-list-head: 160rem;
   --beicroon-height-list-foot: 60rem;
+  --beicroon-width-search-button: 130rem;
 }
 
 .beicroon-list {
@@ -99,14 +100,14 @@ const moreSearchSize = computed(() => {
     height: var(--beicroon-height-list-head);
 
     .head-search {
-      flex: 1;
-      gap: 16rem;
+      height: 100%;
       display: flex;
-      padding: 18rem;
+      padding: 8rem;
       flex-wrap: wrap;
       flex-direction: row;
       align-items: center;
       justify-content: flex-start;
+      width: calc(100% - var(--beicroon-width-search-button));
     }
 
     .head-search-full {
@@ -126,14 +127,13 @@ const moreSearchSize = computed(() => {
 
     .head-button {
       gap: 13rem;
-      width: 130rem;
       display: flex;
-      padding: 18rem;
       min-height: 100%;
       height: fit-content;
       align-items: center;
       flex-direction: column;
       justify-content: center;
+      width: var(--beicroon-width-search-button);
     }
   }
 

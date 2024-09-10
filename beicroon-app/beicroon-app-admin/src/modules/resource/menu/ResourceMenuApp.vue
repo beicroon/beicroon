@@ -25,6 +25,11 @@ onMounted(list.resetSearch);
       <beicroon-input label="编码" v-model="list.params.code"></beicroon-input>
       <beicroon-input label="名称" v-model="list.params.name"></beicroon-input>
       <beicroon-input label="路径" v-model="list.params.path"></beicroon-input>
+      <beicroon-input label="路径" v-model="list.params.path"></beicroon-input>
+      <beicroon-input label="路径" v-model="list.params.path"></beicroon-input>
+      <beicroon-input label="路径" v-model="list.params.path"></beicroon-input>
+      <beicroon-input label="路径" v-model="list.params.path"></beicroon-input>
+      <beicroon-input label="路径" v-model="list.params.path"></beicroon-input>
     </template>
     <template #head-button>
       <beicroon-button class="block primary" label="重置" @click="list.handleReset"></beicroon-button>
