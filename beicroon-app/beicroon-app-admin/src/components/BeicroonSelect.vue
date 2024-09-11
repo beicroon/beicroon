@@ -1,14 +1,11 @@
 <script setup lang="ts">
-import {computed, ref} from "vue";
+import {Select} from "@/select.ts";
 import BeicroonLoading from "@/components/BeicroonLoading.vue";
+import {computed} from "vue";
 
 type Props = {
-  label: string,
-  placeholder?: string,
-  required?: boolean,
-  disabled?: boolean,
+  select: Select<any, any>,
   modelValue?: string,
-  loading?: boolean,
 };
 
 const props = defineProps<Props>();
@@ -16,32 +13,24 @@ const props = defineProps<Props>();
 const emits = defineEmits(["update:modelValue"]);
 
 const value = computed({
-  get: () => props.modelValue,
-  set: async (val: string | undefined) => {
+  get: () => props.select.showValue,
+  set: (val?: string) => {
     emits("update:modelValue", val);
   },
-})
-
-const hidden = ref(true);
+});
 </script>
 
 <template>
-  <div class="beicroon-input beicroon-select" :class="{required: required}" @click.stop>
-    <span class="input-label">{{ label }}</span>
-    <input class="input-area" :disabled="disabled" type="text" :placeholder="placeholder" v-model="value"/>
-    <div class="loading" :class="{hidden: !loading}">
+  <div class="beicroon-input beicroon-select" :class="{required: select.required}" v-on="select.getEvents()">
+    <span class="beicroon-input-label">{{ select.label }}</span>
+    <input class="beicroon-input-area" :disabled="select.disabled" type="text" :placeholder="select.placeholder" v-model="value"/>
+    <div class="loading" :class="{hidden: !select.loading}">
       <beicroon-loading fill="#b3e5fc" width="60" height="60"></beicroon-loading>
     </div>
-    <ul class="select" :class="{hidden: hidden}">
-      <li class="option">选项1</li>
-      <li class="option">选项2</li>
-      <li class="option">选项3</li>
-      <li class="option">选项4</li>
-      <li class="option">选项5</li>
-      <li class="option">选项6</li>
-      <li class="option">选项7</li>
-      <li class="option">选项8</li>
-      <li class="option">选项9</li>
+    <ul class="select" :class="{hidden: select.hidden}">
+      <li class="option" v-for="option in select.options" @click="select.choose(option)">
+        {{ option[select.optionLabel] }}
+      </li>
     </ul>
   </div>
 </template>

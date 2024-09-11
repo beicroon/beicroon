@@ -6,12 +6,12 @@ import Detail from "./ResourceMenuDetail.vue";
 import Update from "./ResourceMenuUpdate.vue";
 import BeicroonList from "@/components/BeicroonList.vue";
 import BeicroonInput from "@/components/BeicroonInput.vue";
-import BeicroonSelect from "@/components/BeicroonSelect.vue";
 import BeicroonButton from "@/components/BeicroonButton.vue";
 import BeicroonListRow from "@/components/BeicroonListRow.vue";
 import BeicroonListCell from "@/components/BeicroonListCell.vue";
 import BeicroonListCellButton from "@/components/BeicroonListCellButton.vue";
 import {page, remove, ResourceMenuPageVO as VO, ResourceMenuQueryDTO as DTO} from "./resource-menu.http.ts";
+import ResourceMenuSelect from "@/modules/resource/menu/ResourceMenuSelect.vue";
 
 const list = createBeicroonList<DTO, VO>("资源菜单", page);
 
@@ -21,14 +21,9 @@ onMounted(list.resetSearch);
 <template>
   <beicroon-list :list="list">
     <template #head-search>
-      <beicroon-select label="父级菜单" v-model="list.params.parentId" :request="page"></beicroon-select>
+      <resource-menu-select label="父级" v-model="list.params.parentId"></resource-menu-select>
       <beicroon-input label="编码" v-model="list.params.code"></beicroon-input>
       <beicroon-input label="名称" v-model="list.params.name"></beicroon-input>
-      <beicroon-input label="路径" v-model="list.params.path"></beicroon-input>
-      <beicroon-input label="路径" v-model="list.params.path"></beicroon-input>
-      <beicroon-input label="路径" v-model="list.params.path"></beicroon-input>
-      <beicroon-input label="路径" v-model="list.params.path"></beicroon-input>
-      <beicroon-input label="路径" v-model="list.params.path"></beicroon-input>
       <beicroon-input label="路径" v-model="list.params.path"></beicroon-input>
     </template>
     <template #head-button>
@@ -63,7 +58,6 @@ onMounted(list.resetSearch);
       </beicroon-list-row>
     </template>
     <template #more-search>
-      <beicroon-select class="column" label="父级菜单" v-model="list.params.parentId"></beicroon-select>
       <beicroon-input class="column" label="编码" v-model="list.params.code"></beicroon-input>
       <beicroon-input class="column" label="名称" v-model="list.params.name"></beicroon-input>
       <beicroon-input class="column" label="路径" v-model="list.params.path"></beicroon-input>
