@@ -9,7 +9,7 @@ defineProps<Props>();
 </script>
 
 <template>
-  <div class="beicroon-dialog-overlay" @click.stop>
+  <div class="beicroon-dialog-overlay" @click.stop @mousedown.stop @mouseup.stop>
     <div class="beicroon-dialog-head">{{ title }}</div>
     <beicroon-line-vertical></beicroon-line-vertical>
     <div class="beicroon-dialog-body">

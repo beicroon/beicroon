@@ -15,15 +15,19 @@ const props = withDefaults(defineProps<Props>(), {
 
 const emits = defineEmits(["click"]);
 
+const clicking = ref(false);
+
 function handleClick(e: MouseEvent) {
   if (props.loading) {
     return;
   }
 
+  e.preventDefault();
+  e.stopPropagation();
+  e.stopImmediatePropagation();
+
   emits("click", e);
 }
-
-const clicking = ref(false);
 
 function handleMouseDown() {
   clicking.value = true;
@@ -32,10 +36,23 @@ function handleMouseDown() {
 function handleMouseUp() {
   clicking.value = false;
 }
+
+function handleMouseLeave() {
+  clicking.value = false;
+}
+
+function getEvents() {
+  return {
+    click: handleClick,
+    mouseup: handleMouseUp,
+    mousedown: handleMouseDown,
+    mouseleave: handleMouseLeave,
+  };
+}
 </script>
 
 <template>
-<div class="beicroon-button" :class="{disabled: disabled, clicking: clicking}" @click.stop.prevent="handleClick" @mousedown="handleMouseDown" @mouseup="handleMouseUp">
+<div class="beicroon-button" :class="{disabled: disabled, clicking: clicking}" v-on="getEvents()">
   <beicroon-loading v-show="loading" fill="#ffffff" width="20" height="20"></beicroon-loading>
   <button v-show="!loading" :disabled="disabled" :type="type">{{label}}</button>
 </div>
