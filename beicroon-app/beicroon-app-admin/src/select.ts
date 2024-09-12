@@ -12,6 +12,7 @@ export type Config<DTO extends QueryDTO, VO extends BaseVO> = {
     optionValue: string,
     optionLabel: string,
     pageSize?: number,
+    multiple?: boolean,
 };
 
 export type Select<DTO extends QueryDTO, VO extends BaseVO> = {
@@ -22,6 +23,7 @@ export type Select<DTO extends QueryDTO, VO extends BaseVO> = {
     placeholder?: string,
     required?: boolean,
     disabled?: boolean,
+    getEvents: () => Record<string, Function>,
     noMore: boolean,
     loading: boolean,
     request?: Page<DTO, VO> | null,
@@ -32,7 +34,6 @@ export type Select<DTO extends QueryDTO, VO extends BaseVO> = {
     loadMoreOptions: () => Promise<void>,
     optionValue: string,
     optionLabel: string,
-    getEvents: () => Record<string, Function>,
     hide: () => void,
     getLabel: (option: VO) => any,
     getValue: (option: VO) => any,
@@ -47,6 +48,25 @@ export default function createBeicroonSelect<DTO extends QueryDTO, VO extends Ba
         placeholder: config.placeholder,
         required: config.required,
         disabled: config.disabled,
+        getEvents: () => {
+            return {
+                click: (e: MouseEvent) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    e.stopImmediatePropagation();
+                },
+                focusin: async () => {
+                    select.hidden = false;
+
+                    if (select.requested) {
+                        return;
+                    }
+
+                    await select.handleRequest();
+                },
+                focusout: () => select.hidden = true,
+            };
+        },
         noMore: true,
         loading: false,
         request: config.options instanceof Function ? config.options : undefined,
@@ -83,25 +103,6 @@ export default function createBeicroonSelect<DTO extends QueryDTO, VO extends Ba
         },
         optionValue: config.optionValue,
         optionLabel: config.optionLabel,
-        getEvents: () => {
-            return {
-                click: (e: MouseEvent) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    e.stopImmediatePropagation();
-                },
-                focusin: async () => {
-                    select.hidden = false;
-
-                    if (select.requested) {
-                        return;
-                    }
-
-                    await select.handleRequest();
-                },
-                focusout: () => select.hidden = true,
-            };
-        },
         hide: () => select.hidden = true,
         getLabel: (option: VO) => {
             if (select.optionLabel) {
