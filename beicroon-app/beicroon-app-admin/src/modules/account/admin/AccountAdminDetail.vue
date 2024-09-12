@@ -32,6 +32,7 @@ onMounted(async () => {
     <div class="beicroon-dialog-input" v-if="form">
       <beicroon-input disabled class="column" label="编码" placeholder="编码" v-model="form.code"></beicroon-input>
       <beicroon-input disabled class="column" label="账号" placeholder="账号" v-model="form.username"></beicroon-input>
+      <beicroon-input disabled class="column" label="密码" placeholder="密码" v-model="form.password"></beicroon-input>
       <beicroon-input disabled class="column" label="昵称" placeholder="昵称" v-model="form.nickname"></beicroon-input>
       <beicroon-input disabled class="column" label="电话" placeholder="电话" v-model="form.phone"></beicroon-input>
       <beicroon-input disabled class="column" label="邮箱" placeholder="邮箱" v-model="form.email"></beicroon-input>

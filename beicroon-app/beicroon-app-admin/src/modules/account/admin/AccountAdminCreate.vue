@@ -42,5 +42,5 @@ async function handleConfirm() {
   </form>
 </template>
 
-<style lang="less">
+<style scoped lang="less">
 </style>

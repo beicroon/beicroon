@@ -5,6 +5,14 @@ import {AuthMenu, listAuthMenu} from "@/auth.http.ts";
 import BeicroonLineCross from "@/components/BeicroonLineCross.vue";
 import BeicroonLineVertical from "@/components/BeicroonLineVertical.vue";
 
+const index: AuthMenu = {
+  code: "INDEX",
+  name: "首页",
+  path: "/index",
+  active: false,
+  children: [],
+};
+
 const menus = ref<Array<AuthMenu>>([]);
 
 const prevMenu = ref<AuthMenu | null>(null);
@@ -37,12 +45,16 @@ function setLinks(menu: AuthMenu) {
   menu.active = true;
 
   links.value = menu.children;
+
+  if ((!menu.children || menu.children.length == 0) && menu.path) {
+    router.push(menu.path);
+  }
 }
 
 onBeforeMount(async () => {
   const res = await listAuthMenu();
 
-  menus.value = res.data;
+  menus.value = [index].concat(res.data);
 
   MENU_FOREACH: for (let i = 0; i < menus.value.length; i++) {
     const menu = menus.value[i];
@@ -71,7 +83,6 @@ onBeforeMount(async () => {
     <section class="beicroon-head">
       <div class="logo"></div>
       <ul class="menu">
-        <li>首页</li>
         <li v-for="menu in menus" :class="{active: menu.active}" @click="setLinks(menu)">{{ menu.name }}</li>
       </ul>
     </section>

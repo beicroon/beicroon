@@ -45,6 +45,6 @@ const modelValue = computed({
 <beicroon-select :select="select" v-model:show-value="showValue" v-model:model-value="modelValue"></beicroon-select>
 </template>
 
-<style lang="less">
+<style scoped lang="less">
 
 </style>
