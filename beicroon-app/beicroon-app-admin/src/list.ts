@@ -1,6 +1,6 @@
 import toast from "@/toast.ts";
 import dialog from "@/dialog.ts";
-import {nextTick, Reactive, reactive, toRaw} from "vue";
+import {nextTick, reactive} from "vue";
 import {BaseVO, PageInfo, QueryDTO, Response} from "@/http.ts";
 
 type Page<DTO extends QueryDTO, VO extends BaseVO> = (params: DTO, pageInfo: PageInfo) => Promise<Response<Array<VO>>>;
@@ -31,8 +31,8 @@ export type List<DTO extends QueryDTO, VO extends BaseVO> = {
     handleSearchCallbacks: () => Promise<void>,
 };
 
-export default function createBeicroonList<DTO extends QueryDTO, VO extends BaseVO>(name: string, page: Page<DTO, VO>): Reactive<List<DTO, VO>> {
-    const list: Reactive<List<DTO, VO>> = reactive<List<DTO, VO>>({
+export default function createBeicroonList<DTO extends QueryDTO, VO extends BaseVO>(name: string, page: Page<DTO, VO>): List<DTO, VO> {
+    const list: List<DTO, VO> = reactive<List<DTO, VO>>({
         name: name,
         loading: false,
         params: {} as DTO,
@@ -105,7 +105,7 @@ export default function createBeicroonList<DTO extends QueryDTO, VO extends Base
 
             list.data = [];
 
-            const res = await page(toRaw(list.params) as DTO, list.pageInfo).finally(() => {
+            const res = await page.call(list, list.params, list.pageInfo).finally(() => {
                 list.loading = false;
             });
 
@@ -171,7 +171,7 @@ export default function createBeicroonList<DTO extends QueryDTO, VO extends Base
         handleSearchCallbacks: async () => {
             list.afterSearchCallbacks.forEach(callback => callback());
         },
-    });
+    }) as List<DTO, VO>;
 
     return list;
 };
