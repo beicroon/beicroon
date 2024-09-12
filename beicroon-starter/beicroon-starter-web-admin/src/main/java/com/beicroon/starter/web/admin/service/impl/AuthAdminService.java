@@ -63,6 +63,7 @@ public class AuthAdminService implements IAuthAdminService {
         LambdaQueryWrapper<ResourceMenuModel> query = this.resourceMenuRepository.newLambdaQuery();
 
         query.isNull(ResourceMenuModel::getDisabledAt);
+        query.orderByAsc(ResourceMenuModel::getSorting);
 
         List<ResourceMenuModel> list = this.resourceMenuRepository.list(query);
 
@@ -80,7 +81,7 @@ public class AuthAdminService implements IAuthAdminService {
                 }
         );
 
-        for (AuthAdminMenuVO menu : parentMap.values()) {
+        for (ResourceMenuModel menu : list) {
             if (EmptyUtils.isNotId(menu.getParentId())) {
                 continue;
             }
@@ -91,10 +92,10 @@ public class AuthAdminService implements IAuthAdminService {
                 continue;
             }
 
-            parent.getChildren().add(menu);
+            parent.getChildren().add(parentMap.get(menu.getId()));
         }
 
-        parents.sort(Comparator.comparing(AuthAdminMenuVO::getSorting).reversed());
+        parents.sort(Comparator.comparing(AuthAdminMenuVO::getSorting));
 
         return parents;
     }
