@@ -50,15 +50,15 @@ function loadMore(e: Event) {
            :placeholder="select.placeholder"
            v-model="showValue"
     />
-    <div class="loading" :class="{hidden: !select.loading}">
-      <beicroon-loading fill="#b3e5fc" width="60" height="60"></beicroon-loading>
-    </div>
-    <ul class="select" :class="{hidden: select.hidden}" @scrollend="loadMore">
+    <ul class="select" :class="{hidden: select.hidden}" @scroll="loadMore">
       <template v-for="options in select.options">
         <li class="option" v-for="option in options" @mousedown="choose(option)">
           {{ option[select.optionLabel] }}
         </li>
       </template>
+      <li class="option loading" :class="{hidden: !select.loading}">
+        <beicroon-loading fill="#b3e5fc" width="38" height="38"></beicroon-loading>
+      </li>
     </ul>
   </div>
 </template>
@@ -69,37 +69,28 @@ function loadMore(e: Event) {
   position: relative;
 
   &.column {
-    .select, .loading {
+    .select {
       right: 18rem;
       width: 300rem;
       top: calc(100% - 12rem);
     }
   }
 
-  .loading, .select {
+  .select {
+    gap: 2rem;
     right: 6rem;
-    z-index: 777;
+    z-index: 666;
     display: flex;
     width: 240rem;
     height: 160rem;
+    padding: 8rem 0;
+    overflow-y: auto;
     position: absolute;
     border-radius: 6rem;
     top: calc(100% - 4rem);
+    flex-direction: column;
     background-color: var(--color-white);
     border: 1rem solid var(--color-grey-light);
-  }
-
-  .loading {
-    align-items: center;
-    justify-content: center;
-  }
-
-  .select {
-    gap: 2rem;
-    z-index: 666;
-    padding: 8rem 0;
-    overflow-y: auto;
-    flex-direction: column;
 
     .option {
       width: 100%;
@@ -108,11 +99,16 @@ function loadMore(e: Event) {
       flex-shrink: 0;
       cursor: pointer;
       padding: 0 18rem;
+      overflow: hidden;
       align-items: center;
 
       &:hover {
         background-color: var(--color-primary-light);
       }
+    }
+
+    .loading {
+      justify-content: center;
     }
   }
 }
