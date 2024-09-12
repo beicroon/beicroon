@@ -7,6 +7,7 @@ public class VueCreateContent {
     private static final String CONTENT = """
             <script setup lang="ts">
             import {reactive, ref} from "vue";
+            import BeicroonForm from "@/components/BeicroonForm.vue";
             import BeicroonInput from "@/components/BeicroonInput.vue";
             import BeicroonButton from "@/components/BeicroonButton.vue";
             import BeicroonLineVertical from "@/components/BeicroonLineVertical.vue";
@@ -32,16 +33,16 @@ public class VueCreateContent {
             </script>
 
             <template>
-              <form class="beicroon-dialog-view">
+              <beicroon-form class="beicroon-dialog-view" @submit="handleConfirm">
                 <div class="beicroon-dialog-input">
                   {{formInput}}
                 </div>
                 <beicroon-line-vertical></beicroon-line-vertical>
                 <div class="beicroon-dialog-button">
                   <beicroon-button class="block warning" label="取消" @click="handleCancel"></beicroon-button>
-                  <beicroon-button class="block primary" label="保存" @click="handleConfirm" :loading="loading"></beicroon-button>
+                  <beicroon-button type="submit" class="block primary" label="保存" :loading="loading"></beicroon-button>
                 </div>
-              </form>
+              </beicroon-form>
             </template>
 
             <style scoped lang="less">

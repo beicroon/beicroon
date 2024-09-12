@@ -7,6 +7,7 @@ public class VueUpdateContent {
     private static final String CONTENT = """
             <script setup lang="ts">
             import {onMounted, reactive} from "vue";
+            import BeicroonForm from "@/components/BeicroonForm.vue";
             import BeicroonInput from "@/components/BeicroonInput.vue";
             import BeicroonButton from "@/components/BeicroonButton.vue";
             import BeicroonLoading from "@/components/BeicroonLoading.vue";
@@ -52,7 +53,7 @@ public class VueUpdateContent {
             </script>
 
             <template>
-              <form class="beicroon-dialog-view">
+              <beicroon-form class="beicroon-dialog-view" @submit="handleConfirm">
                 <div class="beicroon-dialog-input" v-if="!loading.get">
                   {{formInput}}
                 </div>
@@ -62,9 +63,9 @@ public class VueUpdateContent {
                 <beicroon-line-vertical></beicroon-line-vertical>
                 <div class="beicroon-dialog-button">
                   <beicroon-button class="block primary" label="关闭" @click="handleCancel"></beicroon-button>
-                  <beicroon-button class="block warning" label="保存" @click="handleConfirm" :loading="loading.set"></beicroon-button>
+                  <beicroon-button type="submit" class="block warning" label="保存" :loading="loading.set"></beicroon-button>
                 </div>
-              </form>
+              </beicroon-form>
             </template>
 
             <style scoped lang="less">

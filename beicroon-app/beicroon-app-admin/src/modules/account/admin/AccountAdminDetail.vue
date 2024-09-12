@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import {onMounted, ref} from "vue";
+import BeicroonForm from "@/components/BeicroonForm.vue";
 import BeicroonInput from "@/components/BeicroonInput.vue";
 import BeicroonButton from "@/components/BeicroonButton.vue";
 import BeicroonLoading from "@/components/BeicroonLoading.vue";
@@ -28,7 +29,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <form class="beicroon-dialog-view">
+  <beicroon-form class="beicroon-dialog-view">
     <div class="beicroon-dialog-input" v-if="form">
       <beicroon-input disabled class="column" label="编码" placeholder="编码" v-model="form.code"></beicroon-input>
       <beicroon-input disabled class="column" label="账号" placeholder="账号" v-model="form.username"></beicroon-input>
@@ -43,7 +44,7 @@ onMounted(async () => {
     <div class="beicroon-dialog-button">
       <beicroon-button class="block primary" label="关闭" @click="handleCancel"></beicroon-button>
     </div>
-  </form>
+  </beicroon-form>
 </template>
 
 <style scoped lang="less">

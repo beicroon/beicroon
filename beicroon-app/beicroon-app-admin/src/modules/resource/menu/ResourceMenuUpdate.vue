@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import {onMounted, reactive, ref} from "vue";
+import BeicroonForm from "@/components/BeicroonForm.vue";
 import BeicroonInput from "@/components/BeicroonInput.vue";
 import BeicroonButton from "@/components/BeicroonButton.vue";
 import BeicroonLoading from "@/components/BeicroonLoading.vue";
@@ -54,7 +55,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <form class="beicroon-dialog-view">
+  <beicroon-form class="beicroon-dialog-view" @submit="handleConfirm">
     <div class="beicroon-dialog-input" v-if="!loading.get">
       <resource-menu-select
         class="column"
@@ -74,9 +75,9 @@ onMounted(async () => {
     <beicroon-line-vertical></beicroon-line-vertical>
     <div class="beicroon-dialog-button">
       <beicroon-button class="block primary" label="关闭" @click="handleCancel"></beicroon-button>
-      <beicroon-button class="block warning" label="保存" @click="handleConfirm" :loading="loading.set"></beicroon-button>
+      <beicroon-button type="submit" class="block warning" label="保存" @click="handleConfirm" :loading="loading.set"></beicroon-button>
     </div>
-  </form>
+  </beicroon-form>
 </template>
 
 <style scoped lang="less">

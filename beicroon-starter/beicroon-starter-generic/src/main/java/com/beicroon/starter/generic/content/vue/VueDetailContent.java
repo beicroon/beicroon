@@ -7,6 +7,7 @@ public class VueDetailContent {
     private static final String CONTENT = """
             <script setup lang="ts">
             import {onMounted, ref} from "vue";
+            import BeicroonForm from "@/components/BeicroonForm.vue";
             import BeicroonInput from "@/components/BeicroonInput.vue";
             import BeicroonButton from "@/components/BeicroonButton.vue";
             import BeicroonLoading from "@/components/BeicroonLoading.vue";
@@ -35,7 +36,7 @@ public class VueDetailContent {
             </script>
 
             <template>
-              <form class="beicroon-dialog-view">
+              <beicroon-form class="beicroon-dialog-view">
                 <div class="beicroon-dialog-input" v-if="form">
                   {{formInput}}
                 </div>
@@ -46,7 +47,7 @@ public class VueDetailContent {
                 <div class="beicroon-dialog-button">
                   <beicroon-button class="block primary" label="关闭" @click="handleCancel"></beicroon-button>
                 </div>
-              </form>
+              </beicroon-form>
             </template>
 
             <style scoped lang="less">

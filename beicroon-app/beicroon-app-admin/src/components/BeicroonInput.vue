@@ -40,6 +40,27 @@ const modelValue = computed({
   transition: all 300ms linear;
   justify-content: space-between;
 
+  &.required {
+    .beicroon-input-label {
+      z-index: 1;
+      position: relative;
+
+      &:after {
+        top: 0;
+        left: 0;
+        content: "*";
+        width: 24rem;
+        height: 24rem;
+        display: flex;
+        font-size: 18rem;
+        position: absolute;
+        align-items: center;
+        justify-content: center;
+        color: var(--color-error);
+      }
+    }
+  }
+
   &:focus-within {
     background-color: var(--color-primary-lighter);
 

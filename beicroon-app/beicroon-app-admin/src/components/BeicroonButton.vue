@@ -3,7 +3,7 @@ import {ref} from "vue";
 import BeicroonLoading from "@/components/BeicroonLoading.vue";
 
 type Props = {
-  type?: "button" | "submit" | "reset",
+  type?: "button" | "submit",
   label: string,
   loading?: boolean,
   disabled?: boolean,
@@ -22,7 +22,6 @@ function handleClick(e: MouseEvent) {
     return;
   }
 
-  e.preventDefault();
   e.stopPropagation();
   e.stopImmediatePropagation();
 
