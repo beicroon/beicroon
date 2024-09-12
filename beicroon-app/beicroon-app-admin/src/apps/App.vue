@@ -15,6 +15,8 @@
   --color-grey-deeper: #c8c9cc;
   --color-white: #ffffff;
   --color-black: #000000;
+  --color-black-30: #00000030;
+  --color-black-60: #00000060;
   --color-black-light: #333333;
   --color-error: #f56c6c;
   --color-error-light: #fcd3d3;
@@ -124,7 +126,7 @@ html, body, #beicroon-app {
   bottom: 0;
   z-index: 888;
   position: fixed;
-  background-color: rgba(30, 30, 30, 0.3);
+  background-color: var(--color-black-60);
 
   .beicroon-dialog {
     width: 100%;

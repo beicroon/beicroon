@@ -233,11 +233,12 @@ const moreSearchSize = computed(() => {
         background-color: var(--color-white);
         grid-template-columns: repeat(3, 1fr);
         border: 1rem solid var(--color-grey-light);
+        box-shadow: 0 0 8rem -3rem var(--color-black-30) inset;
 
         &.show {
           opacity: 1;
           width: 1080rem;
-          height: 550rem;
+          height: 600rem;
           overflow-y: auto;
         }
       }

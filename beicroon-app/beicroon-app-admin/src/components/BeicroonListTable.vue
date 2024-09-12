@@ -178,7 +178,7 @@ async function endScroll() {
           height: 100%;
           display: block;
           position: absolute;
-          box-shadow: -6rem 0 8rem -3rem #00000026 inset;
+          box-shadow: -6rem 0 8rem -3rem var(--color-black-30) inset;
         }
       }
     }
