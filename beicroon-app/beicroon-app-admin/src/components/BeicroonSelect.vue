@@ -15,7 +15,9 @@ const emits = defineEmits(["update:showValue", "update:modelValue"]);
 
 const showValue = computed({
   get: () => props.showValue,
-  set: (val?: any) => {
+  set: async (val?: any) => {
+    await props.select.search(val);
+
     emits("update:showValue", val);
   },
 });
@@ -25,6 +27,14 @@ function choose(option: any) {
 
   emits("update:showValue", props.select.getLabel(option));
   emits("update:modelValue", props.select.getValue(option));
+}
+
+function loadMore(e: Event) {
+  const target = e.target as HTMLElement;
+
+  if (target.scrollHeight - target.scrollTop === target.clientHeight) {
+    props.select.loadMoreOptions();
+  }
 }
 </script>
 
@@ -43,7 +53,7 @@ function choose(option: any) {
     <div class="loading" :class="{hidden: !select.loading}">
       <beicroon-loading fill="#b3e5fc" width="60" height="60"></beicroon-loading>
     </div>
-    <ul class="select" :class="{hidden: select.hidden}">
+    <ul class="select" :class="{hidden: select.hidden}" @scrollend="loadMore">
       <template v-for="options in select.options">
         <li class="option" v-for="option in options" @mousedown="choose(option)">
           {{ option[select.optionLabel] }}

@@ -30,7 +30,9 @@ export type Select<DTO extends QueryDTO, VO extends BaseVO> = {
     requested: boolean,
     params: DTO,
     pageInfo: PageInfo,
-    handleRequest: () => Promise<void>,
+    timer?: any,
+    search: (keywords?: string) => Promise<void>,
+    handleRequest: (clear?: boolean) => Promise<void>,
     loadMoreOptions: () => Promise<void>,
     optionValue: string,
     optionLabel: string,
@@ -67,14 +69,24 @@ export default function createBeicroonSelect<DTO extends QueryDTO, VO extends Ba
                 focusout: () => select.hidden = true,
             };
         },
-        noMore: true,
+        noMore: false,
         loading: false,
         request: config.options instanceof Function ? config.options : undefined,
         requested: false,
         params: {} as DTO,
-        pageInfo: {page: 1, size: config.pageSize || 30} as PageInfo,
+        pageInfo: {page: 1, size: config.pageSize || 5} as PageInfo,
+        timer: null,
+        search: async (keywords?: string) => {
+            clearTimeout(select.timer);
+
+            select.timer = setTimeout(async () => {
+                select.params.keywords = keywords;
+
+                await select.handleRequest(true);
+            }, 500);
+        },
         handleRequest: async (clear: boolean = false) => {
-            if (select.request) {
+            if (select.request && !select.noMore) {
                 if (clear) {
                     select.options = [];
                     select.pageInfo.page = 1;
