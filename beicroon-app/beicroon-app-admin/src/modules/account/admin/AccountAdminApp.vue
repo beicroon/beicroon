@@ -22,7 +22,6 @@ onMounted(list.resetSearch);
     <template #head-search>
       <beicroon-input label="编码" v-model="list.params.code"></beicroon-input>
       <beicroon-input label="账号" v-model="list.params.username"></beicroon-input>
-      <beicroon-input label="密码" v-model="list.params.password"></beicroon-input>
       <beicroon-input label="昵称" v-model="list.params.nickname"></beicroon-input>
       <beicroon-input label="电话" v-model="list.params.phone"></beicroon-input>
       <beicroon-input label="邮箱" v-model="list.params.email"></beicroon-input>
@@ -45,7 +44,6 @@ onMounted(list.resetSearch);
       <beicroon-list-row v-for="item in list.data">
         <beicroon-list-cell>{{ item.code }}</beicroon-list-cell>
         <beicroon-list-cell>{{ item.username }}</beicroon-list-cell>
-        <beicroon-list-cell>{{ item.password }}</beicroon-list-cell>
         <beicroon-list-cell>{{ item.nickname }}</beicroon-list-cell>
         <beicroon-list-cell>{{ item.phone }}</beicroon-list-cell>
         <beicroon-list-cell>{{ item.email }}</beicroon-list-cell>
@@ -59,7 +57,6 @@ onMounted(list.resetSearch);
     <template #more-search>
       <beicroon-input class="column" label="编码" v-model="list.params.code"></beicroon-input>
       <beicroon-input class="column" label="账号" v-model="list.params.username"></beicroon-input>
-      <beicroon-input class="column" label="密码" v-model="list.params.password"></beicroon-input>
       <beicroon-input class="column" label="昵称" v-model="list.params.nickname"></beicroon-input>
       <beicroon-input class="column" label="电话" v-model="list.params.phone"></beicroon-input>
       <beicroon-input class="column" label="邮箱" v-model="list.params.email"></beicroon-input>

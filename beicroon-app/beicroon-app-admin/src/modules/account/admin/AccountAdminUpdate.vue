@@ -42,7 +42,6 @@ onMounted(async () => {
 
   form.code = data.code;
   form.username = data.username;
-  form.password = data.password;
   form.nickname = data.nickname;
   form.phone = data.phone;
   form.email = data.email;

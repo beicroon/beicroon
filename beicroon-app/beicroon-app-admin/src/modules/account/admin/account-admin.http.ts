@@ -4,7 +4,6 @@ import http, {BaseVO, DisableDTO, DisableVO, PageInfo, QueryDTO, Response, Updat
 export type AccountAdminBaseVO = BaseVO & DisableVO & {
     code?: string,  // 编码
     username?: string,  // 账号
-    password?: string,  // 密码
     nickname?: string,  // 昵称
     phone?: string,  // 电话
     email?: string,  // 邮箱
@@ -44,7 +43,6 @@ export type AccountAdminUpdateDTO = UpdateDTO & {
 export type AccountAdminQueryDTO = QueryDTO & DisableDTO & {
     code?: string,  // 编码
     username?: string,  // 账号
-    password?: string,  // 密码
     nickname?: string,  // 昵称
     phone?: string,  // 电话
     email?: string,  // 邮箱
