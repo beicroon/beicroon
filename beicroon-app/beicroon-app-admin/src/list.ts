@@ -37,7 +37,7 @@ export default function createBeicroonList<DTO extends QueryDTO, VO extends Base
         loading: false,
         params: {} as DTO,
         data: [] as Array<VO>,
-        pageInfo: {page: 1, size: 15, total: 0} as PageInfo,
+        pageInfo: {page: 1, size: 15} as PageInfo,
         pages: [1],
         choosers: [2, 15, 30, 50, 100],
         afterSearchCallbacks: [] as Array<() => Promise<void>>,
@@ -70,7 +70,9 @@ export default function createBeicroonList<DTO extends QueryDTO, VO extends Base
             return pages;
         },
         setPages: async () => {
-            const total = list.pageInfo.total > 0 ? Math.ceil(list.pageInfo.total / list.pageInfo.size) : 1;
+            const total = list.pageInfo.total && list.pageInfo.total > 0
+                ? Math.ceil(list.pageInfo.total / list.pageInfo.size)
+                : 1;
 
             if (total <= 11) {
                 list.pages = await list.getPages(1, total);
@@ -109,7 +111,7 @@ export default function createBeicroonList<DTO extends QueryDTO, VO extends Base
 
             Object.assign(list.data, res.data);
 
-            list.pageInfo.total = res.page.total;
+            list.pageInfo.total = res.page?.total;
 
             await list.setPages();
 

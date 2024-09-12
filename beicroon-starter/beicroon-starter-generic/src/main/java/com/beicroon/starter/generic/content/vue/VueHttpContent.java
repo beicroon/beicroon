@@ -5,7 +5,7 @@ import com.beicroon.starter.generic.entity.Table;
 public class VueHttpContent {
 
     private static final String CONTENT = """
-            import http, {BaseVO, DisableDTO, DisableVO, QueryDTO, Response, UpdateDTO} from "@/http";
+            import http, {BaseVO, DisableDTO, PageInfo, DisableVO, QueryDTO, Response, UpdateDTO} from "@/http";
 
             // 基础返回字段
             export type {{filename}}BaseVO = BaseVO & DisableVO & {
@@ -54,11 +54,15 @@ public class VueHttpContent {
             }
 
             // 分页列表接口
-            export async function page(data: {{filename}}QueryDTO): Promise<Response<Array<{{filename}}PageVO>>> {
+            export async function page(data: {{filename}}QueryDTO, pageInfo: PageInfo): Promise<Response<Array<{{filename}}PageVO>>> {
                 return http.request({
                     url: "/api/{{modulePrefix}}/admin/{{urlName}}-page",
                     method: "POST",
-                    data: data,
+                    data: {
+                        ...data,
+                        pageNum: pageInfo.page,
+                        pageSize: pageInfo.size,
+                    },
                 })
             }
 

@@ -11,59 +11,113 @@ export type Config<DTO extends QueryDTO, VO extends BaseVO> = {
     options: Array<VO> | Page<DTO, VO>,
     optionValue: string,
     optionLabel: string,
+    pageSize?: number,
 };
 
 export type Select<DTO extends QueryDTO, VO extends BaseVO> = {
-    showValue: string,
+    defaultOptions: Array<VO>,
     options: Array<Array<VO>>,
     hidden: boolean,
     label: string,
     placeholder?: string,
     required?: boolean,
     disabled?: boolean,
+    noMore: boolean,
     loading: boolean,
     request?: Page<DTO, VO> | null,
+    requested: boolean,
     params: DTO,
+    pageInfo: PageInfo,
+    handleRequest: () => Promise<void>,
+    loadMoreOptions: () => Promise<void>,
     optionValue: string,
     optionLabel: string,
-    getEvents: () => Record<string, (e: Event) => void>,
-    choose: (option: VO) => void,
+    getEvents: () => Record<string, Function>,
+    hide: () => void,
+    getLabel: (option: VO) => any,
+    getValue: (option: VO) => any,
 };
 
 export default function createBeicroonSelect<DTO extends QueryDTO, VO extends BaseVO>(config: Config<DTO, VO>): Select<DTO, VO> {
     const select: Select<DTO, VO> = reactive<Select<DTO, VO>>({
-        showValue: null,
+        defaultOptions: config.options instanceof Array ? config.options : [],
         options: [],
         hidden: true,
         label: config.label,
         placeholder: config.placeholder,
         required: config.required,
         disabled: config.disabled,
+        noMore: true,
         loading: false,
-        request: null,
+        request: config.options instanceof Function ? config.options : undefined,
+        requested: false,
         params: {} as DTO,
+        pageInfo: {page: 1, size: config.pageSize || 30} as PageInfo,
+        handleRequest: async (clear: boolean = false) => {
+            if (select.request) {
+                if (clear) {
+                    select.options = [];
+                    select.pageInfo.page = 1;
+
+                    if (select.defaultOptions.length > 0) {
+                        select.options.push(select.defaultOptions);
+                    }
+                }
+
+                select.loading = true;
+
+                const res = await select.request.call(select, select.params, select.pageInfo)
+                    .finally(() => select.loading = false);
+
+                select.options.push(res.data);
+
+                select.noMore = !res.page || res.data.length < res.page.size;
+
+                select.requested = true;
+            }
+        },
+        loadMoreOptions: async () => {
+            select.pageInfo.page++;
+
+            await select.handleRequest();
+        },
         optionValue: config.optionValue,
         optionLabel: config.optionLabel,
         getEvents: () => {
             return {
                 click: (e: MouseEvent) => {
+                    e.preventDefault();
                     e.stopPropagation();
                     e.stopImmediatePropagation();
                 },
-                focusin: () => select.hidden = false,
+                focusin: async () => {
+                    select.hidden = false;
+
+                    if (select.requested) {
+                        return;
+                    }
+
+                    await select.handleRequest();
+                },
                 focusout: () => select.hidden = true,
             };
         },
-        choose: (option: VO) => {
-            select.hidden = true;
+        hide: () => select.hidden = true,
+        getLabel: (option: VO) => {
+            if (select.optionLabel) {
+                return (option as any)[select.optionLabel];
+            }
+
+            return option;
+        },
+        getValue: (option: VO) => {
+            if (select.optionValue) {
+                return (option as any)[select.optionValue];
+            }
+
+            return option;
         },
     }) as Select<DTO, VO>;
-
-    if (config.options instanceof Array) {
-        select.options.push(config.options);
-    } else {
-        select.request = config.options;
-    }
 
     return select;
 }

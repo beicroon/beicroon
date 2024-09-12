@@ -1,36 +1,54 @@
 <script setup lang="ts">
+import {computed} from "vue";
 import {Select} from "@/select.ts";
 import BeicroonLoading from "@/components/BeicroonLoading.vue";
-import {computed} from "vue";
 
 type Props = {
   select: Select<any, any>,
-  modelValue?: string,
+  showValue?: any,
+  modelValue?: any,
 };
 
 const props = defineProps<Props>();
 
-const emits = defineEmits(["update:modelValue"]);
+const emits = defineEmits(["update:showValue", "update:modelValue"]);
 
-const value = computed({
-  get: () => props.select.showValue,
-  set: (val?: string) => {
-    emits("update:modelValue", val);
+const showValue = computed({
+  get: () => props.showValue,
+  set: (val?: any) => {
+    emits("update:showValue", val);
   },
 });
+
+function choose(option: any) {
+  props.select.hide();
+
+  emits("update:showValue", props.select.getLabel(option));
+  emits("update:modelValue", props.select.getValue(option));
+}
 </script>
 
 <template>
-  <div class="beicroon-input beicroon-select" :class="{required: select.required}" v-on="select.getEvents()">
+  <div class="beicroon-input beicroon-select"
+       :class="{required: select.required}"
+       v-on="select.getEvents()"
+  >
     <span class="beicroon-input-label">{{ select.label }}</span>
-    <input class="beicroon-input-area" :disabled="select.disabled" type="text" :placeholder="select.placeholder" v-model="value"/>
+    <input class="beicroon-input-area"
+           type="text"
+           :disabled="select.disabled"
+           :placeholder="select.placeholder"
+           v-model="showValue"
+    />
     <div class="loading" :class="{hidden: !select.loading}">
       <beicroon-loading fill="#b3e5fc" width="60" height="60"></beicroon-loading>
     </div>
     <ul class="select" :class="{hidden: select.hidden}">
-      <li class="option" v-for="option in select.options" @click="select.choose(option)">
-        {{ option[select.optionLabel] }}
-      </li>
+      <template v-for="options in select.options">
+        <li class="option" v-for="option in options" @mousedown="choose(option)">
+          {{ option[select.optionLabel] }}
+        </li>
+      </template>
     </ul>
   </div>
 </template>
@@ -56,11 +74,14 @@ const value = computed({
     height: 160rem;
     position: absolute;
     border-radius: 6rem;
-    align-items: center;
     top: calc(100% - 4rem);
-    justify-content: center;
     background-color: var(--color-white);
     border: 1rem solid var(--color-grey-light);
+  }
+
+  .loading {
+    align-items: center;
+    justify-content: center;
   }
 
   .select {

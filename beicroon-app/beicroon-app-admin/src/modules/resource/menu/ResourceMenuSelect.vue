@@ -2,14 +2,17 @@
 import createBeicroonSelect from "@/select.ts";
 import BeicroonSelect from "@/components/BeicroonSelect.vue";
 import {page, ResourceMenuPageVO as VO, ResourceMenuQueryDTO as DTO} from "./resource-menu.http.ts";
-import {computed} from "vue";
+import {computed, onMounted, ref, watch} from "vue";
 
 type Props = {
   label: string,
-  modelValue?: string,
+  showValue?: any,
+  modelValue?: any,
 };
 
 const props = defineProps<Props>();
+
+const emits = defineEmits(["update:showValue", "update:modelValue"]);
 
 const select = createBeicroonSelect<DTO, VO>({
   label: props.label,
@@ -18,16 +21,28 @@ const select = createBeicroonSelect<DTO, VO>({
   optionLabel: "name",
 });
 
-const value = computed({
+const showValue = ref(props.showValue);
+
+onMounted(() => {
+  watch(() => props.showValue, (val?: any) => {
+    showValue.value = val;
+  });
+
+  watch(() => showValue.value, (val?: any) => {
+    emits("update:showValue", val);
+  });
+});
+
+const modelValue = computed({
   get: () => props.modelValue,
-  set: (val?: string) => {
+  set: (val?: any) => {
     emits("update:modelValue", val);
   },
 });
 </script>
 
 <template>
-<beicroon-select :select="select" v-model="value"></beicroon-select>
+<beicroon-select :select="select" v-model:show-value="showValue" v-model:model-value="modelValue"></beicroon-select>
 </template>
 
 <style lang="less">

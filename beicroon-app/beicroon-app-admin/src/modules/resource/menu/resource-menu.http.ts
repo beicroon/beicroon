@@ -1,4 +1,4 @@
-import http, {BaseVO, DisableDTO, DisableVO, QueryDTO, Response, UpdateDTO} from "@/http";
+import http, {BaseVO, DisableDTO, DisableVO, PageInfo, QueryDTO, Response, UpdateDTO} from "@/http";
 
 // 基础返回字段
 export type ResourceMenuBaseVO = BaseVO & DisableVO & {
@@ -71,11 +71,15 @@ export async function detail(id: String): Promise<Response<ResourceMenuDetailVO>
 }
 
 // 分页列表接口
-export async function page(data: ResourceMenuQueryDTO): Promise<Response<Array<ResourceMenuPageVO>>> {
+export async function page(data: ResourceMenuQueryDTO, pageInfo: PageInfo): Promise<Response<Array<ResourceMenuPageVO>>> {
     return http.request({
         url: "/api/admin/admin/resource-menu-page",
         method: "POST",
-        data: data,
+        data: {
+            ...data,
+            pageNum: pageInfo.page,
+            pageSize: pageInfo.size,
+        },
     })
 }
 

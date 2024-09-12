@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {onMounted} from "vue";
+import {onMounted, ref} from "vue";
 import createBeicroonList from "@/list.ts";
 import Create from "./ResourceMenuCreate.vue";
 import Detail from "./ResourceMenuDetail.vue";
@@ -16,12 +16,14 @@ import ResourceMenuSelect from "@/modules/resource/menu/ResourceMenuSelect.vue";
 const list = createBeicroonList<DTO, VO>("资源菜单", page);
 
 onMounted(list.resetSearch);
+
+const parentShowValue = ref();
 </script>
 
 <template>
   <beicroon-list :list="list">
     <template #head-search>
-      <resource-menu-select label="父级" v-model="list.params.parentId"></resource-menu-select>
+      <resource-menu-select label="父级" v-model="list.params.parentId" v-model:show-value="parentShowValue"></resource-menu-select>
       <beicroon-input label="编码" v-model="list.params.code"></beicroon-input>
       <beicroon-input label="名称" v-model="list.params.name"></beicroon-input>
       <beicroon-input label="路径" v-model="list.params.path"></beicroon-input>
@@ -58,6 +60,7 @@ onMounted(list.resetSearch);
       </beicroon-list-row>
     </template>
     <template #more-search>
+      <resource-menu-select class="column" label="父级" v-model="list.params.parentId" v-model:show-value="parentShowValue"></resource-menu-select>
       <beicroon-input class="column" label="编码" v-model="list.params.code"></beicroon-input>
       <beicroon-input class="column" label="名称" v-model="list.params.name"></beicroon-input>
       <beicroon-input class="column" label="路径" v-model="list.params.path"></beicroon-input>

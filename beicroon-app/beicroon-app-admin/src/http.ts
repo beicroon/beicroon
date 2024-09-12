@@ -67,14 +67,14 @@ export default http;
 export type PageInfo = {
     page: number,
     size: number,
-    total: number,
+    total?: number,
 }
 
 export type Response<T> = {
     code: number,
     data: T,
     message: string,
-    page: PageInfo,
+    page?: PageInfo,
     voice: string,
 }
 

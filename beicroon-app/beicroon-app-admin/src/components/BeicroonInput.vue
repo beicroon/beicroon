@@ -16,7 +16,7 @@ const props = withDefaults(defineProps<Props>(), {
 
 const emits = defineEmits(["update:modelValue"]);
 
-const value = computed({
+const modelValue = computed({
   get: () => props.modelValue,
   set: (val: string | number | undefined) => emits("update:modelValue", val),
 })
@@ -25,7 +25,7 @@ const value = computed({
 <template>
 <div class="beicroon-input" :class="{required: required}">
   <span class="beicroon-input-label">{{label}}</span>
-  <input class="beicroon-input-area" :disabled="disabled" :type="type" :placeholder="placeholder" v-model="value" />
+  <input class="beicroon-input-area" :disabled="disabled" :type="type" :placeholder="placeholder" v-model="modelValue" />
 </div>
 </template>
 
