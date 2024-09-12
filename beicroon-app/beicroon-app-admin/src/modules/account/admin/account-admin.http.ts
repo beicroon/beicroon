@@ -1,9 +1,10 @@
-import http, {BaseVO, DisableDTO, DisableVO, QueryDTO, Response, UpdateDTO} from "@/http";
+import http, {BaseVO, DisableDTO, DisableVO, PageInfo, QueryDTO, Response, UpdateDTO} from "@/http";
 
 // 基础返回字段
 export type AccountAdminBaseVO = BaseVO & DisableVO & {
     code?: string,  // 编码
     username?: string,  // 账号
+    password?: string,  // 密码
     nickname?: string,  // 昵称
     phone?: string,  // 电话
     email?: string,  // 邮箱
@@ -33,6 +34,7 @@ export type AccountAdminCreateDTO = DisableDTO & {
 export type AccountAdminUpdateDTO = UpdateDTO & {
     code?: string,  // 编码
     username?: string,  // 账号
+    password?: string,  // 密码
     nickname?: string,  // 昵称
     phone?: string,  // 电话
     email?: string,  // 邮箱
@@ -42,6 +44,7 @@ export type AccountAdminUpdateDTO = UpdateDTO & {
 export type AccountAdminQueryDTO = QueryDTO & DisableDTO & {
     code?: string,  // 编码
     username?: string,  // 账号
+    password?: string,  // 密码
     nickname?: string,  // 昵称
     phone?: string,  // 电话
     email?: string,  // 邮箱
@@ -64,11 +67,15 @@ export async function detail(id: String): Promise<Response<AccountAdminDetailVO>
 }
 
 // 分页列表接口
-export async function page(data: AccountAdminQueryDTO): Promise<Response<Array<AccountAdminPageVO>>> {
+export async function page(data: AccountAdminQueryDTO, pageInfo: PageInfo): Promise<Response<Array<AccountAdminPageVO>>> {
     return http.request({
         url: "/api/admin/admin/account-admin-page",
         method: "POST",
-        data: data,
+        data: {
+            ...data,
+            pageNum: pageInfo.page,
+            pageSize: pageInfo.size,
+        },
     })
 }
 

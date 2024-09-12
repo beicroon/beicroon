@@ -10,8 +10,8 @@ import BeicroonButton from "@/components/BeicroonButton.vue";
 import BeicroonListRow from "@/components/BeicroonListRow.vue";
 import BeicroonListCell from "@/components/BeicroonListCell.vue";
 import BeicroonListCellButton from "@/components/BeicroonListCellButton.vue";
-import {page, remove, ResourceMenuPageVO as VO, ResourceMenuQueryDTO as DTO} from "./resource-menu.http.ts";
 import ResourceMenuSelect from "@/modules/resource/menu/ResourceMenuSelect.vue";
+import {page, remove, ResourceMenuPageVO as VO, ResourceMenuQueryDTO as DTO} from "./resource-menu.http.ts";
 
 const list = createBeicroonList<DTO, VO>("资源菜单", page);
 
@@ -23,10 +23,13 @@ const parentShowValue = ref();
 <template>
   <beicroon-list :list="list">
     <template #head-search>
-      <resource-menu-select label="父级" v-model="list.params.parentId" v-model:show-value="parentShowValue"></resource-menu-select>
+      <resource-menu-select
+        label="父级"
+        v-model="list.params.parentId"
+        v-model:show-value="parentShowValue"
+      ></resource-menu-select>
       <beicroon-input label="编码" v-model="list.params.code"></beicroon-input>
       <beicroon-input label="名称" v-model="list.params.name"></beicroon-input>
-      <beicroon-input label="路径" v-model="list.params.path"></beicroon-input>
     </template>
     <template #head-button>
       <beicroon-button class="block primary" label="重置" @click="list.handleReset"></beicroon-button>
@@ -60,13 +63,17 @@ const parentShowValue = ref();
       </beicroon-list-row>
     </template>
     <template #more-search>
-      <resource-menu-select class="column" label="父级" v-model="list.params.parentId" v-model:show-value="parentShowValue"></resource-menu-select>
+      <resource-menu-select
+        class="column"
+        label="父级"
+        v-model="list.params.parentId"
+        v-model:show-value="parentShowValue"
+      ></resource-menu-select>
       <beicroon-input class="column" label="编码" v-model="list.params.code"></beicroon-input>
       <beicroon-input class="column" label="名称" v-model="list.params.name"></beicroon-input>
-      <beicroon-input class="column" label="路径" v-model="list.params.path"></beicroon-input>
     </template>
   </beicroon-list>
 </template>
 
-<style lang="less">
+<style scoped lang="less">
 </style>
