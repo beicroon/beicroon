@@ -21,7 +21,7 @@ const parentName = ref();
 </script>
 
 <template>
-  <beicroon-list :list="list">
+  <beicroon-list class="row-search" :list="list">
     <template #head-search>
       <resource-menu-select
         label="父级"

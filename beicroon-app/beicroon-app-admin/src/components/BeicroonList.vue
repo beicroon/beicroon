@@ -77,6 +77,7 @@ const moreSearchSize = computed(() => {
 <style lang="less">
 :root {
   --beicroon-height-list-head: 160rem;
+  --beicroon-height-list-head-row: 108rem;
   --beicroon-height-list-foot: 60rem;
   --beicroon-width-search-button: 130rem;
 }
@@ -85,9 +86,28 @@ const moreSearchSize = computed(() => {
   width: 100%;
   height: 100%;
 
-  &.head-search-no-wrap {
-    .head-search {
-      flex-wrap: nowrap !important;
+  &.row-search {
+    .list-head {
+      flex-direction: column;
+      height: var(--beicroon-height-list-head-row);
+
+      .head-search {
+        width: 100%;
+        height: fit-content;
+      }
+
+      .head-button {
+        width: 100%;
+        padding: 8rem;
+        height: 34rem;
+        min-height: auto;
+        flex-direction: row;
+        justify-content: flex-end;
+      }
+    }
+
+    .list-body {
+      height: calc(100% - var(--beicroon-height-list-head-row) - var(--beicroon-height-list-foot) - 2 * var(--beicroon-height-line));
     }
   }
 
@@ -143,7 +163,7 @@ const moreSearchSize = computed(() => {
     padding: 8rem;
     position: relative;
     min-height: 300rem;
-    height: calc(100% - var(--beicroon-height-list-head) - var(--beicroon-height-line) - var(--beicroon-height-list-foot) - var(--beicroon-height-line));
+    height: calc(100% - var(--beicroon-height-list-head) - var(--beicroon-height-list-foot) - 2 * var(--beicroon-height-line));
   }
 
   .list-foot {
