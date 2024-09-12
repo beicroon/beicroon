@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import createBeicroonSelect from "@/select.ts";
+import {computed, onMounted, ref, watch} from "vue";
 import BeicroonSelect from "@/components/BeicroonSelect.vue";
 import {page, ResourceMenuPageVO as VO, ResourceMenuQueryDTO as DTO} from "./resource-menu.http.ts";
-import {computed, onMounted, ref, watch} from "vue";
 
 type Props = {
   label: string,
