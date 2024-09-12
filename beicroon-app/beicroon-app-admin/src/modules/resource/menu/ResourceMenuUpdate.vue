@@ -75,7 +75,7 @@ onMounted(async () => {
     <beicroon-line-vertical></beicroon-line-vertical>
     <div class="beicroon-dialog-button">
       <beicroon-button class="block primary" label="关闭" @click="handleCancel"></beicroon-button>
-      <beicroon-button type="submit" class="block warning" label="保存" @click="handleConfirm" :loading="loading.set"></beicroon-button>
+      <beicroon-button type="submit" class="block warning" label="保存" :loading="loading.set"></beicroon-button>
     </div>
   </beicroon-form>
 </template>
