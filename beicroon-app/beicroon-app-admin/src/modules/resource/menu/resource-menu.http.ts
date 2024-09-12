@@ -24,8 +24,6 @@ export type ResourceMenuPageVO = ResourceMenuBaseVO & {
 // 新增参数字段
 export type ResourceMenuCreateDTO = DisableDTO & {
     parentId?: string,  // 父级主键
-    parentCode?: string,  // 父级编码
-    parentName?: string,  // 父级名称
     code?: string,  // 编码
     name?: string,  // 名称
     path?: string,  // 路径
@@ -35,8 +33,6 @@ export type ResourceMenuCreateDTO = DisableDTO & {
 // 修改参数字段
 export type ResourceMenuUpdateDTO = UpdateDTO & {
     parentId?: string,  // 父级主键
-    parentCode?: string,  // 父级编码
-    parentName?: string,  // 父级名称
     code?: string,  // 编码
     name?: string,  // 名称
     path?: string,  // 路径
@@ -46,8 +42,6 @@ export type ResourceMenuUpdateDTO = UpdateDTO & {
 // 查询参数字段
 export type ResourceMenuQueryDTO = QueryDTO & DisableDTO & {
     parentId?: string,  // 父级主键
-    parentCode?: string,  // 父级编码
-    parentName?: string,  // 父级名称
     code?: string,  // 编码
     name?: string,  // 名称
     path?: string,  // 路径

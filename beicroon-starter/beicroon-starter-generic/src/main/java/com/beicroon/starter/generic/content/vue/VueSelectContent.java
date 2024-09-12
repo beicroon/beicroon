@@ -22,7 +22,6 @@ public class VueSelectContent {
             const emits = defineEmits(["update:showValue", "update:modelValue"]);
 
             const select = createBeicroonSelect<DTO, VO>({
-              label: props.label,
               options: page,
               optionValue: "id",
               optionLabel: "name",
@@ -49,7 +48,13 @@ public class VueSelectContent {
             </script>
 
             <template>
-            <beicroon-select :select="select" v-model:show-value="showValue" v-model:model-value="modelValue"></beicroon-select>
+            <beicroon-select
+              :label="label"
+              :select="select"
+              v-model:show-value="showValue"
+              v-model:model-value="modelValue"
+              v-bind="$attrs"
+            ></beicroon-select>
             </template>
 
             <style scoped lang="less">

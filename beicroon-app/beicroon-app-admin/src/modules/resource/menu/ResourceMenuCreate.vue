@@ -4,6 +4,7 @@ import BeicroonInput from "@/components/BeicroonInput.vue";
 import BeicroonButton from "@/components/BeicroonButton.vue";
 import BeicroonLineVertical from "@/components/BeicroonLineVertical.vue";
 import {create, ResourceMenuCreateDTO as DTO} from "./resource-menu.http.ts";
+import ResourceMenuSelect from "@/modules/resource/menu/ResourceMenuSelect.vue";
 
 const loading = ref(false);
 
@@ -27,9 +28,7 @@ async function handleConfirm() {
 <template>
   <form class="beicroon-dialog-view">
     <div class="beicroon-dialog-input">
-      <beicroon-input class="column" label="父级主键" placeholder="父级主键" v-model="form.parentId"></beicroon-input>
-      <beicroon-input class="column" label="父级编码" placeholder="父级编码" v-model="form.parentCode"></beicroon-input>
-      <beicroon-input class="column" label="父级名称" placeholder="父级名称" v-model="form.parentName"></beicroon-input>
+      <resource-menu-select class="column" label="父级" placeholder="父级" v-model="form.parentId"></resource-menu-select>
       <beicroon-input class="column" label="编码" placeholder="编码" v-model="form.code"></beicroon-input>
       <beicroon-input class="column" label="名称" placeholder="名称" v-model="form.name"></beicroon-input>
       <beicroon-input class="column" label="路径" placeholder="路径" v-model="form.path"></beicroon-input>

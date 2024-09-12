@@ -5,8 +5,12 @@ import BeicroonLoading from "@/components/BeicroonLoading.vue";
 
 type Props = {
   select: Select<any, any>,
+  label: string,
   showValue?: any,
   modelValue?: any,
+  required?: boolean,
+  disabled?: boolean,
+  placeholder?: string,
 };
 
 const props = defineProps<Props>();
@@ -40,14 +44,14 @@ function loadMore(e: Event) {
 
 <template>
   <div class="beicroon-input beicroon-select"
-       :class="{required: select.required}"
+       :class="{required: required}"
        v-on="select.getEvents()"
   >
-    <span class="beicroon-input-label">{{ select.label }}</span>
+    <span class="beicroon-input-label">{{ label }}</span>
     <input class="beicroon-input-area"
            type="text"
-           :disabled="select.disabled"
-           :placeholder="select.placeholder"
+           :disabled="disabled"
+           :placeholder="placeholder"
            v-model="showValue"
     />
     <ul class="select" :class="{hidden: select.hidden}" @scroll="loadMore">

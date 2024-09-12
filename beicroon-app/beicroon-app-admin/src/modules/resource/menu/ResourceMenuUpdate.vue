@@ -1,9 +1,10 @@
 <script setup lang="ts">
-import {onMounted, reactive} from "vue";
+import {onMounted, reactive, ref} from "vue";
 import BeicroonInput from "@/components/BeicroonInput.vue";
 import BeicroonButton from "@/components/BeicroonButton.vue";
 import BeicroonLoading from "@/components/BeicroonLoading.vue";
 import BeicroonLineVertical from "@/components/BeicroonLineVertical.vue";
+import ResourceMenuSelect from "@/modules/resource/menu/ResourceMenuSelect.vue";
 import {detail, ResourceMenuUpdateDTO as DTO, update} from "./resource-menu.http.ts";
 
 type Props = {
@@ -35,27 +36,33 @@ async function handleConfirm() {
   emits("confirm");
 }
 
+const parentName = ref();
+
 onMounted(async () => {
   loading.get = true;
 
   const {data} = await detail(props.id).finally(() => loading.get = false);
 
   form.parentId = data.parentId;
-  form.parentCode = data.parentCode;
-  form.parentName = data.parentName;
   form.code = data.code;
   form.name = data.name;
   form.path = data.path;
   form.sorting = data.sorting;
+
+  parentName.value = data.parentName;
 });
 </script>
 
 <template>
   <form class="beicroon-dialog-view">
     <div class="beicroon-dialog-input" v-if="!loading.get">
-      <beicroon-input class="column" label="父级主键" placeholder="父级主键" v-model="form.parentId"></beicroon-input>
-      <beicroon-input class="column" label="父级编码" placeholder="父级编码" v-model="form.parentCode"></beicroon-input>
-      <beicroon-input class="column" label="父级名称" placeholder="父级名称" v-model="form.parentName"></beicroon-input>
+      <resource-menu-select
+        class="column"
+        label="父级"
+        placeholder="父级"
+        v-model="form.parentId"
+        v-model:show-value="parentName"
+      ></resource-menu-select>
       <beicroon-input class="column" label="编码" placeholder="编码" v-model="form.code"></beicroon-input>
       <beicroon-input class="column" label="名称" placeholder="名称" v-model="form.name"></beicroon-input>
       <beicroon-input class="column" label="路径" placeholder="路径" v-model="form.path"></beicroon-input>

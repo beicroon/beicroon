@@ -17,7 +17,7 @@ const list = createBeicroonList<DTO, VO>("资源菜单", page);
 
 onMounted(list.resetSearch);
 
-const parentShowValue = ref();
+const parentName = ref();
 </script>
 
 <template>
@@ -26,7 +26,7 @@ const parentShowValue = ref();
       <resource-menu-select
         label="父级"
         v-model="list.params.parentId"
-        v-model:show-value="parentShowValue"
+        v-model:show-value="parentName"
       ></resource-menu-select>
       <beicroon-input label="编码" v-model="list.params.code"></beicroon-input>
       <beicroon-input label="名称" v-model="list.params.name"></beicroon-input>
@@ -67,7 +67,7 @@ const parentShowValue = ref();
         class="column"
         label="父级"
         v-model="list.params.parentId"
-        v-model:show-value="parentShowValue"
+        v-model:show-value="parentName"
       ></resource-menu-select>
       <beicroon-input class="column" label="编码" v-model="list.params.code"></beicroon-input>
       <beicroon-input class="column" label="名称" v-model="list.params.name"></beicroon-input>

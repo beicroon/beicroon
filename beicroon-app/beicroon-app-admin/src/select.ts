@@ -4,10 +4,6 @@ import {BaseVO, PageInfo, QueryDTO, Response} from "@/http.ts";
 type Page<DTO extends QueryDTO, VO extends BaseVO> = (params: DTO, pageInfo: PageInfo) => Promise<Response<Array<VO>>>;
 
 export type Config<DTO extends QueryDTO, VO extends BaseVO> = {
-    label: string,
-    placeholder?: string,
-    required?: boolean,
-    disabled?: boolean,
     options: Array<VO> | Page<DTO, VO>,
     optionValue: string,
     optionLabel: string,
@@ -19,10 +15,6 @@ export type Select<DTO extends QueryDTO, VO extends BaseVO> = {
     defaultOptions: Array<VO>,
     options: Array<Array<VO>>,
     hidden: boolean,
-    label: string,
-    placeholder?: string,
-    required?: boolean,
-    disabled?: boolean,
     getEvents: () => Record<string, Function>,
     noMore: boolean,
     loading: boolean,
@@ -46,10 +38,6 @@ export default function createBeicroonSelect<DTO extends QueryDTO, VO extends Ba
         defaultOptions: config.options instanceof Array ? config.options : [],
         options: [],
         hidden: true,
-        label: config.label,
-        placeholder: config.placeholder,
-        required: config.required,
-        disabled: config.disabled,
         getEvents: () => {
             return {
                 click: (e: MouseEvent) => {
