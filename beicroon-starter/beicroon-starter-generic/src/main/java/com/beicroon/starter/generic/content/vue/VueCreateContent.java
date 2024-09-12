@@ -44,7 +44,7 @@ public class VueCreateContent {
               </form>
             </template>
 
-            <style lang="less">
+            <style scoped lang="less">
             </style>
             """;
 

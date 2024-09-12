@@ -71,6 +71,8 @@ public class FileManager {
 
     public static final String FILENAME_VUE_UPDATE = "%sUpdate.vue";
 
+    public static final String FILENAME_VUE_SELECT = "%sSelect.vue";
+
     private final File rootPath;
 
     private final String moduleName;
@@ -435,6 +437,10 @@ public class FileManager {
 
     public static File getVueUpdateFile(File modulePath, Table table) {
         return new File(modulePath, String.format(FILENAME_VUE_UPDATE, table.getFilename()));
+    }
+
+    public static File getVueSelectFile(File modulePath, Table table) {
+        return new File(modulePath, String.format(FILENAME_VUE_SELECT, table.getFilename()));
     }
 
 }

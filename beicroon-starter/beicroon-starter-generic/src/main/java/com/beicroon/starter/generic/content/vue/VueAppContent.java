@@ -54,7 +54,7 @@ public class VueAppContent {
               </beicroon-list>
             </template>
 
-            <style lang="less">
+            <style scoped lang="less">
             </style>
             """;
 

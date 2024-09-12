@@ -74,7 +74,7 @@ export default function createBeicroonSelect<DTO extends QueryDTO, VO extends Ba
         request: config.options instanceof Function ? config.options : undefined,
         requested: false,
         params: {} as DTO,
-        pageInfo: {page: 1, size: config.pageSize || 5} as PageInfo,
+        pageInfo: {page: 1, size: config.pageSize || 30} as PageInfo,
         timer: null,
         search: async (keywords?: string) => {
             clearTimeout(select.timer);
