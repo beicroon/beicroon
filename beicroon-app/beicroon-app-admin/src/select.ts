@@ -24,6 +24,7 @@ export type Select<DTO extends QueryDTO, VO extends BaseVO> = {
     pageInfo: PageInfo,
     timer?: any,
     search: (keywords?: string) => Promise<void>,
+    handleSearch: () => Promise<void>,
     handleRequest: (clear?: boolean) => Promise<void>,
     loadMoreOptions: () => Promise<void>,
     optionValue: string,
@@ -67,11 +68,14 @@ export default function createBeicroonSelect<DTO extends QueryDTO, VO extends Ba
         search: async (keywords?: string) => {
             clearTimeout(select.timer);
 
-            select.timer = setTimeout(async () => {
-                select.params.keywords = keywords;
+            select.params.keywords = keywords;
 
-                await select.handleRequest(true);
-            }, 500);
+            select.timer = setTimeout(select.handleSearch, 500);
+        },
+        handleSearch: async () => {
+            select.noMore = false;
+
+            await select.handleRequest(true);
         },
         handleRequest: async (clear: boolean = false) => {
             if (select.request && !select.noMore) {
