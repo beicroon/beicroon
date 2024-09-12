@@ -34,7 +34,6 @@ onMounted(list.resetSearch);
     <template #table-title>
       <beicroon-list-cell width="180">编码</beicroon-list-cell>
       <beicroon-list-cell width="180">账号</beicroon-list-cell>
-      <beicroon-list-cell width="180">密码</beicroon-list-cell>
       <beicroon-list-cell width="180">昵称</beicroon-list-cell>
       <beicroon-list-cell width="180">电话</beicroon-list-cell>
       <beicroon-list-cell width="180">邮箱</beicroon-list-cell>
