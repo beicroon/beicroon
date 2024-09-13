@@ -7,7 +7,7 @@ type Props = {
   placeholder?: string,
   required?: boolean,
   disabled?: boolean,
-  modelValue?: string | number,
+  modelValue?: any,
 };
 
 const props = withDefaults(defineProps<Props>(), {
@@ -18,7 +18,7 @@ const emits = defineEmits(["update:modelValue"]);
 
 const modelValue = computed({
   get: () => props.modelValue,
-  set: (val: string | number | undefined) => emits("update:modelValue", val),
+  set: (val: any) => emits("update:modelValue", val),
 })
 </script>
 

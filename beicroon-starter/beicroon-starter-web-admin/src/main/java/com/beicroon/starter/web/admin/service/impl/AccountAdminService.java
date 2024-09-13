@@ -3,7 +3,10 @@ package com.beicroon.starter.web.admin.service.impl;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.beicroon.construct.entity.IdsDTO;
 import com.beicroon.construct.entity.PageInfo;
+import com.beicroon.construct.utils.EmptyUtils;
+import com.beicroon.construct.utils.HashUtils;
 import com.beicroon.construct.utils.ListUtils;
+import com.beicroon.starter.jwt.utils.JwtUtils;
 import com.beicroon.starter.mysql.utils.PageUtils;
 import com.beicroon.starter.web.admin.convertor.AccountAdminConvertor;
 import com.beicroon.starter.web.admin.entity.account.admin.dto.AccountAdminCreateDTO;
@@ -60,14 +63,20 @@ public class AccountAdminService implements IAccountAdminService {
     @Override
     public boolean create(AccountAdminCreateDTO dto) {
         AccountAdminModel creator = this.accountAdminConvertor.toEntity(dto);
-        
+
+        creator.setPassword(HashUtils.getPasswordHash(creator.getPassword(), JwtUtils.getSaltString()));
+
         return this.accountAdminRepository.save(creator);
     }
 
     @Override
     public boolean update(AccountAdminUpdateDTO dto) {
         AccountAdminModel updater = this.accountAdminConvertor.toEntity(dto);
-        
+
+        if (EmptyUtils.isNotEmpty(updater.getPassword())) {
+            updater.setPassword(HashUtils.getPasswordHash(updater.getPassword(), JwtUtils.getSaltString()));
+        }
+
         return this.accountAdminRepository.updateById(updater);
     }
 

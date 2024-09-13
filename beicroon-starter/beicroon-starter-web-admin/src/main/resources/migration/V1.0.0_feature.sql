@@ -34,7 +34,7 @@ create table `admin_account_admin`
 INSERT INTO `admin_account_admin`
     (`code`, `nickname`, `username`, `password`, `creator_name`, `modifier_name`)
 VALUES
-    ('BeiCroon', 'BeiCroon', 'BeiCroon', 'BeiCroon', 'BeiCroon', 'BeiCroon');
+    ('admin', 'admin', 'admin', 'faf1f45a58caa5b6bdb451adb8a71dfe697472e5c85516ec40fde6f989719610', 'admin', 'admin');
 
 drop table if exists `admin_resource_menu`;
 create table `admin_resource_menu`
@@ -70,11 +70,12 @@ create table `admin_resource_menu`
 INSERT INTO `admin_resource_menu`
     (`id`, `tenant_id`, `parent_id`, `parent_code`, `parent_name`, `code`, `name`, `path`, `creator_name`, `modifier_name`)
 VALUES
-    (1825706731063808002, 0, 0, '', '', 'ACCOUNT_CENTER', '账号中心', '/account/center', 'BeiCroon', 'BeiCroon'),
-    (1825707094248591361, 0, 1825706731063808002, 'ACCOUNT_CENTER', '账号中心', 'ACCOUNT_MANAGER', '账号管理', '/account/manager', 'BeiCroon', 'BeiCroon'),
-    (1825707293197012994, 0, 1825707094248591361, 'ACCOUNT_MANAGER', '账号管理', 'ACCOUNT_ADMIN', '后台账号', '/account/admin', 'BeiCroon', 'BeiCroon'),
-    (1825707485132558337, 0, 0, '', '', 'SETTING_CENTER', '设置中心', '/setting/center', 'BeiCroon', 'BeiCroon'),
-    (1825707757028315138, 0, 1825707485132558337, 'SETTING_CENTER', '设置中心', 'SETTING_SYSTEM', '系统设置','/setting/system', 'BeiCroon', 'BeiCroon'),
-    (1825707969033605121, 0, 1825707757028315138, 'SETTING_SYSTEM', '系统设置', 'RESOURCE_MENU', '菜单管理', '/resource/menu', 'BeiCroon', 'BeiCroon');
+    (1825706731063808002, 0, 0, '', '', 'ACCOUNT_CENTER', '账号中心', '/account/center', 'admin', 'admin'),
+    (1825707094248591361, 0, 1825706731063808002, 'ACCOUNT_CENTER', '账号中心', 'ACCOUNT_MANAGER', '账号管理', '/account/manager', 'admin', 'admin'),
+    (1825707293197012994, 0, 1825707094248591361, 'ACCOUNT_MANAGER', '账号管理', 'ACCOUNT_ADMIN', '后台账号', '/account/admin', 'admin', 'admin'),
+    (1825707485132558337, 0, 0, '', '', 'SETTING_CENTER', '设置中心', '/setting/center', 'admin', 'admin'),
+    (1825707757028315138, 0, 1825707485132558337, 'SETTING_CENTER', '设置中心', 'SETTING_SYSTEM', '系统设置','/setting/system', 'admin', 'admin'),
+    (1825707969033605121, 0, 1825707757028315138, 'SETTING_SYSTEM', '系统设置', 'RESOURCE_MENU', '菜单管理', '/resource/menu', 'admin', 'admin'),
+    (1825707969033606521, 0, 1825707757028315138, 'SETTING_SYSTEM', '系统设置', 'RESOURCE_ROLE', '角色管理', '/resource/role', 'admin', 'admin');
 
 

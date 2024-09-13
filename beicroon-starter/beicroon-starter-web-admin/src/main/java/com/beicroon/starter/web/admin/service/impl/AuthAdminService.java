@@ -37,11 +37,13 @@ public class AuthAdminService implements IAuthAdminService {
 
     @Override
     public AuthAdminLoginVO login(AuthAdminLoginDTO dto) {
+        System.out.println(HashUtils.getPasswordHash(dto.getPassword(), JwtUtils.getSaltString()));
+
         AccountAdminModel admin = this.accountAdminRepository.firstOrError(
                 AccountAdminModel::getUsername, dto.getUsername(), "账号或密码错误"
         );
 
-        if (!HashUtils.checkPassword(admin.getPassword(), dto.getPassword())) {
+        if (!HashUtils.checkPassword(admin.getPassword(), dto.getPassword(), JwtUtils.getSaltString())) {
             throw ExceptionUtils.business("账号或密码错误");
         }
 

@@ -60,7 +60,7 @@ export default function createBeicroonSelect<DTO extends QueryDTO, VO extends Ba
         },
         noMore: false,
         loading: false,
-        request: config.options instanceof Function ? config.options : undefined,
+        request: config.options instanceof Function ? config.options : null,
         requested: false,
         params: {} as DTO,
         pageInfo: {page: 1, size: config.pageSize || 30} as PageInfo,

@@ -1,4 +1,5 @@
 import http, {BaseVO, DisableDTO, DisableVO, PageInfo, QueryDTO, Response, UpdateDTO} from "@/http";
+import {sha256} from "@/hash.ts";
 
 // 基础返回字段
 export type AccountAdminBaseVO = BaseVO & DisableVO & {
@@ -91,7 +92,10 @@ export async function create(dto: AccountAdminCreateDTO): Promise<Response<boole
     return http.request({
         url: "/api/admin/admin/account-admin-create",
         method: "POST",
-        data: dto,
+        data: {
+            ...dto,
+            password: await sha256(dto.password),
+        },
     })
 }
 
@@ -100,7 +104,10 @@ export async function update(dto: AccountAdminUpdateDTO): Promise<Response<boole
     return http.request({
         url: "/api/admin/admin/account-admin-update",
         method: "PUT",
-        data: dto,
+        data: {
+            ...dto,
+            password: await sha256(dto.password),
+        },
     })
 }
 

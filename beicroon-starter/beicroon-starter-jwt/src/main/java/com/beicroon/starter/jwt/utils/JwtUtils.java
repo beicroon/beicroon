@@ -36,6 +36,10 @@ public final class JwtUtils {
 
     }
 
+    public static String getSaltString() {
+        return SALT.values().toString();
+    }
+
     private static String addSalt(String code) {
         StringBuilder sb = new StringBuilder(code);
 
