@@ -65,12 +65,12 @@ export async function detail(id: String): Promise<Response<ResourceMenuDetailVO>
 }
 
 // 分页列表接口
-export async function page(data: ResourceMenuQueryDTO, pageInfo: PageInfo): Promise<Response<Array<ResourceMenuPageVO>>> {
+export async function page(dto: ResourceMenuQueryDTO, pageInfo: PageInfo): Promise<Response<Array<ResourceMenuPageVO>>> {
     return http.request({
         url: "/api/admin/admin/resource-menu-page",
         method: "POST",
         data: {
-            ...data,
+            ...dto,
             pageNum: pageInfo.page,
             pageSize: pageInfo.size,
         },
@@ -78,29 +78,29 @@ export async function page(data: ResourceMenuQueryDTO, pageInfo: PageInfo): Prom
 }
 
 // 全量列表接口
-export async function list(data: ResourceMenuQueryDTO): Promise<Response<Array<ResourceMenuBaseVO>>> {
+export async function list(dto: ResourceMenuQueryDTO): Promise<Response<Array<ResourceMenuBaseVO>>> {
     return http.request({
         url: "/api/admin/admin/resource-menu-list",
         method: "POST",
-        data: data,
+        data: dto,
     })
 }
 
 // 单个新增接口
-export async function create(data: ResourceMenuCreateDTO): Promise<Response<boolean>> {
+export async function create(dto: ResourceMenuCreateDTO): Promise<Response<boolean>> {
     return http.request({
         url: "/api/admin/admin/resource-menu-create",
         method: "POST",
-        data: data,
+        data: dto,
     })
 }
 
 // 单个修改接口
-export async function update(data: ResourceMenuUpdateDTO): Promise<Response<boolean>> {
+export async function update(dto: ResourceMenuUpdateDTO): Promise<Response<boolean>> {
     return http.request({
         url: "/api/admin/admin/resource-menu-update",
         method: "PUT",
-        data: data,
+        data: dto,
     })
 }
 

@@ -11,9 +11,6 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 public class AuthAdminLoginVO extends BaseVO {
 
-    @ApiModelProperty(name = "主键")
-    private Long id;
-
     @ApiModelProperty(name = "编码")
     private String code;
 

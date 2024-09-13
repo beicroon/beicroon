@@ -54,12 +54,12 @@ public class VueHttpContent {
             }
 
             // 分页列表接口
-            export async function page(data: {{filename}}QueryDTO, pageInfo: PageInfo): Promise<Response<Array<{{filename}}PageVO>>> {
+            export async function page(dto: {{filename}}QueryDTO, pageInfo: PageInfo): Promise<Response<Array<{{filename}}PageVO>>> {
                 return http.request({
                     url: "/api/{{modulePrefix}}/admin/{{urlName}}-page",
                     method: "POST",
                     data: {
-                        ...data,
+                        ...dto,
                         pageNum: pageInfo.page,
                         pageSize: pageInfo.size,
                     },
@@ -67,29 +67,29 @@ public class VueHttpContent {
             }
 
             // 全量列表接口
-            export async function list(data: {{filename}}QueryDTO): Promise<Response<Array<{{filename}}BaseVO>>> {
+            export async function list(dto: {{filename}}QueryDTO): Promise<Response<Array<{{filename}}BaseVO>>> {
                 return http.request({
                     url: "/api/{{modulePrefix}}/admin/{{urlName}}-list",
                     method: "POST",
-                    data: data,
+                    data: dto,
                 })
             }
 
             // 单个新增接口
-            export async function create(data: {{filename}}CreateDTO): Promise<Response<boolean>> {
+            export async function create(dto: {{filename}}CreateDTO): Promise<Response<boolean>> {
                 return http.request({
                     url: "/api/{{modulePrefix}}/admin/{{urlName}}-create",
                     method: "POST",
-                    data: data,
+                    data: dto,
                 })
             }
 
             // 单个修改接口
-            export async function update(data: {{filename}}UpdateDTO): Promise<Response<boolean>> {
+            export async function update(dto: {{filename}}UpdateDTO): Promise<Response<boolean>> {
                 return http.request({
                     url: "/api/{{modulePrefix}}/admin/{{urlName}}-update",
                     method: "PUT",
-                    data: data,
+                    data: dto,
                 })
             }
 

@@ -1,17 +1,9 @@
 <script setup lang="ts">
 import router from "@/router.ts";
 import {onBeforeMount, ref} from "vue";
-import {AuthMenu, listAuthMenu} from "@/auth.http.ts";
+import {AuthMenu, index, listAuthMenu} from "@/auth.http.ts";
 import BeicroonLineCross from "@/components/BeicroonLineCross.vue";
 import BeicroonLineVertical from "@/components/BeicroonLineVertical.vue";
-
-const index: AuthMenu = {
-  code: "INDEX",
-  name: "首页",
-  path: "/index",
-  active: false,
-  children: [],
-};
 
 const menus = ref<Array<AuthMenu>>([]);
 

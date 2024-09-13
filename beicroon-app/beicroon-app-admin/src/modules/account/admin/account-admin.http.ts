@@ -65,12 +65,12 @@ export async function detail(id: String): Promise<Response<AccountAdminDetailVO>
 }
 
 // 分页列表接口
-export async function page(data: AccountAdminQueryDTO, pageInfo: PageInfo): Promise<Response<Array<AccountAdminPageVO>>> {
+export async function page(dto: AccountAdminQueryDTO, pageInfo: PageInfo): Promise<Response<Array<AccountAdminPageVO>>> {
     return http.request({
         url: "/api/admin/admin/account-admin-page",
         method: "POST",
         data: {
-            ...data,
+            ...dto,
             pageNum: pageInfo.page,
             pageSize: pageInfo.size,
         },
@@ -78,29 +78,29 @@ export async function page(data: AccountAdminQueryDTO, pageInfo: PageInfo): Prom
 }
 
 // 全量列表接口
-export async function list(data: AccountAdminQueryDTO): Promise<Response<Array<AccountAdminBaseVO>>> {
+export async function list(dto: AccountAdminQueryDTO): Promise<Response<Array<AccountAdminBaseVO>>> {
     return http.request({
         url: "/api/admin/admin/account-admin-list",
         method: "POST",
-        data: data,
+        data: dto,
     })
 }
 
 // 单个新增接口
-export async function create(data: AccountAdminCreateDTO): Promise<Response<boolean>> {
+export async function create(dto: AccountAdminCreateDTO): Promise<Response<boolean>> {
     return http.request({
         url: "/api/admin/admin/account-admin-create",
         method: "POST",
-        data: data,
+        data: dto,
     })
 }
 
 // 单个修改接口
-export async function update(data: AccountAdminUpdateDTO): Promise<Response<boolean>> {
+export async function update(dto: AccountAdminUpdateDTO): Promise<Response<boolean>> {
     return http.request({
         url: "/api/admin/admin/account-admin-update",
         method: "PUT",
-        data: data,
+        data: dto,
     })
 }
 
