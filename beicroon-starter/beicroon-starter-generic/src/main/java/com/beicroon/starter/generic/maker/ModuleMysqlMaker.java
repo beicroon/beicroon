@@ -11,6 +11,7 @@ import com.beicroon.starter.generic.content.manager.ManagerContent;
 import com.beicroon.starter.generic.content.mapper.MapperContent;
 import com.beicroon.starter.generic.content.mapper.MapperXmlContent;
 import com.beicroon.starter.generic.content.model.ModelContent;
+import com.beicroon.starter.generic.content.repository.RelationRepositoryContent;
 import com.beicroon.starter.generic.content.repository.RepositoryContent;
 import com.beicroon.starter.generic.content.service.ServiceContent;
 import com.beicroon.starter.generic.content.service.ServiceImplContent;
@@ -107,6 +108,10 @@ public class ModuleMysqlMaker {
         }
 
         for (Table table : this.tables) {
+            if (table.isRelation()) {
+                continue;
+            }
+
             File modulePath = new File(rootPath, table.getPath());
 
             FileUtils.mkdir(modulePath);
@@ -192,22 +197,28 @@ public class ModuleMysqlMaker {
             table.setDtoContent(dtoContent.toString());
             table.setQueryContent(queryContent.toString());
 
-            FileUtils.writeFileIfNotExists(fileManager.getConverTorFile(table), ConvertorContent.getContent(packageManager, table));
-            FileUtils.writeFileIfNotExists(fileManager.getHelperFile(table), HelperContent.getContent(packageManager, table));
-            FileUtils.writeFileIfNotExists(fileManager.getManagerFile(table), ManagerContent.getContent(packageManager, table));
             FileUtils.writeFileIfNotExists(fileManager.getMapperFile(table), MapperContent.getContent(packageManager, table));
             FileUtils.writeFileIfNotExists(fileManager.getModelFile(table), ModelContent.getContent(packageManager, table));
-            FileUtils.writeFileIfNotExists(fileManager.getRepositoryFile(table), RepositoryContent.getContent(packageManager, table));
-            FileUtils.writeFileIfNotExists(fileManager.getMapperXmlFile(table), MapperXmlContent.getContent(packageManager, table));
             FileUtils.writeFileIfNotExists(fileManager.getCreateDTOFile(table), CreateDTOContent.getContent(packageManager, table));
-            FileUtils.writeFileIfNotExists(fileManager.getUpdateDTOFile(table), UpdateDTOContent.getContent(packageManager, table));
-            FileUtils.writeFileIfNotExists(fileManager.getQueryDTOFile(table), QueryDTOContent.getContent(packageManager, table));
             FileUtils.writeFileIfNotExists(fileManager.getBaseVOFile(table), BaseVOContent.getContent(packageManager, table));
-            FileUtils.writeFileIfNotExists(fileManager.getDetailVOFile(table), DetailVOContent.getContent(packageManager, table));
-            FileUtils.writeFileIfNotExists(fileManager.getPageVOFile(table), PageVOContent.getContent(packageManager, table));
-            FileUtils.writeFileIfNotExists(fileManager.getControllerAdminFile(table), AdminControllerContent.getContent(packageManager, table));
-            FileUtils.writeFileIfNotExists(fileManager.getServiceFile(table), ServiceContent.getContent(packageManager, table));
-            FileUtils.writeFileIfNotExists(fileManager.getServiceImplFile(table), ServiceImplContent.getContent(packageManager, table));
+
+            if (table.isRelation()) {
+//                FileUtils.writeFileIfNotExists(fileManager.getConvertorFile(table), RelationConvertorContent.getContent(packageManager, table));
+                FileUtils.writeFileIfNotExists(fileManager.getRepositoryFile(table), RelationRepositoryContent.getContent(packageManager, table));
+            } else {
+                FileUtils.writeFileIfNotExists(fileManager.getRepositoryFile(table), RepositoryContent.getContent(packageManager, table));
+                FileUtils.writeFileIfNotExists(fileManager.getConvertorFile(table), ConvertorContent.getContent(packageManager, table));
+                FileUtils.writeFileIfNotExists(fileManager.getHelperFile(table), HelperContent.getContent(packageManager, table));
+                FileUtils.writeFileIfNotExists(fileManager.getManagerFile(table), ManagerContent.getContent(packageManager, table));
+                FileUtils.writeFileIfNotExists(fileManager.getMapperXmlFile(table), MapperXmlContent.getContent(packageManager, table));
+                FileUtils.writeFileIfNotExists(fileManager.getUpdateDTOFile(table), UpdateDTOContent.getContent(packageManager, table));
+                FileUtils.writeFileIfNotExists(fileManager.getQueryDTOFile(table), QueryDTOContent.getContent(packageManager, table));
+                FileUtils.writeFileIfNotExists(fileManager.getDetailVOFile(table), DetailVOContent.getContent(packageManager, table));
+                FileUtils.writeFileIfNotExists(fileManager.getPageVOFile(table), PageVOContent.getContent(packageManager, table));
+                FileUtils.writeFileIfNotExists(fileManager.getControllerAdminFile(table), AdminControllerContent.getContent(packageManager, table));
+                FileUtils.writeFileIfNotExists(fileManager.getServiceFile(table), ServiceContent.getContent(packageManager, table));
+                FileUtils.writeFileIfNotExists(fileManager.getServiceImplFile(table), ServiceImplContent.getContent(packageManager, table));
+            }
         }
 
         System.out.println("接口初始化结束");

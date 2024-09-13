@@ -355,7 +355,7 @@ public class FileManager {
         return new File(this.getWebMigrationPath(), String.format(FILENAME_MIGRATION, moduleVersion));
     }
 
-    public File getConverTorFile(Table table) {
+    public File getConvertorFile(Table table) {
         return new File(this.getConvertorPath(), String.format(FILENAME_CONVERTOR, table.getFilename()));
     }
 

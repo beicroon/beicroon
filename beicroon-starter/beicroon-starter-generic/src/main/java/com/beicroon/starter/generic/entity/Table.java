@@ -15,9 +15,15 @@ public class Table implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
 
+    private static final String SUFFIX_RELATION = "_relation";
+
     private final String prefix;
 
     private final String name;
+
+    private final String suffix;
+
+    private final boolean isRelation;
 
     private final String comment;
 
@@ -70,6 +76,18 @@ public class Table implements Serializable {
 
         String tempName = name.replaceFirst(prefix, "");
 
+        if (tempName.endsWith(SUFFIX_RELATION)) {
+            this.suffix = SUFFIX_RELATION;
+
+            this.isRelation = true;
+
+            tempName = tempName.substring(0, tempName.length() - SUFFIX_RELATION.length());
+        } else {
+            this.suffix = "";
+
+            this.isRelation = false;
+        }
+
         if (tempName.startsWith("_")) {
             this.name = tempName.substring(1);
         } else {
@@ -104,7 +122,7 @@ public class Table implements Serializable {
     }
 
     public String getTableName() {
-        return this.prefix + "_" + this.name;
+        return this.prefix + "_" + this.name + this.suffix;
     }
 
     public String getPath() {
