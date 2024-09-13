@@ -2,13 +2,16 @@ package com.beicroon.starter.mysql.mapper;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.core.toolkit.support.SFunction;
 import com.baomidou.mybatisplus.extension.toolkit.SqlHelper;
 import com.beicroon.construct.constant.SystemConstant;
 import com.beicroon.construct.exception.utils.ExceptionUtils;
 import com.beicroon.construct.utils.EmptyUtils;
 import com.beicroon.construct.utils.ListUtils;
+import com.beicroon.starter.mysql.helper.RemoveHelper;
 import com.beicroon.starter.mysql.model.GenericModel;
 import com.beicroon.starter.mysql.utils.QueryUtils;
 
@@ -312,28 +315,60 @@ public interface GenericMapper<T extends GenericModel> extends BaseMapper<T> {
         }
     }
 
-    default boolean remove(SFunction<T, ?> column, Object value) {
+    default boolean softDelete(SFunction<T, ?> column, Object value) {
         if (value == null) {
             return false;
         }
 
-        QueryWrapper<T> wrapper = QueryUtils.newQueryWrapper();
+        UpdateWrapper<T> wrapper = Wrappers.update();
+
+        RemoveHelper.setRemoveWrapper(wrapper);
 
         wrapper.lambda().eq(column, value);
 
-        return SqlHelper.retBool(this.delete(wrapper));
+        return SqlHelper.retBool(this.update(wrapper));
     }
 
-    default boolean remove(SFunction<T, ?> column, Collection<?> values) {
+    default boolean softDelete(SFunction<T, ?> column, Collection<?> values) {
         if (EmptyUtils.isEmpty(values)) {
             return false;
         }
 
-        QueryWrapper<T> wrapper = QueryUtils.newQueryWrapper();
+        UpdateWrapper<T> wrapper = Wrappers.update();
+
+        RemoveHelper.setRemoveWrapper(wrapper);
 
         wrapper.lambda().in(column, values);
 
-        return SqlHelper.retBool(this.delete(wrapper));
+        return SqlHelper.retBool(this.update(wrapper));
+    }
+
+    default boolean softDeleteById(Long id) {
+        if (EmptyUtils.isNotId(id)) {
+            return false;
+        }
+
+        UpdateWrapper<T> wrapper = Wrappers.update();
+
+        wrapper.eq(SystemConstant.PRIMARY_KEY_NAME, id);
+
+        RemoveHelper.setRemoveWrapper(wrapper);
+
+        return SqlHelper.retBool(this.update(wrapper));
+    }
+
+    default boolean softDeleteByIds(Collection<Long> ids) {
+        if (EmptyUtils.isEmpty(ids)) {
+            return false;
+        }
+
+        UpdateWrapper<T> wrapper = Wrappers.update();
+
+        wrapper.in(SystemConstant.PRIMARY_KEY_NAME, ids);
+
+        RemoveHelper.setRemoveWrapper(wrapper);
+
+        return SqlHelper.retBool(this.update(wrapper));
     }
 
     default boolean existed(SFunction<T, ?> column, Object value) {

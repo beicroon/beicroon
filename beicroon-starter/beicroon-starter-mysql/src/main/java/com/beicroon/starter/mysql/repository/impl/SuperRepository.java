@@ -148,12 +148,12 @@ public abstract class SuperRepository<M extends GenericMapper<T>, T extends Gene
         this.getBaseMapper().chunkById(field, getter, size, wrapper, consumer);
     }
 
-    public boolean remove(SFunction<T, ?> column, Object value) {
-        return this.getBaseMapper().remove(column, value);
+    public boolean delete(SFunction<T, ?> column, Object value) {
+        return this.getBaseMapper().softDelete(column, value);
     }
 
-    public boolean remove(SFunction<T, ?> column, Collection<?> values) {
-        return this.getBaseMapper().remove(column, values);
+    public boolean delete(SFunction<T, ?> column, Collection<?> values) {
+        return this.getBaseMapper().softDelete(column, values);
     }
 
     public boolean existed(SFunction<T, ?> column, Object value) {
