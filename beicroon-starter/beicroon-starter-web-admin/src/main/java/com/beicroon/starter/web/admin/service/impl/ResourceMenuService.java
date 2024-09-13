@@ -12,6 +12,7 @@ import com.beicroon.starter.web.admin.entity.resource.menu.dto.ResourceMenuUpdat
 import com.beicroon.starter.web.admin.entity.resource.menu.vo.ResourceMenuBaseVO;
 import com.beicroon.starter.web.admin.entity.resource.menu.vo.ResourceMenuDetailVO;
 import com.beicroon.starter.web.admin.entity.resource.menu.vo.ResourceMenuPageVO;
+import com.beicroon.starter.web.admin.manager.ResourceMenuManager;
 import com.beicroon.starter.web.admin.model.ResourceMenuModel;
 import com.beicroon.starter.web.admin.repository.ResourceMenuRepository;
 import com.beicroon.starter.web.admin.service.IResourceMenuService;
@@ -22,6 +23,9 @@ import java.util.List;
 
 @Service
 public class ResourceMenuService implements IResourceMenuService {
+
+    @Resource
+    private ResourceMenuManager resourceMenuManager;
 
     @Resource
     private ResourceMenuConvertor resourceMenuConvertor;
@@ -60,13 +64,17 @@ public class ResourceMenuService implements IResourceMenuService {
     @Override
     public boolean create(ResourceMenuCreateDTO dto) {
         ResourceMenuModel creator = this.resourceMenuConvertor.toEntity(dto);
-        
+
+        this.resourceMenuManager.setParent(creator, dto.getParentId());
+
         return this.resourceMenuRepository.save(creator);
     }
 
     @Override
     public boolean update(ResourceMenuUpdateDTO dto) {
         ResourceMenuModel updater = this.resourceMenuConvertor.toEntity(dto);
+
+        this.resourceMenuManager.setParent(updater, dto.getParentId());
         
         return this.resourceMenuRepository.updateById(updater);
     }
