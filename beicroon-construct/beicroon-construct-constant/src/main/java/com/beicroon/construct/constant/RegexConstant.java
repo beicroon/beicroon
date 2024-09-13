@@ -6,11 +6,11 @@ public interface RegexConstant {
 
     String CASE_SNAKE = "_(\\w)";
 
-    String PHONE = "^(+?86)?(-\\s)?1[3-9](-\\s)?[0-9]{4}(-\\s)?[0-9]{4}$";
-
-    String ID_CARD = "^[0-9]{17}([0-9]|X)$";
+    String CELLPHONE = "^(+?86)?(-\\s)?1[3-9](-\\s)?[0-9]{4}(-\\s)?[0-9]{4}$";
 
     String MOBILE = "^(0[0-9]{2,3}-?|\\(0[0-9]{2,3}\\))?[1-9][0-9]{6,7}|400-?[0-9]{3}-?[0-9]{4}$";
+
+    String ID_CARD = "^[0-9]{17}([0-9]|X)$";
 
     String EMAIL = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
 

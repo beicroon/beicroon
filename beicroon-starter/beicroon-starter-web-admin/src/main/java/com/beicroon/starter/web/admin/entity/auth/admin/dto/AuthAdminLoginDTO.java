@@ -12,11 +12,11 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 public class AuthAdminLoginDTO extends BaseDTO {
 
-    @NeedValue(message = "[username]必传")
+    @NeedValue(message = "账号[username]不能为空")
     @ApiModelProperty(name = "账号")
     private String username;
 
-    @NeedValue(message = "[password]必传")
+    @NeedValue(message = "密码[password]不能为空")
     @ApiModelProperty(name = "密码")
     private String password;
 

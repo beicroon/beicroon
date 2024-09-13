@@ -2,6 +2,7 @@ package com.beicroon.starter.web.admin.entity.resource.menu.dto;
 
 import com.beicroon.construct.annotation.ApiModel;
 import com.beicroon.construct.annotation.ApiModelProperty;
+import com.beicroon.construct.annotation.NeedValue;
 import com.beicroon.construct.entity.CreateDTO;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -14,18 +15,15 @@ public class ResourceMenuCreateDTO extends CreateDTO {
     @ApiModelProperty(name = "父级主键")
     private Long parentId;
 
-    @ApiModelProperty(name = "父级编码")
-    private String parentCode;
-
-    @ApiModelProperty(name = "父级名称")
-    private String parentName;
-
+    @NeedValue(message = "编码[code]不能为空")
     @ApiModelProperty(name = "编码")
     private String code;
 
+    @NeedValue(message = "名称[name]不能为空")
     @ApiModelProperty(name = "名称")
     private String name;
 
+    @NeedValue(message = "路径[path]不能为空")
     @ApiModelProperty(name = "路径")
     private String path;
 
