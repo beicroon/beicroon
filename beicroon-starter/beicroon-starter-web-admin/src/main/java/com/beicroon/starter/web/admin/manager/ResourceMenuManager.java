@@ -25,8 +25,8 @@ public class ResourceMenuManager {
 
      public void setParent(ResourceMenuModel menu, ResourceMenuModel parent) {
           menu.setParentId(parent.getId());
-          menu.setParentCode(parent.getParentCode());
-          menu.setParentName(parent.getParentName());
+          menu.setParentCode(parent.getCode());
+          menu.setParentName(parent.getName());
      }
 
 }
