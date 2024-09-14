@@ -93,8 +93,10 @@ html, body, #beicroon-app {
 }
 
 &.hidden {
+  width: 0 !important;
+  height: 0 !important;
   opacity: 0 !important;
-  display: none !important;
+  overflow: hidden !important;
   visibility: hidden !important;
 }
 

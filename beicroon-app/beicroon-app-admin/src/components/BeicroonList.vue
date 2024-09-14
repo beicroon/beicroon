@@ -14,14 +14,14 @@ type Props = {
 
 const props = defineProps<Props>();
 
-const moreSearch = ref(false);
+const moreSearchHidden = ref(true);
 
 async function toggleMoreSearch() {
-  moreSearch.value = !moreSearch.value;
+  moreSearchHidden.value = !moreSearchHidden.value;
 
-  if (moreSearch.value) {
+  if (moreSearchHidden.value) {
     await escToggle(async () => {
-      moreSearch.value = false;
+      moreSearchHidden.value = false;
     });
   } else {
     await escToggle();
@@ -65,7 +65,7 @@ const moreSearchSize = computed(() => {
       <div class="more-search" @click.stop v-show="hasMoreSearch">
         <beicroon-button class="search-button primary" label="更多筛选" @click="toggleMoreSearch"></beicroon-button>
         <h6 class="search-size">+{{ moreSearchSize }}</h6>
-        <form class="search-input" :class="{show: moreSearch}" ref="moreSearchForm">
+        <form class="search-input" :class="{hidden: moreSearchHidden}" ref="moreSearchForm">
           <slot name="more-search"></slot>
         </form>
       </div>
@@ -172,15 +172,14 @@ const moreSearchSize = computed(() => {
       }
 
       .search-input {
-        width: 0;
-        height: 0;
-        opacity: 0;
         gap: 18rem;
         z-index: 1;
         left: 8rem;
         display: grid;
         bottom: 36rem;
-        overflow: hidden;
+        width: 1080rem;
+        height: 600rem;
+        overflow-y: auto;
         position: absolute;
         border-radius: 6rem;
         padding: 24rem 8rem;
@@ -191,13 +190,6 @@ const moreSearchSize = computed(() => {
         grid-template-columns: repeat(3, 1fr);
         border: 1rem solid var(--color-grey-light);
         box-shadow: 0 0 8rem -3rem var(--color-black-30) inset;
-
-        &.show {
-          opacity: 1;
-          width: 1080rem;
-          height: 600rem;
-          overflow-y: auto;
-        }
       }
 
       .beicroon-input {
