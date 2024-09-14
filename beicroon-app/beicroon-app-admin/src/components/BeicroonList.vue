@@ -20,11 +20,11 @@ async function toggleMoreSearch() {
   moreSearchHidden.value = !moreSearchHidden.value;
 
   if (moreSearchHidden.value) {
-    await escToggle(async () => {
-      moreSearchHidden.value = false;
-    });
+    await escToggle(false);
   } else {
-    await escToggle();
+    await escToggle(async () => {
+      moreSearchHidden.value = true;
+    });
   }
 }
 
