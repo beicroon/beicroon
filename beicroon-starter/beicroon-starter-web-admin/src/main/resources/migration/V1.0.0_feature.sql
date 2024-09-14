@@ -117,8 +117,8 @@ create table `admin_resource_role_menu_relation`
     index `idx_role_id_menu_id` (`role_id`, `menu_id`)
 ) engine = innodb comment '角色菜单';
 
-drop table if exists `admin_resource_admin_role_relation`;
-create table `admin_resource_admin_role_relation`
+drop table if exists `admin_account_admin_role_relation`;
+create table `admin_account_admin_role_relation`
 (
     `id`            bigint(20) unsigned not null auto_increment comment '主键',
     `tenant_id`     bigint(20) unsigned not null default 0 comment '租户主键',
@@ -142,4 +142,4 @@ create table `admin_resource_admin_role_relation`
     `deleter_name`  varchar(255)        not null default '' comment '删除人昵称',
     primary key (`id`),
     index `idx_admin_id_role_id` (`admin_id`, `role_id`)
-) engine = innodb comment '角色菜单';
+) engine = innodb comment '后台账号角色';

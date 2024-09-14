@@ -23,8 +23,6 @@ onMounted(list.resetSearch);
       <beicroon-input label="编码" v-model="list.params.code"></beicroon-input>
       <beicroon-input label="账号" v-model="list.params.username"></beicroon-input>
       <beicroon-input label="昵称" v-model="list.params.nickname"></beicroon-input>
-      <beicroon-input label="电话" v-model="list.params.phone"></beicroon-input>
-      <beicroon-input label="邮箱" v-model="list.params.email"></beicroon-input>
     </template>
     <template #head-button>
       <beicroon-button class="block primary" label="重置" @click="list.handleReset"></beicroon-button>

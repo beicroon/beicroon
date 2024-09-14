@@ -3,6 +3,7 @@ package com.beicroon.starter.generic.maker;
 import com.beicroon.construct.constant.SystemConstant;
 import com.beicroon.starter.generic.content.controller.AdminControllerContent;
 import com.beicroon.starter.generic.content.convertor.ConvertorContent;
+import com.beicroon.starter.generic.content.convertor.RelationConvertorContent;
 import com.beicroon.starter.generic.content.dto.CreateDTOContent;
 import com.beicroon.starter.generic.content.dto.QueryDTOContent;
 import com.beicroon.starter.generic.content.dto.UpdateDTOContent;
@@ -46,6 +47,9 @@ public class ModuleMysqlMaker {
         IGNORES_TABLES.add("flyway_schema_history");
         IGNORES_TABLES.add("admin_account_admin");
         IGNORES_TABLES.add("admin_resource_menu");
+        IGNORES_TABLES.add("admin_resource_role");
+        IGNORES_TABLES.add("admin_resource_role_menu_relation");
+        IGNORES_TABLES.add("admin_account_admin_role_relation");
 
         NUMBER_TYPES.put("Integer", "number");
 
@@ -130,7 +134,7 @@ public class ModuleMysqlMaker {
             for (Field field : table.getColumns()) {
                 vueHttpContent.append(this.getVueHttpFieldString(field));
 
-                if (searchCount <= 9) {
+                if (searchCount <= 3) {
                     vueSearchContent.append(this.getVueSearchFieldString(field));
 
                     searchCount++;
@@ -203,7 +207,7 @@ public class ModuleMysqlMaker {
             FileUtils.writeFileIfNotExists(fileManager.getBaseVOFile(table), BaseVOContent.getContent(packageManager, table));
 
             if (table.isRelation()) {
-//                FileUtils.writeFileIfNotExists(fileManager.getConvertorFile(table), RelationConvertorContent.getContent(packageManager, table));
+                FileUtils.writeFileIfNotExists(fileManager.getConvertorFile(table), RelationConvertorContent.getContent(packageManager, table));
                 FileUtils.writeFileIfNotExists(fileManager.getRepositoryFile(table), RelationRepositoryContent.getContent(packageManager, table));
             } else {
                 FileUtils.writeFileIfNotExists(fileManager.getRepositoryFile(table), RepositoryContent.getContent(packageManager, table));

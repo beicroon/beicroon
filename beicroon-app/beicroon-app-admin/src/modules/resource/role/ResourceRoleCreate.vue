@@ -31,7 +31,6 @@ async function handleConfirm() {
       <beicroon-input class="column" label="编码" placeholder="编码" v-model="form.code"></beicroon-input>
       <beicroon-input class="column" label="名称" placeholder="名称" v-model="form.name"></beicroon-input>
       <beicroon-input class="column" label="备注" placeholder="备注" v-model="form.remark"></beicroon-input>
-      <beicroon-input class="column" label="是否超级管理员" placeholder="是否超级管理员" v-model="form.superAdminFlag"></beicroon-input>
     </div>
     <beicroon-line-vertical></beicroon-line-vertical>
     <div class="beicroon-dialog-button">

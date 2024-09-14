@@ -10,12 +10,6 @@ import java.time.LocalDateTime;
 @EqualsAndHashCode(callSuper = true)
 public class DisableVO extends GenericVO {
 
-    @ApiModelProperty(name = "禁用标识")
-    private String disabledFlag;
-
-    @ApiModelProperty(name = "禁用标识")
-    private String disableDesc;
-
     @ApiModelProperty(name = "禁用时间")
     private LocalDateTime disabledAt;
 

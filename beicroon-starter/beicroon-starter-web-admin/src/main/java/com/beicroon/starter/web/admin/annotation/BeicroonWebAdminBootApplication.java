@@ -11,8 +11,8 @@ import java.lang.annotation.*;
 
 @Inherited
 @Documented
-@BeicroonWebBootApplication
 @Target(ElementType.TYPE)
+@BeicroonWebBootApplication
 @Retention(RetentionPolicy.RUNTIME)
 public @interface BeicroonWebAdminBootApplication {
 

@@ -14,6 +14,10 @@ public enum BooleanEnums {
 
     private final String name;
 
+    public boolean isTrue() {
+        return this.code.equals(BooleanEnums.TRUE.getCode());
+    }
+
     public static BooleanEnums boolOf(Boolean flag) {
         return flag != null && flag ? BooleanEnums.TRUE : BooleanEnums.FALSE;
     }

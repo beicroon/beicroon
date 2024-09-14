@@ -76,83 +76,40 @@ const moreSearchSize = computed(() => {
 
 <style lang="less">
 :root {
-  --beicroon-height-list-head: 160rem;
-  --beicroon-height-list-head-row: 108rem;
+  --beicroon-height-list-head: 108rem;
   --beicroon-height-list-foot: 60rem;
-  --beicroon-width-search-button: 130rem;
 }
 
 .beicroon-list {
   width: 100%;
   height: 100%;
 
-  &.row-search {
-    .list-head {
-      flex-direction: column;
-      height: var(--beicroon-height-list-head-row);
-
-      .head-search {
-        width: 100%;
-        height: fit-content;
-      }
-
-      .head-button {
-        width: 100%;
-        padding: 8rem;
-        height: 34rem;
-        min-height: auto;
-        flex-direction: row;
-        justify-content: flex-end;
-      }
-    }
-
-    .list-body {
-      height: calc(100% - var(--beicroon-height-list-head-row) - var(--beicroon-height-list-foot) - 2 * var(--beicroon-height-line));
-    }
-  }
-
   .list-head {
     z-index: 2;
     width: 100%;
     display: flex;
+    padding: 8rem;
     position: relative;
-    flex-direction: row;
+    flex-direction: column;
     height: var(--beicroon-height-list-head);
 
     .head-search {
+      width: 100%;
       height: 100%;
       display: flex;
-      padding: 8rem;
       flex-wrap: wrap;
       flex-direction: row;
       align-items: center;
       justify-content: flex-start;
-      width: calc(100% - var(--beicroon-width-search-button));
-    }
-
-    .head-search-full {
-      height: 100%;
-      width: 350rem;
-    }
-
-    .head-search-sub {
-      flex: 1;
-      gap: 16rem;
-      display: flex;
-      flex-wrap: wrap;
-      flex-direction: row;
-      align-items: flex-start;
-      justify-content: space-between;
     }
 
     .head-button {
-      gap: 13rem;
+      gap: 14rem;
       display: flex;
-      min-height: 100%;
       height: fit-content;
       align-items: center;
-      flex-direction: column;
-      justify-content: center;
+      flex-direction: row;
+      justify-content: flex-end;
       width: var(--beicroon-width-search-button);
     }
   }
@@ -237,7 +194,7 @@ const moreSearchSize = computed(() => {
 
         &.show {
           opacity: 1;
-          width: 1080rem;
+          width: 1020rem;
           height: 600rem;
           overflow-y: auto;
         }

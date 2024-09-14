@@ -20,6 +20,16 @@ function toLinkPath(link: AuthMenu) {
         item.active = false;
       });
     });
+
+    prevMenu.value = null;
+  }
+
+  if (currentMenu.value !== null) {
+    currentMenu.value.children.forEach((child) => {
+      child.children.forEach((item) => {
+        item.active = false;
+      });
+    });
   }
 
   link.active = true;
@@ -102,7 +112,7 @@ onBeforeMount(async () => {
 :root {
   --beicroon-height-head: 60rem;
   --beicroon-height-line: 1rem;
-  --beicroon-width-menu: 180rem;
+  --beicroon-width-menu: 169rem;
   --beicroon-width-line: 1rem;
 }
 

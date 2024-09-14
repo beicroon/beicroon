@@ -29,6 +29,11 @@ const router: Router = createRouter({
                     path: "/resource/menu",
                     component: () => import("@/modules/resource/menu/ResourceMenuApp.vue"),
                 },
+                {
+                    name: "角色管理",
+                    path: "/resource/role",
+                    component: () => import("@/modules/resource/role/ResourceRoleApp.vue"),
+                },
             ],
         },
     ],

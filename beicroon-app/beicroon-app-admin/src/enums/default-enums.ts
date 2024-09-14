@@ -1,5 +1,5 @@
 export enum BooleanEnums {
-    TRUE = "true",
+    TRUE = "true" ,
     FALSE = "false",
 }
 

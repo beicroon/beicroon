@@ -72,14 +72,10 @@ const modelValue = computed({
 
   &.column {
     gap: 12rem;
-    padding: 14rem 18rem;
     border-radius: 6rem;
+    padding: 14rem 18rem;
     flex-direction: column;
     align-items: flex-start;
-
-    .beicroon-input-area {
-      width: 300rem;
-    }
   }
 
   .beicroon-input-label {
@@ -92,7 +88,7 @@ const modelValue = computed({
   }
 
   .beicroon-input-area {
-    width: 240rem;
+    width: 300rem;
     outline: none;
     height: 32rem;
     padding: 0 8rem;

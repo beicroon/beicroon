@@ -8,18 +8,44 @@ public class RelationConvertorContent {
     private static final String CONTENT = """
             package {{package}}.convertor;
 
+            import com.beicroon.construct.utils.ListUtils;
             import {{package}}.model.{{filename}}Model;
             import {{modulePackage}}.dto.{{filename}}CreateDTO;
-            import {{modulePackage}}.dto.{{filename}}UpdateDTO;
             import {{modulePackage}}.vo.{{filename}}BaseVO;
-            import {{modulePackage}}.vo.{{filename}}DetailVO;
-            import {{modulePackage}}.vo.{{filename}}PageVO;
-            import com.beicroon.starter.dao.convertor.GenericConvertor;
-            import org.mapstruct.Mapper;
-            import org.mapstruct.ReportingPolicy;
+            import com.beicroon.starter.dao.helper.ConvertorHelper;
+            import org.mapstruct.*;
+
+            import java.util.List;
 
             @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
-            public interface {{filename}}Convertor extends RelationConvertor<{{filename}}Model, {{filename}}CreateDTO, {{filename}}UpdateDTO, {{filename}}BaseVO, {{filename}}DetailVO, {{filename}}PageVO> {
+            public interface {{filename}}Convertor {
+
+                @Mapping(target = "id", ignore = true)
+                @Mapping(target = "createdAt", ignore = true)
+                @Mapping(target = "creatorId", ignore = true)
+                @Mapping(target = "creatorCode", ignore = true)
+                @Mapping(target = "creatorName", ignore = true)
+                @Mapping(target = "modifiedAt", ignore = true)
+                @Mapping(target = "modifierId", ignore = true)
+                @Mapping(target = "modifierCode", ignore = true)
+                @Mapping(target = "modifierName", ignore = true)
+                {{filename}}Model toEntity({{filename}}CreateDTO dto);
+
+                @AfterMapping
+                default void fillCreator(@MappingTarget {{filename}}Model model) {
+                    ConvertorHelper.fillCreator(model);
+                }
+
+                {{filename}}BaseVO toBaseVO({{filename}}Model model);
+
+                default List<{{filename}}BaseVO> toBaseVO(List<{{filename}}Model> models) {
+                    return ListUtils.toList(models, this::toBaseVO);
+                }
+
+                @AfterMapping
+                default void fillVO(@MappingTarget {{filename}}BaseVO vo, {{filename}}Model model) {
+
+                }
 
             }
             """;

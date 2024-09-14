@@ -13,7 +13,7 @@ import BeicroonListCellButton from "@/components/BeicroonListCellButton.vue";
 import ResourceMenuSelect from "@/modules/resource/menu/ResourceMenuSelect.vue";
 import {page, remove, ResourceMenuPageVO as VO, ResourceMenuQueryDTO as DTO} from "./resource-menu.http.ts";
 
-const list = createBeicroonList<DTO, VO>("资源菜单", page);
+const list = createBeicroonList<DTO, VO>("菜单", page);
 
 onMounted(list.resetSearch);
 
@@ -21,7 +21,7 @@ const parentName = ref();
 </script>
 
 <template>
-  <beicroon-list class="row-search" :list="list">
+  <beicroon-list :list="list">
     <template #head-search>
       <resource-menu-select
         label="父级"

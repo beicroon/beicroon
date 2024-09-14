@@ -12,7 +12,7 @@ import BeicroonListCell from "@/components/BeicroonListCell.vue";
 import BeicroonListCellButton from "@/components/BeicroonListCellButton.vue";
 import {page, remove, ResourceRolePageVO as VO, ResourceRoleQueryDTO as DTO} from "./resource-role.http.ts";
 
-const list = createBeicroonList<DTO, VO>("资源角色", page);
+const list = createBeicroonList<DTO, VO>("角色", page);
 
 onMounted(list.resetSearch);
 </script>
@@ -22,8 +22,6 @@ onMounted(list.resetSearch);
     <template #head-search>
       <beicroon-input label="编码" v-model="list.params.code"></beicroon-input>
       <beicroon-input label="名称" v-model="list.params.name"></beicroon-input>
-      <beicroon-input label="备注" v-model="list.params.remark"></beicroon-input>
-      <beicroon-input label="是否超级管理员" v-model="list.params.superAdminFlag"></beicroon-input>
     </template>
     <template #head-button>
       <beicroon-button class="block primary" label="重置" @click="list.handleReset"></beicroon-button>
@@ -34,7 +32,6 @@ onMounted(list.resetSearch);
       <beicroon-list-cell width="180">编码</beicroon-list-cell>
       <beicroon-list-cell width="180">名称</beicroon-list-cell>
       <beicroon-list-cell width="180">备注</beicroon-list-cell>
-      <beicroon-list-cell width="180">是否超级管理员</beicroon-list-cell>
       <beicroon-list-cell-button>操作</beicroon-list-cell-button>
     </template>
     <template #table-body>
@@ -42,7 +39,6 @@ onMounted(list.resetSearch);
         <beicroon-list-cell>{{ item.code }}</beicroon-list-cell>
         <beicroon-list-cell>{{ item.name }}</beicroon-list-cell>
         <beicroon-list-cell>{{ item.remark }}</beicroon-list-cell>
-        <beicroon-list-cell>{{ item.superAdminFlag }}</beicroon-list-cell>
         <beicroon-list-cell-button>
           <beicroon-button class="primary" label="查看" @click="list.handleDetail(item, Detail)"></beicroon-button>
           <beicroon-button class="warning" label="编辑" @click="list.handleUpdate(item, Update)"></beicroon-button>
@@ -53,8 +49,6 @@ onMounted(list.resetSearch);
     <template #more-search>
       <beicroon-input class="column" label="编码" v-model="list.params.code"></beicroon-input>
       <beicroon-input class="column" label="名称" v-model="list.params.name"></beicroon-input>
-      <beicroon-input class="column" label="备注" v-model="list.params.remark"></beicroon-input>
-      <beicroon-input class="column" label="是否超级管理员" v-model="list.params.superAdminFlag"></beicroon-input>
     </template>
   </beicroon-list>
 </template>

@@ -5,7 +5,6 @@ export type ResourceRoleBaseVO = BaseVO & DisableVO & {
     code?: string,  // 编码
     name?: string,  // 名称
     remark?: string,  // 备注
-    superAdminFlag?: string,  // 是否超级管理员
 }
 
 // 详情返回字段
@@ -23,7 +22,6 @@ export type ResourceRoleCreateDTO = DisableDTO & {
     code?: string,  // 编码
     name?: string,  // 名称
     remark?: string,  // 备注
-    superAdminFlag?: string,  // 是否超级管理员
 }
 
 // 修改参数字段
@@ -31,7 +29,6 @@ export type ResourceRoleUpdateDTO = UpdateDTO & {
     code?: string,  // 编码
     name?: string,  // 名称
     remark?: string,  // 备注
-    superAdminFlag?: string,  // 是否超级管理员
 }
 
 // 查询参数字段
@@ -39,7 +36,6 @@ export type ResourceRoleQueryDTO = QueryDTO & DisableDTO & {
     code?: string,  // 编码
     name?: string,  // 名称
     remark?: string,  // 备注
-    superAdminFlag?: string,  // 是否超级管理员
 }
 
 // 基础信息接口

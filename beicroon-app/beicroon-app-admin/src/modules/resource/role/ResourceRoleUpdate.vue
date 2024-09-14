@@ -44,7 +44,6 @@ onMounted(async () => {
   form.code = data.code;
   form.name = data.name;
   form.remark = data.remark;
-  form.superAdminFlag = data.superAdminFlag;
 });
 </script>
 
@@ -54,7 +53,6 @@ onMounted(async () => {
       <beicroon-input class="column" label="编码" placeholder="编码" v-model="form.code"></beicroon-input>
       <beicroon-input class="column" label="名称" placeholder="名称" v-model="form.name"></beicroon-input>
       <beicroon-input class="column" label="备注" placeholder="备注" v-model="form.remark"></beicroon-input>
-      <beicroon-input class="column" label="是否超级管理员" placeholder="是否超级管理员" v-model="form.superAdminFlag"></beicroon-input>
     </div>
     <div class="beicroon-dialog-loading" v-else>
       <beicroon-loading fill="#b3e5fc" width="100" height="100"></beicroon-loading>

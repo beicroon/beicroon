@@ -75,7 +75,6 @@ function loadMore(e: Event) {
   &.column {
     .select {
       right: 18rem;
-      width: 300rem;
       top: calc(100% - 12rem);
     }
   }
@@ -84,8 +83,8 @@ function loadMore(e: Event) {
     gap: 2rem;
     right: 6rem;
     z-index: 666;
+    width: 300rem;
     display: flex;
-    width: 240rem;
     height: 160rem;
     padding: 8rem 0;
     overflow-y: auto;
