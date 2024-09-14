@@ -27,8 +27,11 @@ public interface SystemConstant {
 
     String DISABLE_KEY_NAME = "`disabled_at`";
 
+    String REMOVE_KEY_NAME = "`removed_at`";
+
     Set<String> IGNORES_COLUMNS = new HashSet<>(Arrays.asList(
             "id",
+            "tenant_id",
             "created_at",
             "creator_id",
             "creator_code",
@@ -41,12 +44,10 @@ public interface SystemConstant {
             "disabled_id",
             "disabled_name",
             "disabled_code",
-            "deleted_at",
-            "deleter_id",
-            "deleter_name",
-            "deleter_code",
-            "version",
-            "tenant_id"
+            "removed_at",
+            "remover_id",
+            "remover_name",
+            "remover_code"
     ));
 
 }

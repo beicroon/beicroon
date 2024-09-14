@@ -72,6 +72,18 @@ function hide(node: HTMLElement) {
     });
 }
 
+async function remove(node: HTMLElement, duration: number) {
+    let timer = setTimeout(() => handleRemove(node), duration);
+
+    node.addEventListener("mouseenter", () => {
+        clearTimeout(timer);
+    });
+
+    node.addEventListener("mouseleave", () => {
+        timer = setTimeout(() => handleRemove(node), duration);
+    });
+}
+
 export default async function toast(message: string, type: Types = "success", duration: number = 3000) {
     const node = getNode();
 
@@ -88,5 +100,5 @@ export default async function toast(message: string, type: Types = "success", du
 
     container.classList.remove("hidden");
 
-    setTimeout(() => handleRemove(node), duration);
+    await remove(node, duration);
 }

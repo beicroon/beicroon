@@ -142,7 +142,7 @@ public interface IGenericRepository<Q extends QueryDTO, T extends GenericModel> 
         TabHandler<T> handler = ListUtils.first(handlers, h -> h.getCode().equals(dto.getTabCode()));
 
         if (handler == null) {
-            wrapper.first("1 = 0");
+            wrapper.eq("1", EmptyUtils.emptyInteger());
 
             return;
         }
@@ -156,7 +156,7 @@ public interface IGenericRepository<Q extends QueryDTO, T extends GenericModel> 
         TabHandler<T> subHandler = ListUtils.first(handler.getChildren(), h -> h.getCode().equals(dto.getSubTabCode()));
 
         if (subHandler == null) {
-            wrapper.first("1 = 0");
+            wrapper.eq("1", EmptyUtils.emptyInteger());
 
             return;
         }

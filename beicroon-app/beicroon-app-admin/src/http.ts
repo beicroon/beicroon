@@ -56,7 +56,9 @@ http.interceptors.response.use(
         })
     },
     async error => {
-        await toast(error.response.message, "error");
+        console.error(error.response.data.message);
+
+        await toast(`服务器错误[${error.response.data.code}]`, "error");
 
         return Promise.reject(error);
     }

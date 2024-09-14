@@ -20,10 +20,10 @@ public class MigrationContent {
             #    `modifier_id`   bigint(20) unsigned not null default 0 comment '更新人主键',
             #    `modifier_code` varchar(64)         not null default '' comment '更新人编码',
             #    `modifier_name` varchar(255)        not null default '' comment '更新人昵称',
-            #    `deleted_at`    timestamp               null default null comment '删除时间',
-            #    `deleter_id`    bigint(20) unsigned not null default 0 comment '删除人主键',
-            #    `deleter_code`  varchar(64)         not null default '' comment '删除人编码',
-            #    `deleter_name`  varchar(255)        not null default '' comment '删除人昵称',
+            #    `removed_at`    timestamp               null default null comment '删除时间',
+            #    `remover_id`    bigint(20) unsigned not null default 0 comment '删除人主键',
+            #    `remover_code`  varchar(64)         not null default '' comment '删除人编码',
+            #    `remover_name`  varchar(255)        not null default '' comment '删除人昵称',
             #    primary key (`id`)
             #) engine = innodb comment '建表示例';
             

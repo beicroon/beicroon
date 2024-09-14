@@ -21,10 +21,10 @@ create table `admin_account_admin`
     `disabled_id`   bigint(20) unsigned not null default 0 comment '禁用人主键',
     `disabled_code` varchar(64)         not null default '' comment '禁用人编码',
     `disabled_name` varchar(64)         not null default '' comment '禁用人名称',
-    `deleted_at`    timestamp           null     default null comment '删除时间',
-    `deleter_id`    bigint(20) unsigned not null default 0 comment '删除人主键',
-    `deleter_code`  varchar(64)         not null default '' comment '删除人编码',
-    `deleter_name`  varchar(255)        not null default '' comment '删除人昵称',
+    `removed_at`    timestamp           null     default null comment '删除时间',
+    `remover_id`    bigint(20) unsigned not null default 0 comment '删除人主键',
+    `remover_code`  varchar(64)         not null default '' comment '删除人编码',
+    `remover_name`  varchar(255)        not null default '' comment '删除人昵称',
     primary key (`id`),
     index `idx_username` (`username`),
     index `idx_phone` (`phone`),
@@ -55,10 +55,10 @@ create table `admin_resource_menu`
     `disabled_id`   bigint(20) unsigned  not null default 0 comment '禁用人主键',
     `disabled_code` varchar(64)          not null default '' comment '禁用人编码',
     `disabled_name` varchar(64)          not null default '' comment '禁用人名称',
-    `deleted_at`    timestamp            null     default null comment '删除时间',
-    `deleter_id`    bigint(20) unsigned  not null default 0 comment '删除人主键',
-    `deleter_code`  varchar(64)          not null default '' comment '删除人编码',
-    `deleter_name`  varchar(255)         not null default '' comment '删除人昵称',
+    `removed_at`    timestamp            null     default null comment '删除时间',
+    `remover_id`    bigint(20) unsigned  not null default 0 comment '删除人主键',
+    `remover_code`  varchar(64)          not null default '' comment '删除人编码',
+    `remover_name`  varchar(255)         not null default '' comment '删除人昵称',
     primary key (`id`)
 ) engine = innodb comment '资源菜单';
 
@@ -83,10 +83,10 @@ create table `admin_resource_role`
     `disabled_id`      bigint(20) unsigned not null default 0 comment '禁用人主键',
     `disabled_code`    varchar(64)         not null default '' comment '禁用人编码',
     `disabled_name`    varchar(64)         not null default '' comment '禁用人名称',
-    `deleted_at`       timestamp           null     default null comment '删除时间',
-    `deleter_id`       bigint(20) unsigned not null default 0 comment '删除人主键',
-    `deleter_code`     varchar(64)         not null default '' comment '删除人编码',
-    `deleter_name`     varchar(255)        not null default '' comment '删除人昵称',
+    `removed_at`       timestamp           null     default null comment '删除时间',
+    `remover_id`       bigint(20) unsigned not null default 0 comment '删除人主键',
+    `remover_code`     varchar(64)         not null default '' comment '删除人编码',
+    `remover_name`     varchar(255)        not null default '' comment '删除人昵称',
     primary key (`id`)
 ) engine = innodb comment '资源角色';
 
@@ -109,10 +109,10 @@ create table `admin_resource_role_menu_relation`
     `disabled_id`   bigint(20) unsigned not null default 0 comment '禁用人主键',
     `disabled_code` varchar(64)         not null default '' comment '禁用人编码',
     `disabled_name` varchar(64)         not null default '' comment '禁用人名称',
-    `deleted_at`    timestamp           null     default null comment '删除时间',
-    `deleter_id`    bigint(20) unsigned not null default 0 comment '删除人主键',
-    `deleter_code`  varchar(64)         not null default '' comment '删除人编码',
-    `deleter_name`  varchar(255)        not null default '' comment '删除人昵称',
+    `removed_at`    timestamp           null     default null comment '删除时间',
+    `remover_id`    bigint(20) unsigned not null default 0 comment '删除人主键',
+    `remover_code`  varchar(64)         not null default '' comment '删除人编码',
+    `remover_name`  varchar(255)        not null default '' comment '删除人昵称',
     primary key (`id`),
     index `idx_role_id_menu_id` (`role_id`, `menu_id`)
 ) engine = innodb comment '角色菜单';
@@ -136,10 +136,10 @@ create table `admin_account_admin_role_relation`
     `disabled_id`   bigint(20) unsigned not null default 0 comment '禁用人主键',
     `disabled_code` varchar(64)         not null default '' comment '禁用人编码',
     `disabled_name` varchar(64)         not null default '' comment '禁用人名称',
-    `deleted_at`    timestamp           null     default null comment '删除时间',
-    `deleter_id`    bigint(20) unsigned not null default 0 comment '删除人主键',
-    `deleter_code`  varchar(64)         not null default '' comment '删除人编码',
-    `deleter_name`  varchar(255)        not null default '' comment '删除人昵称',
+    `removed_at`    timestamp           null     default null comment '删除时间',
+    `remover_id`    bigint(20) unsigned not null default 0 comment '删除人主键',
+    `remover_code`  varchar(64)         not null default '' comment '删除人编码',
+    `remover_name`  varchar(255)        not null default '' comment '删除人昵称',
     primary key (`id`),
     index `idx_admin_id_role_id` (`admin_id`, `role_id`)
 ) engine = innodb comment '后台账号角色';

@@ -16,10 +16,10 @@ public final class RemoveHelper {
     public static <T extends GenericModel> void setRemoveWrapper(UpdateWrapper<T> wrapper) {
         AuthUser user = AuthUtils.getUser();
 
-        wrapper.set("`deleted_at`", LocalDateTime.now());
-        wrapper.set("`deleter_id`", user.getId());
-        wrapper.set("`deleter_code`", user.getCode());
-        wrapper.set("`deleter_name`", user.getNickname());
+        wrapper.set("`removed_at`", LocalDateTime.now());
+        wrapper.set("`remover_id`", user.getId());
+        wrapper.set("`remover_code`", user.getCode());
+        wrapper.set("`remover_name`", user.getNickname());
     }
 
 }
