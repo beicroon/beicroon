@@ -3,9 +3,6 @@ package com.beicroon.construct.mybatis.helper;
 import com.beicroon.construct.constant.SystemConstant;
 import com.beicroon.construct.database.annotation.DataPermission;
 import com.beicroon.construct.database.annotation.DataScope;
-import com.beicroon.construct.mybatis.expression.AdminExpression;
-import com.beicroon.construct.mybatis.expression.OrgExpression;
-import com.beicroon.construct.mybatis.expression.UserExpression;
 import com.beicroon.construct.utils.EmptyUtils;
 import com.beicroon.construct.utils.ListUtils;
 import net.sf.jsqlparser.expression.Expression;
@@ -16,6 +13,7 @@ import net.sf.jsqlparser.expression.operators.relational.ExpressionList;
 import net.sf.jsqlparser.expression.operators.relational.InExpression;
 import net.sf.jsqlparser.expression.operators.relational.IsNullExpression;
 import net.sf.jsqlparser.schema.Column;
+import net.sf.jsqlparser.schema.Table;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -28,24 +26,22 @@ public final class DataPermissionHelper {
 
     }
 
-    public static Expression getDataScopeExpression(Expression where, String mappedStatementId) {
-        ExpressionList<Expression> expressionList = new ExpressionList<>();
+    public static List<DataPermission> getPermissions(String mappedStatementId) {
+        int index = mappedStatementId.lastIndexOf(".");
 
-        if (where != null) {
-            expressionList.add(where);
+        String className = mappedStatementId.substring(0, index);
+
+        String methodName = mappedStatementId.substring(index + 1);
+
+        Class<?> clazz;
+
+        try {
+            clazz = Class.forName(className);
+        } catch (ClassNotFoundException ex) {
+            throw new RuntimeException(ex);
         }
 
-        List<DataPermission> permissions = DataPermissionHelper.getPermissions(mappedStatementId);
-
-        if (EmptyUtils.isNotEmpty(permissions)) {
-            for (DataPermission permission : permissions) {
-                expressionList.add(DataPermissionHelper.getExpression(permission));
-            }
-        }
-
-        expressionList.add(DataPermissionHelper.getDeleteExpression());
-
-        return expressionList;
+        return DataPermissionHelper.getPermissions(clazz, methodName);
     }
 
     public static List<DataPermission> getPermissions(Class<?> clazz, String method) {
@@ -72,54 +68,16 @@ public final class DataPermissionHelper {
         return permissions;
     }
 
-    public static List<DataPermission> getPermissions(String mappedStatementId) {
-        int index = mappedStatementId.lastIndexOf(".");
-
-        String className = mappedStatementId.substring(0, index);
-
-        String methodName = mappedStatementId.substring(index + 1);
-
-        Class<?> clazz;
-
-        try {
-            clazz = Class.forName(className);
-        } catch (ClassNotFoundException ex) {
-            throw new RuntimeException(ex);
-        }
-
-        return DataPermissionHelper.getPermissions(clazz, methodName);
-    }
-
-    public static Expression getExpression(DataPermission permission) {
-        ExpressionList<Expression> expression = new ExpressionList<>();
-
-        for (DataScope scope : permission.value()) {
-            switch (scope.value()) {
-                case ORG:
-                    expression.add(OrgExpression.getExpression(scope));
-                case USER:
-                    expression.add(UserExpression.getExpression(scope));
-                case ADMIN:
-                    expression.add(AdminExpression.getExpression(scope));
-                    break;
-                default:
-                    throw new RuntimeException("未匹配的数据权限类型");
-            }
-        }
-
-        return expression;
-    }
-
-    public static Expression getInExpression(DataScope scope, Collection<Long> ids) {
-        Expression left = new Column(EmptyUtils.getValueOr(scope.filed(), scope.value().getCode()));
+    public static Expression getInExpression(Table table, DataScope scope, Collection<Long> ids) {
+        Expression left = new Column(table, EmptyUtils.getValueOr(scope.filed(), scope.value().getCode()));
 
         ExpressionList<?> right = new ExpressionList<>(ListUtils.toList(ids, LongValue::new));
 
         return new InExpression(left, right);
     }
 
-    public static Expression getEqLongExpression(DataScope scope, Long value) {
-        Column left = new Column(EmptyUtils.getValueOr(scope.filed(), scope.value().getCode()));
+    public static Expression getEqLongExpression(Table table, DataScope scope, Long value) {
+        Column left = new Column(table, EmptyUtils.getValueOr(scope.filed(), scope.value().getCode()));
 
         LongValue right = new LongValue(value);
 

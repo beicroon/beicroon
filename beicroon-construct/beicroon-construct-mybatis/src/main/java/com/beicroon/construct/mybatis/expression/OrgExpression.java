@@ -7,6 +7,7 @@ import com.beicroon.construct.enums.BooleanEnums;
 import com.beicroon.construct.mybatis.helper.DataPermissionHelper;
 import com.beicroon.construct.utils.EmptyUtils;
 import net.sf.jsqlparser.expression.Expression;
+import net.sf.jsqlparser.schema.Table;
 
 public final class OrgExpression {
 
@@ -14,7 +15,7 @@ public final class OrgExpression {
 
     }
 
-    public static Expression getExpression(DataScope scope) {
+    public static Expression getExpression(Table table, DataScope scope) {
         AuthUser.Permission userPermission = AuthUtils.getUser().getPermission();
 
         if (BooleanEnums.isTrue(userPermission.getAllOrg())) {
@@ -25,7 +26,7 @@ public final class OrgExpression {
             return DataPermissionHelper.getNonExpression();
         }
 
-        return DataPermissionHelper.getInExpression(scope, userPermission.getOrgIds());
+        return DataPermissionHelper.getInExpression(table, scope, userPermission.getOrgIds());
     }
 
 }

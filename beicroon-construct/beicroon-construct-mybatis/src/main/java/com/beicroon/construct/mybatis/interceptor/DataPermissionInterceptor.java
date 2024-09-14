@@ -3,6 +3,7 @@ package com.beicroon.construct.mybatis.interceptor;
 import com.baomidou.mybatisplus.core.toolkit.PluginUtils;
 import com.baomidou.mybatisplus.extension.plugins.inner.BaseMultiTableInnerInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.InnerInterceptor;
+import com.beicroon.construct.database.annotation.DataPermission;
 import com.beicroon.construct.mybatis.helper.DataPermissionHelper;
 import com.beicroon.construct.utils.ListUtils;
 import net.sf.jsqlparser.expression.Expression;
@@ -17,13 +18,19 @@ import org.apache.ibatis.mapping.MappedStatement;
 import org.apache.ibatis.session.ResultHandler;
 import org.apache.ibatis.session.RowBounds;
 
-public class RemoveInterceptor extends BaseMultiTableInnerInterceptor implements InnerInterceptor {
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+public class DataPermissionInterceptor extends BaseMultiTableInnerInterceptor implements InnerInterceptor {
+
+    private static final Map<String, List<DataPermission>> PERMISSION_CACHE = new HashMap<>();
 
     @Override
     public void beforeQuery(Executor executor, MappedStatement ms, Object parameter, RowBounds rowBounds, ResultHandler resultHandler, BoundSql boundSql) {
         PluginUtils.MPBoundSql mpBs = PluginUtils.mpBoundSql(boundSql);
 
-        mpBs.sql(this.parserSingle(mpBs.sql(), null));
+        mpBs.sql(this.parserSingle(mpBs.sql(), ms.getId()));
     }
 
     protected void processInsert(Insert insert, int index, String sql, Object obj) {
@@ -48,7 +55,11 @@ public class RemoveInterceptor extends BaseMultiTableInnerInterceptor implements
 
     @Override
     public Expression buildTableExpression(Table table, Expression where, String whereSegment) {
-        return DataPermissionHelper.getDeleteExpression();
+        if (!PERMISSION_CACHE.containsKey(whereSegment)) {
+            PERMISSION_CACHE.put(whereSegment, DataPermissionHelper.getPermissions(whereSegment));
+        }
+
+        return where;
     }
 
 }
