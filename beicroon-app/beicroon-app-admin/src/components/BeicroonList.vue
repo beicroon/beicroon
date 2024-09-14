@@ -194,7 +194,7 @@ const moreSearchSize = computed(() => {
 
         &.show {
           opacity: 1;
-          width: 1020rem;
+          width: 1080rem;
           height: 600rem;
           overflow-y: auto;
         }
