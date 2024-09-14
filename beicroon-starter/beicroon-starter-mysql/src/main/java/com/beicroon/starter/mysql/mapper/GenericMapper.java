@@ -18,6 +18,7 @@ import com.beicroon.starter.mysql.utils.QueryUtils;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -134,7 +135,7 @@ public interface GenericMapper<T extends GenericModel> extends BaseMapper<T> {
         return this.selectById(id);
     }
 
-    default T getByIdOrError(Long id, String message) {
+    default T getByIdOrError(Serializable id, String message) {
         T t = this.getById(id);
 
         if (t == null) {
@@ -315,7 +316,7 @@ public interface GenericMapper<T extends GenericModel> extends BaseMapper<T> {
         }
     }
 
-    default boolean softDelete(SFunction<T, ?> column, Object value) {
+    default boolean remove(SFunction<T, ?> column, Object value) {
         if (value == null) {
             return false;
         }
@@ -329,7 +330,7 @@ public interface GenericMapper<T extends GenericModel> extends BaseMapper<T> {
         return SqlHelper.retBool(this.update(wrapper));
     }
 
-    default boolean softDelete(SFunction<T, ?> column, Collection<?> values) {
+    default boolean remove(SFunction<T, ?> column, Collection<?> values) {
         if (EmptyUtils.isEmpty(values)) {
             return false;
         }
@@ -343,8 +344,8 @@ public interface GenericMapper<T extends GenericModel> extends BaseMapper<T> {
         return SqlHelper.retBool(this.update(wrapper));
     }
 
-    default boolean softDeleteById(Long id) {
-        if (EmptyUtils.isNotId(id)) {
+    default boolean removeById(Serializable id) {
+        if (id == null) {
             return false;
         }
 
@@ -352,12 +353,10 @@ public interface GenericMapper<T extends GenericModel> extends BaseMapper<T> {
 
         wrapper.eq(SystemConstant.PRIMARY_KEY_NAME, id);
 
-        RemoveHelper.setRemoveWrapper(wrapper);
-
-        return SqlHelper.retBool(this.update(wrapper));
+        return this.remove(wrapper);
     }
 
-    default boolean softDeleteByIds(Collection<Long> ids) {
+    default boolean removeByIds(Collection<?> ids) {
         if (EmptyUtils.isEmpty(ids)) {
             return false;
         }
@@ -366,6 +365,18 @@ public interface GenericMapper<T extends GenericModel> extends BaseMapper<T> {
 
         wrapper.in(SystemConstant.PRIMARY_KEY_NAME, ids);
 
+        return this.remove(wrapper);
+    }
+
+    default boolean removeByMap(Map<String, Object> columnMap) {
+        UpdateWrapper<T> wrapper = Wrappers.update();
+
+        wrapper.allEq(columnMap);
+
+        return this.remove(wrapper);
+    }
+
+    default boolean remove(UpdateWrapper<T> wrapper) {
         RemoveHelper.setRemoveWrapper(wrapper);
 
         return SqlHelper.retBool(this.update(wrapper));

@@ -1,7 +1,9 @@
 package com.beicroon.starter.mysql.repository.impl;
 
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.toolkit.support.SFunction;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.beicroon.construct.constant.SystemConstant;
@@ -12,6 +14,7 @@ import com.beicroon.starter.mysql.repository.ISuperRepository;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -148,12 +151,66 @@ public abstract class SuperRepository<M extends GenericMapper<T>, T extends Gene
         this.getBaseMapper().chunkById(field, getter, size, wrapper, consumer);
     }
 
-    public boolean delete(SFunction<T, ?> column, Object value) {
-        return this.getBaseMapper().softDelete(column, value);
+    public boolean remove(SFunction<T, ?> column, Object value) {
+        return this.getBaseMapper().remove(column, value);
     }
 
-    public boolean delete(SFunction<T, ?> column, Collection<?> values) {
-        return this.getBaseMapper().softDelete(column, values);
+    public boolean remove(SFunction<T, ?> column, Collection<?> values) {
+        return this.getBaseMapper().remove(column, values);
+    }
+
+    @Override
+    public boolean removeByMap(Map<String, Object> columnMap) {
+        return this.getBaseMapper().removeByMap(columnMap);
+    }
+
+    @Override
+    public boolean removeById(Serializable id) {
+        return this.getBaseMapper().removeById(id);
+    }
+
+    @Override
+    public boolean removeByIds(Collection<?> ids) {
+        return this.getBaseMapper().removeByIds(ids);
+    }
+
+    @Override
+    public boolean removeBatchByIds(Collection<?> ids) {
+        return this.getBaseMapper().removeByIds(ids);
+    }
+
+    public boolean remove(UpdateWrapper<T> wrapper) {
+        return this.getBaseMapper().remove(wrapper);
+    }
+
+    @Override
+    @Deprecated
+    public boolean remove(Wrapper<T> wrapper) {
+        throw new UnsupportedOperationException("该方法已弃用");
+    }
+
+    @Override
+    @Deprecated
+    public boolean removeById(T entity) {
+        throw new UnsupportedOperationException("该方法已弃用");
+    }
+
+    @Override
+    @Deprecated
+    public boolean removeBatchByIds(Collection<?> list, boolean useFill) {
+        throw new UnsupportedOperationException("该方法已弃用");
+    }
+
+    @Override
+    @Deprecated
+    public boolean removeByIds(Collection<?> ids, boolean useFill) {
+        throw new UnsupportedOperationException("该方法已弃用");
+    }
+
+    @Override
+    @Deprecated
+    public boolean removeById(Serializable id, boolean useFill) {
+        throw new UnsupportedOperationException("该方法已弃用");
     }
 
     public boolean existed(SFunction<T, ?> column, Object value) {
