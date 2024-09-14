@@ -10,7 +10,7 @@ import lombok.EqualsAndHashCode;
 @ApiModel(name = "修改资源角色入参")
 @EqualsAndHashCode(callSuper = true)
 public class ResourceRoleUpdateDTO extends UpdateDTO {
-    
+
     @ApiModelProperty(name = "编码")
     private String code;
 

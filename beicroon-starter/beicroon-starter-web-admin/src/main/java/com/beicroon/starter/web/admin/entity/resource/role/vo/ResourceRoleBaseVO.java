@@ -10,7 +10,7 @@ import lombok.EqualsAndHashCode;
 @ApiModel(name = "查询资源角色基础出参")
 @EqualsAndHashCode(callSuper = true)
 public class ResourceRoleBaseVO extends GenericVO {
-    
+
     @ApiModelProperty(name = "编码")
     private String code;
 

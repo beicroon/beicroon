@@ -39,35 +39,35 @@ public class ResourceRoleService implements IResourceRoleService {
     @Override
     public ResourceRoleDetailVO detail(Long id) {
         ResourceRoleModel resourceRole = this.resourceRoleRepository.getById(id);
-        
+
         return this.resourceRoleConvertor.toDetailVO(resourceRole);
     }
 
     @Override
     public List<ResourceRoleBaseVO> list(ResourceRoleQueryDTO dto) {
         List<ResourceRoleModel> list = this.resourceRoleRepository.list(dto);
-        
+
         return ListUtils.toList(list, this.resourceRoleConvertor::toBaseVO);
     }
 
     @Override
     public PageInfo<ResourceRolePageVO> page(ResourceRoleQueryDTO dto) {
         Page<ResourceRoleModel> page = this.resourceRoleRepository.page(dto);
-        
+
         return PageUtils.result(page, this.resourceRoleConvertor::toPageVO);
     }
 
     @Override
     public boolean create(ResourceRoleCreateDTO dto) {
         ResourceRoleModel creator = this.resourceRoleConvertor.toEntity(dto);
-        
+
         return this.resourceRoleRepository.save(creator);
     }
 
     @Override
     public boolean update(ResourceRoleUpdateDTO dto) {
         ResourceRoleModel updater = this.resourceRoleConvertor.toEntity(dto);
-        
+
         return this.resourceRoleRepository.updateById(updater);
     }
 

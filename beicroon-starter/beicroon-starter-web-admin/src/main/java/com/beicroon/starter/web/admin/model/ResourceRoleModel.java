@@ -13,7 +13,7 @@ import lombok.EqualsAndHashCode;
 @TableName("`admin_resource_role`")
 @EqualsAndHashCode(callSuper = true)
 public class ResourceRoleModel extends GenericModel {
-    
+
     @TableField(value = "`code`")
     @ApiModelProperty(name = "编码")
     private String code;

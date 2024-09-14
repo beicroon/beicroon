@@ -11,7 +11,7 @@ import lombok.EqualsAndHashCode;
 @ApiModel(name = "查询后台账号入参")
 @EqualsAndHashCode(callSuper = true)
 public class AccountAdminQueryDTO extends QueryDTO {
-    
+
     @FieldSearch(name = "`code`")
     @ApiModelProperty(name = "编码")
     private String code;

@@ -11,7 +11,7 @@ import lombok.EqualsAndHashCode;
 @ApiModel(name = "查询资源角色入参")
 @EqualsAndHashCode(callSuper = true)
 public class ResourceRoleQueryDTO extends QueryDTO {
-    
+
     @FieldSearch(name = "`code`")
     @ApiModelProperty(name = "编码")
     private String code;

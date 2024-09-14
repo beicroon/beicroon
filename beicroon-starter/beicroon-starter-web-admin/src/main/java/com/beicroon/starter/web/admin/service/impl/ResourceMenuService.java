@@ -43,21 +43,21 @@ public class ResourceMenuService implements IResourceMenuService {
     @Override
     public ResourceMenuDetailVO detail(Long id) {
         ResourceMenuModel resourceMenu = this.resourceMenuRepository.getById(id);
-        
+
         return this.resourceMenuConvertor.toDetailVO(resourceMenu);
     }
 
     @Override
     public List<ResourceMenuBaseVO> list(ResourceMenuQueryDTO dto) {
         List<ResourceMenuModel> list = this.resourceMenuRepository.list(dto);
-        
+
         return ListUtils.toList(list, this.resourceMenuConvertor::toBaseVO);
     }
 
     @Override
     public PageInfo<ResourceMenuPageVO> page(ResourceMenuQueryDTO dto) {
         Page<ResourceMenuModel> page = this.resourceMenuRepository.page(dto);
-        
+
         return PageUtils.result(page, this.resourceMenuConvertor::toPageVO);
     }
 
@@ -75,7 +75,7 @@ public class ResourceMenuService implements IResourceMenuService {
         ResourceMenuModel updater = this.resourceMenuConvertor.toEntity(dto);
 
         this.resourceMenuManager.setParent(updater, dto.getParentId());
-        
+
         return this.resourceMenuRepository.updateById(updater);
     }
 

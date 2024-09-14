@@ -11,7 +11,7 @@ import lombok.EqualsAndHashCode;
 @ApiModel(name = "修改资源菜单入参")
 @EqualsAndHashCode(callSuper = true)
 public class ResourceMenuUpdateDTO extends UpdateDTO {
-    
+
     @ApiModelProperty(name = "父级主键")
     private Long parentId;
 

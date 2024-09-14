@@ -10,10 +10,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class AccountAdminManager {
 
-     @Resource
-     private AccountAdminConvertor accountAdminConvertor;
+    @Resource
+    private AccountAdminConvertor accountAdminConvertor;
 
-     @Resource
-     private AccountAdminRepository accountAdminRepository;
+    @Resource
+    private AccountAdminRepository accountAdminRepository;
 
 }

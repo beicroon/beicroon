@@ -14,7 +14,7 @@ import lombok.EqualsAndHashCode;
 @TableName("`admin_account_admin`")
 @EqualsAndHashCode(callSuper = true)
 public class AccountAdminModel extends GenericModel implements IAuthUser {
-    
+
     @TableField(value = "`code`")
     @ApiModelProperty(name = "编码")
     private String code;

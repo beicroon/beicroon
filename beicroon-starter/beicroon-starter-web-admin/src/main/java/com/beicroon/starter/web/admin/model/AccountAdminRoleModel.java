@@ -13,7 +13,7 @@ import lombok.EqualsAndHashCode;
 @TableName("`admin_account_admin_role_relation`")
 @EqualsAndHashCode(callSuper = true)
 public class AccountAdminRoleModel extends GenericModel {
-    
+
     @TableField(value = "`admin_id`")
     @ApiModelProperty(name = "后台账号主键")
     private Long adminId;

@@ -10,7 +10,7 @@ import lombok.EqualsAndHashCode;
 @ApiModel(name = "查询资源菜单基础出参")
 @EqualsAndHashCode(callSuper = true)
 public class ResourceMenuBaseVO extends GenericVO {
-    
+
     @ApiModelProperty(name = "父级主键")
     private Long parentId;
 

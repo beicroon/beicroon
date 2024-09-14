@@ -42,21 +42,21 @@ public class AccountAdminService implements IAccountAdminService {
     @Override
     public AccountAdminDetailVO detail(Long id) {
         AccountAdminModel accountAdmin = this.accountAdminRepository.getById(id);
-        
+
         return this.accountAdminConvertor.toDetailVO(accountAdmin);
     }
 
     @Override
     public List<AccountAdminBaseVO> list(AccountAdminQueryDTO dto) {
         List<AccountAdminModel> list = this.accountAdminRepository.list(dto);
-        
+
         return ListUtils.toList(list, this.accountAdminConvertor::toBaseVO);
     }
 
     @Override
     public PageInfo<AccountAdminPageVO> page(AccountAdminQueryDTO dto) {
         Page<AccountAdminModel> page = this.accountAdminRepository.page(dto);
-        
+
         return PageUtils.result(page, this.accountAdminConvertor::toPageVO);
     }
 

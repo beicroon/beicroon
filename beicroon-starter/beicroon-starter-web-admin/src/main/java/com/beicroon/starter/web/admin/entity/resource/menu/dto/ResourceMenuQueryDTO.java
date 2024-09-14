@@ -13,7 +13,7 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 @KeywordsSearch(name = {"`code`", "`name`"})
 public class ResourceMenuQueryDTO extends QueryDTO {
-    
+
     @FieldSearch(name = "`parent_id`")
     @ApiModelProperty(name = "父级主键")
     private Long parentId;

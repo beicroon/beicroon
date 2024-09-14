@@ -10,10 +10,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class ResourceRoleManager {
 
-     @Resource
-     private ResourceRoleConvertor resourceRoleConvertor;
+    @Resource
+    private ResourceRoleConvertor resourceRoleConvertor;
 
-     @Resource
-     private ResourceRoleRepository resourceRoleRepository;
+    @Resource
+    private ResourceRoleRepository resourceRoleRepository;
 
 }

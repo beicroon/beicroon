@@ -10,7 +10,7 @@ import lombok.EqualsAndHashCode;
 @ApiModel(name = "查询后台账号基础出参")
 @EqualsAndHashCode(callSuper = true)
 public class AccountAdminBaseVO extends GenericVO {
-    
+
     @ApiModelProperty(name = "编码")
     private String code;
 
