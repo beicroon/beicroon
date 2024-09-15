@@ -1,9 +1,8 @@
 package com.beicroon.construct.mybatis.config;
 
-import com.baomidou.mybatisplus.annotation.DbType;
 import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
-import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
 import com.beicroon.construct.mybatis.interceptor.DataPermissionInterceptor;
+import com.beicroon.construct.mybatis.interceptor.MysqlPaginationInterceptor;
 import com.beicroon.construct.mybatis.interceptor.RemoveInterceptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,16 +16,9 @@ public class MybatisPlusConfig {
     public MybatisPlusInterceptor mybatisPlusInterceptor() {
         MybatisPlusInterceptor interceptor = new MybatisPlusInterceptor();
 
-        interceptor.addInnerInterceptor(new DataPermissionInterceptor());
         interceptor.addInnerInterceptor(new RemoveInterceptor());
-
-        PaginationInnerInterceptor pagination = new PaginationInnerInterceptor();
-
-        pagination.setMaxLimit(300L);
-        pagination.setOverflow(false);
-        pagination.setDbType(DbType.MYSQL);
-
-        interceptor.addInnerInterceptor(pagination);
+        interceptor.addInnerInterceptor(new DataPermissionInterceptor());
+        interceptor.addInnerInterceptor(new MysqlPaginationInterceptor());
 
         return interceptor;
     }

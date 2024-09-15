@@ -8,6 +8,7 @@ import com.beicroon.construct.utils.ListUtils;
 import net.sf.jsqlparser.expression.Expression;
 import net.sf.jsqlparser.expression.HexValue;
 import net.sf.jsqlparser.expression.LongValue;
+import net.sf.jsqlparser.expression.operators.conditional.AndExpression;
 import net.sf.jsqlparser.expression.operators.relational.EqualsTo;
 import net.sf.jsqlparser.expression.operators.relational.ExpressionList;
 import net.sf.jsqlparser.expression.operators.relational.InExpression;
@@ -66,6 +67,14 @@ public final class DataPermissionHelper {
         }
 
         return permissions;
+    }
+
+    public static Expression getAndExpression(Expression where, Expression scopeWhere) {
+        if (where == null) {
+            return scopeWhere;
+        }
+
+        return new AndExpression(where, scopeWhere);
     }
 
     public static Expression getInExpression(Table table, DataScope scope, Collection<Long> ids) {

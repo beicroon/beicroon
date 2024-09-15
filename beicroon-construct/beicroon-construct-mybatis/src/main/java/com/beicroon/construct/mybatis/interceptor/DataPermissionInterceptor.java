@@ -4,7 +4,12 @@ import com.baomidou.mybatisplus.core.toolkit.PluginUtils;
 import com.baomidou.mybatisplus.extension.plugins.inner.BaseMultiTableInnerInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.InnerInterceptor;
 import com.beicroon.construct.database.annotation.DataPermission;
+import com.beicroon.construct.database.annotation.DataScope;
+import com.beicroon.construct.mybatis.expression.AdminExpression;
+import com.beicroon.construct.mybatis.expression.OrgExpression;
+import com.beicroon.construct.mybatis.expression.UserExpression;
 import com.beicroon.construct.mybatis.helper.DataPermissionHelper;
+import com.beicroon.construct.utils.EmptyUtils;
 import com.beicroon.construct.utils.ListUtils;
 import net.sf.jsqlparser.expression.Expression;
 import net.sf.jsqlparser.schema.Table;
@@ -55,11 +60,51 @@ public class DataPermissionInterceptor extends BaseMultiTableInnerInterceptor im
 
     @Override
     public Expression buildTableExpression(Table table, Expression where, String whereSegment) {
+        List<DataPermission> permissions;
+
         if (!PERMISSION_CACHE.containsKey(whereSegment)) {
-            PERMISSION_CACHE.put(whereSegment, DataPermissionHelper.getPermissions(whereSegment));
+            PERMISSION_CACHE.put(whereSegment, permissions = DataPermissionHelper.getPermissions(whereSegment));
+        } else {
+            permissions = PERMISSION_CACHE.get(whereSegment);
         }
 
-        return where;
+        if (EmptyUtils.isEmpty(permissions)) {
+            return null;
+        }
+
+        Expression scopeWhere = null;
+
+        for (DataPermission permission : permissions) {
+            DataScope[] scopes = permission.value();
+
+            if (EmptyUtils.isEmpty(scopes)) {
+                continue;
+            }
+
+            for (DataScope dataScope : scopes) {
+                switch (dataScope.value()) {
+                    case ORG:
+                        scopeWhere = DataPermissionHelper.getAndExpression(
+                                scopeWhere, OrgExpression.getExpression(table, dataScope)
+                        );
+                        break;
+                    case USER:
+                        scopeWhere = DataPermissionHelper.getAndExpression(
+                                scopeWhere, UserExpression.getExpression(table, dataScope)
+                        );
+                        break;
+                    case ADMIN:
+                        scopeWhere = DataPermissionHelper.getAndExpression(
+                                scopeWhere, AdminExpression.getExpression(table, dataScope)
+                        );
+                        break;
+                    default:
+                        throw new RuntimeException(String.format("未支持的数据权限类型[%s]", dataScope.value()));
+                }
+            }
+        }
+
+        return scopeWhere;
     }
 
 }
