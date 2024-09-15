@@ -27,11 +27,10 @@ public interface ResourceRoleConvertor {
     ResourceRoleModel toEntity(ResourceRoleCreateDTO dto);
 
     @AfterMapping
-    default void fillCreator(@MappingTarget ResourceRoleModel model) {
+    default void fillCreator(@MappingTarget ResourceRoleModel model, ResourceRoleCreateDTO dto) {
         ConvertorHelper.fillCreator(model);
     }
 
-    @Mapping(target = "id", ignore = true)
     @Mapping(target = "createdAt", ignore = true)
     @Mapping(target = "creatorId", ignore = true)
     @Mapping(target = "creatorCode", ignore = true)

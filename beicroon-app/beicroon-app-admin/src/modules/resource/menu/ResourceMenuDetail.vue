@@ -31,7 +31,6 @@ onMounted(async () => {
 <template>
   <beicroon-form class="beicroon-dialog-view">
     <div class="beicroon-dialog-input" v-if="form">
-      <beicroon-input disabled class="column" label="父级主键" placeholder="父级主键" v-model="form.parentId"></beicroon-input>
       <beicroon-input disabled class="column" label="父级编码" placeholder="父级编码" v-model="form.parentCode"></beicroon-input>
       <beicroon-input disabled class="column" label="父级名称" placeholder="父级名称" v-model="form.parentName"></beicroon-input>
       <beicroon-input disabled class="column" label="编码" placeholder="编码" v-model="form.code"></beicroon-input>

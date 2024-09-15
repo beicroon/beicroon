@@ -55,7 +55,9 @@ export default function createBeicroonSelect<DTO extends QueryDTO, VO extends Ba
 
                     await select.handleRequest();
                 },
-                focusout: () => select.hidden = true,
+                focusout: () => {
+                    select.hidden = true;
+                },
             };
         },
         noMore: false,

@@ -27,11 +27,10 @@ public interface AccountAdminConvertor {
     AccountAdminModel toEntity(AccountAdminCreateDTO dto);
 
     @AfterMapping
-    default void fillCreator(@MappingTarget AccountAdminModel model) {
+    default void fillCreator(@MappingTarget AccountAdminModel model, AccountAdminCreateDTO dto) {
         ConvertorHelper.fillCreator(model);
     }
 
-    @Mapping(target = "id", ignore = true)
     @Mapping(target = "createdAt", ignore = true)
     @Mapping(target = "creatorId", ignore = true)
     @Mapping(target = "creatorCode", ignore = true)

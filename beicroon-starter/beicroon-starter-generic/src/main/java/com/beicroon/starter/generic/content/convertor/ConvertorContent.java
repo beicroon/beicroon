@@ -35,11 +35,10 @@ public class ConvertorContent {
                 {{filename}}Model toEntity({{filename}}CreateDTO dto);
 
                 @AfterMapping
-                default void fillCreator(@MappingTarget {{filename}}Model model) {
+                default void fillCreator(@MappingTarget {{filename}}Model model, {{filename}}CreateDTO dto) {
                     ConvertorHelper.fillCreator(model);
                 }
 
-                @Mapping(target = "id", ignore = true)
                 @Mapping(target = "createdAt", ignore = true)
                 @Mapping(target = "creatorId", ignore = true)
                 @Mapping(target = "creatorCode", ignore = true)

@@ -37,7 +37,6 @@ const parentName = ref();
       <beicroon-button class="block warning" label="新增" @click="list.handleCreate(Create)"></beicroon-button>
     </template>
     <template #table-title>
-      <beicroon-list-cell width="180">父级主键</beicroon-list-cell>
       <beicroon-list-cell width="180">父级编码</beicroon-list-cell>
       <beicroon-list-cell width="180">父级名称</beicroon-list-cell>
       <beicroon-list-cell width="180">编码</beicroon-list-cell>
@@ -48,7 +47,6 @@ const parentName = ref();
     </template>
     <template #table-body>
       <beicroon-list-row v-for="item in list.data">
-        <beicroon-list-cell>{{ item.parentId }}</beicroon-list-cell>
         <beicroon-list-cell>{{ item.parentCode }}</beicroon-list-cell>
         <beicroon-list-cell>{{ item.parentName }}</beicroon-list-cell>
         <beicroon-list-cell>{{ item.code }}</beicroon-list-cell>

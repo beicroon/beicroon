@@ -28,11 +28,10 @@ public interface ResourceMenuConvertor {
     ResourceMenuModel toEntity(ResourceMenuCreateDTO dto);
 
     @AfterMapping
-    default void fillCreator(@MappingTarget ResourceMenuModel model) {
+    default void fillCreator(@MappingTarget ResourceMenuModel model, ResourceMenuCreateDTO dto) {
         ConvertorHelper.fillCreator(model);
     }
 
-    @Mapping(target = "id", ignore = true)
     @Mapping(target = "createdAt", ignore = true)
     @Mapping(target = "creatorId", ignore = true)
     @Mapping(target = "creatorCode", ignore = true)

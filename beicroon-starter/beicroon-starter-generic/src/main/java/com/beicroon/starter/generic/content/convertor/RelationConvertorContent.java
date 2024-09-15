@@ -32,7 +32,7 @@ public class RelationConvertorContent {
                 {{filename}}Model toEntity({{filename}}CreateDTO dto);
 
                 @AfterMapping
-                default void fillCreator(@MappingTarget {{filename}}Model model) {
+                default void fillCreator(@MappingTarget {{filename}}Model model, {{filename}}CreateDTO dto) {
                     ConvertorHelper.fillCreator(model);
                 }
 
