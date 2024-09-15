@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {computed} from "vue";
+import {computed, ref} from "vue";
 import {Select} from "@/select.ts";
 import BeicroonLoading from "@/components/BeicroonLoading.vue";
 
@@ -23,10 +23,20 @@ const showValue = computed({
     await props.select.search(val);
 
     emits("update:showValue", val);
+
+    if (!val) {
+      tempShowValue.value = null;
+
+      emits("update:modelValue", null);
+    }
   },
 });
 
+const chose = ref(false);
+
 function choose(option: any) {
+  chose.value = true;
+
   props.select.hide();
 
   emits("update:showValue", props.select.getLabel(option));
@@ -38,6 +48,22 @@ function loadMore(e: Event) {
 
   if (target.scrollHeight - target.scrollTop === target.clientHeight) {
     props.select.loadMoreOptions();
+  }
+}
+
+const tempShowValue = ref(null);
+
+function handleFocusin() {
+  chose.value = false;
+
+  tempShowValue.value = showValue.value;
+}
+
+function handleFocusout() {
+  if (!chose.value) {
+    emits("update:showValue", tempShowValue.value);
+
+    props.select.reset();
   }
 }
 </script>
@@ -53,6 +79,8 @@ function loadMore(e: Event) {
            :disabled="disabled"
            :placeholder="placeholder"
            v-model="showValue"
+           @focusin="handleFocusin"
+           @focusout="handleFocusout"
     />
     <ul class="select" :class="{hidden: select.hidden}" @scroll="loadMore">
       <template v-for="options in select.options">

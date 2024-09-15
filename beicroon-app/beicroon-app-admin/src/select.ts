@@ -32,6 +32,7 @@ export type Select<DTO extends QueryDTO, VO extends BaseVO> = {
     hide: () => void,
     getLabel: (option: VO) => any,
     getValue: (option: VO) => any,
+    reset: () => void,
 };
 
 export default function createBeicroonSelect<DTO extends QueryDTO, VO extends BaseVO>(config: Config<DTO, VO>): Select<DTO, VO> {
@@ -123,6 +124,18 @@ export default function createBeicroonSelect<DTO extends QueryDTO, VO extends Ba
             }
 
             return option;
+        },
+        reset: () => {
+            select.noMore = false;
+            select.loading = false;
+            select.requested = false;
+            select.params = {} as DTO;
+            select.pageInfo = {page: 1, size: config.pageSize || 30} as PageInfo;
+            select.options = [];
+
+            if (select.defaultOptions.length > 0) {
+                select.options.push(select.defaultOptions);
+            }
         },
     }) as Select<DTO, VO>;
 
