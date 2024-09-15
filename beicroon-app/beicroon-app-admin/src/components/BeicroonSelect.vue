@@ -60,18 +60,30 @@ function handleFocusin() {
 }
 
 function handleFocusout() {
-  if (!chose.value) {
+  if (!chose.value && tempShowValue.value !== showValue.value) {
     emits("update:showValue", tempShowValue.value);
 
     props.select.reset();
   }
+
+  tempShowValue.value = null;
+}
+
+function handleMouseDown() {
+
+}
+
+function handleMouseUp() {
+
 }
 </script>
 
 <template>
   <div class="beicroon-input beicroon-select"
        :class="{required: required}"
-       v-on="select.getEvents()"
+       @click.stop
+       @mousedown="handleMouseDown"
+       @mouseup="handleMouseUp"
   >
     <span class="beicroon-input-label">{{ label }}</span>
     <input class="beicroon-input-area"

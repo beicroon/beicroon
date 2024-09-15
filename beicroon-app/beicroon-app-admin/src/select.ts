@@ -15,7 +15,6 @@ export type Select<DTO extends QueryDTO, VO extends BaseVO> = {
     defaultOptions: Array<VO>,
     options: Array<Array<VO>>,
     hidden: boolean,
-    getEvents: () => Record<string, Function>,
     noMore: boolean,
     loading: boolean,
     request?: Page<DTO, VO> | null,
@@ -23,13 +22,15 @@ export type Select<DTO extends QueryDTO, VO extends BaseVO> = {
     params: DTO,
     pageInfo: PageInfo,
     timer?: any,
+    clearTimer: () => void,
     search: (keywords?: string) => Promise<void>,
     handleSearch: () => Promise<void>,
     handleRequest: (clear?: boolean) => Promise<void>,
     loadMoreOptions: () => Promise<void>,
-    optionValue: string,
     optionLabel: string,
+    optionValue?: string,
     hide: () => void,
+    show: () => Promise<void>,
     getLabel: (option: VO) => any,
     getValue: (option: VO) => any,
     reset: () => void,
@@ -37,39 +38,21 @@ export type Select<DTO extends QueryDTO, VO extends BaseVO> = {
 
 export default function createBeicroonSelect<DTO extends QueryDTO, VO extends BaseVO>(config: Config<DTO, VO>): Select<DTO, VO> {
     const select: Select<DTO, VO> = reactive<Select<DTO, VO>>({
-        defaultOptions: config.options instanceof Array ? config.options : [],
+        defaultOptions: [],
         options: [],
         hidden: true,
-        getEvents: () => {
-            return {
-                click: (e: MouseEvent) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    e.stopImmediatePropagation();
-                },
-                focusin: async () => {
-                    select.hidden = false;
-
-                    if (select.requested) {
-                        return;
-                    }
-
-                    await select.handleRequest();
-                },
-                focusout: () => {
-                    select.hidden = true;
-                },
-            };
-        },
         noMore: false,
         loading: false,
-        request: config.options instanceof Function ? config.options : null,
+        request: null,
         requested: false,
         params: {} as DTO,
-        pageInfo: {page: 1, size: config.pageSize || 30} as PageInfo,
+        pageInfo: {page: 1, size: 30} as PageInfo,
         timer: null,
-        search: async (keywords?: string) => {
+        clearTimer: () => {
             clearTimeout(select.timer);
+        },
+        search: async (keywords?: string) => {
+            select.clearTimer();
 
             select.params.keywords = keywords;
 
@@ -108,9 +91,18 @@ export default function createBeicroonSelect<DTO extends QueryDTO, VO extends Ba
 
             await select.handleRequest();
         },
-        optionValue: config.optionValue,
-        optionLabel: config.optionLabel,
+        optionLabel: "",
+        optionValue: undefined,
         hide: () => select.hidden = true,
+        show: async () => {
+            select.hidden = false;
+
+            if (select.requested) {
+                return;
+            }
+
+            await select.handleRequest();
+        },
         getLabel: (option: VO) => {
             if (select.optionLabel) {
                 return (option as any)[select.optionLabel];
@@ -130,14 +122,33 @@ export default function createBeicroonSelect<DTO extends QueryDTO, VO extends Ba
             select.loading = false;
             select.requested = false;
             select.params = {} as DTO;
-            select.pageInfo = {page: 1, size: config.pageSize || 30} as PageInfo;
+            select.pageInfo = {page: 1, size: select.pageInfo.size} as PageInfo;
             select.options = [];
 
             if (select.defaultOptions.length > 0) {
                 select.options.push(select.defaultOptions);
             }
+
+            select.clearTimer();
         },
     }) as Select<DTO, VO>;
+
+    if (Array.isArray(config.options)) {
+        select.defaultOptions = config.options;
+    } else {
+        select.request = config.options;
+    }
+
+    if (select.defaultOptions.length > 0) {
+        select.options.push(select.defaultOptions);
+    }
+
+    select.optionLabel = config.optionLabel;
+    select.optionValue = config.optionValue;
+
+    if (config.pageSize) {
+        select.pageInfo.size = config.pageSize;
+    }
 
     return select;
 }
