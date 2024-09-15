@@ -13,6 +13,7 @@ export type Config<DTO extends QueryDTO, VO extends BaseVO> = {
 
 export type Select<DTO extends QueryDTO, VO extends BaseVO> = {
     defaultOptions: Array<VO>,
+    prevOptions: Array<Array<VO>>,
     options: Array<Array<VO>>,
     hidden: boolean,
     noMore: boolean,
@@ -33,12 +34,12 @@ export type Select<DTO extends QueryDTO, VO extends BaseVO> = {
     show: () => Promise<void>,
     getLabel: (option: VO) => any,
     getValue: (option: VO) => any,
-    reset: () => void,
 };
 
 export default function createBeicroonSelect<DTO extends QueryDTO, VO extends BaseVO>(config: Config<DTO, VO>): Select<DTO, VO> {
     const select: Select<DTO, VO> = reactive<Select<DTO, VO>>({
         defaultOptions: [],
+        prevOptions: [],
         options: [],
         hidden: true,
         noMore: false,
@@ -66,12 +67,9 @@ export default function createBeicroonSelect<DTO extends QueryDTO, VO extends Ba
         handleRequest: async (clear: boolean = false) => {
             if (select.request && !select.noMore) {
                 if (clear) {
+                    select.prevOptions = select.options;
                     select.options = [];
                     select.pageInfo.page = 1;
-
-                    if (select.defaultOptions.length > 0) {
-                        select.options.push(select.defaultOptions);
-                    }
                 }
 
                 select.loading = true;
@@ -79,7 +77,9 @@ export default function createBeicroonSelect<DTO extends QueryDTO, VO extends Ba
                 const res = await select.request.call(select, select.params, select.pageInfo)
                     .finally(() => select.loading = false);
 
-                select.options.push(res.data);
+                if (res.data && res.data.length > 0) {
+                    select.options.push(res.data);
+                }
 
                 select.noMore = !res.page || res.data.length < res.page.size;
 
@@ -93,7 +93,13 @@ export default function createBeicroonSelect<DTO extends QueryDTO, VO extends Ba
         },
         optionLabel: "",
         optionValue: undefined,
-        hide: () => select.hidden = true,
+        hide: () => {
+            select.hidden = true;
+
+            if (select.options.length <= 0 && select.prevOptions.length > 0) {
+                select.options = select.prevOptions;
+            }
+        },
         show: async () => {
             select.hidden = false;
 
@@ -117,30 +123,12 @@ export default function createBeicroonSelect<DTO extends QueryDTO, VO extends Ba
 
             return option;
         },
-        reset: () => {
-            select.noMore = false;
-            select.loading = false;
-            select.requested = false;
-            select.params = {} as DTO;
-            select.pageInfo = {page: 1, size: select.pageInfo.size} as PageInfo;
-            select.options = [];
-
-            if (select.defaultOptions.length > 0) {
-                select.options.push(select.defaultOptions);
-            }
-
-            select.clearTimer();
-        },
     }) as Select<DTO, VO>;
 
     if (Array.isArray(config.options)) {
         select.defaultOptions = config.options;
     } else {
         select.request = config.options;
-    }
-
-    if (select.defaultOptions.length > 0) {
-        select.options.push(select.defaultOptions);
     }
 
     select.optionLabel = config.optionLabel;

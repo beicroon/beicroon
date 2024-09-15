@@ -62,10 +62,8 @@ function handleFocusin() {
 }
 
 function handleFocusout() {
-  if (!chose.value && tempShowValue.value !== showValue.value) {
+  if (!chose.value && tempShowValue.value != showValue.value) {
     emits("update:showValue", tempShowValue.value);
-
-    props.select.reset();
   }
 
   tempShowValue.value = null;
@@ -98,7 +96,10 @@ function handleMouseUp() {
            @focusin="handleFocusin"
            @focusout="handleFocusout"
     />
-    <ul class="select" :class="{hidden: select.hidden}" @scroll="loadMore">
+    <ul class="select" :class="{hidden: select.hidden}" @scroll="loadMore" @click.stop>
+      <li class="option" v-for="option in select.defaultOptions" @mousedown="choose(option)">
+        {{ option[select.optionLabel] }}
+      </li>
       <template v-for="options in select.options">
         <li class="option" v-for="option in options" @mousedown="choose(option)">
           {{ option[select.optionLabel] }}
