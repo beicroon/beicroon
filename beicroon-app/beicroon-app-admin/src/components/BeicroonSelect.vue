@@ -69,6 +69,8 @@ function handleFocusout() {
   }
 
   tempShowValue.value = null;
+
+  props.select.hide();
 }
 
 function handleMouseDown() {
