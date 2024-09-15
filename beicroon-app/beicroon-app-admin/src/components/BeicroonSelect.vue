@@ -57,6 +57,8 @@ function handleFocusin() {
   chose.value = false;
 
   tempShowValue.value = showValue.value;
+
+  props.select.show();
 }
 
 function handleFocusout() {
