@@ -1,6 +1,8 @@
 <script setup lang="ts">
-import {computed, ref} from "vue";
 import {Select} from "@/select.ts";
+import {escToggle} from "@/event.ts";
+import {computed, reactive, ref} from "vue";
+import BeicroonButton from "@/components/BeicroonButton.vue";
 import BeicroonLoading from "@/components/BeicroonLoading.vue";
 
 type Props = {
@@ -17,75 +19,68 @@ const props = defineProps<Props>();
 
 const emits = defineEmits(["update:showValue", "update:modelValue"]);
 
+const timer = ref();
+
 const showValue = computed({
   get: () => props.showValue,
   set: async (val?: any) => {
-    await props.select.search(val);
-
     emits("update:showValue", val);
 
-    if (!val) {
-      tempShowValue.value = null;
+    clearTimeout(timer.value);
 
-      emits("update:modelValue", null);
-    }
+    timer.value = setTimeout(() => props.select.search(val), 300);
   },
 });
 
-const chose = ref(false);
+const loadMoreLabel = computed(() => props.select.noMore ? "没有更多了!" : "加载更多");
 
-function choose(option: any) {
-  chose.value = true;
+const active = ref(false);
 
-  props.select.hide();
+const clicking = reactive({
+  mouseDown: false,
+  mouseUp: false,
+});
 
-  emits("update:showValue", props.select.getLabel(option));
-  emits("update:modelValue", props.select.getValue(option));
-}
-
-function loadMore(e: Event) {
-  const target = e.target as HTMLElement;
-
-  if (target.scrollHeight - target.scrollTop === target.clientHeight) {
-    props.select.loadMoreOptions();
-  }
-}
-
-const tempShowValue = ref(null);
-
-function handleFocusin() {
-  chose.value = false;
-
-  tempShowValue.value = showValue.value;
+async function handleFocusin() {
+  active.value = true;
 
   props.select.show();
+  props.select.load();
+
+  await escToggle(handleFocusout);
 }
 
-function handleFocusout() {
-  if (!chose.value && tempShowValue.value != showValue.value) {
-    emits("update:showValue", tempShowValue.value);
-  }
-
-  tempShowValue.value = null;
+async function handleFocusout() {
+  clicking.mouseDown = false;
+  clicking.mouseUp = false;
 
   props.select.hide();
 }
 
-function handleMouseDown() {
-
+async function handleMouseDown() {
+  clicking.mouseDown = true;
 }
 
-function handleMouseUp() {
+async function handleMouseUp() {
+  clicking.mouseUp = true;
+}
 
+async function handleClick(option: any) {
+  if (clicking.mouseDown && clicking.mouseUp) {
+    emits("update:showValue", props.select.getLabel(option));
+    emits("update:modelValue", props.select.getValue(option));
+  }
+
+  await escToggle(false);
+
+  await handleFocusout();
 }
 </script>
 
 <template>
   <div class="beicroon-input beicroon-select"
-       :class="{required: required}"
+       :class="{required: required, active: active}"
        @click.stop
-       @mousedown="handleMouseDown"
-       @mouseup="handleMouseUp"
   >
     <span class="beicroon-input-label">{{ label }}</span>
     <input class="beicroon-input-area"
@@ -94,19 +89,38 @@ function handleMouseUp() {
            :placeholder="placeholder"
            v-model="showValue"
            @focusin="handleFocusin"
-           @focusout="handleFocusout"
     />
-    <ul class="select" :class="{hidden: select.hidden}" @scroll="loadMore" @click.stop>
-      <li class="option" v-for="option in select.defaultOptions" @mousedown="choose(option)">
-        {{ option[select.optionLabel] }}
+    <ul class="select" :class="{hidden: select.hidden}" @click.stop>
+      <li class="option"
+          v-for="option in select.options"
+          @click="handleClick(option)"
+          @mousedown="handleMouseDown"
+          @mouseup="handleMouseUp"
+      >
+        {{ select.getLabel(option) }}
       </li>
-      <template v-for="options in select.options">
-        <li class="option" v-for="option in options" @mousedown="choose(option)">
-          {{ option[select.optionLabel] }}
+      <template v-for="options in select.moreOptions">
+        <li class="option"
+            v-for="option in options"
+            @click="handleClick(option)"
+            @mousedown="handleMouseDown"
+            @mouseup="handleMouseUp"
+        >
+          {{ select.getLabel(option) }}
         </li>
       </template>
-      <li class="option loading" :class="{hidden: !select.loading}">
-        <beicroon-loading fill="#b3e5fc" width="38" height="38"></beicroon-loading>
+      <li class="option loading">
+        <beicroon-loading
+          :class="{hidden: !select.loading}"
+          fill="#b3e5fc"
+          width="38"
+          height="38"
+        ></beicroon-loading>
+        <beicroon-button
+          :class="{hidden: select.loading}"
+          :label="loadMoreLabel"
+          @click="props.select.loadMore"
+        ></beicroon-button>
       </li>
     </ul>
   </div>
@@ -116,6 +130,19 @@ function handleMouseUp() {
 .beicroon-select {
   z-index: 666;
   position: relative;
+
+  &.active {
+    background-color: var(--color-primary-lighter);
+
+    .beicroon-input-label {
+      color: var(--color-white);
+      background-color: var(--color-primary-deeper);
+    }
+
+    .beicroon-input-area {
+      border-color: var(--color-primary);
+    }
+  }
 
   &.column {
     .select {
@@ -156,7 +183,12 @@ function handleMouseUp() {
     }
 
     .loading {
+      cursor: auto;
       justify-content: center;
+
+      &:hover {
+        background-color: var(--color-white);
+      }
     }
   }
 }

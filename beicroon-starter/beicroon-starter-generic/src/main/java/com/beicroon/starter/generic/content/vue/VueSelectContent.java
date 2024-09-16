@@ -22,7 +22,7 @@ public class VueSelectContent {
             const emits = defineEmits(["update:showValue", "update:modelValue"]);
 
             const select = createBeicroonSelect<DTO, VO>({
-              options: page,
+              request: page,
               optionValue: "id",
               optionLabel: "name",
             });

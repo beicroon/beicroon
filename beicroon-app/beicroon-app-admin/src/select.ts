@@ -4,139 +4,104 @@ import {BaseVO, PageInfo, QueryDTO, Response} from "@/http.ts";
 type Page<DTO extends QueryDTO, VO extends BaseVO> = (params: DTO, pageInfo: PageInfo) => Promise<Response<Array<VO>>>;
 
 export type Config<DTO extends QueryDTO, VO extends BaseVO> = {
-    options: Array<VO> | Page<DTO, VO>,
-    optionValue: string,
+    options?: Array<VO>,
+    request?: Page<DTO, VO>,
     optionLabel: string,
+    optionValue?: string,
     pageSize?: number,
     multiple?: boolean,
 };
 
 export type Select<DTO extends QueryDTO, VO extends BaseVO> = {
-    defaultOptions: Array<VO>,
-    prevOptions: Array<Array<VO>>,
-    options: Array<Array<VO>>,
-    hidden: boolean,
-    noMore: boolean,
-    loading: boolean,
-    request?: Page<DTO, VO> | null,
-    requested: boolean,
+    options?: Array<VO>,
+    moreOptions: Array<Array<VO>>,
+    request?: Page<DTO, VO>,
     params: DTO,
-    pageInfo: PageInfo,
-    timer?: any,
-    clearTimer: () => void,
-    search: (keywords?: string) => Promise<void>,
-    handleSearch: () => Promise<void>,
-    handleRequest: (clear?: boolean) => Promise<void>,
-    loadMoreOptions: () => Promise<void>,
     optionLabel: string,
     optionValue?: string,
-    hide: () => void,
+    pageInfo: PageInfo,
+    multiple?: boolean,
+    hidden: boolean,
+    loading: boolean,
+    noMore: boolean,
     show: () => Promise<void>,
+    hide: () => Promise<void>,
+    load: () => Promise<void>,
+    search: (keywords?: string) => Promise<void>,
+    loadMore: () => Promise<void>,
+    handleRequest: () => Promise<void>,
     getLabel: (option: VO) => any,
     getValue: (option: VO) => any,
 };
 
 export default function createBeicroonSelect<DTO extends QueryDTO, VO extends BaseVO>(config: Config<DTO, VO>): Select<DTO, VO> {
     const select: Select<DTO, VO> = reactive<Select<DTO, VO>>({
-        defaultOptions: [],
-        prevOptions: [],
-        options: [],
-        hidden: true,
-        noMore: false,
-        loading: false,
-        request: null,
-        requested: false,
+        options: config.options as Array<VO>,
+        moreOptions: [] as Array<Array<VO>>,
+        request: config.request,
         params: {} as DTO,
-        pageInfo: {page: 1, size: 30} as PageInfo,
-        timer: null,
-        clearTimer: () => {
-            clearTimeout(select.timer);
-        },
-        search: async (keywords?: string) => {
-            select.clearTimer();
-
-            select.params.keywords = keywords;
-
-            select.timer = setTimeout(select.handleSearch, 500);
-        },
-        handleSearch: async () => {
-            select.noMore = false;
-
-            await select.handleRequest(true);
-        },
-        handleRequest: async (clear: boolean = false) => {
-            if (select.request && !select.noMore) {
-                if (clear) {
-                    select.prevOptions = select.options;
-                    select.options = [];
-                    select.pageInfo.page = 1;
-                }
-
-                select.loading = true;
-
-                const res = await select.request.call(select, select.params, select.pageInfo)
-                    .finally(() => select.loading = false);
-
-                if (res.data && res.data.length > 0) {
-                    select.options.push(res.data);
-                }
-
-                select.noMore = !res.page || res.data.length < res.page.size;
-
-                select.requested = true;
-            }
-        },
-        loadMoreOptions: async () => {
-            select.pageInfo.page++;
-
-            await select.handleRequest();
-        },
-        optionLabel: "",
-        optionValue: undefined,
-        hide: () => {
-            select.hidden = true;
-
-            if (select.options.length <= 0 && select.prevOptions.length > 0) {
-                select.options = select.prevOptions;
-            }
-        },
+        optionLabel: config.optionLabel,
+        optionValue: config.optionValue,
+        pageInfo: {page: 1, size: config.pageSize || 30} as PageInfo,
+        multiple: config.multiple,
+        hidden: true,
+        loading: false,
+        noMore: false,
         show: async () => {
             select.hidden = false;
-
-            if (select.requested) {
+        },
+        hide: async () => {
+            select.hidden = true;
+        },
+        load: async () => {
+            if (select.noMore || select.moreOptions.length > 0) {
                 return;
             }
 
             await select.handleRequest();
         },
-        getLabel: (option: VO) => {
-            if (select.optionLabel) {
-                return (option as any)[select.optionLabel];
-            }
+        search: async (keywords?: string) => {
+            select.noMore = false;
+            select.moreOptions = [];
+            select.pageInfo.page = 1;
+            select.params.keywords = keywords;
 
-            return option;
+            await select.load();
         },
-        getValue: (option: VO) => {
-            if (select.optionValue) {
-                return (option as any)[select.optionValue];
+        loadMore: async () => {
+            if (select.noMore) {
+                return;
             }
 
-            return option;
+            select.pageInfo.page++;
+
+            await select.handleRequest();
+        },
+        handleRequest: async () => {
+            if (select.request) {
+                select.loading = true;
+
+                const res = await select.request(select.params, select.pageInfo)
+                    .finally(() => select.loading = false);
+
+                if (Array.isArray(res.data) && res.data.length > 0) {
+                    select.moreOptions.push(res.data);
+                }
+
+                select.noMore = !res.data || res.data.length < select.pageInfo.size;
+            }
+        },
+        getLabel: (option: any): any => {
+            return option[select.optionLabel];
+        },
+        getValue: (option: any): any => {
+            if (!select.optionValue) {
+                return option;
+            }
+
+            return option[select.optionValue];
         },
     }) as Select<DTO, VO>;
-
-    if (Array.isArray(config.options)) {
-        select.defaultOptions = config.options;
-    } else {
-        select.request = config.options;
-    }
-
-    select.optionLabel = config.optionLabel;
-    select.optionValue = config.optionValue;
-
-    if (config.pageSize) {
-        select.pageInfo.size = config.pageSize;
-    }
 
     return select;
 }

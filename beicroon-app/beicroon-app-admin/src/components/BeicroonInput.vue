@@ -68,6 +68,10 @@ const modelValue = computed({
       color: var(--color-white);
       background-color: var(--color-primary-deeper);
     }
+
+    .beicroon-input-area {
+      border-color: var(--color-primary);
+    }
   }
 
   &.column {
@@ -98,10 +102,6 @@ const modelValue = computed({
 
     &::placeholder {
       color: var(--color-grey);
-    }
-
-    &:focus {
-      border-color: var(--color-primary);
     }
 
     &[disabled] {
