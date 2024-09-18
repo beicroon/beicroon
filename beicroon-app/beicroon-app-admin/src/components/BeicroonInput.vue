@@ -51,7 +51,9 @@ async function handleFocusout() {
 <style lang="less">
 .beicroon-input {
   gap: 6rem;
+  z-index: 1;
   padding: 6rem;
+  position: relative;
   border-radius: 6rem;
   align-items: center;
   flex-direction: row;

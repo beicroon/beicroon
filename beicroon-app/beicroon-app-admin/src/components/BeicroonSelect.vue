@@ -99,10 +99,8 @@ async function handleClear() {
            v-model="keywords"
            @focusin="handleFocusin"
     />
-    <div class="show-value">
-      <span>{{ showValue || "请选择" }}</span>
-      <beicroon-button label="x" @click="handleClear"></beicroon-button>
-    </div>
+    <div class="show-value-label"><span>{{ showValue || "请选择" }}</span></div>
+    <beicroon-button class="show-value-clear" label="x" @click="handleClear"></beicroon-button>
     <ul class="select" :class="{hidden: select.hidden}">
       <li class="option" v-for="option in select.options"
           @click="handleClick(option)"
@@ -145,9 +143,14 @@ async function handleClear() {
   &.active {
     background-color: var(--color-primary-lighter);
 
-    .show-value {
+    .show-value-label {
       top: 0;
       transform: translateY(-28rem);
+    }
+
+    .show-value-clear {
+      top: 0;
+      transform: translateY(-26rem);
     }
 
     .beicroon-input-label {
@@ -162,10 +165,16 @@ async function handleClear() {
   }
 
   &.column {
-    .show-value {
+    .show-value-label {
       top: 0;
       right: 18rem;
       transform: translateY(58rem) !important;
+    }
+
+    .show-value-clear {
+      top: 0;
+      right: 36rem;
+      transform: translateY(62rem) !important;
     }
 
     .select {
@@ -174,13 +183,17 @@ async function handleClear() {
     }
 
     &.active {
-      .show-value {
+      .show-value-label {
+        top: -34rem;
+      }
+
+      .show-value-clear {
         top: -34rem;
       }
     }
   }
 
-  .show-value {
+  .show-value-label {
     top: 50%;
     z-index: 1;
     right: 6rem;
@@ -196,6 +209,19 @@ async function handleClear() {
     justify-content: space-between;
     background-color: var(--color-white);
     border: 1rem solid var(--color-grey-deeper);
+  }
+
+  .show-value-clear {
+    top: 50%;
+    z-index: 3;
+    right: 24rem;
+    width: 24rem;
+    height: 24rem;
+    position: absolute;
+    align-items: center;
+    justify-content: center;
+    transform: translateY(-50%);
+    transition: all 130ms linear;
   }
 
   .beicroon-input-area {
