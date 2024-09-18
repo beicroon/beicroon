@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import {Select} from "@/select.ts";
-import {escToggle} from "@/event.ts";
 import {computed, reactive, ref, watch} from "vue";
 import BeicroonButton from "@/components/BeicroonButton.vue";
 import BeicroonLoading from "@/components/BeicroonLoading.vue";
@@ -54,7 +53,7 @@ async function handleFocusin() {
   await props.select.show();
   await props.select.load();
 
-  await escToggle(handleFocusout);
+  document.addEventListener("click", handleFocusout, {once: true});
 }
 
 async function handleFocusout() {
@@ -80,7 +79,7 @@ async function handleClick(option: any) {
     emits("update:modelValue", props.select.getValue(option));
   }
 
-  await escToggle(false);
+  document.removeEventListener("click", handleFocusout);
 
   await handleFocusout();
 }

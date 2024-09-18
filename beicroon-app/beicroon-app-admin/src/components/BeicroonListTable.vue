@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import {afterSearch, List} from "@/list.ts";
 import {computed, onMounted, onUnmounted, ref} from "vue";
-import {mouseMove, mouseUp, windowResize} from "@/event.ts";
 import BeicroonListRow from "@/components/BeicroonListRow.vue";
 import BeicroonLoading from "@/components/BeicroonLoading.vue";
 
@@ -66,26 +65,31 @@ const scrollHeightStyle = computed(() => {
 afterSearch(props.list, setScroll);
 
 onMounted(() => {
-  windowResize(setScroll);
+  window.addEventListener("resize", setScroll);
 
   handleScroll();
 });
 
-onUnmounted(() => windowResize());
+onUnmounted(() => window.removeEventListener("resize", setScroll));
 
 const scrollXActive = ref(false);
 const scrollYActive = ref(false);
+
+async function moveX(e: MouseEvent) {
+  beicroonList.value.scrollLeft += e.movementX;
+}
 
 async function activeX() {
   document.body.style.userSelect = "none";
 
   scrollXActive.value = true;
 
-  await mouseMove(async (e: MouseEvent) => {
-    beicroonList.value.scrollLeft += e.movementX;
-  });
+  document.addEventListener("mousemove", moveX);
+  document.addEventListener("mouseup", endScroll);
+}
 
-  await mouseUp(endScroll);
+async function moveY(e: MouseEvent) {
+  beicroonList.value.scrollTop += e.movementY;
 }
 
 async function activeY() {
@@ -93,11 +97,8 @@ async function activeY() {
 
   scrollYActive.value = true;
 
-  await mouseMove(async (e: MouseEvent) => {
-    beicroonList.value.scrollTop += e.movementY;
-  });
-
-  await mouseUp(endScroll);
+  document.addEventListener("mousemove", moveY);
+  document.addEventListener("mouseup", endScroll);
 }
 
 async function endScroll() {
@@ -106,7 +107,9 @@ async function endScroll() {
   scrollXActive.value = false;
   scrollYActive.value = false;
 
-  await mouseMove();
+  document.removeEventListener("mousemove", moveX);
+  document.removeEventListener("mousemove", moveY);
+  document.removeEventListener("mouseup", endScroll);
 }
 </script>
 
@@ -126,10 +129,18 @@ async function endScroll() {
       <beicroon-loading fill="#b3e5fc" width="100" height="100"></beicroon-loading>
     </div>
     <div class="beicroon-list-table-scroll x">
-      <div class="scroll" :class="{active: scrollXActive}" :style="scrollWidthStyle" @mousedown.self="activeX"></div>
+      <div class="scroll"
+           :class="{active: scrollXActive}"
+           :style="scrollWidthStyle"
+           @mousedown.self="activeX"
+      ></div>
     </div>
     <div class="beicroon-list-table-scroll y">
-      <div class="scroll" :class="{active: scrollYActive}" :style="scrollHeightStyle" @mousedown.self="activeY"></div>
+      <div class="scroll"
+           :class="{active: scrollYActive}"
+           :style="scrollHeightStyle"
+           @mousedown.self="activeY"
+      ></div>
     </div>
   </div>
 </template>

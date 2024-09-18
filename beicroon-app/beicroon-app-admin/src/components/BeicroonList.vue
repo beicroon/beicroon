@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import {List} from "@/list.ts";
 import {computed, ref} from "vue";
-import {escToggle} from "@/event.ts";
 import {SelectorEnums} from "@/enums/default-enums.ts";
 import BeicroonButton from "@/components/BeicroonButton.vue";
 import BeicroonListTable from "@/components/BeicroonListTable.vue";
@@ -20,11 +19,9 @@ async function toggleMoreSearch() {
   moreSearchHidden.value = !moreSearchHidden.value;
 
   if (moreSearchHidden.value) {
-    await escToggle(false);
+    document.removeEventListener("click", toggleMoreSearch);
   } else {
-    await escToggle(async () => {
-      moreSearchHidden.value = true;
-    });
+    document.addEventListener("click", toggleMoreSearch, {once: true});
   }
 }
 

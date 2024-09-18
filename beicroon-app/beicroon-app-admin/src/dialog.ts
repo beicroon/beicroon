@@ -1,5 +1,4 @@
 import {h, ref, render, VNode} from "vue";
-import {escToggle} from "@/event.ts";
 import DialogMessage from "@/apps/DialogMessage.vue";
 import DialogOverlay from "@/apps/DialogOverlay.vue";
 import {AppNameEnums} from "@/enums/default-enums.ts";
@@ -111,7 +110,7 @@ function hide(node: HTMLElement) {
 const mousedownFlag = ref(false);
 const mouseUpFlag = ref(false);
 
-function terminateClick(node: HTMLElement) {
+function terminateClick(node: HTMLElement, callback: (e: MouseEvent) => Promise<void>) {
     node.addEventListener("mousedown", () => {
         mousedownFlag.value = true;
     });
@@ -120,15 +119,17 @@ function terminateClick(node: HTMLElement) {
         mouseUpFlag.value = true;
     });
 
-    node.addEventListener("click", (e: MouseEvent) => {
-        if (!mousedownFlag.value || !mouseUpFlag.value) {
-            e.preventDefault();
-            e.stopPropagation();
-            e.stopImmediatePropagation();
+    node.addEventListener("click", async (e: MouseEvent) => {
+        if (mousedownFlag.value && mouseUpFlag.value) {
+            await callback(e);
         }
 
         mousedownFlag.value = false;
         mouseUpFlag.value = false;
+
+        e.preventDefault();
+        e.stopPropagation();
+        e.stopImmediatePropagation();
     });
 }
 
@@ -176,9 +177,7 @@ export default async function dialog(config: DialogConfig) {
 
         render(vNode, node);
 
-        terminateClick(node);
-
-        await escToggle(dialog.handleCancel);
+        terminateClick(node, dialog.handleCancel);
     }
 
     container.appendChild(node);
