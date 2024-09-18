@@ -96,8 +96,10 @@ async function handleClear() {
        :class="{required: required, active: active}"
        @click.stop
   >
-    <div class="show-value">{{ showValue || "请选择" }}</div>
-    <beicroon-button class="show-value-clear" label="x" @click="handleClear"></beicroon-button>
+    <div class="show-value">
+      <span>{{ showValue || "请选择" }}</span>
+      <beicroon-button label="x" @click="handleClear"></beicroon-button>
+    </div>
     <span class="beicroon-input-label">{{ label }}</span>
     <input class="beicroon-input-area"
            type="text"
@@ -173,12 +175,6 @@ async function handleClear() {
       transform: translateY(58rem) !important;
     }
 
-    .show-value-clear {
-      top: 0;
-      right: 34rem;
-      transform: translateY(62rem) !important;
-    }
-
     .select {
       right: 18rem;
       top: calc(100% - 12rem);
@@ -207,19 +203,6 @@ async function handleClear() {
     justify-content: space-between;
     background-color: var(--color-white);
     border: 1rem solid var(--color-grey-deeper);
-  }
-
-  .show-value-clear {
-    top: 50%;
-    z-index: 3;
-    right: 24rem;
-    width: 24rem;
-    height: 24rem;
-    display: flex;
-    position: absolute;
-    align-items: center;
-    justify-content: center;
-    transform: translateY(-50%);
   }
 
   .beicroon-input-area {
