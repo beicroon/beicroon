@@ -92,25 +92,20 @@ async function handleClear() {
 </script>
 
 <template>
-  <div class="beicroon-input beicroon-select"
-       :class="{required: required, active: active}"
-       @click.stop
-  >
-    <div class="show-value">
-      <span>{{ showValue || "请选择" }}</span>
-      <beicroon-button label="x" @click="handleClear"></beicroon-button>
-    </div>
+  <div class="beicroon-input beicroon-select" :class="{required: required, active: active}" @click.stop>
     <span class="beicroon-input-label">{{ label }}</span>
-    <input class="beicroon-input-area"
-           type="text"
+    <input class="beicroon-input-area" type="text"
            :disabled="disabled"
            :placeholder="placeholder"
            v-model="keywords"
            @focusin="handleFocusin"
     />
+    <div class="show-value">
+      <span>{{ showValue || "请选择" }}</span>
+      <beicroon-button label="x" @click="handleClear"></beicroon-button>
+    </div>
     <ul class="select" :class="{hidden: select.hidden}">
-      <li class="option"
-          v-for="option in select.options"
+      <li class="option" v-for="option in select.options"
           @click="handleClick(option)"
           @mousedown="handleMouseDown"
           @mouseup="handleMouseUp"
@@ -118,8 +113,7 @@ async function handleClear() {
         {{ select.getLabel(option) }}
       </li>
       <template v-for="options in select.moreOptions">
-        <li class="option"
-            v-for="option in options"
+        <li class="option" v-for="option in options"
             @click="handleClick(option)"
             @mousedown="handleMouseDown"
             @mouseup="handleMouseUp"
