@@ -32,7 +32,17 @@ const showValue = computed({
   },
 });
 
-const loadMoreLabel = computed(() => props.select.noMore ? "没有更多了!" : "加载更多");
+const loadMoreLabel = computed(() => {
+  if (!props.select.request) {
+    return "~ 到底了 ~";
+  }
+
+  if (props.select.noMore) {
+    return props.select.moreOptions.length > 0 ? "! 没有更多了 !" : "~ 暂无数据 ~";
+  }
+
+  return "! 加载更多 !";
+});
 
 const active = ref(false);
 
@@ -44,8 +54,8 @@ const clicking = reactive({
 async function handleFocusin() {
   active.value = true;
 
-  props.select.show();
-  props.select.load();
+  await props.select.show();
+  await props.select.load();
 
   await escToggle(handleFocusout);
 }
@@ -54,7 +64,7 @@ async function handleFocusout() {
   clicking.mouseDown = false;
   clicking.mouseUp = false;
 
-  props.select.hide();
+  await props.select.hide();
 }
 
 async function handleMouseDown() {
