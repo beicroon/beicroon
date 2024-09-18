@@ -21,7 +21,6 @@ export enum AppSelectorEnums {
 }
 
 export enum SelectorEnums {
-    INPUT = ".beicroon-input",
     INPUT_REQUIRED = ".beicroon-input.required",
     INPUT_AREA = ".beicroon-input-area",
 }
