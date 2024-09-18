@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import {Select} from "@/select.ts";
 import {escToggle} from "@/event.ts";
-import {computed, reactive, ref} from "vue";
+import {computed, reactive, ref, watch} from "vue";
 import BeicroonButton from "@/components/BeicroonButton.vue";
 import BeicroonLoading from "@/components/BeicroonLoading.vue";
 
@@ -21,15 +21,12 @@ const emits = defineEmits(["update:showValue", "update:modelValue"]);
 
 const timer = ref();
 
-const showValue = computed({
-  get: () => props.showValue,
-  set: async (val?: any) => {
-    emits("update:showValue", val);
+const keywords = ref(null);
 
-    clearTimeout(timer.value);
+watch(keywords, (val: any) => {
+  clearTimeout(timer.value);
 
-    timer.value = setTimeout(() => props.select.search(val), 300);
-  },
+  timer.value = setTimeout(() => props.select.search(val), 300);
 });
 
 const loadMoreLabel = computed(() => {
@@ -61,6 +58,8 @@ async function handleFocusin() {
 }
 
 async function handleFocusout() {
+  active.value = false;
+
   clicking.mouseDown = false;
   clicking.mouseUp = false;
 
@@ -85,6 +84,11 @@ async function handleClick(option: any) {
 
   await handleFocusout();
 }
+
+async function handleClear() {
+  emits("update:showValue", null);
+  emits("update:modelValue", null);
+}
 </script>
 
 <template>
@@ -92,15 +96,17 @@ async function handleClick(option: any) {
        :class="{required: required, active: active}"
        @click.stop
   >
+    <div class="show-value">{{ showValue || "请选择" }}</div>
+    <beicroon-button class="show-value-clear" label="x" @click="handleClear"></beicroon-button>
     <span class="beicroon-input-label">{{ label }}</span>
     <input class="beicroon-input-area"
            type="text"
            :disabled="disabled"
            :placeholder="placeholder"
-           v-model="showValue"
+           v-model="keywords"
            @focusin="handleFocusin"
     />
-    <ul class="select" :class="{hidden: select.hidden}" @click.stop>
+    <ul class="select" :class="{hidden: select.hidden}">
       <li class="option"
           v-for="option in select.options"
           @click="handleClick(option)"
@@ -144,28 +150,88 @@ async function handleClick(option: any) {
   &.active {
     background-color: var(--color-primary-lighter);
 
+    .show-value {
+      top: 0;
+      transform: translateY(-28rem);
+    }
+
     .beicroon-input-label {
       color: var(--color-white);
       background-color: var(--color-primary-deeper);
     }
 
     .beicroon-input-area {
+      opacity: 1;
       border-color: var(--color-primary);
     }
   }
 
   &.column {
+    .show-value {
+      top: 0;
+      right: 18rem;
+      transform: translateY(58rem) !important;
+    }
+
+    .show-value-clear {
+      top: 0;
+      right: 34rem;
+      transform: translateY(62rem) !important;
+    }
+
     .select {
       right: 18rem;
       top: calc(100% - 12rem);
     }
+
+    &.active {
+      .show-value {
+        top: -34rem;
+      }
+    }
+  }
+
+  .show-value {
+    top: 50%;
+    z-index: 1;
+    right: 6rem;
+    width: 300rem;
+    height: 32rem;
+    display: flex;
+    position: absolute;
+    align-items: center;
+    border-radius: 6rem;
+    padding: 8rem 18rem;
+    transform: translateY(-50%);
+    transition: all 130ms linear;
+    justify-content: space-between;
+    background-color: var(--color-white);
+    border: 1rem solid var(--color-grey-deeper);
+  }
+
+  .show-value-clear {
+    top: 50%;
+    z-index: 3;
+    right: 24rem;
+    width: 24rem;
+    height: 24rem;
+    display: flex;
+    position: absolute;
+    align-items: center;
+    justify-content: center;
+    transform: translateY(-50%);
+  }
+
+  .beicroon-input-area {
+    opacity: 0;
+    z-index: 2;
+    position: relative;
   }
 
   .select {
     gap: 2rem;
     right: 6rem;
     z-index: 666;
-    width: 300rem;
     display: flex;
     height: 160rem;
     padding: 8rem 0;
@@ -174,8 +240,10 @@ async function handleClick(option: any) {
     border-radius: 6rem;
     top: calc(100% - 4rem);
     flex-direction: column;
+    width: 300rem !important;
+    transition: all 130ms linear;
     background-color: var(--color-white);
-    border: 1rem solid var(--color-grey-light);
+    border: 1rem solid var(--color-grey-deeper);
 
     .option {
       width: 100%;

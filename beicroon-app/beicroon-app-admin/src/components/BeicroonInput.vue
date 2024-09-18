@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {computed} from "vue";
+import {computed, ref} from "vue";
 
 type Props = {
   type?: "text" | "number" | "password",
@@ -20,13 +20,32 @@ const modelValue = computed({
   get: () => props.modelValue,
   set: (val: any) => emits("update:modelValue", val),
 })
+
+const active = ref(false);
+
+async function handleFocusin() {
+  active.value = true;
+}
+
+async function handleFocusout() {
+  active.value = false;
+}
 </script>
 
 <template>
-<div class="beicroon-input" :class="{required: required}">
-  <span class="beicroon-input-label">{{label}}</span>
-  <input class="beicroon-input-area" :disabled="disabled" :type="type" :placeholder="placeholder" v-model="modelValue" />
-</div>
+  <div class="beicroon-input"
+       :class="{required: required, active: active}"
+  >
+    <span class="beicroon-input-label">{{ label }}</span>
+    <input class="beicroon-input-area"
+           :disabled="disabled"
+           :type="type"
+           :placeholder="placeholder"
+           v-model="modelValue"
+           @focusin="handleFocusin"
+           @focusout="handleFocusout"
+    />
+  </div>
 </template>
 
 <style lang="less">
@@ -61,7 +80,7 @@ const modelValue = computed({
     }
   }
 
-  &:focus-within {
+  &.active {
     background-color: var(--color-primary-lighter);
 
     .beicroon-input-label {
