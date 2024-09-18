@@ -120,16 +120,16 @@ function terminateClick(node: HTMLElement, callback: (e: MouseEvent) => Promise<
     });
 
     node.addEventListener("click", async (e: MouseEvent) => {
+        e.preventDefault();
+        e.stopPropagation();
+        e.stopImmediatePropagation();
+
         if (mousedownFlag.value && mouseUpFlag.value) {
             await callback(e);
         }
 
         mousedownFlag.value = false;
         mouseUpFlag.value = false;
-
-        e.preventDefault();
-        e.stopPropagation();
-        e.stopImmediatePropagation();
     });
 }
 
