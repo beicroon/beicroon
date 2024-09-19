@@ -35,7 +35,7 @@ onMounted(async () => {
       <beicroon-input disabled class="column" label="父级名称" placeholder="父级名称" v-model="form.parentName"></beicroon-input>
       <beicroon-input disabled class="column" label="编码" placeholder="编码" v-model="form.code"></beicroon-input>
       <beicroon-input disabled class="column" label="名称" placeholder="名称" v-model="form.name"></beicroon-input>
-      <beicroon-input disabled class="column" label="路径" placeholder="路径" v-model="form.path"></beicroon-input>
+      <beicroon-input disabled class="column" label="路由" placeholder="路由" v-model="form.path"></beicroon-input>
       <beicroon-input disabled class="column" label="排序" placeholder="排序" v-model="form.sorting"></beicroon-input>
     </div>
     <div class="beicroon-dialog-loading" v-else>

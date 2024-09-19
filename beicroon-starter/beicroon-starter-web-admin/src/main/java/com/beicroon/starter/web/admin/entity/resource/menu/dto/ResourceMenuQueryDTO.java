@@ -35,7 +35,7 @@ public class ResourceMenuQueryDTO extends QueryDTO {
     private String name;
 
     @FieldSearch(name = "`path`")
-    @ApiModelProperty(name = "路径")
+    @ApiModelProperty(name = "路由")
     private String path;
 
     @FieldSearch(name = "`sorting`")

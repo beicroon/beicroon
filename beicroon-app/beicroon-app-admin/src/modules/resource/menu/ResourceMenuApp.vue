@@ -41,7 +41,7 @@ const parentName = ref();
       <beicroon-list-cell width="180">父级名称</beicroon-list-cell>
       <beicroon-list-cell width="180">编码</beicroon-list-cell>
       <beicroon-list-cell width="180">名称</beicroon-list-cell>
-      <beicroon-list-cell width="180">路径</beicroon-list-cell>
+      <beicroon-list-cell width="180">路由</beicroon-list-cell>
       <beicroon-list-cell width="180">排序</beicroon-list-cell>
       <beicroon-list-cell-button>操作</beicroon-list-cell-button>
     </template>

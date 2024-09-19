@@ -26,7 +26,7 @@ public class ResourceMenuBaseVO extends GenericVO {
     @ApiModelProperty(name = "名称")
     private String name;
 
-    @ApiModelProperty(name = "路径")
+    @ApiModelProperty(name = "路由")
     private String path;
 
     @ApiModelProperty(name = "排序")

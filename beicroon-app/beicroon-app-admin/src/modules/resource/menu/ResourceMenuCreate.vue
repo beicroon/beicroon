@@ -32,7 +32,7 @@ async function handleConfirm() {
       <resource-menu-select class="column" label="父级" placeholder="父级" v-model="form.parentId"></resource-menu-select>
       <beicroon-input class="column" label="编码" placeholder="编码" v-model="form.code" required></beicroon-input>
       <beicroon-input class="column" label="名称" placeholder="名称" v-model="form.name" required></beicroon-input>
-      <beicroon-input class="column" label="路径" placeholder="路径" v-model="form.path" required></beicroon-input>
+      <beicroon-input class="column" label="路由" placeholder="路由" v-model="form.path" required></beicroon-input>
       <beicroon-input class="column" label="排序" placeholder="排序" v-model="form.sorting"></beicroon-input>
     </div>
     <beicroon-line-vertical></beicroon-line-vertical>

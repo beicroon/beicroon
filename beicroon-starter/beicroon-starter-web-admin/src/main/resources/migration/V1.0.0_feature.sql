@@ -41,7 +41,7 @@ create table `admin_resource_menu`
     `parent_name`   varchar(255)         not null default '' comment '父级名称',
     `code`          varchar(64)          not null default '' comment '编码',
     `name`          varchar(255)         not null default '' comment '名称',
-    `path`          varchar(255)         not null default '' comment '路径',
+    `path`          varchar(255)         not null default '' comment '路由',
     `sorting`       smallint(5) unsigned not null default 0 comment '排序',
     `created_at`    timestamp            not null default current_timestamp comment '创建时间',
     `creator_id`    bigint(20) unsigned  not null default 0 comment '创建人主键',

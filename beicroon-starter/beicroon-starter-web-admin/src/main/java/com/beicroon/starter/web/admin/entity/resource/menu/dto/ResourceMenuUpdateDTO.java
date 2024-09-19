@@ -23,8 +23,8 @@ public class ResourceMenuUpdateDTO extends UpdateDTO {
     @ApiModelProperty(name = "名称")
     private String name;
 
-    @NeedValue(message = "路径[path]不能为空")
-    @ApiModelProperty(name = "路径")
+    @NeedValue(message = "路由[path]不能为空")
+    @ApiModelProperty(name = "路由")
     private String path;
 
     @ApiModelProperty(name = "排序")

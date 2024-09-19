@@ -7,7 +7,7 @@ export type ResourceMenuBaseVO = BaseVO & DisableVO & {
     parentName?: string,  // 父级名称
     code?: string,  // 编码
     name?: string,  // 名称
-    path?: string,  // 路径
+    path?: string,  // 路由
     sorting?: number,  // 排序
 }
 
@@ -26,7 +26,7 @@ export type ResourceMenuCreateDTO = DisableDTO & {
     parentId?: string,  // 父级主键
     code?: string,  // 编码
     name?: string,  // 名称
-    path?: string,  // 路径
+    path?: string,  // 路由
     sorting?: number,  // 排序
 }
 
@@ -35,7 +35,7 @@ export type ResourceMenuUpdateDTO = UpdateDTO & {
     parentId?: string,  // 父级主键
     code?: string,  // 编码
     name?: string,  // 名称
-    path?: string,  // 路径
+    path?: string,  // 路由
     sorting?: number,  // 排序
 }
 
@@ -44,7 +44,7 @@ export type ResourceMenuQueryDTO = QueryDTO & DisableDTO & {
     parentId?: string,  // 父级主键
     code?: string,  // 编码
     name?: string,  // 名称
-    path?: string,  // 路径
+    path?: string,  // 路由
     sorting?: number,  // 排序
 }
 

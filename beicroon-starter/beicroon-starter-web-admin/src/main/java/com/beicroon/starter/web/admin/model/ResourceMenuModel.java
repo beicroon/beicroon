@@ -35,7 +35,7 @@ public class ResourceMenuModel extends DisableModel {
     private String name;
 
     @TableField(value = "`path`")
-    @ApiModelProperty(name = "路径")
+    @ApiModelProperty(name = "路由")
     private String path;
 
     @TableField(value = "`sorting`")
