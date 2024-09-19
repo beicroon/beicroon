@@ -96,9 +96,9 @@ async function handleClear() {
            @focusin="handleFocusin"
            @focusout="handleFocusout"
     />
-    <div class="show-value-label"><span>{{ showValue || "请选择" }}</span></div>
+    <div class="beicroon-select-label"><span>{{ showValue || placeholder }}</span></div>
     <beicroon-button
-      class="show-value-clear"
+      class="beicroon-select-clear"
       :class="{hidden: !active}"
       label="x"
       @click="handleClear"
@@ -147,12 +147,12 @@ async function handleClear() {
   &.active {
     background-color: var(--color-primary-lighter);
 
-    .show-value-label {
+    .beicroon-select-label {
       top: 0;
       transform: translateY(-28rem);
     }
 
-    .show-value-clear {
+    .beicroon-select-clear {
       top: 0;
       transform: translateY(-26rem);
     }
@@ -169,13 +169,13 @@ async function handleClear() {
   }
 
   &.column {
-    .show-value-label {
+    .beicroon-select-label {
       top: 0;
       right: 18rem;
       transform: translateY(58rem) !important;
     }
 
-    .show-value-clear {
+    .beicroon-select-clear {
       top: 0;
       right: 36rem;
       transform: translateY(62rem) !important;
@@ -187,17 +187,17 @@ async function handleClear() {
     }
 
     &.active {
-      .show-value-label {
+      .beicroon-select-label {
         top: -34rem;
       }
 
-      .show-value-clear {
+      .beicroon-select-clear {
         top: -34rem;
       }
     }
   }
 
-  .show-value-label {
+  .beicroon-select-label {
     top: 50%;
     z-index: 1;
     right: 6rem;
@@ -215,7 +215,7 @@ async function handleClear() {
     border: 1rem solid var(--color-grey-deeper);
   }
 
-  .show-value-clear {
+  .beicroon-select-clear {
     top: 50%;
     z-index: 3;
     right: 24rem;
