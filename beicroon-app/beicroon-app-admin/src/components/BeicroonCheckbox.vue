@@ -1,32 +1,49 @@
 <script setup lang="ts">
-import {computed} from "vue";
+import {ref, watch} from "vue";
 
 type Props = {
   label: string,
   placeholder?: string,
   required?: boolean,
   disabled?: boolean,
-  modelValue?: any,
+  checked?: "checked" | "fixed" | "unchecked",
 };
 
-const props = defineProps<Props>();
+const props = withDefaults(defineProps<Props>(), {
+  checked: "unchecked",
+});
 
-const emits = defineEmits(["update:modelValue"]);
+const emits = defineEmits(["check", "uncheck"]);
 
-const modelValue = computed({
-  get: () => props.modelValue,
-  set: (val: any) => emits("update:modelValue", val),
-})
+const checkStatus = ref(props.checked);
+
+watch(() => props.checked, (value) => {
+  checkStatus.value = value;
+});
+
+function handleCheck() {
+  if (checkStatus.value !== "unchecked") {
+    checkStatus.value = "unchecked";
+
+    emits("uncheck");
+
+    return;
+  }
+
+  checkStatus.value = "checked";
+
+  emits("check");
+}
 </script>
 
 <template>
-  <div class="beicroon-input beicroon-checkbox" :class="{required: required}">
+  <div class="beicroon-input beicroon-checkbox" :class="{required: required}" @click.stop="handleCheck">
     <input class="beicroon-input-area"
            type="checkbox"
            :disabled="disabled"
            :placeholder="placeholder"
-           v-model="modelValue"
     />
+    <span class="beicroon-checkbox-area" :class="checkStatus"></span>
     <span class="beicroon-checkbox-label">{{ label }}</span>
   </div>
 </template>
@@ -34,5 +51,31 @@ const modelValue = computed({
 <style lang="less">
 .beicroon-checkbox {
   cursor: pointer;
+
+  .beicroon-input-area {
+    opacity: 0;
+    z-index: 2;
+    position: relative;
+  }
+
+  .beicroon-checkbox-area {
+    top: 10rem;
+    left: 6rem;
+    z-index: 1;
+    width: 12rem;
+    height: 12rem;
+    cursor: pointer;
+    position: absolute;
+    border-radius: 2rem;
+    border: 1rem solid var(--color-grey-deeper);
+
+    &.fixed {
+      background-color: var(--color-warning);
+    }
+
+    &.checked {
+      background-color: var(--color-primary);
+    }
+  }
 }
 </style>

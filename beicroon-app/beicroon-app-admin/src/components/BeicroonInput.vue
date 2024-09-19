@@ -128,7 +128,6 @@ async function handleFocusout() {
       width: 12rem;
       height: 12rem;
       cursor: pointer;
-      border: 1rem solid var(--color-grey-deeper);
     }
 
     &::placeholder {

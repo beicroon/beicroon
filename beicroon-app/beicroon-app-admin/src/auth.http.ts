@@ -29,14 +29,17 @@ export async function login(dto: LoginDTO): Promise<Response<LoginVO>> {
 }
 
 export type AuthMenu = {
+    id: string;
     code: string;
     name: string;
     path: string;
     active: boolean;
     children: Array<AuthMenu>;
+    checked?: "checked" | "fixed" | "unchecked";
 };
 
 export const index: AuthMenu = {
+    id: "1",
     code: "INDEX",
     name: "首页",
     path: "/index",
