@@ -54,7 +54,7 @@ public class VueUpdateContent {
 
             <template>
               <beicroon-form class="beicroon-dialog-view" @submit="handleConfirm">
-                <div class="beicroon-dialog-input" v-if="!loading.get">
+                <div class="beicroon-dialog-main beicroon-dialog-input" v-if="!loading.get">
                   {{formInput}}
                 </div>
                 <div class="beicroon-dialog-loading" v-else>

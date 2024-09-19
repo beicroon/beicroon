@@ -30,7 +30,7 @@ onMounted(async () => {
 
 <template>
   <beicroon-form class="beicroon-dialog-view">
-    <div class="beicroon-dialog-input" v-if="form">
+    <div class="beicroon-dialog-main beicroon-dialog-input" v-if="form">
       <beicroon-input disabled class="column" label="编码" placeholder="编码" v-model="form.code"></beicroon-input>
       <beicroon-input disabled class="column" label="名称" placeholder="名称" v-model="form.name"></beicroon-input>
       <beicroon-input disabled class="column" label="备注" placeholder="备注" v-model="form.remark"></beicroon-input>

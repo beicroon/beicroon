@@ -1,4 +1,5 @@
 import {h, ref, render, VNode} from "vue";
+import {Component} from "@vue/runtime-core";
 import DialogMessage from "@/apps/DialogMessage.vue";
 import DialogOverlay from "@/apps/DialogOverlay.vue";
 import {AppNameEnums} from "@/enums/default-enums.ts";
@@ -21,7 +22,7 @@ function getNode() {
 
 type DialogConfig = {
     title?: string,
-    message: string | VNode,
+    message: string | VNode | Component,
     props?: Record<string, any>,
     cancel?: () => Promise<void>,
     confirm?: () => Promise<void>,
@@ -30,7 +31,7 @@ type DialogConfig = {
 
 type Dialog = {
     title: string,
-    message: string | VNode,
+    message: string | VNode | Component,
     props?: Record<string, any>,
     handleCancel: () => Promise<void>,
     handleConfirm: () => Promise<void>,

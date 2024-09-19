@@ -56,7 +56,7 @@ onMounted(async () => {
 
 <template>
   <beicroon-form class="beicroon-dialog-view" @submit="handleConfirm">
-    <div class="beicroon-dialog-input" v-if="!loading.get">
+    <div class="beicroon-dialog-main beicroon-dialog-input" v-if="!loading.get">
       <resource-menu-select
         class="column"
         label="父级"

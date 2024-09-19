@@ -47,14 +47,17 @@ defineProps<Props>();
     height: calc(100% - 53rem);
   }
 
+  .beicroon-dialog-main {
+    overflow-y: auto;
+    height: calc(100% - 73rem);
+  }
+
   .beicroon-dialog-input {
     gap: 8rem;
     display: grid;
     padding: 24rem 0;
-    overflow-y: auto;
     justify-items: center;
     align-content: flex-start;
-    height: calc(100% - 73rem);
     grid-template-columns: repeat(3, 1fr);
   }
 

@@ -37,7 +37,7 @@ public class VueDetailContent {
 
             <template>
               <beicroon-form class="beicroon-dialog-view">
-                <div class="beicroon-dialog-input" v-if="form">
+                <div class="beicroon-dialog-main beicroon-dialog-input" v-if="form">
                   {{formInput}}
                 </div>
                 <div class="beicroon-dialog-loading" v-else>

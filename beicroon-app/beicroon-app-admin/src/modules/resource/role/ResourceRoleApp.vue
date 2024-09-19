@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import {onMounted} from "vue";
+import dialog from "@/dialog.ts";
 import createBeicroonList from "@/list.ts";
 import Create from "./ResourceRoleCreate.vue";
 import Detail from "./ResourceRoleDetail.vue";
@@ -10,11 +11,20 @@ import BeicroonButton from "@/components/BeicroonButton.vue";
 import BeicroonListRow from "@/components/BeicroonListRow.vue";
 import BeicroonListCell from "@/components/BeicroonListCell.vue";
 import BeicroonListCellButton from "@/components/BeicroonListCellButton.vue";
+import ResourceRoleMenuUpdate from "@/modules/resource/role/menu/ResourceRoleMenuUpdate.vue";
 import {page, remove, ResourceRolePageVO as VO, ResourceRoleQueryDTO as DTO} from "./resource-role.http.ts";
 
 const list = createBeicroonList<DTO, VO>("角色", page);
 
 onMounted(list.resetSearch);
+
+function showRuleMenuUpdate(item: VO) {
+  dialog({
+    title: "菜单分配",
+    message: ResourceRoleMenuUpdate,
+    props: {roleId: item.id},
+  });
+}
 </script>
 
 <template>
@@ -40,6 +50,7 @@ onMounted(list.resetSearch);
         <beicroon-list-cell>{{ item.name }}</beicroon-list-cell>
         <beicroon-list-cell>{{ item.remark }}</beicroon-list-cell>
         <beicroon-list-cell-button>
+          <beicroon-button class="primary" label="菜单分配" @click="showRuleMenuUpdate(item)"></beicroon-button>
           <beicroon-button class="primary" label="查看" @click="list.handleDetail(item, Detail)"></beicroon-button>
           <beicroon-button class="warning" label="编辑" @click="list.handleUpdate(item, Update)"></beicroon-button>
           <beicroon-button class="danger" label="删除" @click="list.handleRemove(item, remove)"></beicroon-button>

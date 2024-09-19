@@ -33,9 +33,7 @@ async function handleFocusout() {
 </script>
 
 <template>
-  <div class="beicroon-input"
-       :class="{required: required, active: active}"
-  >
+  <div class="beicroon-input" :class="{required: required, active: active}">
     <span class="beicroon-input-label">{{ label }}</span>
     <input class="beicroon-input-area"
            :disabled="disabled"
@@ -114,13 +112,24 @@ async function handleFocusout() {
   }
 
   .beicroon-input-area {
-    width: 300rem;
+    border: none;
     outline: none;
-    height: 32rem;
-    padding: 0 8rem;
-    line-height: 32rem;
-    border-radius: 6rem;
-    border: 1rem solid var(--color-grey-deeper);
+
+    &[type="text"], &[type="number"], &[type="password"] {
+      width: 300rem;
+      height: 32rem;
+      padding: 0 8rem;
+      line-height: 32rem;
+      border-radius: 6rem;
+      border: 1rem solid var(--color-grey-deeper);
+    }
+
+    &[type="checkbox"] {
+      width: 12rem;
+      height: 12rem;
+      cursor: pointer;
+      border: 1rem solid var(--color-grey-deeper);
+    }
 
     &::placeholder {
       color: var(--color-grey);

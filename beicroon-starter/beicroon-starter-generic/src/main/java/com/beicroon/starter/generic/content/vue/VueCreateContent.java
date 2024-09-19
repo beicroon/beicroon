@@ -34,7 +34,7 @@ public class VueCreateContent {
 
             <template>
               <beicroon-form class="beicroon-dialog-view" @submit="handleConfirm">
-                <div class="beicroon-dialog-input">
+                <div class="beicroon-dialog-main beicroon-dialog-input">
                   {{formInput}}
                 </div>
                 <beicroon-line-vertical></beicroon-line-vertical>

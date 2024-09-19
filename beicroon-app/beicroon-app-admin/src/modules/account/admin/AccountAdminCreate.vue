@@ -27,7 +27,7 @@ async function handleConfirm() {
 
 <template>
   <beicroon-form class="beicroon-dialog-view" @submit="handleConfirm">
-    <div class="beicroon-dialog-input">
+    <div class="beicroon-dialog-main beicroon-dialog-input">
       <beicroon-input class="column" label="编码" placeholder="编码" v-model="form.code"></beicroon-input>
       <beicroon-input class="column" label="账号" placeholder="账号" v-model="form.username"></beicroon-input>
       <beicroon-input class="column" label="密码" placeholder="密码" v-model="form.password"></beicroon-input>
