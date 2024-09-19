@@ -99,6 +99,7 @@ async function handleClear() {
     <div class="show-value-label"><span>{{ showValue || "请选择" }}</span></div>
     <beicroon-button
       class="show-value-clear"
+      :class="{hidden: !active}"
       label="x"
       @click="handleClear"
       @mousedown="handleMouseDown"
@@ -218,11 +219,11 @@ async function handleClear() {
     top: 50%;
     z-index: 3;
     right: 24rem;
-    width: 24rem;
-    height: 24rem;
     position: absolute;
     align-items: center;
     justify-content: center;
+    width: 24rem !important;
+    height: 24rem !important;
     transform: translateY(-50%);
     transition: all 130ms linear;
   }
