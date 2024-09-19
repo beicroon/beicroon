@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import {Select} from "@/select.ts";
-import {computed, reactive, ref, watch} from "vue";
+import {computed, ref, watch} from "vue";
 import BeicroonButton from "@/components/BeicroonButton.vue";
 import BeicroonLoading from "@/components/BeicroonLoading.vue";
 
@@ -42,10 +42,7 @@ const loadMoreLabel = computed(() => {
 
 const active = ref(false);
 
-const clicking = reactive({
-  mouseDown: false,
-  mouseUp: false,
-});
+const clicking = ref(false);
 
 async function handleFocusin() {
   active.value = true;
@@ -57,29 +54,28 @@ async function handleFocusin() {
 }
 
 async function handleFocusout() {
-  active.value = false;
+  if (clicking.value) {
+    return;
+  }
 
-  clicking.mouseDown = false;
-  clicking.mouseUp = false;
+  document.removeEventListener("click", handleFocusout);
+
+  active.value = false;
 
   await props.select.hide();
 }
 
 async function handleMouseDown() {
-  clicking.mouseDown = true;
+  clicking.value = true;
 }
 
 async function handleMouseUp() {
-  clicking.mouseUp = true;
+  clicking.value = false;
 }
 
 async function handleClick(option: any) {
-  if (clicking.mouseDown && clicking.mouseUp) {
-    emits("update:showValue", props.select.getLabel(option));
-    emits("update:modelValue", props.select.getValue(option));
-  }
-
-  document.removeEventListener("click", handleFocusout);
+  emits("update:showValue", props.select.getLabel(option));
+  emits("update:modelValue", props.select.getValue(option));
 
   await handleFocusout();
 }
@@ -98,6 +94,7 @@ async function handleClear() {
            :placeholder="placeholder"
            v-model="keywords"
            @focusin="handleFocusin"
+           @focusout="handleFocusout"
     />
     <div class="show-value-label"><span>{{ showValue || "请选择" }}</span></div>
     <beicroon-button class="show-value-clear" label="x" @click="handleClear"></beicroon-button>
