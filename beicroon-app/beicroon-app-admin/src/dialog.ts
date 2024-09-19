@@ -110,7 +110,7 @@ function hide(node: HTMLElement) {
 const mousedownFlag = ref(false);
 const mouseUpFlag = ref(false);
 
-function terminateClick(node: HTMLElement, callback: (e: MouseEvent) => Promise<void>) {
+function terminateClick(node: HTMLElement, callback: (e: MouseEvent) => Promise<void>, escHandler: (e: KeyboardEvent) => Promise<void>) {
     node.addEventListener("mousedown", () => {
         mousedownFlag.value = true;
     });
@@ -125,6 +125,8 @@ function terminateClick(node: HTMLElement, callback: (e: MouseEvent) => Promise<
         e.stopImmediatePropagation();
 
         if (mousedownFlag.value && mouseUpFlag.value) {
+            document.removeEventListener("keyup", escHandler);
+
             await callback(e);
         }
 
@@ -166,6 +168,14 @@ export default async function dialog(config: DialogConfig) {
         },
     };
 
+    const escHandler = async (e: KeyboardEvent) => {
+        if (e.key === "Escape") {
+            document.removeEventListener("keyup", escHandler);
+
+            await dialog.handleCancel();
+        }
+    };
+
     if (isMessage) {
         const vNode = createMessageNode(dialog);
 
@@ -177,7 +187,9 @@ export default async function dialog(config: DialogConfig) {
 
         render(vNode, node);
 
-        terminateClick(node, dialog.handleCancel);
+        terminateClick(node, dialog.handleCancel, escHandler);
+
+        document.addEventListener("keyup", escHandler);
     }
 
     container.appendChild(node);

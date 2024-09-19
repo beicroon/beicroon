@@ -53,6 +53,7 @@ async function handleFocusout() {
   gap: 6rem;
   z-index: 1;
   padding: 6rem;
+  user-select: text;
   position: relative;
   border-radius: 6rem;
   align-items: center;

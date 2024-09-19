@@ -77,6 +77,7 @@ const moreSearchSize = computed(() => {
 .beicroon-list {
   width: 100%;
   height: 100%;
+  user-select: text;
 
   .list-head {
     z-index: 2;

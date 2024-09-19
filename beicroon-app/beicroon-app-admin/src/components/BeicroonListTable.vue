@@ -80,8 +80,6 @@ async function moveX(e: MouseEvent) {
 }
 
 async function activeX() {
-  document.body.style.userSelect = "none";
-
   scrollXActive.value = true;
 
   document.addEventListener("mousemove", moveX);
@@ -93,8 +91,6 @@ async function moveY(e: MouseEvent) {
 }
 
 async function activeY() {
-  document.body.style.userSelect = "none";
-
   scrollYActive.value = true;
 
   document.addEventListener("mousemove", moveY);
@@ -102,8 +98,6 @@ async function activeY() {
 }
 
 async function endScroll() {
-  document.body.style.userSelect = "";
-
   scrollXActive.value = false;
   scrollYActive.value = false;
 
