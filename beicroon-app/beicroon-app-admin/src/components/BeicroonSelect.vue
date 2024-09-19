@@ -97,7 +97,13 @@ async function handleClear() {
            @focusout="handleFocusout"
     />
     <div class="show-value-label"><span>{{ showValue || "请选择" }}</span></div>
-    <beicroon-button class="show-value-clear" label="x" @click="handleClear"></beicroon-button>
+    <beicroon-button
+      class="show-value-clear"
+      label="x"
+      @click="handleClear"
+      @mousedown="handleMouseDown"
+      @mouseup="handleMouseUp"
+    ></beicroon-button>
     <ul class="select" :class="{hidden: select.hidden}">
       <li class="option" v-for="option in select.options"
           @click="handleClick(option)"
