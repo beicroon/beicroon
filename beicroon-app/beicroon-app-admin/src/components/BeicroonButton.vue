@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import {ref} from "vue";
 import BeicroonLoading from "@/components/BeicroonLoading.vue";
 
 type Props = {
@@ -15,8 +14,6 @@ const props = withDefaults(defineProps<Props>(), {
 
 const emits = defineEmits(["click"]);
 
-const clicking = ref(false);
-
 function handleClick(e: MouseEvent) {
   if (props.loading) {
     return;
@@ -27,31 +24,10 @@ function handleClick(e: MouseEvent) {
 
   emits("click", e);
 }
-
-function handleMouseDown() {
-  clicking.value = true;
-}
-
-function handleMouseUp() {
-  clicking.value = false;
-}
-
-function handleMouseLeave() {
-  clicking.value = false;
-}
-
-function getEvents() {
-  return {
-    click: handleClick,
-    mouseup: handleMouseUp,
-    mousedown: handleMouseDown,
-    mouseleave: handleMouseLeave,
-  };
-}
 </script>
 
 <template>
-<div class="beicroon-button" :class="{disabled: disabled, clicking: clicking}" v-on="getEvents()">
+<div class="beicroon-button" :class="{disabled: disabled}" @click="handleClick">
   <beicroon-loading v-show="loading" fill="#ffffff" width="20" height="20"></beicroon-loading>
   <button v-show="!loading" :disabled="disabled" :type="type">{{label}}</button>
 </div>
@@ -99,7 +75,7 @@ function getEvents() {
       color: var(--color-white);
       background-color: var(--color-error);
 
-      &.clicking {
+      &:active {
         background-color: var(--color-error-deeper);
       }
     }
@@ -108,7 +84,7 @@ function getEvents() {
       color: var(--color-white);
       background-color: var(--color-warning);
 
-      &.clicking {
+      &:active {
         background-color: var(--color-warning-deeper);
       }
     }
@@ -117,7 +93,7 @@ function getEvents() {
       color: var(--color-white);
       background-color: var(--color-success);
 
-      &.clicking {
+      &:active {
         background-color: var(--color-success-deeper);
       }
     }
@@ -126,7 +102,7 @@ function getEvents() {
       color: var(--color-white);
       background-color: var(--color-primary);
 
-      &.clicking {
+      &:active {
         background-color: var(--color-primary-deeper);
       }
     }
