@@ -67,10 +67,14 @@ async function handleFocusout() {
 
 async function handleMouseDown() {
   clicking.value = true;
+
+  document.addEventListener("mouseup", handleMouseUp, {once: true});
 }
 
 async function handleMouseUp() {
   clicking.value = false;
+
+  document.removeEventListener("mouseup", handleMouseUp);
 }
 
 async function handleClick(option: any) {
@@ -105,35 +109,18 @@ async function handleClear() {
       @mousedown="handleMouseDown"
       @mouseup="handleMouseUp"
     ></beicroon-button>
-    <ul class="select" :class="{hidden: select.hidden}">
-      <li class="option" v-for="option in select.options"
-          @click="handleClick(option)"
-          @mousedown="handleMouseDown"
-          @mouseup="handleMouseUp"
-      >
+    <ul class="select" :class="{hidden: select.hidden}" @mousedown="handleMouseDown" @mouseup="handleMouseUp">
+      <li class="option" v-for="option in select.options" @click="handleClick(option)">
         {{ select.getLabel(option) }}
       </li>
       <template v-for="options in select.moreOptions">
-        <li class="option" v-for="option in options"
-            @click="handleClick(option)"
-            @mousedown="handleMouseDown"
-            @mouseup="handleMouseUp"
-        >
+        <li class="option" v-for="option in options" @click="handleClick(option)">
           {{ select.getLabel(option) }}
         </li>
       </template>
       <li class="option loading">
-        <beicroon-loading
-          :class="{hidden: !select.loading}"
-          fill="#b3e5fc"
-          width="38"
-          height="38"
-        ></beicroon-loading>
-        <beicroon-button
-          :class="{hidden: select.loading}"
-          :label="loadMoreLabel"
-          @click="props.select.loadMore"
-        ></beicroon-button>
+        <beicroon-loading :class="{hidden: !select.loading}" fill="#b3e5fc" width="38" height="38" ></beicroon-loading>
+        <beicroon-button :class="{hidden: select.loading}" :label="loadMoreLabel" @click="props.select.loadMore"></beicroon-button>
       </li>
     </ul>
   </div>
