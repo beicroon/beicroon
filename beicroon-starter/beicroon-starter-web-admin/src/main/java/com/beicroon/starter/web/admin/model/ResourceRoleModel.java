@@ -26,7 +26,7 @@ public class ResourceRoleModel extends GenericModel {
     @ApiModelProperty(name = "备注")
     private String remark;
 
-    @TableField(value = "`super_admin_flag`")
+    @TableField(value = "`root_flag`")
     @ApiModelProperty(name = "是否超级管理员")
     private String superAdminFlag;
 

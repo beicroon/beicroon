@@ -15,7 +15,7 @@ VALUES
     (1825707969033606521, 1825707757028315138, 'SETTING_SYSTEM', '系统设置', 'RESOURCE_ROLE', '角色管理', '/resource/role', 'admin', 'admin');
 
 INSERT INTO `admin_resource_role`
-    (`id`, `code`, `name`, `remark`, `super_admin_flag`, `creator_name`, `modifier_name`)
+    (`id`, `code`, `name`, `remark`, `root_flag`, `creator_name`, `modifier_name`)
 VALUES
     (1825706731063808102, 'ROOT', '超级管理员', '超级管理员', 'true', 'admin', 'admin'),
     (1825706731063809202, 'ADMIN', '管理员', '管理员', 'false', 'admin', 'admin');
