@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import {onMounted, reactive, ref} from "vue";
 import BeicroonForm from "@/components/BeicroonForm.vue";
-import {create, list} from "./resource-role-menu.http.ts";
 import BeicroonButton from "@/components/BeicroonButton.vue";
-import {AuthMenu as Menu, listAuthMenu} from "@/auth.http.ts";
 import BeicroonLoading from "@/components/BeicroonLoading.vue";
 import BeicroonCheckbox from "@/components/BeicroonCheckbox.vue";
+import {assign, list} from "@/request/resource-role-menu.http.ts";
 import BeicroonLineVertical from "@/components/BeicroonLineVertical.vue";
+import {AuthMenu as Menu, listAuthMenu} from "@/request/account-admin-auth.http.ts";
 
 type Props = {
   roleId: string,
@@ -27,7 +27,7 @@ onMounted(async () => {
   try {
     const res = await listAuthMenu();
 
-    const roleMenus = await list(props.roleId);
+    const {data: roleMenuIds} = await list(props.roleId);
 
     menus.value = res.data.map((menu) => {
       menu.children = menu.children.map((child) => {
@@ -36,7 +36,7 @@ onMounted(async () => {
         let grandUnchecked = false;
 
         child.children = child.children.map((grand) => {
-          if (roleMenus.data.find((roleMenu) => roleMenu.id === grand.id)) {
+          if (roleMenuIds.includes(grand.id)) {
             grand.checked = "checked";
 
             grandCheck = true;
@@ -50,7 +50,7 @@ onMounted(async () => {
         });
 
         if (grandCheck && grandUnchecked) {
-          child.checked = "fixed";
+          child.checked = "indeterminate";
         } else if (grandCheck) {
           child.checked = "checked";
         } else {
@@ -69,7 +69,7 @@ onMounted(async () => {
       menu.children.forEach((child) => {
         if (child.checked === "checked") {
           childCheck = true;
-        } else if (child.checked === "fixed") {
+        } else if (child.checked === "indeterminate") {
           childFixed = true;
         } else {
           childUnchecked = true;
@@ -77,7 +77,7 @@ onMounted(async () => {
       });
 
       if ((childCheck && childUnchecked) || childFixed) {
-        menu.checked = "fixed";
+        menu.checked = "indeterminate";
       } else if (childCheck) {
         menu.checked = "checked";
       } else {
@@ -103,24 +103,24 @@ async function handleConfirm() {
   const menuIds: Array<string> = [];
 
   menus.value.forEach((menu) => {
-    if (menu.checked === "checked" || menu.checked === "fixed") {
+    if (menu.checked === "checked" || menu.checked === "indeterminate") {
       menuIds.push(menu.id);
     }
 
     menu.children.forEach((child) => {
-      if (child.checked === "checked" || child.checked === "fixed") {
+      if (child.checked === "checked" || child.checked === "indeterminate") {
         menuIds.push(child.id);
       }
 
       child.children.forEach((grand) => {
-        if (grand.checked === "checked" || grand.checked === "fixed") {
+        if (grand.checked === "checked" || grand.checked === "indeterminate") {
           menuIds.push(grand.id);
         }
       });
     });
   });
 
-  await create(props.roleId, menuIds).finally(() => loading.set = false);
+  await assign(props.roleId, menuIds).finally(() => loading.set = false);
 
   emits("confirm");
 }
@@ -130,9 +130,9 @@ async function handleCheckGrand(menu: Menu, child: Menu, grand: Menu) {
 
   for (let i = 0; i < child.children.length; i++) {
     if (child.children[i].checked !== "checked") {
-      child.checked = "fixed";
+      child.checked = "indeterminate";
 
-      menu.checked = "fixed";
+      menu.checked = "indeterminate";
 
       return;
     }
@@ -150,7 +150,7 @@ async function handleCheckChild(menu: Menu, child: Menu) {
 
   for (let i = 0; i < menu.children.length; i++) {
     if (menu.children[i].checked !== "checked") {
-      menu.checked = "fixed";
+      menu.checked = "indeterminate";
 
       return;
     }
@@ -192,9 +192,9 @@ async function handleUncheckGrand(menu: Menu, child: Menu, grand: Menu) {
 
   for (let i = 0; i < child.children.length; i++) {
     if (child.children[i].checked !== "unchecked") {
-      child.checked = "fixed";
+      child.checked = "indeterminate";
 
-      menu.checked = "fixed";
+      menu.checked = "indeterminate";
 
       return;
     }
@@ -212,7 +212,7 @@ async function handleUncheckChild(menu: Menu, child: Menu) {
 
   for (let i = 0; i < menu.children.length; i++) {
     if (menu.children[i].checked !== "unchecked") {
-      menu.checked = "fixed";
+      menu.checked = "indeterminate";
 
       return;
     }

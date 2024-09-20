@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import {onMounted} from "vue";
+import dialog from "@/dialog.ts";
 import createBeicroonList from "@/list.ts";
 import Create from "./AccountAdminCreate.vue";
 import Detail from "./AccountAdminDetail.vue";
@@ -10,11 +11,21 @@ import BeicroonButton from "@/components/BeicroonButton.vue";
 import BeicroonListRow from "@/components/BeicroonListRow.vue";
 import BeicroonListCell from "@/components/BeicroonListCell.vue";
 import BeicroonListCellButton from "@/components/BeicroonListCellButton.vue";
-import {AccountAdminPageVO as VO, AccountAdminQueryDTO as DTO, page, remove} from "./account-admin.http.ts";
+import AccountAdminRoleAssign from "@/modules/account/admin/role/AccountAdminRoleAssign.vue";
+import {AccountAdminPageVO as VO, AccountAdminQueryDTO as DTO, page, remove} from "@/request/account-admin.http.ts";
 
 const list = createBeicroonList<DTO, VO>("后台账号", page);
 
 onMounted(list.resetSearch);
+
+function adminRoleAssign(item: VO) {
+  dialog({
+    title: "角色分配",
+    width: 520,
+    message: AccountAdminRoleAssign,
+    props: {adminId: item.id},
+  });
+}
 </script>
 
 <template>
@@ -45,6 +56,7 @@ onMounted(list.resetSearch);
         <beicroon-list-cell>{{ item.phone }}</beicroon-list-cell>
         <beicroon-list-cell>{{ item.email }}</beicroon-list-cell>
         <beicroon-list-cell-button>
+          <beicroon-button class="primary" label="角色分配" @click="adminRoleAssign(item)"></beicroon-button>
           <beicroon-button class="primary" label="查看" @click="list.handleDetail(item, Detail)"></beicroon-button>
           <beicroon-button class="warning" label="编辑" @click="list.handleUpdate(item, Update)"></beicroon-button>
           <beicroon-button class="danger" label="删除" @click="list.handleRemove(item, remove)"></beicroon-button>

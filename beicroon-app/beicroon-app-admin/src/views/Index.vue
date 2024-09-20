@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import router from "@/router.ts";
 import {onBeforeMount, ref} from "vue";
-import {AuthMenu, index, listAuthMenu} from "@/auth.http.ts";
 import BeicroonLineCross from "@/components/BeicroonLineCross.vue";
 import BeicroonLineVertical from "@/components/BeicroonLineVertical.vue";
+import {AuthMenu, index, listAuthMenu} from "@/request/account-admin-auth.http.ts";
 
 const menus = ref<Array<AuthMenu>>([]);
 

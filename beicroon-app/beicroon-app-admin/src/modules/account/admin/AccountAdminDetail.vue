@@ -5,7 +5,7 @@ import BeicroonInput from "@/components/BeicroonInput.vue";
 import BeicroonButton from "@/components/BeicroonButton.vue";
 import BeicroonLoading from "@/components/BeicroonLoading.vue";
 import BeicroonLineVertical from "@/components/BeicroonLineVertical.vue";
-import {AccountAdminDetailVO as VO, detail} from "./account-admin.http.ts";
+import {AccountAdminDetailVO as VO, detail} from "@/request/account-admin.http.ts";
 
 type Props = {
   id: string,

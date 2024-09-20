@@ -5,7 +5,7 @@ import BeicroonInput from "@/components/BeicroonInput.vue";
 import BeicroonButton from "@/components/BeicroonButton.vue";
 import BeicroonLoading from "@/components/BeicroonLoading.vue";
 import BeicroonLineVertical from "@/components/BeicroonLineVertical.vue";
-import {detail, ResourceMenuDetailVO as VO} from "./resource-menu.http.ts";
+import {detail, ResourceMenuDetailVO as VO} from "@/request/resource-menu.http.ts";
 
 type Props = {
   id: string,

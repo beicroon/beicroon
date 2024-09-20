@@ -2,7 +2,7 @@
 import createBeicroonSelect from "@/select.ts";
 import {computed, onMounted, ref, watch} from "vue";
 import BeicroonSelect from "@/components/BeicroonSelect.vue";
-import {AccountAdminPageVO as VO, AccountAdminQueryDTO as DTO, page} from "./account-admin.http.ts";
+import {AccountAdminPageVO as VO, AccountAdminQueryDTO as DTO, page} from "@/request/account-admin.http.ts";
 
 type Props = {
   label: string,

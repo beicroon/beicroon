@@ -4,7 +4,7 @@ import BeicroonForm from "@/components/BeicroonForm.vue";
 import BeicroonInput from "@/components/BeicroonInput.vue";
 import BeicroonButton from "@/components/BeicroonButton.vue";
 import BeicroonLineVertical from "@/components/BeicroonLineVertical.vue";
-import {AccountAdminCreateDTO as DTO, create} from "./account-admin.http.ts";
+import {AccountAdminCreateDTO as DTO, create} from "@/request/account-admin.http.ts";
 
 const loading = ref(false);
 

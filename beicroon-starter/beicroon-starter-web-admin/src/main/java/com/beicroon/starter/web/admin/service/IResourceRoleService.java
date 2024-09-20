@@ -2,11 +2,10 @@ package com.beicroon.starter.web.admin.service;
 
 import com.beicroon.construct.entity.IdsDTO;
 import com.beicroon.construct.entity.PageInfo;
-import com.beicroon.starter.web.admin.entity.resource.menu.vo.ResourceMenuBaseVO;
 import com.beicroon.starter.web.admin.entity.resource.role.dto.ResourceRoleCreateDTO;
 import com.beicroon.starter.web.admin.entity.resource.role.dto.ResourceRoleQueryDTO;
 import com.beicroon.starter.web.admin.entity.resource.role.dto.ResourceRoleUpdateDTO;
-import com.beicroon.starter.web.admin.entity.resource.role.menu.ResourceRoleMenuAssignDTO;
+import com.beicroon.starter.web.admin.entity.resource.role.menu.dto.ResourceRoleMenuAssignDTO;
 import com.beicroon.starter.web.admin.entity.resource.role.vo.ResourceRoleBaseVO;
 import com.beicroon.starter.web.admin.entity.resource.role.vo.ResourceRoleDetailVO;
 import com.beicroon.starter.web.admin.entity.resource.role.vo.ResourceRolePageVO;
@@ -29,7 +28,7 @@ public interface IResourceRoleService {
 
     boolean remove(IdsDTO dto);
 
-    List<ResourceMenuBaseVO> menuList(Long roleId);
+    List<Long> menuIdList(Long roleId);
 
     boolean menuAssign(ResourceRoleMenuAssignDTO dto);
 

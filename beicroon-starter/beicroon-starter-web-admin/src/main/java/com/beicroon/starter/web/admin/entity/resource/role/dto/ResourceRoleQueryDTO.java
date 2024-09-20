@@ -3,14 +3,14 @@ package com.beicroon.starter.web.admin.entity.resource.role.dto;
 import com.beicroon.construct.annotation.ApiModel;
 import com.beicroon.construct.annotation.ApiModelProperty;
 import com.beicroon.construct.annotation.FieldSearch;
-import com.beicroon.construct.entity.QueryDTO;
+import com.beicroon.construct.entity.QueryDTOWithDisable;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @Data
 @ApiModel(name = "查询资源角色入参")
 @EqualsAndHashCode(callSuper = true)
-public class ResourceRoleQueryDTO extends QueryDTO {
+public class ResourceRoleQueryDTO extends QueryDTOWithDisable {
 
     @FieldSearch(name = "`code`")
     @ApiModelProperty(name = "编码")

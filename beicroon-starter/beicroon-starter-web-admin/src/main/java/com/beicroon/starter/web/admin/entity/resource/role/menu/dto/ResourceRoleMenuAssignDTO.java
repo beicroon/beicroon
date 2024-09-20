@@ -1,4 +1,4 @@
-package com.beicroon.starter.web.admin.entity.resource.role.menu;
+package com.beicroon.starter.web.admin.entity.resource.role.menu.dto;
 
 import com.beicroon.construct.annotation.ApiModel;
 import com.beicroon.construct.annotation.ApiModelProperty;
@@ -9,7 +9,7 @@ import lombok.EqualsAndHashCode;
 import java.util.List;
 
 @Data
-@ApiModel(name = "新增资源角色菜单入参")
+@ApiModel(name = "分配资源角色菜单入参")
 @EqualsAndHashCode(callSuper = true)
 public class ResourceRoleMenuAssignDTO extends CreateDTO {
 

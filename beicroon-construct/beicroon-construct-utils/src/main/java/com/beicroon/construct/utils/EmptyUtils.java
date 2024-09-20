@@ -30,7 +30,7 @@ public final class EmptyUtils {
     public static boolean isAllEmpty(Object object, String... ignores) {
         Map<String, String> ignoreMap = ListUtils.toMap(Arrays.asList(ignores), Function.identity());
 
-        return ClassUtils.testAllFields(object.getClass(), field -> {
+        return ClassUtils.testAllFields(object, field -> {
             if (ignoreMap.containsKey(field.getName())) {
                 return true;
             }

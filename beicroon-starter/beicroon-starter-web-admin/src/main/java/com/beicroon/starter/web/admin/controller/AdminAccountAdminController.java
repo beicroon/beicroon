@@ -8,6 +8,7 @@ import com.beicroon.construct.entity.WebResult;
 import com.beicroon.starter.web.admin.entity.account.admin.dto.AccountAdminCreateDTO;
 import com.beicroon.starter.web.admin.entity.account.admin.dto.AccountAdminQueryDTO;
 import com.beicroon.starter.web.admin.entity.account.admin.dto.AccountAdminUpdateDTO;
+import com.beicroon.starter.web.admin.entity.account.admin.role.dto.AccountAdminRoleAssignDTO;
 import com.beicroon.starter.web.admin.entity.account.admin.vo.AccountAdminBaseVO;
 import com.beicroon.starter.web.admin.entity.account.admin.vo.AccountAdminDetailVO;
 import com.beicroon.starter.web.admin.entity.account.admin.vo.AccountAdminPageVO;
@@ -67,6 +68,18 @@ public class AdminAccountAdminController {
     @DeleteMapping(path = "/account-admin-remove")
     public Result<Boolean> remove(@RequestBody IdsDTO dto) {
         return WebResult.success(this.accountAdminService.remove(dto));
+    }
+
+    @ApiOperation(name = "获取角色主键")
+    @GetMapping(path = "/account-admin-role-id-list")
+    public Result<List<Long>> roleIdList(@RequestParam("adminId") Long adminId) {
+        return WebResult.success(this.accountAdminService.roleIdList(adminId));
+    }
+
+    @ApiOperation(name = "分配角色")
+    @PostMapping(path = "/account-admin-role-assign")
+    public Result<Boolean> roleAssign(@RequestBody AccountAdminRoleAssignDTO dto) {
+        return WebResult.success(this.accountAdminService.roleAssign(dto));
     }
 
 }

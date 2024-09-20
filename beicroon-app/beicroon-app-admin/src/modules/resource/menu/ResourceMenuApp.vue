@@ -11,7 +11,7 @@ import BeicroonListRow from "@/components/BeicroonListRow.vue";
 import BeicroonListCell from "@/components/BeicroonListCell.vue";
 import BeicroonListCellButton from "@/components/BeicroonListCellButton.vue";
 import ResourceMenuSelect from "@/modules/resource/menu/ResourceMenuSelect.vue";
-import {page, remove, ResourceMenuPageVO as VO, ResourceMenuQueryDTO as DTO} from "./resource-menu.http.ts";
+import {page, remove, ResourceMenuPageVO as VO, ResourceMenuQueryDTO as DTO} from "@/request/resource-menu.http.ts";
 
 const list = createBeicroonList<DTO, VO>("菜单", page);
 

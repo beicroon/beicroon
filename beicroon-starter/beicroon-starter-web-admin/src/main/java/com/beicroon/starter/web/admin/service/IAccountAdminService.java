@@ -5,6 +5,7 @@ import com.beicroon.construct.entity.PageInfo;
 import com.beicroon.starter.web.admin.entity.account.admin.dto.AccountAdminCreateDTO;
 import com.beicroon.starter.web.admin.entity.account.admin.dto.AccountAdminQueryDTO;
 import com.beicroon.starter.web.admin.entity.account.admin.dto.AccountAdminUpdateDTO;
+import com.beicroon.starter.web.admin.entity.account.admin.role.dto.AccountAdminRoleAssignDTO;
 import com.beicroon.starter.web.admin.entity.account.admin.vo.AccountAdminBaseVO;
 import com.beicroon.starter.web.admin.entity.account.admin.vo.AccountAdminDetailVO;
 import com.beicroon.starter.web.admin.entity.account.admin.vo.AccountAdminPageVO;
@@ -26,5 +27,9 @@ public interface IAccountAdminService {
     boolean update(AccountAdminUpdateDTO dto);
 
     boolean remove(IdsDTO dto);
+
+    List<Long> roleIdList(Long adminId);
+
+    boolean roleAssign(AccountAdminRoleAssignDTO dto);
 
 }

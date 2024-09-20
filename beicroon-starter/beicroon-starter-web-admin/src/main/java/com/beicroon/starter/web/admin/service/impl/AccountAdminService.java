@@ -9,19 +9,25 @@ import com.beicroon.construct.utils.ListUtils;
 import com.beicroon.starter.jwt.utils.JwtUtils;
 import com.beicroon.starter.mysql.utils.PageUtils;
 import com.beicroon.starter.web.admin.convertor.AccountAdminConvertor;
+import com.beicroon.starter.web.admin.convertor.AccountAdminRoleConvertor;
 import com.beicroon.starter.web.admin.entity.account.admin.dto.AccountAdminCreateDTO;
 import com.beicroon.starter.web.admin.entity.account.admin.dto.AccountAdminQueryDTO;
 import com.beicroon.starter.web.admin.entity.account.admin.dto.AccountAdminUpdateDTO;
+import com.beicroon.starter.web.admin.entity.account.admin.role.dto.AccountAdminRoleAssignDTO;
 import com.beicroon.starter.web.admin.entity.account.admin.vo.AccountAdminBaseVO;
 import com.beicroon.starter.web.admin.entity.account.admin.vo.AccountAdminDetailVO;
 import com.beicroon.starter.web.admin.entity.account.admin.vo.AccountAdminPageVO;
 import com.beicroon.starter.web.admin.model.AccountAdminModel;
+import com.beicroon.starter.web.admin.model.AccountAdminRoleModel;
 import com.beicroon.starter.web.admin.repository.AccountAdminRepository;
+import com.beicroon.starter.web.admin.repository.AccountAdminRoleRepository;
 import com.beicroon.starter.web.admin.service.IAccountAdminService;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class AccountAdminService implements IAccountAdminService {
@@ -30,7 +36,13 @@ public class AccountAdminService implements IAccountAdminService {
     private AccountAdminConvertor accountAdminConvertor;
 
     @Resource
+    private AccountAdminRoleConvertor accountAdminRoleConvertor;
+
+    @Resource
     private AccountAdminRepository accountAdminRepository;
+
+    @Resource
+    private AccountAdminRoleRepository accountAdminRoleRepository;
 
     @Override
     public AccountAdminBaseVO show(Long id) {
@@ -83,6 +95,22 @@ public class AccountAdminService implements IAccountAdminService {
     @Override
     public boolean remove(IdsDTO dto) {
         return this.accountAdminRepository.removeByIds(dto.getIds());
+    }
+
+    @Override
+    public List<Long> roleIdList(Long adminId) {
+        Set<Long> roleIds = this.accountAdminRoleRepository.list(
+                AccountAdminRoleModel::getAdminId, adminId, AccountAdminRoleModel::getRoleId
+        );
+
+        return new ArrayList<>(roleIds);
+    }
+
+    @Override
+    public boolean roleAssign(AccountAdminRoleAssignDTO dto) {
+        this.accountAdminRoleRepository.remove(AccountAdminRoleModel::getAdminId, dto.getAdminId());
+
+        return this.accountAdminRoleRepository.saveBatch(this.accountAdminRoleConvertor.toEntity(dto));
     }
 
 }

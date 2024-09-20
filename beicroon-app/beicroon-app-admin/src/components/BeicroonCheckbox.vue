@@ -6,7 +6,7 @@ type Props = {
   placeholder?: string,
   required?: boolean,
   disabled?: boolean,
-  checked?: "checked" | "fixed" | "unchecked",
+  checked?: "checked" | "indeterminate" | "unchecked",
 };
 
 const props = withDefaults(defineProps<Props>(), {

@@ -5,7 +5,7 @@ import {CacheKeyEnums} from "@/enums/default-enums.ts";
 import BeicroonForm from "@/components/BeicroonForm.vue";
 import BeicroonInput from "@/components/BeicroonInput.vue";
 import BeicroonButton from "@/components/BeicroonButton.vue";
-import {AuthUser, index, login, LoginDTO} from "@/auth.http.ts";
+import {AuthUser, index, login, LoginDTO} from "@/request/account-admin-auth.http.ts";
 
 const form = reactive<LoginDTO>({
   username: "",

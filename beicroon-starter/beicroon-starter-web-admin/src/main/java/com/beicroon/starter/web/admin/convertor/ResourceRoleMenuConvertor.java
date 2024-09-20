@@ -2,7 +2,7 @@ package com.beicroon.starter.web.admin.convertor;
 
 import com.beicroon.construct.utils.ListUtils;
 import com.beicroon.starter.dao.helper.ConvertorHelper;
-import com.beicroon.starter.web.admin.entity.resource.role.menu.ResourceRoleMenuAssignDTO;
+import com.beicroon.starter.web.admin.entity.resource.role.menu.dto.ResourceRoleMenuAssignDTO;
 import com.beicroon.starter.web.admin.model.ResourceRoleMenuModel;
 import org.mapstruct.*;
 

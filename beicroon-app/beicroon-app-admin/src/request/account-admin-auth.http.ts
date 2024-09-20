@@ -35,7 +35,7 @@ export type AuthMenu = {
     path: string;
     active: boolean;
     children: Array<AuthMenu>;
-    checked?: "checked" | "fixed" | "unchecked";
+    checked?: "checked" | "indeterminate" | "unchecked";
 };
 
 export const index: AuthMenu = {

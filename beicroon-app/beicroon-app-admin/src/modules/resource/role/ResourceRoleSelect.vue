@@ -2,7 +2,7 @@
 import createBeicroonSelect from "@/select.ts";
 import {computed, onMounted, ref, watch} from "vue";
 import BeicroonSelect from "@/components/BeicroonSelect.vue";
-import {page, ResourceRolePageVO as VO, ResourceRoleQueryDTO as DTO} from "./resource-role.http.ts";
+import {page, ResourceRolePageVO as VO, ResourceRoleQueryDTO as DTO} from "@/request/resource-role.http.ts";
 
 type Props = {
   label: string,

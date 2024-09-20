@@ -5,11 +5,10 @@ import com.beicroon.construct.annotation.ApiTag;
 import com.beicroon.construct.entity.IdsDTO;
 import com.beicroon.construct.entity.Result;
 import com.beicroon.construct.entity.WebResult;
-import com.beicroon.starter.web.admin.entity.resource.menu.vo.ResourceMenuBaseVO;
 import com.beicroon.starter.web.admin.entity.resource.role.dto.ResourceRoleCreateDTO;
 import com.beicroon.starter.web.admin.entity.resource.role.dto.ResourceRoleQueryDTO;
 import com.beicroon.starter.web.admin.entity.resource.role.dto.ResourceRoleUpdateDTO;
-import com.beicroon.starter.web.admin.entity.resource.role.menu.ResourceRoleMenuAssignDTO;
+import com.beicroon.starter.web.admin.entity.resource.role.menu.dto.ResourceRoleMenuAssignDTO;
 import com.beicroon.starter.web.admin.entity.resource.role.vo.ResourceRoleBaseVO;
 import com.beicroon.starter.web.admin.entity.resource.role.vo.ResourceRoleDetailVO;
 import com.beicroon.starter.web.admin.entity.resource.role.vo.ResourceRolePageVO;
@@ -71,10 +70,10 @@ public class AdminResourceRoleController {
         return WebResult.success(this.resourceRoleService.remove(dto));
     }
 
-    @ApiOperation(name = "获取菜单")
-    @GetMapping(path = "/resource-role-menu-list")
-    public Result<List<ResourceMenuBaseVO>> menuList(@RequestParam("roleId") Long roleId) {
-        return WebResult.success(this.resourceRoleService.menuList(roleId));
+    @ApiOperation(name = "获取菜单主键")
+    @GetMapping(path = "/resource-role-menu-id-list")
+    public Result<List<Long>> menuIdList(@RequestParam("roleId") Long roleId) {
+        return WebResult.success(this.resourceRoleService.menuIdList(roleId));
     }
 
     @ApiOperation(name = "分配菜单")
