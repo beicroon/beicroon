@@ -28,6 +28,6 @@ public class ResourceRoleModel extends GenericModel {
 
     @TableField(value = "`root_flag`")
     @ApiModelProperty(name = "是否超级管理员")
-    private String superAdminFlag;
+    private String rootFlag;
 
 }

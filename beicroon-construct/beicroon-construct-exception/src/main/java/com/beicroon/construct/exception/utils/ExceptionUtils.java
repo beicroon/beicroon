@@ -34,4 +34,8 @@ public final class ExceptionUtils {
         return new BusinessException(403, "权限异常");
     }
 
+    public static BusinessException forbidden(String message) {
+        return new BusinessException(403, message);
+    }
+
 }

@@ -1,6 +1,7 @@
 package com.beicroon.starter.web.admin.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.beicroon.construct.auth.utils.AuthUtils;
 import com.beicroon.construct.exception.utils.ExceptionUtils;
 import com.beicroon.construct.utils.EmptyUtils;
 import com.beicroon.construct.utils.HashUtils;
@@ -10,18 +11,14 @@ import com.beicroon.starter.web.admin.convertor.ResourceMenuConvertor;
 import com.beicroon.starter.web.admin.entity.auth.admin.dto.AuthAdminLoginDTO;
 import com.beicroon.starter.web.admin.entity.auth.admin.vo.AuthAdminLoginVO;
 import com.beicroon.starter.web.admin.entity.auth.admin.vo.AuthAdminMenuVO;
-import com.beicroon.starter.web.admin.model.AccountAdminModel;
-import com.beicroon.starter.web.admin.model.ResourceMenuModel;
-import com.beicroon.starter.web.admin.repository.AccountAdminRepository;
-import com.beicroon.starter.web.admin.repository.ResourceMenuRepository;
+import com.beicroon.starter.web.admin.helper.ResourceRoleHelper;
+import com.beicroon.starter.web.admin.model.*;
+import com.beicroon.starter.web.admin.repository.*;
 import com.beicroon.starter.web.admin.service.IAuthAdminService;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 public class AuthAdminService implements IAuthAdminService {
@@ -34,6 +31,15 @@ public class AuthAdminService implements IAuthAdminService {
 
     @Resource
     private ResourceMenuRepository resourceMenuRepository;
+
+    @Resource
+    private ResourceRoleRepository resourceRoleRepository;
+
+    @Resource
+    private AccountAdminRoleRepository accountAdminRoleRepository;
+
+    @Resource
+    private ResourceRoleMenuRepository resourceRoleMenuRepository;
 
     @Override
     public AuthAdminLoginVO login(AuthAdminLoginDTO dto) {
@@ -58,7 +64,30 @@ public class AuthAdminService implements IAuthAdminService {
 
     @Override
     public List<AuthAdminMenuVO> menuTree() {
+        Set<Long> roleIds = this.accountAdminRoleRepository.list(
+                AccountAdminRoleModel::getAdminId, AuthUtils.getUserId(), AccountAdminRoleModel::getRoleId
+        );
+
+        if (EmptyUtils.isEmpty(roleIds)) {
+            throw ExceptionUtils.forbidden("账号未分配任何角色");
+        }
+
+        List<ResourceRoleModel> roles = this.resourceRoleRepository.listByIdsAndEnable(roleIds);
+
         LambdaQueryWrapper<ResourceMenuModel> query = this.resourceMenuRepository.newLambdaQuery();
+
+        // 不是超管
+        if (roles.stream().noneMatch(ResourceRoleHelper::isRoot)) {
+            Set<Long> menuIds = this.resourceRoleMenuRepository.list(
+                    ResourceRoleMenuModel::getRoleId, roleIds, ResourceRoleMenuModel::getMenuId
+            );
+
+            if (EmptyUtils.isEmpty(menuIds)) {
+                throw ExceptionUtils.forbidden("角色未分配任何菜单");
+            }
+
+            query.in(ResourceMenuModel::getId, menuIds);
+        }
 
         query.isNull(ResourceMenuModel::getDisabledAt);
         query.orderByAsc(ResourceMenuModel::getSorting);

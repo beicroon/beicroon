@@ -154,7 +154,7 @@ public interface GenericMapper<T extends GenericModel> extends BaseMapper<T> {
 
         wrapper.lambda().eq(column, value);
 
-        return this.selectList(wrapper);
+        return this.list(wrapper);
     }
 
     default List<T> list(SFunction<T, ?> column, Collection<?> values) {
@@ -166,7 +166,7 @@ public interface GenericMapper<T extends GenericModel> extends BaseMapper<T> {
 
         wrapper.lambda().in(column, values);
 
-        return this.selectList(wrapper);
+        return this.list(wrapper);
     }
 
     default <R> Set<R> list(SFunction<T, ?> column, Object value, SFunction<T, R> mapper) {
@@ -178,7 +178,7 @@ public interface GenericMapper<T extends GenericModel> extends BaseMapper<T> {
 
         wrapper.lambda().select(mapper).eq(column, value);
 
-        return ListUtils.toSet(this.selectList(wrapper), mapper);
+        return ListUtils.toSet(this.list(wrapper), mapper);
     }
 
     default <R> Set<R> list(SFunction<T, ?> column, Collection<?> values, SFunction<T, R> mapper) {
@@ -190,15 +190,27 @@ public interface GenericMapper<T extends GenericModel> extends BaseMapper<T> {
 
         wrapper.lambda().select(mapper).in(column, values);
 
-        return ListUtils.toSet(this.selectList(wrapper), mapper);
+        return ListUtils.toSet(this.list(wrapper), mapper);
+    }
+
+    default List<T> list(QueryWrapper<T> wrapper) {
+        return this.selectList(wrapper);
     }
 
     default <R> Set<R> list(QueryWrapper<T> wrapper, SFunction<T, R> mapper) {
-        return ListUtils.toSet(this.selectList(wrapper), mapper);
+        wrapper.lambda().select(mapper);
+
+        return ListUtils.toSet(this.list(wrapper), mapper);
+    }
+
+    default List<T> list(LambdaQueryWrapper<T> wrapper) {
+        return this.selectList(wrapper);
     }
 
     default <R> Set<R> list(LambdaQueryWrapper<T> wrapper, SFunction<T, R> mapper) {
-        return ListUtils.toSet(this.selectList(wrapper), mapper);
+        wrapper.select(mapper);
+
+        return ListUtils.toSet(this.list(wrapper), mapper);
     }
 
     default List<T> listOrError(SFunction<T, ?> column, Object value, String message) {
@@ -226,7 +238,7 @@ public interface GenericMapper<T extends GenericModel> extends BaseMapper<T> {
     }
 
     default List<T> listOrError(QueryWrapper<T> wrapper, String message) {
-        List<T> data = this.selectList(wrapper);
+        List<T> data = this.list(wrapper);
 
         if (EmptyUtils.isEmpty(data)) {
             throw ExceptionUtils.business(message);
@@ -236,7 +248,7 @@ public interface GenericMapper<T extends GenericModel> extends BaseMapper<T> {
     }
 
     default List<T> listOrError(LambdaQueryWrapper<T> wrapper, String message) {
-        List<T> data = this.selectList(wrapper);
+        List<T> data = this.list(wrapper);
 
         if (EmptyUtils.isEmpty(data)) {
             throw ExceptionUtils.business(message);
@@ -251,6 +263,19 @@ public interface GenericMapper<T extends GenericModel> extends BaseMapper<T> {
         }
 
         return this.selectBatchIds(ids);
+    }
+
+    default List<T> listByIdsAndEnable(Collection<? extends Serializable> ids) {
+        if (EmptyUtils.isEmpty(ids)) {
+            return EmptyUtils.emptyList();
+        }
+        
+        QueryWrapper<T> wrapper = QueryUtils.newQueryWrapper();
+
+        wrapper.in(SystemConstant.PRIMARY_KEY_NAME, ids);
+        wrapper.isNull(SystemConstant.DISABLE_KEY_NAME);
+
+        return this.list(wrapper);
     }
 
     default List<T> listByIdsOrError(Collection<Long> ids, String message) {
@@ -280,7 +305,7 @@ public interface GenericMapper<T extends GenericModel> extends BaseMapper<T> {
     }
 
     default void chunkById(long size, QueryWrapper<T> wrapper, Consumer<List<T>> consumer) {
-        this.chunkById(this::selectList, size, wrapper, consumer);
+        this.chunkById(this::list, size, wrapper, consumer);
     }
 
     default void chunkById(Function<QueryWrapper<T>, List<T>> getter, QueryWrapper<T> wrapper, Consumer<List<T>> consumer) {

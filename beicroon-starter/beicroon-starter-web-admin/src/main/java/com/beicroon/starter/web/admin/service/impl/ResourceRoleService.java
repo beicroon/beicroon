@@ -3,6 +3,7 @@ package com.beicroon.starter.web.admin.service.impl;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.beicroon.construct.entity.IdsDTO;
 import com.beicroon.construct.entity.PageInfo;
+import com.beicroon.construct.exception.utils.ExceptionUtils;
 import com.beicroon.construct.utils.ListUtils;
 import com.beicroon.starter.mysql.utils.PageUtils;
 import com.beicroon.starter.web.admin.convertor.ResourceMenuConvertor;
@@ -15,6 +16,7 @@ import com.beicroon.starter.web.admin.entity.resource.role.menu.dto.ResourceRole
 import com.beicroon.starter.web.admin.entity.resource.role.vo.ResourceRoleBaseVO;
 import com.beicroon.starter.web.admin.entity.resource.role.vo.ResourceRoleDetailVO;
 import com.beicroon.starter.web.admin.entity.resource.role.vo.ResourceRolePageVO;
+import com.beicroon.starter.web.admin.helper.ResourceRoleHelper;
 import com.beicroon.starter.web.admin.model.ResourceRoleMenuModel;
 import com.beicroon.starter.web.admin.model.ResourceRoleModel;
 import com.beicroon.starter.web.admin.repository.ResourceMenuRepository;
@@ -107,6 +109,12 @@ public class ResourceRoleService implements IResourceRoleService {
 
     @Override
     public boolean menuAssign(ResourceRoleMenuAssignDTO dto) {
+        ResourceRoleModel role = this.resourceRoleRepository.getByIdOrError(dto.getRoleId(), "角色不存在或已删除");
+
+        if (ResourceRoleHelper.isRoot(role)) {
+            throw ExceptionUtils.business("超级管理员自动拥有所有菜单权限~无需手动分配！");
+        }
+
         this.resourceRoleMenuRepository.remove(ResourceRoleMenuModel::getRoleId, dto.getRoleId());
 
         return this.resourceRoleMenuRepository.saveBatch(this.resourceRoleMenuConvertor.toEntity(dto));

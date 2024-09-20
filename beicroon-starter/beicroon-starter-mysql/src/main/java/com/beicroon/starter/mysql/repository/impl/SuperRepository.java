@@ -111,6 +111,10 @@ public abstract class SuperRepository<M extends GenericMapper<T>, T extends Gene
         return this.getBaseMapper().listByIds(ids);
     }
 
+    public List<T> listByIdsAndEnable(Collection<? extends Serializable> ids) {
+        return this.getBaseMapper().listByIdsAndEnable(ids);
+    }
+
     public List<T> listByIdsOrError(Collection<Long> ids, String message) {
         return this.getBaseMapper().listByIdsOrError(ids, message);
     }
