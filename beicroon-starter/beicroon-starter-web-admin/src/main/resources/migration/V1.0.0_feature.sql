@@ -9,6 +9,7 @@ create table `admin_account_admin`
     `nickname`      varchar(255)        not null default '' comment '昵称',
     `phone`         varchar(32)         not null default '' comment '电话',
     `email`         varchar(255)        not null default '' comment '邮箱',
+    `root_flag`     varchar(32)         not null default 'false' comment '是否超级账号',
     `created_at`    timestamp           not null default current_timestamp comment '创建时间',
     `creator_id`    bigint(20) unsigned not null default 0 comment '创建人主键',
     `creator_code`  varchar(64)         not null default '' comment '创建人编码',

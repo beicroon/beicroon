@@ -39,4 +39,8 @@ public class AccountAdminModel extends GenericModel implements IAuthUser {
     @ApiModelProperty(name = "邮箱")
     private String email;
 
+    @TableField(value = "`root_flag`")
+    @ApiModelProperty(name = "是否超级账号")
+    private String rootFlag;
+
 }

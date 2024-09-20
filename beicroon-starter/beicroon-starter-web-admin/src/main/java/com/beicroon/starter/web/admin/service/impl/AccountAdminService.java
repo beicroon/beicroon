@@ -1,8 +1,11 @@
 package com.beicroon.starter.web.admin.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.beicroon.construct.auth.utils.AuthUtils;
 import com.beicroon.construct.entity.IdsDTO;
 import com.beicroon.construct.entity.PageInfo;
+import com.beicroon.construct.enums.BooleanEnums;
 import com.beicroon.construct.utils.EmptyUtils;
 import com.beicroon.construct.utils.HashUtils;
 import com.beicroon.construct.utils.ListUtils;
@@ -17,6 +20,7 @@ import com.beicroon.starter.web.admin.entity.account.admin.role.dto.AccountAdmin
 import com.beicroon.starter.web.admin.entity.account.admin.vo.AccountAdminBaseVO;
 import com.beicroon.starter.web.admin.entity.account.admin.vo.AccountAdminDetailVO;
 import com.beicroon.starter.web.admin.entity.account.admin.vo.AccountAdminPageVO;
+import com.beicroon.starter.web.admin.helper.AccountAdminHelper;
 import com.beicroon.starter.web.admin.model.AccountAdminModel;
 import com.beicroon.starter.web.admin.model.AccountAdminRoleModel;
 import com.beicroon.starter.web.admin.repository.AccountAdminRepository;
@@ -60,14 +64,30 @@ public class AccountAdminService implements IAccountAdminService {
 
     @Override
     public List<AccountAdminBaseVO> list(AccountAdminQueryDTO dto) {
-        List<AccountAdminModel> list = this.accountAdminRepository.list(dto);
+        QueryWrapper<AccountAdminModel> wrapper = this.accountAdminRepository.newPageWrapper(dto);
+
+        AccountAdminModel admin = this.accountAdminRepository.getById(AuthUtils.getUserId());
+
+        if (AccountAdminHelper.isNotRoot(admin)) {
+            wrapper.lambda().eq(AccountAdminModel::getRootFlag, BooleanEnums.FALSE.getCode());
+        }
+
+        List<AccountAdminModel> list = this.accountAdminRepository.list(wrapper);
 
         return ListUtils.toList(list, this.accountAdminConvertor::toBaseVO);
     }
 
     @Override
     public PageInfo<AccountAdminPageVO> page(AccountAdminQueryDTO dto) {
-        Page<AccountAdminModel> page = this.accountAdminRepository.page(dto);
+        QueryWrapper<AccountAdminModel> wrapper = this.accountAdminRepository.newPageWrapper(dto);
+
+        AccountAdminModel admin = this.accountAdminRepository.getById(AuthUtils.getUserId());
+
+        if (AccountAdminHelper.isNotRoot(admin)) {
+            wrapper.lambda().eq(AccountAdminModel::getRootFlag, BooleanEnums.FALSE.getCode());
+        }
+
+        Page<AccountAdminModel> page = this.accountAdminRepository.page(dto, wrapper);
 
         return PageUtils.result(page, this.accountAdminConvertor::toPageVO);
     }

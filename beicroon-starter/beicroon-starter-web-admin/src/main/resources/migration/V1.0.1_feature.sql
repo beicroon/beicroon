@@ -1,7 +1,8 @@
 INSERT INTO `admin_account_admin`
-    (`id`, `code`, `nickname`, `username`, `password`, `creator_name`, `modifier_name`)
+    (`id`, `code`, `nickname`, `username`, `password`, `root_flag`, `creator_name`, `modifier_name`)
 VALUES
-    (1825706731063808302, 'root', 'root', 'root', 'b13bc5fefc72a6a06c6c172d227f5c39967cdbbcdf8f20b5fc39f175bfb608a5', 'root', 'root');
+    (1825706731063808302, 'root', 'root', 'root', 'b13bc5fefc72a6a06c6c172d227f5c39967cdbbcdf8f20b5fc39f175bfb608a5', 'true', 'root', 'root'),
+    (1825706731063808332, 'admin', 'admin', 'admin', 'faf1f45a58caa5b6bdb451adb8a71dfe697472e5c85516ec40fde6f989719610', 'false', 'root', 'root');
 
 INSERT INTO `admin_resource_menu`
     (`id`, `parent_id`, `parent_code`, `parent_name`, `code`, `name`, `path`, `creator_name`, `modifier_name`)

@@ -41,10 +41,10 @@ async function handleSubmit() {
   z-index: 9;
   gap: 32rem;
   display: flex;
-  width: 480rem;
   height: 320rem;
   position: fixed;
-  padding: 0 62rem;
+  padding: 0 52rem;
+  width: fit-content;
   align-items: center;
   border-radius: 6rem;
   flex-direction: column;

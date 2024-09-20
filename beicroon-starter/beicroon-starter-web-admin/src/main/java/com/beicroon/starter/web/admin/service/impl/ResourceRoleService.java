@@ -85,7 +85,15 @@ public class ResourceRoleService implements IResourceRoleService {
 
     @Override
     public PageInfo<ResourceRolePageVO> page(ResourceRoleQueryDTO dto) {
-        Page<ResourceRoleModel> page = this.resourceRoleRepository.page(dto);
+        QueryWrapper<ResourceRoleModel> wrapper = this.resourceRoleRepository.newPageWrapper(dto);
+
+        List<ResourceRoleModel> roles = this.resourceRoleManager.listAuthUserRole();
+
+        if (ResourceRoleHelper.isNotRoot(roles)) {
+            wrapper.lambda().eq(ResourceRoleModel::getRootFlag, BooleanEnums.FALSE.getCode());
+        }
+
+        Page<ResourceRoleModel> page = this.resourceRoleRepository.page(dto, wrapper);
 
         return PageUtils.result(page, this.resourceRoleConvertor::toPageVO);
     }

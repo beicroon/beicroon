@@ -17,6 +17,10 @@ public final class ResourceRoleHelper {
         return BooleanEnums.isTrue(role.getRootFlag());
     }
 
+    public static boolean isNotRoot(ResourceRoleModel role) {
+        return !BooleanEnums.isTrue(role.getRootFlag());
+    }
+
     public static boolean isRoot(List<ResourceRoleModel> roles) {
         return roles.stream().anyMatch(ResourceRoleHelper::isRoot);
     }
