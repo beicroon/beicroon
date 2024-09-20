@@ -6,7 +6,6 @@ import com.beicroon.construct.entity.PageInfo;
 import com.beicroon.construct.exception.utils.ExceptionUtils;
 import com.beicroon.construct.utils.ListUtils;
 import com.beicroon.starter.mysql.utils.PageUtils;
-import com.beicroon.starter.web.admin.convertor.ResourceMenuConvertor;
 import com.beicroon.starter.web.admin.convertor.ResourceRoleConvertor;
 import com.beicroon.starter.web.admin.convertor.ResourceRoleMenuConvertor;
 import com.beicroon.starter.web.admin.entity.resource.role.dto.ResourceRoleCreateDTO;
@@ -19,7 +18,6 @@ import com.beicroon.starter.web.admin.entity.resource.role.vo.ResourceRolePageVO
 import com.beicroon.starter.web.admin.helper.ResourceRoleHelper;
 import com.beicroon.starter.web.admin.model.ResourceRoleMenuModel;
 import com.beicroon.starter.web.admin.model.ResourceRoleModel;
-import com.beicroon.starter.web.admin.repository.ResourceMenuRepository;
 import com.beicroon.starter.web.admin.repository.ResourceRoleMenuRepository;
 import com.beicroon.starter.web.admin.repository.ResourceRoleRepository;
 import com.beicroon.starter.web.admin.service.IResourceRoleService;
@@ -34,16 +32,10 @@ import java.util.Set;
 public class ResourceRoleService implements IResourceRoleService {
 
     @Resource
-    private ResourceMenuConvertor resourceMenuConvertor;
-
-    @Resource
     private ResourceRoleConvertor resourceRoleConvertor;
 
     @Resource
     private ResourceRoleMenuConvertor resourceRoleMenuConvertor;
-
-    @Resource
-    private ResourceMenuRepository resourceMenuRepository;
 
     @Resource
     private ResourceRoleRepository resourceRoleRepository;
