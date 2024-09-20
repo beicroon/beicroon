@@ -3,13 +3,14 @@ import BeicroonLineVertical from "@/components/BeicroonLineVertical.vue";
 
 type Props = {
   title: string,
+  width: number,
 };
 
 defineProps<Props>();
 </script>
 
 <template>
-  <div class="beicroon-dialog-overlay" @click.stop @mousedown.stop @mouseup.stop>
+  <div class="beicroon-dialog-overlay" @click.stop :style="{width: `${width}rem`}">
     <div class="beicroon-dialog-head">{{ title }}</div>
     <beicroon-line-vertical></beicroon-line-vertical>
     <div class="beicroon-dialog-body">
@@ -27,7 +28,6 @@ defineProps<Props>();
   top: 0;
   right: 0;
   height: 100%;
-  width: 1080rem;
   position: absolute;
   background-color: var(--color-white);
 

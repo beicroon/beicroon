@@ -21,6 +21,7 @@ onMounted(list.resetSearch);
 function showRuleMenuUpdate(item: VO) {
   dialog({
     title: "菜单分配",
+    width: 520,
     message: ResourceRoleMenuUpdate,
     props: {roleId: item.id},
   });

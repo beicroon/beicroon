@@ -22,6 +22,7 @@ function getNode() {
 
 type DialogConfig = {
     title?: string,
+    width?: number,
     message: string | VNode | Component,
     props?: Record<string, any>,
     cancel?: () => Promise<void>,
@@ -31,6 +32,7 @@ type DialogConfig = {
 
 type Dialog = {
     title: string,
+    width: number,
     message: string | VNode | Component,
     props?: Record<string, any>,
     handleCancel: () => Promise<void>,
@@ -47,7 +49,12 @@ function createMessageNode(config: Dialog) {
 }
 
 function createWindowNode(config: Dialog) {
-    return h(DialogOverlay, {title: config.title}, {
+    const props = {
+        title: config.title,
+        width: config.width,
+    };
+
+    return h<{title: string, width: number}>(DialogOverlay, props, {
         default: () => [
             h(config.message, {
                 ...config.props,
@@ -151,6 +158,7 @@ export default async function dialog(config: DialogConfig) {
 
     const dialog: Dialog = {
         title: config.title || "操作确认",
+        width: config.width || 1080,
         message: config.message,
         props: config.props,
         handleCancel: async () => {
