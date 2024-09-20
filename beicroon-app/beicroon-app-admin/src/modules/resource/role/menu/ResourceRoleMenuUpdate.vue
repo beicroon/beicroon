@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import {onMounted, reactive, ref} from "vue";
 import BeicroonForm from "@/components/BeicroonForm.vue";
+import {create, list} from "./resource-role-menu.http.ts";
 import BeicroonButton from "@/components/BeicroonButton.vue";
 import {AuthMenu as Menu, listAuthMenu} from "@/auth.http.ts";
 import BeicroonLoading from "@/components/BeicroonLoading.vue";
@@ -11,7 +12,7 @@ type Props = {
   roleId: string,
 };
 
-defineProps<Props>();
+const props = defineProps<Props>();
 
 const loading = reactive({
   set: false,
@@ -23,10 +24,71 @@ const menus = ref<Array<Menu>>([]);
 onMounted(async () => {
   loading.get = true;
 
-  const res = await listAuthMenu()
-    .finally(() => loading.get = false);
+  try {
+    const res = await listAuthMenu();
 
-  menus.value = res.data;
+    const roleMenus = await list(props.roleId);
+
+    menus.value = res.data.map((menu) => {
+      menu.children = menu.children.map((child) => {
+        let grandCheck = false;
+
+        let grandUnchecked = false;
+
+        child.children = child.children.map((grand) => {
+          if (roleMenus.data.find((roleMenu) => roleMenu.id === grand.id)) {
+            grand.checked = "checked";
+
+            grandCheck = true;
+          } else {
+            grand.checked = "unchecked";
+
+            grandUnchecked = true;
+          }
+
+          return grand;
+        });
+
+        if (grandCheck && grandUnchecked) {
+          child.checked = "fixed";
+        } else if (grandCheck) {
+          child.checked = "checked";
+        } else {
+          child.checked = "unchecked";
+        }
+
+        return child;
+      });
+
+      let childCheck = false;
+
+      let childFixed = false;
+
+      let childUnchecked = false;
+
+      menu.children.forEach((child) => {
+        if (child.checked === "checked") {
+          childCheck = true;
+        } else if (child.checked === "fixed") {
+          childFixed = true;
+        } else {
+          childUnchecked = true;
+        }
+      });
+
+      if ((childCheck && childUnchecked) || childFixed) {
+        menu.checked = "fixed";
+      } else if (childCheck) {
+        menu.checked = "checked";
+      } else {
+        menu.checked = "unchecked";
+      }
+
+      return menu;
+    });
+  } finally {
+    loading.get = false;
+  }
 });
 
 const emits = defineEmits(["cancel", "confirm"]);
@@ -36,38 +98,68 @@ async function handleCancel() {
 }
 
 async function handleConfirm() {
+  loading.set = true;
+
+  const menuIds: Array<string> = [];
+
+  menus.value.forEach((menu) => {
+    if (menu.checked === "checked" || menu.checked === "fixed") {
+      menuIds.push(menu.id);
+    }
+
+    menu.children.forEach((child) => {
+      if (child.checked === "checked" || child.checked === "fixed") {
+        menuIds.push(child.id);
+      }
+
+      child.children.forEach((grand) => {
+        if (grand.checked === "checked" || grand.checked === "fixed") {
+          menuIds.push(grand.id);
+        }
+      });
+    });
+  });
+
+  await create(props.roleId, menuIds).finally(() => loading.set = false);
+
   emits("confirm");
 }
 
-async function handleCheck(menu: Menu, child?: Menu, grand?: Menu) {
-  if (grand) {
-    grand.checked = "checked";
+async function handleCheckGrand(menu: Menu, child: Menu, grand: Menu) {
+  grand.checked = "checked";
 
-    if (child) {
+  for (let i = 0; i < child.children.length; i++) {
+    if (child.children[i].checked !== "checked") {
       child.checked = "fixed";
-    }
 
-    if (menu) {
       menu.checked = "fixed";
-    }
 
-    return;
+      return;
+    }
   }
 
-  if (child) {
-    child.checked = "checked";
+  await handleCheckChild(menu, child);
+}
 
-    if (menu) {
+async function handleCheckChild(menu: Menu, child: Menu) {
+  child.checked = "checked";
+
+  child.children.forEach((grandMenu) => {
+    grandMenu.checked = "checked";
+  });
+
+  for (let i = 0; i < menu.children.length; i++) {
+    if (menu.children[i].checked !== "checked") {
       menu.checked = "fixed";
+
+      return;
     }
-
-    child.children.forEach((grandMenu) => {
-      grandMenu.checked = "checked";
-    });
-
-    return;
   }
 
+  menu.checked = "checked";
+}
+
+async function handleCheckMenu(menu: Menu) {
   menu.checked = "checked";
 
   menu.children.forEach((childMenu) => {
@@ -79,35 +171,57 @@ async function handleCheck(menu: Menu, child?: Menu, grand?: Menu) {
   });
 }
 
-async function handleUncheck(menu: Menu, child?: Menu, grand?: Menu) {
-  if (grand) {
-    grand.checked = "unchecked";
-
-    if (child) {
-      child.checked = "fixed";
-    }
-
-    if (menu) {
-      menu.checked = "fixed";
-    }
+async function handleCheck(menu: Menu, child?: Menu, grand?: Menu) {
+  if (grand && child) {
+    await handleCheckGrand(menu, child, grand);
 
     return;
   }
 
   if (child) {
-    child.checked = "unchecked";
-
-    if (menu) {
-      menu.checked = "fixed";
-    }
-
-    child.children.forEach((grandMenu) => {
-      grandMenu.checked = "unchecked";
-    });
+    await handleCheckChild(menu, child);
 
     return;
   }
 
+  await handleCheckMenu(menu)
+}
+
+async function handleUncheckGrand(menu: Menu, child: Menu, grand: Menu) {
+  grand.checked = "unchecked";
+
+  for (let i = 0; i < child.children.length; i++) {
+    if (child.children[i].checked !== "unchecked") {
+      child.checked = "fixed";
+
+      menu.checked = "fixed";
+
+      return;
+    }
+  }
+
+  await handleUncheckChild(menu, child);
+}
+
+async function handleUncheckChild(menu: Menu, child: Menu) {
+  child.checked = "unchecked";
+
+  child.children.forEach((grandMenu) => {
+    grandMenu.checked = "unchecked";
+  });
+
+  for (let i = 0; i < menu.children.length; i++) {
+    if (menu.children[i].checked !== "unchecked") {
+      menu.checked = "fixed";
+
+      return;
+    }
+  }
+
+  menu.checked = "unchecked";
+}
+
+async function handleUncheckMenu(menu: Menu) {
   menu.checked = "unchecked";
 
   menu.children.forEach((childMenu) => {
@@ -117,6 +231,22 @@ async function handleUncheck(menu: Menu, child?: Menu, grand?: Menu) {
       grandMenu.checked = "unchecked";
     });
   });
+}
+
+async function handleUncheck(menu: Menu, child?: Menu, grand?: Menu) {
+  if (grand && child) {
+    await handleUncheckGrand(menu, child, grand);
+
+    return;
+  }
+
+  if (child) {
+    await handleUncheckChild(menu, child);
+
+    return;
+  }
+
+  await handleUncheckMenu(menu);
 }
 </script>
 

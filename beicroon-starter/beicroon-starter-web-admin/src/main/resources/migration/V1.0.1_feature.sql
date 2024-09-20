@@ -20,17 +20,6 @@ VALUES
     (1825706731063808102, 'ROOT', '超级管理员', '超级管理员', 'true', 'admin', 'admin'),
     (1825706731063809202, 'ADMIN', '管理员', '管理员', 'false', 'admin', 'admin');
 
-insert into `admin_resource_role_menu_relation`
-    (`role_id`, `menu_id`, `creator_name`, `modifier_name`)
-values
-    (1825706731063809202, 1825706731063808002, 'admin', 'admin'),
-    (1825706731063809202, 1825707094248591361, 'admin', 'admin'),
-    (1825706731063809202, 1825707293197012994, 'admin', 'admin'),
-    (1825706731063809202, 1825707485132558337, 'admin', 'admin'),
-    (1825706731063809202, 1825707757028315138, 'admin', 'admin'),
-    (1825706731063809202, 1825707969033605121, 'admin', 'admin'),
-    (1825706731063809202, 1825707969033606521, 'admin', 'admin');
-
 insert into `admin_resource_admin_role_relation`
     (`admin_id`, `role_id`, `creator_name`, `modifier_name`)
 values
