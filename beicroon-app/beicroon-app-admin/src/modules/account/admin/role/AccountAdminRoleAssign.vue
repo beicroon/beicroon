@@ -54,7 +54,7 @@ async function handleCancel() {
 async function handleConfirm() {
   loading.set = true;
 
-  const roleIds: Array<string> = [];
+  const roleIds = roles.value.filter(role => role.checked === "checked").map(role => role.id);
 
   await assign(props.adminId, roleIds).finally(() => loading.set = false);
 
@@ -62,11 +62,11 @@ async function handleConfirm() {
 }
 
 async function handleCheck(role: RoleWithChecked) {
-
+  role.checked = "checked";
 }
 
 async function handleUncheck(role: RoleWithChecked) {
-
+  role.checked = "unchecked";
 }
 </script>
 

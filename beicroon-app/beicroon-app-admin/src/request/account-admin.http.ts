@@ -3,11 +3,11 @@ import {sha256} from "@/hash.ts";
 
 // 基础返回字段
 export type AccountAdminBaseVO = BaseVO & DisableVO & {
-    code?: string,  // 编码
-    username?: string,  // 账号
-    nickname?: string,  // 昵称
-    phone?: string,  // 电话
-    email?: string,  // 邮箱
+    code: string,  // 编码
+    username: string,  // 账号
+    nickname: string,  // 昵称
+    phone: string,  // 电话
+    email: string,  // 邮箱
 }
 
 // 详情返回字段

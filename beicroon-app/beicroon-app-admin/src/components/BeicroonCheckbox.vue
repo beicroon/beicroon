@@ -69,7 +69,7 @@ function handleCheck() {
     border-radius: 2rem;
     border: 1rem solid var(--color-grey-deeper);
 
-    &.fixed {
+    &.indeterminate {
       background-color: var(--color-warning);
     }
 

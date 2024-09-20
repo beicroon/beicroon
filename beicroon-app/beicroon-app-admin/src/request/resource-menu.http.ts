@@ -2,13 +2,13 @@ import http, {BaseVO, DisableDTO, DisableVO, PageInfo, QueryDTO, Response, Updat
 
 // 基础返回字段
 export type ResourceMenuBaseVO = BaseVO & DisableVO & {
-    parentId?: string,  // 父级主键
-    parentCode?: string,  // 父级编码
-    parentName?: string,  // 父级名称
-    code?: string,  // 编码
-    name?: string,  // 名称
-    path?: string,  // 路由
-    sorting?: number,  // 排序
+    parentId: string,  // 父级主键
+    parentCode: string,  // 父级编码
+    parentName: string,  // 父级名称
+    code: string,  // 编码
+    name: string,  // 名称
+    path: string,  // 路由
+    sorting: number,  // 排序
 }
 
 // 详情返回字段

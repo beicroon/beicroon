@@ -2,9 +2,9 @@ import http, {BaseVO, DisableDTO, DisableVO, PageInfo, QueryDTO, Response, Updat
 
 // 基础返回字段
 export type ResourceRoleBaseVO = BaseVO & DisableVO & {
-    code?: string,  // 编码
-    name?: string,  // 名称
-    remark?: string,  // 备注
+    code: string,  // 编码
+    name: string,  // 名称
+    remark: string,  // 备注
 }
 
 // 详情返回字段

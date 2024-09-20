@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import {onMounted} from "vue";
+import toast from "@/toast.ts";
 import dialog from "@/dialog.ts";
 import createBeicroonList from "@/list.ts";
 import Create from "./ResourceRoleCreate.vue";
@@ -24,6 +25,9 @@ function roleMenuAssign(item: VO) {
     width: 520,
     message: ResourceRoleMenuAssign,
     props: {roleId: item.id},
+    confirm: async () => {
+      await toast("保存成功");
+    },
   });
 }
 </script>

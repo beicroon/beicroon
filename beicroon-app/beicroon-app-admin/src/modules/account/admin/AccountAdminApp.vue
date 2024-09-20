@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import {onMounted} from "vue";
+import toast from "@/toast.ts";
 import dialog from "@/dialog.ts";
 import createBeicroonList from "@/list.ts";
 import Create from "./AccountAdminCreate.vue";
@@ -24,6 +25,9 @@ function adminRoleAssign(item: VO) {
     width: 520,
     message: AccountAdminRoleAssign,
     props: {adminId: item.id},
+    confirm: async () => {
+      await toast("保存成功");
+    },
   });
 }
 </script>
