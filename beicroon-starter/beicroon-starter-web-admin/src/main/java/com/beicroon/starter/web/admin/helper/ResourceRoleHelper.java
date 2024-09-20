@@ -4,6 +4,8 @@ import com.beicroon.construct.enums.BooleanEnums;
 import com.beicroon.starter.web.admin.model.ResourceRoleModel;
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.List;
+
 @Slf4j
 public final class ResourceRoleHelper {
 
@@ -13,6 +15,14 @@ public final class ResourceRoleHelper {
 
     public static boolean isRoot(ResourceRoleModel role) {
         return BooleanEnums.isTrue(role.getRootFlag());
+    }
+
+    public static boolean isRoot(List<ResourceRoleModel> roles) {
+        return roles.stream().anyMatch(ResourceRoleHelper::isRoot);
+    }
+
+    public static boolean isNotRoot(List<ResourceRoleModel> roles) {
+        return roles.stream().noneMatch(ResourceRoleHelper::isRoot);
     }
 
 }

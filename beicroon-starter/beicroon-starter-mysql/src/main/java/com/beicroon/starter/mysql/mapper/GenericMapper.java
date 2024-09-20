@@ -257,6 +257,23 @@ public interface GenericMapper<T extends GenericModel> extends BaseMapper<T> {
         return data;
     }
 
+    default List<T> listEnable() {
+        QueryWrapper<T> wrapper = QueryUtils.newQueryWrapper();
+
+        wrapper.isNull(SystemConstant.DISABLE_KEY_NAME);
+
+        return this.list(wrapper);
+    }
+
+    default <R> Set<R> listEnable(SFunction<T, R> mapper) {
+        QueryWrapper<T> wrapper = QueryUtils.newQueryWrapper();
+
+        wrapper.lambda().select(mapper);
+        wrapper.isNull(SystemConstant.DISABLE_KEY_NAME);
+
+        return ListUtils.toSet(this.list(wrapper), mapper);
+    }
+
     default List<T> listByIds(Collection<? extends Serializable> ids) {
         if (EmptyUtils.isEmpty(ids)) {
             return EmptyUtils.emptyList();
@@ -265,17 +282,31 @@ public interface GenericMapper<T extends GenericModel> extends BaseMapper<T> {
         return this.selectBatchIds(ids);
     }
 
-    default List<T> listByIdsAndEnable(Collection<? extends Serializable> ids) {
+    default List<T> listByIdsAndEnable(Collection<Long> ids) {
         if (EmptyUtils.isEmpty(ids)) {
             return EmptyUtils.emptyList();
         }
-        
+
         QueryWrapper<T> wrapper = QueryUtils.newQueryWrapper();
 
         wrapper.in(SystemConstant.PRIMARY_KEY_NAME, ids);
         wrapper.isNull(SystemConstant.DISABLE_KEY_NAME);
 
         return this.list(wrapper);
+    }
+
+    default <R> Set<R> listByIdsAndEnable(Collection<Long> ids, SFunction<T, R> mapper) {
+        if (EmptyUtils.isEmpty(ids)) {
+            return EmptyUtils.emptySet();
+        }
+
+        QueryWrapper<T> wrapper = QueryUtils.newQueryWrapper();
+
+        wrapper.lambda().select(mapper);
+        wrapper.in(SystemConstant.PRIMARY_KEY_NAME, ids);
+        wrapper.isNull(SystemConstant.DISABLE_KEY_NAME);
+
+        return this.list(wrapper, mapper);
     }
 
     default List<T> listByIdsOrError(Collection<Long> ids, String message) {

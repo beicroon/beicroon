@@ -1,9 +1,7 @@
 package com.beicroon.starter.web.admin.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.beicroon.construct.auth.utils.AuthUtils;
 import com.beicroon.construct.exception.utils.ExceptionUtils;
-import com.beicroon.construct.utils.EmptyUtils;
 import com.beicroon.construct.utils.HashUtils;
 import com.beicroon.construct.utils.ListUtils;
 import com.beicroon.starter.jwt.utils.JwtUtils;
@@ -12,13 +10,20 @@ import com.beicroon.starter.web.admin.entity.auth.admin.dto.AuthAdminLoginDTO;
 import com.beicroon.starter.web.admin.entity.auth.admin.vo.AuthAdminLoginVO;
 import com.beicroon.starter.web.admin.entity.auth.admin.vo.AuthAdminMenuVO;
 import com.beicroon.starter.web.admin.helper.ResourceRoleHelper;
-import com.beicroon.starter.web.admin.model.*;
-import com.beicroon.starter.web.admin.repository.*;
+import com.beicroon.starter.web.admin.manager.ResourceRoleManager;
+import com.beicroon.starter.web.admin.model.AccountAdminModel;
+import com.beicroon.starter.web.admin.model.ResourceMenuModel;
+import com.beicroon.starter.web.admin.model.ResourceRoleModel;
+import com.beicroon.starter.web.admin.repository.AccountAdminRepository;
+import com.beicroon.starter.web.admin.repository.ResourceMenuRepository;
+import com.beicroon.starter.web.admin.repository.ResourceRoleMenuRepository;
 import com.beicroon.starter.web.admin.service.IAuthAdminService;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Set;
 
 @Service
 public class AuthAdminService implements IAuthAdminService {
@@ -33,13 +38,10 @@ public class AuthAdminService implements IAuthAdminService {
     private ResourceMenuRepository resourceMenuRepository;
 
     @Resource
-    private ResourceRoleRepository resourceRoleRepository;
-
-    @Resource
-    private AccountAdminRoleRepository accountAdminRoleRepository;
-
-    @Resource
     private ResourceRoleMenuRepository resourceRoleMenuRepository;
+
+    @Resource
+    private ResourceRoleManager resourceRoleManager;
 
     @Override
     public AuthAdminLoginVO login(AuthAdminLoginDTO dto) {
@@ -64,27 +66,14 @@ public class AuthAdminService implements IAuthAdminService {
 
     @Override
     public List<AuthAdminMenuVO> menuTree() {
-        Set<Long> roleIds = this.accountAdminRoleRepository.list(
-                AccountAdminRoleModel::getAdminId, AuthUtils.getUserId(), AccountAdminRoleModel::getRoleId
-        );
-
-        if (EmptyUtils.isEmpty(roleIds)) {
-            throw ExceptionUtils.forbidden("账号未分配任何角色");
-        }
-
-        List<ResourceRoleModel> roles = this.resourceRoleRepository.listByIdsAndEnable(roleIds);
+        List<ResourceRoleModel> roles = this.resourceRoleManager.listAuthUserRole();
 
         LambdaQueryWrapper<ResourceMenuModel> query = this.resourceMenuRepository.newLambdaQuery();
 
-        // 不是超管
-        if (roles.stream().noneMatch(ResourceRoleHelper::isRoot)) {
-            Set<Long> menuIds = this.resourceRoleMenuRepository.list(
-                    ResourceRoleMenuModel::getRoleId, roleIds, ResourceRoleMenuModel::getMenuId
-            );
+        if (ResourceRoleHelper.isNotRoot(roles)) {
+            Set<Long> roleIds = ListUtils.toSet(roles, ResourceRoleModel::getId);
 
-            if (EmptyUtils.isEmpty(menuIds)) {
-                throw ExceptionUtils.forbidden("角色未分配任何菜单");
-            }
+            Set<Long> menuIds = this.resourceRoleManager.listAuthUserRoleMenuId(roleIds);
 
             query.in(ResourceMenuModel::getId, menuIds);
         }
@@ -94,37 +83,17 @@ public class AuthAdminService implements IAuthAdminService {
 
         List<ResourceMenuModel> list = this.resourceMenuRepository.list(query);
 
-        List<AuthAdminMenuVO> parents = new ArrayList<>();
-
-        Map<Long, AuthAdminMenuVO> parentMap = ListUtils.toMap(
-                list, ResourceMenuModel::getId, item -> {
-                    AuthAdminMenuVO vo = this.resourceMenuConvertor.toTreeVO(item);
-
-                    if (EmptyUtils.isNotId(item.getParentId())) {
-                        parents.add(vo);
-                    }
-
-                    return vo;
-                }
+        List<AuthAdminMenuVO> tree = ListUtils.toTree(
+                list,
+                ResourceMenuModel::getId,
+                ResourceMenuModel::getParentId,
+                AuthAdminMenuVO::getChildren,
+                this.resourceMenuConvertor::toTreeVO
         );
 
-        for (ResourceMenuModel menu : list) {
-            if (EmptyUtils.isNotId(menu.getParentId())) {
-                continue;
-            }
+        tree.sort(Comparator.comparing(AuthAdminMenuVO::getSorting));
 
-            AuthAdminMenuVO parent = parentMap.get(menu.getParentId());
-
-            if (parent == null) {
-                continue;
-            }
-
-            parent.getChildren().add(parentMap.get(menu.getId()));
-        }
-
-        parents.sort(Comparator.comparing(AuthAdminMenuVO::getSorting));
-
-        return parents;
+        return tree;
     }
 
 }

@@ -265,4 +265,36 @@ public final class ListUtils {
         return map;
     }
 
+    public static <T, K, R> List<R> toTree(Collection<T> collection, Function<T, K> key, Function<T, K> parent, Function<R, Collection<R>> children, Function<T, R> mapper) {
+        List<R> parents = new ArrayList<>();
+
+        Map<K, R> parentMap = ListUtils.toMap(collection, key, item -> {
+                    R r = mapper.apply(item);
+
+                    if (!EmptyUtils.hasValue(parent.apply(item))) {
+                        parents.add(r);
+                    }
+
+                    return r;
+                });
+
+        for (T t : collection) {
+            K k = parent.apply(t);
+
+            if (!EmptyUtils.hasValue(k)) {
+                continue;
+            }
+
+            R r = parentMap.get(k);
+
+            if (r == null) {
+                continue;
+            }
+
+            children.apply(r).add(parentMap.get(key.apply(t)));
+        }
+
+        return parents;
+    }
+
 }
