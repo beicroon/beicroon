@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import {onMounted, reactive, ref} from "vue";
+import BeicroonTree from "@/components/BeicroonTree.vue";
 import BeicroonForm from "@/components/BeicroonForm.vue";
 import BeicroonButton from "@/components/BeicroonButton.vue";
 import BeicroonLoading from "@/components/BeicroonLoading.vue";
 import BeicroonCheckbox from "@/components/BeicroonCheckbox.vue";
+import BeicroonTreeItem from "@/components/BeicroonTreeItem.vue";
 import {assign, list} from "@/request/resource-role-menu.http.ts";
 import BeicroonLineVertical from "@/components/BeicroonLineVertical.vue";
 import {AuthMenu as Menu, listAuthMenu} from "@/request/account-admin-auth.http.ts";
@@ -253,42 +255,36 @@ async function handleUncheck(menu: Menu, child?: Menu, grand?: Menu) {
 <template>
   <beicroon-form class="beicroon-dialog-view" @submit="handleConfirm">
     <div class="beicroon-dialog-main" v-if="!loading.get">
-      <ul class="menu-first">
-        <template v-for="menu in menus">
-          <li>
-            <beicroon-checkbox
-              :label="menu.name"
-              :checked="menu.checked"
-              @check="handleCheck(menu)"
-              @uncheck="handleUncheck(menu)"
-            ></beicroon-checkbox>
-          </li>
-          <ul class="menu-second">
-            <template v-for="childMenu in menu.children">
-              <li>
-                <beicroon-checkbox
-                  :label="childMenu.name"
-                  :checked="childMenu.checked"
-                  @check="handleCheck(menu, childMenu)"
-                  @uncheck="handleUncheck(menu, childMenu)"
-                ></beicroon-checkbox>
-              </li>
-              <ul class="menu-third">
-                <template v-for="grandMenu in childMenu.children">
-                  <li>
-                    <beicroon-checkbox
-                      :label="grandMenu.name"
-                      :checked="grandMenu.checked"
-                      @check="handleCheck(menu, childMenu, grandMenu)"
-                      @uncheck="handleUncheck(menu, childMenu, grandMenu)"
-                    ></beicroon-checkbox>
-                  </li>
-                </template>
-              </ul>
-            </template>
-          </ul>
-        </template>
-      </ul>
+      <beicroon-tree>
+        <beicroon-tree-item v-for="menu in menus">
+          <beicroon-checkbox
+            :label="menu.name"
+            :checked="menu.checked"
+            @check="handleCheck(menu)"
+            @uncheck="handleUncheck(menu)"
+          ></beicroon-checkbox>
+          <beicroon-tree>
+            <beicroon-tree-item v-for="childMenu in menu.children">
+              <beicroon-checkbox
+                :label="childMenu.name"
+                :checked="childMenu.checked"
+                @check="handleCheck(menu, childMenu)"
+                @uncheck="handleUncheck(menu, childMenu)"
+              ></beicroon-checkbox>
+              <beicroon-tree>
+                <beicroon-tree-item v-for="grandMenu in childMenu.children">
+                  <beicroon-checkbox
+                    :label="grandMenu.name"
+                    :checked="grandMenu.checked"
+                    @check="handleCheck(menu, childMenu, grandMenu)"
+                    @uncheck="handleUncheck(menu, childMenu, grandMenu)"
+                  ></beicroon-checkbox>
+                </beicroon-tree-item>
+              </beicroon-tree>
+            </beicroon-tree-item>
+          </beicroon-tree>
+        </beicroon-tree-item>
+      </beicroon-tree>
     </div>
     <div class="beicroon-dialog-loading" v-else>
       <beicroon-loading fill="#b3e5fc" width="100" height="100"></beicroon-loading>
@@ -301,16 +297,5 @@ async function handleUncheck(menu: Menu, child?: Menu, grand?: Menu) {
   </beicroon-form>
 </template>
 
-<style scoped lang="less">
-.menu-first {
-  padding: 24rem;
-}
-
-.menu-second {
-  padding: 0 16rem;
-}
-
-.menu-third {
-  padding: 0 16rem;
-}
+<style lang="less">
 </style>

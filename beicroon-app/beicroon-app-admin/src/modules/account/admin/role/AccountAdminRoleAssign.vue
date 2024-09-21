@@ -1,10 +1,12 @@
 <script setup lang="ts">
 import {onMounted, reactive, ref} from "vue";
 import {BooleanEnums} from "@/enums/default-enums.ts";
+import BeicroonTree from "@/components/BeicroonTree.vue";
 import BeicroonForm from "@/components/BeicroonForm.vue";
 import BeicroonButton from "@/components/BeicroonButton.vue";
 import BeicroonLoading from "@/components/BeicroonLoading.vue";
 import BeicroonCheckbox from "@/components/BeicroonCheckbox.vue";
+import BeicroonTreeItem from "@/components/BeicroonTreeItem.vue";
 import {assign, list} from "@/request/account-admin-role.http.ts";
 import BeicroonLineVertical from "@/components/BeicroonLineVertical.vue";
 import {list as roleList, ResourceRoleBaseVO as Role} from "@/request/resource-role.http.ts"
@@ -73,18 +75,16 @@ async function handleUncheck(role: RoleWithChecked) {
 <template>
   <beicroon-form class="beicroon-dialog-view" @submit="handleConfirm">
     <div class="beicroon-dialog-main" v-if="!loading.get">
-      <ul class="menu-first">
-        <template v-for="role in roles">
-          <li>
-            <beicroon-checkbox
-              :label="role.name"
-              :checked="role.checked"
-              @check="handleCheck(role)"
-              @uncheck="handleUncheck(role)"
-            ></beicroon-checkbox>
-          </li>
-        </template>
-      </ul>
+      <beicroon-tree>
+        <beicroon-tree-item v-for="role in roles">
+          <beicroon-checkbox
+            :label="role.name"
+            :checked="role.checked"
+            @check="handleCheck(role)"
+            @uncheck="handleUncheck(role)"
+          ></beicroon-checkbox>
+        </beicroon-tree-item>
+      </beicroon-tree>
     </div>
     <div class="beicroon-dialog-loading" v-else>
       <beicroon-loading fill="#b3e5fc" width="100" height="100"></beicroon-loading>
@@ -97,16 +97,5 @@ async function handleUncheck(role: RoleWithChecked) {
   </beicroon-form>
 </template>
 
-<style scoped lang="less">
-.menu-first {
-  padding: 24rem;
-}
-
-.menu-second {
-  padding: 0 16rem;
-}
-
-.menu-third {
-  padding: 0 16rem;
-}
+<style lang="less">
 </style>

@@ -49,13 +49,13 @@ defineProps<Props>();
 
   .beicroon-dialog-main {
     overflow-y: auto;
+    padding: 24rem 0;
     height: calc(100% - 73rem);
   }
 
   .beicroon-dialog-input {
     gap: 8rem;
     display: grid;
-    padding: 24rem 0;
     justify-items: center;
     align-content: flex-start;
     grid-template-columns: repeat(3, 1fr);
