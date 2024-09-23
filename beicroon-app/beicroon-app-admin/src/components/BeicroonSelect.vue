@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import {computed, ref, watch} from "vue";
-import {SelectUtils} from "@/utils/select.utils.ts";
+import {Select} from "@/utils/select.utils.ts";
 import BeicroonButton from "@/components/BeicroonButton.vue";
 import BeicroonLoading from "@/components/BeicroonLoading.vue";
 
 type Props = {
-  select: SelectUtils<any, any>,
+  select: Select<any, any>,
   label: string,
   showValue?: any,
   modelValue?: any,

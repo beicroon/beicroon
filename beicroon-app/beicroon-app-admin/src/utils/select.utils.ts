@@ -11,7 +11,7 @@ export type Config<DTO extends QueryDTO, VO extends BaseVO> = {
     pageSize?: number,
 };
 
-export type SelectUtils<DTO extends QueryDTO, VO extends BaseVO> = {
+export type Select<DTO extends QueryDTO, VO extends BaseVO> = {
     options?: Array<VO>,
     moreOptions: Array<Array<VO>>,
     request?: Page<DTO, VO>,
@@ -32,8 +32,8 @@ export type SelectUtils<DTO extends QueryDTO, VO extends BaseVO> = {
     getValue: (option: VO) => any,
 };
 
-export default function createBeicroonSelect<DTO extends QueryDTO, VO extends BaseVO>(config: Config<DTO, VO>): SelectUtils<DTO, VO> {
-    const select: SelectUtils<DTO, VO> = reactive<SelectUtils<DTO, VO>>({
+export default function createBeicroonSelect<DTO extends QueryDTO, VO extends BaseVO>(config: Config<DTO, VO>): Select<DTO, VO> {
+    const select: Select<DTO, VO> = reactive<Select<DTO, VO>>({
         options: config.options as Array<VO>,
         moreOptions: [] as Array<Array<VO>>,
         request: config.request,
@@ -98,7 +98,7 @@ export default function createBeicroonSelect<DTO extends QueryDTO, VO extends Ba
 
             return option[select.optionValue];
         },
-    }) as SelectUtils<DTO, VO>;
+    }) as Select<DTO, VO>;
 
     return select;
 }
