@@ -16,8 +16,6 @@ export enum AppNameEnums {
 
 export enum AppSelectorEnums {
     APP = "#" + AppNameEnums.APP,
-    TOAST = "#" + AppNameEnums.TOAST,
-    DIALOG = "#" + AppNameEnums.DIALOG,
 }
 
 export enum SelectorEnums {
