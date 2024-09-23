@@ -1,5 +1,7 @@
 <script setup lang="ts">
-import {onMounted, reactive, ref} from "vue";
+import {onMounted, reactive} from "vue";
+import {createBeicroonCheck} from "@/utils/check.ts";
+import {BooleanEnums} from "@/enums/default-enums.ts";
 import BeicroonTree from "@/components/BeicroonTree.vue";
 import BeicroonForm from "@/components/BeicroonForm.vue";
 import BeicroonButton from "@/components/BeicroonButton.vue";
@@ -7,7 +9,6 @@ import BeicroonLoading from "@/components/BeicroonLoading.vue";
 import BeicroonCheckbox from "@/components/BeicroonCheckbox.vue";
 import BeicroonTreeItem from "@/components/BeicroonTreeItem.vue";
 import {assign, list} from "@/request/account-admin-role.http.ts";
-import {BooleanEnums, CheckedEnums} from "@/enums/default-enums.ts";
 import BeicroonLineVertical from "@/components/BeicroonLineVertical.vue";
 import {list as roleList, ResourceRoleBaseVO as Role} from "@/request/resource-role.http.ts"
 
@@ -22,22 +23,17 @@ const loading = reactive({
   get: false,
 });
 
-const roles = ref<Array<Role>>([]);
+const check = createBeicroonCheck<Role>();
 
 onMounted(async () => {
   loading.get = true;
 
   try {
-    const res = await roleList({disabledFlag: BooleanEnums.FALSE});
+    const {data: roles} = await roleList({disabledFlag: BooleanEnums.FALSE});
 
-    const {data: adminRoleIds} = await list(props.adminId);
+    const {data: roleIds} = await list(props.adminId);
 
-    roles.value = res.data.map((role: Role) => {
-      return {
-        ...role,
-        checked: adminRoleIds.includes(role.id) ? CheckedEnums.CHECKED : CheckedEnums.UNCHECKED,
-      };
-    });
+    check.initCheck(roles, roleIds);
   } finally {
     loading.get = false
   }
@@ -52,19 +48,10 @@ async function handleCancel() {
 async function handleConfirm() {
   loading.set = true;
 
-  const roleIds = roles.value.filter(role => role.checked === CheckedEnums.CHECKED).map(role => role.id);
-
-  await assign(props.adminId, roleIds).finally(() => loading.set = false);
+  await assign(props.adminId, check.getCheckedIds())
+    .finally(() => loading.set = false);
 
   emits("confirm");
-}
-
-async function handleCheck(role: Role) {
-  role.checked = CheckedEnums.CHECKED;
-}
-
-async function handleUncheck(role: Role) {
-  role.checked = CheckedEnums.UNCHECKED;
 }
 </script>
 
@@ -72,12 +59,12 @@ async function handleUncheck(role: Role) {
   <beicroon-form class="beicroon-dialog-view" @submit="handleConfirm">
     <div class="beicroon-dialog-main" v-if="!loading.get">
       <beicroon-tree>
-        <beicroon-tree-item v-for="role in roles">
+        <beicroon-tree-item v-for="role in check.vos">
           <beicroon-checkbox
             :label="role.name"
             :checked="role.checked"
-            @check="handleCheck(role)"
-            @uncheck="handleUncheck(role)"
+            @check="check.handleCheck(role)"
+            @uncheck="check.handleUncheck(role)"
           ></beicroon-checkbox>
         </beicroon-tree-item>
       </beicroon-tree>

@@ -94,7 +94,11 @@ export type BaseVO = {
 }
 
 export type DisableVO = {
-    disabledFlag?: BooleanEnums,
+    disabledFlag: BooleanEnums,
+}
+
+export type ChildrenVO<T extends ChildrenVO<T>> = BaseVO & {
+    children: Array<T>,
 }
 
 export type UpdateDTO = {
