@@ -8,7 +8,7 @@ public class ConvertorContent {
     private static final String CONTENT = """
             package {{package}}.convertor;
 
-            import com.beicroon.construct.utils.ListUtils;
+            import com.beicroon.construct.utils.List;
             import {{package}}.model.{{filename}}Model;
             import {{modulePackage}}.dto.{{filename}}CreateDTO;
             import {{modulePackage}}.dto.{{filename}}UpdateDTO;
@@ -18,7 +18,7 @@ public class ConvertorContent {
             import com.beicroon.starter.dao.helper.ConvertorHelper;
             import org.mapstruct.*;
 
-            import java.util.ListUtils;
+            import java.util.List;
 
             @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
             public interface {{filename}}Convertor {
@@ -60,8 +60,8 @@ public class ConvertorContent {
 
                 {{filename}}DetailVO toDetailVO({{filename}}Model model);
 
-                default ListUtils<{{filename}}BaseVO> toBaseVO(ListUtils<{{filename}}Model> models) {
-                    return ListUtils.toList(models, this::toBaseVO);
+                default List<{{filename}}BaseVO> toBaseVO(List<{{filename}}Model> models) {
+                    return List.toList(models, this::toBaseVO);
                 }
 
                 @AfterMapping

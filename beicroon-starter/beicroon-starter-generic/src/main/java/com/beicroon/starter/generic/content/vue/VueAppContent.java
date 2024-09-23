@@ -7,10 +7,10 @@ public class VueAppContent {
     private static final String CONTENT = """
             <script setup lang="ts">
             import {onMounted} from "vue";
-            import createBeicroonList from "@/utils/list.utils.ts";
             import Create from "./{{filename}}Create.vue";
             import Detail from "./{{filename}}Detail.vue";
             import Update from "./{{filename}}Update.vue";
+            import createBeicroonList from "@/utils/list.utils.ts";
             import BeicroonList from "@/components/BeicroonList.vue";
             import BeicroonInput from "@/components/BeicroonInput.vue";
             import BeicroonButton from "@/components/BeicroonButton.vue";

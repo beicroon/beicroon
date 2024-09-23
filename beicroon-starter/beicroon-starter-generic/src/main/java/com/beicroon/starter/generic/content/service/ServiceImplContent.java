@@ -11,7 +11,7 @@ public class ServiceImplContent {
             import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
             import com.beicroon.construct.entity.IdsDTO;
             import com.beicroon.construct.entity.PageInfo;
-            import com.beicroon.construct.utils.ListUtils;
+            import com.beicroon.construct.utils.List;
             import {{daoPackage}}.convertor.{{filename}}Convertor;
             import {{daoPackage}}.model.{{filename}}Model;
             import {{daoPackage}}.repository.{{filename}}Repository;
@@ -26,7 +26,7 @@ public class ServiceImplContent {
             import jakarta.annotation.Resource;
             import org.springframework.stereotype.Service;
 
-            import java.util.ListUtils;
+            import java.util.List;
 
             @Service
             public class {{filename}}Service implements I{{filename}}Service {
@@ -52,10 +52,10 @@ public class ServiceImplContent {
                 }
 
                 @Override
-                public ListUtils<{{filename}}BaseVO> list({{filename}}QueryDTO dto) {
-                    ListUtils<{{filename}}Model> list = this.{{variableName}}Repository.list(dto);
+                public List<{{filename}}BaseVO> list({{filename}}QueryDTO dto) {
+                    List<{{filename}}Model> list = this.{{variableName}}Repository.list(dto);
                    \s
-                    return ListUtils.toList(list, this.{{variableName}}Convertor::toBaseVO);
+                    return List.toList(list, this.{{variableName}}Convertor::toBaseVO);
                 }
 
                 @Override

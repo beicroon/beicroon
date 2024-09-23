@@ -17,7 +17,7 @@ public class ServiceContent {
             import {{modulePackage}}.vo.{{filename}}DetailVO;
             import {{modulePackage}}.vo.{{filename}}PageVO;
 
-            import java.util.ListUtils;
+            import java.util.List;
 
             public interface I{{filename}}Service {
 
@@ -25,7 +25,7 @@ public class ServiceContent {
 
                 {{filename}}DetailVO detail(Long id);
 
-                ListUtils<{{filename}}BaseVO> list({{filename}}QueryDTO dto);
+                List<{{filename}}BaseVO> list({{filename}}QueryDTO dto);
 
                 PageInfo<{{filename}}PageVO> page({{filename}}QueryDTO dto);
 

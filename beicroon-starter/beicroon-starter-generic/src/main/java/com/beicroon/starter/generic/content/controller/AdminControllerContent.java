@@ -24,7 +24,7 @@ public class AdminControllerContent {
             import org.springframework.validation.annotation.Validated;
             import org.springframework.web.bind.annotation.*;
 
-            import java.util.ListUtils;
+            import java.util.List;
 
             @Validated
             @RestController
@@ -49,13 +49,13 @@ public class AdminControllerContent {
 
                 @ApiOperation(name = "分页列表")
                 @PostMapping(path = "/{{urlName}}-page")
-                public Result<ListUtils<{{filename}}PageVO>> page(@RequestBody {{filename}}QueryDTO dto) {
+                public Result<List<{{filename}}PageVO>> page(@RequestBody {{filename}}QueryDTO dto) {
                     return WebResult.success(this.{{variableName}}Service.page(dto));
                 }
 
                 @ApiOperation(name = "全量列表")
                 @PostMapping(path = "/{{urlName}}-list")
-                public Result<ListUtils<{{filename}}BaseVO>> list(@RequestBody {{filename}}QueryDTO dto) {
+                public Result<List<{{filename}}BaseVO>> list(@RequestBody {{filename}}QueryDTO dto) {
                     return WebResult.success(this.{{variableName}}Service.list(dto));
                 }
 
