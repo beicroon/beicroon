@@ -5,18 +5,21 @@ import {BooleanEnums, CacheKeyEnums} from "@/enums/default-enums.ts";
 
 const http = axios.create({
     timeout: 6000,
+    timeoutErrorMessage: "请求超时",
     baseURL: import.meta.env.VITE_REQUEST_URL,
     headers: {"Content-Type": "application/json"},
 });
 
-const minResponseTime = 380;
+const waiting = 300;
 
 // 添加请求拦截器
 http.interceptors.request.use(
     (config: any) => {
         config.headers["Authorization"] = localStorage.getItem(CacheKeyEnums.AUTHORIZATION_TOKEN);
 
-        config.metadata = {startTime: Date.now()};
+        config.beicroonStart = Date.now();
+
+        config.beicroonWaiting = config.waiting !== false;
 
         if (config.method !== "GET") {
             config.data = config.data || {};
@@ -46,10 +49,10 @@ http.interceptors.response.use(
                 return reject(response.data);
             }
 
-            const elapsedTime = Date.now() - response.config.metadata.startTime;
+            const elapsed = Date.now() - response.config.beicroonStart;
 
-            if (elapsedTime < minResponseTime) {
-                setTimeout(() => resolve(response.data), minResponseTime - elapsedTime);
+            if (response.config.beicroonWaiting && elapsed < waiting) {
+                setTimeout(() => resolve(response.data), waiting - elapsed);
             } else {
                 return resolve(response.data);
             }
@@ -63,6 +66,34 @@ http.interceptors.response.use(
         return Promise.reject(error);
     }
 );
+
+export const waitingConfig = {
+    waiting: false,
+};
+
+export async function batchRequest(requests: Array<() => Promise<Response<any>>>): Promise<any> {
+    const start = Date.now();
+
+    try {
+        const results = await Promise.all(requests.map(request => {
+            return new Promise((resolve, reject) => request()
+                .then(res => resolve(res.data))
+                .catch(reject));
+        }));
+
+        const elapsed = Date.now() - start;
+
+        if (elapsed < waiting) {
+            return new Promise(resolve => {
+                setTimeout(() => resolve(results), waiting - elapsed);
+            });
+        } else {
+            return results;
+        }
+    } catch (error) {
+        return Promise.reject(error);
+    }
+}
 
 export default http;
 

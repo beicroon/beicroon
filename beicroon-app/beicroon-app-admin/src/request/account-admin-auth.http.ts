@@ -1,5 +1,5 @@
 import {sha256} from "@/utils/hash.utils.ts";
-import http, {BaseVO, Response} from "@/utils/http.utils.ts";
+import http, {BaseVO, Response, waitingConfig} from "@/utils/http.utils.ts";
 
 export type LoginDTO = {
     username: string;
@@ -50,5 +50,13 @@ export async function listAuthMenu(): Promise<Response<Array<AuthMenu>>> {
     return http.request({
         url: "/api/admin/admin/auth-menu-tree",
         method: "GET",
+    })
+}
+
+export async function listAuthMenuNoWaiting(): Promise<Response<Array<AuthMenu>>> {
+    return http.request({
+        url: "/api/admin/admin/auth-menu-tree",
+        method: "GET",
+        ...waitingConfig,
     })
 }

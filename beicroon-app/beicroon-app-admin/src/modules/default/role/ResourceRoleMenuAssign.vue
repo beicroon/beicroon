@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import {onMounted, reactive} from "vue";
+import {batchRequest} from "@/utils/http.utils.ts";
 import BeicroonTree from "@/components/BeicroonTree.vue";
 import BeicroonForm from "@/components/BeicroonForm.vue";
 import BeicroonButton from "@/components/BeicroonButton.vue";
@@ -7,9 +8,9 @@ import BeicroonLoading from "@/components/BeicroonLoading.vue";
 import {createBeicroonCheckTree} from "@/utils/check.utils.ts";
 import BeicroonCheckbox from "@/components/BeicroonCheckbox.vue";
 import BeicroonTreeItem from "@/components/BeicroonTreeItem.vue";
-import {assign, list} from "@/request/resource-role-menu.http.ts";
 import BeicroonLineVertical from "@/components/BeicroonLineVertical.vue";
-import {AuthMenu as Menu, listAuthMenu} from "@/request/account-admin-auth.http.ts";
+import {assign, list as listMenuIds} from "@/request/resource-role-menu.http.ts";
+import {AuthMenu as Menu, listAuthMenuNoWaiting} from "@/request/account-admin-auth.http.ts";
 
 type Props = {
   roleId: string,
@@ -27,15 +28,13 @@ const check = createBeicroonCheckTree<Menu>()
 onMounted(async () => {
   loading.get = true;
 
-  try {
-    const {data: menus} = await listAuthMenu();
+  const [menus, menuIds] = await batchRequest([
+      listAuthMenuNoWaiting,
+      async () => listMenuIds(props.roleId),
+    ])
+    .finally(() => loading.get = false);
 
-    const {data: menuIds} = await list(props.roleId);
-
-    check.initCheck(menus, menuIds);
-  } finally {
-    loading.get = false;
-  }
+  check.initCheck(menus, menuIds)
 });
 
 const emits = defineEmits(["cancel", "confirm"]);
