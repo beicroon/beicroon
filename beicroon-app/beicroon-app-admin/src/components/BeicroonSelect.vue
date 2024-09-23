@@ -128,12 +128,8 @@ async function handleClear() {
 
 <style lang="less">
 .beicroon-select {
-  z-index: 666;
-  position: relative;
 
   &.active {
-    background-color: var(--color-primary-lighter);
-
     .beicroon-select-label {
       top: 0;
       transform: translateY(-28rem);
@@ -144,14 +140,8 @@ async function handleClear() {
       transform: translateY(-26rem);
     }
 
-    .beicroon-input-label {
-      color: var(--color-white);
-      background-color: var(--color-primary-deeper);
-    }
-
     .beicroon-input-area {
       opacity: 1;
-      border-color: var(--color-primary);
     }
   }
 
