@@ -278,5 +278,3 @@ export function createBeicroonCheckTree<VO extends ChildrenVO<VO>>() {
 
     return check;
 }
-
-export default {createBeicroonCheck, createBeicroonCheckTree};
