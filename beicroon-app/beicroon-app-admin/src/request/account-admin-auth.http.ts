@@ -1,5 +1,5 @@
-import {sha256} from "@/hash.ts";
-import http, {BaseVO, Response} from "@/http.ts";
+import {sha256} from "@/utils/hash.ts";
+import http, {BaseVO, Response} from "@/utils/http.ts";
 
 export type LoginDTO = {
     username: string;
@@ -37,6 +37,8 @@ export type AuthMenu = BaseVO & {
 };
 
 export const index: AuthMenu = {
+    checked: "unchecked",
+    id: "1",
     code: "INDEX",
     name: "首页",
     path: "/index",

@@ -1,4 +1,4 @@
-import http, {BaseVO, DisableDTO, DisableVO, PageInfo, QueryDTO, Response, UpdateDTO} from "@/http";
+import http, {BaseVO, DisableDTO, DisableVO, PageInfo, QueryDTO, Response, UpdateDTO} from "@/utils/http.ts";
 
 // 基础返回字段
 export type ResourceRoleBaseVO = BaseVO & DisableVO & {

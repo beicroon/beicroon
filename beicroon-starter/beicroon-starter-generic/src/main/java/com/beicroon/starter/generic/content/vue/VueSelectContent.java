@@ -6,7 +6,7 @@ public class VueSelectContent {
 
     private static final String CONTENT = """
             <script setup lang="ts">
-            import createBeicroonSelect from "@/select.ts";
+            import createBeicroonSelect from "@/utils/select.ts";
             import {computed, onMounted, ref, watch} from "vue";
             import BeicroonSelect from "@/components/BeicroonSelect.vue";
             import {page, {{filename}}PageVO as VO, {{filename}}QueryDTO as DTO} from "./{{vueFilename}}.http.ts";

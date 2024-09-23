@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import {onMounted} from "vue";
-import toast from "@/toast.ts";
-import dialog from "@/dialog.ts";
-import createBeicroonList from "@/list.ts";
+import toast from "@/utils/toast.ts";
+import dialog from "@/utils/dialog.ts";
 import Create from "./ResourceRoleCreate.vue";
 import Detail from "./ResourceRoleDetail.vue";
 import Update from "./ResourceRoleUpdate.vue";
+import createBeicroonList from "@/utils/list.ts";
 import BeicroonList from "@/components/BeicroonList.vue";
 import BeicroonInput from "@/components/BeicroonInput.vue";
 import BeicroonButton from "@/components/BeicroonButton.vue";

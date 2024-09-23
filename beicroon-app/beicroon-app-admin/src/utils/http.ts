@@ -1,6 +1,6 @@
 import axios from "axios";
-import toast from "@/toast.ts";
-import router from "@/router.ts";
+import toast from "@/utils/toast.ts";
+import router from "@/utils/router.ts";
 import {BooleanEnums, CacheKeyEnums} from "@/enums/default-enums.ts";
 
 const http = axios.create({
@@ -82,7 +82,7 @@ export type Response<T> = {
 
 export type BaseVO = {
     checked?: "checked" | "unchecked" | "indeterminate",
-    id?: string,
+    id: string,
     createdAt?: string,
     creatorId?: string,
     creatorCode?: string,

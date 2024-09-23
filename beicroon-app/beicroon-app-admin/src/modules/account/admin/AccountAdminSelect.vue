@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import createBeicroonSelect from "@/select.ts";
 import {computed, onMounted, ref, watch} from "vue";
+import createBeicroonSelect from "@/utils/select.ts";
 import BeicroonSelect from "@/components/BeicroonSelect.vue";
 import {AccountAdminPageVO as VO, AccountAdminQueryDTO as DTO, page} from "@/request/account-admin.http.ts";
 

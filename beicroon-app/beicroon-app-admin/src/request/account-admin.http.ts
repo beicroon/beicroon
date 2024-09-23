@@ -1,5 +1,5 @@
-import http, {BaseVO, DisableDTO, DisableVO, PageInfo, QueryDTO, Response, UpdateDTO} from "@/http";
-import {sha256} from "@/hash.ts";
+import {sha256} from "@/utils/hash.ts";
+import http, {BaseVO, DisableDTO, DisableVO, PageInfo, QueryDTO, Response, UpdateDTO} from "@/utils/http.ts";
 
 // 基础返回字段
 export type AccountAdminBaseVO = BaseVO & DisableVO & {

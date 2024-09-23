@@ -5,7 +5,7 @@ import com.beicroon.starter.generic.entity.Table;
 public class VueHttpContent {
 
     private static final String CONTENT = """
-            import http, {BaseVO, DisableDTO, PageInfo, DisableVO, QueryDTO, Response, UpdateDTO} from "@/http";
+            import http, {BaseVO, DisableDTO, PageInfo, DisableVO, QueryDTO, Response, UpdateDTO} from "@/utils/http.ts";
 
             // 基础返回字段
             export type {{filename}}BaseVO = BaseVO & DisableVO & {

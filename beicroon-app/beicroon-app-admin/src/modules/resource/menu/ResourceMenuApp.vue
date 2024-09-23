@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import {onMounted, ref} from "vue";
-import createBeicroonList from "@/list.ts";
 import Create from "./ResourceMenuCreate.vue";
 import Detail from "./ResourceMenuDetail.vue";
 import Update from "./ResourceMenuUpdate.vue";
+import createBeicroonList from "@/utils/list.ts";
 import BeicroonList from "@/components/BeicroonList.vue";
 import BeicroonInput from "@/components/BeicroonInput.vue";
 import BeicroonButton from "@/components/BeicroonButton.vue";

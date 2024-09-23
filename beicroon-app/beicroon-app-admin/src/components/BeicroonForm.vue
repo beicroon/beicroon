@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import {ref} from "vue";
-import toast from "@/toast.ts";
+import toast from "@/utils/toast.ts";
 import {SelectorEnums} from "@/enums/default-enums.ts";
 
 const emits = defineEmits(["submit"]);

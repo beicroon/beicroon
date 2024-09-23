@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import {reactive} from "vue";
-import router from "@/router.ts";
+import router from "@/utils/router.ts";
 import {CacheKeyEnums} from "@/enums/default-enums.ts";
 import BeicroonForm from "@/components/BeicroonForm.vue";
 import BeicroonInput from "@/components/BeicroonInput.vue";

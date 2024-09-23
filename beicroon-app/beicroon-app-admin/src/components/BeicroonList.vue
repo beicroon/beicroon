@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {List} from "@/list.ts";
+import {List} from "@/utils/list.ts";
 import {computed, ref, useSlots} from "vue";
 import BeicroonButton from "@/components/BeicroonButton.vue";
 import BeicroonListTable from "@/components/BeicroonListTable.vue";

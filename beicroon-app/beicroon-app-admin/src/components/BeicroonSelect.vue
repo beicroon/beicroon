@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {Select} from "@/select.ts";
+import {Select} from "@/utils/select.ts";
 import {computed, ref, watch} from "vue";
 import BeicroonButton from "@/components/BeicroonButton.vue";
 import BeicroonLoading from "@/components/BeicroonLoading.vue";
