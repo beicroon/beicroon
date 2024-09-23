@@ -10,7 +10,7 @@ const http = axios.create({
     headers: {"Content-Type": "application/json"},
 });
 
-const waiting = 300;
+const waiting = 380;
 
 // 添加请求拦截器
 http.interceptors.request.use(
