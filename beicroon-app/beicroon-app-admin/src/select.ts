@@ -9,7 +9,6 @@ export type Config<DTO extends QueryDTO, VO extends BaseVO> = {
     optionLabel: string,
     optionValue?: string,
     pageSize?: number,
-    multiple?: boolean,
 };
 
 export type Select<DTO extends QueryDTO, VO extends BaseVO> = {
@@ -20,7 +19,6 @@ export type Select<DTO extends QueryDTO, VO extends BaseVO> = {
     optionLabel: string,
     optionValue?: string,
     pageInfo: PageInfo,
-    multiple?: boolean,
     hidden: boolean,
     loading: boolean,
     noMore: boolean,
@@ -43,7 +41,6 @@ export default function createBeicroonSelect<DTO extends QueryDTO, VO extends Ba
         optionLabel: config.optionLabel,
         optionValue: config.optionValue,
         pageInfo: {page: 1, size: config.pageSize || 30} as PageInfo,
-        multiple: config.multiple,
         hidden: true,
         loading: false,
         noMore: false,
