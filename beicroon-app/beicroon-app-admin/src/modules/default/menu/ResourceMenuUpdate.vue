@@ -5,7 +5,7 @@ import BeicroonInput from "@/components/BeicroonInput.vue";
 import BeicroonButton from "@/components/BeicroonButton.vue";
 import BeicroonLoading from "@/components/BeicroonLoading.vue";
 import BeicroonLineVertical from "@/components/BeicroonLineVertical.vue";
-import ResourceMenuSelect from "@/modules/resource/menu/ResourceMenuSelect.vue";
+import ResourceMenuSelect from "@/modules/default/menu/ResourceMenuSelect.vue";
 import {detail, ResourceMenuUpdateDTO as DTO, update} from "@/request/resource-menu.http.ts";
 
 type Props = {

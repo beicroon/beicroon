@@ -16,9 +16,9 @@ import org.springframework.web.util.UriComponentsBuilder;
 import java.util.Map;
 
 @Slf4j
-public final class HttpUtils {
+public final class http {
 
-    private HttpUtils() {
+    private http() {
 
     }
 
@@ -37,34 +37,34 @@ public final class HttpUtils {
     }
 
     public static Http get(String url) {
-        return HttpUtils.exchange(url, HttpMethod.GET, EmptyUtils.emptyMap(), EmptyUtils.emptyMap(), EmptyUtils.emptyMap());
+        return http.exchange(url, HttpMethod.GET, EmptyUtils.emptyMap(), EmptyUtils.emptyMap(), EmptyUtils.emptyMap());
     }
 
     public static Http get(String url, Map<String, String> query) {
-        return HttpUtils.exchange(url, HttpMethod.GET, query, EmptyUtils.emptyMap(), EmptyUtils.emptyMap());
+        return http.exchange(url, HttpMethod.GET, query, EmptyUtils.emptyMap(), EmptyUtils.emptyMap());
     }
 
     public static Http get(String url, Map<String, String> query, Map<String, String> headers) {
-        return HttpUtils.exchange(url, HttpMethod.GET, query, EmptyUtils.emptyMap(), headers);
+        return http.exchange(url, HttpMethod.GET, query, EmptyUtils.emptyMap(), headers);
     }
 
     public static Http post(String url) {
-        return HttpUtils.exchange(url, HttpMethod.POST, EmptyUtils.emptyMap(), EmptyUtils.emptyMap(), EmptyUtils.emptyMap());
+        return http.exchange(url, HttpMethod.POST, EmptyUtils.emptyMap(), EmptyUtils.emptyMap(), EmptyUtils.emptyMap());
     }
 
     public static Http post(String url, Map<String, ?> body) {
-        return HttpUtils.exchange(url, HttpMethod.POST, EmptyUtils.emptyMap(), body, EmptyUtils.emptyMap());
+        return http.exchange(url, HttpMethod.POST, EmptyUtils.emptyMap(), body, EmptyUtils.emptyMap());
     }
 
     public static Http post(String url, Map<String, ?> body, Map<String, String> headers) {
-        return HttpUtils.exchange(url, HttpMethod.POST, EmptyUtils.emptyMap(), body, headers);
+        return http.exchange(url, HttpMethod.POST, EmptyUtils.emptyMap(), body, headers);
     }
 
     public static Http exchange(String url, HttpMethod method, Map<String, String> query, MultiValueMap<String, String> body, Map<String, String> headers) {
         UriComponents uri = UriComponentsBuilder.fromHttpUrl(getFullUrl(url, query)).build();
 
-        ResponseEntity<byte[]> response = HttpUtils.generic().exchange(
-                uri.toUri(), method, HttpUtils.getRequest(body, headers), byte[].class
+        ResponseEntity<byte[]> response = http.generic().exchange(
+                uri.toUri(), method, http.getRequest(body, headers), byte[].class
         );
 
         Http http = new Http(uri.toUriString(), method.name(), headers, body);
@@ -78,8 +78,8 @@ public final class HttpUtils {
     public static Http exchange(String url, HttpMethod method, Map<String, String> query, Map<String, ?> body, Map<String, String> headers) {
         UriComponents uri = UriComponentsBuilder.fromHttpUrl(getFullUrl(url, query)).build();
 
-        ResponseEntity<byte[]> response = HttpUtils.generic().exchange(
-                uri.toUri(), method, HttpUtils.getRequest(body, headers), byte[].class
+        ResponseEntity<byte[]> response = http.generic().exchange(
+                uri.toUri(), method, http.getRequest(body, headers), byte[].class
         );
 
         Http http = new Http(uri.toUriString(), method.name(), headers, body);

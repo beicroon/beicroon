@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import router from "@/utils/router.ts";
+import router from "@/utils/router.utils.ts";
 import {onBeforeMount, ref} from "vue";
 import BeicroonLineCross from "@/components/BeicroonLineCross.vue";
 import BeicroonLineVertical from "@/components/BeicroonLineVertical.vue";

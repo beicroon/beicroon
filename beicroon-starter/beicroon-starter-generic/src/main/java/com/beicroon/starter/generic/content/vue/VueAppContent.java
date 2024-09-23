@@ -7,7 +7,7 @@ public class VueAppContent {
     private static final String CONTENT = """
             <script setup lang="ts">
             import {onMounted} from "vue";
-            import createBeicroonList from "@/utils/list.ts";
+            import createBeicroonList from "@/utils/list.utils.ts";
             import Create from "./{{filename}}Create.vue";
             import Detail from "./{{filename}}Detail.vue";
             import Update from "./{{filename}}Update.vue";
@@ -17,7 +17,7 @@ public class VueAppContent {
             import BeicroonListRow from "@/components/BeicroonListRow.vue";
             import BeicroonListCell from "@/components/BeicroonListCell.vue";
             import BeicroonListCellButton from "@/components/BeicroonListCellButton.vue";
-            import {page, remove, {{filename}}PageVO as VO, {{filename}}QueryDTO as DTO} from "./{{vueFilename}}.http.ts";
+            import {page, remove, {{filename}}PageVO as VO, {{filename}}QueryDTO as DTO} from "./{{vueFilename}}.http.utils.ts";
 
             const list = createBeicroonList<DTO, VO>("{{comment}}", page);
 

@@ -1,5 +1,5 @@
-import {sha256} from "@/utils/hash.ts";
-import http, {BaseVO, Response} from "@/utils/http.ts";
+import {sha256} from "@/utils/hash.utils.ts";
+import http, {BaseVO, Response} from "@/utils/http.utils.ts";
 
 export type LoginDTO = {
     username: string;

@@ -1,4 +1,4 @@
-import http, {Response} from "@/utils/http.ts";
+import http, {Response} from "@/utils/http.utils.ts";
 
 // 获取菜单
 export async function list(roleId: string): Promise<Response<Array<string>>> {

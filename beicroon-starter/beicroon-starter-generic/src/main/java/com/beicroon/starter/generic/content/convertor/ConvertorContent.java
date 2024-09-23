@@ -18,7 +18,7 @@ public class ConvertorContent {
             import com.beicroon.starter.dao.helper.ConvertorHelper;
             import org.mapstruct.*;
 
-            import java.util.List;
+            import java.util.ListUtils;
 
             @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
             public interface {{filename}}Convertor {
@@ -60,7 +60,7 @@ public class ConvertorContent {
 
                 {{filename}}DetailVO toDetailVO({{filename}}Model model);
 
-                default List<{{filename}}BaseVO> toBaseVO(List<{{filename}}Model> models) {
+                default ListUtils<{{filename}}BaseVO> toBaseVO(ListUtils<{{filename}}Model> models) {
                     return ListUtils.toList(models, this::toBaseVO);
                 }
 

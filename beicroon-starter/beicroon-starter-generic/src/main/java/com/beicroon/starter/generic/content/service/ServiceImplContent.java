@@ -26,7 +26,7 @@ public class ServiceImplContent {
             import jakarta.annotation.Resource;
             import org.springframework.stereotype.Service;
 
-            import java.util.List;
+            import java.util.ListUtils;
 
             @Service
             public class {{filename}}Service implements I{{filename}}Service {
@@ -52,8 +52,8 @@ public class ServiceImplContent {
                 }
 
                 @Override
-                public List<{{filename}}BaseVO> list({{filename}}QueryDTO dto) {
-                    List<{{filename}}Model> list = this.{{variableName}}Repository.list(dto);
+                public ListUtils<{{filename}}BaseVO> list({{filename}}QueryDTO dto) {
+                    ListUtils<{{filename}}Model> list = this.{{variableName}}Repository.list(dto);
                    \s
                     return ListUtils.toList(list, this.{{variableName}}Convertor::toBaseVO);
                 }

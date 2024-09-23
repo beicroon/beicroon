@@ -30,7 +30,7 @@ type DialogConfig = {
     finally?: (flag: boolean) => Promise<void>,
 };
 
-type Dialog = {
+type DialogUtils = {
     title: string,
     width: string,
     message: string | VNode | Component,
@@ -39,7 +39,7 @@ type Dialog = {
     handleConfirm: () => Promise<void>,
 };
 
-function createMessageNode(config: Dialog) {
+function createMessageNode(config: DialogUtils) {
     return h(DialogMessage, {
         title: config.title,
         message: config.message as string,
@@ -48,7 +48,7 @@ function createMessageNode(config: Dialog) {
     });
 }
 
-function createWindowNode(config: Dialog) {
+function createWindowNode(config: DialogUtils) {
     return h(
         DialogOverlay,
         {
@@ -157,7 +157,7 @@ export default async function dialog(config: DialogConfig) {
 
     const isMessage = typeof config.message === "string";
 
-    const dialog: Dialog = {
+    const dialog: DialogUtils = {
         title: config.title || "操作确认",
         width: config.width ? `${config.width}rem` : "1024rem",
         message: config.message,

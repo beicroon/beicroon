@@ -1,18 +1,19 @@
 <script setup lang="ts">
 import {onMounted, reactive} from "vue";
-import {createBeicroonCheckTree} from "@/utils/check.ts";
+import {BooleanEnums} from "@/enums/default-enums.ts";
 import BeicroonTree from "@/components/BeicroonTree.vue";
 import BeicroonForm from "@/components/BeicroonForm.vue";
+import {createBeicroonCheck} from "@/utils/check.utils.ts";
 import BeicroonButton from "@/components/BeicroonButton.vue";
 import BeicroonLoading from "@/components/BeicroonLoading.vue";
 import BeicroonCheckbox from "@/components/BeicroonCheckbox.vue";
 import BeicroonTreeItem from "@/components/BeicroonTreeItem.vue";
-import {assign, list} from "@/request/resource-role-menu.http.ts";
+import {assign, list} from "@/request/account-admin-role.http.ts";
 import BeicroonLineVertical from "@/components/BeicroonLineVertical.vue";
-import {AuthMenu as Menu, listAuthMenu} from "@/request/account-admin-auth.http.ts";
+import {list as roleList, ResourceRoleBaseVO as Role} from "@/request/resource-role.http.ts"
 
 type Props = {
-  roleId: string,
+  adminId: string,
 };
 
 const props = defineProps<Props>();
@@ -22,19 +23,19 @@ const loading = reactive({
   get: false,
 });
 
-const check = createBeicroonCheckTree<Menu>()
+const check = createBeicroonCheck<Role>();
 
 onMounted(async () => {
   loading.get = true;
 
   try {
-    const {data: menus} = await listAuthMenu();
+    const {data: roles} = await roleList({disabledFlag: BooleanEnums.FALSE});
 
-    const {data: menuIds} = await list(props.roleId);
+    const {data: roleIds} = await list(props.adminId);
 
-    check.initCheck(menus, menuIds);
+    check.initCheck(roles, roleIds);
   } finally {
-    loading.get = false;
+    loading.get = false
   }
 });
 
@@ -47,7 +48,7 @@ async function handleCancel() {
 async function handleConfirm() {
   loading.set = true;
 
-  await assign(props.roleId, check.getCheckedAndIndeterminateIds())
+  await assign(props.adminId, check.getCheckedIds())
     .finally(() => loading.set = false);
 
   emits("confirm");
@@ -58,33 +59,13 @@ async function handleConfirm() {
   <beicroon-form class="beicroon-dialog-view" @submit="handleConfirm">
     <div class="beicroon-dialog-main" v-if="!loading.get">
       <beicroon-tree>
-        <beicroon-tree-item v-for="menu in check.vos">
+        <beicroon-tree-item v-for="role in check.vos">
           <beicroon-checkbox
-            :label="menu.name"
-            :checked="menu.checked"
-            @check="check.handleCheck(menu)"
-            @uncheck="check.handleUncheck(menu)"
+            :label="role.name"
+            :checked="role.checked"
+            @check="check.handleCheck(role)"
+            @uncheck="check.handleUncheck(role)"
           ></beicroon-checkbox>
-          <beicroon-tree>
-            <beicroon-tree-item v-for="childMenu in menu.children">
-              <beicroon-checkbox
-                :label="childMenu.name"
-                :checked="childMenu.checked"
-                @check="check.handleCheck(menu, childMenu)"
-                @uncheck="check.handleUncheck(menu, childMenu)"
-              ></beicroon-checkbox>
-              <beicroon-tree>
-                <beicroon-tree-item v-for="grandMenu in childMenu.children">
-                  <beicroon-checkbox
-                    :label="grandMenu.name"
-                    :checked="grandMenu.checked"
-                    @check="check.handleCheck(menu, childMenu, grandMenu)"
-                    @uncheck="check.handleUncheck(menu, childMenu, grandMenu)"
-                  ></beicroon-checkbox>
-                </beicroon-tree-item>
-              </beicroon-tree>
-            </beicroon-tree-item>
-          </beicroon-tree>
         </beicroon-tree-item>
       </beicroon-tree>
     </div>

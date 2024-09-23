@@ -12,7 +12,7 @@ public class VueDetailContent {
             import BeicroonButton from "@/components/BeicroonButton.vue";
             import BeicroonLoading from "@/components/BeicroonLoading.vue";
             import BeicroonLineVertical from "@/components/BeicroonLineVertical.vue";
-            import {detail, {{filename}}DetailVO as VO} from "./{{vueFilename}}.http.ts";
+            import {detail, {{filename}}DetailVO as VO} from "./{{vueFilename}}.http.utils.ts";
 
             type Props = {
               id: string,

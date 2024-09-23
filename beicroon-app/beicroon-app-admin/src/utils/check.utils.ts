@@ -1,8 +1,8 @@
 import {reactive} from "vue";
-import {BaseVO, ChildrenVO} from "@/utils/http.ts";
 import {CheckedEnums} from "@/enums/default-enums.ts";
+import {BaseVO, ChildrenVO} from "@/utils/http.utils.ts";
 
-type Check<VO extends BaseVO> = {
+type CheckUtils<VO extends BaseVO> = {
     vos: Array<VO>,
     initCheck: (vos: Array<VO>, ids: Array<string>) => void,
     getCheckedIds: () => Array<string>,
@@ -49,7 +49,7 @@ export function createBeicroonCheck<VO extends BaseVO>() {
         handleUncheck: (vo: VO) => {
             vo.checked = CheckedEnums.UNCHECKED;
         },
-    }) as Check<VO>;
+    }) as CheckUtils<VO>;
 
     return check;
 }

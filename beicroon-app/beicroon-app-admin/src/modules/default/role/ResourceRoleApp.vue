@@ -1,18 +1,18 @@
 <script setup lang="ts">
 import {onMounted} from "vue";
-import toast from "@/utils/toast.ts";
-import dialog from "@/utils/dialog.ts";
+import toast from "@/utils/toast.utils.ts";
+import dialog from "@/utils/dialog.utils.ts";
 import Create from "./ResourceRoleCreate.vue";
 import Detail from "./ResourceRoleDetail.vue";
 import Update from "./ResourceRoleUpdate.vue";
-import createBeicroonList from "@/utils/list.ts";
+import Assign from "./ResourceRoleMenuAssign.vue";
+import createBeicroonList from "@/utils/list.utils.ts";
 import BeicroonList from "@/components/BeicroonList.vue";
 import BeicroonInput from "@/components/BeicroonInput.vue";
 import BeicroonButton from "@/components/BeicroonButton.vue";
 import BeicroonListRow from "@/components/BeicroonListRow.vue";
 import BeicroonListCell from "@/components/BeicroonListCell.vue";
 import BeicroonListCellButton from "@/components/BeicroonListCellButton.vue";
-import ResourceRoleMenuAssign from "@/modules/resource/role/menu/ResourceRoleMenuAssign.vue";
 import {page, remove, ResourceRolePageVO as VO, ResourceRoleQueryDTO as DTO} from "@/request/resource-role.http.ts";
 
 const list = createBeicroonList<DTO, VO>("角色", page);
@@ -23,7 +23,7 @@ function roleMenuAssign(item: VO) {
   dialog({
     title: "菜单分配",
     width: 520,
-    message: ResourceRoleMenuAssign,
+    message: Assign,
     props: {roleId: item.id},
     confirm: async () => {
       await toast("保存成功");

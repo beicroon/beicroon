@@ -1,7 +1,7 @@
-import toast from "@/utils/toast.ts";
-import dialog from "@/utils/dialog.ts";
 import {nextTick, reactive} from "vue";
-import {BaseVO, PageInfo, QueryDTO, Response} from "@/utils/http.ts";
+import toast from "@/utils/toast.utils.ts";
+import dialog from "@/utils/dialog.utils.ts";
+import {BaseVO, PageInfo, QueryDTO, Response} from "@/utils/http.utils.ts";
 
 type Page<DTO extends QueryDTO, VO extends BaseVO> = (params: DTO, pageInfo: PageInfo) => Promise<Response<Array<VO>>>;
 

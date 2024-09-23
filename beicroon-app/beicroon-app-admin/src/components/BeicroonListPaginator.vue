@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import {ref} from "vue";
-import {List} from "@/utils/list.ts";
+import {List} from "@/utils/list.utils.ts";
 
 type Props = {
   list: List<any, any>,

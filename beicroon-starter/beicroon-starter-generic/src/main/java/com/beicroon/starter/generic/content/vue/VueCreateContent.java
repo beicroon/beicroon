@@ -11,7 +11,7 @@ public class VueCreateContent {
             import BeicroonInput from "@/components/BeicroonInput.vue";
             import BeicroonButton from "@/components/BeicroonButton.vue";
             import BeicroonLineVertical from "@/components/BeicroonLineVertical.vue";
-            import {create, {{filename}}CreateDTO as DTO} from "./{{vueFilename}}.http.ts";
+            import {create, {{filename}}CreateDTO as DTO} from "./{{vueFilename}}.http.utils.ts";
 
             const loading = ref(false);
 

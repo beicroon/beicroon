@@ -22,17 +22,17 @@ const router: Router = createRouter({
                 {
                     name: "后台账号",
                     path: "/account/admin",
-                    component: () => import("@/modules/account/admin/AccountAdminApp.vue"),
+                    component: () => import("@/modules/default/admin/AccountAdminApp.vue"),
                 },
                 {
                     name: "菜单管理",
                     path: "/resource/menu",
-                    component: () => import("@/modules/resource/menu/ResourceMenuApp.vue"),
+                    component: () => import("@/modules/default/menu/ResourceMenuApp.vue"),
                 },
                 {
                     name: "角色管理",
                     path: "/resource/role",
-                    component: () => import("@/modules/resource/role/ResourceRoleApp.vue"),
+                    component: () => import("@/modules/default/role/ResourceRoleApp.vue"),
                 },
             ],
         },
