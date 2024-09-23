@@ -1,10 +1,11 @@
-import http, {Response} from "@/utils/http.utils.ts";
+import http, {Response, waitingConfig} from "@/utils/http.utils.ts";
 
 // 获取菜单
 export async function list(adminId: string): Promise<Response<Array<string>>> {
     return http.request({
         url: "/api/admin/admin/account-admin-role-id-list?adminId=" + adminId,
         method: "GET",
+        ...waitingConfig,
     })
 }
 

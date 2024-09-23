@@ -9,8 +9,8 @@ import {createBeicroonCheckTree} from "@/utils/check.utils.ts";
 import BeicroonCheckbox from "@/components/BeicroonCheckbox.vue";
 import BeicroonTreeItem from "@/components/BeicroonTreeItem.vue";
 import BeicroonLineVertical from "@/components/BeicroonLineVertical.vue";
-import {assign, list as listMenuIds} from "@/request/resource-role-menu.http.ts";
-import {AuthMenu as Menu, listAuthMenuNoWaiting} from "@/request/account-admin-auth.http.ts";
+import {assign, list as listMenuId} from "@/request/resource-role-menu.http.ts";
+import {AuthMenu as Menu, listAuthMenuNoWaiting as listMenu} from "@/request/account-admin-auth.http.ts";
 
 type Props = {
   roleId: string,
@@ -29,8 +29,8 @@ onMounted(async () => {
   loading.get = true;
 
   const [menus, menuIds] = await batchRequest([
-      listAuthMenuNoWaiting,
-      async () => listMenuIds(props.roleId),
+      async () => listMenu(),
+      async () => listMenuId(props.roleId),
     ])
     .finally(() => loading.get = false);
 

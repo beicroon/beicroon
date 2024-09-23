@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import {onMounted, reactive} from "vue";
+import {batchRequest} from "@/utils/http.utils.ts";
 import {BooleanEnums} from "@/enums/default-enums.ts";
 import BeicroonTree from "@/components/BeicroonTree.vue";
 import BeicroonForm from "@/components/BeicroonForm.vue";
@@ -8,9 +9,9 @@ import BeicroonButton from "@/components/BeicroonButton.vue";
 import BeicroonLoading from "@/components/BeicroonLoading.vue";
 import BeicroonCheckbox from "@/components/BeicroonCheckbox.vue";
 import BeicroonTreeItem from "@/components/BeicroonTreeItem.vue";
-import {assign, list} from "@/request/account-admin-role.http.ts";
 import BeicroonLineVertical from "@/components/BeicroonLineVertical.vue";
-import {list as roleList, ResourceRoleBaseVO as Role} from "@/request/resource-role.http.ts"
+import {assign, list as listRoleId} from "@/request/account-admin-role.http.ts";
+import {listNoWaiting as listRole, ResourceRoleBaseVO as Role} from "@/request/resource-role.http.ts"
 
 type Props = {
   adminId: string,
@@ -28,15 +29,13 @@ const check = createBeicroonCheck<Role>();
 onMounted(async () => {
   loading.get = true;
 
-  try {
-    const {data: roles} = await roleList({disabledFlag: BooleanEnums.FALSE});
+  const [roles, roleIds] = await batchRequest([
+      async () => listRole({disabledFlag: BooleanEnums.FALSE}),
+      async () => listRoleId(props.adminId),
+    ])
+    .finally(() => loading.get = false);
 
-    const {data: roleIds} = await list(props.adminId);
-
-    check.initCheck(roles, roleIds);
-  } finally {
-    loading.get = false
-  }
+  check.initCheck(roles, roleIds)
 });
 
 const emits = defineEmits(["cancel", "confirm"]);

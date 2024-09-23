@@ -1,4 +1,13 @@
-import http, {BaseVO, DisableDTO, DisableVO, PageInfo, QueryDTO, Response, UpdateDTO} from "@/utils/http.utils.ts";
+import http, {
+    BaseVO,
+    DisableDTO,
+    DisableVO,
+    PageInfo,
+    QueryDTO,
+    Response,
+    UpdateDTO,
+    waitingConfig
+} from "@/utils/http.utils.ts";
 
 // 基础返回字段
 export type ResourceRoleBaseVO = BaseVO & DisableVO & {
@@ -73,6 +82,16 @@ export async function list(dto: ResourceRoleQueryDTO): Promise<Response<Array<Re
         url: "/api/admin/admin/resource-role-list",
         method: "POST",
         data: dto,
+    })
+}
+
+// 全量列表接口
+export async function listNoWaiting(dto: ResourceRoleQueryDTO): Promise<Response<Array<ResourceRoleBaseVO>>> {
+    return http.request({
+        url: "/api/admin/admin/resource-role-list",
+        method: "POST",
+        data: dto,
+        ...waitingConfig,
     })
 }
 
