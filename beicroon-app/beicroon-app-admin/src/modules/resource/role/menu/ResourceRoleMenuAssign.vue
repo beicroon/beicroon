@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import {onMounted, reactive, ref} from "vue";
+import {CheckedEnums} from "@/enums/default-enums.ts";
 import BeicroonTree from "@/components/BeicroonTree.vue";
 import BeicroonForm from "@/components/BeicroonForm.vue";
 import BeicroonButton from "@/components/BeicroonButton.vue";
@@ -23,6 +24,64 @@ const loading = reactive({
 
 const menus = ref<Array<Menu>>([]);
 
+function initChildCheckStatus(menu: Menu, roleMenuIds: Array<string>) {
+  menu.children = menu.children.map((child) => {
+    let checked = false;
+
+    let unchecked = false;
+
+    child.children = child.children.map((grand) => {
+      if (roleMenuIds.includes(grand.id)) {
+        grand.checked = CheckedEnums.CHECKED;
+
+        checked = true;
+      } else {
+        grand.checked = CheckedEnums.UNCHECKED;
+
+        unchecked = true;
+      }
+
+      return grand;
+    });
+
+    if (checked && unchecked) {
+      child.checked = CheckedEnums.INDETERMINATE;
+    } else if (checked) {
+      child.checked = CheckedEnums.CHECKED;
+    } else {
+      child.checked = CheckedEnums.UNCHECKED;
+    }
+
+    return child;
+  });
+}
+
+function initCheckStatus(menu: Menu) {
+  let checked = false;
+
+  let unchecked = false;
+
+  let indeterminate = false;
+
+  menu.children.forEach((child) => {
+    if (child.checked === CheckedEnums.CHECKED) {
+      checked = true;
+    } else if (child.checked === CheckedEnums.INDETERMINATE) {
+      indeterminate = true;
+    } else {
+      unchecked = true;
+    }
+  });
+
+  if ((checked && unchecked) || indeterminate) {
+    menu.checked = CheckedEnums.INDETERMINATE;
+  } else if (checked) {
+    menu.checked = CheckedEnums.CHECKED;
+  } else {
+    menu.checked = CheckedEnums.UNCHECKED;
+  }
+}
+
 onMounted(async () => {
   loading.get = true;
 
@@ -32,59 +91,9 @@ onMounted(async () => {
     const {data: roleMenuIds} = await list(props.roleId);
 
     menus.value = res.data.map((menu) => {
-      menu.children = menu.children.map((child) => {
-        let grandCheck = false;
+      initChildCheckStatus(menu, roleMenuIds);
 
-        let grandUnchecked = false;
-
-        child.children = child.children.map((grand) => {
-          if (roleMenuIds.includes(grand.id)) {
-            grand.checked = "checked";
-
-            grandCheck = true;
-          } else {
-            grand.checked = "unchecked";
-
-            grandUnchecked = true;
-          }
-
-          return grand;
-        });
-
-        if (grandCheck && grandUnchecked) {
-          child.checked = "indeterminate";
-        } else if (grandCheck) {
-          child.checked = "checked";
-        } else {
-          child.checked = "unchecked";
-        }
-
-        return child;
-      });
-
-      let childCheck = false;
-
-      let childFixed = false;
-
-      let childUnchecked = false;
-
-      menu.children.forEach((child) => {
-        if (child.checked === "checked") {
-          childCheck = true;
-        } else if (child.checked === "indeterminate") {
-          childFixed = true;
-        } else {
-          childUnchecked = true;
-        }
-      });
-
-      if ((childCheck && childUnchecked) || childFixed) {
-        menu.checked = "indeterminate";
-      } else if (childCheck) {
-        menu.checked = "checked";
-      } else {
-        menu.checked = "unchecked";
-      }
+      initCheckStatus(menu);
 
       return menu;
     });
@@ -105,17 +114,17 @@ async function handleConfirm() {
   const menuIds: Array<string> = [];
 
   menus.value.forEach((menu) => {
-    if (menu.checked === "checked" || menu.checked === "indeterminate") {
+    if (menu.checked === CheckedEnums.CHECKED || menu.checked === CheckedEnums.INDETERMINATE) {
       menuIds.push(menu.id);
     }
 
     menu.children.forEach((child) => {
-      if (child.checked === "checked" || child.checked === "indeterminate") {
+      if (child.checked === CheckedEnums.CHECKED || child.checked === CheckedEnums.INDETERMINATE) {
         menuIds.push(child.id);
       }
 
       child.children.forEach((grand) => {
-        if (grand.checked === "checked" || grand.checked === "indeterminate") {
+        if (grand.checked === CheckedEnums.CHECKED || grand.checked === CheckedEnums.INDETERMINATE) {
           menuIds.push(grand.id);
         }
       });
@@ -128,13 +137,13 @@ async function handleConfirm() {
 }
 
 async function handleCheckGrand(menu: Menu, child: Menu, grand: Menu) {
-  grand.checked = "checked";
+  grand.checked = CheckedEnums.CHECKED;
 
   for (let i = 0; i < child.children.length; i++) {
-    if (child.children[i].checked !== "checked") {
-      child.checked = "indeterminate";
+    if (child.children[i].checked !== CheckedEnums.CHECKED) {
+      child.checked = CheckedEnums.INDETERMINATE;
 
-      menu.checked = "indeterminate";
+      menu.checked = CheckedEnums.INDETERMINATE;
 
       return;
     }
@@ -144,31 +153,31 @@ async function handleCheckGrand(menu: Menu, child: Menu, grand: Menu) {
 }
 
 async function handleCheckChild(menu: Menu, child: Menu) {
-  child.checked = "checked";
+  child.checked = CheckedEnums.CHECKED;
 
   child.children.forEach((grandMenu) => {
-    grandMenu.checked = "checked";
+    grandMenu.checked = CheckedEnums.CHECKED;
   });
 
   for (let i = 0; i < menu.children.length; i++) {
-    if (menu.children[i].checked !== "checked") {
-      menu.checked = "indeterminate";
+    if (menu.children[i].checked !== CheckedEnums.CHECKED) {
+      menu.checked = CheckedEnums.INDETERMINATE;
 
       return;
     }
   }
 
-  menu.checked = "checked";
+  menu.checked = CheckedEnums.CHECKED;
 }
 
 async function handleCheckMenu(menu: Menu) {
-  menu.checked = "checked";
+  menu.checked = CheckedEnums.CHECKED;
 
   menu.children.forEach((childMenu) => {
-    childMenu.checked = "checked";
+    childMenu.checked = CheckedEnums.CHECKED;
 
     childMenu.children.forEach((grandMenu) => {
-      grandMenu.checked = "checked";
+      grandMenu.checked = CheckedEnums.CHECKED;
     });
   });
 }
@@ -190,13 +199,13 @@ async function handleCheck(menu: Menu, child?: Menu, grand?: Menu) {
 }
 
 async function handleUncheckGrand(menu: Menu, child: Menu, grand: Menu) {
-  grand.checked = "unchecked";
+  grand.checked = CheckedEnums.UNCHECKED;
 
   for (let i = 0; i < child.children.length; i++) {
-    if (child.children[i].checked !== "unchecked") {
-      child.checked = "indeterminate";
+    if (child.children[i].checked !== CheckedEnums.UNCHECKED) {
+      child.checked = CheckedEnums.INDETERMINATE;
 
-      menu.checked = "indeterminate";
+      menu.checked = CheckedEnums.INDETERMINATE;
 
       return;
     }
@@ -206,31 +215,31 @@ async function handleUncheckGrand(menu: Menu, child: Menu, grand: Menu) {
 }
 
 async function handleUncheckChild(menu: Menu, child: Menu) {
-  child.checked = "unchecked";
+  child.checked = CheckedEnums.UNCHECKED;
 
   child.children.forEach((grandMenu) => {
-    grandMenu.checked = "unchecked";
+    grandMenu.checked = CheckedEnums.UNCHECKED;
   });
 
   for (let i = 0; i < menu.children.length; i++) {
-    if (menu.children[i].checked !== "unchecked") {
-      menu.checked = "indeterminate";
+    if (menu.children[i].checked !== CheckedEnums.UNCHECKED) {
+      menu.checked = CheckedEnums.INDETERMINATE;
 
       return;
     }
   }
 
-  menu.checked = "unchecked";
+  menu.checked = CheckedEnums.UNCHECKED;
 }
 
 async function handleUncheckMenu(menu: Menu) {
-  menu.checked = "unchecked";
+  menu.checked = CheckedEnums.UNCHECKED;
 
   menu.children.forEach((childMenu) => {
-    childMenu.checked = "unchecked";
+    childMenu.checked = CheckedEnums.UNCHECKED;
 
     childMenu.children.forEach((grandMenu) => {
-      grandMenu.checked = "unchecked";
+      grandMenu.checked = CheckedEnums.UNCHECKED;
     });
   });
 }

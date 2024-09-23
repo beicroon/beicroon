@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import {onMounted, reactive, ref} from "vue";
-import {BooleanEnums} from "@/enums/default-enums.ts";
 import BeicroonTree from "@/components/BeicroonTree.vue";
 import BeicroonForm from "@/components/BeicroonForm.vue";
 import BeicroonButton from "@/components/BeicroonButton.vue";
@@ -8,12 +7,9 @@ import BeicroonLoading from "@/components/BeicroonLoading.vue";
 import BeicroonCheckbox from "@/components/BeicroonCheckbox.vue";
 import BeicroonTreeItem from "@/components/BeicroonTreeItem.vue";
 import {assign, list} from "@/request/account-admin-role.http.ts";
+import {BooleanEnums, CheckedEnums} from "@/enums/default-enums.ts";
 import BeicroonLineVertical from "@/components/BeicroonLineVertical.vue";
 import {list as roleList, ResourceRoleBaseVO as Role} from "@/request/resource-role.http.ts"
-
-type RoleWithChecked = Role & {
-  checked: "checked" | "indeterminate" | "unchecked",
-};
 
 type Props = {
   adminId: string,
@@ -26,7 +22,7 @@ const loading = reactive({
   get: false,
 });
 
-const roles = ref<Array<RoleWithChecked>>([]);
+const roles = ref<Array<Role>>([]);
 
 onMounted(async () => {
   loading.get = true;
@@ -39,7 +35,7 @@ onMounted(async () => {
     roles.value = res.data.map((role: Role) => {
       return {
         ...role,
-        checked: adminRoleIds.includes(role.id) ? "checked" : "unchecked",
+        checked: adminRoleIds.includes(role.id) ? CheckedEnums.CHECKED : CheckedEnums.UNCHECKED,
       };
     });
   } finally {
@@ -56,19 +52,19 @@ async function handleCancel() {
 async function handleConfirm() {
   loading.set = true;
 
-  const roleIds = roles.value.filter(role => role.checked === "checked").map(role => role.id);
+  const roleIds = roles.value.filter(role => role.checked === CheckedEnums.CHECKED).map(role => role.id);
 
   await assign(props.adminId, roleIds).finally(() => loading.set = false);
 
   emits("confirm");
 }
 
-async function handleCheck(role: RoleWithChecked) {
-  role.checked = "checked";
+async function handleCheck(role: Role) {
+  role.checked = CheckedEnums.CHECKED;
 }
 
-async function handleUncheck(role: RoleWithChecked) {
-  role.checked = "unchecked";
+async function handleUncheck(role: Role) {
+  role.checked = CheckedEnums.UNCHECKED;
 }
 </script>
 

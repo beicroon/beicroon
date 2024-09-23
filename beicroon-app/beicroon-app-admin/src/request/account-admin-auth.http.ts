@@ -1,5 +1,5 @@
 import {sha256} from "@/hash.ts";
-import http, {Response} from "@/http.ts";
+import http, {BaseVO, Response} from "@/http.ts";
 
 export type LoginDTO = {
     username: string;
@@ -28,23 +28,20 @@ export async function login(dto: LoginDTO): Promise<Response<LoginVO>> {
     })
 }
 
-export type AuthMenu = {
-    id: string;
+export type AuthMenu = BaseVO & {
     code: string;
     name: string;
     path: string;
     active: boolean;
     children: Array<AuthMenu>;
-    checked?: "checked" | "indeterminate" | "unchecked";
 };
 
 export const index: AuthMenu = {
-    id: "1",
     code: "INDEX",
     name: "首页",
     path: "/index",
     active: false,
-    children: [],
+    children: [] as Array<AuthMenu>,
 };
 
 export async function listAuthMenu(): Promise<Response<Array<AuthMenu>>> {

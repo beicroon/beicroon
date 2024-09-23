@@ -81,19 +81,20 @@ export type Response<T> = {
 }
 
 export type BaseVO = {
-    id: string,
-    createdAt: string,
-    creatorId: string,
-    creatorCode: string,
-    creatorName: string,
-    modifiedAt: string,
-    modifierId: string,
-    modifierCode: string,
-    modifierName: string,
+    checked?: "checked" | "unchecked" | "indeterminate",
+    id?: string,
+    createdAt?: string,
+    creatorId?: string,
+    creatorCode?: string,
+    creatorName?: string,
+    modifiedAt?: string,
+    modifierId?: string,
+    modifierCode?: string,
+    modifierName?: string,
 }
 
 export type DisableVO = {
-    disabledFlag: BooleanEnums,
+    disabledFlag?: BooleanEnums,
 }
 
 export type UpdateDTO = {

@@ -24,3 +24,9 @@ export enum SelectorEnums {
     INPUT_REQUIRED = ".beicroon-input.required",
     INPUT_AREA = ".beicroon-input-area",
 }
+
+export enum CheckedEnums {
+    CHECKED = "checked",
+    UNCHECKED = "unchecked",
+    INDETERMINATE = "indeterminate",
+}
