@@ -16,36 +16,6 @@ type Picker = {
   current: boolean,
 };
 
-const hours = [
-  "0", "01", "02", "03", "04", "05",
-  "06", "07", "08", "09", "10", "11",
-  "12", "13", "14", "15", "16", "17",
-  "18", "19", "20", "21", "22", "23"
-] as const;
-
-const minutesAndSeconds = [
-  "00", "01", "02", "03", "04", "05",
-  "06", "07", "08", "09", "10", "11",
-  "12", "13", "14", "15", "16", "17",
-  "18", "19", "20", "21", "22", "23",
-  "24", "25", "26", "27", "28", "29",
-  "30", "31", "32", "33", "34", "35",
-  "36", "37", "38", "39", "40", "41",
-  "42", "43", "44", "45", "46", "47",
-  "48", "49", "50", "51", "52", "53",
-  "54", "55", "56", "57", "58", "59"
-] as const;
-
-type Hours = typeof hours[number];
-
-type MinuteAndSecond = typeof minutesAndSeconds[number];
-
-type Time = {
-  hour: Hours,
-  minute: MinuteAndSecond,
-  second: MinuteAndSecond,
-};
-
 const days = ["日", "一", "二", "三", "四", "五", "六"];
 
 const props = defineProps<Props>();
@@ -58,6 +28,7 @@ const modelValue = computed({
 })
 
 const active = ref(false);
+
 const clicking = ref(false);
 
 const current = ref();
@@ -67,13 +38,13 @@ const next = ref();
 const start = ref("");
 const end = ref("");
 
-const currentTime = ref({});
-const startTime = ref(null);
-const endTime = ref(null);
+onMounted(() => {
+  const now = new Date();
 
-onMounted(init);
+  prev.value = new Date(now.getFullYear(), now.getMonth(), 1);
+  next.value = new Date(now.getFullYear(), now.getMonth() + 1, 1);
+});
 
-const currentPicker = ref(undefined as Picker);
 const pickers = ref([] as Array<Picker>);
 
 function getPickers(now: Date) {
@@ -92,7 +63,7 @@ function getPickers(now: Date) {
 
     pickers.push({
       date: pickerDate,
-      active: pickerDate.getMonth() === month,
+      active: pickerDate.getMonth() === month && pickerDate.getTime() > prev.value.getTime(),
       current: pickerDate.getFullYear() === now.getFullYear()
         && pickerDate.getMonth() === now.getMonth()
         && pickerDate.getDate() === now.getDate(),
@@ -104,10 +75,8 @@ function getPickers(now: Date) {
   return pickers;
 }
 
-async function handleFocusin(date: Date, time: Time, handler: (picker: Picker) => Promise<void>) {
+async function handleFocusin(date: Date, handler: (picker: Picker) => Promise<void>) {
   current.value = date;
-
-  currentTime.value = time;
 
   pickers.value = getPickers(date);
 
@@ -144,88 +113,48 @@ function getFormatter(num: number) {
   return num < 10 ? "0" + num : `${num}`;
 }
 
-function pushFormatter(now: Date, time: Time, formatter: Array<string>) {
+function pushFormatter(now: Date, formatter: Array<string>) {
   formatter.push(getFormatter(now.getFullYear()))
   formatter.push("-")
   formatter.push(getFormatter(now.getMonth() + 1));
   formatter.push("-")
   formatter.push(getFormatter(now.getDate()));
-  formatter.push(" ")
-  formatter.push(time.hour);
-  formatter.push(":")
-  formatter.push(time.minute);
-  formatter.push(":")
-  formatter.push(time.second);
 }
 
 const clickHandler = ref(null as null | ((picker: Picker) => Promise<void>));
 
 async function handlePrevClick(picker: Picker) {
-  current.value = picker.date;
-
   prev.value = picker.date;
 
   const res = [] as Array<string>;
 
-  pushFormatter(picker.date, currentTime.value, res);
+  pushFormatter(picker.date, res);
 
   start.value = res.join("");
 }
 
 async function handleNextClick(picker: Picker) {
-  current.value = picker.date;
-
   next.value = picker.date;
 
   const res = [] as Array<string>;
 
-  pushFormatter(picker.date, currentTime.value, res);
+  pushFormatter(picker.date, res);
 
   end.value = res.join("");
 }
 
 async function handleClick(picker: Picker) {
-  currentPicker.value = picker;
+  if (!picker.active) {
+    return;
+  }
 
-  current.value = picker.date;
-}
-
-async function handleClear() {
-  await init();
-
-  emits("update:modelValue", null);
-}
-
-async function handleConfirm() {
-  clickHandler.value && await clickHandler.value(currentPicker.value);
+  clickHandler.value && await clickHandler.value(picker);
 
   if (start && end) {
     emits("update:modelValue", `${start.value}~${end.value}`);
   }
 
   await handleFocusout();
-}
-
-async function init() {
-  const now = new Date();
-
-  prev.value = new Date(now.getFullYear(), now.getMonth(), 1);
-  next.value = new Date(now.getFullYear(), now.getMonth() + 1, 1);
-
-  start.value = "";
-  end.value = "";
-
-  startTime.value = {
-    hour: "00",
-    minute: "00",
-    second: "00",
-  };
-
-  endTime.value = {
-    hour: "23",
-    minute: "59",
-    second: "59",
-  };
 }
 
 function subMonth() {
@@ -252,14 +181,13 @@ watch(current, () => {
 <template>
   <div class="beicroon-input beicroon-datetime" :class="{required: required, active: active}" @click.stop>
     <span class="beicroon-input-label">{{ label }}</span>
-    <input class="beicroon-input-area" type="text" :disabled="disabled" :placeholder="placeholder"
-           v-model="modelValue"/>
+    <input class="beicroon-input-area" type="text" :disabled="disabled" :placeholder="placeholder" v-model="modelValue"/>
     <div class="beicroon-datetime-area">
       <input class="start" type="text"
              :disabled="disabled"
              :placeholder="placeholder"
              v-model="start"
-             @focusin="handleFocusin(prev, startTime, handlePrevClick)"
+             @focusin="handleFocusin(prev, handlePrevClick)"
              @focusout="handleFocusout"
       />
       <span>~</span>
@@ -267,18 +195,17 @@ watch(current, () => {
              :disabled="disabled"
              :placeholder="placeholder"
              v-model="end"
-             @focusin="handleFocusin(next, endTime, handleNextClick)"
+             @focusin="handleFocusin(next, handleNextClick)"
              @focusout="handleFocusout"
       />
     </div>
-    <div class="beicroon-datetime-view" :class="{hidden: !active}" @mousedown="handleMouseDown"
-         @mouseup="handleMouseUp">
+    <div class="beicroon-datetime-view" v-if="active" @mousedown="handleMouseDown" @mouseup="handleMouseUp">
       <div class="beicroon-month-picker">
         <beicroon-button label="<<" @click="subYear"></beicroon-button>
         <beicroon-button label="<" @click="subMonth"></beicroon-button>
         <div class="title">
-          <span>{{ current && current.getFullYear() }}年</span>
-          <span>{{ current && current.getMonth() + 1 }}月</span>
+          <span>{{ current.getFullYear() }}年</span>
+          <span>{{ current.getMonth() + 1 }}月</span>
         </div>
         <beicroon-button label=">" @click="addMonth"></beicroon-button>
         <beicroon-button label=">>" @click="addYear"></beicroon-button>
@@ -287,29 +214,22 @@ watch(current, () => {
         <li v-for="day in days" class="day">{{ day }}</li>
         <li v-for="picker in pickers"
             :class="{active: picker.active, current: picker.current}"
-            @click.stop="handleClick(picker)"
+            @click="handleClick(picker)"
         >{{ picker.date.getDate() }}
         </li>
       </ul>
-      <div class="beicroon-datetime-foot">
-        <ul class="beicroon-time-picker">
-          <li><input type="text" v-model="currentTime.hour"/></li>
-          <li><span>:</span></li>
-          <li><input type="text" v-model="currentTime.minute"/></li>
-          <li><span>:</span></li>
-          <li><input type="text" v-model="currentTime.second"/></li>
-        </ul>
-        <ul class="beicroon-datetime-button">
-          <beicroon-button class="warning" label="清空" @click="handleClear"></beicroon-button>
-          <beicroon-button class="primary" label="确认" @click="handleConfirm"></beicroon-button>
-        </ul>
-      </div>
     </div>
   </div>
 </template>
 
 <style lang="less">
 .beicroon-datetime {
+  &.active {
+    .beicroon-datetime-area {
+      border-color: var(--color-primary);
+    }
+  }
+
   .beicroon-input-area {
     opacity: 0;
   }
@@ -327,6 +247,8 @@ watch(current, () => {
     border: 1rem solid var(--color-grey-deeper);
 
     input {
+      padding: 0;
+      height: 100%;
       border: none;
       outline: none;
       background: none;
@@ -337,18 +259,14 @@ watch(current, () => {
   .beicroon-datetime-view {
     left: 50%;
     z-index: 1;
-    opacity: 1;
     cursor: text;
     padding: 8rem;
-    height: 320rem;
-    overflow: hidden;
+    width: 300rem;
     user-select: none;
     position: absolute;
     border-radius: 6rem;
     top: calc(100% - 8rem);
-    width: 300rem !important;
     transform: translateX(-50%);
-    transition: all 180ms linear;
     background-color: var(--color-white);
     box-shadow: 0 0 8rem -3rem var(--color-black-30) inset;
   }
@@ -393,34 +311,6 @@ watch(current, () => {
         background-color: var(--color-primary);
       }
     }
-  }
-
-  .beicroon-datetime-foot {
-    display: flex;
-    padding: 4rem;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  .beicroon-time-picker {
-    gap: 4rem;
-    display: flex;
-
-    input {
-      width: 32rem;
-      height: 24rem;
-      outline: none;
-      font-size: 12rem;
-      background: none;
-      line-height: 16rem;
-      text-align: center;
-      border-radius: 4rem;
-      border: 1rem solid var(--color-grey-deeper);
-    }
-  }
-
-  .beicroon-datetime-button {
-    display: flex;
   }
 }
 </style>
