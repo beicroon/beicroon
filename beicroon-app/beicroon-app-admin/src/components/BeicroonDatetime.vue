@@ -67,19 +67,9 @@ const next = ref();
 const start = ref("");
 const end = ref("");
 
-const currentTime = ref({} as Time);
-
-const startTime = ref({
-  hour: "00",
-  minute: "00",
-  second: "00",
-} as Time);
-
-const endTime = ref({
-  hour: "00",
-  minute: "00",
-  second: "00",
-} as Time);
+const currentTime = ref({});
+const startTime = ref(null);
+const endTime = ref(null);
 
 onMounted(init);
 
@@ -232,9 +222,9 @@ async function init() {
   };
 
   endTime.value = {
-    hour: "00",
-    minute: "00",
-    second: "00",
+    hour: "23",
+    minute: "59",
+    second: "59",
   };
 }
 
