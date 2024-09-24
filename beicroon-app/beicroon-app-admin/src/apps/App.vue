@@ -93,7 +93,7 @@ html, body, #beicroon-app {
   position: relative;
 }
 
-&.hidden {
+.hidden {
   width: 0 !important;
   height: 0 !important;
   opacity: 0 !important;

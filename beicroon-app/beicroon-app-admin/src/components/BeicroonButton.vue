@@ -19,15 +19,12 @@ function handleClick(e: MouseEvent) {
     return;
   }
 
-  e.stopPropagation();
-  e.stopImmediatePropagation();
-
   emits("click", e);
 }
 </script>
 
 <template>
-<div class="beicroon-button" :class="{disabled: disabled}" @click="handleClick">
+<div class="beicroon-button" :class="{disabled: disabled}" @click.stop="handleClick">
   <beicroon-loading v-show="loading" fill="#ffffff" width="20" height="20"></beicroon-loading>
   <button v-show="!loading" :disabled="disabled" :type="type">{{label}}</button>
 </div>

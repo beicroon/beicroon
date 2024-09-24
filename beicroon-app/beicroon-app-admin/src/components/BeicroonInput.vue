@@ -96,7 +96,6 @@ async function handleFocusout() {
 
   &.column {
     gap: 12rem;
-    border-radius: 6rem;
     padding: 14rem 18rem;
     flex-direction: column;
     align-items: flex-start;
@@ -114,6 +113,7 @@ async function handleFocusout() {
   .beicroon-input-area {
     border: none;
     outline: none;
+    background: none;
 
     &[type="text"], &[type="number"], &[type="password"] {
       width: 300rem;

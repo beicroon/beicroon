@@ -9,6 +9,7 @@ import BeicroonInput from "@/components/BeicroonInput.vue";
 import BeicroonButton from "@/components/BeicroonButton.vue";
 import BeicroonListRow from "@/components/BeicroonListRow.vue";
 import BeicroonListCell from "@/components/BeicroonListCell.vue";
+import BeicroonDatetime from "@/components/BeicroonDatetime.vue";
 import BeicroonListCellButton from "@/components/BeicroonListCellButton.vue";
 import ResourceMenuSelect from "@/modules/default/menu/ResourceMenuSelect.vue";
 import {page, remove, ResourceMenuPageVO as VO, ResourceMenuQueryDTO as DTO} from "@/request/resource-menu.http.ts";
@@ -69,6 +70,7 @@ const parentName = ref();
       ></resource-menu-select>
       <beicroon-input class="column" label="编码" v-model="list.params.code"></beicroon-input>
       <beicroon-input class="column" label="名称" v-model="list.params.name"></beicroon-input>
+      <beicroon-datetime class="column" label="创建时间" v-model="list.params.createdAt"></beicroon-datetime>
     </template>
   </beicroon-list>
 </template>
