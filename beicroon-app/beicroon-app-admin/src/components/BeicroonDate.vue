@@ -240,6 +240,8 @@ async function handleConfirm() {
   if (startValue.value && endValue.value) {
     emits("update:modelValue", `${startValue.value}~${endValue.value}`);
   }
+
+  await handleFocusout();
 }
 </script>
 
