@@ -161,6 +161,7 @@ public class ModuleMysqlMaker {
             FileUtils.writeFileIfNotExists(FileManager.getVueAppFile(modulePath, table), VueAppContent.getContent(table));
             FileUtils.writeFileIfNotExists(FileManager.getVueCreateFile(modulePath, table), VueCreateContent.getContent(table));
             FileUtils.writeFileIfNotExists(FileManager.getVueDetailFile(modulePath, table), VueDetailContent.getContent(table));
+            FileUtils.writeFileIfNotExists(FileManager.getVueDetailViewFile(modulePath, table), VueDetailViewContent.getContent(table));
             FileUtils.writeFileIfNotExists(FileManager.getVueUpdateFile(modulePath, table), VueUpdateContent.getContent(table));
             FileUtils.writeFileIfNotExists(FileManager.getVueSelectFile(modulePath, table), VueSelectContent.getContent(table));
         }

@@ -69,6 +69,8 @@ public class FileManager {
 
     public static final String FILENAME_VUE_DETAIL = "%sDetail.vue";
 
+    public static final String FILENAME_VUE_DETAIL_VIEW = "%sDetailView.vue";
+
     public static final String FILENAME_VUE_UPDATE = "%sUpdate.vue";
 
     public static final String FILENAME_VUE_SELECT = "%sSelect.vue";
@@ -433,6 +435,10 @@ public class FileManager {
 
     public static File getVueDetailFile(File modulePath, Table table) {
         return new File(modulePath, String.format(FILENAME_VUE_DETAIL, table.getFilename()));
+    }
+
+    public static File getVueDetailViewFile(File modulePath, Table table) {
+        return new File(modulePath, String.format(FILENAME_VUE_DETAIL_VIEW, table.getFilename()));
     }
 
     public static File getVueUpdateFile(File modulePath, Table table) {
