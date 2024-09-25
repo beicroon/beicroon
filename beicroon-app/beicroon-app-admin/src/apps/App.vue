@@ -94,7 +94,6 @@ html, body, #beicroon-app {
 }
 
 .hidden {
-  width: 0 !important;
   height: 0 !important;
   opacity: 0 !important;
   overflow: hidden !important;

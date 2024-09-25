@@ -16,11 +16,11 @@ type Picker = {
   current: boolean,
 };
 
-const days = ["日", "一", "二", "三", "四", "五", "六"];
+const weeks = ["日", "一", "二", "三", "四", "五", "六"];
 
 const props = defineProps<Props>();
 
-const emits = defineEmits(["update:modelValue"]);
+const emits = defineEmits(["update:modelValue", "update:start", "update:end"]);
 
 const modelValue = computed({
   get: () => props.modelValue,
@@ -28,7 +28,6 @@ const modelValue = computed({
 })
 
 const active = ref(false);
-
 const clicking = ref(false);
 
 const current = ref();
@@ -38,11 +37,13 @@ const next = ref();
 const start = ref("");
 const end = ref("");
 
+const currentTime = ref();
+
 onMounted(() => {
   const now = new Date();
 
-  prev.value = new Date(now.getFullYear(), now.getMonth(), 1);
-  next.value = new Date(now.getFullYear(), now.getMonth() + 1, 1);
+  prev.value = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  next.value = new Date(now.getFullYear(), now.getMonth() + 1, now.getDate());
 });
 
 const pickers = ref([] as Array<Picker>);
@@ -63,7 +64,7 @@ function getPickers(now: Date) {
 
     pickers.push({
       date: pickerDate,
-      active: pickerDate.getMonth() === month && pickerDate.getTime() > prev.value.getTime(),
+      active: pickerDate.getMonth() === month,
       current: pickerDate.getFullYear() === now.getFullYear()
         && pickerDate.getMonth() === now.getMonth()
         && pickerDate.getDate() === now.getDate(),
@@ -75,12 +76,30 @@ function getPickers(now: Date) {
   return pickers;
 }
 
-async function handleFocusin(date: Date, handler: (picker: Picker) => Promise<void>) {
-  current.value = date;
+const className = ref("");
 
-  pickers.value = getPickers(date);
+async function handlePrevFocusin() {
+  className.value = "prev";
 
-  clickHandler.value = handler;
+  current.value = prev.value;
+
+  currentTime.value = {hour: "00", minute: "00", second: "00"};
+
+  clickHandler.value = handlePrevClick;
+
+  active.value = true;
+
+  document.addEventListener("click", handleFocusout, {once: true});
+}
+
+async function handleNextFocusin() {
+  className.value = "next";
+
+  current.value = next.value;
+
+  currentTime.value = {hour: "23", minute: "59", second: "59"};
+
+  clickHandler.value = handleNextClick;
 
   active.value = true;
 
@@ -150,7 +169,15 @@ async function handleClick(picker: Picker) {
 
   clickHandler.value && await clickHandler.value(picker);
 
-  if (start && end) {
+  if (start.value) {
+    emits("update:start", start.value);
+  }
+
+  if (end.value) {
+    emits("update:end", end.value);
+  }
+
+  if (start.value && end.value) {
     emits("update:modelValue", `${start.value}~${end.value}`);
   }
 
@@ -176,18 +203,27 @@ function addYear() {
 watch(current, () => {
   pickers.value = getPickers(current.value);
 });
+
+function handleClear() {
+  start.value = "";
+  end.value = "";
+
+  emits("update:start", null);
+  emits("update:end", null);
+  emits("update:modelValue", null);
+}
 </script>
 
 <template>
-  <div class="beicroon-input beicroon-datetime" :class="{required: required, active: active}" @click.stop>
+  <div class="beicroon-input beicroon-date" :class="{required: required, active: active}" @click.stop>
     <span class="beicroon-input-label">{{ label }}</span>
     <input class="beicroon-input-area" type="text" :disabled="disabled" :placeholder="placeholder" v-model="modelValue"/>
-    <div class="beicroon-datetime-area">
+    <div class="beicroon-date-area">
       <input class="start" type="text"
              :disabled="disabled"
              :placeholder="placeholder"
              v-model="start"
-             @focusin="handleFocusin(prev, handlePrevClick)"
+             @focusin="handlePrevFocusin"
              @focusout="handleFocusout"
       />
       <span>~</span>
@@ -195,37 +231,54 @@ watch(current, () => {
              :disabled="disabled"
              :placeholder="placeholder"
              v-model="end"
-             @focusin="handleFocusin(next, handleNextClick)"
+             @focusin="handleNextFocusin"
              @focusout="handleFocusout"
       />
     </div>
-    <div class="beicroon-datetime-view" v-if="active" @mousedown="handleMouseDown" @mouseup="handleMouseUp">
-      <div class="beicroon-month-picker">
-        <beicroon-button label="<<" @click="subYear"></beicroon-button>
-        <beicroon-button label="<" @click="subMonth"></beicroon-button>
-        <div class="title">
-          <span>{{ current.getFullYear() }}年</span>
-          <span>{{ current.getMonth() + 1 }}月</span>
+    <div class="beicroon-date-view" :class="{hidden: !active}" @mousedown="handleMouseDown" @mouseup="handleMouseUp">
+      <div class="beicroon-date-main" :class="className">
+        <div class="beicroon-month-picker">
+          <beicroon-button label="<<" @click="subYear"></beicroon-button>
+          <beicroon-button label="<" @click="subMonth"></beicroon-button>
+          <div class="title">
+            <span>{{ current && current.getFullYear() }}年</span>
+            <span>{{ current && current.getMonth() + 1 }}月</span>
+          </div>
+          <beicroon-button label=">" @click="addMonth"></beicroon-button>
+          <beicroon-button label=">>" @click="addYear"></beicroon-button>
         </div>
-        <beicroon-button label=">" @click="addMonth"></beicroon-button>
-        <beicroon-button label=">>" @click="addYear"></beicroon-button>
+        <ul class="beicroon-date-picker">
+          <li v-for="week in weeks" class="week">{{ week }}</li>
+          <li v-for="picker in pickers"
+              :class="{active: picker.active, current: picker.current}"
+              @click="handleClick(picker)"
+          >{{ picker.date.getDate() }}
+          </li>
+        </ul>
+        <div class="beicroon-date-foot" v-if="currentTime">
+          <ul class="beicroon-date-time">
+            <li><input type="text" v-model="currentTime.hour" /></li>
+            <li><span>:</span></li>
+            <li><input type="text" v-model="currentTime.minute" /></li>
+            <li><span>:</span></li>
+            <li><input type="text" v-model="currentTime.second" /></li>
+          </ul>
+          <div class="beicroon-date-button">
+            <beicroon-button class="warning" label="清空" @click="handleClear"></beicroon-button>
+            <beicroon-button class="primary" label="确定" @click="handleFocusout"></beicroon-button>
+          </div>
+        </div>
       </div>
-      <ul class="beicroon-date-picker">
-        <li v-for="day in days" class="day">{{ day }}</li>
-        <li v-for="picker in pickers"
-            :class="{active: picker.active, current: picker.current}"
-            @click="handleClick(picker)"
-        >{{ picker.date.getDate() }}
-        </li>
-      </ul>
     </div>
   </div>
 </template>
 
 <style lang="less">
-.beicroon-datetime {
+.beicroon-date {
   &.active {
-    .beicroon-datetime-area {
+    z-index: 9;
+
+    .beicroon-date-area {
       border-color: var(--color-primary);
     }
   }
@@ -234,7 +287,8 @@ watch(current, () => {
     opacity: 0;
   }
 
-  .beicroon-datetime-area {
+  .beicroon-date-area {
+    z-index: 1;
     left: 18rem;
     bottom: 14rem;
     width: 300rem;
@@ -256,19 +310,56 @@ watch(current, () => {
     }
   }
 
-  .beicroon-datetime-view {
-    left: 50%;
+  .beicroon-date-view {
     z-index: 1;
+    right: 18rem;
     cursor: text;
-    padding: 8rem;
     width: 300rem;
+    height: 328rem;
+    overflow: hidden;
     user-select: none;
     position: absolute;
+    top: calc(100% - 16rem);
+    transition: all 180ms linear;
+  }
+
+  .beicroon-date-main {
+    padding: 8rem;
+    height: 320rem;
+    margin-top: 8rem;
     border-radius: 6rem;
-    top: calc(100% - 8rem);
-    transform: translateX(-50%);
     background-color: var(--color-white);
     box-shadow: 0 0 8rem -3rem var(--color-black-30) inset;
+
+    &.prev:before {
+      top: 0;
+      width: 0;
+      height: 0;
+      z-index: 1;
+      content: "";
+      right: 220rem;
+      border-top: none;
+      position: absolute;
+      border-left: 8rem solid transparent;
+      border-right: 8rem solid transparent;
+      border-bottom: 8rem solid transparent;
+      border-bottom-color: var(--color-white);
+    }
+
+    &.next:after {
+      top: 0;
+      width: 0;
+      height: 0;
+      z-index: 1;
+      content: "";
+      right: 60rem;
+      border-top: none;
+      position: absolute;
+      border-left: 8rem solid transparent;
+      border-right: 8rem solid transparent;
+      border-bottom: 8rem solid transparent;
+      border-bottom-color: var(--color-white);
+    }
   }
 
   .beicroon-month-picker {
@@ -297,19 +388,48 @@ watch(current, () => {
       justify-content: center;
       color: var(--color-grey-deeper);
 
-      &.day {
+      &.week {
         color: var(--color-black-light);
       }
 
       &.active {
         cursor: pointer;
         color: var(--color-black-light);
-      }
 
-      &.current {
-        color: var(--color-white);
-        background-color: var(--color-primary);
+        &.current {
+          color: var(--color-white);
+          background-color: var(--color-primary);
+        }
       }
+    }
+  }
+
+  .beicroon-date-foot {
+    display: flex;
+    padding: 2rem 8rem;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .beicroon-date-time {
+    gap: 4rem;
+    display: flex;
+    align-items: center;
+
+    li {
+      display: flex;
+      align-items: center;
+    }
+
+    input {
+      padding: 0;
+      width: 32rem;
+      height: 26rem;
+      outline: none;
+      background: none;
+      text-align: center;
+      border-radius: 6rem;
+      border: 1rem solid var(--color-grey-deeper);
     }
   }
 }

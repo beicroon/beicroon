@@ -128,8 +128,9 @@ async function handleClear() {
 
 <style lang="less">
 .beicroon-select {
-
   &.active {
+    z-index: 9;
+
     .beicroon-select-label {
       top: 0;
       transform: translateY(-28rem);
@@ -213,8 +214,8 @@ async function handleClear() {
 
   .select {
     gap: 2rem;
+    z-index: 1;
     right: 6rem;
-    z-index: 666;
     display: flex;
     height: 160rem;
     padding: 8rem 0;
