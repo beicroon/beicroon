@@ -232,6 +232,10 @@ function handleClear() {
   emits("update:modelValue", null);
 }
 
+function handleCurrent() {
+  setCurrent(new Date());
+}
+
 async function handleConfirm() {
   clickHandler.value && await clickHandler.value();
 
@@ -294,6 +298,7 @@ async function handleConfirm() {
           </ul>
           <div class="beicroon-date-button">
             <beicroon-button class="warning" label="清空" @click="handleClear"></beicroon-button>
+            <beicroon-button class="primary" label="当前" @click="handleCurrent"></beicroon-button>
             <beicroon-button class="primary" label="确定" @click="handleConfirm"></beicroon-button>
           </div>
         </div>
