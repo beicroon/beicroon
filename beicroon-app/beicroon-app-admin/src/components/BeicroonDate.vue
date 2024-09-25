@@ -226,9 +226,7 @@ function addYear() {
   current.value = new Date(current.value.getFullYear() + 1, current.value.getMonth(), current.value.getDate());
 }
 
-watch(current, () => {
-  pickers.value = getPickers(current.value);
-});
+watch(current, () => pickers.value = getPickers(current.value));
 
 function handleClear() {
   emits("update:modelValue", null);
