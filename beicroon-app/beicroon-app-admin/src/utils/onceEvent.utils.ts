@@ -1,4 +1,4 @@
-const eventNames = ["click"];
+const eventNames = ["click"] as const;
 
 type EventName = typeof eventNames[number];
 
@@ -8,7 +8,7 @@ const eventStacks: Record<EventName, Array<Callback>> = {
     click: [],
 };
 
-export default async function (event: EventName, callback: Callback | boolean, e?: UIEvent) {
+export default async function onceEvent(event: EventName, callback: Callback | boolean = false, e?: UIEvent) {
     const callbacks = eventStacks[event];
 
     if (callback instanceof Function) {

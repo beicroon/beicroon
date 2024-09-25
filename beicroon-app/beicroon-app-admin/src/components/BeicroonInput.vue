@@ -16,7 +16,7 @@ const props = withDefaults(defineProps<Props>(), {
 
 const emits = defineEmits(["update:modelValue"]);
 
-const modelValue = computed({
+const value = computed({
   get: () => props.modelValue,
   set: (val: any) => emits("update:modelValue", val),
 })
@@ -39,7 +39,7 @@ async function handleFocusout() {
            :disabled="disabled"
            :type="type"
            :placeholder="placeholder"
-           v-model="modelValue"
+           v-model="value"
            @focusin="handleFocusin"
            @focusout="handleFocusout"
     />

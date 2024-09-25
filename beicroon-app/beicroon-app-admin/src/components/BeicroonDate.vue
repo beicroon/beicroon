@@ -1,9 +1,12 @@
 <script setup lang="ts">
 import {computed, onMounted, ref, watch} from "vue";
+import {BeicroonTime} from "@/utils/datetime.utils.ts";
 import BeicroonButton from "@/components/BeicroonButton.vue";
 
 type Props = {
   label: string,
+  start?: any,
+  end?: any,
   modelValue?: any,
   required?: boolean,
   disabled?: boolean,
@@ -22,7 +25,7 @@ const props = defineProps<Props>();
 
 const emits = defineEmits(["update:modelValue", "update:start", "update:end"]);
 
-const modelValue = computed({
+const value = computed({
   get: () => props.modelValue,
   set: (val: any) => emits("update:modelValue", val),
 })
@@ -34,10 +37,10 @@ const current = ref();
 const prev = ref();
 const next = ref();
 
-const start = ref("");
-const end = ref("");
+const startValue = ref("");
+const endValue = ref("");
 
-const currentTime = ref();
+const currentTime = ref({} as BeicroonTime);
 
 onMounted(() => {
   const now = new Date();
@@ -132,12 +135,21 @@ function getFormatter(num: number) {
   return num < 10 ? "0" + num : `${num}`;
 }
 
-function pushFormatter(now: Date, formatter: Array<string>) {
+function pushFormatterDate(now: Date, formatter: Array<string>) {
   formatter.push(getFormatter(now.getFullYear()))
   formatter.push("-")
   formatter.push(getFormatter(now.getMonth() + 1));
   formatter.push("-")
   formatter.push(getFormatter(now.getDate()));
+}
+
+function pushFormatterTime(time: BeicroonTime, formatter: Array<string>) {
+  formatter.push(" ");
+  formatter.push(time.hour);
+  formatter.push(":");
+  formatter.push(time.minute);
+  formatter.push(":");
+  formatter.push(time.second);
 }
 
 const clickHandler = ref(null as null | ((picker: Picker) => Promise<void>));
@@ -147,9 +159,10 @@ async function handlePrevClick(picker: Picker) {
 
   const res = [] as Array<string>;
 
-  pushFormatter(picker.date, res);
+  pushFormatterDate(picker.date, res);
+  pushFormatterTime(currentTime.value, res);
 
-  start.value = res.join("");
+  startValue.value = res.join("");
 }
 
 async function handleNextClick(picker: Picker) {
@@ -157,9 +170,10 @@ async function handleNextClick(picker: Picker) {
 
   const res = [] as Array<string>;
 
-  pushFormatter(picker.date, res);
+  pushFormatterDate(picker.date, res);
+  pushFormatterTime(currentTime.value, res);
 
-  end.value = res.join("");
+  endValue.value = res.join("");
 }
 
 async function handleClick(picker: Picker) {
@@ -169,16 +183,16 @@ async function handleClick(picker: Picker) {
 
   clickHandler.value && await clickHandler.value(picker);
 
-  if (start.value) {
-    emits("update:start", start.value);
+  if (startValue.value) {
+    emits("update:start", startValue.value);
   }
 
-  if (end.value) {
-    emits("update:end", end.value);
+  if (endValue.value) {
+    emits("update:end", endValue.value);
   }
 
-  if (start.value && end.value) {
-    emits("update:modelValue", `${start.value}~${end.value}`);
+  if (startValue.value && endValue.value) {
+    emits("update:modelValue", `${startValue.value}~${endValue.value}`);
   }
 
   await handleFocusout();
@@ -205,8 +219,8 @@ watch(current, () => {
 });
 
 function handleClear() {
-  start.value = "";
-  end.value = "";
+  startValue.value = "";
+  endValue.value = "";
 
   emits("update:start", null);
   emits("update:end", null);
@@ -217,12 +231,12 @@ function handleClear() {
 <template>
   <div class="beicroon-input beicroon-date" :class="{required: required, active: active}" @click.stop>
     <span class="beicroon-input-label">{{ label }}</span>
-    <input class="beicroon-input-area" type="text" :disabled="disabled" :placeholder="placeholder" v-model="modelValue"/>
+    <input class="beicroon-input-area" type="text" v-model="value" />
     <div class="beicroon-date-area">
       <input class="start" type="text"
              :disabled="disabled"
              :placeholder="placeholder"
-             v-model="start"
+             v-model="startValue"
              @focusin="handlePrevFocusin"
              @focusout="handleFocusout"
       />
@@ -230,7 +244,7 @@ function handleClear() {
       <input class="end" type="text"
              :disabled="disabled"
              :placeholder="placeholder"
-             v-model="end"
+             v-model="endValue"
              @focusin="handleNextFocusin"
              @focusout="handleFocusout"
       />

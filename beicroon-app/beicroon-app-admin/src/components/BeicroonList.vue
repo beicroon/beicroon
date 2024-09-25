@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import {List} from "@/utils/list.utils.ts";
 import {computed, ref, useSlots} from "vue";
+import onceEvent from "@/utils/onceEvent.utils.ts";
 import BeicroonButton from "@/components/BeicroonButton.vue";
 import BeicroonListTable from "@/components/BeicroonListTable.vue";
 import BeicroonLineVertical from "@/components/BeicroonLineVertical.vue";
@@ -18,9 +19,9 @@ async function toggleMoreSearch() {
   moreSearchHidden.value = !moreSearchHidden.value;
 
   if (moreSearchHidden.value) {
-    document.removeEventListener("click", toggleMoreSearch);
+    await onceEvent("click");
   } else {
-    document.addEventListener("click", toggleMoreSearch, {once: true});
+    await onceEvent("click", toggleMoreSearch);
   }
 }
 
