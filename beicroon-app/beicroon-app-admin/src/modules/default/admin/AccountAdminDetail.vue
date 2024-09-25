@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import {onMounted, ref} from "vue";
-import AccountAdminDetailView from ".//AccountAdminDetailView.vue";
+import AccountAdminDetailView from "./AccountAdminDetailView.vue";
 import {AccountAdminDetailVO as VO, detail} from "@/request/account-admin.http.ts";
 
 type Props = {

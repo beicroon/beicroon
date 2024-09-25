@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import {onMounted, ref} from "vue";
+import ResourceMenuDetailView from "./ResourceMenuDetailView.vue";
 import {detail, ResourceMenuDetailVO as VO} from "@/request/resource-menu.http.ts";
-import ResourceMenuDetailView from "@/modules/default/menu/ResourceMenuDetailView.vue";
 
 type Props = {
   id: string,
