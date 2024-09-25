@@ -248,10 +248,10 @@ async function handleConfirm() {
 </script>
 
 <template>
-  <div class="beicroon-input beicroon-date" :class="{required: required, active: active}" @click.stop>
+  <div class="beicroon-input beicroon-datetime" :class="{required: required, active: active}" @click.stop>
     <span class="beicroon-input-label">{{ label }}</span>
     <input class="beicroon-input-area" type="text" v-model="value" />
-    <div class="beicroon-date-area">
+    <div class="beicroon-datetime-area">
       <input class="start" type="text"
              :disabled="disabled"
              :placeholder="placeholder"
@@ -268,8 +268,8 @@ async function handleConfirm() {
              @focusout="handleFocusout"
       />
     </div>
-    <div class="beicroon-date-view" :class="{hidden: !active}" @mousedown="handleMouseDown" @mouseup="handleMouseUp">
-      <div class="beicroon-date-main" :class="className">
+    <div class="beicroon-datetime-view" :class="{hidden: !active}" @mousedown="handleMouseDown" @mouseup="handleMouseUp">
+      <div class="beicroon-datetime-main" :class="className">
         <div class="beicroon-month-picker">
           <beicroon-button label="<<" @click="subYear"></beicroon-button>
           <beicroon-button label="<" @click="subMonth"></beicroon-button>
@@ -288,8 +288,8 @@ async function handleConfirm() {
           >{{ picker.date.getDate() }}
           </li>
         </ul>
-        <div class="beicroon-date-foot" v-if="currentTime">
-          <ul class="beicroon-date-time">
+        <div class="beicroon-datetime-foot" v-if="currentTime">
+          <ul class="beicroon-time-picker">
             <li><input type="text" v-model="currentTime.hour" /></li>
             <li><span>:</span></li>
             <li><input type="text" v-model="currentTime.minute" /></li>
@@ -297,10 +297,10 @@ async function handleConfirm() {
             <li><input type="text" v-model="currentTime.second" /></li>
           </ul>
           <div class="beicroon-date-button">
+            <beicroon-button class="primary" label="关闭" @click="handleFocusout"></beicroon-button>
             <beicroon-button class="warning" label="清空" @click="handleClear"></beicroon-button>
             <beicroon-button class="primary" label="当前" @click="handleCurrent"></beicroon-button>
-            <beicroon-button class="primary" label="确定" @click="handleConfirm"></beicroon-button>
-            <beicroon-button class="primary" label="关闭" @click="handleFocusout"></beicroon-button>
+            <beicroon-button class="primary" label="选取" @click="handleConfirm"></beicroon-button>
           </div>
         </div>
       </div>
@@ -309,11 +309,11 @@ async function handleConfirm() {
 </template>
 
 <style lang="less">
-.beicroon-date {
+.beicroon-datetime {
   &.active {
     z-index: 9;
 
-    .beicroon-date-area {
+    .beicroon-datetime-area {
       border-color: var(--color-primary);
     }
   }
@@ -322,7 +322,7 @@ async function handleConfirm() {
     opacity: 0;
   }
 
-  .beicroon-date-area {
+  .beicroon-datetime-area {
     z-index: 1;
     left: 18rem;
     bottom: 14rem;
@@ -345,7 +345,7 @@ async function handleConfirm() {
     }
   }
 
-  .beicroon-date-view {
+  .beicroon-datetime-view {
     z-index: 1;
     right: 18rem;
     cursor: text;
@@ -358,7 +358,7 @@ async function handleConfirm() {
     transition: all 180ms linear;
   }
 
-  .beicroon-date-main {
+  .beicroon-datetime-main {
     padding: 6rem;
     height: 320rem;
     margin-top: 8rem;
@@ -439,14 +439,14 @@ async function handleConfirm() {
     }
   }
 
-  .beicroon-date-foot {
+  .beicroon-datetime-foot {
     display: flex;
     padding: 6rem 0;
     align-items: center;
     justify-content: space-between;
   }
 
-  .beicroon-date-time {
+  .beicroon-time-picker {
     gap: 4rem;
     display: flex;
     align-items: center;
