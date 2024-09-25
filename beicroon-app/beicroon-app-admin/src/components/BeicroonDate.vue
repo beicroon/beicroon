@@ -300,6 +300,7 @@ async function handleConfirm() {
             <beicroon-button class="warning" label="清空" @click="handleClear"></beicroon-button>
             <beicroon-button class="primary" label="当前" @click="handleCurrent"></beicroon-button>
             <beicroon-button class="primary" label="确定" @click="handleConfirm"></beicroon-button>
+            <beicroon-button class="primary" label="关闭" @click="handleFocusout"></beicroon-button>
           </div>
         </div>
       </div>
@@ -358,7 +359,7 @@ async function handleConfirm() {
   }
 
   .beicroon-date-main {
-    padding: 8rem;
+    padding: 6rem;
     height: 320rem;
     margin-top: 8rem;
     border-radius: 6rem;
@@ -440,7 +441,7 @@ async function handleConfirm() {
 
   .beicroon-date-foot {
     display: flex;
-    padding: 2rem 8rem;
+    padding: 6rem 0;
     align-items: center;
     justify-content: space-between;
   }
@@ -465,6 +466,11 @@ async function handleConfirm() {
       border-radius: 6rem;
       border: 1rem solid var(--color-grey-deeper);
     }
+  }
+
+  .beicroon-date-button {
+    gap: 2rem;
+    display: flex;
   }
 }
 </style>
