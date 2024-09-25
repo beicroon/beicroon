@@ -1,12 +1,10 @@
 <script setup lang="ts">
-import {computed, onMounted, ref, watch} from "vue";
-import {BeicroonTime} from "@/utils/datetime.utils.ts";
+import {computed, onMounted, reactive, ref, watch} from "vue";
 import BeicroonButton from "@/components/BeicroonButton.vue";
+import {BeicroonTime, Hour, Minute, Second} from "@/utils/datetime.utils.ts";
 
 type Props = {
   label: string,
-  start?: any,
-  end?: any,
   modelValue?: any,
   required?: boolean,
   disabled?: boolean,
@@ -23,31 +21,39 @@ const weeks = ["日", "一", "二", "三", "四", "五", "六"];
 
 const props = defineProps<Props>();
 
-const emits = defineEmits(["update:modelValue", "update:start", "update:end"]);
+const emits = defineEmits(["update:modelValue"]);
 
 const value = computed({
   get: () => props.modelValue,
   set: (val: any) => emits("update:modelValue", val),
 })
 
+watch(value, initValue);
+
+function initValue() {
+  if (value.value) {
+    const [start, end] = value.value.split("~");
+
+    startValue.value = start;
+
+    endValue.value = end;
+  } else {
+    startValue.value = null;
+
+    endValue.value = null;
+  }
+}
+
+const startValue = ref();
+const endValue = ref();
+
+onMounted(initValue)
+
 const active = ref(false);
 const clicking = ref(false);
 
 const current = ref();
-const prev = ref();
-const next = ref();
-
-const startValue = ref("");
-const endValue = ref("");
-
-const currentTime = ref({} as BeicroonTime);
-
-onMounted(() => {
-  const now = new Date();
-
-  prev.value = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-  next.value = new Date(now.getFullYear(), now.getMonth() + 1, now.getDate());
-});
+const currentTime = reactive({} as BeicroonTime);
 
 const pickers = ref([] as Array<Picker>);
 
@@ -84,9 +90,17 @@ const className = ref("");
 async function handlePrevFocusin() {
   className.value = "prev";
 
-  current.value = prev.value;
+  if (startValue.value) {
+    const date = new Date(startValue.value);
 
-  currentTime.value = {hour: "00", minute: "00", second: "00"};
+    setCurrent(date);
+  } else {
+    current.value = new Date();
+
+    currentTime.hour = "00"
+    currentTime.minute = "00"
+    currentTime.second = "00"
+  }
 
   clickHandler.value = handlePrevClick;
 
@@ -95,12 +109,28 @@ async function handlePrevFocusin() {
   document.addEventListener("click", handleFocusout, {once: true});
 }
 
+function setCurrent(date: Date) {
+  current.value = date;
+
+  currentTime.hour = getFormatter(date.getHours()) as Hour;
+  currentTime.minute = getFormatter(date.getMinutes()) as Minute;
+  currentTime.second = getFormatter(date.getSeconds()) as Second;
+}
+
 async function handleNextFocusin() {
   className.value = "next";
 
-  current.value = next.value;
+  if (endValue.value) {
+    const date = new Date(endValue.value);
 
-  currentTime.value = {hour: "23", minute: "59", second: "59"};
+    setCurrent(date);
+  } else {
+    current.value = new Date();
+
+    currentTime.hour = "23"
+    currentTime.minute = "59"
+    currentTime.second = "59"
+  }
 
   clickHandler.value = handleNextClick;
 
@@ -152,26 +182,22 @@ function pushFormatterTime(time: BeicroonTime, formatter: Array<string>) {
   formatter.push(time.second);
 }
 
-const clickHandler = ref(null as null | ((picker: Picker) => Promise<void>));
+const clickHandler = ref(null as null | (() => Promise<void>));
 
-async function handlePrevClick(picker: Picker) {
-  prev.value = picker.date;
-
+async function handlePrevClick() {
   const res = [] as Array<string>;
 
-  pushFormatterDate(picker.date, res);
-  pushFormatterTime(currentTime.value, res);
+  pushFormatterDate(current.value, res);
+  pushFormatterTime(currentTime, res);
 
   startValue.value = res.join("");
 }
 
-async function handleNextClick(picker: Picker) {
-  next.value = picker.date;
-
+async function handleNextClick() {
   const res = [] as Array<string>;
 
-  pushFormatterDate(picker.date, res);
-  pushFormatterTime(currentTime.value, res);
+  pushFormatterDate(current.value, res);
+  pushFormatterTime(currentTime, res);
 
   endValue.value = res.join("");
 }
@@ -181,21 +207,7 @@ async function handleClick(picker: Picker) {
     return;
   }
 
-  clickHandler.value && await clickHandler.value(picker);
-
-  if (startValue.value) {
-    emits("update:start", startValue.value);
-  }
-
-  if (endValue.value) {
-    emits("update:end", endValue.value);
-  }
-
-  if (startValue.value && endValue.value) {
-    emits("update:modelValue", `${startValue.value}~${endValue.value}`);
-  }
-
-  await handleFocusout();
+  current.value = picker.date;
 }
 
 function subMonth() {
@@ -219,12 +231,15 @@ watch(current, () => {
 });
 
 function handleClear() {
-  startValue.value = "";
-  endValue.value = "";
-
-  emits("update:start", null);
-  emits("update:end", null);
   emits("update:modelValue", null);
+}
+
+async function handleConfirm() {
+  clickHandler.value && await clickHandler.value();
+
+  if (startValue.value && endValue.value) {
+    emits("update:modelValue", `${startValue.value}~${endValue.value}`);
+  }
 }
 </script>
 
@@ -279,7 +294,7 @@ function handleClear() {
           </ul>
           <div class="beicroon-date-button">
             <beicroon-button class="warning" label="清空" @click="handleClear"></beicroon-button>
-            <beicroon-button class="primary" label="确定" @click="handleFocusout"></beicroon-button>
+            <beicroon-button class="primary" label="确定" @click="handleConfirm"></beicroon-button>
           </div>
         </div>
       </div>

@@ -16,7 +16,7 @@ import {page, remove, ResourceMenuPageVO as VO, ResourceMenuQueryDTO as DTO} fro
 
 const list = createBeicroonList<DTO, VO>("菜单", page);
 
-list.params.createdAt = '2024-08-01 18:00:00~2024-08-05 18:00:00';
+list.params.createdAt = '2024-08-01 18:00:24~2024-08-05 18:30:00';
 
 onMounted(list.resetSearch);
 
