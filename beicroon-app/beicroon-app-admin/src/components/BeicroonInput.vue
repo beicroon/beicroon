@@ -33,7 +33,7 @@ async function handleFocusout() {
 </script>
 
 <template>
-  <div class="beicroon-input" :class="{required: required, active: active}">
+  <div class="beicroon-input" :class="{required: required, active: active}" @click.stop>
     <span class="beicroon-input-label">{{ label }}</span>
     <input class="beicroon-input-area"
            :disabled="disabled"

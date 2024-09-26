@@ -75,7 +75,7 @@ async function removeNode(node: HTMLElement) {
 
     container.removeChild(node);
 
-    if (container.childNodes.length <= 0) {
+    if (container.children.length <= 0) {
         container.classList.add("hidden");
     }
 }
