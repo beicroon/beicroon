@@ -19,6 +19,7 @@
     <!--  请勿随意调整顺序  -->
     <modules>
         <module>beicroon-starter-async</module>
+        <module>beicroon-starter-auth</module>
         <module>beicroon-starter-cache</module>
         <module>beicroon-starter-cloud</module>
         <module>beicroon-starter-dao</module>
@@ -40,6 +41,12 @@
             <dependency>
                 <groupId>com.beicroon.starter</groupId>
                 <artifactId>beicroon-starter-async</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.beicroon.starter</groupId>
+                <artifactId>beicroon-starter-auth</artifactId>
                 <version>${project.version}</version>
             </dependency>
 

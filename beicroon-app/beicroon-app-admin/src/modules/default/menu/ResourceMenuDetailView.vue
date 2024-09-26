@@ -22,12 +22,12 @@ async function handleCancel() {
 <template>
   <beicroon-form class="beicroon-dialog-view">
     <div class="beicroon-dialog-main beicroon-dialog-input" v-if="data">
-      <beicroon-input disabled class="column" label="父级编码" placeholder="父级编码" v-model="data.parentCode"></beicroon-input>
-      <beicroon-input disabled class="column" label="父级名称" placeholder="父级名称" v-model="data.parentName"></beicroon-input>
-      <beicroon-input disabled class="column" label="编码" placeholder="编码" v-model="data.code"></beicroon-input>
-      <beicroon-input disabled class="column" label="名称" placeholder="名称" v-model="data.name"></beicroon-input>
-      <beicroon-input disabled class="column" label="路由" placeholder="路由" v-model="data.path"></beicroon-input>
-      <beicroon-input disabled class="column" label="排序" placeholder="排序" v-model="data.sorting"></beicroon-input>
+      <beicroon-input disabled class="column" label="父级编码" v-model="data.parentCode"></beicroon-input>
+      <beicroon-input disabled class="column" label="父级名称" v-model="data.parentName"></beicroon-input>
+      <beicroon-input disabled class="column" label="编码" v-model="data.code"></beicroon-input>
+      <beicroon-input disabled class="column" label="名称" v-model="data.name"></beicroon-input>
+      <beicroon-input disabled class="column" label="路由" v-model="data.path"></beicroon-input>
+      <beicroon-input disabled class="column" label="排序" v-model="data.sorting"></beicroon-input>
     </div>
     <div class="beicroon-dialog-loading" v-else>
       <beicroon-loading fill="#b3e5fc" width="100" height="100"></beicroon-loading>

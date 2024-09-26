@@ -262,10 +262,10 @@ public class ModuleMysqlMaker {
 
     private String getVueFormDisabledInputFieldString(Field field) {
         String template = """
-                      <beicroon-input disabled class="column" label="%s" placeholder="%s" v-model="form.%s"></beicroon-input>
+                      <beicroon-input disabled class="column" label="%s" v-model="form.%s"></beicroon-input>
                 """;
 
-        return String.format(template, field.getComment(), field.getComment(), field.getSnakeCaseName());
+        return String.format(template, field.getComment(), field.getSnakeCaseName());
     }
 
     private String getVueFormFieldFieldString(Field field) {

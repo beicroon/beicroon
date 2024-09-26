@@ -136,6 +136,7 @@ async function handleFocusout() {
 
     &[disabled] {
       cursor: text;
+      background-color: var(--color-grey-light);
     }
 
     &[type="number"] {

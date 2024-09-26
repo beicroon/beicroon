@@ -8,23 +8,31 @@
         <groupId>com.beicroon.starter</groupId>
         <artifactId>beicroon-starter</artifactId>
         <version>1.0.0</version>
-        <relativePath/>
     </parent>
 
-    <groupId>com.beicroon.gateway</groupId>
-    <artifactId>beicroon-gateway-admin</artifactId>
+    <artifactId>beicroon-starter-auth</artifactId>
     <version>1.0.0</version>
     <packaging>jar</packaging>
 
     <dependencies>
         <dependency>
-            <groupId>com.beicroon.starter</groupId>
-            <artifactId>beicroon-starter-auth</artifactId>
+            <groupId>com.beicroon.construct</groupId>
+            <artifactId>beicroon-construct-auth</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.beicroon.construct</groupId>
+            <artifactId>beicroon-construct-exception</artifactId>
         </dependency>
 
         <dependency>
             <groupId>com.beicroon.starter</groupId>
-            <artifactId>beicroon-starter-gateway</artifactId>
+            <artifactId>beicroon-starter-cache</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.beicroon.starter</groupId>
+            <artifactId>beicroon-starter-jwt</artifactId>
         </dependency>
     </dependencies>
 </project>
