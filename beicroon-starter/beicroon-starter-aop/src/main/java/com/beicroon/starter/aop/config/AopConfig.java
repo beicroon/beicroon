@@ -1,4 +1,4 @@
-package com.beicroon.starter.web.config;
+package com.beicroon.starter.aop.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
