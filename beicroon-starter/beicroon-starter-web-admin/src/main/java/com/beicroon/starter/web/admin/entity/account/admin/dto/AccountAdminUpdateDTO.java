@@ -18,10 +18,6 @@ public class AccountAdminUpdateDTO extends UpdateDTO {
     @ApiModelProperty(name = "昵称")
     private String name;
 
-    @NeedValue(message = "账号[username]不能为空")
-    @ApiModelProperty(name = "账号")
-    private String username;
-
     @ApiModelProperty(name = "密码")
     private String password;
 

@@ -96,11 +96,15 @@ public class AccountAdminService implements IAccountAdminService {
     @Override
     public boolean create(AccountAdminCreateDTO dto) {
         if (this.accountAdminRepository.existed(AccountAdminModel::getCode, dto.getCode())) {
-            throw ExceptionUtils.business("账号编码已被占用");
+            throw ExceptionUtils.business("编码已被占用");
         }
 
-        if (this.accountAdminRepository.existed(AccountAdminModel::getName, dto.getCode())) {
-            throw ExceptionUtils.business("账号编码已被占用");
+        if (this.accountAdminRepository.existed(AccountAdminModel::getName, dto.getName())) {
+            throw ExceptionUtils.business("昵称已被占用");
+        }
+
+        if (this.accountAdminRepository.existed(AccountAdminModel::getUsername, dto.getUsername())) {
+            throw ExceptionUtils.business("账号已被占用");
         }
 
         AccountAdminModel creator = this.accountAdminConvertor.toEntity(dto);
@@ -112,6 +116,10 @@ public class AccountAdminService implements IAccountAdminService {
 
     @Override
     public boolean update(AccountAdminUpdateDTO dto) {
+        if (this.accountAdminRepository.existed(AccountAdminModel::getName, dto.getName(), dto.getId())) {
+            throw ExceptionUtils.business("昵称已被占用");
+        }
+
         AccountAdminModel updater = this.accountAdminConvertor.toEntity(dto);
 
         if (EmptyUtils.isNotEmpty(updater.getPassword())) {
