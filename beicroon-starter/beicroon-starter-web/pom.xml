@@ -77,6 +77,11 @@
 
         <dependency>
             <groupId>com.beicroon.starter</groupId>
+            <artifactId>beicroon-starter-aop</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.beicroon.starter</groupId>
             <artifactId>beicroon-starter-async</artifactId>
         </dependency>
 
