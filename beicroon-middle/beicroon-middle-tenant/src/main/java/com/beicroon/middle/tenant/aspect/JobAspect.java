@@ -25,8 +25,8 @@ public class JobAspect {
     @Resource
     private TenantJobHandler tenantJobHandler;
 
-    @Around("@annotation(xxlJob)")
-    public Object around(ProceedingJoinPoint joinPoint, XxlJob xxlJob) {
+    @Around("@annotation(job)")
+    public Object around(ProceedingJoinPoint joinPoint, XxlJob job) {
         Set<Long> tenantIds = this.tenantIdManager.getTenantIds();
 
         for (Long tenantId : tenantIds) {
@@ -34,7 +34,7 @@ public class JobAspect {
 
             AuthUtils.clear();
 
-            this.tenantJobHandler.handle(tenantId, joinPoint, xxlJob);
+            this.tenantJobHandler.handle(tenantId, joinPoint, job);
         }
 
         return null;
