@@ -26,7 +26,7 @@ public class VueDetailContent {
 
             onMounted(async () => {
               const {data} = await detail(props.id);
-            
+                        
               form.value = data;
             });
             </script>

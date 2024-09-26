@@ -54,7 +54,7 @@
             <groupId>com.beicroon.construct</groupId>
             <artifactId>beicroon-construct-constant</artifactId>
         </dependency>
-        
+
         <dependency>
             <groupId>com.beicroon.construct</groupId>
             <artifactId>beicroon-construct-entity</artifactId>

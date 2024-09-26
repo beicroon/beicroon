@@ -17,11 +17,6 @@
     <dependencies>
         <dependency>
             <groupId>com.beicroon.construct</groupId>
-            <artifactId>beicroon-construct-auth</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.beicroon.construct</groupId>
             <artifactId>beicroon-construct-exception</artifactId>
         </dependency>
 

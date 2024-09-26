@@ -6,7 +6,7 @@ public class ApplicationFatYmlContent {
             logging:
               level:
                 {{basePackage}}: DEBUG
-            
+                        
             mybatis-plus:
               configuration:
                 log-impl: org.apache.ibatis.logging.slf4j.Slf4jImpl

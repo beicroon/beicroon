@@ -16,7 +16,7 @@ async function handleSubmit() {
     const inputArea = input.querySelector(SelectorEnums.INPUT_AREA)  as HTMLInputElement;
 
     if (!inputArea.value) {
-      await toast("请填写必填项", "error");
+      await toast(`请填写必填项`, "error");
 
       inputArea.focus();
 

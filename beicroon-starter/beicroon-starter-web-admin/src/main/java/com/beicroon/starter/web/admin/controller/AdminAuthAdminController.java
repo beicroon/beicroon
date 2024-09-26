@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Validated
 @RestController
 @ApiTag(name = "认证相关")
 @RequestMapping("/api/admin/admin")
@@ -24,7 +25,7 @@ public class AdminAuthAdminController {
 
     @ApiOperation(name = "登录认证")
     @PostMapping("/auth-admin-login")
-    public Result<AuthAdminLoginVO> login(@Validated @RequestBody AuthAdminLoginDTO dto) {
+    public Result<AuthAdminLoginVO> login(@RequestBody AuthAdminLoginDTO dto) {
         return WebResult.success(this.authAdminService.login(dto));
     }
 

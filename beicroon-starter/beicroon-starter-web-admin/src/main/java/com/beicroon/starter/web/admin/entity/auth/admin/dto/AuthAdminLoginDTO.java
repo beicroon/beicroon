@@ -2,8 +2,8 @@ package com.beicroon.starter.web.admin.entity.auth.admin.dto;
 
 import com.beicroon.construct.annotation.ApiModel;
 import com.beicroon.construct.annotation.ApiModelProperty;
-import com.beicroon.construct.annotation.NeedValue;
 import com.beicroon.construct.entity.BaseDTO;
+import com.beicroon.construct.validator.annotation.NeedValue;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 

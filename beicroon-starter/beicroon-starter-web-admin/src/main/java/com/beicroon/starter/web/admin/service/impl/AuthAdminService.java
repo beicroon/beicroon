@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.beicroon.construct.exception.utils.ExceptionUtils;
 import com.beicroon.construct.utils.HashUtils;
 import com.beicroon.construct.utils.ListUtils;
+import com.beicroon.starter.cache.template.CacheTemplate;
 import com.beicroon.starter.jwt.utils.JwtUtils;
 import com.beicroon.starter.web.admin.convertor.ResourceMenuConvertor;
 import com.beicroon.starter.web.admin.entity.auth.admin.dto.AuthAdminLoginDTO;
@@ -16,7 +17,6 @@ import com.beicroon.starter.web.admin.model.ResourceMenuModel;
 import com.beicroon.starter.web.admin.model.ResourceRoleModel;
 import com.beicroon.starter.web.admin.repository.AccountAdminRepository;
 import com.beicroon.starter.web.admin.repository.ResourceMenuRepository;
-import com.beicroon.starter.web.admin.repository.ResourceRoleMenuRepository;
 import com.beicroon.starter.web.admin.service.IAuthAdminService;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
@@ -38,10 +38,10 @@ public class AuthAdminService implements IAuthAdminService {
     private ResourceMenuRepository resourceMenuRepository;
 
     @Resource
-    private ResourceRoleMenuRepository resourceRoleMenuRepository;
+    private ResourceRoleManager resourceRoleManager;
 
     @Resource
-    private ResourceRoleManager resourceRoleManager;
+    private CacheTemplate cacheTemplate;
 
     @Override
     public AuthAdminLoginVO login(AuthAdminLoginDTO dto) {
@@ -60,6 +60,8 @@ public class AuthAdminService implements IAuthAdminService {
         vo.setCode(admin.getCode());
         vo.setName(admin.getName());
         vo.setToken(token);
+
+        this.cacheTemplate.set(String.valueOf(admin.getId()), token);
 
         return vo;
     }

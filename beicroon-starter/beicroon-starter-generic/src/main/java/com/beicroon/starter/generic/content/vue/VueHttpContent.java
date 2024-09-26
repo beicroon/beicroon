@@ -14,12 +14,12 @@ public class VueHttpContent {
 
             // 详情返回字段
             export type {{filename}}DetailVO = {{filename}}BaseVO & {
-            
+                        
             }
 
             // 分页返回字段
             export type {{filename}}PageVO = {{filename}}BaseVO & {
-            
+                        
             }
 
             // 新增参数字段

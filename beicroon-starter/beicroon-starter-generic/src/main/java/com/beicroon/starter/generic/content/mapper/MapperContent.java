@@ -7,12 +7,12 @@ public class MapperContent {
 
     private static final String CONTENT = """
             package {{package}}.mapper;
-            
+                        
             import {{package}}.model.{{filename}}Model;
             import com.beicroon.starter.mysql.mapper.GenericMapper;
-            
+                        
             public interface {{filename}}Mapper extends GenericMapper<{{filename}}Model> {
-            
+                        
             }
             """;
 
@@ -21,5 +21,5 @@ public class MapperContent {
                 .replace("{{package}}", packageManager.getDaoPackage())
                 .replace("{{filename}}", table.getFilename());
     }
-    
+
 }

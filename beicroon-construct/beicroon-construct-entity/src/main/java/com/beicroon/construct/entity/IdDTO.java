@@ -1,7 +1,7 @@
 package com.beicroon.construct.entity;
 
 import com.beicroon.construct.annotation.ApiModelProperty;
-import com.beicroon.construct.annotation.NeedValue;
+import com.beicroon.construct.validator.annotation.NeedValue;
 import lombok.Data;
 
 import java.io.Serial;

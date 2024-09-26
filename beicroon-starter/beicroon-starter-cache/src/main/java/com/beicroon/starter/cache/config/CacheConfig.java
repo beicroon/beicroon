@@ -84,8 +84,8 @@ public class CacheConfig {
 
         manager.setCaffeine(
                 Caffeine.newBuilder()
-                .expireAfterWrite(EXPIRE_AFTER_WRITE, TimeUnit.MINUTES)
-                .maximumSize(MAXIMUM_SIZE)
+                        .expireAfterWrite(EXPIRE_AFTER_WRITE, TimeUnit.MINUTES)
+                        .maximumSize(MAXIMUM_SIZE)
         );
 
         return manager;

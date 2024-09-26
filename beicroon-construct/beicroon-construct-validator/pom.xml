@@ -10,29 +10,24 @@
         <version>1.0.0</version>
     </parent>
 
-    <artifactId>beicroon-construct-entity</artifactId>
+    <artifactId>beicroon-construct-validator</artifactId>
     <version>1.0.0</version>
     <packaging>jar</packaging>
 
     <dependencies>
         <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-annotations</artifactId>
+            <groupId>jakarta.validation</groupId>
+            <artifactId>jakarta.validation-api</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.hibernate.validator</groupId>
+            <artifactId>hibernate-validator</artifactId>
         </dependency>
 
         <dependency>
             <groupId>com.beicroon.construct</groupId>
-            <artifactId>beicroon-construct-annotation</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.beicroon.construct</groupId>
-            <artifactId>beicroon-construct-interfaces</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.beicroon.construct</groupId>
-            <artifactId>beicroon-construct-validator</artifactId>
+            <artifactId>beicroon-construct-utils</artifactId>
         </dependency>
     </dependencies>
 </project>

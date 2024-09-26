@@ -2,7 +2,8 @@
 <configuration>
     <!-- 彩色日志依赖 -->
     <conversionRule conversionWord="clr" converterClass="org.springframework.boot.logging.logback.ColorConverter"/>
-    <conversionRule conversionWord="ewt" converterClass="org.springframework.boot.logging.logback.ExtendedWhitespaceThrowableProxyConverter"/>
+    <conversionRule conversionWord="ewt"
+                    converterClass="org.springframework.boot.logging.logback.ExtendedWhitespaceThrowableProxyConverter"/>
 
     <!-- 从Spring上下文中获取属性 -->
     <springProperty scope="context" name="springAppName" source="spring.application.name"/>
@@ -10,8 +11,10 @@
 
     <!-- 定义变量 -->
     <property name="LOG_PATH" value="/opt/app/logs/${springAppName}"/>
-    <property name="FILE_PATTERN" value="[%d{yyyy-MM-dd HH:mm:ss.SSS}] - %X{traceId} -%5p - ${PID:- } --- [%15.15t] %-40.40logger{39} : %m%n%ewt"/>
-    <property name="CONSOLE_PATTERN" value="[%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint}] %clr(- %X{traceId}){cyan} %clr(-%5p) %clr(- ${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n%ewt"/>
+    <property name="FILE_PATTERN"
+              value="[%d{yyyy-MM-dd HH:mm:ss.SSS}] - %X{traceId} -%5p - ${PID:- } --- [%15.15t] %-40.40logger{39} : %m%n%ewt"/>
+    <property name="CONSOLE_PATTERN"
+              value="[%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint}] %clr(- %X{traceId}){cyan} %clr(-%5p) %clr(- ${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n%ewt"/>
 
     <!-- 控制台日志输出 -->
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">

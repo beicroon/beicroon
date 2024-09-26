@@ -26,5 +26,5 @@ public class RelationRepositoryContent {
                 .replace("{{modulePackage}}", packageManager.getEntityPackage() + "." + table.getPackage())
                 .replace("{{filename}}", table.getFilename());
     }
-    
+
 }

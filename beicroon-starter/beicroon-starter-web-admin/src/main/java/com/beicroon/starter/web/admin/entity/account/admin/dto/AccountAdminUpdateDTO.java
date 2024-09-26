@@ -2,9 +2,9 @@ package com.beicroon.starter.web.admin.entity.account.admin.dto;
 
 import com.beicroon.construct.annotation.ApiModel;
 import com.beicroon.construct.annotation.ApiModelProperty;
-import com.beicroon.construct.annotation.NeedValue;
 import com.beicroon.construct.constant.RegexConstant;
 import com.beicroon.construct.entity.UpdateDTO;
+import com.beicroon.construct.validator.annotation.NeedValue;
 import jakarta.validation.constraints.Pattern;
 import lombok.Data;
 import lombok.EqualsAndHashCode;

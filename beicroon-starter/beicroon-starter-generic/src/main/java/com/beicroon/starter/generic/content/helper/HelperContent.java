@@ -7,7 +7,7 @@ public class HelperContent {
 
     private static final String CONTENT = """
             package {{package}}.helper;
-            
+                        
             import lombok.extern.slf4j.Slf4j;
 
             @Slf4j

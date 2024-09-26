@@ -34,5 +34,5 @@ public class RepositoryContent {
                 .replace("{{modulePackage}}", packageManager.getEntityPackage() + "." + table.getPackage())
                 .replace("{{filename}}", table.getFilename());
     }
-    
+
 }

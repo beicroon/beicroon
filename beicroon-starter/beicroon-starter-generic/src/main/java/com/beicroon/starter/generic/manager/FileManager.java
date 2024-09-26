@@ -420,7 +420,7 @@ public class FileManager {
     public File getServiceImplFile(Table table) {
         return new File(this.getServiceImplPath(), String.format(FILENAME_SERVICE_IMPL, table.getFilename()));
     }
-    
+
     public static File getVueHttpFile(File modulePath, Table table) {
         return new File(modulePath, String.format(FILENAME_VUE_HTTP, table.getVueFilename()));
     }
