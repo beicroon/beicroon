@@ -70,7 +70,7 @@ const parentName = ref();
       ></resource-menu-select>
       <beicroon-input class="column" label="编码" v-model="list.params.code"></beicroon-input>
       <beicroon-input class="column" label="名称" v-model="list.params.name"></beicroon-input>
-      <beicroon-datetime class="column" label="创建时间" v-model="list.params.createdAt"></beicroon-datetime>
+      <beicroon-datetime class="column" label="创建时间" :time="false" v-model="list.params.createdAt"></beicroon-datetime>
     </template>
   </beicroon-list>
 </template>

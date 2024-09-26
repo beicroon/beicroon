@@ -9,6 +9,7 @@ type Props = {
   required?: boolean,
   disabled?: boolean,
   placeholder?: string,
+  time?: boolean,
 };
 
 type Picker = {
@@ -19,7 +20,9 @@ type Picker = {
 
 const weeks = ["日", "一", "二", "三", "四", "五", "六"];
 
-const props = defineProps<Props>();
+const props = withDefaults(defineProps<Props>(), {
+  time: true,
+});
 
 const emits = defineEmits(["update:modelValue"]);
 
@@ -188,7 +191,10 @@ async function handlePrevClick() {
   const res = [] as Array<string>;
 
   pushFormatterDate(current.value, res);
-  pushFormatterTime(currentTime, res);
+
+  if (props.time) {
+    pushFormatterTime(currentTime, res);
+  }
 
   startValue.value = res.join("");
 }
@@ -197,7 +203,10 @@ async function handleNextClick() {
   const res = [] as Array<string>;
 
   pushFormatterDate(current.value, res);
-  pushFormatterTime(currentTime, res);
+
+  if (props.time) {
+    pushFormatterTime(currentTime, res);
+  }
 
   endValue.value = res.join("");
 }
@@ -289,7 +298,7 @@ async function handleConfirm() {
           </li>
         </ul>
         <div class="beicroon-datetime-foot" v-if="currentTime">
-          <ul class="beicroon-time-picker">
+          <ul class="beicroon-time-picker" :class="{show: time}">
             <li><input type="text" v-model="currentTime.hour" /></li>
             <li><span>:</span></li>
             <li><input type="text" v-model="currentTime.minute" /></li>
@@ -297,7 +306,6 @@ async function handleConfirm() {
             <li><input type="text" v-model="currentTime.second" /></li>
           </ul>
           <div class="beicroon-date-button">
-            <beicroon-button class="primary" label="关闭" @click="handleFocusout"></beicroon-button>
             <beicroon-button class="warning" label="清空" @click="handleClear"></beicroon-button>
             <beicroon-button class="primary" label="当前" @click="handleCurrent"></beicroon-button>
             <beicroon-button class="primary" label="选取" @click="handleConfirm"></beicroon-button>
@@ -348,7 +356,6 @@ async function handleConfirm() {
   .beicroon-datetime-view {
     z-index: 1;
     right: 18rem;
-    cursor: text;
     width: 300rem;
     height: 328rem;
     overflow: hidden;
@@ -416,6 +423,7 @@ async function handleConfirm() {
     grid-template-columns: repeat(7, 1fr);
 
     li {
+      cursor: text;
       height: 32rem;
       display: flex;
       border-radius: 6rem;
@@ -448,8 +456,15 @@ async function handleConfirm() {
 
   .beicroon-time-picker {
     gap: 4rem;
+    opacity: 0;
     display: flex;
+    visibility: hidden;
     align-items: center;
+
+    &.show {
+      opacity: 1;
+      visibility: visible;
+    }
 
     li {
       display: flex;
