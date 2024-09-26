@@ -62,15 +62,14 @@ const parentName = ref();
       </beicroon-list-row>
     </template>
     <template #more-search>
+      <beicroon-datetime class="column" label="创建时间" v-model="list.params.createdAt"></beicroon-datetime>
       <resource-menu-select
-        class="column"
-        label="父级"
+        class="column" label="父级"
         v-model="list.params.parentId"
         v-model:show-value="parentName"
       ></resource-menu-select>
       <beicroon-input class="column" label="编码" v-model="list.params.code"></beicroon-input>
       <beicroon-input class="column" label="名称" v-model="list.params.name"></beicroon-input>
-      <beicroon-datetime class="column" label="创建时间" :time="false" v-model="list.params.createdAt"></beicroon-datetime>
     </template>
   </beicroon-list>
 </template>

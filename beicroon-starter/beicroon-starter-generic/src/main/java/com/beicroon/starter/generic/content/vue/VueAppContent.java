@@ -16,6 +16,7 @@ public class VueAppContent {
             import BeicroonButton from "@/components/BeicroonButton.vue";
             import BeicroonListRow from "@/components/BeicroonListRow.vue";
             import BeicroonListCell from "@/components/BeicroonListCell.vue";
+            import BeicroonDatetime from "@/components/BeicroonDatetime.vue";
             import BeicroonListCellButton from "@/components/BeicroonListCellButton.vue";
             import {page, remove, {{filename}}PageVO as VO, {{filename}}QueryDTO as DTO} from "./{{vueFilename}}.http.utils.ts";
 
@@ -49,6 +50,7 @@ public class VueAppContent {
                   </beicroon-list-row>
                 </template>
                 <template #more-search>
+                  <beicroon-datetime class="column" label="创建时间" v-model="list.params.createdAt"></beicroon-datetime>
                   {{moreSearch}}
                 </template>
               </beicroon-list>
