@@ -19,7 +19,7 @@ public final class RemoveHelper {
         wrapper.set("`removed_at`", LocalDateTime.now());
         wrapper.set("`remover_id`", user.getId());
         wrapper.set("`remover_code`", user.getCode());
-        wrapper.set("`remover_name`", user.getNickname());
+        wrapper.set("`remover_name`", user.getName());
     }
 
 }

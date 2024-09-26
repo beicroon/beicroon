@@ -14,16 +14,16 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 public class AccountAdminUpdateDTO extends UpdateDTO {
 
+    @NeedValue(message = "昵称[name]不能为空")
+    @ApiModelProperty(name = "昵称")
+    private String name;
+
     @NeedValue(message = "账号[username]不能为空")
     @ApiModelProperty(name = "账号")
     private String username;
 
     @ApiModelProperty(name = "密码")
     private String password;
-
-    @NeedValue(message = "昵称[nickname]不能为空")
-    @ApiModelProperty(name = "昵称")
-    private String nickname;
 
     @Pattern(regexp = RegexConstant.CELLPHONE, message = "电话格式不正确")
     @ApiModelProperty(name = "电话")

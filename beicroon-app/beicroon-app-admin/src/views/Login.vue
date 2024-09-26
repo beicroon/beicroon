@@ -15,7 +15,7 @@ const form = reactive<LoginDTO>({
 async function handleSubmit() {
   const res = await login(form);
 
-  const user = {code: res.data.code, nickname: res.data.nickname} as AuthUser;
+  const user = {code: res.data.code, name: res.data.name} as AuthUser;
 
   localStorage.setItem(CacheKeyEnums.AUTHORIZATION_USER, JSON.stringify(user));
   localStorage.setItem(CacheKeyEnums.AUTHORIZATION_TOKEN, res.data.token);

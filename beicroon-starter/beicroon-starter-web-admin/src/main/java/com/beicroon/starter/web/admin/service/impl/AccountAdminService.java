@@ -6,6 +6,7 @@ import com.beicroon.construct.auth.utils.AuthUtils;
 import com.beicroon.construct.entity.IdsDTO;
 import com.beicroon.construct.entity.PageInfo;
 import com.beicroon.construct.enums.BooleanEnums;
+import com.beicroon.construct.exception.utils.ExceptionUtils;
 import com.beicroon.construct.utils.EmptyUtils;
 import com.beicroon.construct.utils.HashUtils;
 import com.beicroon.construct.utils.ListUtils;
@@ -94,6 +95,14 @@ public class AccountAdminService implements IAccountAdminService {
 
     @Override
     public boolean create(AccountAdminCreateDTO dto) {
+        if (this.accountAdminRepository.existed(AccountAdminModel::getCode, dto.getCode())) {
+            throw ExceptionUtils.business("账号编码已被占用");
+        }
+
+        if (this.accountAdminRepository.existed(AccountAdminModel::getName, dto.getCode())) {
+            throw ExceptionUtils.business("账号编码已被占用");
+        }
+
         AccountAdminModel creator = this.accountAdminConvertor.toEntity(dto);
 
         creator.setPassword(HashUtils.getPasswordHash(creator.getPassword(), JwtUtils.getSaltString()));

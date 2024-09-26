@@ -16,6 +16,10 @@ public class AccountAdminQueryDTO extends QueryDTO {
     @ApiModelProperty(name = "编码")
     private String code;
 
+    @FieldSearch(name = "`name`")
+    @ApiModelProperty(name = "昵称")
+    private String name;
+
     @FieldSearch(name = "`username`")
     @ApiModelProperty(name = "账号")
     private String username;
@@ -23,10 +27,6 @@ public class AccountAdminQueryDTO extends QueryDTO {
     @FieldSearch(name = "`password`")
     @ApiModelProperty(name = "密码")
     private String password;
-
-    @FieldSearch(name = "`nickname`")
-    @ApiModelProperty(name = "昵称")
-    private String nickname;
 
     @FieldSearch(name = "`phone`")
     @ApiModelProperty(name = "电话")

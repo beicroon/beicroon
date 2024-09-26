@@ -8,13 +8,13 @@ export type LoginDTO = {
 
 export type LoginVO = {
     code: string;
-    nickname: string;
+    name: string;
     token: string;
 };
 
 export type AuthUser = {
     code: string;
-    nickname: string;
+    name: string;
 };
 
 export async function login(dto: LoginDTO): Promise<Response<LoginVO>> {

@@ -25,11 +25,11 @@ public final class ConvertorHelper {
         t.setCreatedAt(LocalDateTime.now());
         t.setCreatorId(authUser.getId());
         t.setCreatorCode(authUser.getCode());
-        t.setCreatorName(authUser.getNickname());
+        t.setCreatorName(authUser.getName());
         t.setModifiedAt(t.getCreatedAt());
         t.setModifierId(authUser.getId());
         t.setModifierCode(authUser.getCode());
-        t.setModifierName(authUser.getNickname());
+        t.setModifierName(authUser.getName());
         t.setId(IdWorker.getId(t));
     }
 
@@ -39,7 +39,7 @@ public final class ConvertorHelper {
         t.setModifiedAt(LocalDateTime.now());
         t.setModifierId(authUser.getId());
         t.setModifierCode(authUser.getCode());
-        t.setModifierName(authUser.getNickname());
+        t.setModifierName(authUser.getName());
     }
 
     public static <T extends GenericModel> void cover(T from, T to) {

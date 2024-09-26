@@ -58,7 +58,7 @@ public class AuthAdminService implements IAuthAdminService {
         String token = JwtUtils.admin(admin);
 
         vo.setCode(admin.getCode());
-        vo.setNickname(admin.getNickname());
+        vo.setName(admin.getName());
         vo.setToken(token);
 
         return vo;

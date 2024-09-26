@@ -19,6 +19,10 @@ public class AccountAdminModel extends GenericModel implements IAuthUser {
     @ApiModelProperty(name = "编码")
     private String code;
 
+    @TableField(value = "`name`")
+    @ApiModelProperty(name = "昵称")
+    private String name;
+
     @TableField(value = "`username`")
     @ApiModelProperty(name = "账号")
     private String username;
@@ -26,10 +30,6 @@ public class AccountAdminModel extends GenericModel implements IAuthUser {
     @TableField(value = "`password`")
     @ApiModelProperty(name = "密码")
     private String password;
-
-    @TableField(value = "`nickname`")
-    @ApiModelProperty(name = "昵称")
-    private String nickname;
 
     @TableField(value = "`phone`")
     @ApiModelProperty(name = "电话")

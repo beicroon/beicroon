@@ -15,7 +15,7 @@ public class AuthAdminLoginVO extends BaseVO {
     private String code;
 
     @ApiModelProperty(name = "昵称")
-    private String nickname;
+    private String name;
 
     @ApiModelProperty(name = "令牌")
     private String token;

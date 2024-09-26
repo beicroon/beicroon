@@ -87,7 +87,7 @@ public final class JwtUtils {
                 .expirationTime(new Date(System.currentTimeMillis() + JwtConstant.DURATION))
                 .claim("role", role.getCode())
                 .claim("code", user.getCode())
-                .claim("nickname", user.getNickname())
+                .claim("name", user.getName())
                 .build();
 
         JWSHeader jwsHeader = new JWSHeader.Builder(JWSAlgorithm.HS256)
@@ -137,7 +137,7 @@ public final class JwtUtils {
         authUser.setId(NumberUtils.longOf(claimsSet.getSubject()));
         authUser.setRole((String) claimsSet.getClaim("role"));
         authUser.setCode((String) claimsSet.getClaim("code"));
-        authUser.setNickname((String) claimsSet.getClaim("nickname"));
+        authUser.setName((String) claimsSet.getClaim("name"));
 
         return authUser;
     }

@@ -22,7 +22,7 @@
 ```
 UserModel user = this.userRepository.findById(1L);
 
-user.setName("nickname");
+user.setName("name");
 user.setAge(20);
 
 this.userRepository.updateById(user);

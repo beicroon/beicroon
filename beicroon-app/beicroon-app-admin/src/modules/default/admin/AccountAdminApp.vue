@@ -36,8 +36,8 @@ function adminRoleAssign(item: VO) {
   <beicroon-list :list="list">
     <template #head-search>
       <beicroon-input label="编码" v-model="list.params.code"></beicroon-input>
+      <beicroon-input label="昵称" v-model="list.params.name"></beicroon-input>
       <beicroon-input label="账号" v-model="list.params.username"></beicroon-input>
-      <beicroon-input label="昵称" v-model="list.params.nickname"></beicroon-input>
     </template>
     <template #head-button>
       <beicroon-button class="block primary" label="重置" @click="list.handleReset"></beicroon-button>
@@ -46,8 +46,8 @@ function adminRoleAssign(item: VO) {
     </template>
     <template #table-title>
       <beicroon-list-cell width="180">编码</beicroon-list-cell>
-      <beicroon-list-cell width="180">账号</beicroon-list-cell>
       <beicroon-list-cell width="180">昵称</beicroon-list-cell>
+      <beicroon-list-cell width="180">账号</beicroon-list-cell>
       <beicroon-list-cell width="180">电话</beicroon-list-cell>
       <beicroon-list-cell width="180">邮箱</beicroon-list-cell>
       <beicroon-list-cell-button>操作</beicroon-list-cell-button>
@@ -55,8 +55,8 @@ function adminRoleAssign(item: VO) {
     <template #table-body>
       <beicroon-list-row v-for="item in list.data">
         <beicroon-list-cell>{{ item.code }}</beicroon-list-cell>
+        <beicroon-list-cell>{{ item.name }}</beicroon-list-cell>
         <beicroon-list-cell>{{ item.username }}</beicroon-list-cell>
-        <beicroon-list-cell>{{ item.nickname }}</beicroon-list-cell>
         <beicroon-list-cell>{{ item.phone }}</beicroon-list-cell>
         <beicroon-list-cell>{{ item.email }}</beicroon-list-cell>
         <beicroon-list-cell-button>
@@ -69,8 +69,8 @@ function adminRoleAssign(item: VO) {
     </template>
     <template #more-search>
       <beicroon-input class="column" label="编码" v-model="list.params.code"></beicroon-input>
+      <beicroon-input class="column" label="昵称" v-model="list.params.name"></beicroon-input>
       <beicroon-input class="column" label="账号" v-model="list.params.username"></beicroon-input>
-      <beicroon-input class="column" label="昵称" v-model="list.params.nickname"></beicroon-input>
       <beicroon-input class="column" label="电话" v-model="list.params.phone"></beicroon-input>
       <beicroon-input class="column" label="邮箱" v-model="list.params.email"></beicroon-input>
     </template>

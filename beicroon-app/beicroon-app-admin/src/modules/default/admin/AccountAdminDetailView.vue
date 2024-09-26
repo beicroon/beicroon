@@ -23,8 +23,8 @@ async function handleCancel() {
   <beicroon-form class="beicroon-dialog-view">
     <div class="beicroon-dialog-main beicroon-dialog-input" v-if="data">
       <beicroon-input disabled class="column" label="编码" placeholder="编码" v-model="data.code"></beicroon-input>
+      <beicroon-input disabled class="column" label="昵称" placeholder="昵称" v-model="data.name"></beicroon-input>
       <beicroon-input disabled class="column" label="账号" placeholder="账号" v-model="data.username"></beicroon-input>
-      <beicroon-input disabled class="column" label="昵称" placeholder="昵称" v-model="data.nickname"></beicroon-input>
       <beicroon-input disabled class="column" label="电话" placeholder="电话" v-model="data.phone"></beicroon-input>
       <beicroon-input disabled class="column" label="邮箱" placeholder="邮箱" v-model="data.email"></beicroon-input>
     </div>

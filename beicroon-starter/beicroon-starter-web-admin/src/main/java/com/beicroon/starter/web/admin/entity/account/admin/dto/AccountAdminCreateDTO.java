@@ -18,6 +18,10 @@ public class AccountAdminCreateDTO extends CreateDTO {
     @ApiModelProperty(name = "编码")
     private String code;
 
+    @NeedValue(message = "昵称[name]不能为空")
+    @ApiModelProperty(name = "昵称")
+    private String name;
+
     @NeedValue(message = "账号[username]不能为空")
     @ApiModelProperty(name = "账号")
     private String username;
@@ -25,10 +29,6 @@ public class AccountAdminCreateDTO extends CreateDTO {
     @NeedValue(message = "密码[password]不能为空")
     @ApiModelProperty(name = "密码")
     private String password;
-
-    @NeedValue(message = "昵称[nickname]不能为空")
-    @ApiModelProperty(name = "昵称")
-    private String nickname;
 
     @Pattern(regexp = RegexConstant.CELLPHONE, message = "电话格式不正确")
     @ApiModelProperty(name = "电话")

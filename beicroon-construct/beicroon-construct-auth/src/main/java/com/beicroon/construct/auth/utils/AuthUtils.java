@@ -17,7 +17,7 @@ public final class AuthUtils {
 
         system.setId(0L);
         system.setCode("system");
-        system.setNickname("系统");
+        system.setName("系统");
 
         return system;
     }

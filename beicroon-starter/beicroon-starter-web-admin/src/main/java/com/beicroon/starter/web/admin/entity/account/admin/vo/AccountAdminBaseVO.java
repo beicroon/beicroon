@@ -14,14 +14,14 @@ public class AccountAdminBaseVO extends GenericVO {
     @ApiModelProperty(name = "编码")
     private String code;
 
+    @ApiModelProperty(name = "昵称")
+    private String name;
+
     @ApiModelProperty(name = "账号")
     private String username;
 
     @ApiModelProperty(name = "密码")
     private String password;
-
-    @ApiModelProperty(name = "昵称")
-    private String nickname;
 
     @ApiModelProperty(name = "电话")
     private String phone;

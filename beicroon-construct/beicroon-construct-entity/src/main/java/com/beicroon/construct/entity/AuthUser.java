@@ -24,7 +24,7 @@ public class AuthUser implements IAuthUser, Serializable {
     private String code = "";
 
     @ApiModelProperty(name = "昵称")
-    private String nickname = "";
+    private String name = "";
 
     @ApiModelProperty(name = "权限")
     private Permission permission = new Permission();
