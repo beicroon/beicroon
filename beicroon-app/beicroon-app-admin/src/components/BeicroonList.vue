@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import {List} from "@/utils/list.utils.ts";
 import {computed, ref, useSlots} from "vue";
-import onceEvent from "@/utils/onceEvent.utils.ts";
+import toggle from "@/utils/toggle.utils.ts";
 import BeicroonButton from "@/components/BeicroonButton.vue";
 import BeicroonListTable from "@/components/BeicroonListTable.vue";
 import BeicroonLineVertical from "@/components/BeicroonLineVertical.vue";
@@ -15,13 +15,15 @@ const props = defineProps<Props>();
 
 const moreSearchHidden = ref(true);
 
+const searchForm = ref();
+
 async function toggleMoreSearch() {
   moreSearchHidden.value = !moreSearchHidden.value;
 
   if (moreSearchHidden.value) {
-    await onceEvent("click");
+    toggle.pop("click");
   } else {
-    await onceEvent("click", toggleMoreSearch);
+    toggle.on("click", searchForm.value, toggleMoreSearch);
   }
 }
 
@@ -57,10 +59,10 @@ const moreSearchSize = computed(() => {
     </div>
     <beicroon-line-vertical></beicroon-line-vertical>
     <div class="list-foot">
-      <div class="more-search" @click.stop v-show="hasMoreSearch">
+      <div class="more-search" v-show="hasMoreSearch">
         <beicroon-button class="search-button primary" label="更多筛选" @click="toggleMoreSearch"></beicroon-button>
         <h6 class="search-size">+{{ moreSearchSize }}</h6>
-        <form class="search-input" :class="{hidden: moreSearchHidden}">
+        <form class="search-input" :class="{hidden: moreSearchHidden}" ref="searchForm">
           <slot name="more-search"></slot>
         </form>
       </div>
