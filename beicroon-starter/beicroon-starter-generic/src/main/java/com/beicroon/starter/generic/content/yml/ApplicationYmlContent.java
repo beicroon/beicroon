@@ -48,6 +48,10 @@ public class ApplicationYmlContent {
                     file-extension: yml
                     enabled: true
                     refresh-enabled: true
+            
+            logging:
+              level:
+                com.beicroon.construct.mybatis: INFO
 
             mybatis-plus:
               mapper-locations: classpath*:/mapper/*.xml
