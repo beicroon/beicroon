@@ -13,6 +13,7 @@ import com.beicroon.starter.web.admin.entity.resource.menu.vo.ResourceMenuDetail
 import com.beicroon.starter.web.admin.entity.resource.menu.vo.ResourceMenuPageVO;
 import com.beicroon.starter.web.admin.service.IResourceMenuService;
 import jakarta.annotation.Resource;
+import jakarta.validation.Valid;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -41,31 +42,31 @@ public class AdminResourceMenuController {
 
     @ApiOperation(name = "分页列表")
     @PostMapping(path = "/resource-menu-page")
-    public Result<List<ResourceMenuPageVO>> page(@RequestBody ResourceMenuQueryDTO dto) {
+    public Result<List<ResourceMenuPageVO>> page(@Valid @RequestBody ResourceMenuQueryDTO dto) {
         return WebResult.success(this.resourceMenuService.page(dto));
     }
 
     @ApiOperation(name = "全量列表")
     @PostMapping(path = "/resource-menu-list")
-    public Result<List<ResourceMenuBaseVO>> list(@RequestBody ResourceMenuQueryDTO dto) {
+    public Result<List<ResourceMenuBaseVO>> list(@Valid @RequestBody ResourceMenuQueryDTO dto) {
         return WebResult.success(this.resourceMenuService.list(dto));
     }
 
     @ApiOperation(name = "单个新增")
     @PostMapping(path = "/resource-menu-create")
-    public Result<Boolean> create(@RequestBody ResourceMenuCreateDTO dto) {
+    public Result<Boolean> create(@Valid @RequestBody ResourceMenuCreateDTO dto) {
         return WebResult.success(this.resourceMenuService.create(dto));
     }
 
     @ApiOperation(name = "单个修改")
     @PutMapping(path = "/resource-menu-update")
-    public Result<Boolean> update(@RequestBody ResourceMenuUpdateDTO dto) {
+    public Result<Boolean> update(@Valid @RequestBody ResourceMenuUpdateDTO dto) {
         return WebResult.success(this.resourceMenuService.update(dto));
     }
 
     @ApiOperation(name = "批量删除")
     @DeleteMapping(path = "/resource-menu-remove")
-    public Result<Boolean> remove(@RequestBody IdsDTO dto) {
+    public Result<Boolean> remove(@Valid @RequestBody IdsDTO dto) {
         return WebResult.success(this.resourceMenuService.remove(dto));
     }
 

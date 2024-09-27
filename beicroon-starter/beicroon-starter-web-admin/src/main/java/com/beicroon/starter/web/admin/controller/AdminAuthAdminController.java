@@ -9,6 +9,7 @@ import com.beicroon.starter.web.admin.entity.auth.admin.vo.AuthAdminLoginVO;
 import com.beicroon.starter.web.admin.entity.auth.admin.vo.AuthAdminMenuVO;
 import com.beicroon.starter.web.admin.service.IAuthAdminService;
 import jakarta.annotation.Resource;
+import jakarta.validation.Valid;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,7 +26,7 @@ public class AdminAuthAdminController {
 
     @ApiOperation(name = "登录认证")
     @PostMapping("/auth-admin-login")
-    public Result<AuthAdminLoginVO> login(@RequestBody AuthAdminLoginDTO dto) {
+    public Result<AuthAdminLoginVO> login(@Valid @RequestBody AuthAdminLoginDTO dto) {
         return WebResult.success(this.authAdminService.login(dto));
     }
 

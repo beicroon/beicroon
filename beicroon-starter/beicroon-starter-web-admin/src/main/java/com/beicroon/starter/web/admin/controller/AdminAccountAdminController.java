@@ -14,6 +14,7 @@ import com.beicroon.starter.web.admin.entity.account.admin.vo.AccountAdminDetail
 import com.beicroon.starter.web.admin.entity.account.admin.vo.AccountAdminPageVO;
 import com.beicroon.starter.web.admin.service.IAccountAdminService;
 import jakarta.annotation.Resource;
+import jakarta.validation.Valid;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -42,31 +43,31 @@ public class AdminAccountAdminController {
 
     @ApiOperation(name = "分页列表")
     @PostMapping(path = "/account-admin-page")
-    public Result<List<AccountAdminPageVO>> page(@RequestBody AccountAdminQueryDTO dto) {
+    public Result<List<AccountAdminPageVO>> page(@Valid @RequestBody AccountAdminQueryDTO dto) {
         return WebResult.success(this.accountAdminService.page(dto));
     }
 
     @ApiOperation(name = "全量列表")
     @PostMapping(path = "/account-admin-list")
-    public Result<List<AccountAdminBaseVO>> list(@RequestBody AccountAdminQueryDTO dto) {
+    public Result<List<AccountAdminBaseVO>> list(@Valid @RequestBody AccountAdminQueryDTO dto) {
         return WebResult.success(this.accountAdminService.list(dto));
     }
 
     @ApiOperation(name = "单个新增")
     @PostMapping(path = "/account-admin-create")
-    public Result<Boolean> create(@RequestBody AccountAdminCreateDTO dto) {
+    public Result<Boolean> create(@Valid @RequestBody AccountAdminCreateDTO dto) {
         return WebResult.success(this.accountAdminService.create(dto));
     }
 
     @ApiOperation(name = "单个修改")
     @PutMapping(path = "/account-admin-update")
-    public Result<Boolean> update(@RequestBody AccountAdminUpdateDTO dto) {
+    public Result<Boolean> update(@Valid @RequestBody AccountAdminUpdateDTO dto) {
         return WebResult.success(this.accountAdminService.update(dto));
     }
 
     @ApiOperation(name = "批量删除")
     @DeleteMapping(path = "/account-admin-remove")
-    public Result<Boolean> remove(@RequestBody IdsDTO dto) {
+    public Result<Boolean> remove(@Valid @RequestBody IdsDTO dto) {
         return WebResult.success(this.accountAdminService.remove(dto));
     }
 
@@ -78,7 +79,7 @@ public class AdminAccountAdminController {
 
     @ApiOperation(name = "分配角色")
     @PostMapping(path = "/account-admin-role-assign")
-    public Result<Boolean> roleAssign(@RequestBody AccountAdminRoleAssignDTO dto) {
+    public Result<Boolean> roleAssign(@Valid @RequestBody AccountAdminRoleAssignDTO dto) {
         return WebResult.success(this.accountAdminService.roleAssign(dto));
     }
 

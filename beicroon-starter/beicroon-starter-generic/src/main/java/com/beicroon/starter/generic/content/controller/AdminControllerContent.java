@@ -21,6 +21,7 @@ public class AdminControllerContent {
             import {{modulePackage}}.vo.{{filename}}PageVO;
             import {{package}}.service.I{{filename}}Service;
             import jakarta.annotation.Resource;
+            import jakarta.validation.Valid;
             import org.springframework.validation.annotation.Validated;
             import org.springframework.web.bind.annotation.*;
 
@@ -49,31 +50,31 @@ public class AdminControllerContent {
 
                 @ApiOperation(name = "分页列表")
                 @PostMapping(path = "/{{urlName}}-page")
-                public Result<List<{{filename}}PageVO>> page(@RequestBody {{filename}}QueryDTO dto) {
+                public Result<List<{{filename}}PageVO>> page(@Valid @RequestBody {{filename}}QueryDTO dto) {
                     return WebResult.success(this.{{variableName}}Service.page(dto));
                 }
 
                 @ApiOperation(name = "全量列表")
                 @PostMapping(path = "/{{urlName}}-list")
-                public Result<List<{{filename}}BaseVO>> list(@RequestBody {{filename}}QueryDTO dto) {
+                public Result<List<{{filename}}BaseVO>> list(@Valid @RequestBody {{filename}}QueryDTO dto) {
                     return WebResult.success(this.{{variableName}}Service.list(dto));
                 }
 
                 @ApiOperation(name = "单个新增")
                 @PostMapping(path = "/{{urlName}}-create")
-                public Result<Boolean> create(@RequestBody {{filename}}CreateDTO dto) {
+                public Result<Boolean> create(@Valid @RequestBody {{filename}}CreateDTO dto) {
                     return WebResult.success(this.{{variableName}}Service.create(dto));
                 }
 
                 @ApiOperation(name = "单个修改")
                 @PutMapping(path = "/{{urlName}}-update")
-                public Result<Boolean> update(@RequestBody {{filename}}UpdateDTO dto) {
+                public Result<Boolean> update(@Valid @RequestBody {{filename}}UpdateDTO dto) {
                     return WebResult.success(this.{{variableName}}Service.update(dto));
                 }
 
                 @ApiOperation(name = "批量删除")
                 @DeleteMapping(path = "/{{urlName}}-remove")
-                public Result<Boolean> remove(@RequestBody IdsDTO dto) {
+                public Result<Boolean> remove(@Valid @RequestBody IdsDTO dto) {
                     return WebResult.success(this.{{variableName}}Service.remove(dto));
                 }
 

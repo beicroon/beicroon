@@ -14,6 +14,7 @@ import com.beicroon.starter.web.admin.entity.resource.role.vo.ResourceRoleDetail
 import com.beicroon.starter.web.admin.entity.resource.role.vo.ResourceRolePageVO;
 import com.beicroon.starter.web.admin.service.IResourceRoleService;
 import jakarta.annotation.Resource;
+import jakarta.validation.Valid;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -42,31 +43,31 @@ public class AdminResourceRoleController {
 
     @ApiOperation(name = "分页列表")
     @PostMapping(path = "/resource-role-page")
-    public Result<List<ResourceRolePageVO>> page(@RequestBody ResourceRoleQueryDTO dto) {
+    public Result<List<ResourceRolePageVO>> page(@Valid @RequestBody ResourceRoleQueryDTO dto) {
         return WebResult.success(this.resourceRoleService.page(dto));
     }
 
     @ApiOperation(name = "全量列表")
     @PostMapping(path = "/resource-role-list")
-    public Result<List<ResourceRoleBaseVO>> list(@RequestBody ResourceRoleQueryDTO dto) {
+    public Result<List<ResourceRoleBaseVO>> list(@Valid @RequestBody ResourceRoleQueryDTO dto) {
         return WebResult.success(this.resourceRoleService.list(dto));
     }
 
     @ApiOperation(name = "单个新增")
     @PostMapping(path = "/resource-role-create")
-    public Result<Boolean> create(@RequestBody ResourceRoleCreateDTO dto) {
+    public Result<Boolean> create(@Valid @RequestBody ResourceRoleCreateDTO dto) {
         return WebResult.success(this.resourceRoleService.create(dto));
     }
 
     @ApiOperation(name = "单个修改")
     @PutMapping(path = "/resource-role-update")
-    public Result<Boolean> update(@RequestBody ResourceRoleUpdateDTO dto) {
+    public Result<Boolean> update(@Valid @RequestBody ResourceRoleUpdateDTO dto) {
         return WebResult.success(this.resourceRoleService.update(dto));
     }
 
     @ApiOperation(name = "批量删除")
     @DeleteMapping(path = "/resource-role-remove")
-    public Result<Boolean> remove(@RequestBody IdsDTO dto) {
+    public Result<Boolean> remove(@Valid @RequestBody IdsDTO dto) {
         return WebResult.success(this.resourceRoleService.remove(dto));
     }
 
@@ -78,7 +79,7 @@ public class AdminResourceRoleController {
 
     @ApiOperation(name = "分配菜单")
     @PostMapping(path = "/resource-role-menu-assign")
-    public Result<Boolean> menuAssign(@RequestBody ResourceRoleMenuAssignDTO dto) {
+    public Result<Boolean> menuAssign(@Valid @RequestBody ResourceRoleMenuAssignDTO dto) {
         return WebResult.success(this.resourceRoleService.menuAssign(dto));
     }
 
