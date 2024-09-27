@@ -9,7 +9,7 @@ type Props = {
   required?: boolean,
   disabled?: boolean,
   placeholder?: string,
-  time?: boolean,
+  noTime?: boolean,
 };
 
 type Picker = {
@@ -21,7 +21,7 @@ type Picker = {
 const weeks = ["日", "一", "二", "三", "四", "五", "六"];
 
 const props = withDefaults(defineProps<Props>(), {
-  time: true,
+  noTime: false,
 });
 
 const emits = defineEmits(["update:modelValue"]);
@@ -192,7 +192,7 @@ async function handlePrevClick() {
 
   pushFormatterDate(current.value, res);
 
-  if (props.time) {
+  if (!props.noTime) {
     pushFormatterTime(currentTime, res);
   }
 
@@ -204,7 +204,7 @@ async function handleNextClick() {
 
   pushFormatterDate(current.value, res);
 
-  if (props.time) {
+  if (!props.noTime) {
     pushFormatterTime(currentTime, res);
   }
 
@@ -298,7 +298,7 @@ async function handleConfirm() {
           </li>
         </ul>
         <div class="beicroon-datetime-foot" v-if="currentTime">
-          <ul class="beicroon-time-picker" :class="{show: time}">
+          <ul class="beicroon-time-picker" :class="{show: !noTime}">
             <li><input type="text" v-model="currentTime.hour" /></li>
             <li><span>:</span></li>
             <li><input type="text" v-model="currentTime.minute" /></li>
