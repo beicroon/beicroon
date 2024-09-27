@@ -23,7 +23,7 @@ public class LoggingAspect {
     @Around("within(com.beicroon..*.web.*.controller..*)")
     public Object around(ProceedingJoinPoint joinPoint) throws Throwable {
         log.info(
-                "Request Log: path={}, dto={}, auth={}",
+                "Request Log: path={}, params={}, auth={}",
                 request.getRequestURI(),
                 Arrays.toString(joinPoint.getArgs()),
                 JsonUtils.toJson(AuthUtils.getAuthThreadInfo())

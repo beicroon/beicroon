@@ -33,6 +33,7 @@
         <module>beicroon-starter-mq</module>
         <module>beicroon-starter-mysql</module>
         <module>beicroon-starter-task</module>
+        <module>beicroon-starter-validation</module>
         <module>beicroon-starter-web</module>
         <module>beicroon-starter-web-admin</module>
     </modules>
@@ -126,6 +127,12 @@
             <dependency>
                 <groupId>com.beicroon.starter</groupId>
                 <artifactId>beicroon-starter-task</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.beicroon.starter</groupId>
+                <artifactId>beicroon-starter-validation</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
