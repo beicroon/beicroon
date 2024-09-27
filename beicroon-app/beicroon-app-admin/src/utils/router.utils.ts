@@ -40,9 +40,13 @@ const router: Router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
+    if (to.path === "/login") {
+        return next();
+    }
+
     const meta: Meta = to.meta as Meta;
 
-    if (localStorage.getItem(CacheKeyEnums.AUTHORIZATION_USER) || (meta.auth && !meta.auth) || to.path === "/login") {
+    if (localStorage.getItem(CacheKeyEnums.AUTHORIZATION_USER) || (meta.auth && !meta.auth)) {
         if (typeof to.name === "string") {
             document.title = to.name;
         }
