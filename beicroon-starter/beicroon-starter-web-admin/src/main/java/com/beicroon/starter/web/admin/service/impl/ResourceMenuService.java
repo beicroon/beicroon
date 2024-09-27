@@ -3,6 +3,7 @@ package com.beicroon.starter.web.admin.service.impl;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.beicroon.construct.entity.IdsDTO;
 import com.beicroon.construct.entity.PageInfo;
+import com.beicroon.construct.exception.utils.ExceptionUtils;
 import com.beicroon.construct.utils.ListUtils;
 import com.beicroon.starter.mysql.utils.PageUtils;
 import com.beicroon.starter.web.admin.convertor.ResourceMenuConvertor;
@@ -63,6 +64,18 @@ public class ResourceMenuService implements IResourceMenuService {
 
     @Override
     public boolean create(ResourceMenuCreateDTO dto) {
+        if (this.resourceMenuRepository.existed(ResourceMenuModel::getCode, dto.getCode())) {
+            throw ExceptionUtils.business("编码已被占用");
+        }
+
+        if (this.resourceMenuRepository.existed(ResourceMenuModel::getName, dto.getName())) {
+            throw ExceptionUtils.business("昵称已被占用");
+        }
+
+        if (this.resourceMenuRepository.existed(ResourceMenuModel::getPath, dto.getPath())) {
+            throw ExceptionUtils.business("路由已被占用");
+        }
+
         ResourceMenuModel creator = this.resourceMenuConvertor.toEntity(dto);
 
         this.resourceMenuManager.setParent(creator, dto.getParentId());
@@ -72,6 +85,18 @@ public class ResourceMenuService implements IResourceMenuService {
 
     @Override
     public boolean update(ResourceMenuUpdateDTO dto) {
+        if (this.resourceMenuRepository.existed(ResourceMenuModel::getCode, dto.getCode(), dto.getId())) {
+            throw ExceptionUtils.business("编码已被占用");
+        }
+
+        if (this.resourceMenuRepository.existed(ResourceMenuModel::getName, dto.getName(), dto.getId())) {
+            throw ExceptionUtils.business("昵称已被占用");
+        }
+
+        if (this.resourceMenuRepository.existed(ResourceMenuModel::getPath, dto.getPath(), dto.getId())) {
+            throw ExceptionUtils.business("路由已被占用");
+        }
+
         ResourceMenuModel updater = this.resourceMenuConvertor.toEntity(dto);
 
         this.resourceMenuManager.setParent(updater, dto.getParentId());

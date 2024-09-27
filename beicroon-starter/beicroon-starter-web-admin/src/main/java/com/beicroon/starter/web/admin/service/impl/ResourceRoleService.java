@@ -100,8 +100,12 @@ public class ResourceRoleService implements IResourceRoleService {
 
     @Override
     public boolean create(ResourceRoleCreateDTO dto) {
+        if (this.resourceRoleRepository.existed(ResourceRoleModel::getCode, dto.getCode())) {
+            throw ExceptionUtils.business("角色编码已被占用");
+        }
+
         if (this.resourceRoleRepository.existed(ResourceRoleModel::getName, dto.getName())) {
-            throw ExceptionUtils.business("角色名称已存在");
+            throw ExceptionUtils.business("角色名称已被占用");
         }
 
         ResourceRoleModel creator = this.resourceRoleConvertor.toEntity(dto);
@@ -111,14 +115,18 @@ public class ResourceRoleService implements IResourceRoleService {
 
     @Override
     public boolean update(ResourceRoleUpdateDTO dto) {
+        if (this.resourceRoleRepository.existed(ResourceRoleModel::getCode, dto.getCode(), dto.getId())) {
+            throw ExceptionUtils.business("角色编码已被占用");
+        }
+
+        if (this.resourceRoleRepository.existed(ResourceRoleModel::getName, dto.getName(), dto.getId())) {
+            throw ExceptionUtils.business("角色名称已存在");
+        }
+
         ResourceRoleModel role = this.resourceRoleRepository.getByIdOrError(dto.getId(), "角色不存在或已删除");
 
         if (ResourceRoleHelper.isRoot(role)) {
             throw ExceptionUtils.business("超级管理员角色无法修改");
-        }
-
-        if (this.resourceRoleRepository.existed(ResourceRoleModel::getName, dto.getName(), role.getId())) {
-            throw ExceptionUtils.business("角色名称已存在");
         }
 
         ResourceRoleModel updater = this.resourceRoleConvertor.toEntity(dto);
