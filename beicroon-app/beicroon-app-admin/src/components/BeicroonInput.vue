@@ -90,7 +90,7 @@ async function handleFocusout() {
     }
 
     .beicroon-input-area {
-      border-color: var(--color-primary);
+      border-color: var(--color-primary) !important;
     }
   }
 
