@@ -11,7 +11,6 @@ type Props = {
 const props = defineProps<Props>();
 
 const beicroonList = ref();
-
 const beicroonTable = ref();
 
 const scrollWidth = ref(0);
@@ -123,18 +122,10 @@ async function endScroll() {
       <beicroon-loading fill="#b3e5fc" width="100" height="100"></beicroon-loading>
     </div>
     <div class="beicroon-list-table-scroll x">
-      <div class="scroll"
-           :class="{active: scrollXActive}"
-           :style="scrollWidthStyle"
-           @mousedown.self="activeX"
-      ></div>
+      <div class="scroll" :class="{active: scrollXActive}" :style="scrollWidthStyle" @mousedown.self="activeX"></div>
     </div>
     <div class="beicroon-list-table-scroll y">
-      <div class="scroll"
-           :class="{active: scrollYActive}"
-           :style="scrollHeightStyle"
-           @mousedown.self="activeY"
-      ></div>
+      <div class="scroll" :class="{active: scrollYActive}" :style="scrollHeightStyle" @mousedown.self="activeY"></div>
     </div>
   </div>
 </template>

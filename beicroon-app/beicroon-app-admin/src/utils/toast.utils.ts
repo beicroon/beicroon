@@ -75,9 +75,7 @@ function hide(node: HTMLElement) {
 async function remove(node: HTMLElement, duration: number) {
     let timer = setTimeout(() => handleRemove(node), duration);
 
-    node.addEventListener("mouseenter", () => {
-        clearTimeout(timer);
-    });
+    node.addEventListener("mouseenter", () => clearTimeout(timer));
 
     node.addEventListener("mouseleave", () => {
         timer = setTimeout(() => handleRemove(node), duration);
