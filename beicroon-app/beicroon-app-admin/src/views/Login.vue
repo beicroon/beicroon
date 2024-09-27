@@ -46,14 +46,14 @@ async function handleSubmit() {
   padding: 0 52rem;
   width: fit-content;
   align-items: center;
-  border-radius: 6rem;
+  border-radius: 12rem;
   flex-direction: column;
   justify-content: center;
   transform: translateX(-50%);
   box-shadow: 0 0 8rem -3rem var(--color-black-30) inset;
 
   .form-button {
-    width: 100%;
+    width: 406rem;
   }
 }
 </style>
