@@ -39,7 +39,7 @@ http.interceptors.response.use(
             if (response.data.code > 0) {
                 await toast(response.data.message, "error");
 
-                if (response.data.code === 401) {
+                if (response.data.code === 401 || response.data.code === 403) {
                     localStorage.removeItem(CacheKeyEnums.AUTHORIZATION_USER);
                     localStorage.removeItem(CacheKeyEnums.AUTHORIZATION_TOKEN);
 
