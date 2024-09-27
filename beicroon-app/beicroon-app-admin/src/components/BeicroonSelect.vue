@@ -217,6 +217,7 @@ async function handleClear() {
     z-index: 1;
     right: 6rem;
     display: flex;
+    width: 300rem;
     height: 160rem;
     padding: 8rem 0;
     overflow-y: auto;
@@ -224,7 +225,6 @@ async function handleClear() {
     border-radius: 6rem;
     top: calc(100% - 4rem);
     flex-direction: column;
-    width: 300rem !important;
     transition: all 130ms linear;
     background-color: var(--color-white);
     border: 1rem solid var(--color-grey-deeper);

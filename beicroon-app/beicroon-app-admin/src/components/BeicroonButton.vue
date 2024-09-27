@@ -64,7 +64,7 @@ function handleClick(e: MouseEvent) {
     justify-content: center;
 
     &.disabled {
-      color: var(--color-white);
+      color: var(--color-white) !important;
       background-color: var(--color-grey-light) !important;
     }
 
