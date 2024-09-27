@@ -1,43 +1,57 @@
 import {reactive} from "vue";
 
-const eventNames = ["click"] as const;
+const events = ["click", "mousedown", "mouseup", "keydown", "keyup"] as const;
 
-type EventName = typeof eventNames[number];
+type EventName = typeof events[number];
 
-type Callback<E extends Event> = (e?: E) => Promise<void>;
+type Callback<E extends Event> = (e: E) => Promise<void>;
 
-type Stack<E extends Event> = {
+interface Stack<E extends Event> {
     el: Element;
     callback: Callback<E>;
+}
+
+type Stacks = {
+    [K in EventName]: Stack<Event>[];
 };
 
-const stacks = {
-    click: [] as Stack<MouseEvent>[],
-};
+const stacks: Stacks = events.reduce(
+    (acc, event: EventName) => {
+        acc[event] = [];
+        
+        return acc;
+    },
+    {} as Stacks
+);
 
 const toggle = reactive({
-    on: (event: EventName, el: Element, callback: Callback<any>) => {
-        stacks[event].push({el, callback});
+    on<E extends Event>(event: EventName, el: Element, callback: Callback<E>) {
+        stacks[event].push({el, callback: callback as Callback<Event>});
     },
-    pop: (event: EventName) => {
+    off<E extends Event>(event: EventName, el: Element, callback: Callback<E>) {
+        const index = stacks[event].findIndex(
+            (stack) => stack.el === el && stack.callback === callback
+        );
+
+        if (index !== -1) {
+            stacks[event].splice(index, 1);
+        }
+    },
+    pop(event: EventName) {
         return stacks[event].pop();
     },
 });
 
-export default toggle;
+events.forEach((eventName: EventName) => {
+    document.addEventListener(eventName, async (e: Event) => {
+        const stack = stacks[eventName][stacks[eventName].length - 1];
 
-document.addEventListener("click", async (e: MouseEvent) => {
-    const stack = stacks.click[stacks.click.length - 1];
+        if (stack && !stack.el.contains(e.target as Node)) {
+            await stack.callback(e);
 
-    if (stack) {
-        const {el, callback} = stack;
-
-        if (el === e.target) {
-            return;
+            toggle.off(eventName, stack.el, stack.callback);
         }
-
-        await callback(e);
-
-        stacks.click.slice(stacks.click.indexOf(stack), 1);
-    }
+    });
 });
+
+export default toggle;
