@@ -1,6 +1,7 @@
 import axios from "axios";
 import toast from "@/utils/toast.utils.ts";
 import {router} from "@/utils/auth.utils.ts";
+import {loginMenu} from "@/request/account-admin-auth.http.ts";
 import {BooleanEnums, CacheKeyEnums} from "@/enums/default-enums.ts";
 
 const http = axios.create({
@@ -43,7 +44,7 @@ http.interceptors.response.use(
                     localStorage.removeItem(CacheKeyEnums.AUTHORIZATION_USER);
                     localStorage.removeItem(CacheKeyEnums.AUTHORIZATION_TOKEN);
 
-                    await router.push("/login");
+                    await router.push(loginMenu);
                 }
 
                 return reject(response.data);

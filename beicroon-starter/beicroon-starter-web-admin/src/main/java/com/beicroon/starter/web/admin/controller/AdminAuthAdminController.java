@@ -30,6 +30,12 @@ public class AdminAuthAdminController {
         return WebResult.success(this.authAdminService.login(dto));
     }
 
+    @ApiOperation(name = "退出登录")
+    @PostMapping("/auth-admin-logout")
+    public Result<Boolean> logout() {
+        return WebResult.success(this.authAdminService.logout());
+    }
+
     @ApiOperation(name = "菜单认证")
     @GetMapping("/auth-menu-tree")
     public Result<List<AuthAdminMenuVO>> menuTree() {

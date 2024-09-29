@@ -1,11 +1,37 @@
 <script setup lang="ts">
-import {onMounted} from "vue";
+import {onMounted, ref} from "vue";
 import {useRouter} from "vue-router";
+import {CacheKeyEnums} from "@/enums/default-enums.ts";
+import BeicroonButton from "@/components/BeicroonButton.vue";
 import BeicroonLineCross from "@/components/BeicroonLineCross.vue";
 import BeicroonLineVertical from "@/components/BeicroonLineVertical.vue";
-import auth, {initMenus, setLinks, toLinkPath} from "@/utils/auth.utils.ts";
+import {AuthUser, loginMenu, logout} from "@/request/account-admin-auth.http.ts";
+import auth, {clearAuth, initMenus, router, setLinks, toLinkPath} from "@/utils/auth.utils.ts";
 
 onMounted(() => initMenus(useRouter().currentRoute.value.path));
+
+const user: AuthUser = JSON.parse(localStorage.getItem(CacheKeyEnums.AUTHORIZATION_USER) as string);
+
+const hidden = ref(true);
+
+function handleShow() {
+  hidden.value = false;
+}
+
+function handleHide() {
+  hidden.value = true;
+}
+
+async function handleLogout() {
+  await logout();
+
+  await clearAuth()
+
+  localStorage.removeItem(CacheKeyEnums.AUTHORIZATION_USER);
+  localStorage.removeItem(CacheKeyEnums.AUTHORIZATION_TOKEN);
+
+  await router.push(loginMenu.path);
+}
 </script>
 
 <template>
@@ -15,6 +41,12 @@ onMounted(() => initMenus(useRouter().currentRoute.value.path));
       <ul class="menu">
         <li v-for="menu in auth.menus" :class="{active: menu.active}" @click="setLinks(menu)">{{ menu.name }}</li>
       </ul>
+      <div class="user" @mouseenter="handleShow" @mouseleave="handleHide">
+        <h3>{{user.name}}</h3>
+        <ul class="button" :class="{hidden: hidden}">
+          <li><beicroon-button label="退出登录" @click="handleLogout"></beicroon-button></li>
+        </ul>
+      </div>
     </section>
     <beicroon-line-vertical></beicroon-line-vertical>
     <section class="beicroon-body">
@@ -54,15 +86,16 @@ onMounted(() => initMenus(useRouter().currentRoute.value.path));
 }
 
 .beicroon-head {
-  z-index: 1;
+  z-index: 3;
   gap: 30rem;
   width: 100%;
   display: flex;
+  padding: 0 30rem;
   position: relative;
   height: var(--beicroon-height-head);
 
   .logo {
-    width: 300rem;
+    width: 240rem;
   }
 
   .menu {
@@ -85,6 +118,43 @@ onMounted(() => initMenus(useRouter().currentRoute.value.path));
       &:hover, &.active {
         color: var(--color-white);
         background-color: var(--color-primary);
+      }
+    }
+  }
+
+  .user {
+    gap: 6rem;
+    z-index: 1;
+    display: flex;
+    width: 120rem;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .button {
+    left: 50%;
+    z-index: 1;
+    width: 80rem;
+    position: absolute;
+    border-radius: 6rem;
+    transform: translateX(-50%);
+    background-color: var(--color-white);
+    top: calc(var(--beicroon-height-head) - 8rem);
+    box-shadow: 0 0 8rem -3rem var(--color-black-30) inset;
+
+    li {
+      width: 100%;
+      height: 32rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .beicroon-button {
+        width: 100%;
+        height: 100%;
+        align-items: center;
+        justify-content: center;
       }
     }
   }

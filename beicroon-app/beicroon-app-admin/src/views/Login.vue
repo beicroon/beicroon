@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import {reactive, ref} from "vue";
-import {initMenus, router} from "@/utils/auth.utils.ts";
 import {CacheKeyEnums} from "@/enums/default-enums.ts";
+import {initMenus, router} from "@/utils/auth.utils.ts";
 import BeicroonForm from "@/components/BeicroonForm.vue";
 import BeicroonInput from "@/components/BeicroonInput.vue";
 import BeicroonButton from "@/components/BeicroonButton.vue";
-import {AuthUser, index, login, LoginDTO} from "@/request/account-admin-auth.http.ts";
+import {AuthUser, indexMenu, login, LoginDTO} from "@/request/account-admin-auth.http.ts";
 
 const form = reactive<LoginDTO>({
   username: "",
@@ -17,6 +17,8 @@ const loading = ref(false);
 async function handleSubmit() {
   const from = router.currentRoute.value.query.t as string;
 
+  const path = from ? from : indexMenu.path;
+
   loading.value = true;
 
   try {
@@ -27,12 +29,12 @@ async function handleSubmit() {
     localStorage.setItem(CacheKeyEnums.AUTHORIZATION_USER, JSON.stringify(user));
     localStorage.setItem(CacheKeyEnums.AUTHORIZATION_TOKEN, res.data.token);
 
-    await initMenus(from);
+    await initMenus(path, true);
   } finally {
     loading.value = false;
   }
 
-  await router.push(from ? from : index.path);
+  await router.push(path);
 }
 </script>
 

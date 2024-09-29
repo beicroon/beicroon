@@ -2,7 +2,7 @@ import {reactive} from "vue";
 import toast from "@/utils/toast.utils.ts";
 import {createRouter, createWebHistory, Router} from "vue-router";
 import {CacheKeyEnums, SystemEnums} from "@/enums/default-enums.ts";
-import {AuthMenu, index, listAuthMenu} from "@/request/account-admin-auth.http.ts";
+import {AuthMenu, indexMenu, listAuthMenu, loginMenu} from "@/request/account-admin-auth.http.ts";
 
 export type Meta = {
     auth: boolean,
@@ -52,7 +52,7 @@ const auth = reactive({
 });
 
 router.beforeEach(async (to, from, next) => {
-    if (to.path === "/login") {
+    if (to.path === loginMenu.path) {
         return next();
     }
 
@@ -62,7 +62,7 @@ router.beforeEach(async (to, from, next) => {
         if (auth.ready && !auth.paths.has(to.path)) {
             await toast("访问被拒绝！", "error");
 
-            return next({path: "/"});
+            return next({path: indexMenu.path});
         }
 
         document.title = auth.paths.get(to.path) || SystemEnums.NAME;
@@ -70,7 +70,7 @@ router.beforeEach(async (to, from, next) => {
         return next();
     }
 
-    return next({path: "/login", query: {f: from.path, t: to.path}});
+    return next({path: loginMenu.path, query: {f: from.path, t: to.path}});
 });
 
 export async function toLinkPath(link: AuthMenu) {
@@ -113,14 +113,23 @@ export async function setLinks(menu: AuthMenu) {
     }
 }
 
-export async function initMenus(path: string) {
-    if (auth.ready) {
+export async function clearAuth() {
+    auth.ready = false;
+    auth.menus = [] as Array<AuthMenu>;
+    auth.prevMenu = null as AuthMenu | null;
+    auth.currentMenu = null as AuthMenu | null;
+    auth.links = [] as Array<AuthMenu>;
+    auth.paths = new Map<string, string>;
+}
+
+export async function initMenus(path: string, reset: boolean = false) {
+    if (auth.ready && !reset) {
         return;
     }
 
     const res = await listAuthMenu();
 
-    auth.menus = [index].concat(res.data).map(menu => {
+    auth.menus = [indexMenu].concat(res.data).map(menu => {
         addPath(menu.path, menu.name);
 
         menu.children = menu.children.map(child => {
@@ -149,7 +158,7 @@ export async function initMenus(path: string) {
     if (!auth.paths.has(path)) {
         await toast("访问被拒绝！", "error");
 
-        await router.push({path: index.path});
+        await router.push({path: indexMenu.path});
     }
 }
 

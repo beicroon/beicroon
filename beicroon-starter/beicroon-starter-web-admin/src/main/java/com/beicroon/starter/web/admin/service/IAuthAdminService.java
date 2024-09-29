@@ -10,6 +10,8 @@ public interface IAuthAdminService {
 
     AuthAdminLoginVO login(AuthAdminLoginDTO dto);
 
+    boolean logout();
+
     List<AuthAdminMenuVO> menuTree();
 
 }

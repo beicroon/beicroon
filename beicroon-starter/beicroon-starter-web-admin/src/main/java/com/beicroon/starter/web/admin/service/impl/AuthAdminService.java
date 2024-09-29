@@ -1,6 +1,7 @@
 package com.beicroon.starter.web.admin.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.beicroon.construct.auth.utils.AuthUtils;
 import com.beicroon.construct.exception.utils.ExceptionUtils;
 import com.beicroon.construct.utils.HashUtils;
 import com.beicroon.construct.utils.ListUtils;
@@ -64,6 +65,13 @@ public class AuthAdminService implements IAuthAdminService {
         this.cacheTemplate.set(String.valueOf(admin.getId()), token);
 
         return vo;
+    }
+
+    @Override
+    public boolean logout() {
+        this.cacheTemplate.delete(String.valueOf(AuthUtils.getUserId()));
+
+        return true;
     }
 
     @Override

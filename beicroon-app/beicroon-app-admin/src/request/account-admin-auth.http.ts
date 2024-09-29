@@ -28,6 +28,13 @@ export async function login(dto: LoginDTO): Promise<Response<LoginVO>> {
     })
 }
 
+export async function logout(): Promise<Response<LoginVO>> {
+    return http.request({
+        url: "/api/admin/admin/auth-admin-logout",
+        method: "POST",
+    })
+}
+
 export type AuthMenu = BaseVO & {
     code: string;
     name: string;
@@ -36,12 +43,22 @@ export type AuthMenu = BaseVO & {
     children: Array<AuthMenu>;
 };
 
-export const index: AuthMenu = {
+export const indexMenu: AuthMenu = {
     checked: "unchecked",
     id: "1",
     code: "INDEX",
     name: "首页",
     path: "/",
+    active: false,
+    children: [] as Array<AuthMenu>,
+};
+
+export const loginMenu: AuthMenu = {
+    checked: "unchecked",
+    id: "1",
+    code: "LOGIN",
+    name: "系统登录",
+    path: "/login",
     active: false,
     children: [] as Array<AuthMenu>,
 };
