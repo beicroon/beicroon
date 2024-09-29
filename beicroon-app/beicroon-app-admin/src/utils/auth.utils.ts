@@ -1,7 +1,7 @@
 import {reactive} from "vue";
 import toast from "@/utils/toast.utils.ts";
-import {CacheKeyEnums, SystemEnums} from "@/enums/default-enums.ts";
 import {createRouter, createWebHistory, Router} from "vue-router";
+import {CacheKeyEnums, SystemEnums} from "@/enums/default-enums.ts";
 import {AuthMenu, index, listAuthMenu} from "@/request/account-admin-auth.http.ts";
 
 export type Meta = {
