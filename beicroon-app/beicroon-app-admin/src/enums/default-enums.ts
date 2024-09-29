@@ -1,3 +1,7 @@
+export enum SystemEnums {
+    NAME = "后台管理系统",
+}
+
 export enum BooleanEnums {
     TRUE = "true" ,
     FALSE = "false",

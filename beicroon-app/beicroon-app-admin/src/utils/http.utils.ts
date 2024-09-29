@@ -1,6 +1,6 @@
 import axios from "axios";
 import toast from "@/utils/toast.utils.ts";
-import router from "@/utils/router.utils.ts";
+import {router} from "@/utils/auth.utils.ts";
 import {BooleanEnums, CacheKeyEnums} from "@/enums/default-enums.ts";
 
 const http = axios.create({

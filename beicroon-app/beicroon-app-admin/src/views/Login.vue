@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import {reactive} from "vue";
-import router from "@/utils/router.utils.ts";
+import {reactive, ref} from "vue";
+import {initMenus, router} from "@/utils/auth.utils.ts";
 import {CacheKeyEnums} from "@/enums/default-enums.ts";
 import BeicroonForm from "@/components/BeicroonForm.vue";
 import BeicroonInput from "@/components/BeicroonInput.vue";
@@ -12,15 +12,25 @@ const form = reactive<LoginDTO>({
   password: "",
 });
 
+const loading = ref(false);
+
 async function handleSubmit() {
-  const res = await login(form);
-
-  const user = {code: res.data.code, name: res.data.name} as AuthUser;
-
-  localStorage.setItem(CacheKeyEnums.AUTHORIZATION_USER, JSON.stringify(user));
-  localStorage.setItem(CacheKeyEnums.AUTHORIZATION_TOKEN, res.data.token);
-
   const from = router.currentRoute.value.query.t as string;
+
+  loading.value = true;
+
+  try {
+    const res = await login(form);
+
+    const user = {code: res.data.code, name: res.data.name} as AuthUser;
+
+    localStorage.setItem(CacheKeyEnums.AUTHORIZATION_USER, JSON.stringify(user));
+    localStorage.setItem(CacheKeyEnums.AUTHORIZATION_TOKEN, res.data.token);
+
+    await initMenus(from);
+  } finally {
+    loading.value = false;
+  }
 
   await router.push(from ? from : index.path);
 }
@@ -30,7 +40,7 @@ async function handleSubmit() {
   <beicroon-form class="login-form" @submit="handleSubmit">
     <beicroon-input required label="账号" v-model="form.username"></beicroon-input>
     <beicroon-input required label="密码" v-model="form.password" type="password"></beicroon-input>
-    <beicroon-button class="form-button block primary" type="submit" label="登录"></beicroon-button>
+    <beicroon-button class="form-button block primary" type="submit" label="登录" :loading="loading"></beicroon-button>
   </beicroon-form>
 </template>
 

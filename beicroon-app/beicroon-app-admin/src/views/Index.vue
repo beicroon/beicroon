@@ -1,83 +1,11 @@
 <script setup lang="ts">
-import router from "@/utils/router.utils.ts";
-import {onBeforeMount, ref} from "vue";
+import {onMounted} from "vue";
+import {useRouter} from "vue-router";
 import BeicroonLineCross from "@/components/BeicroonLineCross.vue";
 import BeicroonLineVertical from "@/components/BeicroonLineVertical.vue";
-import {AuthMenu, index, listAuthMenu} from "@/request/account-admin-auth.http.ts";
+import auth, {initMenus, setLinks, toLinkPath} from "@/utils/auth.utils.ts";
 
-const menus = ref<Array<AuthMenu>>([]);
-
-const prevMenu = ref<AuthMenu | null>(null);
-
-const currentMenu = ref<AuthMenu | null>(null);
-
-const links = ref<Array<AuthMenu>>([]);
-
-function toLinkPath(link: AuthMenu) {
-  if (prevMenu.value !== null) {
-    prevMenu.value.children.forEach((child) => {
-      child.children.forEach((item) => {
-        item.active = false;
-      });
-    });
-
-    prevMenu.value = null;
-  }
-
-  if (currentMenu.value !== null) {
-    currentMenu.value.children.forEach((child) => {
-      child.children.forEach((item) => {
-        item.active = false;
-      });
-    });
-  }
-
-  link.active = true;
-
-  router.push(link.path);
-}
-
-function setLinks(menu: AuthMenu) {
-  menus.value.forEach((item) => item.active = false);
-
-  prevMenu.value = currentMenu.value;
-
-  currentMenu.value = menu;
-
-  menu.active = true;
-
-  links.value = menu.children;
-
-  if ((!menu.children || menu.children.length == 0) && menu.path) {
-    router.push(menu.path);
-  }
-}
-
-onBeforeMount(async () => {
-  const res = await listAuthMenu();
-
-  menus.value = [index].concat(res.data);
-
-  MENU_FOREACH: for (let i = 0; i < menus.value.length; i++) {
-    const menu = menus.value[i];
-
-    for (let j = 0; j < menu.children.length; j++) {
-      const child = menu.children[j];
-
-      for (let k = 0; k < child.children.length; k++) {
-        const link = child.children[k];
-
-        if (link.path === router.currentRoute.value.path) {
-          setLinks(menu);
-
-          link.active = true;
-
-          break MENU_FOREACH;
-        }
-      }
-    }
-  }
-});
+onMounted(() => initMenus(useRouter().currentRoute.value.path));
 </script>
 
 <template>
@@ -85,24 +13,26 @@ onBeforeMount(async () => {
     <section class="beicroon-head">
       <div class="logo"></div>
       <ul class="menu">
-        <li v-for="menu in menus" :class="{active: menu.active}" @click="setLinks(menu)">{{ menu.name }}</li>
+        <li v-for="menu in auth.menus" :class="{active: menu.active}" @click="setLinks(menu)">{{ menu.name }}</li>
       </ul>
     </section>
     <beicroon-line-vertical></beicroon-line-vertical>
     <section class="beicroon-body">
       <section class="beicroon-menu">
         <ul class="menu">
-          <li v-for="menu in links">
+          <li v-for="menu in auth.links">
             <h3>{{ menu.name }}</h3>
             <ul class="menu">
-              <li v-for="link in menu.children" :class="{active: link.active}" @click="toLinkPath(link)">{{ link.name }}</li>
+              <template v-for="link in menu.children">
+                <li :class="{active: link.active}" @click="toLinkPath(link)">{{link.name}}</li>
+              </template>
             </ul>
           </li>
         </ul>
       </section>
       <beicroon-line-cross></beicroon-line-cross>
       <section class="beicroon-main">
-        <router-view class="beicroon-view"></router-view>
+        <router-view class="beicroon-view" v-if="auth.ready"></router-view>
       </section>
     </section>
   </section>

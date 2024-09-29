@@ -41,7 +41,7 @@ export const index: AuthMenu = {
     id: "1",
     code: "INDEX",
     name: "首页",
-    path: "/index",
+    path: "/",
     active: false,
     children: [] as Array<AuthMenu>,
 };
