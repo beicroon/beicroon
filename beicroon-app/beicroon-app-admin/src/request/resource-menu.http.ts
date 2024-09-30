@@ -41,7 +41,6 @@ export type ResourceMenuUpdateDTO = UpdateDTO & {
 
 // 查询参数字段
 export type ResourceMenuQueryDTO = QueryDTO & DisableDTO & {
-    parentIds?: Array<string>,  // 父级主键
     parentId?: string,  // 父级主键
     code?: string,  // 编码
     name?: string,  // 名称
