@@ -1,4 +1,4 @@
-import {BooleanEnums} from "@/enums/default-enums.ts";
+import {BooleanEnums} from "@/enums/beicroon/beicroon-enums.ts";
 
 export function getBooleanDesc(value?: string): string {
     return value === BooleanEnums.TRUE ? "是" : "否";

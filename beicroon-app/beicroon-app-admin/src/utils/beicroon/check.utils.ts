@@ -1,5 +1,5 @@
 import {reactive} from "vue";
-import {CheckedEnums} from "@/enums/default-enums.ts";
+import {CheckedEnums} from "@/enums/beicroon/beicroon-enums.ts";
 import {BaseVO, ChildrenVO} from "@/utils/beicroon/http.utils.ts";
 
 type CheckUtils<VO extends BaseVO> = {

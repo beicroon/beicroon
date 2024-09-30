@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import {onMounted, reactive} from "vue";
-import {BooleanEnums} from "@/enums/default-enums.ts";
 import {batchRequest} from "@/utils/beicroon/http.utils.ts";
+import {BooleanEnums} from "@/enums/beicroon/beicroon-enums.ts";
 import BeicroonTree from "@/components/beicroon/BeicroonTree.vue";
 import BeicroonForm from "@/components/beicroon/BeicroonForm.vue";
 import {createBeicroonCheck} from "@/utils/beicroon/check.utils.ts";

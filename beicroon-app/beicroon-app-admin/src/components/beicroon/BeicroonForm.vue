@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import {ref} from "vue";
 import toast from "@/utils/beicroon/toast.utils.ts";
-import {SelectorEnums} from "@/enums/default-enums.ts";
+import {SelectorEnums} from "@/enums/beicroon/beicroon-enums.ts";
 
 const emits = defineEmits(["submit"]);
 

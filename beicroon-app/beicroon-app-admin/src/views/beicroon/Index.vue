@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import {onMounted, ref} from "vue";
 import {useRouter} from "vue-router";
-import {CacheKeyEnums} from "@/enums/default-enums.ts";
+import {CacheKeyEnums} from "@/enums/beicroon/beicroon-enums.ts";
 import BeicroonButton from "@/components/beicroon/BeicroonButton.vue";
 import BeicroonLineCross from "@/components/beicroon/BeicroonLineCross.vue";
 import BeicroonLineVertical from "@/components/beicroon/BeicroonLineVertical.vue";

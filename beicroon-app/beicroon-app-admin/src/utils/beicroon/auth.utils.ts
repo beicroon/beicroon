@@ -2,7 +2,7 @@ import {reactive} from "vue";
 import routes, {Meta} from "@/routes.ts";
 import toast from "@/utils/beicroon/toast.utils.ts";
 import {createRouter, createWebHistory, Router} from "vue-router";
-import {CacheKeyEnums, SystemEnums} from "@/enums/default-enums.ts";
+import {CacheKeyEnums, SystemEnums} from "@/enums/beicroon/beicroon-enums.ts";
 import {AuthMenu, indexMenu, listAuthMenu, loginMenu} from "@/request/beicroon/account-admin-auth.http.ts";
 
 export const router: Router = createRouter({
