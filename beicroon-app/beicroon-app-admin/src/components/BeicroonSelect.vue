@@ -82,7 +82,7 @@ function getChecked(option: any) {
     return "unchecked";
   }
 
-  if (props.modelValue instanceof  Array) {
+  if (props.modelValue instanceof Array) {
     return props.modelValue.findIndex(value => value === props.modelValue) >= 0 ? "checked" : "unchecked";
   }
 
@@ -90,10 +90,12 @@ function getChecked(option: any) {
 }
 
 async function handleChoose(option: any) {
-  if (props.modelValue instanceof  Array) {
-    if (!props.showValue) {
-      emits("update:showValue", props.select.getLabel(option));
-    }
+  if (props.modelValue instanceof Array) {
+    const showSet = new Set(props.showValue);
+
+    showSet.add(props.select.getLabel(option));
+
+    emits("update:showValue", Array.from(showSet));
 
     const set = new Set(props.modelValue);
 
@@ -111,17 +113,19 @@ async function handleChoose(option: any) {
 }
 
 async function handleUnChoose(option: any) {
-  if (!(props.modelValue instanceof  Array)) {
+  if (!(props.modelValue instanceof Array)) {
     return;
   }
+
+  const showSet = new Set(props.showValue);
+
+  showSet.delete(props.select.getLabel(option));
+
+  emits("update:showValue", Array.from(showSet));
 
   const set = new Set(props.modelValue);
 
   set.delete(props.select.getValue(option));
-
-  if (set.size <= 0) {
-    emits("update:showValue", null);
-  }
 
   emits("update:modelValue", Array.from(set));
 }
@@ -130,6 +134,22 @@ async function handleClear() {
   emits("update:showValue", null);
   emits("update:modelValue", null);
 }
+
+const showLabel = computed(() => {
+  if (props.showValue instanceof Array) {
+    if (props.showValue.length > 0) {
+      return props.showValue[0];
+    }
+
+    return props.placeholder;
+  }
+
+  return props.showValue || props.placeholder;
+});
+
+const sizeShow = computed(() => {
+  return props.modelValue instanceof Array && props.modelValue.length > 1;
+});
 </script>
 
 <template>
@@ -142,7 +162,10 @@ async function handleClear() {
            @focusin="handleFocusin"
            @focusout="handleFocusout"
     />
-    <div class="beicroon-select-label"><span>{{ showValue || placeholder }}</span></div>
+    <div class="beicroon-select-label">
+      <span>{{ showLabel }}</span>
+      <span v-if="sizeShow">+{{ props.modelValue.length - 1 }}...</span>
+    </div>
     <beicroon-button
       class="beicroon-select-clear"
       :class="{hidden: !active}"
@@ -171,7 +194,7 @@ async function handleClear() {
         </li>
       </template>
       <li class="option loading">
-        <beicroon-loading :class="{hidden: !select.loading}" fill="#b3e5fc" width="38" height="38" ></beicroon-loading>
+        <beicroon-loading :class="{hidden: !select.loading}" fill="#b3e5fc" width="38" height="38"></beicroon-loading>
         <beicroon-button :class="{hidden: select.loading}" :label="loadMoreLabel" @click="props.select.loadMore"></beicroon-button>
       </li>
     </ul>
@@ -227,17 +250,17 @@ async function handleClear() {
 
   .beicroon-select-label {
     top: 50%;
+    gap: 52rem;
     right: 6rem;
     width: 300rem;
     height: 32rem;
     display: flex;
+    padding: 0 18rem;
     position: absolute;
     align-items: center;
     border-radius: 6rem;
-    padding: 8rem 18rem;
     transform: translateY(-50%);
     transition: all 130ms linear;
-    justify-content: space-between;
     background-color: var(--color-white);
     border: 1rem solid var(--color-grey-deeper);
   }
