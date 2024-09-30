@@ -260,6 +260,11 @@ async function handleClear() {
     position: relative;
   }
 
+  .beicroon-checkbox {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
   .select {
     gap: 2rem;
     right: 6rem;
