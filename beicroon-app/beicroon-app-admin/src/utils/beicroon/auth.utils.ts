@@ -3,7 +3,27 @@ import routes, {Meta} from "@/routes.ts";
 import toast from "@/utils/beicroon/toast.utils.ts";
 import {createRouter, createWebHistory, Router} from "vue-router";
 import {CacheKeyEnums, SystemEnums} from "@/enums/beicroon/beicroon-enums.ts";
-import {AuthMenu, indexMenu, listAuthMenu, loginMenu} from "@/request/beicroon/account-admin-auth.http.ts";
+import {AuthMenu, listAuthMenu} from "@/request/beicroon/account-admin-auth.http.ts";
+
+export const versionMenu: AuthMenu = {
+    checked: "unchecked",
+    id: "1",
+    code: "VERSION",
+    name: "首页",
+    path: "/version",
+    active: false,
+    children: [] as Array<AuthMenu>,
+};
+
+export const loginMenu: AuthMenu = {
+    checked: "unchecked",
+    id: "1",
+    code: "LOGIN",
+    name: "系统登录",
+    path: "/login",
+    active: false,
+    children: [] as Array<AuthMenu>,
+};
 
 export const router: Router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -30,7 +50,7 @@ router.beforeEach(async (to, from, next) => {
         if (auth.ready && !auth.paths.has(to.path)) {
             await toast("访问被拒绝！", "error");
 
-            return next({path: indexMenu.path});
+            return next({path: versionMenu.path});
         }
 
         document.title = auth.paths.get(to.path) || SystemEnums.NAME;
@@ -77,7 +97,7 @@ export async function setLinks(menu: AuthMenu) {
     auth.links = menu.children;
 
     if ((!menu.children || menu.children.length == 0) && menu.path) {
-        await router.push(menu.path);
+        await toLinkPath(menu);
     }
 }
 
@@ -97,7 +117,7 @@ export async function initMenus(path: string, reset: boolean = false) {
 
     const res = await listAuthMenu();
 
-    auth.menus = [indexMenu].concat(res.data).map(menu => {
+    auth.menus = [versionMenu].concat(res.data).map(menu => {
         addPath(menu.path, menu.name);
 
         menu.children = menu.children.map(child => {
@@ -126,7 +146,7 @@ export async function initMenus(path: string, reset: boolean = false) {
     if (!auth.paths.has(path)) {
         await toast("访问被拒绝！", "error");
 
-        await router.push({path: indexMenu.path});
+        await router.push({path: versionMenu.path});
     }
 }
 

@@ -4,9 +4,8 @@ import {useRouter} from "vue-router";
 import {CacheKeyEnums} from "@/enums/beicroon/beicroon-enums.ts";
 import BeicroonButton from "@/components/beicroon/BeicroonButton.vue";
 import BeicroonLineCross from "@/components/beicroon/BeicroonLineCross.vue";
-import BeicroonLineVertical from "@/components/beicroon/BeicroonLineVertical.vue";
-import {AuthUser, loginMenu, logout} from "@/request/beicroon/account-admin-auth.http.ts";
-import auth, {clearAuth, initMenus, router, setLinks, toLinkPath} from "@/utils/beicroon/auth.utils.ts";
+import {AuthUser, logout} from "@/request/beicroon/account-admin-auth.http.ts";
+import auth, {clearAuth, initMenus, loginMenu, router, setLinks, toLinkPath} from "@/utils/beicroon/auth.utils.ts";
 
 onMounted(() => initMenus(useRouter().currentRoute.value.path));
 
@@ -48,7 +47,6 @@ async function handleLogout() {
         </ul>
       </div>
     </section>
-    <beicroon-line-vertical></beicroon-line-vertical>
     <section class="beicroon-body">
       <section class="beicroon-menu">
         <ul class="menu">
@@ -91,7 +89,7 @@ async function handleLogout() {
   padding: 0 30rem;
   position: relative;
   height: var(--beicroon-height-head);
-  background-color: var(--color-white);
+  background: radial-gradient(circle at center, var(--color-primary-deeper) 0%, var(--color-primary-deep) 100%);
 
   .logo {
     width: 240rem;
@@ -112,10 +110,10 @@ async function handleLogout() {
       border-radius: 8rem;
       align-items: center;
       justify-content: center;
+      color: var(--color-white);
       border: 1rem solid var(--color-primary);
 
       &:hover, &.active {
-        color: var(--color-white);
         background-color: var(--color-primary);
       }
     }
@@ -178,7 +176,7 @@ async function handleLogout() {
   display: flex;
   position: relative;
   flex-direction: row;
-  height: calc(100% - var(--beicroon-height-head) - var(--beicroon-height-line));
+  height: calc(100% - var(--beicroon-height-head));
 
   .beicroon-menu {
     height: 100%;

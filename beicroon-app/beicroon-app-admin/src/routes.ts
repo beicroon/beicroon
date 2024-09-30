@@ -15,6 +15,11 @@ export default [
         component: () => import("@/views/beicroon/Index.vue"),
         children: [
             {
+                name: "版本",
+                path: "/version",
+                component: () => import("@/views/beicroon/Version.vue"),
+            },
+            {
                 name: "后台账号",
                 path: "/account/admin",
                 component: () => import("@/modules/beicroon/admin/AccountAdminApp.vue"),

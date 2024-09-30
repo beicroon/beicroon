@@ -1,7 +1,6 @@
 import axios from "axios";
 import toast from "@/utils/beicroon/toast.utils.ts";
-import {clearAuth, router} from "@/utils/beicroon/auth.utils.ts";
-import {loginMenu} from "@/request/beicroon/account-admin-auth.http.ts";
+import {clearAuth, loginMenu, router} from "@/utils/beicroon/auth.utils.ts";
 import {BooleanEnums, CacheKeyEnums} from "@/enums/beicroon/beicroon-enums.ts";
 
 const http = axios.create({
@@ -46,7 +45,7 @@ http.interceptors.response.use(
                     localStorage.removeItem(CacheKeyEnums.AUTHORIZATION_USER);
                     localStorage.removeItem(CacheKeyEnums.AUTHORIZATION_TOKEN);
 
-                    await router.push(loginMenu);
+                    await router.push({path: loginMenu.path});
                 }
 
                 return reject(response.data);

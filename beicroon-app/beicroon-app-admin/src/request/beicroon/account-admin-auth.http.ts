@@ -43,26 +43,6 @@ export type AuthMenu = BaseVO & {
     children: Array<AuthMenu>;
 };
 
-export const indexMenu: AuthMenu = {
-    checked: "unchecked",
-    id: "1",
-    code: "INDEX",
-    name: "首页",
-    path: "/",
-    active: false,
-    children: [] as Array<AuthMenu>,
-};
-
-export const loginMenu: AuthMenu = {
-    checked: "unchecked",
-    id: "1",
-    code: "LOGIN",
-    name: "系统登录",
-    path: "/login",
-    active: false,
-    children: [] as Array<AuthMenu>,
-};
-
 export async function listAuthMenu(): Promise<Response<Array<AuthMenu>>> {
     return http.request({
         url: "/api/admin/admin/auth-menu-tree",

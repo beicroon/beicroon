@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import {reactive, ref} from "vue";
 import {CacheKeyEnums} from "@/enums/beicroon/beicroon-enums.ts";
-import {initMenus, router} from "@/utils/beicroon/auth.utils.ts";
 import BeicroonForm from "@/components/beicroon/BeicroonForm.vue";
 import BeicroonInput from "@/components/beicroon/BeicroonInput.vue";
 import BeicroonButton from "@/components/beicroon/BeicroonButton.vue";
-import {AuthUser, indexMenu, login, LoginDTO} from "@/request/beicroon/account-admin-auth.http.ts";
+import {initMenus, router, versionMenu} from "@/utils/beicroon/auth.utils.ts";
+import {AuthUser, login, LoginDTO} from "@/request/beicroon/account-admin-auth.http.ts";
 
 const form = reactive<LoginDTO>({
   username: "",
@@ -17,7 +17,7 @@ const loading = ref(false);
 async function handleSubmit() {
   const from = router.currentRoute.value.query.t as string;
 
-  const path = from ? from : indexMenu.path;
+  const path = from ? from : versionMenu.path;
 
   loading.value = true;
 
