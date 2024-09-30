@@ -13,12 +13,9 @@ type Props = {
   required?: boolean,
   disabled?: boolean,
   placeholder?: string,
-  multiple?: boolean,
 };
 
-const props = withDefaults(defineProps<Props>(), {
-  multiple: false,
-});
+const props = defineProps<Props>();
 
 const emits = defineEmits(["update:showValue", "update:modelValue"]);
 
@@ -85,16 +82,48 @@ function getChecked(option: any) {
     return "unchecked";
   }
 
+  if (props.modelValue instanceof  Array) {
+    return props.modelValue.findIndex(value => value === props.modelValue) >= 0 ? "checked" : "unchecked";
+  }
+
   return props.select.getValue(option) === props.modelValue ? "checked" : "unchecked";
 }
 
-async function handleClick(option: any) {
-  option.checked = "checked";
+async function handleChoose(option: any) {
+  if (props.modelValue instanceof  Array) {
+    if (!props.showValue) {
+      emits("update:showValue", props.select.getLabel(option));
+    }
+
+    const set = new Set(props.modelValue);
+
+    set.add(props.select.getValue(option));
+
+    emits("update:modelValue", Array.from(set));
+
+    return;
+  }
 
   emits("update:showValue", props.select.getLabel(option));
   emits("update:modelValue", props.select.getValue(option));
 
   await handleFocusout();
+}
+
+async function handleUnChoose(option: any) {
+  if (!(props.modelValue instanceof  Array)) {
+    return;
+  }
+
+  const set = new Set(props.modelValue);
+
+  set.delete(props.select.getValue(option));
+
+  if (set.size <= 0) {
+    emits("update:showValue", null);
+  }
+
+  emits("update:modelValue", Array.from(set));
 }
 
 async function handleClear() {
@@ -123,12 +152,22 @@ async function handleClear() {
       @mouseup="handleMouseUp"
     ></beicroon-button>
     <ul class="select" :class="{hidden: select.hidden}" @mousedown="handleMouseDown" @mouseup="handleMouseUp">
-      <li class="option" v-for="option in select.options" @click="handleClick(option)">
-        <beicroon-checkbox :label="select.getLabel(option)" :checked="getChecked(option)"></beicroon-checkbox>
+      <li class="option" v-for="option in select.options">
+        <beicroon-checkbox
+          :label="select.getLabel(option)"
+          :checked="getChecked(option)"
+          @check="handleChoose(option)"
+          @uncheck="handleUnChoose(option)"
+        ></beicroon-checkbox>
       </li>
       <template v-for="options in select.moreOptions">
-        <li class="option" v-for="option in options" @click="handleClick(option)">
-          <beicroon-checkbox :label="select.getLabel(option)" :checked="getChecked(option)"></beicroon-checkbox>
+        <li class="option" v-for="option in options">
+          <beicroon-checkbox
+            :label="select.getLabel(option)"
+            :checked="getChecked(option)"
+            @check="handleChoose(option)"
+            @uncheck="handleUnChoose(option)"
+          ></beicroon-checkbox>
         </li>
       </template>
       <li class="option loading">

@@ -16,6 +16,8 @@ import {page, remove, ResourceMenuPageVO as VO, ResourceMenuQueryDTO as DTO} fro
 
 const list = createBeicroonList<DTO, VO>("菜单", page);
 
+list.params.parentIds = [];
+
 onMounted(list.resetSearch);
 
 const parentName = ref();
@@ -26,7 +28,7 @@ const parentName = ref();
     <template #head-search>
       <resource-menu-select
         label="父级"
-        v-model="list.params.parentId"
+        v-model="list.params.parentIds"
         v-model:show-value="parentName"
       ></resource-menu-select>
       <beicroon-input label="编码" v-model="list.params.code"></beicroon-input>
