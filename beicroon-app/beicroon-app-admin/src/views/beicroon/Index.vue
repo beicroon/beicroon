@@ -138,7 +138,7 @@ async function handleLogout() {
       border-radius: 50%;
       align-items: center;
       justify-content: center;
-      border: 1rem solid var(--color-grey-deeper);
+      background-color: var(--color-grey-light);
     }
 
     .button {
