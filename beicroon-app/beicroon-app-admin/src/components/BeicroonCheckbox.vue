@@ -37,7 +37,7 @@ function handleCheck() {
 </script>
 
 <template>
-  <div class="beicroon-input beicroon-checkbox" :class="{required: required}" @click.stop="handleCheck">
+  <div class="beicroon-input beicroon-checkbox" :class="{required: required}" @click="handleCheck">
     <input class="beicroon-input-area"
            type="checkbox"
            :disabled="disabled"
@@ -60,6 +60,7 @@ function handleCheck() {
   .beicroon-checkbox-area {
     top: 10rem;
     left: 6rem;
+    z-index: 1;
     width: 12rem;
     height: 12rem;
     cursor: pointer;

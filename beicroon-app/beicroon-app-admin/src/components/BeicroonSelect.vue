@@ -45,7 +45,6 @@ const loadMoreLabel = computed(() => {
 });
 
 const active = ref(false);
-
 const clicking = ref(false);
 
 async function handleFocusin() {
@@ -79,6 +78,14 @@ async function handleMouseUp() {
   clicking.value = false;
 
   document.removeEventListener("mouseup", handleMouseUp);
+}
+
+function getChecked(option: any) {
+  if (!props.modelValue) {
+    return "unchecked";
+  }
+
+  return props.select.getValue(option) === props.modelValue ? "checked" : "unchecked";
 }
 
 async function handleClick(option: any) {
@@ -117,11 +124,11 @@ async function handleClear() {
     ></beicroon-button>
     <ul class="select" :class="{hidden: select.hidden}" @mousedown="handleMouseDown" @mouseup="handleMouseUp">
       <li class="option" v-for="option in select.options" @click="handleClick(option)">
-        <beicroon-checkbox :label="select.getLabel(option)" :checked="option.checked"></beicroon-checkbox>
+        <beicroon-checkbox :label="select.getLabel(option)" :checked="getChecked(option)"></beicroon-checkbox>
       </li>
       <template v-for="options in select.moreOptions">
         <li class="option" v-for="option in options" @click="handleClick(option)">
-          <beicroon-checkbox :label="select.getLabel(option)" :checked="option.checked"></beicroon-checkbox>
+          <beicroon-checkbox :label="select.getLabel(option)" :checked="getChecked(option)"></beicroon-checkbox>
         </li>
       </template>
       <li class="option loading">
