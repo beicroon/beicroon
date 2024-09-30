@@ -89,7 +89,7 @@ async function handleLogout() {
   padding: 0 30rem;
   position: relative;
   height: var(--beicroon-height-head);
-  background: radial-gradient(circle at center, var(--color-primary-deeper) 0%, var(--color-primary-deep) 100%);
+  background: linear-gradient(to top, var(--color-primary-light), var(--color-primary-lighter) 50%, var(--color-primary-light));
 
   .logo {
     width: 240rem;
@@ -110,10 +110,10 @@ async function handleLogout() {
       border-radius: 8rem;
       align-items: center;
       justify-content: center;
-      color: var(--color-white);
       border: 1rem solid var(--color-primary);
 
       &:hover, &.active {
+        color: var(--color-white);
         background-color: var(--color-primary);
       }
     }
