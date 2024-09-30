@@ -37,9 +37,9 @@ public class VueUpdateContent {
 
             async function handleConfirm() {
               loading.set = true;
-                        
+            
               await update(form).finally(() => loading.set = false);
-                        
+            
               emits("confirm");
             }
 
