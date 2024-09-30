@@ -1,6 +1,6 @@
 import axios from "axios";
 import toast from "@/utils/toast.utils.ts";
-import {router} from "@/utils/auth.utils.ts";
+import {clearAuth, router} from "@/utils/auth.utils.ts";
 import {loginMenu} from "@/request/account-admin-auth.http.ts";
 import {BooleanEnums, CacheKeyEnums} from "@/enums/default-enums.ts";
 
@@ -41,6 +41,8 @@ http.interceptors.response.use(
                 await toast(response.data.message, "error");
 
                 if (response.data.code === 401 || response.data.code === 403) {
+                    await clearAuth();
+
                     localStorage.removeItem(CacheKeyEnums.AUTHORIZATION_USER);
                     localStorage.removeItem(CacheKeyEnums.AUTHORIZATION_TOKEN);
 

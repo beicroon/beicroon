@@ -10,6 +10,7 @@ type Props = {
   disabled?: boolean,
   placeholder?: string,
   noTime?: boolean,
+  noEnd?: boolean,
 };
 
 type Picker = {
@@ -22,6 +23,7 @@ const weeks = ["日", "一", "二", "三", "四", "五", "六"];
 
 const props = withDefaults(defineProps<Props>(), {
   noTime: false,
+  noEnd: false,
 });
 
 const emits = defineEmits(["update:modelValue"]);
@@ -105,7 +107,11 @@ async function handlePrevFocusin() {
     currentTime.second = "00"
   }
 
-  clickHandler.value = handlePrevClick;
+  if (props.noEnd) {
+    clickHandler.value = handleNoEndClick;
+  } else {
+    clickHandler.value = handlePrevClick;
+  }
 
   active.value = true;
 
@@ -187,6 +193,18 @@ function pushFormatterTime(time: BeicroonTime, formatter: Array<string>) {
 
 const clickHandler = ref(null as null | (() => Promise<void>));
 
+async function handleNoEndClick() {
+  const res = [] as Array<string>;
+
+  pushFormatterDate(current.value, res);
+
+  if (!props.noTime) {
+    pushFormatterTime(currentTime, res);
+  }
+
+  value.value = res.join("");
+}
+
 async function handlePrevClick() {
   const res = [] as Array<string>;
 
@@ -259,8 +277,13 @@ async function handleConfirm() {
 <template>
   <div class="beicroon-input beicroon-datetime" :class="{required: required, active: active}" @click.stop>
     <span class="beicroon-input-label">{{ label }}</span>
-    <input class="beicroon-input-area" type="text" v-model="value" />
-    <div class="beicroon-datetime-area">
+    <input class="beicroon-input-area" type="text"
+           :placeholder="placeholder"
+           v-model="value"
+           @focusin="handlePrevFocusin"
+           @focusout="handleFocusout"
+    />
+    <div class="beicroon-datetime-area" :class="{hidden: noEnd}">
       <input class="start" type="text"
              :disabled="disabled"
              :placeholder="placeholder"
@@ -324,10 +347,6 @@ async function handleConfirm() {
     .beicroon-datetime-area {
       border-color: var(--color-primary);
     }
-  }
-
-  .beicroon-input-area {
-    opacity: 0;
   }
 
   .beicroon-datetime-area {

@@ -48,7 +48,7 @@ async function handleLogout() {
         </ul>
       </div>
     </section>
-    <beicroon-line-vertical></beicroon-line-vertical>
+    <beicroon-line-vertical class="beicroon-head-body"></beicroon-line-vertical>
     <section class="beicroon-body">
       <section class="beicroon-menu">
         <ul class="menu">
@@ -86,13 +86,14 @@ async function handleLogout() {
 }
 
 .beicroon-head {
-  z-index: 3;
+  z-index: 2;
   gap: 30rem;
   width: 100%;
   display: flex;
   padding: 0 30rem;
   position: relative;
   height: var(--beicroon-height-head);
+  background-color: var(--color-white);
 
   .logo {
     width: 240rem;
@@ -160,70 +161,75 @@ async function handleLogout() {
   }
 }
 
-.beicroon-body {
+.beicroon-head-body {
   z-index: 2;
+  position: relative;
+}
+
+.beicroon-body {
+  z-index: 1;
   width: 100%;
   display: flex;
   position: relative;
   flex-direction: row;
   height: calc(100% - var(--beicroon-height-head) - var(--beicroon-height-line));
-}
 
-.beicroon-menu {
-  z-index: 1;
-  height: 100%;
-  padding: 30rem 0;
-  overflow-y: auto;
-  position: relative;
-  width: var(--beicroon-width-menu);
+  .beicroon-menu {
+    z-index: 1;
+    height: 100%;
+    padding: 30rem 0;
+    overflow-y: auto;
+    position: relative;
+    width: var(--beicroon-width-menu);
 
-  .menu {
-    gap: 2rem;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-
-    h3 {
-      width: 100%;
-      height: 38rem;
-      display: flex;
-      font-size: 14rem;
-      line-height: 38rem;
-      font-weight: normal;
-      align-items: center;
-      justify-content: center;
-      transform: translateX(-14rem);
-    }
-
-    li {
-      gap: 6rem;
+    .menu {
+      gap: 2rem;
       width: 100%;
       display: flex;
-      cursor: pointer;
-      line-height: 38rem;
-      align-items: center;
       flex-direction: column;
       justify-content: center;
 
-      .menu li {
-        &:hover, &.active {
-          color: var(--color-white);
-          background-color: var(--color-primary);
+      h3 {
+        width: 100%;
+        height: 38rem;
+        display: flex;
+        font-size: 14rem;
+        line-height: 38rem;
+        font-weight: normal;
+        align-items: center;
+        justify-content: center;
+        transform: translateX(-14rem);
+      }
+
+      li {
+        gap: 6rem;
+        width: 100%;
+        display: flex;
+        cursor: pointer;
+        line-height: 38rem;
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
+
+        .menu li {
+          &:hover, &.active {
+            color: var(--color-white);
+            background-color: var(--color-primary);
+          }
         }
       }
     }
   }
-}
 
-.beicroon-main {
-  z-index: 2;
-  height: 100%;
-  position: relative;
-  width: calc(100% - var(--beicroon-width-menu) - var(--beicroon-width-line));
-}
+  .beicroon-main {
+    z-index: 2;
+    height: 100%;
+    position: relative;
+    width: calc(100% - var(--beicroon-width-menu) - var(--beicroon-width-line));
 
-.beicroon-view {
-  height: 100%;
+    .beicroon-view {
+      height: 100%;
+    }
+  }
 }
 </style>
