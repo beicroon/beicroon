@@ -188,6 +188,7 @@ async function endScroll() {
 
   .beicroon-list-head {
     top: 0;
+    z-index: 1;
     position: sticky;
     height: var(--beicroon-height-list-row);
 
@@ -229,6 +230,7 @@ async function endScroll() {
 
   .beicroon-list-button {
     right: 0;
+    z-index: 1;
     width: 180rem;
     position: sticky;
     background-color: var(--color-white);
@@ -243,6 +245,7 @@ async function endScroll() {
     top: 50%;
     left: 50%;
     opacity: 0;
+    z-index: 1;
     display: flex;
     visibility: hidden;
     position: absolute;
@@ -264,6 +267,7 @@ async function endScroll() {
   .scroll {
     top: 0;
     left: 0;
+    z-index: 1;
     max-width: 100%;
     max-height: 100%;
     position: absolute;
