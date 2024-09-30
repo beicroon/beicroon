@@ -2,10 +2,10 @@
 import {List} from "@/utils/list.utils.ts";
 import {computed, ref, useSlots} from "vue";
 import toggle from "@/utils/toggle.utils.ts";
-import BeicroonButton from "@/components/BeicroonButton.vue";
-import BeicroonListTable from "@/components/BeicroonListTable.vue";
-import BeicroonLineVertical from "@/components/BeicroonLineVertical.vue";
-import BeicroonListPaginator from "@/components/BeicroonListPaginator.vue";
+import BeicroonButton from "@/components/beicroon/BeicroonButton.vue";
+import BeicroonListTable from "@/components/beicroon/BeicroonListTable.vue";
+import BeicroonLineVertical from "@/components/beicroon/BeicroonLineVertical.vue";
+import BeicroonListPaginator from "@/components/beicroon/BeicroonListPaginator.vue";
 
 type Props = {
   list: List<any, any>,

@@ -2,15 +2,15 @@
 import {onMounted, reactive} from "vue";
 import {batchRequest} from "@/utils/http.utils.ts";
 import {BooleanEnums} from "@/enums/default-enums.ts";
-import BeicroonTree from "@/components/BeicroonTree.vue";
-import BeicroonForm from "@/components/BeicroonForm.vue";
 import {createBeicroonCheck} from "@/utils/check.utils.ts";
-import BeicroonButton from "@/components/BeicroonButton.vue";
-import BeicroonLoading from "@/components/BeicroonLoading.vue";
-import BeicroonCheckbox from "@/components/BeicroonCheckbox.vue";
-import BeicroonTreeItem from "@/components/BeicroonTreeItem.vue";
-import BeicroonLineVertical from "@/components/BeicroonLineVertical.vue";
+import BeicroonTree from "@/components/beicroon/BeicroonTree.vue";
+import BeicroonForm from "@/components/beicroon/BeicroonForm.vue";
+import BeicroonButton from "@/components/beicroon/BeicroonButton.vue";
+import BeicroonLoading from "@/components/beicroon/BeicroonLoading.vue";
+import BeicroonCheckbox from "@/components/beicroon/BeicroonCheckbox.vue";
+import BeicroonTreeItem from "@/components/beicroon/BeicroonTreeItem.vue";
 import {assign, list as listRoleId} from "@/request/account-admin-role.http.ts";
+import BeicroonLineVertical from "@/components/beicroon/BeicroonLineVertical.vue";
 import {listNoWaiting as listRole, ResourceRoleBaseVO as Role} from "@/request/resource-role.http.ts"
 
 type Props = {

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import BeicroonLineVertical from "@/components/BeicroonLineVertical.vue";
+import BeicroonLineVertical from "@/components/beicroon/BeicroonLineVertical.vue";
 
 type Props = {
   title: string,

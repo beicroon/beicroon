@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import {onMounted, reactive, ref} from "vue";
-import BeicroonForm from "@/components/BeicroonForm.vue";
-import BeicroonInput from "@/components/BeicroonInput.vue";
-import BeicroonButton from "@/components/BeicroonButton.vue";
-import BeicroonLoading from "@/components/BeicroonLoading.vue";
-import BeicroonLineVertical from "@/components/BeicroonLineVertical.vue";
-import ResourceMenuSelect from "@/modules/default/menu/ResourceMenuSelect.vue";
+import BeicroonForm from "@/components/beicroon/BeicroonForm.vue";
+import BeicroonInput from "@/components/beicroon/BeicroonInput.vue";
+import BeicroonButton from "@/components/beicroon/BeicroonButton.vue";
+import BeicroonLoading from "@/components/beicroon/BeicroonLoading.vue";
+import ResourceMenuSelect from "@/modules/beicroon/menu/ResourceMenuSelect.vue";
+import BeicroonLineVertical from "@/components/beicroon/BeicroonLineVertical.vue";
 import {detail, ResourceMenuUpdateDTO as DTO, update} from "@/request/resource-menu.http.ts";
 
 type Props = {

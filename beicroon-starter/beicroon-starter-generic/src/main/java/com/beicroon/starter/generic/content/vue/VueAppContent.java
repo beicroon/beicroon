@@ -11,13 +11,13 @@ public class VueAppContent {
             import Detail from "./{{filename}}Detail.vue";
             import Update from "./{{filename}}Update.vue";
             import createBeicroonList from "@/utils/list.utils.ts";
-            import BeicroonList from "@/components/BeicroonList.vue";
-            import BeicroonInput from "@/components/BeicroonInput.vue";
-            import BeicroonButton from "@/components/BeicroonButton.vue";
-            import BeicroonListRow from "@/components/BeicroonListRow.vue";
-            import BeicroonListCell from "@/components/BeicroonListCell.vue";
-            import BeicroonDatetime from "@/components/BeicroonDatetime.vue";
-            import BeicroonListCellButton from "@/components/BeicroonListCellButton.vue";
+            import BeicroonList from "@/components/beicroon/BeicroonList.vue";
+            import BeicroonInput from "@/components/beicroon/BeicroonInput.vue";
+            import BeicroonButton from "@/components/beicroon/BeicroonButton.vue";
+            import BeicroonListRow from "@/components/beicroon/BeicroonListRow.vue";
+            import BeicroonListCell from "@/components/beicroon/BeicroonListCell.vue";
+            import BeicroonDatetime from "@/components/beicroon/BeicroonDatetime.vue";
+            import BeicroonListCellButton from "@/components/beicroon/BeicroonListCellButton.vue";
             import {page, remove, {{filename}}PageVO as VO, {{filename}}QueryDTO as DTO} from "./{{vueFilename}}.http.utils.ts";
 
             const list = createBeicroonList<DTO, VO>("{{comment}}", page);

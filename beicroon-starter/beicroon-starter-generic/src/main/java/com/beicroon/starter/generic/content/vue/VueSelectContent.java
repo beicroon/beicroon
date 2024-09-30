@@ -8,7 +8,7 @@ public class VueSelectContent {
             <script setup lang="ts">
             import {computed, onMounted, ref, watch} from "vue";
             import createBeicroonSelect from "@/utils/select.utils.ts";
-            import BeicroonSelect from "@/components/BeicroonSelect.vue";
+            import BeicroonSelect from "@/components/beicroon/BeicroonSelect.vue";
             import {page, {{filename}}PageVO as VO, {{filename}}QueryDTO as DTO} from "./{{vueFilename}}.http.utils.ts";
 
             type Props = {

@@ -2,9 +2,9 @@
 import {reactive, ref} from "vue";
 import {CacheKeyEnums} from "@/enums/default-enums.ts";
 import {initMenus, router} from "@/utils/auth.utils.ts";
-import BeicroonForm from "@/components/BeicroonForm.vue";
-import BeicroonInput from "@/components/BeicroonInput.vue";
-import BeicroonButton from "@/components/BeicroonButton.vue";
+import BeicroonForm from "@/components/beicroon/BeicroonForm.vue";
+import BeicroonInput from "@/components/beicroon/BeicroonInput.vue";
+import BeicroonButton from "@/components/beicroon/BeicroonButton.vue";
 import {AuthUser, indexMenu, login, LoginDTO} from "@/request/account-admin-auth.http.ts";
 
 const form = reactive<LoginDTO>({

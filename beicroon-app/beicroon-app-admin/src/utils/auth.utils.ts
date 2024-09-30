@@ -25,17 +25,17 @@ export const router: Router = createRouter({
                 {
                     name: "后台账号",
                     path: "/account/admin",
-                    component: () => import("@/modules/default/admin/AccountAdminApp.vue"),
+                    component: () => import("@/modules/beicroon/admin/AccountAdminApp.vue"),
                 },
                 {
                     name: "菜单管理",
                     path: "/resource/menu",
-                    component: () => import("@/modules/default/menu/ResourceMenuApp.vue"),
+                    component: () => import("@/modules/beicroon/menu/ResourceMenuApp.vue"),
                 },
                 {
                     name: "角色管理",
                     path: "/resource/role",
-                    component: () => import("@/modules/default/role/ResourceRoleApp.vue"),
+                    component: () => import("@/modules/beicroon/role/ResourceRoleApp.vue"),
                 },
             ],
         },

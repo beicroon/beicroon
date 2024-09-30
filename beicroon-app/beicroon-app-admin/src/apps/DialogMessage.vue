@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import {ref} from "vue";
-import BeicroonButton from "@/components/BeicroonButton.vue";
-import BeicroonLineVertical from "@/components/BeicroonLineVertical.vue";
+import BeicroonButton from "@/components/beicroon/BeicroonButton.vue";
+import BeicroonLineVertical from "@/components/beicroon/BeicroonLineVertical.vue";
 
 type Props = {
   title: string,

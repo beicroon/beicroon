@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import {afterSearch, List} from "@/utils/list.utils.ts";
 import {computed, onMounted, onUnmounted, ref} from "vue";
-import BeicroonListRow from "@/components/BeicroonListRow.vue";
-import BeicroonLoading from "@/components/BeicroonLoading.vue";
+import BeicroonListRow from "@/components/beicroon/BeicroonListRow.vue";
+import BeicroonLoading from "@/components/beicroon/BeicroonLoading.vue";
 
 type Props = {
   list: List<any, any>,

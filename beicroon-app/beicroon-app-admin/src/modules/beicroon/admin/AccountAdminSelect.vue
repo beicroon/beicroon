@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import {computed, onMounted, ref, watch} from "vue";
 import createBeicroonSelect from "@/utils/select.utils.ts";
-import BeicroonSelect from "@/components/BeicroonSelect.vue";
+import BeicroonSelect from "@/components/beicroon/BeicroonSelect.vue";
 import {AccountAdminPageVO as VO, AccountAdminQueryDTO as DTO, page} from "@/request/account-admin.http.ts";
 
 type Props = {

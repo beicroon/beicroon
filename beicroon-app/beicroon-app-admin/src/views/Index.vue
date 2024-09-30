@@ -2,10 +2,10 @@
 import {onMounted, ref} from "vue";
 import {useRouter} from "vue-router";
 import {CacheKeyEnums} from "@/enums/default-enums.ts";
-import BeicroonButton from "@/components/BeicroonButton.vue";
-import BeicroonLineCross from "@/components/BeicroonLineCross.vue";
-import BeicroonLineVertical from "@/components/BeicroonLineVertical.vue";
+import BeicroonButton from "@/components/beicroon/BeicroonButton.vue";
+import BeicroonLineCross from "@/components/beicroon/BeicroonLineCross.vue";
 import {AuthUser, loginMenu, logout} from "@/request/account-admin-auth.http.ts";
+import BeicroonLineVertical from "@/components/beicroon/BeicroonLineVertical.vue";
 import auth, {clearAuth, initMenus, router, setLinks, toLinkPath} from "@/utils/auth.utils.ts";
 
 onMounted(() => initMenus(useRouter().currentRoute.value.path));

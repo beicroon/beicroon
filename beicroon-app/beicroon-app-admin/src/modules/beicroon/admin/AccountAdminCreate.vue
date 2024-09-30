@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import {reactive, ref} from "vue";
-import BeicroonForm from "@/components/BeicroonForm.vue";
-import BeicroonInput from "@/components/BeicroonInput.vue";
-import BeicroonButton from "@/components/BeicroonButton.vue";
-import BeicroonLineVertical from "@/components/BeicroonLineVertical.vue";
+import BeicroonForm from "@/components/beicroon/BeicroonForm.vue";
+import BeicroonInput from "@/components/beicroon/BeicroonInput.vue";
+import BeicroonButton from "@/components/beicroon/BeicroonButton.vue";
+import BeicroonLineVertical from "@/components/beicroon/BeicroonLineVertical.vue";
 import {AccountAdminCreateDTO as DTO, create} from "@/request/account-admin.http.ts";
 
 const loading = ref(false);
