@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import {afterSearch, List} from "@/utils/list.utils.ts";
 import {computed, onMounted, onUnmounted, ref} from "vue";
+import {afterSearch, List} from "@/utils/beicroon/list.utils.ts";
 import BeicroonListRow from "@/components/beicroon/BeicroonListRow.vue";
 import BeicroonLoading from "@/components/beicroon/BeicroonLoading.vue";
 

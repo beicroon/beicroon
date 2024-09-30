@@ -1,16 +1,16 @@
 <script setup lang="ts">
 import {onMounted, reactive} from "vue";
-import {batchRequest} from "@/utils/http.utils.ts";
-import {createBeicroonCheckTree} from "@/utils/check.utils.ts";
+import {batchRequest} from "@/utils/beicroon/http.utils.ts";
 import BeicroonTree from "@/components/beicroon/BeicroonTree.vue";
 import BeicroonForm from "@/components/beicroon/BeicroonForm.vue";
 import BeicroonButton from "@/components/beicroon/BeicroonButton.vue";
 import BeicroonLoading from "@/components/beicroon/BeicroonLoading.vue";
+import {createBeicroonCheckTree} from "@/utils/beicroon/check.utils.ts";
 import BeicroonCheckbox from "@/components/beicroon/BeicroonCheckbox.vue";
 import BeicroonTreeItem from "@/components/beicroon/BeicroonTreeItem.vue";
-import {assign, list as listMenuId} from "@/request/resource-role-menu.http.ts";
 import BeicroonLineVertical from "@/components/beicroon/BeicroonLineVertical.vue";
-import {AuthMenu as Menu, listAuthMenuNoWaiting as listMenu} from "@/request/account-admin-auth.http.ts";
+import {assign, list as listMenuId} from "@/request/beicroon/resource-role-menu.http.ts";
+import {AuthMenu as Menu, listAuthMenuNoWaiting as listMenu} from "@/request/beicroon/account-admin-auth.http.ts";
 
 type Props = {
   roleId: string,

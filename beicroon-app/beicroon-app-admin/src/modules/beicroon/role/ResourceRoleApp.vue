@@ -1,19 +1,24 @@
 <script setup lang="ts">
 import {onMounted} from "vue";
-import toast from "@/utils/toast.utils.ts";
-import dialog from "@/utils/dialog.utils.ts";
 import Create from "./ResourceRoleCreate.vue";
 import Detail from "./ResourceRoleDetail.vue";
 import Update from "./ResourceRoleUpdate.vue";
 import Assign from "./ResourceRoleMenuAssign.vue";
-import createBeicroonList from "@/utils/list.utils.ts";
+import toast from "@/utils/beicroon/toast.utils.ts";
+import dialog from "@/utils/beicroon/dialog.utils.ts";
+import createBeicroonList from "@/utils/beicroon/list.utils.ts";
 import BeicroonList from "@/components/beicroon/BeicroonList.vue";
 import BeicroonInput from "@/components/beicroon/BeicroonInput.vue";
 import BeicroonButton from "@/components/beicroon/BeicroonButton.vue";
 import BeicroonListRow from "@/components/beicroon/BeicroonListRow.vue";
 import BeicroonListCell from "@/components/beicroon/BeicroonListCell.vue";
 import BeicroonListCellButton from "@/components/beicroon/BeicroonListCellButton.vue";
-import {page, remove, ResourceRolePageVO as VO, ResourceRoleQueryDTO as DTO} from "@/request/resource-role.http.ts";
+import {
+  page,
+  remove,
+  ResourceRolePageVO as VO,
+  ResourceRoleQueryDTO as DTO
+} from "@/request/beicroon/resource-role.http.ts";
 
 const list = createBeicroonList<DTO, VO>("角色", page);
 

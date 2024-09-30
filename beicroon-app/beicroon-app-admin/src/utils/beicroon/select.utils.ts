@@ -1,5 +1,5 @@
 import {reactive} from "vue";
-import {BaseVO, PageInfo, QueryDTO, Response} from "@/utils/http.utils.ts";
+import {BaseVO, PageInfo, QueryDTO, Response} from "@/utils/beicroon/http.utils.ts";
 
 type Page<DTO extends QueryDTO, VO extends BaseVO> = (params: DTO, pageInfo: PageInfo) => Promise<Response<Array<VO>>>;
 

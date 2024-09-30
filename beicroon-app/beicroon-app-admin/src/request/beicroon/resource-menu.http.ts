@@ -1,4 +1,12 @@
-import http, {BaseVO, DisableDTO, DisableVO, PageInfo, QueryDTO, Response, UpdateDTO} from "@/utils/http.utils.ts";
+import http, {
+    BaseVO,
+    DisableDTO,
+    DisableVO,
+    PageInfo,
+    QueryDTO,
+    Response,
+    UpdateDTO
+} from "@/utils/beicroon/http.utils.ts";
 
 // 基础返回字段
 export type ResourceMenuBaseVO = BaseVO & DisableVO & {

@@ -10,7 +10,7 @@ public class VueAppContent {
             import Create from "./{{filename}}Create.vue";
             import Detail from "./{{filename}}Detail.vue";
             import Update from "./{{filename}}Update.vue";
-            import createBeicroonList from "@/utils/list.utils.ts";
+            import createBeicroonList from "@/utils/beicroon/list.utils.ts";
             import BeicroonList from "@/components/beicroon/BeicroonList.vue";
             import BeicroonInput from "@/components/beicroon/BeicroonInput.vue";
             import BeicroonButton from "@/components/beicroon/BeicroonButton.vue";

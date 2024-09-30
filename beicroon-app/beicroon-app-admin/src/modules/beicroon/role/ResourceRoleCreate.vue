@@ -4,7 +4,7 @@ import BeicroonForm from "@/components/beicroon/BeicroonForm.vue";
 import BeicroonInput from "@/components/beicroon/BeicroonInput.vue";
 import BeicroonButton from "@/components/beicroon/BeicroonButton.vue";
 import BeicroonLineVertical from "@/components/beicroon/BeicroonLineVertical.vue";
-import {create, ResourceRoleCreateDTO as DTO} from "@/request/resource-role.http.ts";
+import {create, ResourceRoleCreateDTO as DTO} from "@/request/beicroon/resource-role.http.ts";
 
 const loading = ref(false);
 

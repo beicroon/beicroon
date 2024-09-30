@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import {computed, onMounted, reactive, ref, watch} from "vue";
 import BeicroonButton from "@/components/beicroon/BeicroonButton.vue";
-import {BeicroonTime, Hour, Minute, Second} from "@/utils/datetime.utils.ts";
+import {BeicroonTime, Hour, Minute, Second} from "@/utils/beicroon/datetime.utils.ts";
 
 type Props = {
   label: string,

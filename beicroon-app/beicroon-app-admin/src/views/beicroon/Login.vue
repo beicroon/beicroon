@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import {reactive, ref} from "vue";
 import {CacheKeyEnums} from "@/enums/default-enums.ts";
-import {initMenus, router} from "@/utils/auth.utils.ts";
+import {initMenus, router} from "@/utils/beicroon/auth.utils.ts";
 import BeicroonForm from "@/components/beicroon/BeicroonForm.vue";
 import BeicroonInput from "@/components/beicroon/BeicroonInput.vue";
 import BeicroonButton from "@/components/beicroon/BeicroonButton.vue";
-import {AuthUser, indexMenu, login, LoginDTO} from "@/request/account-admin-auth.http.ts";
+import {AuthUser, indexMenu, login, LoginDTO} from "@/request/beicroon/account-admin-auth.http.ts";
 
 const form = reactive<LoginDTO>({
   username: "",

@@ -1,5 +1,5 @@
-import {sha256} from "@/utils/hash.utils.ts";
-import http, {BaseVO, Response, waitingConfig} from "@/utils/http.utils.ts";
+import {sha256} from "@/utils/beicroon/hash.utils.ts";
+import http, {BaseVO, Response, waitingConfig} from "@/utils/beicroon/http.utils.ts";
 
 export type LoginDTO = {
     username: string;

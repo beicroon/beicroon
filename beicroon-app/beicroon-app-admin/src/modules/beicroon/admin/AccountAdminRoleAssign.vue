@@ -1,17 +1,17 @@
 <script setup lang="ts">
 import {onMounted, reactive} from "vue";
-import {batchRequest} from "@/utils/http.utils.ts";
 import {BooleanEnums} from "@/enums/default-enums.ts";
-import {createBeicroonCheck} from "@/utils/check.utils.ts";
+import {batchRequest} from "@/utils/beicroon/http.utils.ts";
 import BeicroonTree from "@/components/beicroon/BeicroonTree.vue";
 import BeicroonForm from "@/components/beicroon/BeicroonForm.vue";
+import {createBeicroonCheck} from "@/utils/beicroon/check.utils.ts";
 import BeicroonButton from "@/components/beicroon/BeicroonButton.vue";
 import BeicroonLoading from "@/components/beicroon/BeicroonLoading.vue";
 import BeicroonCheckbox from "@/components/beicroon/BeicroonCheckbox.vue";
 import BeicroonTreeItem from "@/components/beicroon/BeicroonTreeItem.vue";
-import {assign, list as listRoleId} from "@/request/account-admin-role.http.ts";
 import BeicroonLineVertical from "@/components/beicroon/BeicroonLineVertical.vue";
-import {listNoWaiting as listRole, ResourceRoleBaseVO as Role} from "@/request/resource-role.http.ts"
+import {assign, list as listRoleId} from "@/request/beicroon/account-admin-role.http.ts";
+import {listNoWaiting as listRole, ResourceRoleBaseVO as Role} from "@/request/beicroon/resource-role.http.ts"
 
 type Props = {
   adminId: string,

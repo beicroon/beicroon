@@ -5,7 +5,7 @@ import BeicroonInput from "@/components/beicroon/BeicroonInput.vue";
 import BeicroonButton from "@/components/beicroon/BeicroonButton.vue";
 import BeicroonLoading from "@/components/beicroon/BeicroonLoading.vue";
 import BeicroonLineVertical from "@/components/beicroon/BeicroonLineVertical.vue";
-import {AccountAdminUpdateDTO as DTO, detail, update} from "@/request/account-admin.http.ts";
+import {AccountAdminUpdateDTO as DTO, detail, update} from "@/request/beicroon/account-admin.http.ts";
 
 type Props = {
   id: string,

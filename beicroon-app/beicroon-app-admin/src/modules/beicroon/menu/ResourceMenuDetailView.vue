@@ -3,8 +3,8 @@ import BeicroonForm from "@/components/beicroon/BeicroonForm.vue";
 import BeicroonInput from "@/components/beicroon/BeicroonInput.vue";
 import BeicroonButton from "@/components/beicroon/BeicroonButton.vue";
 import BeicroonLoading from "@/components/beicroon/BeicroonLoading.vue";
-import {ResourceMenuDetailVO as VO} from "@/request/resource-menu.http.ts";
 import BeicroonLineVertical from "@/components/beicroon/BeicroonLineVertical.vue";
+import {ResourceMenuDetailVO as VO} from "@/request/beicroon/resource-menu.http.ts";
 
 type Props = {
   data: VO | null,

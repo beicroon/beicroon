@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import {computed, ref, watch} from "vue";
-import {Select} from "@/utils/select.utils.ts";
+import {Select} from "@/utils/beicroon/select.utils.ts";
 import BeicroonButton from "@/components/beicroon/BeicroonButton.vue";
 import BeicroonLoading from "@/components/beicroon/BeicroonLoading.vue";
 import BeicroonCheckbox from "@/components/beicroon/BeicroonCheckbox.vue";

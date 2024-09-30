@@ -1,7 +1,7 @@
 import {createApp} from "vue";
 
 import App from "@/apps/App.vue";
-import {router} from "@/utils/auth.utils.ts";
+import {router} from "@/utils/beicroon/auth.utils.ts";
 import {AppSelectorEnums} from "@/enums/default-enums.ts";
 
 const app = createApp(App)

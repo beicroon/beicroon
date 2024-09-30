@@ -1,8 +1,8 @@
 import axios from "axios";
-import toast from "@/utils/toast.utils.ts";
-import {clearAuth, router} from "@/utils/auth.utils.ts";
-import {loginMenu} from "@/request/account-admin-auth.http.ts";
+import toast from "@/utils/beicroon/toast.utils.ts";
+import {clearAuth, router} from "@/utils/beicroon/auth.utils.ts";
 import {BooleanEnums, CacheKeyEnums} from "@/enums/default-enums.ts";
+import {loginMenu} from "@/request/beicroon/account-admin-auth.http.ts";
 
 const http = axios.create({
     timeout: 6000,

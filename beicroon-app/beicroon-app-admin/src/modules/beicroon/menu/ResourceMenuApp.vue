@@ -3,7 +3,7 @@ import {onMounted, ref} from "vue";
 import Create from "./ResourceMenuCreate.vue";
 import Detail from "./ResourceMenuDetail.vue";
 import Update from "./ResourceMenuUpdate.vue";
-import createBeicroonList from "@/utils/list.utils.ts";
+import createBeicroonList from "@/utils/beicroon/list.utils.ts";
 import BeicroonList from "@/components/beicroon/BeicroonList.vue";
 import BeicroonInput from "@/components/beicroon/BeicroonInput.vue";
 import BeicroonButton from "@/components/beicroon/BeicroonButton.vue";
@@ -12,7 +12,12 @@ import BeicroonListCell from "@/components/beicroon/BeicroonListCell.vue";
 import BeicroonDatetime from "@/components/beicroon/BeicroonDatetime.vue";
 import ResourceMenuSelect from "@/modules/beicroon/menu/ResourceMenuSelect.vue";
 import BeicroonListCellButton from "@/components/beicroon/BeicroonListCellButton.vue";
-import {page, remove, ResourceMenuPageVO as VO, ResourceMenuQueryDTO as DTO} from "@/request/resource-menu.http.ts";
+import {
+  page,
+  remove,
+  ResourceMenuPageVO as VO,
+  ResourceMenuQueryDTO as DTO
+} from "@/request/beicroon/resource-menu.http.ts";
 
 const list = createBeicroonList<DTO, VO>("菜单", page);
 

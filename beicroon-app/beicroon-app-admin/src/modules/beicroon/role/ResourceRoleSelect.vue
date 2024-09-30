@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import {computed, onMounted, ref, watch} from "vue";
-import createBeicroonSelect from "@/utils/select.utils.ts";
+import createBeicroonSelect from "@/utils/beicroon/select.utils.ts";
 import BeicroonSelect from "@/components/beicroon/BeicroonSelect.vue";
-import {page, ResourceRolePageVO as VO, ResourceRoleQueryDTO as DTO} from "@/request/resource-role.http.ts";
+import {page, ResourceRolePageVO as VO, ResourceRoleQueryDTO as DTO} from "@/request/beicroon/resource-role.http.ts";
 
 type Props = {
   label: string,

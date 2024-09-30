@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import {onMounted, ref} from "vue";
 import ResourceRoleDetailView from "./ResourceRoleDetailView.vue";
-import {detail, ResourceRoleDetailVO as VO} from "@/request/resource-role.http.ts";
+import {detail, ResourceRoleDetailVO as VO} from "@/request/beicroon/resource-role.http.ts";
 
 type Props = {
   id: string,

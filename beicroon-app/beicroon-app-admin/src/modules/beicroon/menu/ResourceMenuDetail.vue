@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import {onMounted, ref} from "vue";
 import ResourceMenuDetailView from "./ResourceMenuDetailView.vue";
-import {detail, ResourceMenuDetailVO as VO} from "@/request/resource-menu.http.ts";
+import {detail, ResourceMenuDetailVO as VO} from "@/request/beicroon/resource-menu.http.ts";
 
 type Props = {
   id: string,

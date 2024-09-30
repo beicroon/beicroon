@@ -5,7 +5,7 @@ import BeicroonInput from "@/components/beicroon/BeicroonInput.vue";
 import BeicroonButton from "@/components/beicroon/BeicroonButton.vue";
 import ResourceMenuSelect from "@/modules/beicroon/menu/ResourceMenuSelect.vue";
 import BeicroonLineVertical from "@/components/beicroon/BeicroonLineVertical.vue";
-import {create, ResourceMenuCreateDTO as DTO} from "@/request/resource-menu.http.ts";
+import {create, ResourceMenuCreateDTO as DTO} from "@/request/beicroon/resource-menu.http.ts";
 
 const loading = ref(false);
 

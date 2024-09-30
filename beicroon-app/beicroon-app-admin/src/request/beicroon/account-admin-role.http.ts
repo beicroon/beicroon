@@ -1,4 +1,4 @@
-import http, {Response, waitingConfig} from "@/utils/http.utils.ts";
+import http, {Response, waitingConfig} from "@/utils/beicroon/http.utils.ts";
 
 // 获取菜单
 export async function list(adminId: string): Promise<Response<Array<string>>> {

@@ -1,45 +1,13 @@
 import {reactive} from "vue";
-import toast from "@/utils/toast.utils.ts";
+import routes, {Meta} from "@/routes.ts";
+import toast from "@/utils/beicroon/toast.utils.ts";
 import {createRouter, createWebHistory, Router} from "vue-router";
 import {CacheKeyEnums, SystemEnums} from "@/enums/default-enums.ts";
-import {AuthMenu, indexMenu, listAuthMenu, loginMenu} from "@/request/account-admin-auth.http.ts";
-
-export type Meta = {
-    auth: boolean,
-}
+import {AuthMenu, indexMenu, listAuthMenu, loginMenu} from "@/request/beicroon/account-admin-auth.http.ts";
 
 export const router: Router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
-    routes: [
-        {
-            name: "登录",
-            path: "/login",
-            meta: {auth: false} as Meta,
-            component: () => import("@/views/Login.vue")
-        },
-        {
-            name: "首页",
-            path: "/",
-            component: () => import("@/views/Index.vue"),
-            children: [
-                {
-                    name: "后台账号",
-                    path: "/account/admin",
-                    component: () => import("@/modules/beicroon/admin/AccountAdminApp.vue"),
-                },
-                {
-                    name: "菜单管理",
-                    path: "/resource/menu",
-                    component: () => import("@/modules/beicroon/menu/ResourceMenuApp.vue"),
-                },
-                {
-                    name: "角色管理",
-                    path: "/resource/role",
-                    component: () => import("@/modules/beicroon/role/ResourceRoleApp.vue"),
-                },
-            ],
-        },
-    ],
+    routes: routes,
 });
 
 const auth = reactive({

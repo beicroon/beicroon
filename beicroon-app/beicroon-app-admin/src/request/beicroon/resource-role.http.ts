@@ -7,7 +7,7 @@ import http, {
     Response,
     UpdateDTO,
     waitingConfig
-} from "@/utils/http.utils.ts";
+} from "@/utils/beicroon/http.utils.ts";
 
 // 基础返回字段
 export type ResourceRoleBaseVO = BaseVO & DisableVO & {

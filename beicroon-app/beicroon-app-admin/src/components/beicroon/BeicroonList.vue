@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import {List} from "@/utils/list.utils.ts";
 import {computed, ref, useSlots} from "vue";
-import toggle from "@/utils/toggle.utils.ts";
+import {List} from "@/utils/beicroon/list.utils.ts";
+import toggle from "@/utils/beicroon/toggle.utils.ts";
 import BeicroonButton from "@/components/beicroon/BeicroonButton.vue";
 import BeicroonListTable from "@/components/beicroon/BeicroonListTable.vue";
 import BeicroonLineVertical from "@/components/beicroon/BeicroonLineVertical.vue";
