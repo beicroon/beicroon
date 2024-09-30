@@ -126,9 +126,20 @@ async function handleLogout() {
     z-index: 8;
     display: flex;
     width: 120rem;
+    user-select: text;
     position: relative;
     align-items: center;
     justify-content: center;
+
+    h3 {
+      width: 52rem;
+      height: 52rem;
+      display: flex;
+      border-radius: 50%;
+      align-items: center;
+      justify-content: center;
+      border: 1rem solid var(--color-grey-deeper);
+    }
 
     .button {
       left: 50%;
