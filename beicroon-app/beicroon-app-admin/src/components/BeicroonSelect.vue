@@ -3,6 +3,7 @@ import {computed, ref, watch} from "vue";
 import {Select} from "@/utils/select.utils.ts";
 import BeicroonButton from "@/components/BeicroonButton.vue";
 import BeicroonLoading from "@/components/BeicroonLoading.vue";
+import BeicroonCheckbox from "@/components/BeicroonCheckbox.vue";
 
 type Props = {
   select: Select<any, any>,
@@ -12,9 +13,12 @@ type Props = {
   required?: boolean,
   disabled?: boolean,
   placeholder?: string,
+  multiple?: boolean,
 };
 
-const props = defineProps<Props>();
+const props = withDefaults(defineProps<Props>(), {
+  multiple: false,
+});
 
 const emits = defineEmits(["update:showValue", "update:modelValue"]);
 
@@ -78,6 +82,8 @@ async function handleMouseUp() {
 }
 
 async function handleClick(option: any) {
+  option.checked = "checked";
+
   emits("update:showValue", props.select.getLabel(option));
   emits("update:modelValue", props.select.getValue(option));
 
@@ -111,11 +117,11 @@ async function handleClear() {
     ></beicroon-button>
     <ul class="select" :class="{hidden: select.hidden}" @mousedown="handleMouseDown" @mouseup="handleMouseUp">
       <li class="option" v-for="option in select.options" @click="handleClick(option)">
-        {{ select.getLabel(option) }}
+        <beicroon-checkbox :label="select.getLabel(option)" :checked="option.checked"></beicroon-checkbox>
       </li>
       <template v-for="options in select.moreOptions">
         <li class="option" v-for="option in options" @click="handleClick(option)">
-          {{ select.getLabel(option) }}
+          <beicroon-checkbox :label="select.getLabel(option)" :checked="option.checked"></beicroon-checkbox>
         </li>
       </template>
       <li class="option loading">
@@ -129,8 +135,6 @@ async function handleClear() {
 <style lang="less">
 .beicroon-select {
   &.active {
-    z-index: 9;
-
     .beicroon-select-label {
       top: 0;
       transform: translateY(-28rem);
@@ -177,7 +181,6 @@ async function handleClear() {
 
   .beicroon-select-label {
     top: 50%;
-    z-index: 1;
     right: 6rem;
     width: 300rem;
     height: 32rem;
@@ -195,7 +198,6 @@ async function handleClear() {
 
   .beicroon-select-clear {
     top: 50%;
-    z-index: 3;
     right: 24rem;
     position: absolute;
     align-items: center;
@@ -208,13 +210,12 @@ async function handleClear() {
 
   .beicroon-input-area {
     opacity: 0;
-    z-index: 2;
+    z-index: 1;
     position: relative;
   }
 
   .select {
     gap: 2rem;
-    z-index: 1;
     right: 6rem;
     display: flex;
     width: 300rem;

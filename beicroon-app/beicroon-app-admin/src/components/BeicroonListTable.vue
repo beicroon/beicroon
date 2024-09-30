@@ -168,7 +168,6 @@ async function endScroll() {
         &:before {
           top: 0;
           left: 0;
-          z-index: 2;
           content: "";
           width: 10rem;
           height: 100%;
@@ -189,7 +188,6 @@ async function endScroll() {
 
   .beicroon-list-head {
     top: 0;
-    z-index: 2;
     position: sticky;
     height: var(--beicroon-height-list-row);
 
@@ -208,7 +206,6 @@ async function endScroll() {
   }
 
   .beicroon-list-body {
-    z-index: 1;
     position: relative;
 
     .beicroon-list-row {
@@ -232,7 +229,6 @@ async function endScroll() {
 
   .beicroon-list-button {
     right: 0;
-    z-index: 1;
     width: 180rem;
     position: sticky;
     background-color: var(--color-white);
@@ -246,7 +242,6 @@ async function endScroll() {
   .beicroon-list-loading {
     top: 50%;
     left: 50%;
-    z-index: 3;
     opacity: 0;
     display: flex;
     visibility: hidden;
@@ -262,7 +257,6 @@ async function endScroll() {
 }
 
 .beicroon-list-table-scroll {
-  z-index: 3;
   overflow: hidden;
   position: absolute;
   border-radius: 6rem;
@@ -270,7 +264,6 @@ async function endScroll() {
   .scroll {
     top: 0;
     left: 0;
-    z-index: 1;
     max-width: 100%;
     max-height: 100%;
     position: absolute;

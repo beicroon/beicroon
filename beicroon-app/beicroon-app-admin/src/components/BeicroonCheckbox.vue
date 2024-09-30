@@ -54,14 +54,12 @@ function handleCheck() {
 
   .beicroon-input-area {
     opacity: 0;
-    z-index: 2;
     position: relative;
   }
 
   .beicroon-checkbox-area {
     top: 10rem;
     left: 6rem;
-    z-index: 1;
     width: 12rem;
     height: 12rem;
     cursor: pointer;

@@ -49,7 +49,6 @@ function toggleChoosers() {
   justify-content: space-between;
 
   .size {
-    z-index: 1;
     width: 120rem;
     height: 34rem;
     display: flex;
@@ -74,7 +73,6 @@ function toggleChoosers() {
 
   .chooser {
     gap: 4rem;
-    z-index: 1;
     left: -2rem;
     display: flex;
     padding: 4rem 0;

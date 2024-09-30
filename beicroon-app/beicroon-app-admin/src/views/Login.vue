@@ -50,7 +50,6 @@ async function handleSubmit() {
 .login-form {
   top: 18%;
   left: 50%;
-  z-index: 9;
   gap: 32rem;
   display: flex;
   height: 320rem;

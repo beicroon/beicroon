@@ -342,15 +342,12 @@ async function handleConfirm() {
 <style lang="less">
 .beicroon-datetime {
   &.active {
-    z-index: 9;
-
     .beicroon-datetime-area {
       border-color: var(--color-primary);
     }
   }
 
   .beicroon-datetime-area {
-    z-index: 1;
     left: 18rem;
     bottom: 14rem;
     width: 300rem;
@@ -373,7 +370,6 @@ async function handleConfirm() {
   }
 
   .beicroon-datetime-view {
-    z-index: 1;
     right: 18rem;
     width: 300rem;
     height: 328rem;
@@ -396,7 +392,6 @@ async function handleConfirm() {
       top: 0;
       width: 0;
       height: 0;
-      z-index: 1;
       content: "";
       right: 220rem;
       border-top: none;
@@ -411,7 +406,6 @@ async function handleConfirm() {
       top: 0;
       width: 0;
       height: 0;
-      z-index: 1;
       content: "";
       right: 60rem;
       border-top: none;

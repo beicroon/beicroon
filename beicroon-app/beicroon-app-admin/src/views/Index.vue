@@ -48,7 +48,7 @@ async function handleLogout() {
         </ul>
       </div>
     </section>
-    <beicroon-line-vertical class="beicroon-head-body"></beicroon-line-vertical>
+    <beicroon-line-vertical></beicroon-line-vertical>
     <section class="beicroon-body">
       <section class="beicroon-menu">
         <ul class="menu">
@@ -64,7 +64,7 @@ async function handleLogout() {
       </section>
       <beicroon-line-cross></beicroon-line-cross>
       <section class="beicroon-main">
-        <router-view class="beicroon-view" v-if="auth.ready"></router-view>
+        <router-view v-if="auth.ready"></router-view>
       </section>
     </section>
   </section>
@@ -79,14 +79,12 @@ async function handleLogout() {
 }
 
 .beicroon {
-  z-index: 1;
   width: 100%;
   height: 100%;
   position: relative;
 }
 
 .beicroon-head {
-  z-index: 2;
   gap: 30rem;
   width: 100%;
   display: flex;
@@ -125,49 +123,46 @@ async function handleLogout() {
 
   .user {
     gap: 6rem;
-    z-index: 1;
+    z-index: 8;
     display: flex;
     width: 120rem;
     position: relative;
     align-items: center;
     justify-content: center;
-  }
 
-  .button {
-    left: 50%;
-    z-index: 1;
-    width: 80rem;
-    position: absolute;
-    border-radius: 6rem;
-    transform: translateX(-50%);
-    background-color: var(--color-white);
-    top: calc(var(--beicroon-height-head) - 8rem);
-    box-shadow: 0 0 8rem -3rem var(--color-black-30) inset;
+    .button {
+      left: 50%;
+      width: 80rem;
+      position: absolute;
+      border-radius: 6rem;
+      transform: translateX(-50%);
+      background-color: var(--color-white);
+      top: calc(var(--beicroon-height-head) - 8rem);
+      box-shadow: 0 0 8rem -3rem var(--color-black-30) inset;
 
-    li {
-      width: 100%;
-      height: 32rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      .beicroon-button {
+      li {
         width: 100%;
-        height: 100%;
+        height: 32rem;
+        display: flex;
         align-items: center;
         justify-content: center;
+
+        .beicroon-button {
+          width: 100%;
+          height: 100%;
+          align-items: center;
+          justify-content: center;
+        }
       }
     }
   }
 }
 
 .beicroon-head-body {
-  z-index: 2;
   position: relative;
 }
 
 .beicroon-body {
-  z-index: 1;
   width: 100%;
   display: flex;
   position: relative;
@@ -175,7 +170,6 @@ async function handleLogout() {
   height: calc(100% - var(--beicroon-height-head) - var(--beicroon-height-line));
 
   .beicroon-menu {
-    z-index: 1;
     height: 100%;
     padding: 30rem 0;
     overflow-y: auto;
@@ -222,14 +216,9 @@ async function handleLogout() {
   }
 
   .beicroon-main {
-    z-index: 2;
     height: 100%;
     position: relative;
     width: calc(100% - var(--beicroon-width-menu) - var(--beicroon-width-line));
-
-    .beicroon-view {
-      height: 100%;
-    }
   }
 }
 </style>

@@ -83,7 +83,6 @@ const moreSearchSize = computed(() => {
   user-select: text;
 
   .list-head {
-    z-index: 2;
     width: 100%;
     display: flex;
     padding: 8rem;
@@ -113,7 +112,6 @@ const moreSearchSize = computed(() => {
   }
 
   .list-body {
-    z-index: 1;
     width: 100%;
     padding: 8rem;
     position: relative;
@@ -122,7 +120,6 @@ const moreSearchSize = computed(() => {
   }
 
   .list-foot {
-    z-index: 2;
     width: 100%;
     display: flex;
     position: relative;
@@ -143,7 +140,6 @@ const moreSearchSize = computed(() => {
 
     .more-search {
       gap: 8rem;
-      z-index: 3;
       width: 120rem;
       display: flex;
       position: relative;
@@ -152,12 +148,10 @@ const moreSearchSize = computed(() => {
       justify-content: center;
 
       .search-button {
-        z-index: 1;
         position: relative;
       }
 
       .search-size {
-        z-index: 1;
         top: -12rem;
         right: 10rem;
         height: 34rem;

@@ -49,7 +49,6 @@ async function handleFocusout() {
 <style lang="less">
 .beicroon-input {
   gap: 6rem;
-  z-index: 1;
   padding: 6rem;
   user-select: text;
   position: relative;
@@ -62,7 +61,6 @@ async function handleFocusout() {
 
   &.required {
     .beicroon-input-label {
-      z-index: 1;
       position: relative;
 
       &:after {
@@ -82,6 +80,7 @@ async function handleFocusout() {
   }
 
   &.active {
+    z-index: 9;
     background-color: var(--color-primary-lighter);
 
     .beicroon-input-label {
