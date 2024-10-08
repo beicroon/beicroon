@@ -277,7 +277,7 @@ async function handleConfirm() {
 <template>
   <div class="beicroon-input beicroon-datetime" :class="{required: required, active: active}" @click.stop>
     <span class="beicroon-input-label">{{ label }}</span>
-    <input class="beicroon-input-area" type="text"
+    <input class="beicroon-input-area" :class="{hidden: !noEnd}" type="text"
            :placeholder="placeholder"
            v-model="value"
            @focusin="handlePrevFocusin"
