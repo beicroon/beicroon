@@ -47,7 +47,7 @@ async function handleLogout() {
         </ul>
       </div>
     </section>
-    <section class="beicroon-body">
+    <section class="beicroon-body" :class="{full: !auth.links || auth.links.length === 0}">
       <section class="beicroon-menu">
         <ul class="menu">
           <li v-for="menu in auth.links">
@@ -177,6 +177,20 @@ async function handleLogout() {
   position: relative;
   flex-direction: row;
   height: calc(100% - var(--beicroon-height-head));
+
+  &.full {
+    .beicroon-menu {
+      display: none;
+    }
+
+    .beicroon-line-cross {
+      display: none;
+    }
+
+    .beicroon-main {
+      width: calc(100%);
+    }
+  }
 
   .beicroon-menu {
     height: 100%;
