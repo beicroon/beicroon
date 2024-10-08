@@ -1,8 +1,8 @@
 import {h, ref, render, VNode} from "vue";
 import {Component} from "@vue/runtime-core";
-import DialogMessage from "@/apps/DialogMessage.vue";
-import DialogOverlay from "@/apps/DialogOverlay.vue";
 import {AppNameEnums} from "@/enums/beicroon/beicroon-enums.ts";
+import DialogMessage from "@/apps/beicroon/BeicroonDialogMessage.vue";
+import DialogOverlay from "@/apps/beicroon/BeicroonDialogOverlay.vue";
 
 const container: HTMLElement = document.createElement("div");
 

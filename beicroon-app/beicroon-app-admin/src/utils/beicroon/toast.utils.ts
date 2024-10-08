@@ -1,6 +1,6 @@
 import {h, render} from "vue";
-import ToastMessage from "@/apps/ToastMessage.vue";
 import {AppNameEnums} from "@/enums/beicroon/beicroon-enums.ts";
+import ToastMessage from "@/apps/beicroon/BeicroonToastMessage.vue";
 
 const container: HTMLElement = document.createElement("div");
 

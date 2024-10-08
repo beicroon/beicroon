@@ -1,6 +1,6 @@
 import {createApp} from "vue";
 
-import App from "@/apps/App.vue";
+import App from "@/apps/beicroon/BeicroonApp.vue";
 import {router} from "@/utils/beicroon/auth.utils.ts";
 import {AppSelectorEnums} from "@/enums/beicroon/beicroon-enums.ts";
 
