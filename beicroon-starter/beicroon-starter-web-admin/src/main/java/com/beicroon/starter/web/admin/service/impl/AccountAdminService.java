@@ -131,6 +131,14 @@ public class AccountAdminService implements IAccountAdminService {
 
     @Override
     public boolean remove(IdsDTO dto) {
+        List<AccountAdminModel> admins = this.accountAdminRepository.listByIds(dto.getIds());
+
+        AccountAdminModel root = AccountAdminHelper.getRoot(admins);
+
+        if (root != null) {
+            throw ExceptionUtils.business(String.format("[%s]账号无法删除", root.getName()));
+        }
+
         return this.accountAdminRepository.removeByIds(dto.getIds());
     }
 

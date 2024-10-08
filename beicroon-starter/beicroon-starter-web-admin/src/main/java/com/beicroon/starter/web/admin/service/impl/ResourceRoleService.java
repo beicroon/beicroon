@@ -136,6 +136,14 @@ public class ResourceRoleService implements IResourceRoleService {
 
     @Override
     public boolean remove(IdsDTO dto) {
+        List<ResourceRoleModel> roles = this.resourceRoleRepository.listByIds(dto.getIds());
+
+        ResourceRoleModel root = ResourceRoleHelper.getRoot(roles);
+
+        if (root != null) {
+            throw ExceptionUtils.business(String.format("[%s]角色无法删除", root.getName()));
+        }
+
         return this.resourceRoleRepository.removeByIds(dto.getIds());
     }
 

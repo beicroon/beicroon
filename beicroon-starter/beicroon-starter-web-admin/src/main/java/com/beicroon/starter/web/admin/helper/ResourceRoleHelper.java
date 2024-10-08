@@ -29,4 +29,8 @@ public final class ResourceRoleHelper {
         return roles.stream().noneMatch(ResourceRoleHelper::isRoot);
     }
 
+    public static ResourceRoleModel getRoot(List<ResourceRoleModel> roles) {
+        return roles.stream().filter(ResourceRoleHelper::isRoot).findFirst().orElse(null);
+    }
+
 }

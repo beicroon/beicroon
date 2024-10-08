@@ -29,4 +29,8 @@ public final class AccountAdminHelper {
         return admins.stream().noneMatch(AccountAdminHelper::isRoot);
     }
 
+    public static AccountAdminModel getRoot(List<AccountAdminModel> admins) {
+        return admins.stream().filter(AccountAdminHelper::isRoot).findFirst().orElse(null);
+    }
+
 }

@@ -1,3 +1,5 @@
+import {RouteRecordRaw} from "vue-router";
+
 export type Meta = {
     auth: boolean,
 }
@@ -12,6 +14,7 @@ export default [
     {
         name: "首页",
         path: "/",
+        redirect: "/version",
         component: () => import("@/views/beicroon/Index.vue"),
         children: [
             {
@@ -36,4 +39,4 @@ export default [
             },
         ],
     },
-];
+] as RouteRecordRaw[];
