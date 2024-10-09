@@ -1,5 +1,6 @@
 package com.beicroon.gateway.admin;
 
+import com.beicroon.construct.constant.SystemConstant;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
@@ -9,7 +10,7 @@ import org.springframework.web.reactive.config.EnableWebFlux;
 @EnableWebFlux
 @EnableDiscoveryClient
 @SpringBootApplication
-@ComponentScan("com.beicroon")
+@ComponentScan({SystemConstant.BASE_PACKAGE})
 public class BeicroonGatewayAdminApplication {
 
     public static void main(String[] args) {

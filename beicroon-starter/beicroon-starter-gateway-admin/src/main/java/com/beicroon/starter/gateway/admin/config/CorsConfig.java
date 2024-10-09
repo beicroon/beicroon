@@ -1,4 +1,4 @@
-package com.beicroon.gateway.admin.config;
+package com.beicroon.starter.gateway.admin.config;
 
 import com.beicroon.construct.constant.HeaderConstant;
 import org.springframework.context.annotation.Bean;

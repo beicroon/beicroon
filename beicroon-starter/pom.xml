@@ -27,6 +27,7 @@
         <module>beicroon-starter-feign</module>
         <module>beicroon-starter-generic</module>
         <module>beicroon-starter-gateway</module>
+        <module>beicroon-starter-gateway-admin</module>
         <module>beicroon-starter-json</module>
         <module>beicroon-starter-jwt</module>
         <module>beicroon-starter-logging</module>
@@ -85,6 +86,12 @@
             <dependency>
                 <groupId>com.beicroon.starter</groupId>
                 <artifactId>beicroon-starter-gateway</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.beicroon.starter</groupId>
+                <artifactId>beicroon-starter-gateway-admin</artifactId>
                 <version>${project.version}</version>
             </dependency>
 

@@ -1,11 +1,11 @@
-package com.beicroon.gateway.admin.filter;
+package com.beicroon.starter.gateway.admin.filter;
 
 import com.beicroon.construct.constant.HeaderConstant;
 import com.beicroon.construct.entity.AuthUser;
 import com.beicroon.construct.json.utils.JsonUtils;
 import com.beicroon.construct.utils.UrlUtils;
-import com.beicroon.gateway.admin.property.AuthProperty;
 import com.beicroon.starter.auth.manager.AuthManager;
+import com.beicroon.starter.gateway.admin.property.AuthProperty;
 import com.beicroon.starter.gateway.filter.GenericAuthFilter;
 import jakarta.annotation.Resource;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;

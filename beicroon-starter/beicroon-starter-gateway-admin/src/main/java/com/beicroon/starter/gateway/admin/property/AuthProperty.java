@@ -1,4 +1,4 @@
-package com.beicroon.gateway.admin.property;
+package com.beicroon.starter.gateway.admin.property;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
