@@ -115,10 +115,6 @@ public class ResourceRoleService implements IResourceRoleService {
 
     @Override
     public boolean update(ResourceRoleUpdateDTO dto) {
-        if (this.resourceRoleRepository.existed(ResourceRoleModel::getCode, dto.getCode(), dto.getId())) {
-            throw ExceptionUtils.business("角色编码已被占用");
-        }
-
         if (this.resourceRoleRepository.existed(ResourceRoleModel::getName, dto.getName(), dto.getId())) {
             throw ExceptionUtils.business("角色名称已存在");
         }

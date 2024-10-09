@@ -50,7 +50,7 @@ onMounted(async () => {
 <template>
   <beicroon-form class="beicroon-dialog-view" @submit="handleConfirm">
     <div class="beicroon-dialog-main beicroon-dialog-input" v-if="!loading.get">
-      <beicroon-input required class="column" label="编码" placeholder="编码" v-model="form.code"></beicroon-input>
+      <beicroon-input disabled required class="column" label="编码" placeholder="编码" v-model="form.code"></beicroon-input>
       <beicroon-input required class="column" label="名称" placeholder="名称" v-model="form.name"></beicroon-input>
       <beicroon-input class="column" label="备注" placeholder="备注" v-model="form.remark"></beicroon-input>
     </div>

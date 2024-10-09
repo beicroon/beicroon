@@ -12,10 +12,6 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 public class ResourceRoleUpdateDTO extends UpdateDTO {
 
-    @NeedValue(message = "编码[code]不能为空")
-    @ApiModelProperty(name = "编码")
-    private String code;
-
     @NeedValue(message = "名称[name]不能为空")
     @ApiModelProperty(name = "名称")
     private String name;
