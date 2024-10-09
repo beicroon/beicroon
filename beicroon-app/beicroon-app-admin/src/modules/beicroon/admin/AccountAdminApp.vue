@@ -12,6 +12,7 @@ import BeicroonInput from "@/components/beicroon/BeicroonInput.vue";
 import BeicroonButton from "@/components/beicroon/BeicroonButton.vue";
 import BeicroonListRow from "@/components/beicroon/BeicroonListRow.vue";
 import BeicroonListCell from "@/components/beicroon/BeicroonListCell.vue";
+import BeicroonDatetime from "@/components/beicroon/BeicroonDatetime.vue";
 import BeicroonListCellButton from "@/components/beicroon/BeicroonListCellButton.vue";
 import {
   AccountAdminPageVO as VO,
@@ -73,6 +74,7 @@ function adminRoleAssign(item: VO) {
       </beicroon-list-row>
     </template>
     <template #more-search>
+      <beicroon-datetime class="column" label="创建时间" v-model="list.params.createdAt"></beicroon-datetime>
       <beicroon-input class="column" label="编码" v-model="list.params.code"></beicroon-input>
       <beicroon-input class="column" label="昵称" v-model="list.params.name"></beicroon-input>
       <beicroon-input class="column" label="账号" v-model="list.params.username"></beicroon-input>
