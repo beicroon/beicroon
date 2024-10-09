@@ -10,7 +10,7 @@
         <version>1.0.0</version>
     </parent>
 
-    <artifactId>beicroon-starter-auth</artifactId>
+    <artifactId>beicroon-starter-cors</artifactId>
     <version>1.0.0</version>
     <packaging>jar</packaging>
 
@@ -21,23 +21,13 @@
         </dependency>
 
         <dependency>
-            <groupId>com.beicroon.construct</groupId>
-            <artifactId>beicroon-construct-exception</artifactId>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
         </dependency>
 
         <dependency>
             <groupId>com.beicroon.construct</groupId>
-            <artifactId>beicroon-construct-json</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.beicroon.starter</groupId>
-            <artifactId>beicroon-starter-cache</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.beicroon.starter</groupId>
-            <artifactId>beicroon-starter-jwt</artifactId>
+            <artifactId>beicroon-construct-constant</artifactId>
         </dependency>
     </dependencies>
 </project>

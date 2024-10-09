@@ -1,14 +1,12 @@
-package com.beicroon.starter.gateway.admin.property;
+package com.beicroon.starter.auth.property;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.util.AntPathMatcher;
 
 import java.util.List;
 
 @Data
-@RefreshScope
 @ConfigurationProperties("auth")
 public class AuthProperty {
 

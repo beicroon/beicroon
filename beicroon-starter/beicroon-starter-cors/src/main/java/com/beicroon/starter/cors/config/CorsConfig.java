@@ -1,4 +1,4 @@
-package com.beicroon.starter.gateway.admin.config;
+package com.beicroon.starter.cors.config;
 
 import com.beicroon.construct.constant.HeaderConstant;
 import org.springframework.context.annotation.Bean;

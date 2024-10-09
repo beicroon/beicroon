@@ -23,6 +23,7 @@
         <module>beicroon-starter-auth</module>
         <module>beicroon-starter-cache</module>
         <module>beicroon-starter-cloud</module>
+        <module>beicroon-starter-cors</module>
         <module>beicroon-starter-dao</module>
         <module>beicroon-starter-feign</module>
         <module>beicroon-starter-generic</module>
@@ -68,6 +69,12 @@
             <dependency>
                 <groupId>com.beicroon.starter</groupId>
                 <artifactId>beicroon-starter-cloud</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.beicroon.starter</groupId>
+                <artifactId>beicroon-starter-cors</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
