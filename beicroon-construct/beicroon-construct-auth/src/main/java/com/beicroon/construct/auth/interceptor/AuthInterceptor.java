@@ -23,6 +23,8 @@ public class AuthInterceptor implements HandlerInterceptor {
 
         if (EmptyUtils.isNotEmpty(user)) {
             AuthUtils.setUser(JsonUtils.toObject(UrlUtils.decode(user), AuthUser.class));
+        } else {
+            String token = request.getHeader(HeaderConstant.AUTHORIZATION_TOKEN);
         }
 
         // 来源

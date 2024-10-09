@@ -1,11 +1,11 @@
-package com.beicroon.starter.auth.manager;
+package com.beicroon.construct.auth.manager;
 
+import com.beicroon.construct.cache.template.CacheTemplate;
 import com.beicroon.construct.constant.JwtConstant;
 import com.beicroon.construct.entity.AuthUser;
 import com.beicroon.construct.exception.utils.ExceptionUtils;
+import com.beicroon.construct.jwt.utils.JwtUtils;
 import com.beicroon.construct.utils.EmptyUtils;
-import com.beicroon.starter.cache.template.CacheTemplate;
-import com.beicroon.starter.jwt.utils.JwtUtils;
 import jakarta.annotation.Resource;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;

@@ -1,4 +1,4 @@
-package com.beicroon.starter.auth.property;
+package com.beicroon.construct.auth.property;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;

@@ -57,6 +57,11 @@
 
         <dependency>
             <groupId>com.beicroon.construct</groupId>
+            <artifactId>beicroon-construct-cache</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.beicroon.construct</groupId>
             <artifactId>beicroon-construct-entity</artifactId>
         </dependency>
 
@@ -77,7 +82,7 @@
 
         <dependency>
             <groupId>com.beicroon.starter</groupId>
-            <artifactId>beicroon-starter-cache</artifactId>
+            <artifactId>beicroon-starter-auth</artifactId>
         </dependency>
 
         <dependency>
@@ -88,11 +93,6 @@
         <dependency>
             <groupId>com.beicroon.starter</groupId>
             <artifactId>beicroon-starter-json</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.beicroon.starter</groupId>
-            <artifactId>beicroon-starter-jwt</artifactId>
         </dependency>
 
         <dependency>

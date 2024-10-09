@@ -1,4 +1,4 @@
-package com.beicroon.construct.auth.config;
+package com.beicroon.starter.auth.config;
 
 import com.beicroon.construct.auth.interceptor.AuthInterceptor;
 import jakarta.annotation.Resource;

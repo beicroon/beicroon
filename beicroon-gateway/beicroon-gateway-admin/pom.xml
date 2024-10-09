@@ -18,8 +18,8 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.beicroon.starter</groupId>
-            <artifactId>beicroon-starter-auth</artifactId>
+            <groupId>com.beicroon.construct</groupId>
+            <artifactId>beicroon-construct-auth</artifactId>
         </dependency>
 
         <dependency>

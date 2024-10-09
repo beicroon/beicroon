@@ -101,8 +101,8 @@
         </dependency>
 
         <dependency>
-            <groupId>com.beicroon.starter</groupId>
-            <artifactId>beicroon-starter-cache</artifactId>
+            <groupId>com.beicroon.construct</groupId>
+            <artifactId>beicroon-construct-cache</artifactId>
             <exclusions>
                 <exclusion>
                     <groupId>io.netty</groupId>
