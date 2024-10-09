@@ -22,7 +22,6 @@
         <module>beicroon-starter-async</module>
         <module>beicroon-starter-auth</module>
         <module>beicroon-starter-cloud</module>
-        <module>beicroon-starter-cors</module>
         <module>beicroon-starter-dao</module>
         <module>beicroon-starter-feign</module>
         <module>beicroon-starter-generic</module>
@@ -35,6 +34,7 @@
         <module>beicroon-starter-validation</module>
         <module>beicroon-starter-web</module>
         <module>beicroon-starter-web-admin</module>
+        <module>beicroon-starter-web-gateway</module>
     </modules>
 
     <dependencyManagement>
@@ -60,12 +60,6 @@
             <dependency>
                 <groupId>com.beicroon.starter</groupId>
                 <artifactId>beicroon-starter-cloud</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.beicroon.starter</groupId>
-                <artifactId>beicroon-starter-cors</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
@@ -138,6 +132,12 @@
             <dependency>
                 <groupId>com.beicroon.starter</groupId>
                 <artifactId>beicroon-starter-web-admin</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.beicroon.starter</groupId>
+                <artifactId>beicroon-starter-web-gateway</artifactId>
                 <version>${project.version}</version>
             </dependency>
         </dependencies>

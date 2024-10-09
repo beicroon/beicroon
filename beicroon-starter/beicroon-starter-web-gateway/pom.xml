@@ -10,24 +10,24 @@
         <version>1.0.0</version>
     </parent>
 
-    <artifactId>beicroon-starter-cors</artifactId>
+    <artifactId>beicroon-starter-web-gateway</artifactId>
     <version>1.0.0</version>
     <packaging>jar</packaging>
 
     <dependencies>
         <dependency>
             <groupId>org.springframework</groupId>
-            <artifactId>spring-web</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
+            <artifactId>spring-webmvc</artifactId>
         </dependency>
 
         <dependency>
             <groupId>com.beicroon.construct</groupId>
             <artifactId>beicroon-construct-constant</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.beicroon.construct</groupId>
+            <artifactId>beicroon-construct-auth</artifactId>
         </dependency>
     </dependencies>
 </project>

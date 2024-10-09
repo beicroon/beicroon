@@ -1,4 +1,4 @@
-package com.beicroon.starter.cors.config;
+package com.beicroon.gateway.admin.config;
 
 import com.beicroon.construct.constant.HeaderConstant;
 import org.springframework.context.annotation.Bean;
@@ -20,15 +20,15 @@ public class CorsConfig {
         config.addAllowedHeader("Referer");
         config.addAllowedHeader("User-Agent");
         config.addAllowedHeader("Content-Type");
-        config.addAllowedHeader(HeaderConstant.AUTHORIZATION_TOKEN);
         config.addAllowedHeader(HeaderConstant.SOURCE);
         config.addAllowedHeader(HeaderConstant.VERSION);
         config.addAllowedHeader(HeaderConstant.TENANT_ID);
+        config.addAllowedHeader(HeaderConstant.AUTHORIZATION_TOKEN);
         config.addAllowedMethod("GET");
         config.addAllowedMethod("POST");
         config.addAllowedMethod("PUT");
         config.addAllowedMethod("DELETE");
-        config.addAllowedMethod("OPTION");
+        config.addAllowedMethod("OPTIONS");
         config.setAllowCredentials(false);
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource(new PathPatternParser());

@@ -1,5 +1,6 @@
 package com.beicroon.construct.auth.manager;
 
+import com.beicroon.construct.auth.property.AuthProperty;
 import com.beicroon.construct.cache.template.CacheTemplate;
 import com.beicroon.construct.constant.JwtConstant;
 import com.beicroon.construct.entity.AuthUser;
@@ -8,16 +9,25 @@ import com.beicroon.construct.jwt.utils.JwtUtils;
 import com.beicroon.construct.utils.EmptyUtils;
 import jakarta.annotation.Resource;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.stereotype.Component;
 
 @Component
+@EnableConfigurationProperties(AuthProperty.class)
 public class AuthManager {
 
     @Value("${spring.profiles.active:dev}")
     private String activeProfile;
 
     @Resource
+    private AuthProperty authProperty;
+
+    @Resource
     private CacheTemplate cacheTemplate;
+
+    public boolean isInIgnoreUrls(String method, String url) {
+        return "OPTIONS".equals(method) || this.authProperty.isInIgnoreUrls(url);
+    }
 
     public AuthUser getAuthUser(String token) {
         if (EmptyUtils.isEmpty(token)) {

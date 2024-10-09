@@ -62,3 +62,7 @@ xxl:
   job:
     admin:
       addresses: @pom.job.addresses@
+
+auth:
+  ignores:
+    - /api/admin/admin/auth-admin-login

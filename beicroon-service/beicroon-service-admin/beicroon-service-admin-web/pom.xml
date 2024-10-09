@@ -21,6 +21,11 @@
         </dependency>
 
         <dependency>
+            <groupId>com.beicroon.starter</groupId>
+            <artifactId>beicroon-starter-web-gateway</artifactId>
+        </dependency>
+
+        <dependency>
             <groupId>com.beicroon.service</groupId>
             <artifactId>beicroon-service-admin-dao</artifactId>
             <version>${project.version}</version>

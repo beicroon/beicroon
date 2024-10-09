@@ -4,6 +4,7 @@ import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.util.AntPathMatcher;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -12,7 +13,7 @@ public class AuthProperty {
 
     private static final AntPathMatcher PATH_MATCHER = new AntPathMatcher();
 
-    private List<String> ignores;
+    private List<String> ignores = new ArrayList<>();
 
     public boolean isInIgnoreUrls(String url) {
         for (String ignoreUrl : this.ignores) {
