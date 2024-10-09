@@ -5,7 +5,7 @@ import com.beicroon.construct.auth.utils.AuthUtils;
 import com.beicroon.construct.exception.utils.ExceptionUtils;
 import com.beicroon.construct.utils.HashUtils;
 import com.beicroon.construct.utils.ListUtils;
-import com.beicroon.starter.cache.template.CacheTemplate;
+import com.beicroon.starter.auth.manager.AuthManager;
 import com.beicroon.starter.jwt.utils.JwtUtils;
 import com.beicroon.starter.web.admin.convertor.ResourceMenuConvertor;
 import com.beicroon.starter.web.admin.entity.auth.admin.dto.AuthAdminLoginDTO;
@@ -42,7 +42,7 @@ public class AuthAdminService implements IAuthAdminService {
     private ResourceRoleManager resourceRoleManager;
 
     @Resource
-    private CacheTemplate cacheTemplate;
+    private AuthManager authManager;
 
     @Override
     public AuthAdminLoginVO login(AuthAdminLoginDTO dto) {
@@ -62,14 +62,14 @@ public class AuthAdminService implements IAuthAdminService {
         vo.setName(admin.getName());
         vo.setToken(token);
 
-        this.cacheTemplate.set(String.valueOf(admin.getId()), token);
+        this.authManager.addCache(admin.getId(), token);
 
         return vo;
     }
 
     @Override
     public boolean logout() {
-        this.cacheTemplate.delete(String.valueOf(AuthUtils.getUserId()));
+        this.authManager.removeCache(AuthUtils.getUserId());
 
         return true;
     }

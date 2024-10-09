@@ -39,6 +39,10 @@ public class AuthManager {
         return user;
     }
 
+    public void addCache(Long userId, String token) {
+        this.cacheTemplate.set(String.format(JwtConstant.ADMIN_LOGIN_KEY, userId), token);
+    }
+
     public void removeCache(Long userId) {
         this.cacheTemplate.delete(String.format(JwtConstant.ADMIN_LOGIN_KEY, userId));
     }

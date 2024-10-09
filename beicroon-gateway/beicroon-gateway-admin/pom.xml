@@ -19,7 +19,17 @@
     <dependencies>
         <dependency>
             <groupId>com.beicroon.starter</groupId>
-            <artifactId>beicroon-starter-gateway-admin</artifactId>
+            <artifactId>beicroon-starter-auth</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.beicroon.starter</groupId>
+            <artifactId>beicroon-starter-cors</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.beicroon.starter</groupId>
+            <artifactId>beicroon-starter-gateway</artifactId>
         </dependency>
     </dependencies>
 </project>

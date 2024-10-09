@@ -22,6 +22,11 @@
 
         <dependency>
             <groupId>com.beicroon.starter</groupId>
+            <artifactId>beicroon-starter-auth</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.beicroon.starter</groupId>
             <artifactId>beicroon-starter-dao</artifactId>
         </dependency>
 

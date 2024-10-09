@@ -7,10 +7,12 @@ import com.beicroon.construct.utils.UrlUtils;
 import com.beicroon.starter.auth.manager.AuthManager;
 import com.beicroon.starter.auth.property.AuthProperty;
 import jakarta.annotation.Resource;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.stereotype.Component;
 
 @Component
+@EnableConfigurationProperties(AuthProperty.class)
 public class AuthHandler {
 
     @Resource
