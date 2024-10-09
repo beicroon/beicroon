@@ -85,10 +85,6 @@ public class ResourceMenuService implements IResourceMenuService {
 
     @Override
     public boolean update(ResourceMenuUpdateDTO dto) {
-        if (this.resourceMenuRepository.existed(ResourceMenuModel::getCode, dto.getCode(), dto.getId())) {
-            throw ExceptionUtils.business("编码已被占用");
-        }
-
         if (this.resourceMenuRepository.existed(ResourceMenuModel::getName, dto.getName(), dto.getId())) {
             throw ExceptionUtils.business("昵称已被占用");
         }

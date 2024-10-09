@@ -64,7 +64,7 @@ onMounted(async () => {
         v-model="form.parentId"
         v-model:show-value="parentName"
       ></resource-menu-select>
-      <beicroon-input required class="column" label="编码" placeholder="编码" v-model="form.code"></beicroon-input>
+      <beicroon-input disabled required class="column" label="编码" placeholder="编码" v-model="form.code"></beicroon-input>
       <beicroon-input required class="column" label="名称" placeholder="名称" v-model="form.name"></beicroon-input>
       <beicroon-input required class="column" label="路由" placeholder="路由" v-model="form.path"></beicroon-input>
       <beicroon-input class="column" label="排序" placeholder="排序" v-model="form.sorting"></beicroon-input>
