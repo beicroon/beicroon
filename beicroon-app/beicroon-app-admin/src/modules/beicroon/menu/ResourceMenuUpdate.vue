@@ -57,13 +57,7 @@ onMounted(async () => {
 <template>
   <beicroon-form class="beicroon-dialog-view" @submit="handleConfirm">
     <div class="beicroon-dialog-main beicroon-dialog-input" v-if="!loading.get">
-      <resource-menu-select
-        class="column"
-        label="父级"
-        placeholder="父级"
-        v-model="form.parentId"
-        v-model:show-value="parentName"
-      ></resource-menu-select>
+      <resource-menu-select class="column" label="父级" placeholder="父级" v-model="form.parentId" v-model:show-value="parentName"></resource-menu-select>
       <beicroon-input disabled required class="column" label="编码" placeholder="编码" v-model="form.code"></beicroon-input>
       <beicroon-input required class="column" label="名称" placeholder="名称" v-model="form.name"></beicroon-input>
       <beicroon-input required class="column" label="路由" placeholder="路由" v-model="form.path"></beicroon-input>
