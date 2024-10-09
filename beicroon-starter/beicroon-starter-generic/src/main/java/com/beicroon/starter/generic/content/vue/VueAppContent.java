@@ -18,9 +18,9 @@ public class VueAppContent {
             import BeicroonListCell from "@/components/beicroon/BeicroonListCell.vue";
             import BeicroonDatetime from "@/components/beicroon/BeicroonDatetime.vue";
             import BeicroonListCellButton from "@/components/beicroon/BeicroonListCellButton.vue";
-            import {page, remove, {{filename}}PageVO as VO, {{filename}}QueryDTO as DTO} from "./{{vueFilename}}.http.utils.ts";
+            import {page, remove, {{filename}}PageVO, {{filename}}QueryDTO} from "./{{vueFilename}}.http.utils.ts";
 
-            const list = createBeicroonList<DTO, VO>("{{comment}}", page);
+            const list = createBeicroonList<{{filename}}QueryDTO, {{filename}}PageVO>("{{comment}}", page);
 
             onMounted(list.resetSearch);
             </script>

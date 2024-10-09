@@ -12,14 +12,9 @@ import BeicroonListCell from "@/components/beicroon/BeicroonListCell.vue";
 import BeicroonDatetime from "@/components/beicroon/BeicroonDatetime.vue";
 import ResourceMenuSelect from "@/modules/beicroon/menu/ResourceMenuSelect.vue";
 import BeicroonListCellButton from "@/components/beicroon/BeicroonListCellButton.vue";
-import {
-  page,
-  remove,
-  ResourceMenuPageVO as VO,
-  ResourceMenuQueryDTO as DTO
-} from "@/request/beicroon/resource-menu.http.ts";
+import {page, remove, ResourceMenuPageVO, ResourceMenuQueryDTO} from "@/request/beicroon/resource-menu.http.ts";
 
-const list = createBeicroonList<DTO, VO>("菜单", page);
+const list = createBeicroonList<ResourceMenuQueryDTO, ResourceMenuPageVO>("菜单", page);
 
 onMounted(list.resetSearch);
 

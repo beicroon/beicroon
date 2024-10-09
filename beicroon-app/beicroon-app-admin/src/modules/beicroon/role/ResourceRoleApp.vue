@@ -14,18 +14,13 @@ import BeicroonListRow from "@/components/beicroon/BeicroonListRow.vue";
 import BeicroonListCell from "@/components/beicroon/BeicroonListCell.vue";
 import BeicroonDatetime from "@/components/beicroon/BeicroonDatetime.vue";
 import BeicroonListCellButton from "@/components/beicroon/BeicroonListCellButton.vue";
-import {
-  page,
-  remove,
-  ResourceRolePageVO as VO,
-  ResourceRoleQueryDTO as DTO
-} from "@/request/beicroon/resource-role.http.ts";
+import {page, remove, ResourceRolePageVO, ResourceRoleQueryDTO} from "@/request/beicroon/resource-role.http.ts";
 
-const list = createBeicroonList<DTO, VO>("角色", page);
+const list = createBeicroonList<ResourceRoleQueryDTO, ResourceRolePageVO>("角色", page);
 
 onMounted(list.resetSearch);
 
-function roleMenuAssign(item: VO) {
+function roleMenuAssign(item: ResourceRolePageVO) {
   dialog({
     title: "菜单分配",
     width: 520,

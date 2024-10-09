@@ -14,18 +14,13 @@ import BeicroonListRow from "@/components/beicroon/BeicroonListRow.vue";
 import BeicroonListCell from "@/components/beicroon/BeicroonListCell.vue";
 import BeicroonDatetime from "@/components/beicroon/BeicroonDatetime.vue";
 import BeicroonListCellButton from "@/components/beicroon/BeicroonListCellButton.vue";
-import {
-  AccountAdminPageVO as VO,
-  AccountAdminQueryDTO as DTO,
-  page,
-  remove
-} from "@/request/beicroon/account-admin.http.ts";
+import {AccountAdminPageVO, AccountAdminQueryDTO, page, remove} from "@/request/beicroon/account-admin.http.ts";
 
-const list = createBeicroonList<DTO, VO>("后台账号", page);
+const list = createBeicroonList<AccountAdminQueryDTO, AccountAdminPageVO>("后台账号", page);
 
 onMounted(list.resetSearch);
 
-function adminRoleAssign(item: VO) {
+function adminRoleAssign(item: AccountAdminPageVO) {
   dialog({
     title: "角色分配",
     width: 520,
