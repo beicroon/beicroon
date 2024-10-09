@@ -1,6 +1,6 @@
 package com.beicroon.starter.auth.config;
 
-import com.beicroon.construct.auth.interceptor.AuthInterceptor;
+import com.beicroon.starter.auth.interceptor.AuthInterceptor;
 import jakarta.annotation.Resource;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;

@@ -5,10 +5,10 @@ public class WebApplicationContent {
     private static final String CONTENT = """
             package {{basePackage}}.web;
 
-            import com.beicroon.starter.web.annotation.BeicroonBootApplication;
+            import com.beicroon.starter.web.annotation.BeicroonWebBootApplication;
             import org.springframework.boot.SpringApplication;
 
-            @BeicroonBootApplication
+            @BeicroonWebBootApplication
             public class {{filename}}Application {
 
                 public static void main(String[] args) {

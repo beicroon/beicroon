@@ -77,6 +77,25 @@
 
         <dependency>
             <groupId>com.beicroon.construct</groupId>
+            <artifactId>beicroon-construct-cache</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>io.netty</groupId>
+                    <artifactId>netty-common</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>io.netty</groupId>
+                    <artifactId>netty-handler</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>io.netty</groupId>
+                    <artifactId>netty-transport</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>com.beicroon.construct</groupId>
             <artifactId>beicroon-construct-exception</artifactId>
         </dependency>
 
@@ -98,25 +117,6 @@
         <dependency>
             <groupId>com.beicroon.construct</groupId>
             <artifactId>beicroon-construct-utils</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.beicroon.construct</groupId>
-            <artifactId>beicroon-construct-cache</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>io.netty</groupId>
-                    <artifactId>netty-common</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>io.netty</groupId>
-                    <artifactId>netty-handler</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>io.netty</groupId>
-                    <artifactId>netty-transport</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
 
         <dependency>

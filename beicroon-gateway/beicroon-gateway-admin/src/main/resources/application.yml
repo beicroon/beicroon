@@ -4,6 +4,7 @@ server:
 
 spring:
   main:
+    web-application-type: reactive
     allow-bean-definition-overriding: true
   application:
     name: @project.artifactId@
@@ -11,6 +12,12 @@ spring:
     active: @pom.profile.name@
   cache:
     type: REDIS
+  data:
+    redis:
+      database: 1
+      host: @pom.redis.ip@
+      port: @pom.redis.port@
+      password: @pom.redis.password@
   cloud:
     nacos:
       config:

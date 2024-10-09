@@ -1,4 +1,4 @@
-package com.beicroon.construct.auth.interceptor;
+package com.beicroon.starter.auth.interceptor;
 
 import com.beicroon.construct.auth.utils.AuthUtils;
 import com.beicroon.construct.constant.HeaderConstant;

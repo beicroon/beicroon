@@ -16,6 +16,11 @@
 
     <dependencies>
         <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+        </dependency>
+
+        <dependency>
             <groupId>com.beicroon.construct</groupId>
             <artifactId>beicroon-construct-auth</artifactId>
         </dependency>

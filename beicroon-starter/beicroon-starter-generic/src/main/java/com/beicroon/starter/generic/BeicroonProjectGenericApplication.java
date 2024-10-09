@@ -4,7 +4,7 @@ import com.beicroon.starter.generic.maker.ServiceStructureMaker;
 
 import java.io.File;
 
-public class ProjectGenericApplication {
+public class BeicroonProjectGenericApplication {
 
     private static final String ROOT_PATH = "beicroon-service";
 
