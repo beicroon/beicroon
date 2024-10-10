@@ -14,7 +14,7 @@ import java.lang.annotation.*;
 @SpringBootApplication
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-@MapperScan({SystemConstant.PACKAGE_BASE})
+@MapperScan({SystemConstant.PACKAGE_MAPPER})
 @ComponentScan({SystemConstant.PACKAGE_BASE})
 public @interface BeicroonWebBootApplication {
 

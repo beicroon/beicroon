@@ -15,6 +15,8 @@ public interface SystemConstant {
 
     String PACKAGE_BASE = SUFFIX + "." + NAME;
 
+    String PACKAGE_MAPPER = PACKAGE_BASE + ".**.mapper";
+
     Charset CHARSET = StandardCharsets.UTF_8;
 
     ZoneOffset TIMEZONE = ZoneOffset.of("+8");
