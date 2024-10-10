@@ -8,24 +8,57 @@ import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
-import org.springframework.stereotype.Component;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @Aspect
-@Component
+@Configuration
 public class LoggingAspect {
 
     @Resource
     private HttpServletRequest request;
 
-    @Around("within(com.beicroon..*.web.*.controller..*)")
-    public Object around(ProceedingJoinPoint joinPoint) throws Throwable {
+    private void logRequest(ProceedingJoinPoint joinPoint) {
         log.info(
-                "Request Log: path={}, params={}, auth={}",
-                request.getRequestURI(),
+                "Request Log: mapping={}, params={}, auth={}",
+                String.format("%s:%s", request.getMethod(), request.getRequestURI()),
                 JsonUtils.toJson(joinPoint.getArgs()),
                 JsonUtils.toJson(AuthUtils.getAuthThreadInfo())
         );
+    }
+
+    @Around("@annotation(ignore)")
+    public Object around(ProceedingJoinPoint joinPoint, RequestMapping ignore) throws Throwable {
+        this.logRequest(joinPoint);
+
+        return joinPoint.proceed();
+    }
+
+    @Around("@annotation(ignore)")
+    public Object around(ProceedingJoinPoint joinPoint, GetMapping ignore) throws Throwable {
+        this.logRequest(joinPoint);
+
+        return joinPoint.proceed();
+    }
+
+    @Around("@annotation(ignore)")
+    public Object around(ProceedingJoinPoint joinPoint, PostMapping ignore) throws Throwable {
+        this.logRequest(joinPoint);
+
+        return joinPoint.proceed();
+    }
+
+    @Around("@annotation(ignore)")
+    public Object around(ProceedingJoinPoint joinPoint, PutMapping ignore) throws Throwable {
+        this.logRequest(joinPoint);
+
+        return joinPoint.proceed();
+    }
+
+    @Around("@annotation(ignore)")
+    public Object around(ProceedingJoinPoint joinPoint, DeleteMapping ignore) throws Throwable {
+        this.logRequest(joinPoint);
 
         return joinPoint.proceed();
     }

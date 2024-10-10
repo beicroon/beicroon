@@ -51,7 +51,7 @@ public class ApplicationYmlContent {
             
             logging:
               level:
-                com.beicroon.construct.mybatis: INFO
+                com.beicroon: INFO
 
             mybatis-plus:
               mapper-locations: classpath*:/mapper/*.xml

@@ -5,8 +5,8 @@ public class ApplicationFatYmlContent {
     private static final String CONTENT = """
             logging:
               level:
-                {{basePackage}}: DEBUG
-                        
+                com.beicroon: DEBUG
+            
             mybatis-plus:
               configuration:
                 log-impl: org.apache.ibatis.logging.slf4j.Slf4jImpl

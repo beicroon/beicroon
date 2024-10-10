@@ -5,7 +5,7 @@ public class ApplicationUatYmlContent {
     private static final String CONTENT = """
             logging:
               level:
-                {{basePackage}}: DEBUG
+                com.beicroon: DEBUG
             """;
 
     public static String getContent(String basePackage) {

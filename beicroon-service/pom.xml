@@ -11,7 +11,9 @@
 
     <!--  请勿随意调整顺序  -->
     <modules>
+        <module>beicroon-service-address</module>
         <module>beicroon-service-admin</module>
-<!--        <module>beicroon-service-home</module>-->
+        <module>beicroon-service-oms</module>
+        <module>beicroon-service-tms</module>
     </modules>
 </project>

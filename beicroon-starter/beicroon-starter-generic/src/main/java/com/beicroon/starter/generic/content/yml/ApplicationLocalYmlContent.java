@@ -19,7 +19,7 @@ public class ApplicationLocalYmlContent {
 
             logging:
               level:
-                {{basePackage}}: DEBUG
+                com.beicroon: DEBUG
 
             mybatis-plus:
               configuration:
