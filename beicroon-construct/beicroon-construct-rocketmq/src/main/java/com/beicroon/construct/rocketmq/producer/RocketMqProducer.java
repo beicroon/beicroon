@@ -13,9 +13,11 @@ import org.apache.rocketmq.common.message.Message;
 import org.apache.rocketmq.remoting.exception.RemotingException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Import;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 
 @Slf4j
+@Primary
 @Component
 @Import({RocketMqSendCallback.class, DefaultMQProducer.class})
 public class RocketMqProducer implements IMqProducer {
