@@ -1,0 +1,91 @@
+server:
+  port: 8400
+  shutdown: GRACEFUL
+
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  application:
+    name: @project.parent.artifactId@
+  profiles:
+    active: @pom.profile.name@
+  cache:
+    type: REDIS
+  data:
+    redis:
+      database: 4
+      host: @pom.redis.ip@
+      port: @pom.redis.port@
+      password: @pom.redis.password@
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://@pom.mysql.ip@:@pom.mysql.port@/@pom.profile.name@-@project.parent.artifactId@
+    username: @pom.mysql.username@
+    password: @pom.mysql.password@
+  flyway:
+    enabled: true
+    baseline-on-migrate: false
+    encoding: UTF-8
+    locations: classpath:migration
+    sql-migration-prefix: V
+    sql-migration-separator: _
+    sql-migration-suffixes: .sql
+    validate-on-migrate: false
+    clean-disabled: false
+  cloud:
+    nacos:
+      discovery:
+        server-addr: @pom.nacos.addresses@
+        namespace: @pom.nacos.namespace@
+      config:
+        server-addr: @pom.nacos.addresses@
+        namespace: @pom.nacos.namespace@
+        file-extension: yml
+        enabled: true
+        refresh-enabled: true
+
+logging:
+  level:
+    com.beicroon: INFO
+
+mybatis-plus:
+  mapper-locations: classpath*:/mapper/*.xml
+  type-aliases-package: com.beicroon.service.*.dao.model
+
+mq:
+  server-address: @pom.mq.address@
+  namespace: @pom.profile.name@
+  group-id: @project.parent.artifactId@
+  timeout: 3000
+
+xxl:
+  job:
+    admin:
+      addresses: @pom.job.addresses@
+
+map:
+  company:
+    amap:
+      key: 5604c8cbc6c65efb31868c9c685c79de
+      secret: 24659833f986aa8be802abe4b75a474c
+      host: https://restapi.amap.com
+      uri:
+        poi: /v5/place/text
+        geo: /v3/geocode/geo
+        regeo: /v3/geocode/regeo
+    baidu:
+      key: pwRveXZQ7ZKYyVppWUPscQVrsCxrdAXh
+      secret: vAG3AKLljysn6hF7W7xx6HB8kpj7lOt8
+      host: https://api.map.baidu.com
+      uri:
+        poi: /place/v2/suggestion
+        geo: /geocoding/v3
+        regeo: /reverse_geocoding/v3
+    tencent:
+      key: 2PUBZ-FGOWM-7L26R-6QRR6-AS3M2-I7FUX
+      secret: y3nDGdobG7hUftpJUvqMqzuPnj1eIIG
+      host: https://apis.map.qq.com
+      uri:
+        poi: /ws/place/v1/suggestion
+        geo: /ws/geocoder/v1
+        regeo: /ws/geocoder/v1

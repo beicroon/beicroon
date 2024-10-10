@@ -71,6 +71,11 @@
         </dependency>
 
         <dependency>
+            <groupId>com.beicroon.construct</groupId>
+            <artifactId>beicroon-construct-http</artifactId>
+        </dependency>
+
+        <dependency>
             <groupId>com.beicroon.starter</groupId>
             <artifactId>beicroon-starter-aop</artifactId>
         </dependency>
