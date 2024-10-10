@@ -18,8 +18,5 @@
         <module>beicroon-middle</module>
         <module>beicroon-gateway</module>
         <module>beicroon-service</module>
-        <module>yunbao-app</module>
-        <module>yunbao-gateway</module>
-        <module>yunbao-service</module>
     </modules>
 </project>

@@ -4,7 +4,7 @@ public interface JwtConstant {
 
     String SECRET = "ecb656c0707efa8ced460394ac942435";
 
-    String ISSUER = SystemConstant.BASE_PACKAGE + ".jwt";
+    String ISSUER = SystemConstant.PACKAGE_BASE + ".jwt";
 
     String PREFIX = "Bearer ";
 

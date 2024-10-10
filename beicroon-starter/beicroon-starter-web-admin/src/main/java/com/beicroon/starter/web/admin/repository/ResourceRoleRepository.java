@@ -7,9 +7,9 @@ import com.beicroon.starter.mysql.repository.impl.GenericRepository;
 import com.beicroon.starter.web.admin.entity.resource.role.dto.ResourceRoleQueryDTO;
 import com.beicroon.starter.web.admin.mapper.ResourceRoleMapper;
 import com.beicroon.starter.web.admin.model.ResourceRoleModel;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
-@Component
+@Repository
 public class ResourceRoleRepository extends GenericRepository<ResourceRoleQueryDTO, ResourceRoleMapper, ResourceRoleModel> implements IGenericRepository<ResourceRoleQueryDTO, ResourceRoleModel> {
 
     @Override

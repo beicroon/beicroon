@@ -13,9 +13,7 @@ public interface SystemConstant {
 
     String SUFFIX = "com";
 
-    String BASE_PACKAGE = SUFFIX + "." + NAME;
-
-    String MAPPER_PACKAGE = BASE_PACKAGE + ".service.**.dao.mapper";
+    String PACKAGE_BASE = SUFFIX + "." + NAME;
 
     Charset CHARSET = StandardCharsets.UTF_8;
 

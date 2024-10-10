@@ -7,9 +7,9 @@ import com.beicroon.starter.mysql.repository.impl.GenericRepository;
 import com.beicroon.starter.web.admin.entity.resource.menu.dto.ResourceMenuQueryDTO;
 import com.beicroon.starter.web.admin.mapper.ResourceMenuMapper;
 import com.beicroon.starter.web.admin.model.ResourceMenuModel;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
-@Component
+@Repository
 public class ResourceMenuRepository extends GenericRepository<ResourceMenuQueryDTO, ResourceMenuMapper, ResourceMenuModel> implements IGenericRepository<ResourceMenuQueryDTO, ResourceMenuModel> {
 
     @Override

@@ -1,3 +1,0 @@
-logging:
-  level:
-    com.yunbao.service.admin: INFO

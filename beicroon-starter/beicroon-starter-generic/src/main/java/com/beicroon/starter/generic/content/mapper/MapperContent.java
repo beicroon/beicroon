@@ -7,12 +7,14 @@ public class MapperContent {
 
     private static final String CONTENT = """
             package {{package}}.mapper;
-                        
+            
             import {{package}}.model.{{filename}}Model;
             import com.beicroon.starter.mysql.mapper.GenericMapper;
-                        
+            import org.apache.ibatis.annotations.Mapper;
+            
+            @Mapper
             public interface {{filename}}Mapper extends GenericMapper<{{filename}}Model> {
-                        
+            
             }
             """;
 

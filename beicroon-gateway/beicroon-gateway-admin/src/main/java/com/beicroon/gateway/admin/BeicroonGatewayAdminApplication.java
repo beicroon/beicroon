@@ -10,7 +10,7 @@ import org.springframework.web.reactive.config.EnableWebFlux;
 @EnableWebFlux
 @EnableDiscoveryClient
 @SpringBootApplication
-@ComponentScan({SystemConstant.BASE_PACKAGE})
+@ComponentScan({SystemConstant.PACKAGE_BASE})
 public class BeicroonGatewayAdminApplication {
 
     public static void main(String[] args) {

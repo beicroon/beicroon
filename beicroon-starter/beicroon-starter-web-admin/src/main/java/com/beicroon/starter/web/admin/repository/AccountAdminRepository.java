@@ -7,9 +7,9 @@ import com.beicroon.starter.mysql.repository.impl.GenericRepository;
 import com.beicroon.starter.web.admin.entity.account.admin.dto.AccountAdminQueryDTO;
 import com.beicroon.starter.web.admin.mapper.AccountAdminMapper;
 import com.beicroon.starter.web.admin.model.AccountAdminModel;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
-@Component
+@Repository
 public class AccountAdminRepository extends GenericRepository<AccountAdminQueryDTO, AccountAdminMapper, AccountAdminModel> implements IGenericRepository<AccountAdminQueryDTO, AccountAdminModel> {
 
     @Override

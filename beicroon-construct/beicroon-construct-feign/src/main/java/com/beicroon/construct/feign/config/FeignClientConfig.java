@@ -20,7 +20,7 @@ import java.util.List;
 
 @Slf4j
 @Configuration
-@EnableFeignClients(basePackages = {SystemConstant.BASE_PACKAGE}, defaultConfiguration = FeignClientConfig.class)
+@EnableFeignClients(basePackages = {SystemConstant.PACKAGE_BASE}, defaultConfiguration = FeignClientConfig.class)
 public class FeignClientConfig {
 
     private static final List<String> HEADERS = Arrays.asList(

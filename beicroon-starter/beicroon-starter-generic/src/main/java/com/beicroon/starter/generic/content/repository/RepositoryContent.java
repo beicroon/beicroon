@@ -15,9 +15,9 @@ public class RepositoryContent {
             import {{modulePackage}}.dto.{{filename}}QueryDTO;
             import com.beicroon.starter.mysql.repository.IGenericRepository;
             import com.beicroon.starter.mysql.repository.impl.GenericRepository;
-            import org.springframework.stereotype.Component;
+            import org.springframework.stereotype.Repository;
 
-            @Component
+            @Repository
             public class {{filename}}Repository extends GenericRepository<{{filename}}QueryDTO, {{filename}}Mapper, {{filename}}Model> implements IGenericRepository<{{filename}}QueryDTO, {{filename}}Model> {
 
                 @Override
