@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <!-- 彩色日志依赖 -->
+    <conversionRule conversionWord="clr" converterClass="org.springframework.boot.logging.logback.ColorConverter"/>
+    <conversionRule conversionWord="ewt"
+                    converterClass="org.springframework.boot.logging.logback.ExtendedWhitespaceThrowableProxyConverter"/>
+
+    <!-- 从Spring上下文中获取属性 -->
+    <springProperty scope="context" name="springAppName" source="spring.application.name"/>
+    <springProperty scope="context" name="springProfile" source="spring.profiles.active"/>
+
+    <!-- 定义变量 -->
+    <property name="LOG_PATH" value="/var/log/java/${springAppName}"/>
+    <property name="FILE_PATTERN"
+              value="[%d{yyyy-MM-dd HH:mm:ss.SSS}] - %X{traceId} -%5p - ${PID:- } --- [%15.15t] %-40.40logger{39} : %m%n%ewt"/>
+    <property name="CONSOLE_PATTERN"
+              value="[%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint}] %clr(- %X{traceId}){cyan} %clr(-%5p) %clr(- ${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n%ewt"/>
+
+    <!-- 控制台日志输出 -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${CONSOLE_PATTERN}</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Profile为pro时的配置 -->
+    <springProfile name="pro">
+        <!-- 信息日志文件输出 -->
+        <appender name="INFO_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+                <level>INFO</level>
+            </filter>
+            <file>${LOG_PATH}/console.log</file>
+            <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+                <FileNamePattern>${LOG_PATH}/%d{yyyy-MM-dd}.%i.log.gz</FileNamePattern>
+                <maxFileSize>10MB</maxFileSize>
+                <totalSizeCap>10GB</totalSizeCap>
+                <maxHistory>15</maxHistory>
+            </rollingPolicy>
+            <encoder>
+                <pattern>${FILE_PATTERN}</pattern>
+            </encoder>
+        </appender>
+
+        <!-- 异步信息日志文件输出 -->
+        <appender name="ASYNC_INFO_FILE" class="ch.qos.logback.classic.AsyncAppender">
+            <appender-ref ref="INFO_FILE"/>
+            <queueSize>512</queueSize>
+            <discardingThreshold>0</discardingThreshold>
+        </appender>
+
+        <root level="INFO">
+            <appender-ref ref="ASYNC_INFO_FILE"/>
+            <appender-ref ref="CONSOLE"/>
+        </root>
+    </springProfile>
+
+    <!-- Profile非pro时的配置 -->
+    <springProfile name="!pro">
+        <root level="INFO">
+            <appender-ref ref="CONSOLE"/>
+        </root>
+    </springProfile>
+</configuration>

@@ -1,0 +1,27 @@
+{
+  "name": "beicroon-app-ronmio",
+  "private": true,
+  "version": "1.0.0.Final",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host",
+    "build": "vue-tsc -b && vite build --mode pro",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "axios": "^1.7.8",
+    "crypto-js": "^4.2.0",
+    "vue": "^3.5.13",
+    "vue-router": "^4.5.0"
+  },
+  "devDependencies": {
+    "@types/crypto-js": "^4.2.2",
+    "@types/node": "^20.14.10",
+    "@vitejs/plugin-vue": "^5.0.5",
+    "less": "^4.2.0",
+    "less-loader": "^12.2.0",
+    "typescript": "^5.2.2",
+    "vite": "^5.3.1",
+    "vue-tsc": "^2.0.21"
+  }
+}
