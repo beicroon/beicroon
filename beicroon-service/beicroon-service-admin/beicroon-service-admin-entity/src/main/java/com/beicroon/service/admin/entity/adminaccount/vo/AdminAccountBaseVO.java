@@ -20,9 +20,6 @@ public class AdminAccountBaseVO extends GenericVO {
     @ApiModelProperty(name = "登录账号")
     private String username;
 
-    @ApiModelProperty(name = "登录密码")
-    private String password;
-
     @ApiModelProperty(name = "联系电话")
     private String phone;
 
