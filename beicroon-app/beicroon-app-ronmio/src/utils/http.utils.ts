@@ -1,7 +1,10 @@
 import axios from "axios";
+import {useRouter} from "vue-router";
 import toastUtils from "@u/toast.utils.ts";
 import BeicroonCacheEnums from "@/enums/beicroon-cache-enums.ts";
 import BeicroonBooleanEnums from "@/enums/beicroon-boolean-enums.ts";
+
+const router = useRouter();
 
 const axiosInstance = axios.create({
     timeout: 6000,
@@ -39,6 +42,10 @@ axiosInstance.interceptors.response.use(
 
                 toastUtils.error(response.data.message);
 
+                if (response.data.code && response.data.code === 401) {
+                    await router.push({path: "/login"});
+                }
+
                 return;
             }
 
@@ -54,8 +61,14 @@ axiosInstance.interceptors.response.use(
         });
     },
     async error => {
-        if (error.data && error.data.message) {
-            toastUtils.error(error.data.message);
+        if (error.data) {
+            if (error.data.message) {
+                toastUtils.error(error.data.message);
+            }
+
+            if (error.data.code && error.data.code === 401) {
+                await router.push({path: "/login"});
+            }
         } else if (error.message) {
             toastUtils.error(error.message);
         } else {
