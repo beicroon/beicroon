@@ -332,6 +332,11 @@ public class MybatisplusRepository<M extends GenericMapper<T>, T extends Generic
     }
 
     @Override
+    public boolean existed(IQueryWrapper<T> wrapper) {
+        return this.first(wrapper) != null;
+    }
+
+    @Override
     public boolean existed(SFunction<T, ?> field, Object value) {
         IQueryWrapper<T> wrapper = this.newQueryWrapper();
 

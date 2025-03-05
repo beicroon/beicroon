@@ -11,6 +11,7 @@ import com.beicroon.construct.excel.data.DataRow;
 import com.beicroon.construct.excel.enums.HorizontalAlignmentEnums;
 import com.beicroon.construct.excel.enums.VerticalAlignmentEnums;
 import com.beicroon.construct.excel.writer.IExcelWriter;
+import com.beicroon.construct.exception.utils.ExceptionUtils;
 import com.beicroon.construct.utils.EmptyUtils;
 import com.beicroon.construct.utils.ListUtils;
 import com.beicroon.construct.utils.NumberUtils;
@@ -238,6 +239,15 @@ public class RonmioPackingListInvoiceService implements IRonmioPackingListInvoic
         RonmioPackingListInvoiceModel model = this.ronmioPackingListInvoiceRepository.getByIdOrError(
                 dto.getPackingListInvoiceId(), "箱单发票不存在或已删除"
         );
+
+        IQueryWrapper<RonmioPackingListInvoiceContainerModel> query = this.ronmioPackingListInvoiceContainerRepository.newQueryWrapper();
+
+        query.eq(RonmioPackingListInvoiceContainerModel::getPackingListInvoiceId, model.getId());
+        query.eq(RonmioPackingListInvoiceContainerModel::getCode, dto.getCode());
+
+        if (this.ronmioPackingListInvoiceContainerRepository.existed(query)) {
+            throw ExceptionUtils.business("该箱单已存在！如需修改，请先查询后再操作~");
+        }
 
         RonmioPackingListInvoiceContainerModel container = this.ronmioPackingListInvoiceConvertor.toContainerCreator(model, dto);
 

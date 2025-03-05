@@ -78,6 +78,8 @@ public interface GenericRepository<T extends GenericModel> {
 
     boolean updateById(T model);
 
+    boolean existed(IQueryWrapper<T> wrapper);
+
     boolean existed(SFunction<T, ?> field, Object value);
 
     boolean existed(SFunction<T, ?> field, Object value, Long exceptId);
