@@ -91,12 +91,12 @@ const logout = requestUtils({
 const handleLogout = async () => {
   await logout.request();
 
-  localStorage.removeItem(BeicroonCacheEnums.USER);
-  localStorage.removeItem(BeicroonCacheEnums.TOKEN);
-
   await router.push("/login");
 
   toastUtils.success("退出登录成功");
+
+  localStorage.removeItem(BeicroonCacheEnums.USER);
+  localStorage.removeItem(BeicroonCacheEnums.TOKEN);
 };
 </script>
 
