@@ -10,6 +10,7 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>beicroon-project-ronmio</module>
+        <module>beicroon-project-gzwy</module>  <!-- 贵州物业 -->
+        <module>beicroon-project-ronmio</module>  <!-- 国际货代 -->
     </modules>
 </project>

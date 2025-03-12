@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.beicroon.starter</groupId>
+        <artifactId>beicroon-starter</artifactId>
+        <version>1.0.0.Final</version>
+        <relativePath/>
+    </parent>
+
+    <groupId>com.beicroon.project</groupId>
+    <artifactId>beicroon-project-gzwy</artifactId>
+    <description>贵州物业</description>
+    <version>1.0.0.Final</version>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>beicroon-project-gzwy-app</module>
+        <module>beicroon-project-gzwy-dao</module>
+        <module>beicroon-project-gzwy-entity</module>
+        <module>beicroon-project-gzwy-generic</module>
+        <module>beicroon-project-gzwy-web</module>
+    </modules>
+</project>
