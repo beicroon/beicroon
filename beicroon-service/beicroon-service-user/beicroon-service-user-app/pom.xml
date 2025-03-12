@@ -6,18 +6,24 @@
 
     <parent>
         <groupId>com.beicroon.service</groupId>
-        <artifactId>beicroon-service-home</artifactId>
+        <artifactId>beicroon-service-user</artifactId>
         <version>1.0.0.Final</version>
     </parent>
 
-    <artifactId>beicroon-service-home-generic</artifactId>
+    <artifactId>beicroon-service-user-app</artifactId>
     <version>1.0.0.Final</version>
     <packaging>jar</packaging>
 
     <dependencies>
         <dependency>
+            <groupId>com.beicroon.service</groupId>
+            <artifactId>beicroon-service-user-dao</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
             <groupId>com.beicroon.starter</groupId>
-            <artifactId>beicroon-starter-generic</artifactId>
+            <artifactId>beicroon-starter-app</artifactId>
         </dependency>
     </dependencies>
 </project>

@@ -12,15 +12,13 @@
     </parent>
 
     <groupId>com.beicroon.service</groupId>
-    <artifactId>beicroon-service-home</artifactId>
+    <artifactId>beicroon-service-user</artifactId>
     <version>1.0.0.Final</version>
     <packaging>pom</packaging>
 
     <modules>
-        <module>beicroon-service-home-generic</module>
-        <module>beicroon-service-home-dao</module>
-        <module>beicroon-service-home-entity</module>
-        <module>beicroon-service-home-web</module>
-        <module>beicroon-service-home-app</module>
+        <module>beicroon-service-user-dao</module>
+        <module>beicroon-service-user-entity</module>
+        <module>beicroon-service-user-app</module>
     </modules>
 </project>

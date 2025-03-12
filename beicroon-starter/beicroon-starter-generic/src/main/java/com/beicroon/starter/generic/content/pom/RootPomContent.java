@@ -24,11 +24,11 @@ public final class RootPomContent {
                 <packaging>pom</packaging>
 
                 <modules>
-                    <module>{{moduleName}}-generic</module>
+                    <module>{{moduleName}}-app</module>
                     <module>{{moduleName}}-dao</module>
                     <module>{{moduleName}}-entity</module>
+                    <module>{{moduleName}}-generic</module>
                     <module>{{moduleName}}-web</module>
-                    <module>{{moduleName}}-app</module>
                 </modules>
             </project>
             """;

@@ -23,7 +23,7 @@
 
         <dependency>
             <groupId>com.beicroon.service</groupId>
-            <artifactId>beicroon-service-home-app</artifactId>
+            <artifactId>beicroon-service-user-app</artifactId>
             <version>${project.version}</version>
         </dependency>
 

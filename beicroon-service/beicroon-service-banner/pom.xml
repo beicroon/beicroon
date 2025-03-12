@@ -17,7 +17,6 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>beicroon-service-banner-generic</module>
         <module>beicroon-service-banner-dao</module>
         <module>beicroon-service-banner-entity</module>
         <module>beicroon-service-banner-app</module>
