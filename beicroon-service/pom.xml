@@ -10,8 +10,13 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>beicroon-service-rbac</module>
+        <module>beicroon-service-aliyun</module>
         <module>beicroon-service-banner</module>
+        <module>beicroon-service-mall</module>
+        <module>beicroon-service-order</module>
+        <module>beicroon-service-product</module>
+        <module>beicroon-service-rbac</module>
         <module>beicroon-service-user</module>
+        <module>beicroon-service-wechat</module>
     </modules>
 </project>

@@ -20,5 +20,6 @@
         <module>beicroon-service-rbac-app</module>
         <module>beicroon-service-rbac-dao</module>
         <module>beicroon-service-rbac-entity</module>
+        <module>beicroon-service-rbac-generic</module>
     </modules>
 </project>

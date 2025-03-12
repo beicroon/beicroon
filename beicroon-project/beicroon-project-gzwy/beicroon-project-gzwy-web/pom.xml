@@ -22,6 +22,30 @@
         </dependency>
 
         <dependency>
+            <groupId>com.beicroon.service</groupId>
+            <artifactId>beicroon-service-banner-app</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.beicroon.service</groupId>
+            <artifactId>beicroon-service-mall-app</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.beicroon.service</groupId>
+            <artifactId>beicroon-service-user-app</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.beicroon.service</groupId>
+            <artifactId>beicroon-service-wechat-app</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
             <groupId>com.beicroon.starter</groupId>
             <artifactId>beicroon-starter-web</artifactId>
         </dependency>

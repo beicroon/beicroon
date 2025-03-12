@@ -20,5 +20,6 @@
         <module>beicroon-service-user-app</module>
         <module>beicroon-service-user-dao</module>
         <module>beicroon-service-user-entity</module>
+        <module>beicroon-service-user-generic</module>
     </modules>
 </project>

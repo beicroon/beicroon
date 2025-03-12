@@ -13,6 +13,7 @@
 
     <groupId>com.beicroon.project</groupId>
     <artifactId>beicroon-project-ronmio</artifactId>
+    <description>国际货代</description>
     <version>1.0.0.Final</version>
     <packaging>pom</packaging>
 

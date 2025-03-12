@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.beicroon.starter</groupId>
+        <artifactId>beicroon-starter</artifactId>
+        <version>1.0.0.Final</version>
+        <relativePath/>
+    </parent>
+
+    <groupId>com.beicroon.service</groupId>
+    <artifactId>beicroon-service-product</artifactId>
+    <version>1.0.0.Final</version>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>beicroon-service-product-app</module>
+        <module>beicroon-service-product-dao</module>
+        <module>beicroon-service-product-entity</module>
+        <module>beicroon-service-product-generic</module>
+    </modules>
+</project>
