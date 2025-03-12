@@ -13,6 +13,5 @@
         <module>beicroon-service-rbac</module>
         <module>beicroon-service-banner</module>
         <module>beicroon-service-user</module>
-        <module>beicroon-service-ronmio</module>
     </modules>
 </project>
