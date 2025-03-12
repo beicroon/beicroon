@@ -4,8 +4,8 @@ create table `home_account`
     `id`            bigint(20) unsigned not null auto_increment comment '主键',
     `tenant_id`     bigint(20) unsigned not null default 0 comment '租户主键',
     `wx_unionid`    varchar(255)        not null default '' comment '微信unionid',
-    `wx_openid_xcx` varchar(255)        not null default '' comment '微信小程序openid',
     `wx_openid_ggh` varchar(255)        not null default '' comment '微信公众号openid',
+    `wx_openid_xcx` varchar(255)        not null default '' comment '微信小程序openid',
     `code`          varchar(64)         not null default '' comment '编码',
     `name`          varchar(255)        not null default '' comment '名称',
     `username`      varchar(255)        not null default '' comment '登录账号',
@@ -33,8 +33,8 @@ create table `home_account`
     `remover_name`  varchar(255)        not null default '' comment '删除人昵称',
     primary key (`id`),
     index `idx_wx_unionid` (`wx_unionid`),
-    index `idx_wx_openid_xcx` (`wx_openid_xcx`),
     index `idx_wx_openid_ggh` (`wx_openid_ggh`),
+    index `idx_wx_openid_xcx` (`wx_openid_xcx`),
     index `idx_username` (`username`),
     index `idx_phone` (`phone`)
 ) engine = innodb comment '用户';
