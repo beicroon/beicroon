@@ -31,7 +31,7 @@ public final class ControllerContent {
             @Validated
             @RestController
             @ApiTag(name = "{{comment}}相关")
-            @RequestMapping(path = "/api/admin/admin")
+            @RequestMapping(path = "/api/{{moduleName}}/admin")
             public class Admin{{className}}Controller {
 
                 @Resource
@@ -97,6 +97,7 @@ public final class ControllerContent {
                 .replace("{{pathName}}", table.getPathName())
                 .replace("{{className}}", table.getClassName())
                 .replace("{{comment}}", table.getTableComment())
+                .replace("{{moduleName}}", structure.getModuleName())
                 .replace("{{urlName}}", table.getUrlName())
                 .replace("{{variableName}}", table.getVariableName())
                 ;

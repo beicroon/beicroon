@@ -16,6 +16,7 @@
         <module>beicroon-service-order</module>
         <module>beicroon-service-product</module>
         <module>beicroon-service-rbac</module>
+        <module>beicroon-service-sms</module>
         <module>beicroon-service-user</module>
         <module>beicroon-service-wechat</module>
     </modules>
