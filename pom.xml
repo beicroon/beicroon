@@ -19,5 +19,6 @@
         <module>beicroon-middle</module>
         <module>beicroon-gateway</module>
         <module>beicroon-service</module>
+        <module>beicroon-project</module>
     </modules>
 </project>

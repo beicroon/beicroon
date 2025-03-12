@@ -11,14 +11,16 @@
         <relativePath/>
     </parent>
 
-    <groupId>com.beicroon.service</groupId>
-    <artifactId>beicroon-service-user</artifactId>
+    <groupId>com.beicroon.project</groupId>
+    <artifactId>beicroon-project-ronmio</artifactId>
     <version>1.0.0.Final</version>
     <packaging>pom</packaging>
 
     <modules>
-        <module>beicroon-service-user-app</module>
-        <module>beicroon-service-user-dao</module>
-        <module>beicroon-service-user-entity</module>
+        <module>beicroon-project-ronmio-app</module>
+        <module>beicroon-project-ronmio-dao</module>
+        <module>beicroon-project-ronmio-entity</module>
+        <module>beicroon-project-ronmio-generic</module>
+        <module>beicroon-project-ronmio-web</module>
     </modules>
 </project>

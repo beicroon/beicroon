@@ -17,8 +17,8 @@
     <packaging>pom</packaging>
 
     <modules>
+        <module>beicroon-service-rbac-app</module>
         <module>beicroon-service-rbac-dao</module>
         <module>beicroon-service-rbac-entity</module>
-        <module>beicroon-service-rbac-app</module>
     </modules>
 </project>

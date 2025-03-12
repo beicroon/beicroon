@@ -1,0 +1,17 @@
+spring:
+  data:
+    redis:
+      database: 0
+      host: 172.26.39.143
+      port: 6379
+      password: Jiu!Bu@Gao#Su$Ni
+  datasource:
+    url: jdbc:mysql://rm-uf6e3kll3bq71l984.mysql.rds.aliyuncs.com:3306/beicroon_service_ronmio
+    username: beicroon
+    password: Jiu!Bu@Gao#Su$Ni
+  flyway:
+    enabled: false
+
+logging:
+  level:
+    com.beicroon.service: INFO
