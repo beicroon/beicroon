@@ -9,7 +9,7 @@ public class BeicroonProjectGenericApplication {
 
     private static final String SERVICE_PREFIX = "beicroon-service";
 
-    private static final String MODULE_NAME = "banner";
+    private static final String MODULE_NAME = "admin";
 
     private static final String BASE_PACKAGE = "com.beicroon.service";
 
