@@ -39,49 +39,24 @@ create table `home_account`
     index `idx_phone` (`phone`)
 ) engine = innodb comment '用户';
 
-drop table if exists `home_account_recharge_record_relation`;
-create table `home_account_recharge_record_relation`
+drop table if exists `home_account_balance_relation`;
+create table `home_account_balance_relation`
 (
-    `id`              bigint(20) unsigned not null auto_increment comment '主键',
-    `tenant_id`       bigint(20) unsigned not null default 0 comment '租户主键',
-    `account_id`      bigint(20) unsigned not null default 0 comment '账号主键',
-    `payment_id`      bigint(20) unsigned not null default 0 comment '支付主键',
-    `recharge_amount` decimal(10, 3)      not null default 0 comment '充值金额',
-    `bonus_amount`    decimal(10, 3)      not null default 0 comment '赠送金额',
-    `origin_balance`  decimal(10, 3)      not null default 0 comment '充值前余额',
-    `result_balance`  decimal(10, 3)      not null default 0 comment '充值后余额',
-    `created_at`      timestamp           not null default current_timestamp comment '创建时间',
-    `creator_id`      bigint(20) unsigned not null default 0 comment '创建人主键',
-    `creator_code`    varchar(128)        not null default '' comment '创建人编码',
-    `creator_name`    varchar(255)        not null default '' comment '创建人昵称',
-    `modified_at`     timestamp           not null default current_timestamp on update current_timestamp comment '更新时间',
-    `modifier_id`     bigint(20) unsigned not null default 0 comment '更新人主键',
-    `modifier_code`   varchar(128)        not null default '' comment '更新人编码',
-    `modifier_name`   varchar(255)        not null default '' comment '更新人昵称',
+    `id`            bigint(20) unsigned not null auto_increment comment '主键',
+    `tenant_id`     bigint(20) unsigned not null default 0 comment '租户主键',
+    `account_id`    bigint(20) unsigned not null default 0 comment '账号主键',
+    `type`          varchar(64)         not null default '' comment '类型(充值/消费/退款/赔偿/提现/冻结/解冻)',
+    `amount`        decimal(10, 3)      not null default 0 comment '金额',
+    `balance`       decimal(10, 3)      not null default 0 comment '余额',
+    `created_at`    timestamp           not null default current_timestamp comment '创建时间',
+    `creator_id`    bigint(20) unsigned not null default 0 comment '创建人主键',
+    `creator_code`  varchar(128)        not null default '' comment '创建人编码',
+    `creator_name`  varchar(255)        not null default '' comment '创建人昵称',
+    `modified_at`   timestamp           not null default current_timestamp on update current_timestamp comment '更新时间',
+    `modifier_id`   bigint(20) unsigned not null default 0 comment '更新人主键',
+    `modifier_code` varchar(128)        not null default '' comment '更新人编码',
+    `modifier_name` varchar(255)        not null default '' comment '更新人昵称',
     primary key (`id`),
-    index `idx_account_id` (`account_id`),
-    index `idx_payment_id` (`payment_id`)
-) engine = innodb comment '充值记录';
-
-drop table if exists `home_account_expense_record_relation`;
-create table `home_account_expense_record_relation`
-(
-    `id`             bigint(20) unsigned not null auto_increment comment '主键',
-    `tenant_id`      bigint(20) unsigned not null default 0 comment '租户主键',
-    `account_id`     bigint(20) unsigned not null default 0 comment '账号主键',
-    `order_id`       bigint(20) unsigned not null default 0 comment '订单主键',
-    `expense_amount` decimal(10, 3)      not null default 0 comment '消费金额',
-    `origin_balance` decimal(10, 3)      not null default 0 comment '消费前余额',
-    `result_balance` decimal(10, 3)      not null default 0 comment '消费后余额',
-    `created_at`     timestamp           not null default current_timestamp comment '创建时间',
-    `creator_id`     bigint(20) unsigned not null default 0 comment '创建人主键',
-    `creator_code`   varchar(128)        not null default '' comment '创建人编码',
-    `creator_name`   varchar(255)        not null default '' comment '创建人昵称',
-    `modified_at`    timestamp           not null default current_timestamp on update current_timestamp comment '更新时间',
-    `modifier_id`    bigint(20) unsigned not null default 0 comment '更新人主键',
-    `modifier_code`  varchar(128)        not null default '' comment '更新人编码',
-    `modifier_name`  varchar(255)        not null default '' comment '更新人昵称',
-    primary key (`id`),
-    index `idx_account_id` (`account_id`),
-    index `idx_order_id` (`order_id`)
-) engine = innodb comment '消费记录';
+    index `idx_account_id` (`account_id`, `type`),
+    index `idx_type` (`type`)
+) engine = innodb comment '用户余额';
