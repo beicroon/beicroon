@@ -11,6 +11,7 @@
 
     <modules>
         <module>beicroon-service-admin</module>
+        <module>beicroon-service-banner</module>
         <module>beicroon-service-home</module>
         <module>beicroon-service-ronmio</module>
     </modules>
