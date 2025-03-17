@@ -3,23 +3,23 @@ import {Component, h, ref, render, VNode} from "vue";
 import BeicroonOverlay from "@u/components/BeicroonOverlay.vue";
 
 const getContainer = (): HTMLElement => {
-    const container: HTMLElement | null = document.querySelector("#beicroon-overlay");
+    const element: HTMLElement | null = document.querySelector("#beicroon-overlay");
 
-    if (container) {
-        container.classList.add("hidden");
+    if (element) {
+        element.classList.add("hidden");
 
-        return container;
+        return element;
     }
 
-    const newContainer = document.createElement("div");
+    const newElement = document.createElement("div");
 
-    newContainer.id = "beicroon-overlay";
+    newElement.id = "beicroon-overlay";
 
-    newContainer.classList.add("hidden");
+    newElement.classList.add("hidden");
 
-    document.body.appendChild(newContainer);
+    document.body.appendChild(newElement);
 
-    return newContainer;
+    return newElement;
 };
 
 const getNode = () => {

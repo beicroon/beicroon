@@ -3,23 +3,23 @@ import esc from "@u/esc.utils";
 import BeicroonDialog from "@u/components/BeicroonDialog.vue";
 
 const getContainer = (): HTMLElement => {
-    const container : HTMLElement | null = document.querySelector("#beicroon-dialog");
+    const element: HTMLElement | null = document.querySelector("#beicroon-dialog");
 
-    if (container) {
-        container.classList.add("hidden");
+    if (element) {
+        element.classList.add("hidden");
 
-        return container;
+        return element;
     }
 
-    const newContainer = document.createElement("div");
+    const newElement = document.createElement("div");
 
-    newContainer.id = "beicroon-dialog";
+    newElement.id = "beicroon-dialog";
 
-    newContainer.classList.add("hidden");
+    newElement.classList.add("hidden");
 
-    document.body.appendChild(newContainer);
+    document.body.appendChild(newElement);
 
-    return newContainer;
+    return newElement;
 };
 
 const getNode = () => {
