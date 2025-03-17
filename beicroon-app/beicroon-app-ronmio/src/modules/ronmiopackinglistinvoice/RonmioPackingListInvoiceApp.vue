@@ -7,6 +7,15 @@ import ContainerAppend from "@m/ronmiopackinglistinvoice/component/ContainerAppe
 import RonmioPackingListInvoiceCreate from "@m/ronmiopackinglistinvoice/RonmioPackingListInvoiceCreate.vue";
 import RonmioPackingListInvoiceUpdate from "@m/ronmiopackinglistinvoice/RonmioPackingListInvoiceUpdate.vue";
 import RonmioPackingListInvoiceDetail from "@m/ronmiopackinglistinvoice/RonmioPackingListInvoiceDetail.vue";
+import {
+  BButton,
+  BButtonGroup,
+  BInput,
+  BModule,
+  BTableColumn,
+  BTableField,
+  BTableGroup
+} from "beicroon-app-vue/components";
 
 const module = moduleApp<QueryDTO, PageVO>(config);
 
@@ -81,69 +90,69 @@ onMounted(handleReload);
 </script>
 
 <template>
-  <beicroon-module :module="module" tab-enable>
+  <b-module :module="module" tab-enable>
     <template v-slot:search>
-      <beicroon-input label="箱单单号" v-model="module.params.code"/>
-      <beicroon-input label="客户名称" v-model="module.params.customerName"/>
-      <beicroon-input label="班列号" v-model="module.params.trainCode"/>
-      <beicroon-input label="货柜号" v-model="module.params.containerCode"/>
+      <b-input label="箱单单号" v-model="module.params.code"/>
+      <b-input label="客户名称" v-model="module.params.customerName"/>
+      <b-input label="班列号" v-model="module.params.trainCode"/>
+      <b-input label="货柜号" v-model="module.params.containerCode"/>
     </template>
     <template v-slot:action-left>
-      <beicroon-button label="新增" @click="handleCreate" level="warning"/>
-      <beicroon-button label="刷新" :loading="loading" @click="handleReload"/>
+      <b-button label="新增" @click="handleCreate" level="warning"/>
+      <b-button label="刷新" :loading="loading" @click="handleReload"/>
     </template>
     <template v-slot:action-right>
-      <beicroon-button label="重置" @click="module.clear" level="warning"/>
-      <beicroon-button label="查询" :loading="loading" @click="module.page.request()"/>
+      <b-button label="重置" @click="module.clear" level="warning"/>
+      <b-button label="查询" :loading="loading" @click="module.page.request()"/>
     </template>
-    <beicroon-table-column label="箱单单号" field="code"/>
-    <beicroon-table-column label="客户名称" field="customerName"/>
-    <beicroon-table-column label="班列号" field="trainCode"/>
-    <beicroon-table-column label="货柜号" field="containerCode"/>
-    <beicroon-table-column label="备注" field="remark" width="220rem"/>
-    <beicroon-table-group label="卖方信息" width="420rem">
+    <b-table-column label="箱单单号" field="code"/>
+    <b-table-column label="客户名称" field="customerName"/>
+    <b-table-column label="班列号" field="trainCode"/>
+    <b-table-column label="货柜号" field="containerCode"/>
+    <b-table-column label="备注" field="remark" width="220rem"/>
+    <b-table-group label="卖方信息" width="420rem">
       <template v-slot="{item}">
-        <beicroon-table-field label="卖方名称" :content="item.sellerName"/>
-        <beicroon-table-field label="卖方地址" :content="item.sellerAddr"/>
+        <b-table-field label="卖方名称" :content="item.sellerName"/>
+        <b-table-field label="卖方地址" :content="item.sellerAddr"/>
       </template>
-    </beicroon-table-group>
-    <beicroon-table-group label="买方信息" width="420rem">
+    </b-table-group>
+    <b-table-group label="买方信息" width="420rem">
       <template v-slot="{item}">
-        <beicroon-table-field label="买方名称" :content="item.buyerName"/>
-        <beicroon-table-field label="买方地址" :content="item.buyerAddr"/>
+        <b-table-field label="买方名称" :content="item.buyerName"/>
+        <b-table-field label="买方地址" :content="item.buyerAddr"/>
       </template>
-    </beicroon-table-group>
-    <beicroon-table-group label="其他信息" width="320rem">
+    </b-table-group>
+    <b-table-group label="其他信息" width="320rem">
       <template v-slot="{item}">
-        <beicroon-table-field label="合同号" :content="item.contractCode"/>
-        <beicroon-table-field label="原产国" :content="item.originCountry"/>
-        <beicroon-table-field label="价格条款" :content="item.priceTerm"/>
-        <beicroon-table-field label="箱型" :content="item.boxType"/>
+        <b-table-field label="合同号" :content="item.contractCode"/>
+        <b-table-field label="原产国" :content="item.originCountry"/>
+        <b-table-field label="价格条款" :content="item.priceTerm"/>
+        <b-table-field label="箱型" :content="item.boxType"/>
       </template>
-    </beicroon-table-group>
-    <beicroon-table-group label="创建/更新" width="320rem">
+    </b-table-group>
+    <b-table-group label="创建/更新" width="320rem">
       <template v-slot="{item}">
-        <beicroon-table-field label="创建人" :content="item.creatorName"/>
-        <beicroon-table-field label="创建时间" :content="item.createdAt"/>
-        <beicroon-table-field label="更新人" :content="item.modifierName"/>
-        <beicroon-table-field label="更新时间" :content="item.modifiedAt"/>
+        <b-table-field label="创建人" :content="item.creatorName"/>
+        <b-table-field label="创建时间" :content="item.createdAt"/>
+        <b-table-field label="更新人" :content="item.modifierName"/>
+        <b-table-field label="更新时间" :content="item.modifiedAt"/>
       </template>
-    </beicroon-table-group>
-    <beicroon-table-group label="操作" direction="column" frozen-right>
+    </b-table-group>
+    <b-table-group label="操作" direction="column" frozen-right>
       <template v-slot="{item}">
-        <beicroon-button-group>
-          <beicroon-button size="small" level="primary" label="详情" @click="handleDetail(item)"/>
-          <beicroon-button size="small" level="warning" label="编辑" @click="handleUpdate(item)"/>
-          <beicroon-button size="small" level="danger" label="删除" @click="handleRemove(item)"/>
-        </beicroon-button-group>
-        <beicroon-button-group>
-          <beicroon-button size="small" level="primary" label="下载" @click="handleDownload(item)"/>
-          <beicroon-button size="small" level="primary" label="箱单" @click="handleUpdateContainer(item)"/>
-          <beicroon-button size="small" level="primary" label="单价" @click="handleFillUnitPrice(item)"/>
-        </beicroon-button-group>
+        <b-button-group>
+          <b-button size="small" level="primary" label="详情" @click="handleDetail(item)"/>
+          <b-button size="small" level="warning" label="编辑" @click="handleUpdate(item)"/>
+          <b-button size="small" level="danger" label="删除" @click="handleRemove(item)"/>
+        </b-button-group>
+        <b-button-group>
+          <b-button size="small" level="primary" label="下载" @click="handleDownload(item)"/>
+          <b-button size="small" level="primary" label="箱单" @click="handleUpdateContainer(item)"/>
+          <b-button size="small" level="primary" label="单价" @click="handleFillUnitPrice(item)"/>
+        </b-button-group>
       </template>
-    </beicroon-table-group>
-  </beicroon-module>
+    </b-table-group>
+  </b-module>
 </template>
 
 <style lang="less">

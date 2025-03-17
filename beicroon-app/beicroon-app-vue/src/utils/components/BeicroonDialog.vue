@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import {ref} from "vue";
-import BeicroonButton from "@c/BeicroonButton.vue";
 
 interface Props {
   title: string,
@@ -27,8 +26,8 @@ async function handleConfirm() {
     <div class="beicroon-dialog-title">{{ title }}</div>
     <div class="beicroon-dialog-message">{{ message }}</div>
     <div class="beicroon-dialog-button">
-      <beicroon-button :label="cancelLabel" @click="cancel"/>
-      <beicroon-button level="warning" :label="confirmLabel" @click="handleConfirm" :loading="loading"/>
+      <b-button :label="cancelLabel" @click="cancel"/>
+      <b-button level="warning" :label="confirmLabel" @click="handleConfirm" :loading="loading"/>
     </div>
   </div>
 </template>

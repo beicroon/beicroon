@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import {computed} from "vue";
+import {BSelect} from "beicroon-app-vue/components";
 
 interface Props {
   label: string,
@@ -24,7 +25,7 @@ const options = [
 </script>
 
 <template>
-  <beicroon-select :label="label" v-model="value" :options="options" :disabled="disabled"/>
+  <b-select :label="label" v-model="value" :options="options" :disabled="disabled"/>
 </template>
 
 <style lang="less">

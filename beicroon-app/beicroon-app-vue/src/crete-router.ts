@@ -6,7 +6,7 @@ export type RouteMeta = {
     auth: boolean,
 };
 
-const routerRegister = (app: App, baseURL: string, routes: RouteRecordRaw[]) => {
+const creteRouter = (app: App, baseURL: string, routes: RouteRecordRaw[]) => {
     const router = createRouter({
         history: createWebHistory(baseURL),
         routes: [
@@ -78,4 +78,4 @@ const routerRegister = (app: App, baseURL: string, routes: RouteRecordRaw[]) => 
     app.use(router);
 };
 
-export default routerRegister;
+export default creteRouter;

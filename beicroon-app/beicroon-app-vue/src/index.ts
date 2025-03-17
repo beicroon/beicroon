@@ -4,17 +4,16 @@ import {App, createApp} from "vue";
 import toast from "@u/toast.utils";
 import dialog from "@u/dialog.utils";
 import overlay from "@u/overlay.utils";
+import creteRouter from "@/crete-router";
 import {RouteRecordRaw} from "vue-router";
 import moduleApp from "@u/module-app.utils";
-import routerRegister from "@/router-register";
 import http, {setRequestUrl} from "@u/http.utils";
 import moduleCreate from "@u/module-create.utils";
 import moduleDetail from "@u/module-detail.utils";
 import moduleUpdate from "@u/module-update.utils";
 import moduleRequest from "@u/module-request.utils";
-import componentRegister from "@/component-register";
 
-export * from "@/router-register";
+export * from "@/crete-router";
 
 interface Config {
     requestUrl: string;
@@ -27,9 +26,7 @@ const createBeicroonApp = ({requestUrl, baseURL, routes}: Config): App => {
 
     const app = createApp(Main);
 
-    componentRegister(app);
-
-    routerRegister(app, baseURL, routes);
+    creteRouter(app, baseURL, routes);
 
     return app;
 };

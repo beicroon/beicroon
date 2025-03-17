@@ -2,6 +2,7 @@
 import {computed, ref} from "vue";
 import {http, toast} from "beicroon-app-vue";
 import config, {ContainerCreateDTO, ContainerSearchVO} from "@m/ronmiopackinglistinvoice/script/module.ts";
+import {BButton, BForm, BFormGroup, BGroup, BInput, BTable, BTableGroup} from "beicroon-app-vue/components";
 
 interface Props {
   id: string,
@@ -161,63 +162,64 @@ const saveLabel = computed(() => {
 </script>
 
 <template>
-  <beicroon-form @submit="handleSubmit">
-    <beicroon-form-group label="箱单信息">
-      <beicroon-input required search label="箱号" v-model="data.code" @search="handleSearch"/>
-      <beicroon-input label="总净重" v-model="data.netWeight"/>
-      <beicroon-input label="总毛重" v-model="data.grossWeight"/>
-    </beicroon-form-group>
-    <beicroon-form-group label="码单信息" type="block">
-      <beicroon-group>
-        <beicroon-input label="长度比率" v-model="lengthRatio"/>
-        <beicroon-input label="体积比率" v-model="volumeRatio"/>
-      </beicroon-group>
-      <beicroon-table :data="data.records" height="520rem">
-        <beicroon-table-group label="等级">
+  <b-form @submit="handleSubmit">
+    <b-form-group label="箱单信息">
+      <b-input required search label="箱号" v-model="data.code" @search="handleSearch"/>
+      <b-input label="总净重" v-model="data.netWeight"/>
+      <b-input label="总毛重" v-model="data.grossWeight"/>
+    </b-form-group>
+    <b-form-group label="码单信息" type="block">
+      <b-group>
+        <b-input label="长度比率" v-model="lengthRatio"/>
+        <b-input label="体积比率" v-model="volumeRatio"/>
+      </b-group>
+      <b-table :data="data.records" height="520rem">
+        <b-table-group label="等级">
           <template v-slot="{item, index}">
-            <beicroon-input required size="small" v-model="item.level" @paste="handlePaste($event, index, 'level')"/>
+            <b-input required size="small" v-model="item.level" @paste="handlePaste($event, index, 'level')"/>
           </template>
-        </beicroon-table-group>
-        <beicroon-table-group label="厚度(mm)">
+        </b-table-group>
+        <b-table-group label="厚度(mm)">
           <template v-slot="{item, index}">
-            <beicroon-input required size="small" v-model="item.thickness" @paste="handlePaste($event, index, 'thickness')"/>
+            <b-input required size="small" v-model="item.thickness" @paste="handlePaste($event, index, 'thickness')"/>
           </template>
-        </beicroon-table-group>
-        <beicroon-table-group label="宽度(mm)">
+        </b-table-group>
+        <b-table-group label="宽度(mm)">
           <template v-slot="{item, index}">
-            <beicroon-input required size="small" v-model="item.width" @paste="handlePaste($event, index, 'width')"/>
+            <b-input required size="small" v-model="item.width" @paste="handlePaste($event, index, 'width')"/>
           </template>
-        </beicroon-table-group>
-        <beicroon-table-group label="长度(mm)">
+        </b-table-group>
+        <b-table-group label="长度(mm)">
           <template v-slot="{item, index}">
-            <beicroon-input required size="small" v-model="item.length" @paste="handlePaste($event, index, 'length')"/>
+            <b-input required size="small" v-model="item.length" @paste="handlePaste($event, index, 'length')"/>
           </template>
-        </beicroon-table-group>
-        <beicroon-table-group label="商品体积(m³)">
+        </b-table-group>
+        <b-table-group label="商品体积(m³)">
           <template v-slot="{item, index}">
-            <beicroon-input size="small" v-model="item.volume" @paste="handlePaste($event, index, 'volume')"/>
+            <b-input size="small" v-model="item.volume" @paste="handlePaste($event, index, 'volume')"/>
           </template>
-        </beicroon-table-group>
-        <beicroon-table-group label="商品件数">
+        </b-table-group>
+        <b-table-group label="商品件数">
           <template v-slot="{item, index}">
-            <beicroon-input size="small" v-model="item.count" @paste="handlePaste($event, index, 'count')"/>
+            <b-input size="small" v-model="item.count" @paste="handlePaste($event, index, 'count')"/>
           </template>
-        </beicroon-table-group>
-        <beicroon-table-group label="操作" direction="row" frozen-right>
+        </b-table-group>
+        <b-table-group label="操作" direction="row" frozen-right>
           <template v-slot="{index}">
-            <beicroon-button size="small" label="复制" @click="handleCopy(index)"/>
-            <beicroon-button size="small" label="删除" @click="handleDelete(index)"/>
+            <b-button size="small" label="复制" @click="handleCopy(index)"/>
+            <b-button size="small" label="删除" @click="handleDelete(index)"/>
           </template>
-        </beicroon-table-group>
-      </beicroon-table>
-    </beicroon-form-group>
+        </b-table-group>
+      </b-table>
+    </b-form-group>
     <template v-slot:button>
-      <beicroon-button size="larger" label="关闭" @click="handleHide"/>
-      <beicroon-button size="larger" label="清空" @click="handleClear"/>
-      <beicroon-button size="larger" :label="saveLabel" level="warning" type="submit" :loading="loading"/>
-      <beicroon-button size="larger" label="删除" level="danger" :disabled="!data.id" @click="handleRemove" :loading="loading"/>
+      <b-button size="larger" label="关闭" @click="handleHide"/>
+      <b-button size="larger" label="清空" @click="handleClear"/>
+      <b-button size="larger" :label="saveLabel" level="warning" type="submit" :loading="loading"/>
+      <b-button size="larger" label="删除" level="danger" :disabled="!data.id" @click="handleRemove"
+                :loading="loading"/>
     </template>
-  </beicroon-form>
+  </b-form>
 </template>
 
 <style lang="less">

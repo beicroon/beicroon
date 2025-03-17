@@ -3,16 +3,23 @@
   "version": "1.0.0",
   "description": "Beicroon App Vue",
   "type": "module",
-  "main": "dist/beicroon-app-vue.umd.js",
-  "module": "dist/beicroon-app-vue.es.js",
+  "main": "dist/main.umd.js",
+  "module": "dist/main.es.js",
   "style": "dist/style.css",
   "types": "dist/index.d.ts",
   "files": ["dist"],
   "exports": {
-    "import": "./dist/beicroon-app-vue.es.js",
-    "require": "./dist/beicroon-app-vue.umd.js",
-    "types": "./dist/index.d.ts",
-    "style": "./dist/style.css"
+    ".": {
+      "import": "./dist/main.es.js",
+      "require": "./dist/main.umd.js",
+      "types": "./dist/index.d.ts",
+      "style": "./dist/style.css"
+    },
+    "./components": {
+      "import": "./dist/components.es.js",
+      "require": "./dist/components.cjs.js",
+      "types": "./dist/components/index.d.ts"
+    }
   },
   "scripts": {
     "dev": "vite",

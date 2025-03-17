@@ -2,6 +2,7 @@
 import {onMounted, ref} from "vue";
 import {http, toast} from "beicroon-app-vue";
 import config, {RecordGroupDTO, RecordGroupVO} from "@m/ronmiopackinglistinvoice/script/module.ts";
+import {BButton, BButtonGroup, BForm, BInput, BTableCell, BTableView} from "beicroon-app-vue/components";
 
 interface Props {
   id: string,
@@ -64,49 +65,49 @@ const handleDelete = (index: number) => {
 </script>
 
 <template>
-  <beicroon-form @submit="handleSubmit">
+  <b-form @submit="handleSubmit">
     <template v-slot:default>
-      <beicroon-table-view :loading="loading">
+      <b-table-view :loading="loading">
         <template v-slot:head>
-          <beicroon-table-cell label="操作"/>
-          <beicroon-table-cell label="厚度(mm)*宽度(mm)"/>
-          <beicroon-table-cell label="最小长度"/>
-          <beicroon-table-cell label="最大长度"/>
-          <beicroon-table-cell label="等级"/>
-          <beicroon-table-cell label="单价(元)"/>
+          <b-table-cell label="操作"/>
+          <b-table-cell label="厚度(mm)*宽度(mm)"/>
+          <b-table-cell label="最小长度"/>
+          <b-table-cell label="最大长度"/>
+          <b-table-cell label="等级"/>
+          <b-table-cell label="单价(元)"/>
         </template>
         <template v-slot:body>
           <tr v-for="(item, index) in data">
-            <beicroon-table-cell>
-              <beicroon-button-group align="center">
-                <beicroon-button label="复制" size="small" @click="handleCopy(item, index)"/>
-                <beicroon-button label="删除" size="small" @click="handleDelete(index)"/>
-              </beicroon-button-group>
-            </beicroon-table-cell>
-            <beicroon-table-cell>
-              <beicroon-input disabled size="small" :model-value="`${item.thickness}*${item.width}`"/>
-            </beicroon-table-cell>
-            <beicroon-table-cell>
-              <beicroon-input required size="small" v-model="item.minLength"/>
-            </beicroon-table-cell>
-            <beicroon-table-cell>
-              <beicroon-input size="small" v-model="item.maxLength"/>
-            </beicroon-table-cell>
-            <beicroon-table-cell>
-              <beicroon-input disabled size="small" :model-value="item.level"/>
-            </beicroon-table-cell>
-            <beicroon-table-cell>
-              <beicroon-input size="small" v-model="item.unitPrice"/>
-            </beicroon-table-cell>
+            <b-table-cell>
+              <b-button-group align="center">
+                <b-button label="复制" size="small" @click="handleCopy(item, index)"/>
+                <b-button label="删除" size="small" @click="handleDelete(index)"/>
+              </b-button-group>
+            </b-table-cell>
+            <b-table-cell>
+              <b-input disabled size="small" :model-value="`${item.thickness}*${item.width}`"/>
+            </b-table-cell>
+            <b-table-cell>
+              <b-input required size="small" v-model="item.minLength"/>
+            </b-table-cell>
+            <b-table-cell>
+              <b-input size="small" v-model="item.maxLength"/>
+            </b-table-cell>
+            <b-table-cell>
+              <b-input disabled size="small" :model-value="item.level"/>
+            </b-table-cell>
+            <b-table-cell>
+              <b-input size="small" v-model="item.unitPrice"/>
+            </b-table-cell>
           </tr>
         </template>
-      </beicroon-table-view>
+      </b-table-view>
     </template>
     <template v-slot:button>
-      <beicroon-button size="larger" label="关闭" @click="handleHide"/>
-      <beicroon-button size="larger" label="保存" level="warning" type="submit" :loading="loading"/>
+      <b-button size="larger" label="关闭" @click="handleHide"/>
+      <b-button size="larger" label="保存" level="warning" type="submit" :loading="loading"/>
     </template>
-  </beicroon-form>
+  </b-form>
 </template>
 
 <style lang="less">

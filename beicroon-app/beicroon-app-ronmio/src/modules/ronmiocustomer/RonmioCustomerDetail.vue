@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import {onMounted} from "vue";
 import {moduleDetail} from "beicroon-app-vue";
+import {BButton} from "beicroon-app-vue/components";
 import DetailView from "@m/ronmiocustomer/component/DetailView.vue";
 import config, {DetailVO} from "@m/ronmiocustomer/script/module.ts";
 
@@ -22,7 +23,7 @@ onMounted(module.getData);
 <template>
   <detail-view :data="module.data">
     <template v-slot:button>
-      <beicroon-button size="larger" label="关闭" @click="handleHide"/>
+      <b-button size="larger" label="关闭" @click="handleHide"/>
     </template>
   </detail-view>
 </template>

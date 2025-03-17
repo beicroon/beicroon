@@ -155,7 +155,7 @@ public class TableModuleMaker {
 
     private void addDetailField(Table table, Field field) {
         table.addVueDetailContent(String.format(
-                "\n        <beicroon-input disabled label=\"%s\" v-model=\"data.%s\"/>",
+                "\n        <b-input disabled label=\"%s\" v-model=\"data.%s\"/>",
                 field.getComment(),
                 field.getSnakeCaseName()
         ));
@@ -172,7 +172,7 @@ public class TableModuleMaker {
 
     private void addCreateField(Table table, Field field) {
         table.addVueCreateContent(String.format(
-                "\n      <beicroon-input label=\"%s\" v-model=\"module.data.%s\"/>",
+                "\n      <b-input label=\"%s\" v-model=\"module.data.%s\"/>",
                 field.getComment(),
                 field.getSnakeCaseName()
         ));
@@ -180,7 +180,7 @@ public class TableModuleMaker {
 
     private void addTableField(Table table, Field field) {
         table.addVueTableContent(String.format(
-                "\n    <beicroon-table-column label=\"%s\" field=\"%s\"/>",
+                "\n    <b-table-column label=\"%s\" field=\"%s\"/>",
                 field.getComment(),
                 field.getSnakeCaseName()
         ));
@@ -188,7 +188,7 @@ public class TableModuleMaker {
 
     private void addSearchField(Table table, Field field) {
         table.addVueSearchContent(String.format(
-                "\n      <beicroon-input label=\"%s\" v-model=\"module.params.%s\"/>",
+                "\n      <b-input label=\"%s\" v-model=\"module.params.%s\"/>",
                 field.getComment(),
                 field.getSnakeCaseName()
         ));

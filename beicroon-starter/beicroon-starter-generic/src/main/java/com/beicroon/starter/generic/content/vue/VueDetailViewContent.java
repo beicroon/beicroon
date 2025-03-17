@@ -19,15 +19,15 @@ public final class VueDetailViewContent {
             </script>
             
             <template>
-              <beicroon-form :loading="!data" disabled>
+              <b-form :loading="!data" disabled>
                 <template v-if="data">
-                  <beicroon-form-group label="基础信息">{{detailContent}}
-                  </beicroon-form-group>
+                  <b-form-group label="基础信息">{{detailContent}}
+                  </b-form-group>
                 </template>
                 <template v-slot:button>
                   <slot name="button"></slot>
                 </template>
-              </beicroon-form>
+              </b-form>
             </template>
             
             <style lang="less">

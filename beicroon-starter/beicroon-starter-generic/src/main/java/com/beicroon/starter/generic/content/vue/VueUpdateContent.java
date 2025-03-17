@@ -39,14 +39,14 @@ public final class VueUpdateContent {
             </script>
             
             <template>
-              <beicroon-form @submit="handleSubmit" :loading="module.getting">
-                <beicroon-form-group label="基础信息">{{createContent}}
-                </beicroon-form-group>
+              <b-form @submit="handleSubmit" :loading="module.getting">
+                <b-form-group label="基础信息">{{createContent}}
+                </b-form-group>
                 <template v-slot:button>
-                  <beicroon-button size="larger" label="关闭" @click="handleHide"/>
-                  <beicroon-button size="larger" label="保存" level="warning" type="submit" :loading="module.loading()"/>
+                  <b-button size="larger" label="关闭" @click="handleHide"/>
+                  <b-button size="larger" label="保存" level="warning" type="submit" :loading="module.loading()"/>
                 </template>
-              </beicroon-form>
+              </b-form>
             </template>
             
             <style lang="less">

@@ -2,6 +2,7 @@
 import {onMounted} from "vue";
 import {moduleUpdate} from "beicroon-app-vue";
 import config, {DetailVO, UpdateDTO} from "@m/ronmiocustomer/script/module.ts";
+import {BButton, BForm, BFormGroup, BInput} from "beicroon-app-vue/components";
 
 interface Props {
   id: string,
@@ -30,16 +31,16 @@ onMounted(async () => {
 </script>
 
 <template>
-  <beicroon-form @submit="handleSubmit" :loading="module.getting">
-    <beicroon-form-group label="基础信息">
-      <beicroon-input label="客户名称" v-model="module.data.name"/>
-      <beicroon-input label="联系电话" v-model="module.data.phone"/>
-    </beicroon-form-group>
+  <b-form @submit="handleSubmit" :loading="module.getting">
+    <b-form-group label="基础信息">
+      <b-input label="客户名称" v-model="module.data.name"/>
+      <b-input label="联系电话" v-model="module.data.phone"/>
+    </b-form-group>
     <template v-slot:button>
-      <beicroon-button size="larger" label="关闭" @click="handleHide"/>
-      <beicroon-button size="larger" label="保存" level="warning" type="submit" :loading="module.loading()"/>
+      <b-button size="larger" label="关闭" @click="handleHide"/>
+      <b-button size="larger" label="保存" level="warning" type="submit" :loading="module.loading()"/>
     </template>
-  </beicroon-form>
+  </b-form>
 </template>
 
 <style lang="less">

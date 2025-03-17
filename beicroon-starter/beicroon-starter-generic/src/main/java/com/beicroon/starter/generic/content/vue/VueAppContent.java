@@ -61,32 +61,32 @@ public final class VueAppContent {
             </script>
             
             <template>
-              <beicroon-module :module="module">
+              <b-module :module="module">
                 <template v-slot:search>{{searchContent}}
                 </template>
                 <template v-slot:action-left>
-                  <beicroon-button level="warning" label="新增" @click="handleCreate"/>
+                  <b-button level="warning" label="新增" @click="handleCreate"/>
                 </template>
                 <template v-slot:action-right>
-                  <beicroon-button label="重置" @click="module.clear" level="warning"/>
-                  <beicroon-button label="查询" :loading="module.page.loading" @click="module.page.request()"/>
+                  <b-button label="重置" @click="module.clear" level="warning"/>
+                  <b-button label="查询" :loading="module.page.loading" @click="module.page.request()"/>
                 </template>{{tableContent}}
-                <beicroon-table-group label="创建/更新" width="320rem">
+                <b-table-group label="创建/更新" width="320rem">
                   <template v-slot="{item}">
-                    <beicroon-table-field label="创建人" :content="item.creatorName"/>
-                    <beicroon-table-field label="创建时间" :content="item.createdAt"/>
-                    <beicroon-table-field label="更新人" :content="item.modifierName"/>
-                    <beicroon-table-field label="更新时间" :content="item.modifiedAt"/>
+                    <b-table-field label="创建人" :content="item.creatorName"/>
+                    <b-table-field label="创建时间" :content="item.createdAt"/>
+                    <b-table-field label="更新人" :content="item.modifierName"/>
+                    <b-table-field label="更新时间" :content="item.modifiedAt"/>
                   </template>
-                </beicroon-table-group>
-                <beicroon-table-group label="操作" direction="row" frozen-right>
+                </b-table-group>
+                <b-table-group label="操作" direction="row" frozen-right>
                   <template v-slot="{item}">
-                    <beicroon-button size="small" level="primary" label="详情" @click="handleDetail(item)"/>
-                    <beicroon-button size="small" level="warning" label="编辑" @click="handleUpdate(item)"/>
-                    <beicroon-button size="small" level="danger" label="删除" @click="handleRemove(item)"/>
+                    <b-button size="small" level="primary" label="详情" @click="handleDetail(item)"/>
+                    <b-button size="small" level="warning" label="编辑" @click="handleUpdate(item)"/>
+                    <b-button size="small" level="danger" label="删除" @click="handleRemove(item)"/>
                   </template>
-                </beicroon-table-group>
-              </beicroon-module>
+                </b-table-group>
+              </b-module>
             </template>
             
             <style lang="less">
