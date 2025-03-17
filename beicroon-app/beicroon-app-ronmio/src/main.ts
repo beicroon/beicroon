@@ -1,34 +1,26 @@
-import App from "@/Main.vue";
-import {createApp} from "vue";
-import routes, {RouteMeta} from "@/routes.ts";
-import {createRouter, createWebHistory} from "vue-router";
-import BeicroonCacheEnums from "@/enums/beicroon-cache-enums.ts";
+import {createBeicroonApp, RouteMeta} from "beicroon-app-vue";
 
-const app = createApp(App);
+import "beicroon-app-vue/style.css";
 
-const router = createRouter({
-    history: createWebHistory(import.meta.env.BASE_URL),
-    routes: routes,
+const app = createBeicroonApp({
+    requestUrl: import.meta.env.VITE_REQUEST_URL as string,
+    baseURL: import.meta.env.VITE_BASE_URL as string,
+    routes: [
+        {
+            name: "客户管理",
+            path: "/customer/app",
+            meta: {auth: true} as RouteMeta,
+            component: () => import("@m/ronmiocustomer/RonmioCustomerApp.vue"),
+            children: [],
+        },
+        {
+            name: "箱单发票",
+            path: "/packinglistinvoice/app",
+            meta: {auth: true} as RouteMeta,
+            component: () => import("@m/ronmiopackinglistinvoice/RonmioPackingListInvoiceApp.vue"),
+            children: [],
+        },
+    ],
 });
-
-router.beforeEach((to, _from, next) => {
-    if (to.name) {
-        document.title = to.name as string;
-    }
-
-    const meta = to.meta as RouteMeta;
-
-    const token = localStorage.getItem(BeicroonCacheEnums.TOKEN);
-
-    if (meta.auth && !token) {
-        next({path: "/login"});
-
-        return;
-    }
-
-    next();
-});
-
-app.use(router);
 
 app.mount("#beicroon-app");

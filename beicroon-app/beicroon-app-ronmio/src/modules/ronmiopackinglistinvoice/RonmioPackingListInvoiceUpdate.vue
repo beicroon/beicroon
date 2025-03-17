@@ -1,10 +1,6 @@
 <script setup lang="ts">
 import {onMounted} from "vue";
-import BeicroonForm from "@c/BeicroonForm.vue";
-import BeicroonInput from "@c/BeicroonInput.vue";
-import newModule from "@u/module-update.utils.ts";
-import BeicroonButton from "@c/BeicroonButton.vue";
-import BeicroonFormGroup from "@c/BeicroonFormGroup.vue";
+import {moduleUpdate} from "beicroon-app-vue";
 import config, {DetailVO, UpdateDTO} from "@m/ronmiopackinglistinvoice/script/module.ts";
 import WeighFractionalSelect from "@m/ronmiopackinglistinvoice/component/WeighFractionalSelect.vue";
 import TotalAmountCalculationSelect from "@m/ronmiopackinglistinvoice/component/TotalAmountCalculationSelect.vue";
@@ -19,7 +15,7 @@ const emits = defineEmits(["hide"]);
 
 const handleHide = () => emits("hide", false);
 
-const module = newModule<UpdateDTO, DetailVO>(config, props.id);
+const module = moduleUpdate<UpdateDTO, DetailVO>(config, props.id);
 
 const handleSubmit = async () => {
   await module.submit();

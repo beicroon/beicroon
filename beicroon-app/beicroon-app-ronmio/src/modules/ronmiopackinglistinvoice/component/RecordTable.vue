@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import BeicroonTableView from "@c/BeicroonTableView.vue";
-import BeicroonTableCell from "@c/BeicroonTableCell.vue";
 import {ContainerDetailVO} from "@m/ronmiopackinglistinvoice/script/module.ts";
 
 interface Props {

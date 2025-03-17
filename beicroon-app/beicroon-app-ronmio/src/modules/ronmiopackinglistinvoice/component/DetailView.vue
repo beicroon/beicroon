@@ -1,7 +1,4 @@
 <script setup lang="ts">
-import BeicroonForm from "@c/BeicroonForm.vue";
-import BeicroonInput from "@c/BeicroonInput.vue";
-import BeicroonFormGroup from "@c/BeicroonFormGroup.vue";
 import {DetailVO} from "@m/ronmiopackinglistinvoice/script/module.ts";
 import RecordTable from "@m/ronmiopackinglistinvoice/component/RecordTable.vue";
 import WeighFractionalSelect from "@m/ronmiopackinglistinvoice/component/WeighFractionalSelect.vue";

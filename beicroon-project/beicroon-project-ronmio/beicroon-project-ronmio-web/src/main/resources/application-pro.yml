@@ -6,7 +6,7 @@ spring:
       port: 6379
       password: Jiu!Bu@Gao#Su$Ni
   datasource:
-    url: jdbc:mysql://rm-uf6e3kll3bq71l984.mysql.rds.aliyuncs.com:3306/beicroon_service_ronmio
+    url: jdbc:mysql://rm-uf6e3kll3bq71l984.mysql.rds.aliyuncs.com:3306/beicroon_project_ronmio
     username: beicroon
     password: Jiu!Bu@Gao#Su$Ni
   flyway:

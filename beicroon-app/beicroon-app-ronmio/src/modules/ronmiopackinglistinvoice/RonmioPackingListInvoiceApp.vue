@@ -1,17 +1,6 @@
 <script setup lang="ts">
 import {computed, onMounted} from "vue";
-import httpUtils from "@u/http.utils.ts";
-import toastUtils from "@u/toast.utils.ts";
-import dialogUtils from "@u/dialog.utils.ts";
-import overlayUtils from "@u/overlay.utils.ts";
-import newModule from "@u/module-app.utils.ts";
-import BeicroonInput from "@c/BeicroonInput.vue";
-import BeicroonModule from "@c/BeicroonModule.vue";
-import BeicroonButton from "@c/BeicroonButton.vue";
-import BeicroonTableGroup from "@c/BeicroonTableGroup.vue";
-import BeicroonTableField from "@c/BeicroonTableField.vue";
-import BeicroonTableColumn from "@c/BeicroonTableColumn.vue";
-import BeicroonButtonGroup from "@c/BeicroonButtonGroup.vue";
+import {dialog, http, moduleApp, overlay, toast} from "beicroon-app-vue";
 import RecordGroup from "@m/ronmiopackinglistinvoice/component/RecordGroup.vue";
 import config, {PageVO, QueryDTO} from "@m/ronmiopackinglistinvoice/script/module.ts";
 import ContainerAppend from "@m/ronmiopackinglistinvoice/component/ContainerAppend.vue";
@@ -19,10 +8,10 @@ import RonmioPackingListInvoiceCreate from "@m/ronmiopackinglistinvoice/RonmioPa
 import RonmioPackingListInvoiceUpdate from "@m/ronmiopackinglistinvoice/RonmioPackingListInvoiceUpdate.vue";
 import RonmioPackingListInvoiceDetail from "@m/ronmiopackinglistinvoice/RonmioPackingListInvoiceDetail.vue";
 
-const module = newModule<QueryDTO, PageVO>(config);
+const module = moduleApp<QueryDTO, PageVO>(config);
 
 const handleCreate = () => {
-  overlayUtils({
+  overlay({
     title: "新增箱单发票",
     component: RonmioPackingListInvoiceCreate,
     confirm: module.page.request,
@@ -30,7 +19,7 @@ const handleCreate = () => {
 };
 
 const handleUpdate = (item: any) => {
-  overlayUtils({
+  overlay({
     title: `编辑箱单发票[${item.code}]`,
     component: RonmioPackingListInvoiceUpdate,
     props: {id: item.id},
@@ -39,7 +28,7 @@ const handleUpdate = (item: any) => {
 };
 
 const handleDetail = (item: any) => {
-  overlayUtils({
+  overlay({
     title: "箱单发票详情",
     component: RonmioPackingListInvoiceDetail,
     props: {id: item.id},
@@ -47,7 +36,7 @@ const handleDetail = (item: any) => {
 };
 
 const handleRemove = (item: any) => {
-  dialogUtils({
+  dialog({
     title: "删除确认",
     message: `确定删除该箱单发票吗？`,
     confirm: async () => await module.remove.request(item.id),
@@ -56,7 +45,7 @@ const handleRemove = (item: any) => {
 };
 
 const handleUpdateContainer = async (item: any) => {
-  overlayUtils({
+  overlay({
     title: `添加箱单[${item.code}]`,
     component: ContainerAppend,
     props: {id: item.id},
@@ -64,7 +53,7 @@ const handleUpdateContainer = async (item: any) => {
 };
 
 const handleFillUnitPrice = async (item: any) => {
-  overlayUtils({
+  overlay({
     title: `录入单价[${item.code}]`,
     width: "1400rem",
     component: RecordGroup,
@@ -73,11 +62,11 @@ const handleFillUnitPrice = async (item: any) => {
 };
 
 const handleDownload = async (item: any) => {
-  const res = await httpUtils(config.download, {id: item.id});
+  const res = await http(config.download, {id: item.id});
 
   window.open(res.data as string, "_blank");
 
-  toastUtils.success("下载成功");
+  toast.success("下载成功");
 };
 
 const loading = computed(() => module.page.loading || module.tab.loading);

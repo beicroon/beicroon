@@ -1,0 +1,56 @@
+{
+  "name": "beicroon-app-vue",
+  "version": "1.0.0",
+  "description": "Beicroon App Vue",
+  "type": "module",
+  "main": "dist/beicroon-app-vue.umd.js",
+  "module": "dist/beicroon-app-vue.es.js",
+  "style": "dist/style.css",
+  "types": "dist/index.d.ts",
+  "files": ["dist"],
+  "exports": {
+    "import": "./dist/beicroon-app-vue.es.js",
+    "require": "./dist/beicroon-app-vue.umd.js",
+    "types": "./dist/index.d.ts",
+    "style": "./dist/style.css"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "serve": "vite preview",
+    "prepare": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/beicroon/beicroon-app-vue.git"
+  },
+  "bugs": {
+    "url": "https://github.com/beicroon/beicroon-app-vue/issues"
+  },
+  "homepage": "https://github.com/beicroon/beicroon-app-vue",
+  "author": "Beicroon",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^1.7.8",
+    "crypto-js": "^4.2.0",
+    "vue": "^3.0.0",
+    "vue-router": "^4.5.0"
+  },
+  "peerDependencies": {
+    "axios": "^1.7.8",
+    "crypto-js": "^4.2.0",
+    "vue": "^3.0.0",
+    "vue-router": "^4.5.0"
+  },
+  "devDependencies": {
+    "@types/crypto-js": "^4.2.2",
+    "@types/node": "^20.14.10",
+    "@vitejs/plugin-vue": "^5.0.5",
+    "less": "^4.2.0",
+    "less-loader": "^12.2.0",
+    "typescript": "^5.2.2",
+    "vite": "^5.3.1",
+    "vite-plugin-dts": "^4.5.3",
+    "vue-tsc": "^2.0.21"
+  }
+}

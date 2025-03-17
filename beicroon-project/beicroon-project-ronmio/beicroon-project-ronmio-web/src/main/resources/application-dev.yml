@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:mysql://127.0.0.1:3306/dev_beicroon_service_ronmio
+    url: jdbc:mysql://127.0.0.1:3306/dev_beicroon_project_ronmio
     username: root
     password:
   flyway:

@@ -1,14 +1,7 @@
 <script setup lang="ts">
 import {onMounted, ref} from "vue";
-import httpUtils from "@u/http.utils.ts";
-import toastUtils from "@u/toast.utils.ts";
-import BeicroonForm from "@c/BeicroonForm.vue";
-import BeicroonInput from "@c/BeicroonInput.vue";
-import BeicroonButton from "@c/BeicroonButton.vue";
-import BeicroonTableView from "@c/BeicroonTableView.vue";
-import BeicroonTableCell from "@c/BeicroonTableCell.vue";
+import {http, toast} from "beicroon-app-vue";
 import config, {RecordGroupDTO, RecordGroupVO} from "@m/ronmiopackinglistinvoice/script/module.ts";
-import BeicroonButtonGroup from "@c/BeicroonButtonGroup.vue";
 
 interface Props {
   id: string,
@@ -29,10 +22,10 @@ const handleSubmit = async () => {
 
   loading.value = true;
 
-  await httpUtils(config.fillUnitPrice, {packingListInvoiceId: props.id, groups: data.value})
+  await http(config.fillUnitPrice, {packingListInvoiceId: props.id, groups: data.value})
     .finally(() => loading.value = false);
 
-  toastUtils.success("保存成功");
+  toast.success("保存成功");
 
   handleHide();
 };
@@ -46,7 +39,7 @@ onMounted(async () => {
 
   loading.value = true;
 
-  const res = await httpUtils<Array<RecordGroupVO>>(config.recordGroupList, {packingListInvoiceId: props.id})
+  const res = await http<Array<RecordGroupVO>>(config.recordGroupList, {packingListInvoiceId: props.id})
     .finally(() => loading.value = false);
 
   data.value = res.data.map(item => {

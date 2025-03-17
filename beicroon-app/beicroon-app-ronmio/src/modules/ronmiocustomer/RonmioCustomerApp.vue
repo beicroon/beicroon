@@ -1,23 +1,15 @@
 <script setup lang="ts">
 import {onMounted} from "vue";
-import dialogUtils from "@u/dialog.utils.ts";
-import overlayUtils from "@u/overlay.utils.ts";
-import newModule from "@u/module-app.utils.ts";
-import BeicroonInput from "@c/BeicroonInput.vue";
-import BeicroonModule from "@c/BeicroonModule.vue";
-import BeicroonButton from "@c/BeicroonButton.vue";
-import BeicroonTableField from "@c/BeicroonTableField.vue";
-import BeicroonTableGroup from "@c/BeicroonTableGroup.vue";
-import BeicroonTableColumn from "@c/BeicroonTableColumn.vue";
+import {dialog, moduleApp, overlay} from "beicroon-app-vue";
+import config, {PageVO, QueryDTO} from "@m/ronmiocustomer/script/module.ts";
 import RonmioCustomerCreate from "@m/ronmiocustomer/RonmioCustomerCreate.vue";
 import RonmioCustomerUpdate from "@m/ronmiocustomer/RonmioCustomerUpdate.vue";
 import RonmioCustomerDetail from "@m/ronmiocustomer/RonmioCustomerDetail.vue";
-import config, {PageVO, QueryDTO} from "@m/ronmiocustomer/script/module.ts";
 
-const module = newModule<QueryDTO, PageVO>(config);
+const module = moduleApp<QueryDTO, PageVO>(config);
 
 const handleCreate = () => {
-  overlayUtils({
+  overlay({
     title: "新增客户",
     component: RonmioCustomerCreate,
     confirm: module.page.request,
@@ -25,7 +17,7 @@ const handleCreate = () => {
 };
 
 const handleUpdate = (item: any) => {
-  overlayUtils({
+  overlay({
     title: "编辑客户",
     component: RonmioCustomerUpdate,
     props: {id: item.id},
@@ -34,7 +26,7 @@ const handleUpdate = (item: any) => {
 };
 
 const handleDetail = (item: any) => {
-  overlayUtils({
+  overlay({
     title: "客户详情",
     component: RonmioCustomerDetail,
     props: {id: item.id},
@@ -42,7 +34,7 @@ const handleDetail = (item: any) => {
 };
 
 const handleRemove = (item: any) => {
-  dialogUtils({
+  dialog({
     title: "删除确认",
     message: `确定删除该客户吗？`,
     confirm: async () => await module.remove.request(item.id),

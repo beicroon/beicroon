@@ -1,14 +1,6 @@
 <script setup lang="ts">
 import {computed, ref} from "vue";
-import httpUtils from "@u/http.utils.ts";
-import toastUtils from "@u/toast.utils.ts";
-import BeicroonForm from "@c/BeicroonForm.vue";
-import BeicroonInput from "@c/BeicroonInput.vue";
-import BeicroonTable from "@c/BeicroonTable.vue";
-import BeicroonGroup from "@c/BeicroonGroup.vue";
-import BeicroonButton from "@c/BeicroonButton.vue";
-import BeicroonFormGroup from "@c/BeicroonFormGroup.vue";
-import BeicroonTableGroup from "@c/BeicroonTableGroup.vue";
+import {http, toast} from "beicroon-app-vue";
 import config, {ContainerCreateDTO, ContainerSearchVO} from "@m/ronmiopackinglistinvoice/script/module.ts";
 
 interface Props {
@@ -107,7 +99,7 @@ const handleSearch = async (val: string) => {
 
   loading.value = true;
 
-  const res = await httpUtils<ContainerSearchVO>(config.containerSearch, {packingListInvoiceId: props.id, code: val})
+  const res = await http<ContainerSearchVO>(config.containerSearch, {packingListInvoiceId: props.id, code: val})
     .finally(() => loading.value = false);
 
   if (res.data) {
@@ -138,9 +130,9 @@ const handleSubmit = async () => {
 
   loading.value = true;
 
-  await httpUtils(config.containerAppend, data.value).finally(() => loading.value = false);
+  await http(config.containerAppend, data.value).finally(() => loading.value = false);
 
-  toastUtils.success("保存成功");
+  toast.success("保存成功");
 
   resetData({code: data.value.code});
 };
@@ -152,7 +144,7 @@ const handleRemove = async () => {
 
   loading.value = true;
 
-  await httpUtils(config.containerRemove, {id: data.value.id}).finally(() => loading.value = false);
+  await http(config.containerRemove, {id: data.value.id}).finally(() => loading.value = false);
 
   resetData();
 };

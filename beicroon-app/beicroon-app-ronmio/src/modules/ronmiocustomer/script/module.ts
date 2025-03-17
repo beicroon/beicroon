@@ -1,4 +1,4 @@
-import {BeicroonDisableVO, BeicroonQueryDTO, BeicroonRequestConfig} from "@u/http.utils.ts";
+import {BeicroonDisableVO, BeicroonQueryDTO, BeicroonRequestConfig} from "beicroon-app-vue";
 
 export type QueryDTO = BeicroonQueryDTO & {
     name?: string;  // 客户名称

@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import {computed} from "vue";
-import BeicroonSelect from "@c/BeicroonSelect.vue";
 
 interface Props {
   modelValue?: any,

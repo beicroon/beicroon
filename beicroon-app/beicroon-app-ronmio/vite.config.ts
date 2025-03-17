@@ -14,6 +14,7 @@ export default defineConfig({
             "@m": resolve(__dirname, "src/modules"),
             "@u": resolve(__dirname, "src/utils"),
             "@v": resolve(__dirname, "src/views"),
+            "beicroon-app-vue/style.css": resolve(__dirname, "node_modules/beicroon-app-vue/dist/style.css"),
         },
     },
     css: {
