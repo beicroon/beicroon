@@ -14,7 +14,9 @@ defineProps<Props>();
     <template v-if="data">
       <b-form-group label="基础信息">
         <b-input disabled label="地址" v-model="data.url"/>
-        <b-input disabled label="描述" v-model="data.description"/>
+        <b-input disabled label="描述" size="huge" v-model="data.description"/>
+      </b-form-group>
+      <b-form-group label="有效期">
         <b-input disabled label="生效时间" v-model="data.validAt"/>
         <b-input disabled label="过期时间" v-model="data.expiredAt"/>
       </b-form-group>

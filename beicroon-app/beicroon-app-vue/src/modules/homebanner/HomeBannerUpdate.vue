@@ -36,7 +36,9 @@ onMounted(async () => {
   <b-form @submit="handleSubmit" :loading="module.getting">
     <b-form-group label="基础信息">
       <b-input label="地址" v-model="module.data.url"/>
-      <b-input label="描述" v-model="module.data.description"/>
+      <b-input label="描述" size="huge" v-model="module.data.description"/>
+    </b-form-group>
+    <b-form-group label="有效期">
       <b-input label="生效时间" v-model="module.data.validAt"/>
       <b-input label="过期时间" v-model="module.data.expiredAt"/>
     </b-form-group>

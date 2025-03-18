@@ -49,7 +49,6 @@ onMounted(module.page.request);
 <template>
   <b-module :module="module">
     <template v-slot:search>
-      <b-input label="地址" v-model="module.params.url"/>
       <b-input label="描述" v-model="module.params.description"/>
       <b-input label="生效时间" v-model="module.params.validAt"/>
       <b-input label="过期时间" v-model="module.params.expiredAt"/>
@@ -61,7 +60,11 @@ onMounted(module.page.request);
       <b-button label="重置" @click="module.clear" level="warning"/>
       <b-button label="查询" :loading="module.page.loading" @click="module.page.request()"/>
     </template>
-    <b-table-column label="地址" field="url"/>
+    <b-table-group label="图片">
+      <template v-slot="{item}">
+        <img :src="item.url" alt="" />
+      </template>
+    </b-table-group>
     <b-table-column label="描述" field="description"/>
     <b-table-column label="生效时间" field="validAt"/>
     <b-table-column label="过期时间" field="expiredAt"/>
