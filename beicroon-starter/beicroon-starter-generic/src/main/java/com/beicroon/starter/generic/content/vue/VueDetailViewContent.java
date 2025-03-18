@@ -6,10 +6,8 @@ public final class VueDetailViewContent {
 
     private static final String CONTENT = """
             <script setup lang="ts">
-            import BeicroonForm from "@c/BeicroonForm.vue";
-            import BeicroonInput from "@c/BeicroonInput.vue";
-            import BeicroonFormGroup from "@c/BeicroonFormGroup.vue";
             import {DetailVO} from "@m/{{pathName}}/script/module.ts";
+            import {BForm, BFormGroup, BInput} from "beicroon-app-vue/components";
             
             interface Props {
               data?: DetailVO | null,

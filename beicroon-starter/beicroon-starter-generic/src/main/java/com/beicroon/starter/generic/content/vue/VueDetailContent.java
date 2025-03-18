@@ -7,8 +7,8 @@ public final class VueDetailContent {
     private static final String CONTENT = """
             <script setup lang="ts">
             import {onMounted} from "vue";
-            import newModule from "@u/module-detail.utils.ts";
-            import BeicroonButton from "@c/BeicroonButton.vue";
+            import {moduleDetail} from "beicroon-app-vue";
+            import {BButton} from "beicroon-app-vue/components";
             import DetailView from "@m/{{pathName}}/component/DetailView.vue";
             import config, {DetailVO} from "@m/{{pathName}}/script/module.ts";
 
@@ -22,7 +22,7 @@ public final class VueDetailContent {
 
             const handleHide = () => emits("hide", false);
 
-            const module = newModule<DetailVO>(config, props.id);
+            const module = moduleDetail<DetailVO>(config, props.id);
 
             onMounted(module.getData);
             </script>

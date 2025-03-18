@@ -5,7 +5,7 @@ import com.beicroon.starter.generic.database.Table;
 public final class VueModuleContent {
 
     private static final String CONTENT = """
-            import {BeicroonDisableVO, BeicroonQueryDTO, BeicroonRequestConfig} from "@u/http.utils.ts";
+            import {BeicroonDisableVO, BeicroonQueryDTO, BeicroonRequestConfig} from "beicroon-app-vue";
 
             export type QueryDTO = BeicroonQueryDTO & {{{fieldContent}}
             };

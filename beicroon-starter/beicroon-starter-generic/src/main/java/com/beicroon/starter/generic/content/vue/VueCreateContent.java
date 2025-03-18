@@ -6,18 +6,15 @@ public final class VueCreateContent {
 
     private static final String CONTENT = """
             <script setup lang="ts">
-            import BeicroonForm from "@c/BeicroonForm.vue";
-            import BeicroonInput from "@c/BeicroonInput.vue";
-            import newModule from "@u/module-create.utils.ts";
-            import BeicroonButton from "@c/BeicroonButton.vue";
-            import BeicroonFormGroup from "@c/BeicroonFormGroup.vue";
+            import {moduleCreate} from "beicroon-app-vue";
             import config, {CreateDTO} from "@m/{{pathName}}/script/module.ts";
+            import {BButton, BForm, BFormGroup, BInput} from "beicroon-app-vue/components";
 
             const emits = defineEmits(["hide"]);
 
             const handleHide = () => emits("hide", false);
 
-            const module = newModule<CreateDTO>(config);
+            const module = moduleCreate<CreateDTO>(config);
 
             const handleSubmit = async () => {
               await module.submit();

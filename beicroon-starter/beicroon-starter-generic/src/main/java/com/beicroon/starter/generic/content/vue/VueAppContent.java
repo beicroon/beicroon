@@ -7,24 +7,17 @@ public final class VueAppContent {
     private static final String CONTENT = """
             <script setup lang="ts">
             import {onMounted} from "vue";
-            import dialogUtils from "@u/dialog.utils.ts";
-            import overlayUtils from "@u/overlay.utils.ts";
-            import newModule from "@u/module-app.utils.ts";
-            import BeicroonInput from "@c/BeicroonInput.vue";
-            import BeicroonModule from "@c/BeicroonModule.vue";
-            import BeicroonButton from "@c/BeicroonButton.vue";
-            import BeicroonTableField from "@c/BeicroonTableField.vue";
-            import BeicroonTableGroup from "@c/BeicroonTableGroup.vue";
-            import BeicroonTableColumn from "@c/BeicroonTableColumn.vue";
+            import {dialog, moduleApp, overlay} from "beicroon-app-vue";
+            import config, {PageVO, QueryDTO} from "@m/{{pathName}}/script/module.ts";
             import {{className}}Create from "@m/{{pathName}}/{{className}}Create.vue";
             import {{className}}Update from "@m/{{pathName}}/{{className}}Update.vue";
             import {{className}}Detail from "@m/{{pathName}}/{{className}}Detail.vue";
-            import config, {PageVO, QueryDTO} from "@m/{{pathName}}/script/module.ts";
+            import {BButton, BInput, BModule, BTableColumn, BTableField, BTableGroup} from "beicroon-app-vue/components";
             
-            const module = newModule<QueryDTO, PageVO>(config);
+            const module = moduleApp<QueryDTO, PageVO>(config);
             
             const handleCreate = () => {
-              overlayUtils({
+              overlay({
                 title: "新增{{tableComment}}",
                 component: {{className}}Create,
                 confirm: module.page.request,
@@ -32,7 +25,7 @@ public final class VueAppContent {
             };
             
             const handleUpdate = (item: any) => {
-              overlayUtils({
+              overlay({
                 title: "编辑{{tableComment}}",
                 component: {{className}}Update,
                 props: {id: item.id},
@@ -41,7 +34,7 @@ public final class VueAppContent {
             };
             
             const handleDetail = (item: any) => {
-              overlayUtils({
+              overlay({
                 title: "{{tableComment}}详情",
                 component: {{className}}Detail,
                 props: {id: item.id},
@@ -49,7 +42,7 @@ public final class VueAppContent {
             };
             
             const handleRemove = (item: any) => {
-              dialogUtils({
+              dialog({
                 title: "删除确认",
                 message: `确定删除该{{tableComment}}吗？`,
                 confirm: async () => await module.remove.request(item.id),
