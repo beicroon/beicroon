@@ -2,6 +2,9 @@
 import {useRouter} from "vue-router";
 import toastUtils from "@u/toast.utils";
 import {sha256} from "@u/function.utils";
+import BeicroonForm from "@c/BeicroonForm.vue";
+import BeicroonInput from "@c/BeicroonInput.vue";
+import BeicroonButton from "@c/BeicroonButton.vue";
 import requestUtils from "@u/module-request.utils";
 import {BeicroonRequestConfig} from "@u/http.utils";
 import BeicroonCacheEnums from "@/enums/beicroon-cache-enums";
@@ -33,7 +36,7 @@ const handleLogin = async () => {
   localStorage.removeItem(BeicroonCacheEnums.USER);
   localStorage.removeItem(BeicroonCacheEnums.TOKEN);
 
-  await login.request({password: await sha256(login.param.password)});
+  await login.request({password: sha256(login.param.password)});
 
   if (login.data) {
     const user = {
@@ -57,13 +60,13 @@ const handleLogin = async () => {
 <template>
   <div class="beicroon-login">
     <div class="login-form">
-      <b-form @submit="handleLogin">
-        <b-input required label="账号" v-model="login.param.username"/>
-        <b-input required label="密码" v-model="login.param.password" type="password"/>
+      <beicroon-form @submit="handleLogin">
+        <beicroon-input required label="账号" v-model="login.param.username"/>
+        <beicroon-input required label="密码" v-model="login.param.password" type="password"/>
         <template v-slot:button>
-          <b-button label="登录" size="input" type="submit" :loading="login.loading"/>
+          <beicroon-button label="登录" size="input" type="submit" :loading="login.loading"/>
         </template>
-      </b-form>
+      </beicroon-form>
     </div>
   </div>
 </template>
