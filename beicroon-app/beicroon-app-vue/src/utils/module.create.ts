@@ -1,7 +1,7 @@
 import {reactive} from "vue";
-import httpUtils from "@u/http.utils";
-import toastUtils from "@u/toast.utils";
-import {ModuleRequestConfig} from "@u/module-app.utils";
+import http from "./utils.http";
+import toast from "./beicroon.toast";
+import {ModuleRequestConfig} from "./module.app";
 
 export type BeicroonCreateModule<DTO> = {
     data: DTO,
@@ -22,9 +22,9 @@ const newModule = <DTO>(requestConfig: ModuleRequestConfig) => {
 
             const data = params ? Object.assign({}, module.data, params) : module.data;
 
-            await httpUtils(requestConfig.create, data).finally(() => module.loading = false);
+            await http(requestConfig.create, data).finally(() => module.loading = false);
 
-            toastUtils.success("创建成功");
+            toast.success("创建成功");
         },
     }) as BeicroonCreateModule<DTO>;
 

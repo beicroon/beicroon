@@ -1,5 +1,5 @@
 import {reactive} from "vue";
-import httpUtils, {BeicroonRequestConfig} from "@u/http.utils";
+import http, {BeicroonRequestConfig} from "./utils.http";
 
 export type BeicroonQueryModule<VO, DTO> = {
     param: DTO,
@@ -10,7 +10,7 @@ export type BeicroonQueryModule<VO, DTO> = {
     getCheckedField: (resField: string, childField?: string) => any[],
 };
 
-const newModule = <VO, DTO = Record<string, any>>(requestConfig: BeicroonRequestConfig) => {
+const moduleRequest = <VO, DTO = Record<string, any>>(requestConfig: BeicroonRequestConfig) => {
     const module = reactive({
         param: {} as DTO,
         data: null,
@@ -24,7 +24,7 @@ const newModule = <VO, DTO = Record<string, any>>(requestConfig: BeicroonRequest
 
             const data = params ? Object.assign({}, module.param, params) : module.param;
 
-            const res = await httpUtils<VO>(requestConfig, data)
+            const res = await http<VO>(requestConfig, data)
                 .finally(() => module.loading = false);
 
             module.data = res.data;
@@ -92,4 +92,4 @@ const newModule = <VO, DTO = Record<string, any>>(requestConfig: BeicroonRequest
     return module;
 }
 
-export default newModule;
+export default moduleRequest;

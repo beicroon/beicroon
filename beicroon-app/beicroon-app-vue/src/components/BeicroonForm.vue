@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import {ref} from "vue";
-import toastUtils from "@u/toast.utils";
-import BeicroonFormLoading from "@c/BeicroonFormLoading.vue";
+import {toast} from "@/index";
+import BeicroonFormLoading from "./BeicroonFormLoading.vue";
 
 interface Props {
   disabled?: boolean,
@@ -34,7 +34,7 @@ const handleSubmit = (e: Event) => {
 
         input.focus();
 
-        toastUtils.error("请填写必填项");
+        toast.error("请填写必填项");
 
         return;
       }

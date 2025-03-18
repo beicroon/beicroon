@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import {onUpdated, ref} from "vue";
-import BeicroonCheckbox from "@c/BeicroonCheckbox.vue";
+import BeicroonCheckbox from "./BeicroonCheckbox.vue";
 
 interface Props {
   labelField: string,

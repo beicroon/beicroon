@@ -1,6 +1,6 @@
 import {h, render} from "vue";
-import esc from "@u/esc.utils";
-import BeicroonDialog from "@u/components/BeicroonDialog.vue";
+import esc from "./utils.esc";
+import BeicroonDialog from "./components/BeicroonDialog.vue";
 
 const getContainer = (): HTMLElement => {
     const element: HTMLElement | null = document.querySelector("#beicroon-dialog");

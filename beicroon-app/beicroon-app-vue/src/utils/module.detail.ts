@@ -1,6 +1,6 @@
 import {reactive} from "vue";
-import {ModuleRequestConfig} from "@u/module-app.utils";
-import httpUtils, {BeicroonGenericVO} from "@u/http.utils";
+import {ModuleRequestConfig} from "./module.app";
+import http, {BeicroonGenericVO} from "./utils.http";
 
 export type BeicroonDetailModule<VO> = {
     id: string,
@@ -21,7 +21,7 @@ const newModule = <VO extends BeicroonGenericVO>(requestConfig: ModuleRequestCon
 
             module.loading = true;
 
-            const res = await httpUtils<VO>(requestConfig.detail, {id: module.id})
+            const res = await http<VO>(requestConfig.detail, {id: module.id})
                 .finally(() => module.loading = false);
 
             module.data = res.data;

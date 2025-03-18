@@ -7,15 +7,7 @@ import ContainerAppend from "@m/ronmiopackinglistinvoice/component/ContainerAppe
 import RonmioPackingListInvoiceCreate from "@m/ronmiopackinglistinvoice/RonmioPackingListInvoiceCreate.vue";
 import RonmioPackingListInvoiceUpdate from "@m/ronmiopackinglistinvoice/RonmioPackingListInvoiceUpdate.vue";
 import RonmioPackingListInvoiceDetail from "@m/ronmiopackinglistinvoice/RonmioPackingListInvoiceDetail.vue";
-import {
-  BButton,
-  BButtonGroup,
-  BInput,
-  BModule,
-  BTableColumn,
-  BTableField,
-  BTableGroup
-} from "beicroon-app-vue/components";
+import {BButton, BButtonGroup, BInput, BModule, BTableColumn, BTableField, BTableGroup} from "beicroon-app-vue/components";
 
 const module = moduleApp<QueryDTO, PageVO>(config);
 

@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import {moduleCreate} from "beicroon-app-vue";
+import {BButton, BForm, BFormGroup, BInput} from "beicroon-app-vue/components";
 import config, {CreateDTO} from "@m/ronmiopackinglistinvoice/script/module.ts";
 import WeighFractionalSelect from "@m/ronmiopackinglistinvoice/component/WeighFractionalSelect.vue";
 import TotalAmountCalculationSelect from "@m/ronmiopackinglistinvoice/component/TotalAmountCalculationSelect.vue";
-import {BButton, BForm, BFormGroup, BInput} from "beicroon-app-vue/components";
 
 const emits = defineEmits(["hide"]);
 

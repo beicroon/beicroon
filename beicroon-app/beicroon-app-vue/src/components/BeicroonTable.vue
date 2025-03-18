@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import {computed, useSlots, VNode} from "vue";
-import BeicroonTableView from "@c/BeicroonTableView.vue";
-import BeicroonTableColumnCell from "@c/BeicroonTableColumnCell.vue";
+import BeicroonTableView from "./BeicroonTableView.vue";
+import BeicroonTableColumnCell from "./BeicroonTableColumnCell.vue";
 
 interface Props {
   data: Array<any>,

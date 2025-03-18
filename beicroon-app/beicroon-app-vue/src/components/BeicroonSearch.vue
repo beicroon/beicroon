@@ -1,8 +1,7 @@
 <script setup lang="ts">
 import {computed, onMounted, ref} from "vue";
-import BeicroonSelect from "@c/BeicroonSelect.vue";
-import requestUtils from "@u/module-request.utils";
-import {BeicroonRequestConfig} from "@u/http.utils";
+import BeicroonSelect from "./BeicroonSelect.vue";
+import {BeicroonRequestConfig, moduleRequest} from "@/index";
 
 interface Option {
   label: string,
@@ -36,7 +35,7 @@ const value = computed({
   set: (val: any) => emits("update:modelValue", val),
 });
 
-const query = requestUtils<Array<any>>(props.request);
+const query = moduleRequest<Array<any>>(props.request);
 
 onMounted(async () => {
   await query.request();

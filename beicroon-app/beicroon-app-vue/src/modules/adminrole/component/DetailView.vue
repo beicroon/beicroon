@@ -1,9 +1,6 @@
 <script setup lang="ts">
-import BeicroonForm from "@c/BeicroonForm.vue";
-import BeicroonInput from "@c/BeicroonInput.vue";
 import {DetailVO} from "@m/adminrole/script/module";
-import BeicroonFormGroup from "@c/BeicroonFormGroup.vue";
-import BeicroonCheckboxTree from "@c/BeicroonCheckboxTree.vue";
+import {BCheckboxTree, BForm, BFormGroup, BInput} from "@/components";
 
 interface Props {
   data?: DetailVO | null,
@@ -15,26 +12,26 @@ defineProps<Props>();
 </script>
 
 <template>
-  <beicroon-form :loading="loading" disabled>
+  <b-form :loading="loading" disabled>
     <template v-if="data">
-      <beicroon-form-group label="基础信息">
-        <beicroon-input disabled label="编码" v-model="data.code"/>
-        <beicroon-input disabled label="名称" v-model="data.name"/>
-      </beicroon-form-group>
-      <beicroon-form-group label="资源权限">
-        <beicroon-checkbox-tree
+      <b-form-group label="基础信息">
+        <b-input disabled label="编码" v-model="data.code"/>
+        <b-input disabled label="名称" v-model="data.name"/>
+      </b-form-group>
+      <b-form-group label="资源权限">
+        <b-checkbox-tree
           disabled
           label-field="name"
           child-field="children"
           check-field="id"
           :data="resources"
         />
-      </beicroon-form-group>
+      </b-form-group>
     </template>
     <template v-slot:button>
       <slot name="button"></slot>
     </template>
-  </beicroon-form>
+  </b-form>
 </template>
 
 <style lang="less">

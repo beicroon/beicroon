@@ -1,32 +1,35 @@
 import Main from "@/Main.vue";
-import esc from "@u/esc.utils";
 import {App, createApp} from "vue";
-import toast from "@u/toast.utils";
-import dialog from "@u/dialog.utils";
-import overlay from "@u/overlay.utils";
-import creteRouter from "@/crete-router";
-import {RouteRecordRaw} from "vue-router";
-import moduleApp from "@u/module-app.utils";
-import http, {setRequestUrl} from "@u/http.utils";
-import moduleCreate from "@u/module-create.utils";
-import moduleDetail from "@u/module-detail.utils";
-import moduleUpdate from "@u/module-update.utils";
-import moduleRequest from "@u/module-request.utils";
-
-export * from "@/crete-router";
+import esc from "@/utils/utils.esc";
+import toast from "@/utils/beicroon.toast";
+import moduleApp from "@/utils/module.app";
+import dialog from "@/utils/beicroon.dialog";
+import {creteBeicroonRouter} from "@/router";
+import overlay from "@/utils/beicroon.overlay";
+import moduleCreate from "@/utils/module.create";
+import moduleDetail from "@/utils/module.detail";
+import moduleUpdate from "@/utils/module.update";
+import {Router, RouteRecordRaw} from "vue-router";
+import moduleRequest from "@/utils/module.request";
+import http, {setRequestUrl} from "@/utils/utils.http";
 
 interface Config {
-    requestUrl: string;
-    baseURL: string;
-    routes: RouteRecordRaw[];
+    requestUrl: string,
+    baseURL: string,
+    router?: Router,
+    routes?: RouteRecordRaw[],
 }
 
-const createBeicroonApp = ({requestUrl, baseURL, routes}: Config): App => {
+const createBeicroonApp = ({requestUrl, baseURL, router, routes}: Config): App => {
     setRequestUrl(requestUrl);
 
     const app = createApp(Main);
 
-    creteRouter(app, baseURL, routes);
+    if (routes) {
+        creteBeicroonRouter(app, baseURL, routes);
+    } else if (router) {
+        app.use(router);
+    }
 
     return app;
 };
@@ -35,17 +38,17 @@ export {
     createBeicroonApp,
 };
 
-export * from "@u/function.utils";
-export * from "@u/dialog.utils";
-export * from "@u/esc.utils";
-export * from "@u/http.utils";
-export * from "@u/module-app.utils";
-export * from "@u/module-create.utils";
-export * from "@u/module-detail.utils";
-export * from "@u/module-request.utils";
-export * from "@u/module-update.utils";
-export * from "@u/overlay.utils";
-export * from "@u/toast.utils";
+export * from "@/utils/utils.function";
+export * from "@/utils/beicroon.dialog";
+export * from "@/utils/utils.esc";
+export * from "@/utils/utils.http";
+export * from "@/utils/module.app";
+export * from "@/utils/module.create";
+export * from "@/utils/module.detail";
+export * from "@/utils/module.request";
+export * from "@/utils/module.update";
+export * from "@/utils/beicroon.overlay";
+export * from "@/utils/beicroon.toast";
 
 export {
     dialog,

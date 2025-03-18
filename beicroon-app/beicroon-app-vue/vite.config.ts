@@ -13,9 +13,7 @@ export default defineConfig({
     resolve: {
         alias: {
             "@": resolve(__dirname, "src"),
-            "@c": resolve(__dirname, "src/components"),
             "@m": resolve(__dirname, "src/modules"),
-            "@u": resolve(__dirname, "src/utils"),
             "@v": resolve(__dirname, "src/views"),
         },
     },
@@ -30,6 +28,8 @@ export default defineConfig({
         lib: {
             entry: {
                 main: resolve(__dirname, 'src/index.ts'),
+                router: resolve(__dirname, 'src/router.ts'),
+                enums: resolve(__dirname, 'src/enums/index.ts'),
                 components: resolve(__dirname, 'src/components/index.ts'),
             },
             name: "BeicroonAppVue",
@@ -47,6 +47,6 @@ export default defineConfig({
         },
     },
     esbuild: {
-        drop: process.env.NODE_ENV === "production" ? ["console", "debugger"] : [],
+        drop: [],
     },
 });

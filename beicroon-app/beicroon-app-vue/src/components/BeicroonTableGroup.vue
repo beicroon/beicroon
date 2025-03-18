@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import {computed} from "vue";
-import BeicroonTableCell from "@c/BeicroonTableCell.vue";
+import BeicroonTableCell from "./BeicroonTableCell.vue";
 
 interface Props {
   label: string,

@@ -27,12 +27,19 @@ public class BeicroonServiceBannerAppGenerator {
 
         TableModuleMaker maker = new MysqlTableModuleMaker(
                 "127.0.0.1:3306",
-                "dev_" + structure.getDatabaseName(),
+//                "dev_" + structure.getDatabaseName(),
+                "dev_beicroon_project_gzwy",
                 "root",
                 ""
         );
 
-        maker.generic(structure);
+        String[] tables = {
+                "home_banner"
+        };
+
+        maker.generic(structure, tables);
+
+        maker.genericVue(new File("beicroon-app", "beicroon-app-gzwy"), tables);
     }
 
 }

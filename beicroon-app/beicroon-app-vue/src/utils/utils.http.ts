@@ -1,7 +1,6 @@
 import {ref} from "vue";
+import toast from "./beicroon.toast";
 import axios, {AxiosInstance} from "axios";
-import {useRouter} from "vue-router";
-import toastUtils from "@u/toast.utils";
 import BeicroonCacheEnums from "@/enums/beicroon-cache-enums";
 import BeicroonBooleanEnums from "@/enums/beicroon-boolean-enums";
 
@@ -53,10 +52,10 @@ const getAxiosInstance = () => {
                 if (response.data.code > 0) {
                     reject(response.data);
 
-                    toastUtils.error(response.data.message);
+                    toast.error(response.data.message);
 
                     if (response.data.code && response.data.code === 401) {
-                        await useRouter().push({path: "/login"});
+                        window.location.href = "/login";
                     }
 
                     return;
@@ -76,16 +75,16 @@ const getAxiosInstance = () => {
         async error => {
             if (error.data) {
                 if (error.data.message) {
-                    toastUtils.error(error.data.message);
+                    toast.error(error.data.message);
                 }
 
                 if (error.data.code && error.data.code === 401) {
-                    await useRouter().push({path: "/login"});
+                    window.location.href = "/login";
                 }
             } else if (error.message) {
-                toastUtils.error(error.message);
+                toast.error(error.message);
             } else {
-                toastUtils.error("服务异常!请稍后再试~");
+                toast.error("服务异常!请稍后再试~");
             }
 
             return Promise.reject(error);

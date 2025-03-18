@@ -2,10 +2,8 @@
 import {onMounted, ref} from "vue";
 import {useRouter} from "vue-router";
 import Logo from "@/canvas/Logo.vue";
-import requestUtils from "@u/module-request.utils";
-import {BeicroonRequestConfig} from "@u/http.utils";
 import BeicroonCacheEnums from "@/enums/beicroon-cache-enums";
-import toastUtils from "@u/toast.utils";
+import {BeicroonRequestConfig, moduleRequest, toast} from "@/index";
 
 interface Menu {
   name: string,
@@ -79,11 +77,11 @@ if (userString) {
   user.value = JSON.parse(userString);
 }
 
-const resource = requestUtils<Array<Menu>>(resourceConfig);
+const resource = moduleRequest<Array<Menu>>(resourceConfig);
 
 onMounted(resource.request);
 
-const logout = requestUtils({
+const logout = moduleRequest({
   url: "api/admin/admin/admin-auth-logout",
   method: "POST",
 });
@@ -93,7 +91,7 @@ const handleLogout = async () => {
 
   await router.push("/login");
 
-  toastUtils.success("退出登录成功");
+  toast.success("退出登录成功");
 
   localStorage.removeItem(BeicroonCacheEnums.USER);
   localStorage.removeItem(BeicroonCacheEnums.TOKEN);

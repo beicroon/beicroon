@@ -1,8 +1,7 @@
 <script setup lang="ts">
+import {BButton} from "@/components";
 import {computed, onMounted} from "vue";
-import newModule from "@u/module-detail.utils";
-import BeicroonButton from "@c/BeicroonButton.vue";
-import requestUtils from "@u/module-request.utils";
+import {moduleDetail, moduleRequest} from "@/index";
 import roleConfig, {BaseVO} from "@m/adminrole/script/module";
 import config, {DetailVO} from "@m/adminaccount/script/module";
 import DetailView from "@m/adminaccount/component/DetailView.vue";
@@ -17,9 +16,9 @@ const emits = defineEmits(["hide"]);
 
 const handleHide = () => emits("hide", false);
 
-const module = newModule<DetailVO>(config, props.id);
+const module = moduleDetail<DetailVO>(config, props.id);
 
-const role = requestUtils<Array<BaseVO>>(roleConfig.list);
+const role = moduleRequest<Array<BaseVO>>(roleConfig.list);
 
 const loading = computed(() => module.loading || role.loading);
 
@@ -37,7 +36,7 @@ onMounted(async () => {
 <template>
   <detail-view :data="module.data" :roles="role.data" :loading="loading">
     <template v-slot:button>
-      <beicroon-button size="larger" label="关闭" @click="handleHide"/>
+      <b-button size="larger" label="关闭" @click="handleHide"/>
     </template>
   </detail-view>
 </template>

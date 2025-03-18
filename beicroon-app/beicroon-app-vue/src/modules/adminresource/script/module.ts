@@ -1,4 +1,4 @@
-import {BeicroonDisableVO, BeicroonQueryDTO, BeicroonRequestConfig} from "@u/http.utils";
+import {BeicroonDisableVO, BeicroonQueryDTO, BeicroonRequestConfig} from "@/index";
 
 export type QueryDTO = BeicroonQueryDTO & {
     parentId?: string;  // 父级主键

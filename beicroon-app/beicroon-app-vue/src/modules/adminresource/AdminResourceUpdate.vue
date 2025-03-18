@@ -1,11 +1,7 @@
 <script setup lang="ts">
 import {onMounted} from "vue";
-import BeicroonForm from "@c/BeicroonForm.vue";
-import BeicroonInput from "@c/BeicroonInput.vue";
-import newModule from "@u/module-update.utils";
-import BeicroonSearch from "@c/BeicroonSearch.vue";
-import BeicroonButton from "@c/BeicroonButton.vue";
-import BeicroonFormGroup from "@c/BeicroonFormGroup.vue";
+import {moduleUpdate} from "@/index";
+import {BButton, BForm, BFormGroup, BInput, BSearch} from "@/components";
 import config, {DetailVO, UpdateDTO} from "@m/adminresource/script/module";
 
 interface Props {
@@ -18,7 +14,7 @@ const emits = defineEmits(["hide"]);
 
 const handleHide = () => emits("hide", false);
 
-const module = newModule<UpdateDTO, DetailVO>(config, props.id);
+const module = moduleUpdate<UpdateDTO, DetailVO>(config, props.id);
 
 const handleSubmit = async () => {
   await module.submit();
@@ -37,18 +33,18 @@ onMounted(async () => {
 </script>
 
 <template>
-  <beicroon-form @submit="handleSubmit" :loading="module.getting">
-    <beicroon-form-group label="基础信息">
-      <beicroon-input required label="名称" v-model="module.data.name"/>
-      <beicroon-input label="编码" v-model="module.data.code"/>
-      <beicroon-input label="路由" v-model="module.data.path"/>
-      <beicroon-search label="父级" v-model="module.data.parentId" :request="config.list"/>
-    </beicroon-form-group>
+  <b-form @submit="handleSubmit" :loading="module.getting">
+    <b-form-group label="基础信息">
+      <b-input required label="名称" v-model="module.data.name"/>
+      <b-input label="编码" v-model="module.data.code"/>
+      <b-input label="路由" v-model="module.data.path"/>
+      <b-search label="父级" v-model="module.data.parentId" :request="config.list"/>
+    </b-form-group>
     <template v-slot:button>
-      <beicroon-button size="larger" label="关闭" @click="handleHide"/>
-      <beicroon-button size="larger" label="保存" level="warning" type="submit" :loading="module.loading()"/>
+      <b-button size="larger" label="关闭" @click="handleHide"/>
+      <b-button size="larger" label="保存" level="warning" type="submit" :loading="module.loading()"/>
     </template>
-  </beicroon-form>
+  </b-form>
 </template>
 
 <style lang="less">

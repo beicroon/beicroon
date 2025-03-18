@@ -7,8 +7,6 @@
     "module": "ESNext",
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "skipLibCheck": true,
-
-    /* Bundler mode */
     "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,
     "allowSyntheticDefaultImports": true,
@@ -17,19 +15,16 @@
     "moduleDetection": "force",
     "noEmit": true,
     "jsx": "preserve",
-
-    /* Linting */
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-    "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"],
-      "@c/*": ["src/components/*"],
-      "@m/*": ["src/modules/*"],
-      "@u/*": ["src/utils/*"],
-      "@v/*": ["src/views/*"],
+      "@/*": ["./src/*"],
+      "@c/*": ["./src/components/*"],
+      "@m/*": ["./src/modules/*"],
+      "@u/*": ["./src/utils/*"],
+      "@v/*": ["./src/views/*"]
     }
   },
   "include": ["vite.config.ts", "src/**/*.ts", "src/**/*.d.ts", "src/**/*.vue"],

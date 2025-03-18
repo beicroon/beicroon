@@ -23,9 +23,7 @@
     "useDefineForClassFields": true,
     "paths": {
       "@/*": ["./src/*"],
-      "@c/*": ["./src/components/*"],
       "@m/*": ["./src/modules/*"],
-      "@u/*": ["./src/utils/*"],
       "@v/*": ["./src/views/*"]
     }
   },

@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import BeicroonTable from "@c/BeicroonTable.vue";
-import BeicroonLoading from "@c/BeicroonLoading.vue";
-import {BeicroonModuleApp} from "@u/module-app.utils";
-import BeicroonPaginator from "@c/BeicroonPaginator.vue";
+import {BeicroonModuleApp} from "@/index";
+import BeicroonTable from "./BeicroonTable.vue";
+import BeicroonLoading from "./BeicroonLoading.vue";
+import BeicroonPaginator from "./BeicroonPaginator.vue";
 import {onMounted, onUnmounted, ref, useSlots} from "vue";
 
 interface Props {

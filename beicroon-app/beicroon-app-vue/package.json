@@ -15,6 +15,16 @@
       "types": "./dist/index.d.ts",
       "style": "./dist/style.css"
     },
+    "./enums": {
+      "import": "./dist/enums.es.js",
+      "require": "./dist/enums.cjs.js",
+      "types": "./dist/enums/index.d.ts"
+    },
+    "./router": {
+      "import": "./dist/router.es.js",
+      "require": "./dist/router.cjs.js",
+      "types": "./dist/router.d.ts"
+    },
     "./components": {
       "import": "./dist/components.es.js",
       "require": "./dist/components.cjs.js",

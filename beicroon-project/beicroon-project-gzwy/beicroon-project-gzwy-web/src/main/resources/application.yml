@@ -35,3 +35,13 @@ spring:
 logging:
   level:
     com.beicroon.project: INFO
+
+auth:
+  ignores:
+    - /**/*.png
+    - /**/*.jpg
+    - /**/*.css
+    - /**/*.html
+    - /**/*.jpeg
+    - /**/*.xlsx
+    - /api/admin/admin/admin-auth-login

@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import {onMounted} from "vue";
-import newModule from "@u/module-detail.utils";
-import BeicroonButton from "@c/BeicroonButton.vue";
-import DetailView from "@m/adminresource/component/DetailView.vue";
+import {moduleDetail} from "@/index";
+import {BButton} from "@/components";
 import config, {DetailVO} from "@m/adminresource/script/module";
+import DetailView from "@m/adminresource/component/DetailView.vue";
 
 interface Props {
   id: string,
@@ -15,7 +15,7 @@ const emits = defineEmits(["hide"]);
 
 const handleHide = () => emits("hide", false);
 
-const module = newModule<DetailVO>(config, props.id);
+const module = moduleDetail<DetailVO>(config, props.id);
 
 onMounted(module.getData);
 </script>
@@ -23,7 +23,7 @@ onMounted(module.getData);
 <template>
   <detail-view :data="module.data">
     <template v-slot:button>
-      <beicroon-button size="larger" label="关闭" @click="handleHide"/>
+      <b-button size="larger" label="关闭" @click="handleHide"/>
     </template>
   </detail-view>
 </template>

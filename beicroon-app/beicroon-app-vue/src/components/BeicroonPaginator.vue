@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {BeicroonModulePaginator} from "@u/module-app.utils";
+import {BeicroonModulePaginator} from "@/index";
 
 interface Props {
   paginator: BeicroonModulePaginator,

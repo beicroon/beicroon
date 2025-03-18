@@ -1,13 +1,8 @@
 <script setup lang="ts">
 import {useRouter} from "vue-router";
-import toastUtils from "@u/toast.utils";
-import {sha256} from "@u/function.utils";
-import BeicroonForm from "@c/BeicroonForm.vue";
-import BeicroonInput from "@c/BeicroonInput.vue";
-import BeicroonButton from "@c/BeicroonButton.vue";
-import requestUtils from "@u/module-request.utils";
-import {BeicroonRequestConfig} from "@u/http.utils";
+import {BButton, BForm, BInput} from "@/components";
 import BeicroonCacheEnums from "@/enums/beicroon-cache-enums";
+import {BeicroonRequestConfig, moduleRequest, sha256, toast} from "@/index";
 
 const router = useRouter();
 
@@ -30,7 +25,7 @@ const loginConfig: BeicroonRequestConfig = {
   method: "POST",
 };
 
-const login = requestUtils<VO, DTO>(loginConfig);
+const login = moduleRequest<VO, DTO>(loginConfig);
 
 const handleLogin = async () => {
   localStorage.removeItem(BeicroonCacheEnums.USER);
@@ -51,22 +46,22 @@ const handleLogin = async () => {
     localStorage.setItem(BeicroonCacheEnums.TOKEN, login.data.token);
   }
 
-  toastUtils.success("登录成功");
+  toast.success("登录成功");
 
-  await router.push("/");
+  await router.push({path: "/"});
 };
 </script>
 
 <template>
   <div class="beicroon-login">
     <div class="login-form">
-      <beicroon-form @submit="handleLogin">
-        <beicroon-input required label="账号" v-model="login.param.username"/>
-        <beicroon-input required label="密码" v-model="login.param.password" type="password"/>
+      <b-form @submit="handleLogin">
+        <b-input required label="账号" v-model="login.param.username"/>
+        <b-input required label="密码" v-model="login.param.password" type="password"/>
         <template v-slot:button>
-          <beicroon-button label="登录" size="input" type="submit" :loading="login.loading"/>
+          <b-button label="登录" size="input" type="submit" :loading="login.loading"/>
         </template>
-      </beicroon-form>
+      </b-form>
     </div>
   </div>
 </template>

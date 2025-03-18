@@ -8,10 +8,10 @@ public final class VueAppContent {
             <script setup lang="ts">
             import {onMounted} from "vue";
             import {dialog, moduleApp, overlay} from "beicroon-app-vue";
-            import config, {PageVO, QueryDTO} from "@m/{{pathName}}/script/module.ts";
             import {{className}}Create from "@m/{{pathName}}/{{className}}Create.vue";
             import {{className}}Update from "@m/{{pathName}}/{{className}}Update.vue";
             import {{className}}Detail from "@m/{{pathName}}/{{className}}Detail.vue";
+            import config, {PageVO, QueryDTO} from "@m/{{pathName}}/script/module.ts";
             import {BButton, BInput, BModule, BTableColumn, BTableField, BTableGroup} from "beicroon-app-vue/components";
             
             const module = moduleApp<QueryDTO, PageVO>(config);

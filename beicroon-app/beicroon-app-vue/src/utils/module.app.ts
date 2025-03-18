@@ -1,6 +1,6 @@
 import {reactive} from "vue";
-import toastUtils from "@u/toast.utils";
-import httpUtils, {BeicroonGenericVO, BeicroonQueryDTO, BeicroonRequestConfig, BeicroonTabVO} from "@u/http.utils";
+import toast from "./beicroon.toast";
+import http, {BeicroonGenericVO, BeicroonQueryDTO, BeicroonRequestConfig, BeicroonTabVO} from "./utils.http";
 
 const getPages = async (start: number, end: number) => {
     if (start < 1 || end < 1) {
@@ -39,7 +39,7 @@ const handleTabRequest = async <DTO extends BeicroonQueryDTO>(module: BeicroonMo
 
     module.loading = true;
 
-    const res = await httpUtils<Array<BeicroonTabVO>>(config, data).finally(() => module.loading = false);
+    const res = await http<Array<BeicroonTabVO>>(config, data).finally(() => module.loading = false);
 
     module.data = res.data;
 };
@@ -57,7 +57,7 @@ const handlePageRequest = async <DTO extends BeicroonQueryDTO, VO extends Beicro
         pageInfo: {page: page, size: module.paginator.size},
     };
 
-    const res = await httpUtils<Array<VO>>(config, params).finally(() => module.page.loading = false);
+    const res = await http<Array<VO>>(config, params).finally(() => module.page.loading = false);
 
     module.page.data = res.data;
 
@@ -75,7 +75,7 @@ const handleRemoveRequest = async (module: BeicroonModuleRemove, ids: string | A
 
     const data = {ids: ids instanceof Array ? ids : [ids]};
 
-    await httpUtils(config, data).finally(() => module.loading = false);
+    await http(config, data).finally(() => module.loading = false);
 };
 
 export type ModuleRequestConfig = {
@@ -146,7 +146,7 @@ const newModule = <DTO extends BeicroonQueryDTO, VO extends BeicroonGenericVO>(r
             request: async (ids: string | Array<string>) => {
                 await handleRemoveRequest(module.remove, ids, requestConfig.remove);
 
-                toastUtils.success("删除成功");
+                toast.success("删除成功");
             },
         } as BeicroonModuleRemove,
         tab: {

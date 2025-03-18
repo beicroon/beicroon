@@ -1,7 +1,7 @@
 import {reactive} from "vue";
-import toastUtils from "@u/toast.utils";
-import {ModuleRequestConfig} from "@u/module-app.utils";
-import httpUtils, {BeicroonGenericVO} from "@u/http.utils";
+import toast from "./beicroon.toast";
+import {ModuleRequestConfig} from "./module.app";
+import http, {BeicroonGenericVO} from "./utils.http";
 
 export type BeicroonUpdateModule<DTO, VO extends BeicroonGenericVO> = {
     id: string,
@@ -27,7 +27,7 @@ const newModule = <DTO, VO extends BeicroonGenericVO>(config: ModuleRequestConfi
 
             module.getting = true;
 
-            const res = await httpUtils<VO>(config.detail, {id: module.id})
+            const res = await http<VO>(config.detail, {id: module.id})
                 .finally(() => module.getting = false);
 
             callback(res.data);
@@ -41,9 +41,9 @@ const newModule = <DTO, VO extends BeicroonGenericVO>(config: ModuleRequestConfi
 
             const data = params ? Object.assign({}, module.data, params) : module.data;
 
-            await httpUtils(config.update, data).finally(() => module.setting = false);
+            await http(config.update, data).finally(() => module.setting = false);
 
-            toastUtils.success("保存成功");
+            toast.success("保存成功");
         },
     }) as BeicroonUpdateModule<DTO, VO>;
 
