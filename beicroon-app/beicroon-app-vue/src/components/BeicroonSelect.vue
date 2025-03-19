@@ -79,7 +79,7 @@ const topOrBottom = ref<"top" | "bottom">("bottom");
 
 const optionActive = ref(false);
 
-const optionHidden = ref(true);
+const hidden = ref(true);
 
 const handleMouseDown = () => {
   optionActive.value = true;
@@ -88,7 +88,7 @@ const handleMouseDown = () => {
 };
 
 const handleFocusin = () => {
-  optionHidden.value = false;
+  hidden.value = false;
 
   const rect = inputEl.value?.getBoundingClientRect();
 
@@ -116,7 +116,7 @@ const hideOption = () => {
 
   optionActive.value = false;
 
-  optionHidden.value = true;
+  hidden.value = true;
 };
 </script>
 
@@ -132,7 +132,7 @@ const hideOption = () => {
       @focusin="handleFocusin"
       @focusout="handleFocusout"
     />
-    <div class="option" :class="topOrBottom" v-show="!optionHidden" @mousedown="handleMouseDown">
+    <div class="option" :class="topOrBottom" v-show="!hidden" @mousedown="handleMouseDown">
       <div class="tip">请选择</div>
       <ul class="chooser">
         <li v-for="option in options" @click="handleChoose(option)">{{ option.label }}</li>
