@@ -12,6 +12,7 @@
     <modules>
         <module>beicroon-service-aliyun</module>
         <module>beicroon-service-banner</module>
+        <module>beicroon-service-file</module>
         <module>beicroon-service-mall</module>
         <module>beicroon-service-order</module>
         <module>beicroon-service-product</module>

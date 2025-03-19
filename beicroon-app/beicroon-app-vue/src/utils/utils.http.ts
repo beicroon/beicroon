@@ -23,7 +23,6 @@ const getAxiosInstance = () => {
         timeout: 6000,
         timeoutErrorMessage: "请求超时",
         baseURL: baseURL.value,
-        headers: {"Content-Type": "application/json"},
     });
 
     // 添加请求拦截器
@@ -101,6 +100,12 @@ const http = async <T>(config: BeicroonRequestConfig, data?: any): Promise<Beicr
     };
 
     if (data) {
+        if (data instanceof FormData) {
+            requestConfig.headers = {"Content-Type": "multipart/form-data"};
+        } else {
+            requestConfig.headers = {"Content-Type": "application/json"};
+        }
+
         if (config.method === "GET") {
             requestConfig.params = data;
         } else {

@@ -3,7 +3,9 @@ create table `home_banner`
 (
     `id`            bigint(20) unsigned not null auto_increment comment '主键',
     `tenant_id`     bigint(20) unsigned not null default 0 comment '租户主键',
+    `file_id`       bigint(20) unsigned not null default 0 comment '文件主键',
     `url`           varchar(1024)       not null default '' comment '地址',
+    `name`          varchar(255)        not null default '' comment '名称',
     `description`   varchar(512)        not null default '' comment '描述',
     `valid_at`      timestamp           null     default null comment '生效时间',
     `expired_at`    timestamp           null     default null comment '过期时间',

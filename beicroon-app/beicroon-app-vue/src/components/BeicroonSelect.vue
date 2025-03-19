@@ -22,15 +22,15 @@ const props = withDefaults(defineProps<Props>(), {
 
 const emits = defineEmits(["update:modelValue"]);
 
-const input = ref<HTMLInputElement>();
+const inputEl = ref<HTMLInputElement>();
 
 const showValue = ref("");
 
 const value = computed({
   get: () => props.modelValue,
   set: (val: any) => {
-    if (input.value) {
-      input.value.classList.remove("error");
+    if (inputEl.value) {
+      inputEl.value.classList.remove("error");
     }
 
     emits("update:modelValue", val);
@@ -90,7 +90,7 @@ const handleMouseDown = () => {
 const handleFocusin = () => {
   optionHidden.value = false;
 
-  const rect = input.value?.getBoundingClientRect();
+  const rect = inputEl.value?.getBoundingClientRect();
 
   if (rect) {
     if (rect.top + rect.height + 180 > window.innerHeight) {
@@ -121,7 +121,7 @@ const hideOption = () => {
 </script>
 
 <template>
-  <div class="beicroon-input input select" :class="clazz" ref="input" @mousedown.stop>
+  <div class="beicroon-input input select" :class="clazz" ref="inputEl" @mousedown.stop>
     <label class="label" v-if="label">{{ label }}</label>
     <input
       class="input"

@@ -28,6 +28,10 @@ public final class YmlPomContent {
                 url: jdbc:mysql://127.0.0.1:3306/{{databaseName}}
                 username: root
                 password:
+              servlet:
+                multipart:
+                  max-file-size: 8MB
+                  max-request-size: 20MB
               flyway:
                 enabled: true
                 baseline-on-migrate: false

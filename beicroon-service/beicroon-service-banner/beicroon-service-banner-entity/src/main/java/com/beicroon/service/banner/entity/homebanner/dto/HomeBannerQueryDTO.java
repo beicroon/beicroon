@@ -18,6 +18,10 @@ public class HomeBannerQueryDTO extends QueryDTO {
     @ApiModelProperty(name = "地址")
     private String url;
 
+    @FieldSearch(name = "`name`")
+    @ApiModelProperty(name = "名称")
+    private String name;
+
     @FieldSearch(name = "`description`")
     @ApiModelProperty(name = "描述")
     private String description;

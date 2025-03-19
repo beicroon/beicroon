@@ -4,12 +4,16 @@ import com.beicroon.construct.auth.utils.AuthUtils;
 import com.beicroon.construct.json.utils.JsonUtils;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.util.Arrays;
 
 @Slf4j
 @Aspect
@@ -20,10 +24,26 @@ public class LoggingAspect {
     private HttpServletRequest request;
 
     private void logRequest(ProceedingJoinPoint joinPoint) {
+        Object[] args = Arrays.stream(joinPoint.getArgs()).map(arg -> {
+            if (arg instanceof HttpServletRequest) {
+                return null;
+            }
+
+            if (arg instanceof HttpServletResponse) {
+                return null;
+            }
+
+            if (arg instanceof MultipartFile file) {
+                return String.format("MultipartFile[name=%s, size=%s]", file.getOriginalFilename(), file.getSize());
+            }
+
+            return arg;
+        }).toArray();
+
         log.info(
                 "Request Log: mapping={}, params={}, auth={}",
                 String.format("%s=>%s", request.getMethod(), request.getRequestURI()),
-                JsonUtils.toJson(joinPoint.getArgs()),
+                JsonUtils.toJson(args),
                 JsonUtils.toJson(AuthUtils.getAuthThreadInfo())
         );
     }

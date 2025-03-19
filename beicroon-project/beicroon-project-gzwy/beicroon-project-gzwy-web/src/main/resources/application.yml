@@ -21,6 +21,10 @@ spring:
     url: jdbc:mysql://127.0.0.1:3306/beicroon_project_gzwy
     username: root
     password:
+  servlet:
+    multipart:
+      max-file-size: 8MB
+      max-request-size: 20MB
   flyway:
     enabled: true
     baseline-on-migrate: false

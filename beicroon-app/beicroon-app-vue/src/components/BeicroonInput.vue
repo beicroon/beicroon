@@ -21,13 +21,13 @@ const props = withDefaults(defineProps<Props>(), {
 
 const emits = defineEmits(["update:modelValue", "search"]);
 
-const input = ref<HTMLInputElement>();
+const inputEl = ref<HTMLInputElement>();
 
 const value = computed({
   get: () => props.modelValue,
   set: (val: any) => {
-    if (props.required && input.value) {
-      input.value.classList.remove("error");
+    if (props.required && inputEl.value) {
+      inputEl.value.classList.remove("error");
     }
 
     if (val && typeof val === "string") {
@@ -64,7 +64,7 @@ const handleSearch = () => emits("search", value.value);
 </script>
 
 <template>
-  <div class="beicroon-input input" :class="clazz" ref="input">
+  <div class="beicroon-input input" :class="clazz" ref="inputEl">
     <label class="label" v-if="label">{{ label }}</label>
     <input class="input" :type="type" v-model="value" :placeholder="placeholder" :disabled="disabled" />
     <search class="search" v-if="search" @click="handleSearch" />
@@ -73,7 +73,6 @@ const handleSearch = () => emits("search", value.value);
 
 <style lang="less">
 .beicroon-input.input {
-  height: 32rem;
   position: relative;
   border-radius: 4rem;
   display: inline-flex;
@@ -133,9 +132,9 @@ const handleSearch = () => emits("search", value.value);
   }
 
   .label {
-    height: 100%;
     cursor: text;
     width: 108rem;
+    height: 32rem;
     display: flex;
     position: relative;
     align-items: center;
@@ -149,9 +148,9 @@ const handleSearch = () => emits("search", value.value);
 
   .input {
     flex: 1;
-    height: 100%;
     border: none;
     outline: none;
+    height: 32rem;
     padding: 0 12rem;
     border-top-right-radius: 4rem;
     border-bottom-right-radius: 4rem;

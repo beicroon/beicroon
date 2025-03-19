@@ -29,6 +29,12 @@
 
         <dependency>
             <groupId>com.beicroon.service</groupId>
+            <artifactId>beicroon-service-file-app</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.beicroon.service</groupId>
             <artifactId>beicroon-service-mall-app</artifactId>
             <version>${project.version}</version>
         </dependency>

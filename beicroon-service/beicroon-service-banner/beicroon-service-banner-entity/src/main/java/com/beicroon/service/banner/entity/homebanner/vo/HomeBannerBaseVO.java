@@ -13,8 +13,14 @@ import java.time.LocalDateTime;
 @EqualsAndHashCode(callSuper = true)
 public class HomeBannerBaseVO extends GenericVO {
 
+    @ApiModelProperty(name = "文件主键")
+    private Long fileId;
+
     @ApiModelProperty(name = "地址")
     private String url;
+
+    @ApiModelProperty(name = "名称")
+    private String name;
 
     @ApiModelProperty(name = "描述")
     private String description;

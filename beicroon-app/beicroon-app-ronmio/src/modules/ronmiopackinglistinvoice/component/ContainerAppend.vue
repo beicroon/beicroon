@@ -204,6 +204,11 @@ const saveLabel = computed(() => {
             <b-input size="small" v-model="item.count" @paste="handlePaste($event, index, 'count')"/>
           </template>
         </b-table-group>
+        <b-table-group label="单价">
+          <template v-slot="{item, index}">
+            <b-input size="small" v-model="item.unitPrice" @paste="handlePaste($event, index, 'unitPrice')"/>
+          </template>
+        </b-table-group>
         <b-table-group label="操作" direction="row" frozen-right>
           <template v-slot="{index}">
             <b-button size="small" label="复制" @click="handleCopy(index)"/>
@@ -216,8 +221,7 @@ const saveLabel = computed(() => {
       <b-button size="larger" label="关闭" @click="handleHide"/>
       <b-button size="larger" label="清空" @click="handleClear"/>
       <b-button size="larger" :label="saveLabel" level="warning" type="submit" :loading="loading"/>
-      <b-button size="larger" label="删除" level="danger" :disabled="!data.id" @click="handleRemove"
-                :loading="loading"/>
+      <b-button size="larger" label="删除" level="danger" :disabled="!data.id" @click="handleRemove" :loading="loading"/>
     </template>
   </b-form>
 </template>

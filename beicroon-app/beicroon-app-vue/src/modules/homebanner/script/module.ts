@@ -8,6 +8,7 @@ export type QueryDTO = BeicroonQueryDTO & {
 };
 
 export type CreateDTO = {
+    fileId?: string,  // 文件主键
     url?: string,  // 地址
     description?: string,  // 描述
     validAt?: string,  // 生效时间
@@ -16,6 +17,7 @@ export type CreateDTO = {
 
 export type UpdateDTO = {
     id?: string,  // 主键
+    fileId?: string,  // 文件主键
     url?: string,  // 地址
     description?: string,  // 描述
     validAt?: string,  // 生效时间
@@ -23,6 +25,7 @@ export type UpdateDTO = {
 };
 
 export type BaseVO = BeicroonDisableVO & {
+    fileId?: string,  // 文件主键
     url?: string,  // 地址
     description?: string,  // 描述
     validAt?: string,  // 生效时间

@@ -14,9 +14,17 @@ import java.time.LocalDateTime;
 @TableName("`home_banner`")
 public class HomeBannerModel extends GenericModel {
 
+    @TableField(name = "`file_id`")
+    @ApiModelProperty(name = "文件主键")
+    private Long fileId;
+
     @TableField(name = "`url`")
     @ApiModelProperty(name = "地址")
     private String url;
+
+    @TableField(name = "`name`")
+    @ApiModelProperty(name = "名称")
+    private String name;
 
     @TableField(name = "`description`")
     @ApiModelProperty(name = "描述")

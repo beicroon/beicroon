@@ -5,7 +5,7 @@ import HomeBannerCreate from "@m/homebanner/HomeBannerCreate.vue";
 import HomeBannerUpdate from "@m/homebanner/HomeBannerUpdate.vue";
 import HomeBannerDetail from "@m/homebanner/HomeBannerDetail.vue";
 import config, {PageVO, QueryDTO} from "@m/homebanner/script/module";
-import {BButton, BInput, BModule, BTableColumn, BTableField, BTableGroup} from "@/components";
+import {BButton, BImage, BInput, BModule, BTableColumn, BTableField, BTableGroup} from "@/components";
 
 const module = moduleApp<QueryDTO, PageVO>(config);
 
@@ -62,7 +62,7 @@ onMounted(module.page.request);
     </template>
     <b-table-group label="图片">
       <template v-slot="{item}">
-        <img :src="item.url" alt="" />
+        <b-image :src="item.url" size="small" />
       </template>
     </b-table-group>
     <b-table-column label="描述" field="description"/>
