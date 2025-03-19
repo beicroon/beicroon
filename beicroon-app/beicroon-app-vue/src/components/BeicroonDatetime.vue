@@ -13,7 +13,7 @@ interface Props {
   placeholder?: string,
   disabled?: boolean,
   required?: boolean,
-  time?: "none" | "start" | "end" | "current",
+  time?: "none" | "start" | "end" | "current" | "currentOrStart" | "currentOrEnd",
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -100,6 +100,28 @@ switch (props.time) {
     current.value.setHours(datetime.value.getHours());
     current.value.setMinutes(datetime.value.getMinutes());
     current.value.setSeconds(datetime.value.getSeconds());
+    break;
+  case "currentOrStart":
+    if (props.modelValue) {
+      current.value.setHours(datetime.value.getHours());
+      current.value.setMinutes(datetime.value.getMinutes());
+      current.value.setSeconds(datetime.value.getSeconds());
+    } else {
+      current.value.setHours(0);
+      current.value.setMinutes(0);
+      current.value.setSeconds(0);
+    }
+    break;
+  case "currentOrEnd":
+    if (props.modelValue) {
+      current.value.setHours(datetime.value.getHours());
+      current.value.setMinutes(datetime.value.getMinutes());
+      current.value.setSeconds(datetime.value.getSeconds());
+    } else {
+      current.value.setHours(23);
+      current.value.setMinutes(59);
+      current.value.setSeconds(59);
+    }
     break;
   case "none":
   case "start":
@@ -327,17 +349,17 @@ const handleConfirm = () => {
         <button @click="addYear">>></button>
       </div>
       <div class="current">
-        <input class="year" type="number" min="1" max="9999" step="1" v-model="year" />
+        <input class="year" type="text" v-model="year" />
         <span>年</span>
-        <input type="number" min="1" max="12" step="1" v-model="month" />
+        <input type="text" v-model="month" />
         <span>月</span>
-        <input type="number" min="1" max="31" step="1" v-model="day" />
+        <input type="text" v-model="day" />
         <span>日</span>
-        <input type="number" min="1" max="24" step="1" v-model="hour" />
+        <input type="text" v-model="hour" />
         <span>:</span>
-        <input type="number" min="1" max="60" step="1" v-model="minute" />
+        <input type="text" v-model="minute" />
         <span>:</span>
-        <input type="number" min="1" max="60" step="1" v-model="second" />
+        <input type="text" v-model="second" />
       </div>
       <ul class="week">
         <li class="item">日</li>

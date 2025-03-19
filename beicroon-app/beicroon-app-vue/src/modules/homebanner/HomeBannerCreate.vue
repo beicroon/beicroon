@@ -2,7 +2,7 @@
 import {ref} from "vue";
 import {moduleCreate, uploadImage} from "@/index";
 import config, {CreateDTO} from "@m/homebanner/script/module";
-import {BButton, BFile, BForm, BFormGroup, BInput} from "@/components";
+import {BButton, BDatetime, BFile, BForm, BFormGroup, BInput} from "@/components";
 
 const emits = defineEmits(["hide"]);
 
@@ -10,16 +10,12 @@ const handleHide = () => emits("hide", false);
 
 const module = moduleCreate<CreateDTO>(config);
 
-const loading = ref(false);
-
 const handleSubmit = async () => {
   if (!fileValue.value) {
     return;
   }
 
-  loading.value = true;
-
-  const fileRes = await uploadImage(fileValue.value).finally(() => loading.value = false);
+  const fileRes = await uploadImage(fileValue.value);
 
   module.data.fileId = fileRes.data.id;
   module.data.fileName = fileRes.data.name;
@@ -52,12 +48,12 @@ const handleChange = (file: File) => {
       <b-input label="描述" size="huge" v-model="module.data.description"/>
     </b-form-group>
     <b-form-group label="有效期">
-      <b-input label="生效时间" v-model="module.data.validAt"/>
-      <b-input label="过期时间" v-model="module.data.expiredAt"/>
+      <b-datetime label="生效时间" time="start" v-model="module.data.validAt"/>
+      <b-datetime label="过期时间" time="end" v-model="module.data.expiredAt"/>
     </b-form-group>
     <template v-slot:button>
       <b-button size="larger" label="关闭" @click="handleHide"/>
-      <b-button size="larger" label="保存" level="warning" type="submit" :loading="loading || module.loading"/>
+      <b-button size="larger" label="保存" level="warning" type="submit" :loading="module.loading"/>
     </template>
   </b-form>
 </template>
