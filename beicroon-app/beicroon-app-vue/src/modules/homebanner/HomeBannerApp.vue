@@ -5,7 +5,7 @@ import HomeBannerCreate from "@m/homebanner/HomeBannerCreate.vue";
 import HomeBannerUpdate from "@m/homebanner/HomeBannerUpdate.vue";
 import HomeBannerDetail from "@m/homebanner/HomeBannerDetail.vue";
 import config, {PageVO, QueryDTO} from "@m/homebanner/script/module";
-import {BButton, BImage, BInput, BModule, BTableColumn, BTableField, BTableGroup} from "@/components";
+import {BButton, BDatetime, BImage, BInput, BModule, BTableColumn, BTableField, BTableGroup} from "@/components";
 
 const module = moduleApp<QueryDTO, PageVO>(config);
 
@@ -50,8 +50,8 @@ onMounted(module.page.request);
   <b-module :module="module">
     <template v-slot:search>
       <b-input label="描述" v-model="module.params.description"/>
-      <b-input label="生效时间" v-model="module.params.validAt"/>
-      <b-input label="过期时间" v-model="module.params.expiredAt"/>
+      <b-datetime label="生效时间" v-model="module.params.validAt"/>
+      <b-datetime label="过期时间" v-model="module.params.expiredAt"/>
     </template>
     <template v-slot:action-left>
       <b-button level="warning" label="新增" @click="handleCreate"/>

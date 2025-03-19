@@ -5,7 +5,7 @@ import config, {PageVO, QueryDTO} from "@m/adminresource/script/module";
 import AdminResourceCreate from "@m/adminresource/AdminResourceCreate.vue";
 import AdminResourceUpdate from "@m/adminresource/AdminResourceUpdate.vue";
 import AdminResourceDetail from "@m/adminresource/AdminResourceDetail.vue";
-import {BButton, BInput, BModule, BTableColumn, BTableField, BTableGroup} from "@/components";
+import {BButton, BInput, BModule, BSearch, BTableColumn, BTableField, BTableGroup} from "@/components";
 
 const module = moduleApp<QueryDTO, PageVO>(config);
 

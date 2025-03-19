@@ -2,6 +2,7 @@ export { default as BButton } from './BeicroonButton.vue';
 export { default as BButtonGroup } from './BeicroonButtonGroup.vue';
 export { default as BCheckbox } from './BeicroonCheckbox.vue';
 export { default as BCheckboxTree } from './BeicroonCheckboxTree.vue';
+export { default as BDatetime } from './BeicroonDatetime.vue';
 export { default as BFile } from './BeicroonFile.vue';
 export { default as BForm } from './BeicroonForm.vue';
 export { default as BFormGroup } from './BeicroonFormGroup.vue';
