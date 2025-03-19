@@ -62,7 +62,7 @@ onMounted(module.page.request);
     </template>
     <b-table-group label="图片">
       <template v-slot="{item}">
-        <b-image :src="item.url" size="small" />
+        <b-image :src="item.fileUrl" :alt="item.fileName" size="small" />
       </template>
     </b-table-group>
     <b-table-column label="描述" field="description"/>

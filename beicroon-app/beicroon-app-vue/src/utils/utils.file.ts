@@ -15,6 +15,11 @@ const FILE_REMOVE: BeicroonRequestConfig = {
     method: "DELETE",
 };
 
+export type BeicroonFile = {
+    url: string,
+    name: string,
+}
+
 export type FileUploadVO = BeicroonGenericVO & {
     url: string,
     name: string,

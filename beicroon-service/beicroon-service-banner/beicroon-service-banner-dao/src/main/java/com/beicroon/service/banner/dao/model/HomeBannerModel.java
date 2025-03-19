@@ -18,13 +18,13 @@ public class HomeBannerModel extends GenericModel {
     @ApiModelProperty(name = "文件主键")
     private Long fileId;
 
-    @TableField(name = "`url`")
-    @ApiModelProperty(name = "地址")
-    private String url;
+    @TableField(name = "`file_name`")
+    @ApiModelProperty(name = "文件名称")
+    private String fileName;
 
-    @TableField(name = "`name`")
-    @ApiModelProperty(name = "名称")
-    private String name;
+    @TableField(name = "`file_url`")
+    @ApiModelProperty(name = "文件地址")
+    private String fileUrl;
 
     @TableField(name = "`description`")
     @ApiModelProperty(name = "描述")

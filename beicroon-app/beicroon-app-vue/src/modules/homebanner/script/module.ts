@@ -1,7 +1,9 @@
 import {BeicroonDisableVO, BeicroonQueryDTO, BeicroonRequestConfig} from "@/index";
 
 export type QueryDTO = BeicroonQueryDTO & {
-    url?: string,  // 地址
+    fileId?: string,  // 文件主键
+    fileName?: string,  // 文件名称
+    fileUrl?: string,  // 文件地址
     description?: string,  // 描述
     validAt?: string,  // 生效时间
     expiredAt?: string,  // 过期时间
@@ -9,7 +11,8 @@ export type QueryDTO = BeicroonQueryDTO & {
 
 export type CreateDTO = {
     fileId?: string,  // 文件主键
-    url?: string,  // 地址
+    fileName?: string,  // 文件名称
+    fileUrl?: string,  // 文件地址
     description?: string,  // 描述
     validAt?: string,  // 生效时间
     expiredAt?: string,  // 过期时间
@@ -18,7 +21,8 @@ export type CreateDTO = {
 export type UpdateDTO = {
     id?: string,  // 主键
     fileId?: string,  // 文件主键
-    url?: string,  // 地址
+    fileName?: string,  // 文件名称
+    fileUrl?: string,  // 文件地址
     description?: string,  // 描述
     validAt?: string,  // 生效时间
     expiredAt?: string,  // 过期时间
@@ -26,7 +30,8 @@ export type UpdateDTO = {
 
 export type BaseVO = BeicroonDisableVO & {
     fileId?: string,  // 文件主键
-    url?: string,  // 地址
+    fileName?: string,  // 文件名称
+    fileUrl?: string,  // 文件地址
     description?: string,  // 描述
     validAt?: string,  // 生效时间
     expiredAt?: string,  // 过期时间

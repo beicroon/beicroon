@@ -14,13 +14,17 @@ import java.time.LocalDateTime;
 @EqualsAndHashCode(callSuper = true)
 public class HomeBannerQueryDTO extends QueryDTO {
 
-    @FieldSearch(name = "`url`")
-    @ApiModelProperty(name = "地址")
-    private String url;
+    @FieldSearch(name = "`file_id`")
+    @ApiModelProperty(name = "文件主键")
+    private Long fileId;
 
-    @FieldSearch(name = "`name`")
-    @ApiModelProperty(name = "名称")
-    private String name;
+    @FieldSearch(name = "`file_name`")
+    @ApiModelProperty(name = "文件名称")
+    private String fileName;
+
+    @FieldSearch(name = "`file_url`")
+    @ApiModelProperty(name = "文件地址")
+    private String fileUrl;
 
     @FieldSearch(name = "`description`")
     @ApiModelProperty(name = "描述")

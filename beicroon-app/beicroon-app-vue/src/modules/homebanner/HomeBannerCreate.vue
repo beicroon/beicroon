@@ -10,15 +10,20 @@ const handleHide = () => emits("hide", false);
 
 const module = moduleCreate<CreateDTO>(config);
 
+const loading = ref(false);
+
 const handleSubmit = async () => {
   if (!fileValue.value) {
     return;
   }
 
-  const fileRes = await uploadImage(fileValue.value);
+  loading.value = true;
 
-  module.data.url = fileRes.data.url;
+  const fileRes = await uploadImage(fileValue.value).finally(() => loading.value = false);
+
   module.data.fileId = fileRes.data.id;
+  module.data.fileName = fileRes.data.name;
+  module.data.fileUrl = fileRes.data.url;
 
   await module.submit();
 
@@ -29,7 +34,9 @@ const fileValue = ref<File | null>(null);
 
 const handleChange = (file: File) => {
   if (!file) {
-    module.data.url = "";
+    module.data.fileId = "0";
+    module.data.fileName = "";
+    module.data.fileUrl = "";
 
     return;
   }
@@ -41,7 +48,7 @@ const handleChange = (file: File) => {
 <template>
   <b-form @submit="handleSubmit">
     <b-form-group label="基础信息">
-      <b-file required label="图片" placeholder="请选择图片" @change="handleChange" v-model="module.data.url"/>
+      <b-file required label="图片" placeholder="请选择图片" @change="handleChange" />
       <b-input label="描述" size="huge" v-model="module.data.description"/>
     </b-form-group>
     <b-form-group label="有效期">
@@ -50,7 +57,7 @@ const handleChange = (file: File) => {
     </b-form-group>
     <template v-slot:button>
       <b-button size="larger" label="关闭" @click="handleHide"/>
-      <b-button size="larger" label="保存" level="warning" type="submit" :loading="module.loading"/>
+      <b-button size="larger" label="保存" level="warning" type="submit" :loading="loading || module.loading"/>
     </template>
   </b-form>
 </template>

@@ -1,13 +1,9 @@
 <script setup lang="ts">
 import {computed, ref} from "vue";
-
-interface Image {
-  url: string,
-  name: string,
-}
+import {BeicroonFile} from "@/utils/utils.file";
 
 interface Props {
-  moduleValue?: Image | Array<Image>,
+  modelValue?: BeicroonFile | Array<BeicroonFile> | null,
   label?: string,
   placeholder?: string,
   disabled?: boolean,
@@ -28,11 +24,11 @@ const props = withDefaults(defineProps<Props>(), {
 const emits = defineEmits(["change"]);
 
 const value = computed(() => {
-  if (!props.moduleValue) {
+  if (!props.modelValue) {
     return [];
   }
 
-  return Array.isArray(props.moduleValue) ? props.moduleValue : [props.moduleValue];
+  return Array.isArray(props.modelValue) ? props.modelValue : [props.modelValue];
 });
 
 const fileList = ref<File[]>([]);
@@ -63,18 +59,18 @@ const handleChange = (e: any) => {
   }
 };
 
-const getPreview = (img: Image) => {
-  const index = img.url.lastIndexOf(".");
+const getPreview = (file: BeicroonFile) => {
+  const index = file.url.lastIndexOf(".");
 
   if (index > 0) {
-    const ext = img.url.slice(index + 1).toLowerCase();
+    const ext = file.url.slice(index + 1).toLowerCase();
 
     if (["jpg", "jpeg", "png", "gif", "bmp"].includes(ext)) {
-      return `<img src="${img.url}" alt="${img.name}" />`;
+      return `<img src="${file.url}" alt="${file.name}" />`;
     }
   }
 
-  return img.name;
+  return file.name;
 };
 
 const getFilePreview = (file: File) => {
@@ -104,7 +100,7 @@ const getFilePreview = (file: File) => {
         />
       </div>
     </div>
-    <ul class="file-list" v-show="fileList.length > 0">
+    <ul class="file-list" v-show="fileList.length > 0 || value.length > 0">
       <li v-for="img in value" v-html="getPreview(img)"></li>
       <li v-for="file in fileList" v-html="getFilePreview(file)"></li>
     </ul>

@@ -16,11 +16,11 @@ public class HomeBannerBaseVO extends GenericVO {
     @ApiModelProperty(name = "文件主键")
     private Long fileId;
 
-    @ApiModelProperty(name = "地址")
-    private String url;
+    @ApiModelProperty(name = "文件名称")
+    private String fileName;
 
-    @ApiModelProperty(name = "名称")
-    private String name;
+    @ApiModelProperty(name = "文件地址")
+    private String fileUrl;
 
     @ApiModelProperty(name = "描述")
     private String description;

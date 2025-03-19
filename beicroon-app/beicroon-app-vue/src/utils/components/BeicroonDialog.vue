@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import {ref} from "vue";
+import {BButton} from "@/components";
 
 interface Props {
   title: string,
