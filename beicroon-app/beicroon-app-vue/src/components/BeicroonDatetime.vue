@@ -19,7 +19,7 @@ interface Props {
 const props = withDefaults(defineProps<Props>(), {
   disabled: false,
   required: false,
-  time: "start",
+  time: "none",
 });
 
 const emits = defineEmits(["update:modelValue"]);
@@ -169,25 +169,25 @@ const second = computed({
 });
 
 const subYear = () => {
-  current.value.setFullYear(current.value.getFullYear() - 1);;
+  current.value.setFullYear(current.value.getFullYear() - 1);
 
   current.value = new Date(current.value.getTime());
 };
 
 const subMonth = () => {
-  current.value.setMonth(current.value.getMonth() - 1);;
+  current.value.setMonth(current.value.getMonth() - 1);
 
   current.value = new Date(current.value.getTime());
 };
 
 const addMonth = () => {
-  current.value.setMonth(current.value.getMonth() + 1);;
+  current.value.setMonth(current.value.getMonth() + 1);
 
   current.value = new Date(current.value.getTime());
 };
 
 const addYear = () => {
-  current.value.setFullYear(current.value.getFullYear() + 1);;
+  current.value.setFullYear(current.value.getFullYear() + 1);
 
   current.value = new Date(current.value.getTime());
 };
@@ -218,10 +218,7 @@ const days = computed((): Day[][] => {
       }
       // 当前月份的日期
       else {
-        const isCurrentDay =
-          day === datetime.value.getDate() &&
-          current.value.getMonth() === datetime.value.getMonth() &&
-          current.value.getFullYear() === datetime.value.getFullYear();
+        const isCurrentDay = day === current.value.getDate();
 
         week.push({ no: day, active: isCurrentDay ? "current" : "active" });
 
@@ -258,7 +255,7 @@ const hidden = ref(true);
 const handleMouseDown = () => {
   optionActive.value = true;
 
-  document.addEventListener("mousedown", hideOption);
+  document.addEventListener("mousedown", handleHide);
 };
 
 const handleFocusin = () => {
@@ -280,22 +277,38 @@ const handleFocusout = () => {
     return;
   }
 
-  hideOption();
+  handleHide();
 };
 
-const hideOption = () => {
-  if (optionActive.value) {
-    document.removeEventListener("mousedown", hideOption);
+const handleChoose = (day: Day) => {
+  if (day.active !== "active") {
+    return;
   }
 
-  // optionActive.value = false;
-  //
-  // hidden.value = true;
+  current.value.setDate(day.no);
+
+  current.value = new Date(current.value.getTime());
+};
+
+const handleHide = () => {
+  if (optionActive.value) {
+    document.removeEventListener("mousedown", handleHide);
+  }
+
+  optionActive.value = false;
+
+  hidden.value = true;
+};
+
+const handleConfirm = () => {
+  value.value = new Date(current.value.getTime());
+
+  handleHide();
 };
 </script>
 
 <template>
-  <div class="beicroon-input input normal datetime" :class="clazz" ref="inputEl">
+  <div class="beicroon-input input normal datetime" :class="clazz" ref="inputEl" @mousedown.stop>
     <label class="label" v-if="label">{{ label }}</label>
     <input
       class="input"
@@ -336,11 +349,11 @@ const hideOption = () => {
         <li class="item">六</li>
       </ul>
       <ul class="line" v-for="line in days">
-        <li class="item" :class="day.active" v-for="day in line">{{ day.no }}</li>
+        <li v-for="day in line" class="item" :class="day.active" @click="handleChoose(day)">{{ day.no }}</li>
       </ul>
       <div class="button">
-        <b-button label="关闭" level="warning" size="small"/>
-        <b-button label="确定" level="primary" size="small"/>
+        <b-button label="关闭" level="warning" size="small" @click="handleHide"/>
+        <b-button label="确定" level="primary" size="small" @click="handleConfirm"/>
       </div>
     </div>
   </div>
@@ -369,6 +382,19 @@ const hideOption = () => {
 
     &.bottom {
       top: calc(100% + 2rem);
+    }
+  }
+
+  .year-month {
+    display: flex;
+    padding: 0 14rem;
+    justify-content: space-between;
+
+    button {
+      cursor: pointer;
+      padding: 4rem 8rem;
+      border-radius: 4rem;
+      background-color: var(--color-grey-lighter);
     }
   }
 
@@ -433,19 +459,6 @@ const hideOption = () => {
         cursor: auto;
         color: var(--color-grey-light);
       }
-    }
-  }
-
-  .year-month {
-    display: flex;
-    padding: 0 14rem;
-    justify-content: space-around;
-
-    button {
-      cursor: pointer;
-      padding: 4rem 8rem;
-      border-radius: 4rem;
-      background-color: var(--color-grey-lighter);
     }
   }
 

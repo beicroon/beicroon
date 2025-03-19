@@ -50,8 +50,8 @@ onMounted(module.page.request);
   <b-module :module="module">
     <template v-slot:search>
       <b-input label="描述" v-model="module.params.description"/>
-      <b-datetime label="生效时间" v-model="module.params.validAt"/>
-      <b-datetime label="过期时间" v-model="module.params.expiredAt"/>
+      <b-datetime label="生效时间" time="start" v-model="module.params.validAt"/>
+      <b-datetime label="过期时间" time="end" v-model="module.params.expiredAt"/>
     </template>
     <template v-slot:action-left>
       <b-button level="warning" label="新增" @click="handleCreate"/>
