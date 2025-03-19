@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import {computed, ref} from "vue";
-import Search from "@/svg/Search.vue";
+import SearchIcon from "@/icons/SearchIcon.vue";
 
 interface Props {
   modelValue?: any,
@@ -67,7 +67,7 @@ const handleSearch = () => emits("search", value.value);
   <div class="beicroon-input input" :class="clazz" ref="inputEl">
     <label class="label" v-if="label">{{ label }}</label>
     <input class="input" :type="type" v-model="value" :placeholder="placeholder" :disabled="disabled" />
-    <search class="search" v-if="search" @click="handleSearch" />
+    <search-icon class="search" v-if="search" @click="handleSearch" />
   </div>
 </template>
 
