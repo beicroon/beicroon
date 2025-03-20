@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import {computed, ref} from "vue";
 import {BButton} from "@/components/index";
+import {getDate, getDatetime, getMonth, getTime, getYear} from "@/utils/utils.function";
 
 interface Day {
   no: number,
-  active: "active" | "current" | "disabled",
+  state: "active" | "current" | "disabled",
 }
 
 interface Props {
@@ -13,7 +14,7 @@ interface Props {
   placeholder?: string,
   disabled?: boolean,
   required?: boolean,
-  time?: "none" | "start" | "end" | "current" | "currentOrStart" | "currentOrEnd",
+  time?: "none" | "start" | "end" | "current",
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -28,203 +29,99 @@ const inputEl = ref<HTMLInputElement>();
 
 const value = computed({
   get: () => props.modelValue,
-  set: (val: Date) => {
+  set: (val: string) => {
     if (props.required && inputEl.value) {
       inputEl.value.classList.remove("error");
     }
 
-    const emitVal = `${y(val)}-${m(val)}-${d(val)}`;
-
-    emits("update:modelValue", props.time === "none" ? emitVal : `${emitVal} ${hh(val)}:${mm(val)}:${ss(val)}`);
+    emits("update:modelValue", val);
   },
 });
 
-const y = (date: Date) => date.getFullYear();
+const datetime = computed({
+  get: () => props.modelValue ? new Date(props.modelValue) : new Date(),
+  set: (val: Date) => {
+    value.value = props.time === "none" ? getDate(val) : getDatetime(val);
+  },
+});
 
-const m = (date: Date) => {
-  const m = date.getMonth() + 1;
+const year = computed(() => getYear(datetime.value));
 
-  if (m < 10) {
-    return `0${m}`;
-  }
+const month = computed(() => getMonth(datetime.value));
 
-  return m;
-};
+const time = computed({
+  get: () => getTime(datetime.value),
+  set: (val: string) => {
+    const times = val.split(":");
 
-const d = (date: Date) => {
-  const d = date.getDate();
+    const h = times[0];
+    const m = times[1];
+    const s = times[2];
 
-  if (d < 10) {
-    return `0${d}`;
-  }
+    console.log(val, h, m, s);
 
-  return d;
-};
+    const isNumber = /^\d{1,2}$/;
 
-const hh = (date: Date) => {
-  const h = date.getHours();
-
-  if (h < 10) {
-    return `0${h}`;
-  }
-
-  return h;
-};
-
-const mm = (date: Date) => {
-  const m = date.getMinutes();
-
-  if (m < 10) {
-    return `0${m}`;
-  }
-
-  return m;
-};
-
-const ss = (date: Date) => {
-  const s = date.getSeconds();
-
-  if (s < 10) {
-    return `0${s}`;
-  }
-
-  return s;
-};
-
-const datetime = ref(props.modelValue ? new Date(props.modelValue) : new Date());
-
-const current = ref(new Date(datetime.value.getFullYear(), datetime.value.getMonth(), datetime.value.getDate()));
-
-switch (props.time) {
-  case "current":
-    current.value.setHours(datetime.value.getHours());
-    current.value.setMinutes(datetime.value.getMinutes());
-    current.value.setSeconds(datetime.value.getSeconds());
-    break;
-  case "currentOrStart":
-    if (props.modelValue) {
-      current.value.setHours(datetime.value.getHours());
-      current.value.setMinutes(datetime.value.getMinutes());
-      current.value.setSeconds(datetime.value.getSeconds());
-    } else {
-      current.value.setHours(0);
-      current.value.setMinutes(0);
-      current.value.setSeconds(0);
+    if (!isNumber.test(h) || !isNumber.test(m) || !isNumber.test(s)) {
+      return;
     }
-    break;
-  case "currentOrEnd":
-    if (props.modelValue) {
-      current.value.setHours(datetime.value.getHours());
-      current.value.setMinutes(datetime.value.getMinutes());
-      current.value.setSeconds(datetime.value.getSeconds());
-    } else {
-      current.value.setHours(23);
-      current.value.setMinutes(59);
-      current.value.setSeconds(59);
-    }
-    break;
-  case "none":
-  case "start":
-    current.value.setHours(0);
-    current.value.setMinutes(0);
-    current.value.setSeconds(0);
-    break;
-  case "end":
-    current.value.setHours(23);
-    current.value.setMinutes(59);
-    current.value.setSeconds(59);
-    break;
-}
 
-const year = computed({
-  get: () => y(current.value),
-  set: (val: number) => {
-    current.value.setFullYear(val);
+    console.log("success");
 
-    current.value = new Date(current.value.getTime());
-  },
-});
-
-const month = computed({
-  get: () => m(current.value),
-  set: (val: number) => {
-    current.value.setMonth(val - 1);
-
-    current.value = new Date(current.value.getTime());
-  },
-});
-
-const day = computed({
-  get: () => d(current.value),
-  set: (val: number) => {
-    current.value.setDate(val);
-
-    current.value = new Date(current.value.getTime());
-  },
-});
-
-const hour = computed({
-  get: () => hh(current.value),
-  set: (val: number) => {
-    current.value.setHours(val);
-
-    current.value = new Date(current.value.getTime());
-  },
-});
-
-const minute = computed({
-  get: () => mm(current.value),
-  set: (val: number) => {
-    current.value.setMinutes(val);
-
-    current.value = new Date(current.value.getTime());
-  },
-});
-
-const second = computed({
-  get: () => ss(current.value),
-  set: (val: number) => {
-    current.value.setSeconds(val);
-
-    current.value = new Date(current.value.getTime());
+    datetime.value = new Date(
+      datetime.value.getFullYear(),
+      datetime.value.getMonth(),
+      datetime.value.getDate(),
+      parseInt(h),
+      parseInt(m),
+      parseInt(s)
+    );
   },
 });
 
 const subYear = () => {
-  current.value.setFullYear(current.value.getFullYear() - 1);
+  const date = new Date(datetime.value);
 
-  current.value = new Date(current.value.getTime());
+  date.setFullYear(date.getFullYear() - 1);
+
+  datetime.value = date;
 };
 
 const subMonth = () => {
-  current.value.setMonth(current.value.getMonth() - 1);
+  const date = new Date(datetime.value);
 
-  current.value = new Date(current.value.getTime());
+  date.setMonth(date.getMonth() - 1);
+
+  datetime.value = date;
 };
 
 const addMonth = () => {
-  current.value.setMonth(current.value.getMonth() + 1);
+  const date = new Date(datetime.value);
 
-  current.value = new Date(current.value.getTime());
+  date.setMonth(date.getMonth() + 1);
+
+  datetime.value = date;
 };
 
 const addYear = () => {
-  current.value.setFullYear(current.value.getFullYear() + 1);
+  const date = new Date(datetime.value);
 
-  current.value = new Date(current.value.getTime());
+  date.setFullYear(date.getFullYear() + 1);
+
+  datetime.value = date;
 };
 
 const days = computed((): Day[][] => {
   const res: Day[][] = [];
 
-  const firstDayOfMonth = new Date(current.value.getFullYear(), current.value.getMonth(), 1);
-  const lastDayOfMonth = new Date(current.value.getFullYear(), current.value.getMonth() + 1, 0);
-  const firstDayOfWeek = firstDayOfMonth.getDay(); // 当前月份的第一天是星期几（0-6，0 表示星期日）
-  const lastDateOfMonth = lastDayOfMonth.getDate(); // 当前月份的最后一天是几号
+  const firstDayOfMonth = new Date(datetime.value.getFullYear(), datetime.value.getMonth(), 1);
+  const lastDayOfMonth = new Date(datetime.value.getFullYear(), datetime.value.getMonth() + 1, 0);
+  const firstDayOfWeek = firstDayOfMonth.getDay();
+  const lastDateOfMonth = lastDayOfMonth.getDate();
 
-  let day = 1; // 当前月份的日期
-  let prevMonthDay = new Date(current.value.getFullYear(), current.value.getMonth(), 0).getDate(); // 上个月的最后一天
-  let nextMonthDay = 1; // 下个月的日期
+  let currentDay = 1;
+  let prevMonthDay = new Date(datetime.value.getFullYear(), datetime.value.getMonth(), 0).getDate();
+  let nextMonthDay = 1;
 
   for (let i = 0; i < 6; i++) {
     const week: Day[] = [];
@@ -232,19 +129,19 @@ const days = computed((): Day[][] => {
     for (let j = 0; j < 7; j++) {
       // 上个月的日期
       if (i === 0 && j < firstDayOfWeek) {
-        week.push({ no: prevMonthDay - firstDayOfWeek + j + 1, active: "disabled" });
+        week.push({ no: prevMonthDay - firstDayOfWeek + j + 1, state: "disabled" });
       }
       // 下个月的日期
-      else if (day > lastDateOfMonth) {
-        week.push({ no: nextMonthDay++, active: "disabled" });
+      else if (currentDay > lastDateOfMonth) {
+        week.push({ no: nextMonthDay++, state: "disabled" });
       }
       // 当前月份的日期
       else {
-        const isCurrentDay = day === current.value.getDate();
+        const isCurrentDay = currentDay === datetime.value.getDate();
 
-        week.push({ no: day, active: isCurrentDay ? "current" : "active" });
+        week.push({ no: currentDay, state: isCurrentDay ? "current" : "active" });
 
-        day++;
+        currentDay++;
       }
     }
 
@@ -286,7 +183,7 @@ const handleFocusin = () => {
   const rect = inputEl.value?.getBoundingClientRect();
 
   if (rect) {
-    if (rect.top + rect.height + 312 > window.innerHeight) {
+    if (rect.top + rect.height + 320 > window.innerHeight) {
       topOrBottom.value = "top";
     } else {
       topOrBottom.value = "bottom";
@@ -303,13 +200,15 @@ const handleFocusout = () => {
 };
 
 const handleChoose = (day: Day) => {
-  if (day.active !== "active") {
+  if (day.state !== "active") {
     return;
   }
 
-  current.value.setDate(day.no);
+  const date = new Date(datetime.value);
 
-  current.value = new Date(current.value.getTime());
+  date.setDate(day.no);
+
+  datetime.value = date;
 };
 
 const handleHide = () => {
@@ -322,9 +221,21 @@ const handleHide = () => {
   hidden.value = true;
 };
 
-const handleConfirm = () => {
-  value.value = new Date(current.value.getTime());
+const handleSetStart = () => {
+  time.value = "00:00:00";
+};
 
+const handleSetEnd = () => {
+  time.value = "23:59:59";
+};
+
+const handleSetNow = () => {
+  datetime.value = new Date();
+
+  handleHide();
+};
+
+const handleConfirm = () => {
   handleHide();
 };
 </script>
@@ -342,26 +253,15 @@ const handleConfirm = () => {
       @focusout="handleFocusout"
     />
     <div class="datetime" :class="topOrBottom" v-show="!hidden" @mousedown="handleMouseDown">
-      <div class="year-month">
-        <button @click="subYear"><<</button>
-        <button @click="subMonth"><</button>
-        <button @click="addMonth">></button>
-        <button @click="addYear">>></button>
+      <div class="line">
+        <button class="item" @click="subYear"><<</button>
+        <button class="item" @click="subMonth"><</button>
+        <span class="item year">{{year}}年</span>
+        <span class="item month">{{month}}月</span>
+        <button class="item" @click="addMonth">></button>
+        <button class="item" @click="addYear">>></button>
       </div>
-      <div class="current">
-        <input class="year" type="text" v-model="year" />
-        <span>年</span>
-        <input type="text" v-model="month" />
-        <span>月</span>
-        <input type="text" v-model="day" />
-        <span>日</span>
-        <input type="text" v-model="hour" />
-        <span>:</span>
-        <input type="text" v-model="minute" />
-        <span>:</span>
-        <input type="text" v-model="second" />
-      </div>
-      <ul class="week">
+      <ul class="line">
         <li class="item">日</li>
         <li class="item">一</li>
         <li class="item">二</li>
@@ -370,12 +270,19 @@ const handleConfirm = () => {
         <li class="item">五</li>
         <li class="item">六</li>
       </ul>
-      <ul class="line" v-for="line in days">
-        <li v-for="day in line" class="item" :class="day.active" @click="handleChoose(day)">{{ day.no }}</li>
+      <ul class="line day" v-for="line in days">
+        <li v-for="day in line" class="item" :class="day.state" @click="handleChoose(day)">{{ day.no }}</li>
       </ul>
-      <div class="button">
-        <b-button label="关闭" level="warning" size="small" @click="handleHide"/>
-        <b-button label="确定" level="primary" size="small" @click="handleConfirm"/>
+      <div class="foot">
+        <div class="time">
+          <button @click="handleSetStart">始</button>
+          <input type="text" v-model="time" />
+          <button @click="handleSetEnd">末</button>
+        </div>
+        <div class="button">
+          <b-button label="此刻" level="primary" size="small" @click="handleSetNow"/>
+          <b-button label="确定" level="primary" size="small" @click="handleConfirm"/>
+        </div>
       </div>
     </div>
   </div>
@@ -384,17 +291,17 @@ const handleConfirm = () => {
 <style lang="less">
 .beicroon-input.datetime {
   .datetime {
-    gap: 4rem;
     right: 50%;
     z-index: 9;
     display: flex;
-    height: 312rem;
+    height: 320rem;
     padding: 4rem 0;
     position: absolute;
     border-radius: 4rem;
     flex-direction: column;
     width: calc(100% + 2rem);
     transform: translateX(50%);
+    justify-content: space-around;
     background-color: var(--color-white);
     border: 1rem solid var(--color-primary);
 
@@ -407,87 +314,88 @@ const handleConfirm = () => {
     }
   }
 
-  .year-month {
+  .line {
     display: flex;
     padding: 0 14rem;
     justify-content: space-between;
 
-    button {
-      cursor: pointer;
-      padding: 4rem 8rem;
-      border-radius: 4rem;
-      background-color: var(--color-grey-lighter);
-    }
-  }
-
-  .current {
-    display: flex;
-    padding: 0 14rem;
-    align-items: center;
-    justify-content: space-between;
-
-    input {
+    .item {
       width: 32rem;
-      height: 24rem;
-      outline: none;
-      text-align: center;
+      height: 28rem;
+      display: flex;
       border-radius: 4rem;
-      border: 1rem solid var(--color-grey-light);
+      align-items: center;
+      justify-content: center;
+      background-color: var(--color-white-light);
 
       &.year {
         width: 64rem;
+        background-color: transparent;
       }
 
-      &:focus {
-        border-color: var(--color-primary);
+      &.month {
+        width: 48rem;
+        background-color: transparent;
       }
     }
   }
 
-  .week {
-    display: flex;
-    justify-content: space-evenly;
-
+  .day {
     .item {
-      width: 32rem;
-      height: 28rem;
-      display: flex;
-      border-radius: 4rem;
-      align-items: center;
-      justify-content: center;
-      background-color: var(--color-grey-lighter);
-    }
-  }
+      &:hover {
+        color: var(--color-primary-lighter);
+      }
 
-  .line {
-    display: flex;
-    justify-content: space-evenly;
-
-    .item {
-      width: 32rem;
-      height: 28rem;
-      display: flex;
-      cursor: pointer;
-      border-radius: 4rem;
-      align-items: center;
-      justify-content: center;
-      background-color: var(--color-grey-lighter);
+      &.active {
+        cursor: pointer;
+      }
 
       &.current {
         color: var(--color-primary);
       }
 
       &.disabled {
-        cursor: auto;
         color: var(--color-grey-light);
       }
     }
   }
 
-  .button {
+  .foot {
+    height: 28rem;
     display: flex;
     padding: 0 14rem;
+    align-items: center;
     justify-content: space-between;
+
+    .time {
+      gap: 8rem;
+      display: flex;
+
+      button {
+        width: 26rem;
+        border-radius: 4rem;
+        color: var(--color-white);
+        background-color: var(--color-primary-light);
+      }
+
+      input {
+        width: 92rem;
+        outline: none;
+        text-align: center;
+        border-radius: 4rem;
+        border: 1rem solid var(--color-grey-light);
+
+        &:focus {
+          border-color: var(--color-primary);
+        }
+      }
+    }
+
+    .button {
+      gap: 8rem;
+      display: flex;
+      justify-content: flex-end;
+    }
   }
 }
 </style>

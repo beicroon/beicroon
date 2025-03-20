@@ -71,8 +71,8 @@ const handleChange = (file: File) => {
       <b-input label="描述" size="huge" v-model="module.data.description"/>
     </b-form-group>
     <b-form-group label="有效期">
-      <b-datetime label="生效时间" time="currentOrStart" v-model="module.data.validAt"/>
-      <b-datetime label="过期时间" time="currentOrEnd" v-model="module.data.expiredAt"/>
+      <b-datetime label="生效时间" time="current" v-model="module.data.validAt"/>
+      <b-datetime label="过期时间" time="end" v-model="module.data.expiredAt"/>
     </b-form-group>
     <template v-slot:button>
       <b-button size="larger" label="关闭" @click="handleHide"/>
