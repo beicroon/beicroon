@@ -1,5 +1,5 @@
 import {App} from "vue";
-import BeicroonCacheEnums from "@/enums/beicroon-cache-enums";
+import {BeicroonCacheEnums} from "@/enums";
 import {createRouter, createWebHistory, RouteRecordRaw} from "vue-router";
 
 export type RouteMeta = {

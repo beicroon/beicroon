@@ -2,7 +2,7 @@
 import {onMounted, ref} from "vue";
 import {useRouter} from "vue-router";
 import Logo from "@/canvas/Logo.vue";
-import BeicroonCacheEnums from "@/enums/beicroon-cache-enums";
+import {BeicroonCacheEnums} from "@/enums";
 import {BeicroonRequestConfig, moduleRequest, toast} from "@/index";
 
 interface Menu {

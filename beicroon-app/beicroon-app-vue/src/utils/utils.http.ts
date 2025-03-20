@@ -1,8 +1,7 @@
 import {ref} from "vue";
 import toast from "./beicroon.toast";
 import axios, {AxiosInstance} from "axios";
-import BeicroonCacheEnums from "@/enums/beicroon-cache-enums";
-import BeicroonBooleanEnums from "@/enums/beicroon-boolean-enums";
+import {BeicroonBooleanEnums, BeicroonCacheEnums} from "@/enums";
 
 const baseURL = ref("");
 

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import {useRouter} from "vue-router";
+import {BeicroonCacheEnums} from "@/enums";
 import {BButton, BForm, BInput} from "@/components";
-import BeicroonCacheEnums from "@/enums/beicroon-cache-enums";
 import {BeicroonRequestConfig, moduleRequest, sha256, toast} from "@/index";
 
 const router = useRouter();

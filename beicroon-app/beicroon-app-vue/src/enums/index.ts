@@ -1,2 +1,9 @@
-export * from "@/enums/beicroon-boolean-enums";
-export * from "@/enums/beicroon-cache-enums";
+export enum BeicroonBooleanEnums {
+    TRUE = "true",
+    FALSE = "false",
+}
+
+export enum BeicroonCacheEnums {
+    USER = "Auth-User",
+    TOKEN = "Auth-Token",
+}
