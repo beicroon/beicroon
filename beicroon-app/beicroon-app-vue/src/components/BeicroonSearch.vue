@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import {computed, onMounted, ref} from "vue";
-import {BeicroonRequestConfig, moduleRequest} from "@/index";
+import {BeicroonRequestConfig, moduleRequest} from "@/utils";
 import BeicroonSelect from "@/components/BeicroonSelect.vue";
 
 interface Option {

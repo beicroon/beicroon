@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {BeicroonModuleApp} from "@/index";
+import {BeicroonModuleApp} from "@/utils";
 import {onMounted, onUnmounted, ref, useSlots} from "vue";
 import BeicroonTable from "@/components/BeicroonTable.vue";
 import BeicroonLoading from "@/components/BeicroonLoading.vue";

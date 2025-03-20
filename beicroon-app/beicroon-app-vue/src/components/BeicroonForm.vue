@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import {ref} from "vue";
-import {toast} from "@/index";
+import {toast} from "@/utils";
 import BeicroonFormLoading from "@/components/BeicroonFormLoading.vue";
 
 interface Props {
