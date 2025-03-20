@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import {computed, onMounted, ref} from "vue";
-import BeicroonSelect from "./BeicroonSelect.vue";
 import {BeicroonRequestConfig, moduleRequest} from "@/index";
+import BeicroonSelect from "@/components/BeicroonSelect.vue";
 
 interface Option {
   label: string,

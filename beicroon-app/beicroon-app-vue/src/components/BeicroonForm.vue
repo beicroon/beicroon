@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import {ref} from "vue";
 import {toast} from "@/index";
-import BeicroonFormLoading from "./BeicroonFormLoading.vue";
+import BeicroonFormLoading from "@/components/BeicroonFormLoading.vue";
 
 interface Props {
   disabled?: boolean,

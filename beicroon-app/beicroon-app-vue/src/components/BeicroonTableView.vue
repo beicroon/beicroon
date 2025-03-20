@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import BeicroonLoading from "./BeicroonLoading.vue";
 import {computed, onMounted, onUnmounted, ref} from "vue";
+import BeicroonLoading from "@/components/BeicroonLoading.vue";
 
 interface Props {
   loading?: boolean,

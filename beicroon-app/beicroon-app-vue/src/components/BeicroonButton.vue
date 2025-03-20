@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import {computed} from "vue";
-import BeicroonLoading from "./BeicroonLoading.vue";
+import BeicroonLoading from "@/components/BeicroonLoading.vue";
 
 interface Props {
   type?: "button" | "submit" | "reset",

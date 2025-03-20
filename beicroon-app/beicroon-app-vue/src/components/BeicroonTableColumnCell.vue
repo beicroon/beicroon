@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import {computed, VNode} from "vue";
-import BeicroonTableCell from "./BeicroonTableCell.vue";
+import BeicroonTableCell from "@/components/BeicroonTableCell.vue";
 
 interface Column {
   props: Record<string, any>,

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import BeicroonLoading from "./BeicroonLoading.vue";
+import BeicroonLoading from "@/components/BeicroonLoading.vue";
 </script>
 
 <template>
