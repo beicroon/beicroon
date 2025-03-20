@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import {onMounted} from "vue";
-import {dialog, moduleApp, overlay} from "@/index";
+import {dialog, moduleApp, overlay} from "@/utils";
 import config, {PageVO, QueryDTO} from "@m/rbacresource/script/module";
 import RbacResourceCreate from "@m/rbacresource/RbacResourceCreate.vue";
 import RbacResourceUpdate from "@m/rbacresource/RbacResourceUpdate.vue";

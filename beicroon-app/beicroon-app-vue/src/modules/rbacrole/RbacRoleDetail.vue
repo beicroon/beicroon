@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import {BButton} from "@/components";
 import {computed, onMounted} from "vue";
-import {moduleDetail, moduleRequest} from "@/index";
+import {moduleDetail, moduleRequest} from "@/utils";
 import config, {DetailVO} from "@m/rbacrole/script/module";
 import DetailView from "@m/rbacrole/component/DetailView.vue";
 import resourceConfig, {TreeVO} from "@m/rbacresource/script/module";

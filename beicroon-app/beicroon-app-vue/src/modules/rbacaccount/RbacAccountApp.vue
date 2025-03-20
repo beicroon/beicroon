@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import {onMounted} from "vue";
-import {dialog, moduleApp, overlay} from "@/index";
-import config, {PageVO, QueryDTO} from "@m/rbacaccount/script/module";
+import {dialog, moduleApp, overlay} from "@/utils";
 import RbacAccountCreate from "@m/rbacaccount/RbacAccountCreate.vue";
 import RbacAccountUpdate from "@m/rbacaccount/RbacAccountUpdate.vue";
 import RbacAccountDetail from "@m/rbacaccount/RbacAccountDetail.vue";
+import config, {PageVO, QueryDTO} from "@m/rbacaccount/script/module";
 import {BButton, BInput, BModule, BTableColumn, BTableField, BTableGroup} from "@/components";
 
 const module = moduleApp<QueryDTO, PageVO>(config);

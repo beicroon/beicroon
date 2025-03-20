@@ -1,4 +1,4 @@
-import {BeicroonDisableVO, BeicroonQueryDTO, BeicroonRequestConfig} from "@/index";
+import {BeicroonDisableVO, BeicroonQueryDTO, BeicroonRequestConfig} from "@/utils";
 
 export type QueryDTO = BeicroonQueryDTO & {
     fileId?: string,  // 文件主键

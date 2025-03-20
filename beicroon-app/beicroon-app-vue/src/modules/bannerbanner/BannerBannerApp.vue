@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import {onMounted} from "vue";
-import {dialog, moduleApp, overlay} from "@/index";
+import {dialog, moduleApp, overlay} from "@/utils";
+import config, {PageVO, QueryDTO} from "@m/bannerbanner/script/module";
 import BannerBannerCreate from "@m/bannerbanner/BannerBannerCreate.vue";
 import BannerBannerUpdate from "@m/bannerbanner/BannerBannerUpdate.vue";
 import BannerBannerDetail from "@m/bannerbanner/BannerBannerDetail.vue";
-import config, {PageVO, QueryDTO} from "@m/bannerbanner/script/module";
 import {BButton, BDatetime, BImage, BInput, BModule, BTableColumn, BTableField, BTableGroup} from "@/components";
 
 const module = moduleApp<QueryDTO, PageVO>(config);

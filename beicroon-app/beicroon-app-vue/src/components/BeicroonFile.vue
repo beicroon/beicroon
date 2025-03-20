@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import {computed, ref} from "vue";
-import {BeicroonFile} from "@/utils/utils.file";
+import {BeicroonFile} from "@/utils";
 
 interface Props {
   modelValue?: BeicroonFile | Array<BeicroonFile> | null,

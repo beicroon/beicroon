@@ -2,7 +2,7 @@
 import {useRouter} from "vue-router";
 import {BeicroonCacheEnums} from "@/enums";
 import {BButton, BForm, BInput} from "@/components";
-import {BeicroonRequestConfig, moduleRequest, sha256, toast} from "@/index";
+import {BeicroonRequestConfig, moduleRequest, sha256, toast} from "@/utils";
 
 const router = useRouter();
 

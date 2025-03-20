@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import {onMounted} from "vue";
-import {dialog, moduleApp, overlay} from "@/index";
+import {dialog, moduleApp, overlay} from "@/utils";
 import RbacRoleCreate from "@m/rbacrole/RbacRoleCreate.vue";
 import RbacRoleUpdate from "@m/rbacrole/RbacRoleUpdate.vue";
 import RbacRoleDetail from "@m/rbacrole/RbacRoleDetail.vue";

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {moduleCreate} from "@/index";
+import {moduleCreate} from "@/utils";
 import config, {CreateDTO} from "@m/rbacresource/script/module";
 import {BButton, BForm, BFormGroup, BInput, BSearch} from "@/components";
 

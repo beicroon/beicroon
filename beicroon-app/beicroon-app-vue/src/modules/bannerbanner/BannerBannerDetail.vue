@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import {onMounted} from "vue";
-import {moduleDetail} from "@/index";
+import {moduleDetail} from "@/utils";
 import {BButton} from "@/components";
 import config, {DetailVO} from "@m/bannerbanner/script/module";
 import DetailView from "@m/bannerbanner/component/DetailView.vue";

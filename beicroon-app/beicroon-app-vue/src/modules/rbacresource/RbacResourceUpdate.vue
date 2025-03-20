@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import {onMounted} from "vue";
-import {moduleUpdate} from "@/index";
+import {moduleUpdate} from "@/utils";
 import {BButton, BForm, BFormGroup, BInput, BSearch} from "@/components";
 import config, {DetailVO, UpdateDTO} from "@m/rbacresource/script/module";
 

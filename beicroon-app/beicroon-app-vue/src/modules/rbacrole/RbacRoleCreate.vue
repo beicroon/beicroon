@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import {computed, onMounted} from "vue";
-import {moduleCreate, moduleRequest} from "@/index";
+import {moduleCreate, moduleRequest} from "@/utils";
 import config, {CreateDTO} from "@m/rbacrole/script/module";
 import resourceConfig, {TreeVO} from "@m/rbacresource/script/module";
 import {BButton, BCheckboxTree, BForm, BFormGroup, BInput} from "@/components";

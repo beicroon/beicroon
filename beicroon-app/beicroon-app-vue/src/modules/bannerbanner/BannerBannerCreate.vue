@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import {ref} from "vue";
-import {moduleCreate, uploadImage} from "@/index";
+import {moduleCreate, uploadImage} from "@/utils";
 import config, {CreateDTO} from "@m/bannerbanner/script/module";
 import {BButton, BDatetime, BFile, BForm, BFormGroup, BInput} from "@/components";
 

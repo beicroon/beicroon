@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import {computed, ref} from "vue";
 import {BButton} from "@/components/index";
-import {getDate, getDatetime, getMonth, getTime, getYear} from "@/utils/utils.function";
+import {getDate, getDatetime, getMonth, getTime, getYear} from "@/utils";
 
 interface Day {
   no: number,
