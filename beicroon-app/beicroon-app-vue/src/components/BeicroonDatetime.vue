@@ -229,6 +229,10 @@ const handleSetEnd = () => {
   time.value = "23:59:59";
 };
 
+const handleClean = () => {
+  value.value = "";
+};
+
 const handleSetNow = () => {
   datetime.value = new Date();
 
@@ -280,6 +284,7 @@ const handleConfirm = () => {
           <button @click="handleSetEnd">末</button>
         </div>
         <div class="button">
+          <b-button label="清除" level="warning" size="small" @click="handleClean"/>
           <b-button label="此刻" level="primary" size="small" @click="handleSetNow"/>
           <b-button label="确定" level="primary" size="small" @click="handleConfirm"/>
         </div>
