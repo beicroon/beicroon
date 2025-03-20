@@ -35,13 +35,13 @@ const value = computed({
   set: (val: any) => emits("update:modelValue", val),
 });
 
-const query = moduleRequest<Array<any>>(props.request);
+const module = moduleRequest<Array<any>>(props.request);
 
 onMounted(async () => {
-  await query.request();
+  await module.request();
 
-  if (query.data) {
-    options.value = query.data.map(item => {
+  if (module.data) {
+    options.value = module.data.map(item => {
       return {
         label: item[props.labelField],
         value: item[props.valueField],

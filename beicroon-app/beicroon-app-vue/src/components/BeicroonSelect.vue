@@ -56,7 +56,7 @@ const clazz = computed(() => {
 });
 
 const setShowValue = (val: any) => {
-  if (val) {
+  if (val && Array.isArray(props.options) && props.options.length > 0) {
     const option = props.options.find((option) => option.value === val);
 
     if (option) {
@@ -68,6 +68,7 @@ const setShowValue = (val: any) => {
 onMounted(() => setShowValue(value.value));
 
 watch(value, (val: any) => setShowValue(val));
+watch(() => props.options, () => setShowValue(value.value));
 
 const handleChoose = (option: Option) => {
   value.value = option.value;
