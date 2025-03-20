@@ -1,5 +1,5 @@
-drop table if exists `home_account`;
-create table `home_account`
+drop table if exists `user_account`;
+create table `user_account`
 (
     `id`              bigint(20) unsigned not null auto_increment comment '主键',
     `tenant_id`       bigint(20) unsigned not null default 0 comment '租户主键',
@@ -42,8 +42,8 @@ create table `home_account`
     index `idx_phone` (`phone`)
 ) engine = innodb comment '用户';
 
-drop table if exists `home_account_balance_relation`;
-create table `home_account_balance_relation`
+drop table if exists `user_account_balance_relation`;
+create table `user_account_balance_relation`
 (
     `id`            bigint(20) unsigned not null auto_increment comment '主键',
     `tenant_id`     bigint(20) unsigned not null default 0 comment '租户主键',
