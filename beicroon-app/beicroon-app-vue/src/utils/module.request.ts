@@ -1,5 +1,5 @@
 import {reactive} from "vue";
-import http, {BeicroonRequestConfig} from "./utils.http";
+import http, {BeicroonRequestConfig} from "@/utils/utils.http";
 
 export type BeicroonQueryModule<VO, DTO> = {
     param: DTO,

@@ -1,5 +1,5 @@
 import {h, render} from "vue";
-import BeicroonToast from "./components/BeicroonToast.vue";
+import BeicroonToast from "@/utils/components/BeicroonToast.vue";
 
 const getContainer = (): HTMLElement => {
     const element : HTMLElement | null = document.querySelector("#beicroon-toast");

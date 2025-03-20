@@ -1,6 +1,6 @@
 import {reactive} from "vue";
-import toast from "./beicroon.toast";
-import http, {BeicroonGenericVO, BeicroonQueryDTO, BeicroonRequestConfig, BeicroonTabVO} from "./utils.http";
+import toast from "@/utils/beicroon.toast";
+import http, {BeicroonGenericVO, BeicroonQueryDTO, BeicroonRequestConfig, BeicroonTabVO} from "@/utils/utils.http";
 
 const getPages = async (start: number, end: number) => {
     if (start < 1 || end < 1) {

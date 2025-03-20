@@ -1,5 +1,5 @@
 import {ref} from "vue";
-import toast from "./beicroon.toast";
+import toast from "@/utils/beicroon.toast";
 import axios, {AxiosInstance} from "axios";
 import {BeicroonBooleanEnums, BeicroonCacheEnums} from "@/enums";
 

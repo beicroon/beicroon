@@ -1,6 +1,6 @@
-import esc from "./utils.esc";
+import esc from "@/utils/utils.esc";
 import {Component, h, ref, render, VNode} from "vue";
-import BeicroonOverlay from "./components/BeicroonOverlay.vue";
+import BeicroonOverlay from "@/utils/components/BeicroonOverlay.vue";
 
 const getContainer = (): HTMLElement => {
     const element: HTMLElement | null = document.querySelector("#beicroon-overlay");

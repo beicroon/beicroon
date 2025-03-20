@@ -1,6 +1,6 @@
 import {reactive} from "vue";
-import {ModuleRequestConfig} from "./module.app";
-import http, {BeicroonGenericVO} from "./utils.http";
+import {ModuleRequestConfig} from "@/utils/module.app";
+import http, {BeicroonGenericVO} from "@/utils/utils.http";
 
 export type BeicroonDetailModule<VO> = {
     id: string,

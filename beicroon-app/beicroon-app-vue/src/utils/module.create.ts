@@ -1,7 +1,7 @@
 import {reactive} from "vue";
-import http from "./utils.http";
-import toast from "./beicroon.toast";
-import {ModuleRequestConfig} from "./module.app";
+import http from "@/utils/utils.http";
+import toast from "@/utils/beicroon.toast";
+import {ModuleRequestConfig} from "@/utils/module.app";
 
 export type BeicroonCreateModule<DTO> = {
     data: DTO,

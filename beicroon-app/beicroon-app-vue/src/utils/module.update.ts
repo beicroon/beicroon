@@ -1,7 +1,7 @@
 import {reactive} from "vue";
-import toast from "./beicroon.toast";
-import {ModuleRequestConfig} from "./module.app";
-import http, {BeicroonGenericVO} from "./utils.http";
+import toast from "@/utils/beicroon.toast";
+import {ModuleRequestConfig} from "@/utils/module.app";
+import http, {BeicroonGenericVO} from "@/utils/utils.http";
 
 export type BeicroonUpdateModule<DTO, VO extends BeicroonGenericVO> = {
     id: string,
