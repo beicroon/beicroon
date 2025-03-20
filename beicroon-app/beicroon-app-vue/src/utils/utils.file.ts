@@ -6,12 +6,12 @@ const FILE_UPLOAD: BeicroonRequestConfig = {
 };
 
 const FILE_UPLOAD_IMAGE: BeicroonRequestConfig = {
-    url: "/api/admin/file-file-upload-image",
+    url: "/api/admin/file-image-upload",
     method: "POST",
 };
 
 const FILE_REMOVE: BeicroonRequestConfig = {
-    url: "/api/admin/file-file-upload-remove",
+    url: "/api/admin/file-file-remove",
     method: "DELETE",
 };
 
