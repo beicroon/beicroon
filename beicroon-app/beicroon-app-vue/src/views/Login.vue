@@ -21,7 +21,7 @@ type VO = {
 };
 
 const loginConfig: BeicroonRequestConfig = {
-  url: "api/admin/admin/admin-auth-login",
+  url: "api/admin/admin-auth-login",
   method: "POST",
 };
 

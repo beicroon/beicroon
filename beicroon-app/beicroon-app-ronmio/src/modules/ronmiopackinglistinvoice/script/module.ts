@@ -192,59 +192,59 @@ export type RecordGroupVO = {
 
 const config= {
     tab: {
-        url: "api/admin/admin/ronmio-packing-list-invoice-tab",
+        url: "api/admin/ronmio-packing-list-invoice-tab",
         method: "POST",
     } as BeicroonRequestConfig,
     list: {
-        url: "api/admin/admin/ronmio-packing-list-invoice-list",
+        url: "api/admin/ronmio-packing-list-invoice-list",
         method: "POST",
     } as BeicroonRequestConfig,
     page: {
-        url: "api/admin/admin/ronmio-packing-list-invoice-page",
+        url: "api/admin/ronmio-packing-list-invoice-page",
         method: "POST",
     } as BeicroonRequestConfig,
     create: {
-        url: "api/admin/admin/ronmio-packing-list-invoice-create",
+        url: "api/admin/ronmio-packing-list-invoice-create",
         method: "POST",
     } as BeicroonRequestConfig,
     update: {
-        url: "api/admin/admin/ronmio-packing-list-invoice-update",
+        url: "api/admin/ronmio-packing-list-invoice-update",
         method: "PUT",
     } as BeicroonRequestConfig,
     show: {
-        url: "api/admin/admin/ronmio-packing-list-invoice-show",
+        url: "api/admin/ronmio-packing-list-invoice-show",
         method: "GET",
     } as BeicroonRequestConfig,
     detail: {
-        url: "api/admin/admin/ronmio-packing-list-invoice-detail",
+        url: "api/admin/ronmio-packing-list-invoice-detail",
         method: "GET",
     } as BeicroonRequestConfig,
     remove: {
-        url: "api/admin/admin/ronmio-packing-list-invoice-remove",
+        url: "api/admin/ronmio-packing-list-invoice-remove",
         method: "DELETE",
     } as BeicroonRequestConfig,
     download: {
-        url: "api/admin/admin/ronmio-packing-list-invoice-download",
+        url: "api/admin/ronmio-packing-list-invoice-download",
         method: "GET",
     } as BeicroonRequestConfig,
     containerAppend: {
-        url: "api/admin/admin/ronmio-packing-list-invoice-container-append",
+        url: "api/admin/ronmio-packing-list-invoice-container-append",
         method: "POST",
     } as BeicroonRequestConfig,
     containerSearch: {
-        url: "api/admin/admin/ronmio-packing-list-invoice-container-search",
+        url: "api/admin/ronmio-packing-list-invoice-container-search",
         method: "POST",
     } as BeicroonRequestConfig,
     containerRemove: {
-        url: "api/admin/admin/ronmio-packing-list-invoice-container-remove",
+        url: "api/admin/ronmio-packing-list-invoice-container-remove",
         method: "DELETE",
     } as BeicroonRequestConfig,
     recordGroupList: {
-        url: "api/admin/admin/ronmio-packing-list-invoice-record-group-list",
+        url: "api/admin/ronmio-packing-list-invoice-record-group-list",
         method: "GET",
     } as BeicroonRequestConfig,
     fillUnitPrice: {
-        url: "api/admin/admin/ronmio-packing-list-invoice-fill-unit-price",
+        url: "api/admin/ronmio-packing-list-invoice-fill-unit-price",
         method: "PUT",
     } as BeicroonRequestConfig,
 };

@@ -51,4 +51,4 @@ auth:
     - /**/*.html
     - /**/*.jpeg
     - /**/*.xlsx
-    - /api/admin/admin/admin-auth-login
+    - /api/admin/admin-auth-login

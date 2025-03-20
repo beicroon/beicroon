@@ -2,12 +2,12 @@ package com.beicroon.service.banner.dao.convertor;
 
 import com.beicroon.construct.base.entity.PageInfo;
 import com.beicroon.construct.utils.ListUtils;
-import com.beicroon.service.banner.dao.model.HomeBannerModel;
-import com.beicroon.service.banner.entity.homebanner.dto.HomeBannerCreateDTO;
-import com.beicroon.service.banner.entity.homebanner.dto.HomeBannerUpdateDTO;
-import com.beicroon.service.banner.entity.homebanner.vo.HomeBannerBaseVO;
-import com.beicroon.service.banner.entity.homebanner.vo.HomeBannerDetailVO;
-import com.beicroon.service.banner.entity.homebanner.vo.HomeBannerPageVO;
+import com.beicroon.service.banner.dao.model.BannerBannerModel;
+import com.beicroon.service.banner.entity.bannerbanner.dto.BannerBannerCreateDTO;
+import com.beicroon.service.banner.entity.bannerbanner.dto.BannerBannerUpdateDTO;
+import com.beicroon.service.banner.entity.bannerbanner.vo.BannerBannerBaseVO;
+import com.beicroon.service.banner.entity.bannerbanner.vo.BannerBannerDetailVO;
+import com.beicroon.service.banner.entity.bannerbanner.vo.BannerBannerPageVO;
 import com.beicroon.starter.database.helper.ConvertorHelper;
 import org.mapstruct.*;
 
@@ -17,7 +17,7 @@ import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
-public interface HomeBannerConvertor {
+public interface BannerBannerConvertor {
 
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "createdAt", ignore = true)
@@ -28,10 +28,10 @@ public interface HomeBannerConvertor {
     @Mapping(target = "modifierId", ignore = true)
     @Mapping(target = "modifierCode", ignore = true)
     @Mapping(target = "modifierName", ignore = true)
-    HomeBannerModel toCreator(HomeBannerCreateDTO dto);
+    BannerBannerModel toCreator(BannerBannerCreateDTO dto);
 
     @AfterMapping
-    default void fillCreator(@MappingTarget HomeBannerModel model, HomeBannerCreateDTO dto) {
+    default void fillCreator(@MappingTarget BannerBannerModel model, BannerBannerCreateDTO dto) {
         ConvertorHelper.fillCreator(model);
     }
 
@@ -43,28 +43,28 @@ public interface HomeBannerConvertor {
     @Mapping(target = "modifierId", ignore = true)
     @Mapping(target = "modifierCode", ignore = true)
     @Mapping(target = "modifierName", ignore = true)
-    HomeBannerModel toUpdater(HomeBannerUpdateDTO dto);
+    BannerBannerModel toUpdater(BannerBannerUpdateDTO dto);
 
     @AfterMapping
-    default void fillModifier(@MappingTarget HomeBannerModel model, HomeBannerUpdateDTO dto) {
+    default void fillModifier(@MappingTarget BannerBannerModel model, BannerBannerUpdateDTO dto) {
         ConvertorHelper.fillModifier(model);
     }
 
-    HomeBannerBaseVO toBaseVO(HomeBannerModel model);
+    BannerBannerBaseVO toBaseVO(BannerBannerModel model);
 
-    default List<HomeBannerBaseVO> toBaseVO(Collection<HomeBannerModel> models) {
+    default List<BannerBannerBaseVO> toBaseVO(Collection<BannerBannerModel> models) {
         return ListUtils.toList(models, this::toBaseVO);
     }
 
-    HomeBannerPageVO toPageVO(HomeBannerModel model);
+    BannerBannerPageVO toPageVO(BannerBannerModel model);
 
-    default PageInfo<HomeBannerPageVO> toPageVO(PageInfo<HomeBannerModel> page) {
+    default PageInfo<BannerBannerPageVO> toPageVO(PageInfo<BannerBannerModel> page) {
         return ConvertorHelper.toPageVO(page, this::toPageVO);
     }
 
-    default PageInfo<HomeBannerPageVO> toPageVO(PageInfo<HomeBannerModel> page, BiConsumer<HomeBannerModel, HomeBannerPageVO> consumer) {
+    default PageInfo<BannerBannerPageVO> toPageVO(PageInfo<BannerBannerModel> page, BiConsumer<BannerBannerModel, BannerBannerPageVO> consumer) {
         return ConvertorHelper.toPageVO(page, model -> {
-            HomeBannerPageVO vo = this.toPageVO(model);
+            BannerBannerPageVO vo = this.toPageVO(model);
 
             consumer.accept(model, vo);
 
@@ -72,10 +72,10 @@ public interface HomeBannerConvertor {
         });
     }
 
-    HomeBannerDetailVO toDetailVO(HomeBannerModel model);
+    BannerBannerDetailVO toDetailVO(BannerBannerModel model);
 
-    default HomeBannerDetailVO toDetailVO(HomeBannerModel model, Consumer<HomeBannerDetailVO> consumer) {
-        HomeBannerDetailVO vo = this.toDetailVO(model);
+    default BannerBannerDetailVO toDetailVO(BannerBannerModel model, Consumer<BannerBannerDetailVO> consumer) {
+        BannerBannerDetailVO vo = this.toDetailVO(model);
 
         consumer.accept(vo);
 
@@ -83,7 +83,7 @@ public interface HomeBannerConvertor {
     }
 
     @AfterMapping
-    default void fillVO(@MappingTarget HomeBannerBaseVO vo, HomeBannerModel model) {
+    default void fillVO(@MappingTarget BannerBannerBaseVO vo, BannerBannerModel model) {
 
     }
 

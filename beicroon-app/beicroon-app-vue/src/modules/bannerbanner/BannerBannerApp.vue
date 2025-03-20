@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import {onMounted} from "vue";
 import {dialog, moduleApp, overlay} from "@/index";
-import HomeBannerCreate from "@m/homebanner/HomeBannerCreate.vue";
-import HomeBannerUpdate from "@m/homebanner/HomeBannerUpdate.vue";
-import HomeBannerDetail from "@m/homebanner/HomeBannerDetail.vue";
-import config, {PageVO, QueryDTO} from "@m/homebanner/script/module";
+import BannerBannerCreate from "@m/bannerbanner/BannerBannerCreate.vue";
+import BannerBannerUpdate from "@m/bannerbanner/BannerBannerUpdate.vue";
+import BannerBannerDetail from "@m/bannerbanner/BannerBannerDetail.vue";
+import config, {PageVO, QueryDTO} from "@m/bannerbanner/script/module";
 import {BButton, BDatetime, BImage, BInput, BModule, BTableColumn, BTableField, BTableGroup} from "@/components";
 
 const module = moduleApp<QueryDTO, PageVO>(config);
@@ -12,7 +12,7 @@ const module = moduleApp<QueryDTO, PageVO>(config);
 const handleCreate = () => {
   overlay({
     title: "新增轮播图",
-    component: HomeBannerCreate,
+    component: BannerBannerCreate,
     confirm: module.page.request,
   });
 };
@@ -20,7 +20,7 @@ const handleCreate = () => {
 const handleUpdate = (item: any) => {
   overlay({
     title: "编辑轮播图",
-    component: HomeBannerUpdate,
+    component: BannerBannerUpdate,
     props: {id: item.id},
     confirm: module.page.request,
   });
@@ -29,7 +29,7 @@ const handleUpdate = (item: any) => {
 const handleDetail = (item: any) => {
   overlay({
     title: "轮播图详情",
-    component: HomeBannerDetail,
+    component: BannerBannerDetail,
     props: {id: item.id},
   });
 };

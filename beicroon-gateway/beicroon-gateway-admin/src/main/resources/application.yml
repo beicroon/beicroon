@@ -38,4 +38,4 @@ spring:
             - Path=/api/admin/**
 auth:
   ignores:
-    - /api/admin/admin/auth-admin-login
+    - /api/admin/auth-admin-login

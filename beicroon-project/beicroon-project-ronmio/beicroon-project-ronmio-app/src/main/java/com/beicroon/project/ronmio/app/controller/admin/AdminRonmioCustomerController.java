@@ -23,7 +23,7 @@ import java.util.List;
 @Validated
 @RestController
 @ApiTag(name = "客户相关")
-@RequestMapping(path = "/api/admin/admin")
+@RequestMapping(path = "/api/admin")
 public class AdminRonmioCustomerController {
 
     @Resource

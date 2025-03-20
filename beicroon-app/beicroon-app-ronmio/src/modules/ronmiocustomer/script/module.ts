@@ -31,35 +31,35 @@ export type DetailVO = BaseVO & {
 
 const config = {
     tab: {
-        url: "api/admin/admin/ronmio-customer-tab",
+        url: "api/admin/ronmio-customer-tab",
         method: "POST",
     } as BeicroonRequestConfig,
     list: {
-        url: "api/admin/admin/ronmio-customer-list",
+        url: "api/admin/ronmio-customer-list",
         method: "POST",
     } as BeicroonRequestConfig,
     page: {
-        url: "api/admin/admin/ronmio-customer-page",
+        url: "api/admin/ronmio-customer-page",
         method: "POST",
     } as BeicroonRequestConfig,
     create: {
-        url: "api/admin/admin/ronmio-customer-create",
+        url: "api/admin/ronmio-customer-create",
         method: "POST",
     } as BeicroonRequestConfig,
     update: {
-        url: "api/admin/admin/ronmio-customer-update",
+        url: "api/admin/ronmio-customer-update",
         method: "PUT",
     } as BeicroonRequestConfig,
     show: {
-        url: "api/admin/admin/ronmio-customer-show",
+        url: "api/admin/ronmio-customer-show",
         method: "GET",
     } as BeicroonRequestConfig,
     detail: {
-        url: "api/admin/admin/ronmio-customer-detail",
+        url: "api/admin/ronmio-customer-detail",
         method: "GET",
     } as BeicroonRequestConfig,
     remove: {
-        url: "api/admin/admin/ronmio-customer-remove",
+        url: "api/admin/ronmio-customer-remove",
         method: "DELETE",
     } as BeicroonRequestConfig,
 };

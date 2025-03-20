@@ -30,35 +30,35 @@ public final class VueModuleContent {
 
             const config = {
                 tab: {
-                    url: "api/admin/admin/{{urlName}}-tab",
+                    url: "api/admin/{{urlName}}-tab",
                     method: "POST",
                 } as BeicroonRequestConfig,
                 list: {
-                    url: "api/admin/admin/{{urlName}}-list",
+                    url: "api/admin/{{urlName}}-list",
                     method: "POST",
                 } as BeicroonRequestConfig,
                 page: {
-                    url: "api/admin/admin/{{urlName}}-page",
+                    url: "api/admin/{{urlName}}-page",
                     method: "POST",
                 } as BeicroonRequestConfig,
                 create: {
-                    url: "api/admin/admin/{{urlName}}-create",
+                    url: "api/admin/{{urlName}}-create",
                     method: "POST",
                 } as BeicroonRequestConfig,
                 update: {
-                    url: "api/admin/admin/{{urlName}}-update",
+                    url: "api/admin/{{urlName}}-update",
                     method: "PUT",
                 } as BeicroonRequestConfig,
                 show: {
-                    url: "api/admin/admin/{{urlName}}-show",
+                    url: "api/admin/{{urlName}}-show",
                     method: "GET",
                 } as BeicroonRequestConfig,
                 detail: {
-                    url: "api/admin/admin/{{urlName}}-detail",
+                    url: "api/admin/{{urlName}}-detail",
                     method: "GET",
                 } as BeicroonRequestConfig,
                 remove: {
-                    url: "api/admin/admin/{{urlName}}-remove",
+                    url: "api/admin/{{urlName}}-remove",
                     method: "DELETE",
                 } as BeicroonRequestConfig,
             };

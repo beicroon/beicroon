@@ -1,5 +1,5 @@
-drop table if exists `home_banner`;
-create table `home_banner`
+drop table if exists `banner_banner`;
+create table `banner_banner`
 (
     `id`            bigint(20) unsigned not null auto_increment comment '主键',
     `tenant_id`     bigint(20) unsigned not null default 0 comment '租户主键',

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import {computed} from "vue";
-import {DetailVO} from "@m/homebanner/script/module";
+import {DetailVO} from "@m/bannerbanner/script/module";
 import {BFile, BForm, BFormGroup, BInput} from "@/components";
 
 interface Props {

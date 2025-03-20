@@ -1,12 +1,12 @@
 package com.beicroon.service.banner.dao.tab.impl;
 
 import com.beicroon.construct.database.wrapper.IQueryWrapper;
-import com.beicroon.service.banner.dao.model.HomeBannerModel;
-import com.beicroon.service.banner.dao.tab.HomeBannerTabHandler;
+import com.beicroon.service.banner.dao.model.BannerBannerModel;
+import com.beicroon.service.banner.dao.tab.BannerBannerTabHandler;
 import org.springframework.stereotype.Component;
 
 @Component
-public class HomeBannerAllTabHandler implements HomeBannerTabHandler {
+public class BannerBannerAllTabHandler implements BannerBannerTabHandler {
 
     @Override
     public boolean count() {
@@ -24,7 +24,7 @@ public class HomeBannerAllTabHandler implements HomeBannerTabHandler {
     }
 
     @Override
-    public void fillQuery(IQueryWrapper<HomeBannerModel> query) {
+    public void fillQuery(IQueryWrapper<BannerBannerModel> query) {
 
     }
 

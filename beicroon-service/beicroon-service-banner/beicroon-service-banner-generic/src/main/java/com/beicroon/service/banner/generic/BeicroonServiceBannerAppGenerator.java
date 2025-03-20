@@ -33,13 +33,7 @@ public class BeicroonServiceBannerAppGenerator {
                 ""
         );
 
-        String[] tables = {
-                "home_banner"
-        };
-
-        maker.generic(structure, tables);
-
-        maker.genericVue(new File("beicroon-app", "beicroon-app-gzwy"), tables);
+        maker.generic(structure, "banner_banner");
     }
 
 }

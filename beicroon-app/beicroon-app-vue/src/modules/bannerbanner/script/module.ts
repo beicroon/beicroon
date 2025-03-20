@@ -47,35 +47,35 @@ export type DetailVO = BaseVO & {
 
 const config = {
     tab: {
-        url: "api/admin/admin/home-banner-tab",
+        url: "api/admin/home-banner-tab",
         method: "POST",
     } as BeicroonRequestConfig,
     list: {
-        url: "api/admin/admin/home-banner-list",
+        url: "api/admin/home-banner-list",
         method: "POST",
     } as BeicroonRequestConfig,
     page: {
-        url: "api/admin/admin/home-banner-page",
+        url: "api/admin/home-banner-page",
         method: "POST",
     } as BeicroonRequestConfig,
     create: {
-        url: "api/admin/admin/home-banner-create",
+        url: "api/admin/home-banner-create",
         method: "POST",
     } as BeicroonRequestConfig,
     update: {
-        url: "api/admin/admin/home-banner-update",
+        url: "api/admin/home-banner-update",
         method: "PUT",
     } as BeicroonRequestConfig,
     show: {
-        url: "api/admin/admin/home-banner-show",
+        url: "api/admin/home-banner-show",
         method: "GET",
     } as BeicroonRequestConfig,
     detail: {
-        url: "api/admin/admin/home-banner-detail",
+        url: "api/admin/home-banner-detail",
         method: "GET",
     } as BeicroonRequestConfig,
     remove: {
-        url: "api/admin/admin/home-banner-remove",
+        url: "api/admin/home-banner-remove",
         method: "DELETE",
     } as BeicroonRequestConfig,
 };

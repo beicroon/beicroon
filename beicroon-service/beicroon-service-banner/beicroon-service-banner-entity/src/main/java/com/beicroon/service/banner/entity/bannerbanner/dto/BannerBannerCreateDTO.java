@@ -1,17 +1,17 @@
-package com.beicroon.service.banner.entity.homebanner.vo;
+package com.beicroon.service.banner.entity.bannerbanner.dto;
 
 import com.beicroon.construct.annotation.ApiModel;
 import com.beicroon.construct.annotation.ApiModelProperty;
-import com.beicroon.construct.base.entity.GenericVO;
+import com.beicroon.construct.base.entity.GenericDTO;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import java.time.LocalDateTime;
 
 @Data
-@ApiModel(name = "查询轮播图基础出参")
+@ApiModel(name = "新增轮播图入参")
 @EqualsAndHashCode(callSuper = true)
-public class HomeBannerBaseVO extends GenericVO {
+public class BannerBannerCreateDTO extends GenericDTO {
 
     @ApiModelProperty(name = "文件主键")
     private Long fileId;

@@ -16,7 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 @Validated
 @RestController
 @ApiTag(name = "文件相关")
-@RequestMapping(path = "/api/admin/admin")
+@RequestMapping(path = "/api/admin")
 public class AdminAdminFileController {
 
     @Resource

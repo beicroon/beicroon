@@ -46,39 +46,39 @@ export type DetailVO = BaseVO & {
 
 const config = {
     tab: {
-        url: "api/admin/admin/admin-resource-tab",
+        url: "api/admin/admin-resource-tab",
         method: "POST",
     } as BeicroonRequestConfig,
     list: {
-        url: "api/admin/admin/admin-resource-list",
+        url: "api/admin/admin-resource-list",
         method: "POST",
     } as BeicroonRequestConfig,
     tree: {
-        url: "api/admin/admin/admin-resource-tree",
+        url: "api/admin/admin-resource-tree",
         method: "POST",
     } as BeicroonRequestConfig,
     page: {
-        url: "api/admin/admin/admin-resource-page",
+        url: "api/admin/admin-resource-page",
         method: "POST",
     } as BeicroonRequestConfig,
     create: {
-        url: "api/admin/admin/admin-resource-create",
+        url: "api/admin/admin-resource-create",
         method: "POST",
     } as BeicroonRequestConfig,
     update: {
-        url: "api/admin/admin/admin-resource-update",
+        url: "api/admin/admin-resource-update",
         method: "PUT",
     } as BeicroonRequestConfig,
     show: {
-        url: "api/admin/admin/admin-resource-show",
+        url: "api/admin/admin-resource-show",
         method: "GET",
     } as BeicroonRequestConfig,
     detail: {
-        url: "api/admin/admin/admin-resource-detail",
+        url: "api/admin/admin-resource-detail",
         method: "GET",
     } as BeicroonRequestConfig,
     remove: {
-        url: "api/admin/admin/admin-resource-remove",
+        url: "api/admin/admin-resource-remove",
         method: "DELETE",
     } as BeicroonRequestConfig,
 };

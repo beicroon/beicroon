@@ -11,8 +11,8 @@ import java.time.LocalDateTime;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
-@TableName("`home_banner`")
-public class HomeBannerModel extends GenericModel {
+@TableName("`banner_banner`")
+public class BannerBannerModel extends GenericModel {
 
     @TableField(name = "`file_id`")
     @ApiModelProperty(name = "文件主键")

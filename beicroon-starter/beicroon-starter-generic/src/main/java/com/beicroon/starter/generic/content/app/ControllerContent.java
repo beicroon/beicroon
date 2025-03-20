@@ -31,7 +31,7 @@ public final class ControllerContent {
             @Validated
             @RestController
             @ApiTag(name = "{{comment}}相关")
-            @RequestMapping(path = "/api/admin/admin")
+            @RequestMapping(path = "/api/admin")
             public class Admin{{className}}Controller {
 
                 @Resource

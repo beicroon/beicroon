@@ -33,35 +33,35 @@ export type DetailVO = BaseVO & {
 
 const config = {
     tab: {
-        url: "api/admin/admin/admin-role-tab",
+        url: "api/admin/admin-role-tab",
         method: "POST",
     } as BeicroonRequestConfig,
     list: {
-        url: "api/admin/admin/admin-role-list",
+        url: "api/admin/admin-role-list",
         method: "POST",
     } as BeicroonRequestConfig,
     page: {
-        url: "api/admin/admin/admin-role-page",
+        url: "api/admin/admin-role-page",
         method: "POST",
     } as BeicroonRequestConfig,
     create: {
-        url: "api/admin/admin/admin-role-create",
+        url: "api/admin/admin-role-create",
         method: "POST",
     } as BeicroonRequestConfig,
     update: {
-        url: "api/admin/admin/admin-role-update",
+        url: "api/admin/admin-role-update",
         method: "PUT",
     } as BeicroonRequestConfig,
     show: {
-        url: "api/admin/admin/admin-role-show",
+        url: "api/admin/admin-role-show",
         method: "GET",
     } as BeicroonRequestConfig,
     detail: {
-        url: "api/admin/admin/admin-role-detail",
+        url: "api/admin/admin-role-detail",
         method: "GET",
     } as BeicroonRequestConfig,
     remove: {
-        url: "api/admin/admin/admin-role-remove",
+        url: "api/admin/admin-role-remove",
         method: "DELETE",
     } as BeicroonRequestConfig,
 };
