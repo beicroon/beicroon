@@ -9,8 +9,8 @@ import lombok.EqualsAndHashCode;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
-@TableName("`admin_file`")
-public class AdminFileModel extends GenericModel {
+@TableName("`file_file`")
+public class FileFileModel extends GenericModel {
 
     @TableField(name = "`url`")
     @ApiModelProperty(name = "地址")

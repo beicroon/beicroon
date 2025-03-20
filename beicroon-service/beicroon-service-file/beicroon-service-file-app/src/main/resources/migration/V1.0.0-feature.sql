@@ -1,5 +1,5 @@
-drop table if exists `admin_file`;
-create table `admin_file`
+drop table if exists `file_file`;
+create table `file_file`
 (
     `id`            bigint(20) unsigned not null auto_increment comment '主键',
     `tenant_id`     bigint(20) unsigned not null default 0 comment '租户主键',

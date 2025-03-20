@@ -1,17 +1,17 @@
 import http, {BeicroonGenericVO, BeicroonRequestConfig} from "@/utils/utils.http";
 
 const FILE_UPLOAD: BeicroonRequestConfig = {
-    url: "/api/admin/admin-file-upload",
+    url: "/api/admin/file-file-upload",
     method: "POST",
 };
 
 const FILE_UPLOAD_IMAGE: BeicroonRequestConfig = {
-    url: "/api/admin/admin-file-upload-image",
+    url: "/api/admin/file-file-upload-image",
     method: "POST",
 };
 
 const FILE_REMOVE: BeicroonRequestConfig = {
-    url: "/api/admin/admin-file-upload-remove",
+    url: "/api/admin/file-file-upload-remove",
     method: "DELETE",
 };
 

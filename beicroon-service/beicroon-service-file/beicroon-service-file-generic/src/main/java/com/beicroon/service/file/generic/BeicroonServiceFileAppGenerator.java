@@ -33,11 +33,7 @@ public class BeicroonServiceFileAppGenerator {
                 ""
         );
 
-        String[] tables = {
-                "admin_file"
-        };
-
-        maker.generic(structure, tables);
+        maker.generic(structure, "file_file");
     }
 
 }
