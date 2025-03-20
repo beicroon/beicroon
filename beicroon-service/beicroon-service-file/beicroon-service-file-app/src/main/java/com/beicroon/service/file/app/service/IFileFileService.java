@@ -1,32 +1,14 @@
 package com.beicroon.service.file.app.service;
 
 import com.beicroon.construct.base.entity.IdsDTO;
-import com.beicroon.construct.base.entity.PageInfo;
-import com.beicroon.construct.base.entity.TabVO;
-import com.beicroon.service.file.entity.filefile.dto.FileFileCreateDTO;
-import com.beicroon.service.file.entity.filefile.dto.FileFileQueryDTO;
-import com.beicroon.service.file.entity.filefile.dto.FileFileUpdateDTO;
 import com.beicroon.service.file.entity.filefile.vo.FileFileBaseVO;
-import com.beicroon.service.file.entity.filefile.vo.FileFileDetailVO;
-import com.beicroon.service.file.entity.filefile.vo.FileFilePageVO;
-
-import java.util.List;
+import org.springframework.web.multipart.MultipartFile;
 
 public interface IFileFileService {
 
-    List<TabVO> tab(FileFileQueryDTO dto);
+    FileFileBaseVO upload(MultipartFile file);
 
-    List<FileFileBaseVO> list(FileFileQueryDTO dto);
-
-    PageInfo<FileFilePageVO> page(FileFileQueryDTO dto);
-
-    Boolean create(FileFileCreateDTO dto);
-
-    Boolean update(FileFileUpdateDTO dto);
-
-    FileFileBaseVO show(Long id);
-
-    FileFileDetailVO detail(Long id);
+    FileFileBaseVO uploadImage(MultipartFile image);
 
     Boolean remove(IdsDTO dto);
 

@@ -1,23 +1,21 @@
 package com.beicroon.service.file.app.service.impl;
 
 import com.beicroon.construct.base.entity.IdsDTO;
-import com.beicroon.construct.base.entity.PageInfo;
-import com.beicroon.construct.base.entity.TabVO;
+import com.beicroon.construct.exception.utils.ExceptionUtils;
+import com.beicroon.construct.utils.EmptyUtils;
 import com.beicroon.service.file.app.service.IFileFileService;
 import com.beicroon.service.file.dao.convertor.FileFileConvertor;
 import com.beicroon.service.file.dao.manager.FileFileManager;
 import com.beicroon.service.file.dao.model.FileFileModel;
 import com.beicroon.service.file.dao.repository.FileFileRepository;
-import com.beicroon.service.file.entity.filefile.dto.FileFileCreateDTO;
-import com.beicroon.service.file.entity.filefile.dto.FileFileQueryDTO;
-import com.beicroon.service.file.entity.filefile.dto.FileFileUpdateDTO;
 import com.beicroon.service.file.entity.filefile.vo.FileFileBaseVO;
-import com.beicroon.service.file.entity.filefile.vo.FileFileDetailVO;
-import com.beicroon.service.file.entity.filefile.vo.FileFilePageVO;
+import com.beicroon.starter.oss.manager.OssManager;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.util.List;
+import java.io.IOException;
+import java.io.InputStream;
 
 @Service
 public class FileFileService implements IFileFileService {
@@ -31,51 +29,43 @@ public class FileFileService implements IFileFileService {
     @Resource
     private FileFileRepository fileFileRepository;
 
-    @Override
-    public List<TabVO> tab(FileFileQueryDTO dto) {
-        return this.fileFileRepository.tab(dto);
-    }
+    @Resource
+    private OssManager ossManager;
 
     @Override
-    public List<FileFileBaseVO> list(FileFileQueryDTO dto) {
-        List<FileFileModel> list = this.fileFileRepository.list(dto);
+    public FileFileBaseVO upload(MultipartFile file) {
+        if (file.isEmpty()) {
+            throw ExceptionUtils.business("文件不能为空");
+        }
 
-        return this.fileFileConvertor.toBaseVO(list);
-    }
+        byte[] bytes;
 
-    @Override
-    public PageInfo<FileFilePageVO> page(FileFileQueryDTO dto) {
-        PageInfo<FileFileModel> page = this.fileFileRepository.page(dto);
+        try {
+            InputStream stream = file.getInputStream();
 
-        return this.fileFileConvertor.toPageVO(page);
-    }
+            bytes = stream.readAllBytes();
+        } catch (IOException ex) {
+            throw ExceptionUtils.business("文件读取失败");
+        }
 
-    @Override
-    public Boolean create(FileFileCreateDTO dto) {
-        FileFileModel model = this.fileFileConvertor.toCreator(dto);
+        FileFileModel model = this.fileFileConvertor.toCreator(file);
 
-        return this.fileFileRepository.insert(model);
-    }
+        model.setUrl(this.ossManager.upload(bytes, model.getName(), model.getExt()));
 
-    @Override
-    public Boolean update(FileFileUpdateDTO dto) {
-        FileFileModel model = this.fileFileConvertor.toUpdater(dto);
-
-        return this.fileFileRepository.updateById(model);
-    }
-
-    @Override
-    public FileFileBaseVO show(Long id) {
-        FileFileModel model = this.fileFileRepository.getById(id);
+        this.fileFileRepository.insert(model);
 
         return this.fileFileConvertor.toBaseVO(model);
     }
 
     @Override
-    public FileFileDetailVO detail(Long id) {
-        FileFileModel model = this.fileFileRepository.getById(id);
+    public FileFileBaseVO uploadImage(MultipartFile image) {
+        String contentType = image.getContentType();
 
-        return this.fileFileConvertor.toDetailVO(model);
+        if (contentType == null || EmptyUtils.isEmpty(contentType) || !contentType.startsWith("image")) {
+            throw ExceptionUtils.business("请选择图片上传");
+        }
+
+        return this.upload(image);
     }
 
     @Override
