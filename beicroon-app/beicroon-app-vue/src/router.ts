@@ -34,7 +34,7 @@ export const resource = {
     name: "资源管理",
     path: "/resource/app",
     meta: {auth: true} as RouteMeta,
-    component: () => import("@m/adminresource/AdminResourceApp.vue"),
+    component: () => import("@m/rbacresource/RbacResourceApp.vue"),
     children: [],
 } as RouteRecordRaw;
 
@@ -42,7 +42,7 @@ export const role = {
     name: "角色管理",
     path: "/role/app",
     meta: {auth: true} as RouteMeta,
-    component: () => import("@m/adminrole/AdminRoleApp.vue"),
+    component: () => import("@m/rbacrole/RbacRoleApp.vue"),
     children: [],
 } as RouteRecordRaw;
 
@@ -50,7 +50,7 @@ export const account = {
     name: "账号管理",
     path: "/account/app",
     meta: {auth: true} as RouteMeta,
-    component: () => import("@m/adminaccount/AdminAccountApp.vue"),
+    component: () => import("@m/rbacaccount/RbacAccountApp.vue"),
     children: [],
 } as RouteRecordRaw;
 
@@ -58,7 +58,7 @@ export const banner = {
     name: "轮播图",
     path: "/banner/app",
     meta: {auth: true} as RouteMeta,
-    component: () => import("@m/homebanner/HomeBannerApp.vue"),
+    component: () => import("@m/bannerbanner/BannerBannerApp.vue"),
     children: [],
 } as RouteRecordRaw;
 

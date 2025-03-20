@@ -65,7 +65,7 @@ const handleGoHome = () => {
 };
 
 const resourceConfig: BeicroonRequestConfig = {
-  url: "api/admin/admin-auth-resource",
+  url: "api/admin/rbac-auth-resource",
   method: "GET",
 };
 
@@ -82,7 +82,7 @@ const resource = moduleRequest<Array<Menu>>(resourceConfig);
 onMounted(resource.request);
 
 const logout = moduleRequest({
-  url: "api/admin/admin-auth-logout",
+  url: "api/admin/rbac-auth-logout",
   method: "POST",
 });
 

@@ -1,5 +1,5 @@
-drop table if exists `admin_resource`;
-create table `admin_resource`
+drop table if exists `rbac_resource`;
+create table `rbac_resource`
 (
     `id`            bigint(20) unsigned not null auto_increment comment '主键',
     `tenant_id`     bigint(20) unsigned not null default 0 comment '租户主键',
@@ -27,8 +27,8 @@ create table `admin_resource`
     index `idx_parent_id` (`parent_id`)
 ) engine = innodb comment '资源';
 
-drop table if exists `admin_role`;
-create table `admin_role`
+drop table if exists `rbac_role`;
+create table `rbac_role`
 (
     `id`            bigint(20) unsigned not null auto_increment comment '主键',
     `tenant_id`     bigint(20) unsigned not null default 0 comment '租户主键',
@@ -54,8 +54,8 @@ create table `admin_role`
     primary key (`id`)
 ) engine = innodb comment '角色';
 
-drop table if exists `admin_account`;
-create table `admin_account`
+drop table if exists `rbac_account`;
+create table `rbac_account`
 (
     `id`            bigint(20) unsigned not null auto_increment comment '主键',
     `tenant_id`     bigint(20) unsigned not null default 0 comment '租户主键',
@@ -85,8 +85,8 @@ create table `admin_account`
     primary key (`id`)
 ) engine = innodb comment '账号';
 
-drop table if exists `admin_account_role_relation`;
-create table `admin_account_role_relation`
+drop table if exists `rbac_account_role_relation`;
+create table `rbac_account_role_relation`
 (
     `id`            bigint(20) unsigned not null auto_increment comment '主键',
     `tenant_id`     bigint(20) unsigned not null default 0 comment '租户主键',
@@ -109,8 +109,8 @@ create table `admin_account_role_relation`
     index `idx_role_id` (`role_id`)
 ) engine = innodb comment '账号角色关系';
 
-drop table if exists `admin_role_resource_relation`;
-create table `admin_role_resource_relation`
+drop table if exists `rbac_role_resource_relation`;
+create table `rbac_role_resource_relation`
 (
     `id`            bigint(20) unsigned not null auto_increment comment '主键',
     `tenant_id`     bigint(20) unsigned not null default 0 comment '租户主键',

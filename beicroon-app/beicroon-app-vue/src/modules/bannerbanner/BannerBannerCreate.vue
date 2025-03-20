@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import {ref} from "vue";
 import {moduleCreate, uploadImage} from "@/index";
-import config, {CreateDTO} from "@m/homebanner/script/module";
+import config, {CreateDTO} from "@m/bannerbanner/script/module";
 import {BButton, BDatetime, BFile, BForm, BFormGroup, BInput} from "@/components";
 
 const emits = defineEmits(["hide"]);

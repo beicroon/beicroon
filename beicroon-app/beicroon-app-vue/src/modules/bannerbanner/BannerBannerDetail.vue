@@ -2,8 +2,8 @@
 import {onMounted} from "vue";
 import {moduleDetail} from "@/index";
 import {BButton} from "@/components";
-import config, {DetailVO} from "@m/homebanner/script/module";
-import DetailView from "@m/homebanner/component/DetailView.vue";
+import config, {DetailVO} from "@m/bannerbanner/script/module";
+import DetailView from "@m/bannerbanner/component/DetailView.vue";
 
 interface Props {
   id: string,

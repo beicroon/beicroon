@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import {onMounted, ref} from "vue";
 import {BeicroonFile, moduleUpdate, uploadImage} from "@/index";
-import config, {DetailVO, UpdateDTO} from "@m/homebanner/script/module";
+import config, {DetailVO, UpdateDTO} from "@m/bannerbanner/script/module";
 import {BButton, BDatetime, BFile, BForm, BFormGroup, BInput} from "@/components";
 
 interface Props {

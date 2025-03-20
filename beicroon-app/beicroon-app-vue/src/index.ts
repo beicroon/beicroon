@@ -20,7 +20,7 @@ interface Config {
     routes?: RouteRecordRaw[],
 }
 
-const createBeicroonApp = ({requestUrl, baseURL, router, routes}: Config): App => {
+export function createBeicroonApp({requestUrl, baseURL, router, routes}: Config): App {
     setRequestUrl(requestUrl);
 
     const app = createApp(Main);
@@ -32,11 +32,7 @@ const createBeicroonApp = ({requestUrl, baseURL, router, routes}: Config): App =
     }
 
     return app;
-};
-
-export {
-    createBeicroonApp,
-};
+}
 
 export * from "@/utils/beicroon.dialog";
 export * from "@/utils/beicroon.overlay";

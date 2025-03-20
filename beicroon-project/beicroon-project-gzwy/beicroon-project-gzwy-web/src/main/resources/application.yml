@@ -48,4 +48,4 @@ auth:
     - /**/*.html
     - /**/*.jpeg
     - /**/*.xlsx
-    - /api/admin/admin-auth-login
+    - /api/admin/rbac-auth-login
