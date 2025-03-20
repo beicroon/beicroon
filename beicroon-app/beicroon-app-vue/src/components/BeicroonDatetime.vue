@@ -182,12 +182,10 @@ const handleFocusin = () => {
 
   const rect = inputEl.value?.getBoundingClientRect();
 
-  if (rect) {
-    if (rect.top + rect.height + 320 > window.innerHeight) {
-      topOrBottom.value = "top";
-    } else {
-      topOrBottom.value = "bottom";
-    }
+  if (rect && rect.top + rect.height + 352 > window.innerHeight) {
+    topOrBottom.value = "top";
+  } else {
+    topOrBottom.value = "bottom";
   }
 };
 
@@ -265,7 +263,7 @@ const handleConfirm = () => {
         <button class="item" @click="addMonth">></button>
         <button class="item" @click="addYear">>></button>
       </div>
-      <ul class="line">
+      <ul class="line week">
         <li class="item">日</li>
         <li class="item">一</li>
         <li class="item">二</li>
@@ -296,17 +294,17 @@ const handleConfirm = () => {
 <style lang="less">
 .beicroon-input.datetime {
   .datetime {
+    gap: 8rem;
     right: 50%;
     z-index: 9;
     display: flex;
-    height: 320rem;
-    padding: 4rem 0;
+    height: 352rem;
+    padding: 8rem 0;
     position: absolute;
     border-radius: 4rem;
     flex-direction: column;
     width: calc(100% + 2rem);
     transform: translateX(50%);
-    justify-content: space-around;
     background-color: var(--color-white);
     border: 1rem solid var(--color-primary);
 
@@ -345,6 +343,13 @@ const handleConfirm = () => {
     }
   }
 
+  .week {
+    padding-top: 8rem;
+    padding-bottom: 8rem;
+    border-top: 1rem solid var(--color-grey-light);
+    border-bottom: 1rem solid var(--color-grey-light);
+  }
+
   .day {
     .item {
       &:hover {
@@ -368,9 +373,10 @@ const handleConfirm = () => {
   .foot {
     height: 28rem;
     display: flex;
-    padding: 0 14rem;
     align-items: center;
+    padding: 8rem 14rem 0;
     justify-content: space-between;
+    border-top: 1rem solid var(--color-grey-light);
 
     .time {
       gap: 8rem;

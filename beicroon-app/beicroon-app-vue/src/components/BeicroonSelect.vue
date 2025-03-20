@@ -92,12 +92,10 @@ const handleFocusin = () => {
 
   const rect = inputEl.value?.getBoundingClientRect();
 
-  if (rect) {
-    if (rect.top + rect.height + 180 > window.innerHeight) {
-      topOrBottom.value = "top";
-    } else {
-      topOrBottom.value = "bottom";
-    }
+  if (rect && rect.top + rect.height + 180 > window.innerHeight) {
+    topOrBottom.value = "top";
+  } else {
+    topOrBottom.value = "bottom";
   }
 };
 
