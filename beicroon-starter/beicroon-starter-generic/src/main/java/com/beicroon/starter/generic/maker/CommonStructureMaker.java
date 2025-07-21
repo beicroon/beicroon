@@ -24,13 +24,14 @@ public class CommonStructureMaker {
         FileUtils.writeIfNotExists(structure.getEnumsPomFile(), EnumsPomContent.getContent(structure));
         FileUtils.mkdir(structure.getEnumsJavaPath());
 
-        FileUtils.mkdir(structure.getFeignPath());
-        FileUtils.writeIfNotExists(structure.getFeignGitIgnoreFile(), GitIgnoreContent.getContent());
-        FileUtils.writeIfNotExists(structure.getFeignPomFile(), FeignPomContent.getContent(structure));
-        FileUtils.mkdir(structure.getFeignJavaPath());
-        FileUtils.mkdir(structure.getFeignApiPath());
-        FileUtils.mkdir(structure.getFeignDTOPath());
-        FileUtils.mkdir(structure.getFeignVOPath());
+        FileUtils.mkdir(structure.getRpcPath());
+        FileUtils.writeIfNotExists(structure.getRpcGitIgnoreFile(), GitIgnoreContent.getContent());
+        FileUtils.writeIfNotExists(structure.getRpcPomFile(), RpcPomContent.getContent(structure));
+        FileUtils.mkdir(structure.getRpcJavaPath());
+        FileUtils.mkdir(structure.getRpcFeignPath());
+        FileUtils.mkdir(structure.getRpcDubboPath());
+        FileUtils.mkdir(structure.getRpcDTOPath());
+        FileUtils.mkdir(structure.getRpcVOPath());
 
         FileUtils.mkdir(structure.getInterfacesPath());
         FileUtils.writeIfNotExists(structure.getInterfacesGitIgnoreFile(), GitIgnoreContent.getContent());

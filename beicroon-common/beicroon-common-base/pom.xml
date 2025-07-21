@@ -19,7 +19,7 @@
     <modules>
         <module>beicroon-common-base-constant</module>
         <module>beicroon-common-base-enums</module>
-        <module>beicroon-common-base-feign</module>
         <module>beicroon-common-base-interfaces</module>
+        <module>beicroon-common-base-rpc</module>
     </modules>
 </project>

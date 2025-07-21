@@ -19,7 +19,7 @@
     <modules>
         <module>beicroon-common-pay-constant</module>
         <module>beicroon-common-pay-enums</module>
-        <module>beicroon-common-pay-feign</module>
         <module>beicroon-common-pay-interfaces</module>
+        <module>beicroon-common-pay-rpc</module>
     </modules>
 </project>

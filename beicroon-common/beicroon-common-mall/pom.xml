@@ -19,7 +19,7 @@
     <modules>
         <module>beicroon-common-mall-constant</module>
         <module>beicroon-common-mall-enums</module>
-        <module>beicroon-common-mall-feign</module>
         <module>beicroon-common-mall-interfaces</module>
+        <module>beicroon-common-mall-rpc</module>
     </modules>
 </project>

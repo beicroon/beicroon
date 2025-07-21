@@ -57,13 +57,15 @@ public class GenericStructure {
 
     private static final String PATH_ENUMS = "enums";
 
-    private static final String PATH_FEIGN = "feign";
+    private static final String PATH_RPC = "rpc";
 
-    private static final String PATH_FEIGN_API = "api";
+    private static final String PATH_RPC_FEIGN = "feign";
 
-    private static final String PATH_FEIGN_DTO = "dto";
+    private static final String PATH_RPC_DUBBO = "dubbo";
 
-    private static final String PATH_FEIGN_VO = "vo";
+    private static final String PATH_RPC_DTO = "dto";
+
+    private static final String PATH_RPC_VO = "vo";
 
     private static final String PATH_INTERFACES = "interfaces";
 
@@ -281,24 +283,28 @@ public class GenericStructure {
         return new File(this.getEnumsPath(), FileUtils.getPath(this.getJavaPath(), this.getModulePath(), PATH_ENUMS));
     }
 
-    public File getFeignPath() {
-        return new File(this.getRootPath(), String.format("%s-%s", this.getServiceName(), PATH_FEIGN));
+    public File getRpcPath() {
+        return new File(this.getRootPath(), String.format("%s-%s", this.getServiceName(), PATH_RPC));
     }
 
-    public File getFeignJavaPath() {
-        return new File(this.getFeignPath(), FileUtils.getPath(this.getJavaPath(), this.getModulePath(), PATH_FEIGN));
+    public File getRpcJavaPath() {
+        return new File(this.getRpcPath(), FileUtils.getPath(this.getJavaPath(), this.getModulePath(), PATH_RPC));
     }
 
-    public File getFeignApiPath() {
-        return new File(this.getFeignJavaPath(), PATH_FEIGN_API);
+    public File getRpcFeignPath() {
+        return new File(this.getRpcJavaPath(), PATH_RPC_FEIGN);
     }
 
-    public File getFeignDTOPath() {
-        return new File(this.getFeignJavaPath(), PATH_FEIGN_DTO);
+    public File getRpcDubboPath() {
+        return new File(this.getRpcJavaPath(), PATH_RPC_DUBBO);
     }
 
-    public File getFeignVOPath() {
-        return new File(this.getFeignJavaPath(), PATH_FEIGN_VO);
+    public File getRpcDTOPath() {
+        return new File(this.getRpcJavaPath(), PATH_RPC_DTO);
+    }
+
+    public File getRpcVOPath() {
+        return new File(this.getRpcJavaPath(), PATH_RPC_VO);
     }
 
     public File getInterfacesPath() {
@@ -385,12 +391,12 @@ public class GenericStructure {
         return new File(this.getEnumsPath(), FILE_POM);
     }
 
-    public File getFeignGitIgnoreFile() {
-        return new File(this.getFeignPath(), FILE_GIT_IGNORE);
+    public File getRpcGitIgnoreFile() {
+        return new File(this.getRpcPath(), FILE_GIT_IGNORE);
     }
 
-    public File getFeignPomFile() {
-        return new File(this.getFeignPath(), FILE_POM);
+    public File getRpcPomFile() {
+        return new File(this.getRpcPath(), FILE_POM);
     }
 
     public File getInterfacesGitIgnoreFile() {

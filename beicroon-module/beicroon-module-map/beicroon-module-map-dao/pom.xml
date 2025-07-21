@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.beicroon.module</groupId>
+        <artifactId>beicroon-module-map</artifactId>
+        <version>1.0.0.Release</version>
+    </parent>
+
+    <artifactId>beicroon-module-map-dao</artifactId>
+    <version>1.0.0.Release</version>
+    <packaging>jar</packaging>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.beicroon.module</groupId>
+            <artifactId>beicroon-module-map-entity</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.beicroon.common</groupId>
+            <artifactId>beicroon-common-map-constant</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.beicroon.common</groupId>
+            <artifactId>beicroon-common-map-enums</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.beicroon.starter</groupId>
+            <artifactId>beicroon-starter-dao</artifactId>
+        </dependency>
+    </dependencies>
+</project>

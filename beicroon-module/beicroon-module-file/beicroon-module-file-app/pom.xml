@@ -41,7 +41,7 @@
 
         <dependency>
             <groupId>com.beicroon.common</groupId>
-            <artifactId>beicroon-common-file-feign</artifactId>
+            <artifactId>beicroon-common-file-rpc</artifactId>
             <version>${project.version}</version>
         </dependency>
 

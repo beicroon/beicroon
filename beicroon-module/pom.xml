@@ -14,6 +14,7 @@
         <module>beicroon-module-base</module>
         <module>beicroon-module-file</module>
         <module>beicroon-module-mall</module>
+        <module>beicroon-module-map</module>
         <module>beicroon-module-pay</module>
         <module>beicroon-module-rbac</module>
         <module>beicroon-module-sms</module>

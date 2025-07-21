@@ -19,7 +19,7 @@
     <modules>
         <module>beicroon-common-rbac-constant</module>
         <module>beicroon-common-rbac-enums</module>
-        <module>beicroon-common-rbac-feign</module>
         <module>beicroon-common-rbac-interfaces</module>
+        <module>beicroon-common-rbac-rpc</module>
     </modules>
 </project>

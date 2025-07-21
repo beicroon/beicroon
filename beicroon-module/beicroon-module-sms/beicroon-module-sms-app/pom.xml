@@ -41,7 +41,7 @@
 
         <dependency>
             <groupId>com.beicroon.common</groupId>
-            <artifactId>beicroon-common-sms-feign</artifactId>
+            <artifactId>beicroon-common-sms-rpc</artifactId>
             <version>${project.version}</version>
         </dependency>
 

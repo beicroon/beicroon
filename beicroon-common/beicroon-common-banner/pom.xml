@@ -19,7 +19,7 @@
     <modules>
         <module>beicroon-common-banner-constant</module>
         <module>beicroon-common-banner-enums</module>
-        <module>beicroon-common-banner-feign</module>
         <module>beicroon-common-banner-interfaces</module>
+        <module>beicroon-common-banner-rpc</module>
     </modules>
 </project>

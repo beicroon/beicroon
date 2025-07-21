@@ -48,13 +48,13 @@ public final class AppPomContent {
 
                     <dependency>
                         <groupId>{{commonPackage}}</groupId>
-                        <artifactId>{{commonName}}-feign</artifactId>
+                        <artifactId>{{commonName}}-interfaces</artifactId>
                         <version>${project.version}</version>
                     </dependency>
 
                     <dependency>
                         <groupId>{{commonPackage}}</groupId>
-                        <artifactId>{{commonName}}-interfaces</artifactId>
+                        <artifactId>{{commonName}}-rpc</artifactId>
                         <version>${project.version}</version>
                     </dependency>
 

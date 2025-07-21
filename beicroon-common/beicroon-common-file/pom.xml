@@ -19,7 +19,7 @@
     <modules>
         <module>beicroon-common-file-constant</module>
         <module>beicroon-common-file-enums</module>
-        <module>beicroon-common-file-feign</module>
         <module>beicroon-common-file-interfaces</module>
+        <module>beicroon-common-file-rpc</module>
     </modules>
 </project>

@@ -51,7 +51,6 @@ public interface BaseConfigConvertor {
     @Mapping(target = "modifierId", ignore = true)
     @Mapping(target = "modifierCode", ignore = true)
     @Mapping(target = "modifierName", ignore = true)
-    @Mapping(target = "configKey", source = "dto.configKey")
     @Mapping(target = "configValue", source = "dto.configValue")
     @Mapping(target = "configRemark", source = "dto.configRemark")
     @Mapping(target = "componentName", source = "dto.componentName")

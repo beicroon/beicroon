@@ -41,7 +41,7 @@
 
         <dependency>
             <groupId>com.beicroon.common</groupId>
-            <artifactId>beicroon-common-banner-feign</artifactId>
+            <artifactId>beicroon-common-banner-rpc</artifactId>
             <version>${project.version}</version>
         </dependency>
 

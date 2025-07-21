@@ -19,7 +19,7 @@
     <modules>
         <module>beicroon-common-sms-constant</module>
         <module>beicroon-common-sms-enums</module>
-        <module>beicroon-common-sms-feign</module>
         <module>beicroon-common-sms-interfaces</module>
+        <module>beicroon-common-sms-rpc</module>
     </modules>
 </project>

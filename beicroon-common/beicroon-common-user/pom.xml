@@ -19,7 +19,7 @@
     <modules>
         <module>beicroon-common-user-constant</module>
         <module>beicroon-common-user-enums</module>
-        <module>beicroon-common-user-feign</module>
         <module>beicroon-common-user-interfaces</module>
+        <module>beicroon-common-user-rpc</module>
     </modules>
 </project>

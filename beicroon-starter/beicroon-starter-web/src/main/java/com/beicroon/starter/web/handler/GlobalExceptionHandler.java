@@ -2,7 +2,6 @@ package com.beicroon.starter.web.handler;
 
 import com.beicroon.construct.base.entity.WebResult;
 import com.beicroon.construct.exception.BusinessException;
-import com.beicroon.construct.pay.exception.WechatNotifyException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -14,8 +13,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.resource.NoResourceFoundException;
-
-import java.util.Map;
 
 @Slf4j
 @RestControllerAdvice
@@ -72,14 +69,6 @@ public class GlobalExceptionHandler {
         log.warn("接口不存在=>{}", ex.getMessage());
 
         return WebResult.error(500, "接口不存在");
-    }
-
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(WechatNotifyException.class)
-    public Map<String, String> handleException(WechatNotifyException ex) {
-        log.error("微信支付回调异常=>{}", ex.getMessage());
-
-        return Map.of("code", ex.getCode(), "message", ex.getError());
     }
 
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)

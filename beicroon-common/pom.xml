@@ -14,6 +14,7 @@
         <module>beicroon-common-base</module>
         <module>beicroon-common-file</module>
         <module>beicroon-common-mall</module>
+        <module>beicroon-common-map</module>
         <module>beicroon-common-pay</module>
         <module>beicroon-common-rbac</module>
         <module>beicroon-common-sms</module>

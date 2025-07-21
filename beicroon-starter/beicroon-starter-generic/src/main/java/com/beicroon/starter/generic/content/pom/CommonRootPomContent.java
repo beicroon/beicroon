@@ -26,8 +26,8 @@ public final class CommonRootPomContent {
                 <modules>
                     <module>{{commonName}}-constant</module>
                     <module>{{commonName}}-enums</module>
-                    <module>{{commonName}}-feign</module>
                     <module>{{commonName}}-interfaces</module>
+                    <module>{{commonName}}-rpc</module>
                 </modules>
             </project>
             """;

@@ -12,7 +12,7 @@ public class BeicroonProjectGenericApplication {
 
     private static final String SERVICE_PREFIX = "beicroon-module";
 
-    private static final String MODULE_NAME = "base";
+    private static final String MODULE_NAME = "user";
 
     private static final String BASE_PACKAGE = "com.beicroon.module";
 
