@@ -1,0 +1,53 @@
+server:
+  port: 8080
+  shutdown: GRACEFUL
+
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  application:
+    name: @project.artifactId@
+  cache:
+    type: REDIS
+  data:
+    redis:
+      database: 0
+      host: 127.0.0.1
+      port: 6379
+      password:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/beicroon_module_mall
+    username: root
+    password:
+  servlet:
+    multipart:
+      max-file-size: 8MB
+      max-request-size: 20MB
+  flyway:
+    enabled: true
+    baseline-on-migrate: false
+    encoding: UTF-8
+    locations: classpath:migration
+    sql-migration-prefix: V
+    sql-migration-separator: _
+    sql-migration-suffixes: .sql
+    validate-on-migrate: false
+    clean-disabled: false
+
+logging:
+  level:
+    com.beicroon.module: INFO
+
+auth:
+  ignores:
+    - /**/*.png
+    - /**/*.jpg
+    - /**/*.css
+    - /**/*.xlx
+    - /**/*.html
+    - /**/*.jpeg
+    - /**/*.xlsx
+    - /api/open/*
+    - /api/admin/rbac-auth-login

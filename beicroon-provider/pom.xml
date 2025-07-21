@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.beicroon.construct</groupId>
+        <artifactId>beicroon-construct</artifactId>
+        <version>1.0.0.Release</version>
+        <relativePath/>
+    </parent>
+
+    <groupId>com.beicroon.provider</groupId>
+    <artifactId>beicroon-provider</artifactId>
+    <version>1.0.0.Release</version>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>beicroon-provider-aliyunoss</module>
+        <module>beicroon-provider-easyexcel</module>
+        <module>beicroon-provider-jackson</module>
+        <module>beicroon-provider-localstorage</module>
+        <module>beicroon-provider-mybatisplus</module>
+        <module>beicroon-provider-redis</module>
+        <module>beicroon-provider-rocketmq</module>
+        <module>beicroon-provider-wechatpay</module>
+        <module>beicroon-provider-xxljob</module>
+    </modules>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.beicroon.provider</groupId>
+                <artifactId>beicroon-provider-aliyunoss</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.beicroon.provider</groupId>
+                <artifactId>beicroon-provider-easyexcel</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.beicroon.provider</groupId>
+                <artifactId>beicroon-provider-jackson</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.beicroon.provider</groupId>
+                <artifactId>beicroon-provider-localstorage</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.beicroon.provider</groupId>
+                <artifactId>beicroon-provider-mybatisplus</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.beicroon.provider</groupId>
+                <artifactId>beicroon-provider-redis</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.beicroon.provider</groupId>
+                <artifactId>beicroon-provider-rocketmq</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.beicroon.provider</groupId>
+                <artifactId>beicroon-provider-wechatpay</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.beicroon.provider</groupId>
+                <artifactId>beicroon-provider-xxljob</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+</project>

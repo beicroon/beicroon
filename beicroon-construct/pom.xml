@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.beicroon.parent</groupId>
+        <artifactId>beicroon-parent</artifactId>
+        <version>1.0.0.Release</version>
+        <relativePath/>
+    </parent>
+
+    <groupId>com.beicroon.construct</groupId>
+    <artifactId>beicroon-construct</artifactId>
+    <version>1.0.0.Release</version>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>beicroon-construct-annotation</module>
+        <module>beicroon-construct-auth</module>
+        <module>beicroon-construct-base</module>
+        <module>beicroon-construct-cache</module>
+        <module>beicroon-construct-constant</module>
+        <module>beicroon-construct-database</module>
+        <module>beicroon-construct-enums</module>
+        <module>beicroon-construct-excel</module>
+        <module>beicroon-construct-exception</module>
+        <module>beicroon-construct-http</module>
+        <module>beicroon-construct-json</module>
+        <module>beicroon-construct-mq</module>
+        <module>beicroon-construct-oss</module>
+        <module>beicroon-construct-pay</module>
+        <module>beicroon-construct-task</module>
+        <module>beicroon-construct-utils</module>
+    </modules>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.beicroon.construct</groupId>
+                <artifactId>beicroon-construct-annotation</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.beicroon.construct</groupId>
+                <artifactId>beicroon-construct-auth</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.beicroon.construct</groupId>
+                <artifactId>beicroon-construct-base</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.beicroon.construct</groupId>
+                <artifactId>beicroon-construct-cache</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.beicroon.construct</groupId>
+                <artifactId>beicroon-construct-constant</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.beicroon.construct</groupId>
+                <artifactId>beicroon-construct-database</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.beicroon.construct</groupId>
+                <artifactId>beicroon-construct-enums</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.beicroon.construct</groupId>
+                <artifactId>beicroon-construct-excel</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.beicroon.construct</groupId>
+                <artifactId>beicroon-construct-exception</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.beicroon.construct</groupId>
+                <artifactId>beicroon-construct-http</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.beicroon.construct</groupId>
+                <artifactId>beicroon-construct-json</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.beicroon.construct</groupId>
+                <artifactId>beicroon-construct-mq</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.beicroon.construct</groupId>
+                <artifactId>beicroon-construct-oss</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.beicroon.construct</groupId>
+                <artifactId>beicroon-construct-pay</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.beicroon.construct</groupId>
+                <artifactId>beicroon-construct-task</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.beicroon.construct</groupId>
+                <artifactId>beicroon-construct-utils</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+</project>

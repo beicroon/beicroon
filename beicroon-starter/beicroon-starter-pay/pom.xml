@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.beicroon.starter</groupId>
+        <artifactId>beicroon-starter</artifactId>
+        <version>1.0.0.Release</version>
+    </parent>
+
+    <artifactId>beicroon-starter-pay</artifactId>
+    <version>1.0.0.Release</version>
+    <packaging>jar</packaging>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.beicroon.construct</groupId>
+            <artifactId>beicroon-construct-pay</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.beicroon.provider</groupId>
+            <artifactId>beicroon-provider-wechatpay</artifactId>
+        </dependency>
+    </dependencies>
+</project>
