@@ -1,0 +1,38 @@
+map:
+  company:
+    gaode:
+      key: 2baf7a73ce623bcbeeffb3ba83c99857
+      secret:
+      base-url: https://restapi.amap.com
+      path:
+        poi: /v5/place/text
+        geo: /v3/geocode/geo
+        regeo: /v3/geocode/regeo
+        driving: /v5/direction/driving
+        walking: /v5/direction/walking
+        bicycling: /v5/direction/bicycling
+        electrobike: /v5/direction/electrobike
+    baidu:
+      key:
+      secret:
+      base-url: https://api.map.baidu.com
+      path:
+        poi: /place/v2/suggestion
+        geo: /geocoding/v3
+        regeo: /reverse_geocoding/v3
+        driving:
+        walking:
+        bicycling:
+        electrobike:
+    tencent:
+      key:
+      secret:
+      base-url: https://apis.map.qq.com
+      path:
+        poi: /ws/place/v1/suggestion
+        geo: /ws/geocoder/v1
+        regeo: /ws/geocoder/v1
+        driving:
+        walking:
+        bicycling:
+        electrobike:

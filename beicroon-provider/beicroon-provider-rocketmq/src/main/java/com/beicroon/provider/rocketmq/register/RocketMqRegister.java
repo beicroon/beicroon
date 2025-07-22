@@ -34,6 +34,8 @@ public class RocketMqRegister implements IMqRegister {
     @Override
     public void registerProducer(GenericApplicationContext applicationContext) {
         if (EmptyUtils.isEmpty(this.property.getServerAddress())) {
+            log.warn("未配置 RocketMQ 的服务地址，RocketMQ 生产者将不会被注册");
+
             return;
         }
 

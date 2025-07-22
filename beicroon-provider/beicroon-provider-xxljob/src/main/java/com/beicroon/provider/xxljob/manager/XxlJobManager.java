@@ -30,12 +30,14 @@ public class XxlJobManager {
 
     public XxlJobSpringExecutor getXxlJobExecutor() {
         if (EmptyUtils.isEmpty(this.adminAddresses)) {
+            log.warn("XXL-JOB警告：未配置 xxl.job.admin.addresses 跳过执行器初始化");
+
             return null;
         }
 
         XxlJobSpringExecutor xxlJobSpringExecutor = new XxlJobSpringExecutor();
 
-        xxlJobSpringExecutor.setAdminAddresses(this.adminAddresses + "/xxl-job-admin");
+        xxlJobSpringExecutor.setAdminAddresses(this.adminAddresses);
         xxlJobSpringExecutor.setAppname(String.format("%s-%s", this.appName, this.activeProfile));
         xxlJobSpringExecutor.setAccessToken(this.accessToken);
         xxlJobSpringExecutor.setLogPath(this.logPath);
